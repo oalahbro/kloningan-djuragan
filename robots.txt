@@ -1,0 +1,63 @@
+#
+#
+
+User-agent: baiduspider
+Disallow: /assets/
+Disallow: /system/
+Disallow: /index.php
+Disallow: /limited.php
+
+User-agent: Googlebot
+Disallow: /assets/
+Disallow: /system/
+Disallow: /index.php
+Disallow: /limited.php
+
+User-agent: msnbot
+Disallow: /assets/
+Disallow: /system/
+Disallow: /index.php
+Disallow: /limited.php
+
+User-agent: Naverbot
+Disallow: /assets/
+Disallow: /system/
+Disallow: /index.php
+Disallow: /limited.php
+
+User-agent: seznambot
+Disallow: /assets/
+Disallow: /system/
+Disallow: /index.php
+Disallow: /limited.php
+
+User-agent: Slurp
+Disallow: /assets/
+Disallow: /system/
+Disallow: /index.php
+Disallow: /limited.php
+
+User-agent: teoma
+Disallow: /assets/
+Disallow: /system/
+Disallow: /index.php
+Disallow: /limited.php
+
+User-agent: Yandex
+Disallow: /assets/
+Disallow: /system/
+Disallow: /index.php
+Disallow: /limited.php
+
+User-agent: Yeti
+Disallow: /assets/
+Disallow: /system/
+Disallow: /index.php
+
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: *
+Disallow: /
+
+
