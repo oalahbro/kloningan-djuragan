@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
 
     <style type="text/css">
+    	@import url(https://fonts.googleapis.com/css?family=Pacifico);
     	.tengahkan {
     		position: fixed;
     		top: 50%;
@@ -20,12 +21,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     		transform: translate(-50%, -50%);
     	}
     	.formlogin  {
-    		width: 250px;
+    		width: 300px;
     	}
-
+    	.formlogin h2 {
+    		font-family: 'Pacifico', cursive;
+    	}
     </style>
-
-
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="container">
 	<div class="tengahkan">
 		<div class="formlogin">
-			<h5>Juragan</h5>
+			<h2 class="text-center"><?php echo $this->config->item('site_name'); ?> <small>v<?php echo $this->config->item('site_version'); ?></small></h2>
 			<div class="well">
 				<?php echo form_open(''); ?>
 					<div class="form-group">
