@@ -1,17 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * Setting_model
- *
- * @package     Juragan
- * @version 	6.0.0
- * @author      Toto Prayogo
- * @link        http://toto-id.blogspot.com
- * @since 		5.x.x
- */
-
-class Setting_model extends CI_Model {
+class Db_config extends CI_Model {
 
 	public function __construct() {
 		parent::__construct();
@@ -24,8 +14,8 @@ class Setting_model extends CI_Model {
 	public function update_config($data) {
 		$success = true;
 		foreach($data as $key=>$value) {
-			if(!$this->save($key,$value)) {
-				$success=false;
+			if( ! $this->save($key,$value)) {
+				$success = false;
 				break;  
 			}
 		}

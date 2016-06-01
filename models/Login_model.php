@@ -1,21 +1,12 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * Login_model
- *
- * @package     Juragan
- * @version 	6.0.0
- * @author      Toto Prayogo
- * @link        http://toto-id.blogspot.com
- * @since 		5.x.x
- */
+date_default_timezone_set('Asia/Jakarta');
 
 class Login_model extends CI_Model {
 
-	public function login($username, $password) {
+	function login($username, $password) {
 		$query = $this->db->get_where('user', array('username' => $username));
-		$datestring = '%Y-%m-%d %H:%i:%s';
-		$time = now('Asia/Jakarta');
 
 		if ($query->num_rows() === 1) {
 			$row = $query->row();
@@ -35,7 +26,7 @@ class Login_model extends CI_Model {
 				// update table
 				$unik = random_string('alnum', 4);
 				$katasandi = hash('sha256', $unik . hash('sha256', $password) );
-				$last_login = mdate($datestring, $time);
+				$last_login = mdate("%Y-%m-%d %H:%i:%s", now());
 
 				$this->db->where('id', $row->id);
 				$this->db->update('user', array('katasandi' => $katasandi, 'unik' => $unik, 'last_login' => $last_login ));

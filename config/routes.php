@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | Please see the user guide for complete details:
 |
-|	http://codeigniter.com/user_guide/general/routing.html
+|	https://codeigniter.com/user_guide/general/routing.html
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
@@ -51,11 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'login';
 
-$route['admin'] = 'admin/pesanan/semua';
-$route['administrator/(:any)'] = "admin/default_c/$1";
+$route['admin'] = 'admin/pesanan';
+$route['administrator'] = 'admin/pesanan';
 
-$route['user'] = 'user/default_c';
-$route['user/(:any)'] = "user/default_c/$1";
+$route['juragan'] = 'juragan/pesanan';
+$route['user'] = 'juragan/pesanan';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

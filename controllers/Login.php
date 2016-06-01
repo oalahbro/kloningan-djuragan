@@ -1,40 +1,30 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * login.php
- *
- * @package     Juragan
- * @version 	6.0.0
- * @author      Toto Prayogo
- * @link        http://toto-id.blogspot.com
- * @since 		5.x.x
- */
-
 class Login extends CI_Controller {
 
 	public function __construct() {
-        parent::__construct();
-        if(is_login()) {
-			if(is_user('superadmin') || is_user('admin')) {
-				// jika login sebagai admin / superadmin
+    	parent::__construct();
+    	if(is_login() === TRUE) {
+			if((is_user_level('admin') === TRUE) || (is_user_level('superadmin') === TRUE)) {
 				redirect('admin');
 			}
 			else {
-				// jika login sebagai user
-				redirect('user');
+				redirect('juragan');
 			}
 		}
     }
+
 
 	public function index() {
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		
 		if($this->form_validation->run() === FALSE) {
-			$this->load->view('public/header');
-			$this->load->view('public/login_view');
-			$this->load->view('public/footer');
+			$this->data = array(
+				'title' => 'Login'
+				);
+			$this->load->view('public/login', $this->data);
 		}
 		else {
 			$username = $this->input->post('username');
@@ -43,23 +33,20 @@ class Login extends CI_Controller {
 			$login = $this->login->login($username, $password);
 
 			if($login) {
-				/* $sesi = array(
+				$sesi = array(
 					'pesan'  => 'Hey, '.data_session('nama').' selamat bekerja yak :)',
 					'pesan_tampil' => TRUE
 				);
-				$this->session->set_userdata($sesi); */
-				echo "login";
+				$this->session->set_userdata($sesi);
 			}
 			else {
-				/* $sesi = array(
+				$sesi = array(
 					'pesan'  => 'Maaf, kamu gagal login.',
 					'pesan_tampil' => TRUE
 				);
-				$this->session->set_userdata($sesi); */
-				echo 'gagal';
+				$this->session->set_userdata($sesi);
 			}
-			redirect('login');
+			redirect('');
 		}
 	}
-
 }
