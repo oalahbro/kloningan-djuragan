@@ -7,6 +7,6 @@ class Login extends CI_Controller {
 		$this->data = array(
 			'title' => 'Login'
 			);
-		$this->load->view('public/login');
+		$this->load->view('public/login', $this->data);
 	}
 }
