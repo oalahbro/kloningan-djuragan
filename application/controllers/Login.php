@@ -1,6 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Login
+ *
+ * Halaman untuk membatasi hak aksses, form login kehalaman sistem
+ * 
+ * @package 	Juragan
+ * @version 	7.0
+ * @author 	Toto Prayogo
+ * @link 	http://totoprayogo.com
+ */
 class Login extends CI_Controller {
 
 	public function __construct() {

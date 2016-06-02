@@ -1,6 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Logout
+ *
+ * Menghapus semua sesi aktif
+ * 
+ * @package 	Juragan
+ * @version 	7.0
+ */
 class Logout extends CI_Controller {
 	public function index() {
 		$this->session->unset_userdata('logged_in');
