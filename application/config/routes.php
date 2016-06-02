@@ -51,8 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'login';
 
-$route['admin'] = 'admin/pesanan';
-$route['administrator'] = 'admin/pesanan';
+$route['admin'] = 'admin/pesanan/read';
+$route['administrator'] = 'admin/pesanan/read';
 
 $route['juragan'] = 'juragan/pesanan';
 $route['user'] = 'juragan/pesanan';
