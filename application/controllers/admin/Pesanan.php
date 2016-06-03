@@ -25,11 +25,31 @@ class Pesanan extends CI_Controller {
 		}
     }
 
+    // menampilkan daftar pesanan; ALL, PENDING, TERKIRIM
+	public function read() {
+		$this->data = array(
+			'title' => 'Daftar Pesanan'
+			);
 
-	public function create() {
+		$this->load->view('admin/header', $this->data);
+		$this->load->view('admin/pesanan/read', $this->data);
+		$this->load->view('admin/footer', $this->data);
 	}
 
-	public function read() {
+	public function json(){
+		$per_page = 100;
+		$current_page = 1;
+		$this->db->limit($per_page, $current_page);
+		$query = $this->db->get("order");
+		$data['data'] = $query->result();
+		$data['total'] = $this->db->count_all("order");
+		$data['per_page'] = $per_page;
+		$data['current_page'] = $current_page;
+
+		echo json_encode($data);
+	}
+
+	public function create() {
 	}
 
 	public function update() {

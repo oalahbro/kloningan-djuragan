@@ -21,3 +21,9 @@ function is_user_level($level = 'superadmin') {
 		return TRUE;
 	}
 }
+
+function list_juragan() {
+	$TO =& get_instance();
+	$q = $TO->juragan->ambil();
+	return $q;
+}
