@@ -36,19 +36,6 @@ class Pesanan extends CI_Controller {
 		$this->load->view('admin/footer', $this->data);
 	}
 
-	public function json(){
-		$per_page = 100;
-		$current_page = 1;
-		$this->db->limit($per_page, $current_page);
-		$query = $this->db->get("order");
-		$data['data'] = $query->result();
-		$data['total'] = $this->db->count_all("order");
-		$data['per_page'] = $per_page;
-		$data['current_page'] = $current_page;
-
-		echo json_encode($data);
-	}
-
 	public function create() {
 	}
 
