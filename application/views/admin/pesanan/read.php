@@ -1,14 +1,48 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<div class="lembar">
+	<div class="container-fluid">
+		<div class="page-header">
+			<div class="row">
+				<div class="col-sm-5 judul"><h1><?php echo $judul; ?></h1></div>
+				<div class="col-sm-5 menu">
+					<?php 
+					// set aktif tombol semua
+					$status_all = 'btn-default';
+					if($status === 'all') {
+						$status_all = 'btn-primary';
+					}
 
-<header>
-	<div class="jumbotron">
-		<h1>sssssss</h1>
+					// set aktif tombol terkirim
+					$status_terkirim = 'btn-default';
+					if($status === 'terkirim') {
+						$status_terkirim = 'btn-primary';
+					}
+
+					// set aktif tombol pending
+					$status_pending = 'btn-default';
+					if($status === 'pending') {
+						$status_pending = 'btn-primary';
+					}
+
+					echo anchor('admin/pesanan/read/' . $juragan . '/all', 'Semua', array('class' => 'btn ' . $status_all));
+					echo anchor('admin/pesanan/read/' . $juragan . '/terkirim', 'Terkirim', array('class' => 'btn ' . $status_terkirim));
+					echo anchor('admin/pesanan/read/' . $juragan . '/pending', 'Pending', array('class' => 'btn ' . $status_pending));
+					?>
+				</div>
+				<div class="col-sm-2 cari">
+					<form name="form">
+						<div class="input-group">
+							<input type="text" name="name" value="" autocomplete="off" data-date-format="YYYY-MM-DD" id="fn" class="form-control dates" placeholder="pencarian data"/>
+							<div class="input-group-btn">
+								<button type="submit" id="search-btn" class="btn btn-primary" ><i class="glyphicon glyphicon-search"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+		<div class="page-content" id="daftar_pesanan">
+			
+		</div>
 	</div>
-</header>
-
-<main>
-
-</main>
-
+</div>

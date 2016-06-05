@@ -26,9 +26,24 @@ class Pesanan extends CI_Controller {
     }
 
     // menampilkan daftar pesanan; ALL, PENDING, TERKIRIM
-	public function read() {
+	public function read($juragan = 'all', $status = 'all') {
+		$nama_juragan = $this->juragan->ambil_nama_by_username($juragan);
+		if($status === 'pending') {
+			$judul = '<i class="glyphicon glyphicon-refresh"></i> Pesanan Pending <small>'.$nama_juragan.'</small>';
+		}
+		elseif($status === 'terkirim') {
+			$judul = '<i class="glyphicon glyphicon-ok"></i> Pesanan Terkirim <small>'.$nama_juragan.'</small>';
+		}
+		else {
+			$judul = '<i class="glyphicon glyphicon-th-large"></i> Semua Pesanan <small>'.$nama_juragan.'</small>';
+		}
+
 		$this->data = array(
-			'title' => 'Daftar Pesanan'
+			'title' => 'Daftar Pesanan',
+			'judul' => $judul,
+			'active' => 'pesanan',
+			'juragan' => $juragan,
+			'status' => $status
 			);
 
 		$this->load->view('admin/header', $this->data);
@@ -36,7 +51,39 @@ class Pesanan extends CI_Controller {
 		$this->load->view('admin/footer', $this->data);
 	}
 
-	public function create() {
+	public function read_ajax($juragan = 'all', $status = 'all'){
+		$clicked = $this->input->get('submit');
+		$cari = $this->input->get('cari');
+		$page = $this->input->get('halaman', '0');
+
+		$limit = 25;
+		$offset = $page;
+
+		$juragan_id = $this->juragan->ambil_id_by_username($juragan);
+
+		$config['base_url'] = site_url('admin/pesanan/read_ajax/'.$juragan.'/' . $status);
+		$config['total_rows'] = $this->pesanan->semua($status, '', '', $cari, $juragan_id)->num_rows();
+		$config['per_page'] = $limit;
+
+		// $config['use_page_numbers'] = TRUE;
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'halaman';
+		$config['suffix'] = '&cari=' . $cari;
+
+		$this->pagination->initialize($config);
+
+		$this->data = array(
+			'data' => $this->pesanan->semua($status, $offset, $limit, $cari, $juragan_id),
+			'status' => $status,
+			'pagination' => $this->pagination->create_links()
+			);
+
+		if($clicked === 'yes') {
+			$this->load->view('admin/pesanan/ajax', $this->data);
+		}
+		else {
+			show_404();
+		}
 	}
 
 	public function update() {

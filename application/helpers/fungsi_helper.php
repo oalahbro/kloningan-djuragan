@@ -28,6 +28,13 @@ function list_juragan() {
 	return $q;
 }
 
+function harga($data_harga) {
+	$data_harga = str_replace(' ', '', $data_harga);
+	$format = "Rp " . number_format($data_harga , 0 , '', '.' ) . ",-";
+
+	return $format;
+}
+
 function tanggal_range($akhir_mulai) {
 	$TO =& get_instance();
 	$default_tanggal_mulai = $TO->config->item('config_tanggal_mulai');

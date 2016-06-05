@@ -19,6 +19,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     	a.navbar-brand {
     		font-family: 'Pacifico', cursive;
     	}
+    	/* CSS used here will be applied after bootstrap.css */
+    	.badge-notify{
+    		background:red;
+    		position:relative;
+    		top: -15px;
+    		left: 0;
+    	}
     </style>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -55,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									$notifikasi = '&nbsp;<em><small><span class="text-warning"><i class="glyphicon glyphicon-bullhorn"></i></span> ' . '<span class="text-danger">' . $key->transfer . '</span>' . ' / <span class="text-danger">' . $key->kirim . '</span></small></em>';
 
 								}
-								echo '<li>' .  anchor('admin/pesanan/read' . $key->username, $key->nama . $notifikasi) . '</li>';
+								echo '<li>' .  anchor('admin/pesanan/read/' . $key->username, $key->nama . $notifikasi) . '</li>';
 							} ?>
 						</ul>
 					</li>
@@ -73,6 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</ul>
 				
 				<ul class="nav navbar-nav navbar-right">
+					<li><?php echo anchor('', '<span class="glyphicon glyphicon-bullhorn"></span> <span class="label badge-notify">3</span>'); ?></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> Pengaturan <span class="caret"></span></a>
 						<ul class="dropdown-menu">

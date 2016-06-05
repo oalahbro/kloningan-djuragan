@@ -72,4 +72,99 @@ class Pesanan_model extends CI_Model {
 
 		return $query;
 	}
+
+	function semua($halaman, $offset = '', $limit = '', $cari = '', $juragan = '') {
+		$this->db->select('o.*, u.nama as juragan, u.username, m.nama_member, m.hp as hp_member');
+		$this->db->from('order o');
+		$this->db->join('user u', 'u.id = o.user_id');
+		$this->db->join('membership m', 'm.id = o.member_id', 'left');
+
+		if($halaman === 'terkirim') {
+			$this->db->order_by('o.status_transfer desc, o.barang desc, o.cek_kirim desc, o.cek_transfer desc, o.tanggal_order desc');
+			$this->db->having(array('o.barang' => 'terkirim'));
+		}
+		elseif($halaman === 'pending') {
+			$this->db->having(array('o.barang' => 'pending'));
+		}
+		
+		if( ! empty($juragan)) {
+			$this->db->having(array('o.user_id' => $juragan));
+		}
+
+		if( ! empty($cari)) {
+			$this->db->like('o.nama', $cari);
+			$this->db->or_like('o.kode', $cari);
+			$this->db->or_like('o.resi', $cari);
+			$this->db->or_like('o.alamat', $cari);
+			$this->db->or_like('o.keterangan', $cari);
+			$this->db->or_like('o.pesanan', $cari);
+			$this->db->or_like('o.hp', $cari);
+			$this->db->or_like('o.kurir', $cari);
+			$this->db->or_like('o.status', $cari);
+			$this->db->or_like('o.bank', $cari);
+			$this->db->or_like('u.nama', $cari);
+			$this->db->or_like('o.tanggal_order', $cari);
+			//$this->db->or_like('o.cek_kirim', $cari);
+			$this->db->or_like('o.barang', $cari);
+			$this->db->or_like('o.status_transfer', $cari);
+			//$this->db->or_like('o.cek_transfer', $cari);
+		}
+
+		if($limit !== '' && $offset !== '') {
+			$this->db->limit($limit,$offset);
+		}
+
+		if($halaman !== 'terkirim') {
+			$this->db->order_by('o.status_transfer desc, o.barang desc, o.tanggal_order desc');
+		}
+
+		$query = $this->db->get();
+
+		return $query;
+	}
+
+	function set_to_transfer($id, $okremove, $user_id) {
+		$tgl = mdate("%Y-%m-%d %H:%i:%s", now());
+
+		if($okremove === 'ok') {
+			$stat = 'Masuk';
+			$tanggal = $tgl;
+		}
+		elseif($okremove === 'remove') {
+			$stat = 'Belum';
+			$tanggal = NULL;
+		}
+
+		$data = array(
+			'cek_transfer' =>$tanggal,
+			'status_transfer' => $stat
+		);
+		$this->db->where('id', $id);
+		$ubah = $this->db->update('order', $data);
+
+		//if($ubah)
+			//$this->update_count($user_id);
+		return TRUE;
+	}
+
+	function set_to_kirim($id, $okremove, $user_id) {
+		if($okremove === 'remove') {
+			$stat = 'Pending';
+			$tanggal = NULL;
+		}
+
+		$data = array(
+			'cek_kirim' =>$tanggal,
+			'barang' => $stat,
+			'resi' => NULL,
+			'kurir' => NULL,
+			'ongkir_fix' => NULL
+		);
+		$this->db->where('id', $id);
+		$ubah = $this->db->update('order', $data);
+
+		if($ubah)
+			$this->update_count($user_id);
+			return TRUE;
+	}
 }
