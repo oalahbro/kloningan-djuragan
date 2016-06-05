@@ -22,8 +22,23 @@ class Status extends CI_Controller {
 
 
 	public function index() {
+		$tanggal_mulai 		= $this->input->get('tanggal_mulai');
+		$tanggal_akhir 		= $this->input->get('tanggal_akhir');
+
+		if(empty($tanggal_mulai) || empty($tanggal_akhir)) {
+			$tanggal_mulai = tanggal_range('mulai');
+			$tanggal_akhir = tanggal_range('akhir');
+		}
+
+
 		$this->data = array(
-			'title' => 'Status Order per Juragan'
+			'title' => 'Status Order per Juragan',
+			'tanggal_mulai' => $tanggal_mulai,
+			'tanggal_akhir' => $tanggal_akhir,
+			'total_pesanan' => $this->pesanan->total_pesanan($tanggal_mulai, $tanggal_akhir),
+			'total_transfer' => $this->pesanan->total_transfer($tanggal_mulai, $tanggal_akhir),
+			'total_terkirim' => $this->pesanan->total_terkirim($tanggal_mulai, $tanggal_akhir),
+			'total_pending' => $this->pesanan->total_pending()
 			);
 
 		$this->load->view('admin/header', $this->data);

@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Db_config' => 'pengaturan', 'Login_model' => 'login', 'Juragan_model' => 'juragan');
+$autoload['model'] = array('Db_config' => 'pengaturan', 'Login_model' => 'login', 'Juragan_model' => 'juragan', 'Pesanan_model' => 'pesanan');
