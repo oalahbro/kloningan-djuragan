@@ -1,6 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><div class="page-content">
+?>
+<header>
+	<div class="jumbotron">
+		<h1>Status</h1>
+	</div>
+</header>
+
+<div class="page-content">
 		<div class="isi-status" id="">
 			<div class="content-inti" id="reload">
 				<div class="well">
