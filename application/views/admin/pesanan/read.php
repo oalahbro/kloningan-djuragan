@@ -1,23 +1,28 @@
-<div class="lembar">
-	<div class="container-fluid">
-		<div class="page-header">
+<div class="page-header">
+	<div class="title-page">
+		<div class="container-fluid">
+			<h1><?php echo $judul; ?></h1>
+		</div>
+	</div>
+
+	<div class="subnav">
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-5 judul"><h1><?php echo $judul; ?></h1></div>
-				<div class="col-sm-5 menu">
+				<div class="menu col-sm-9">
 					<?php 
-					// set aktif tombol semua
+							// set aktif tombol semua
 					$status_all = 'btn-default';
 					if($status === 'all') {
 						$status_all = 'btn-primary';
 					}
 
-					// set aktif tombol terkirim
+							// set aktif tombol terkirim
 					$status_terkirim = 'btn-default';
 					if($status === 'terkirim') {
 						$status_terkirim = 'btn-primary';
 					}
 
-					// set aktif tombol pending
+							// set aktif tombol pending
 					$status_pending = 'btn-default';
 					if($status === 'pending') {
 						$status_pending = 'btn-primary';
@@ -28,7 +33,7 @@
 					echo anchor('admin/pesanan/read/' . $juragan . '/pending', 'Pending', array('class' => 'btn ' . $status_pending));
 					?>
 				</div>
-				<div class="col-sm-2 cari">
+				<div class="cari col-sm-3">
 					<form name="form">
 						<div class="input-group">
 							<input type="text" name="name" value="" autocomplete="off" data-date-format="YYYY-MM-DD" id="fn" class="form-control dates" placeholder="pencarian data"/>
@@ -39,10 +44,13 @@
 					</form>
 				</div>
 			</div>
-			
 		</div>
-		<div class="page-content" id="daftar_pesanan">
-			
-		</div>
+	</div>
+
+</div>
+<div class="container-fluid">
+
+	<div class="page-content" id="daftar_pesanan">
+
 	</div>
 </div>
