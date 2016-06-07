@@ -145,7 +145,7 @@
 <script type="text/javascript">
 	$('.akses a').click(function(event) {
 		event.preventDefault();
-		$("html, body").animate({scrollTop: 0}, 2000);
+		$("html, body").animate({scrollTop: 0}, 3000);
 		$( '#load_data' ).html('<div class="progress jadi-loading"><div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">Loading ....</div></div>');
 		$("#load_data").load(this.href, 'submit=yes' );
 	});
@@ -166,7 +166,7 @@
 				box.addClass('alert-success');
 
 				$('#search-btn').trigger('click');
-				$("html, body").animate({scrollTop: 0}, 2000);
+				$("html, body").animate({scrollTop: 0}, 3000);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				box.find("p").html('Maaf, Ada kesalahan sistem!'),
@@ -191,7 +191,7 @@
 				box.addClass('alert-success');
 
 				$('#search-btn').trigger('click');
-				$("html, body").animate({scrollTop: 0}, 2000);
+				$("html, body").animate({scrollTop: 0}, 3000);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				box.find("p").html('Maaf, Ada kesalahan sistem!'),
