@@ -8,7 +8,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<title><?php echo $title; ?></title>
 
-	<!-- Bootstrap -->
+    <?php 
+        $bg = array(
+            base_url('assets/img/bg.jpg'),
+            base_url('assets/img/bg2.jpg'),
+            );
+    ?>
+
+    <style type="text/css">
+        html { 
+            background: url(<?php echo random_element($bg); ?>) no-repeat center center fixed; 
+        }
+    </style>
+
     <link href="<?php echo base_url('assets/css/login.css'); ?>" rel="stylesheet" />
 
 
