@@ -13,6 +13,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <style type="text/css">
     	@import url(https://fonts.googleapis.com/css?family=Pacifico);
+        html { 
+            background: url(assets/img/bg.jpg) no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
     	.tengahkan {
     		position: fixed;
     		top: 50%;
@@ -21,7 +28,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     		transform: translate(-50%, -50%);
     	}
     	.formlogin  {
-    		width: 300px;
+    		width: 320px;
+            background: rgba(255,255,255,.5);
+            padding: 10px 20px 20px 20px;
     	}
     	.formlogin h2 {
     		font-family: 'Pacifico', cursive;
