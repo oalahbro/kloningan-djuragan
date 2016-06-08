@@ -9,33 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<title><?php echo $title; ?></title>
 
 	<!-- Bootstrap -->
-    <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/css/login.css'); ?>" rel="stylesheet" />
 
-    <style type="text/css">
-    	@import url(https://fonts.googleapis.com/css?family=Pacifico);
-        html { 
-            background: url(assets/img/bg.jpg) no-repeat center center fixed; 
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-    	.tengahkan {
-    		position: fixed;
-    		top: 50%;
-    		left: 50%;
-    		/* bring your own prefixes */
-    		transform: translate(-50%, -50%);
-    	}
-    	.formlogin  {
-    		width: 320px;
-            background: rgba(255,255,255,.5);
-            padding: 10px 20px 20px 20px;
-    	}
-    	.formlogin h2 {
-    		font-family: 'Pacifico', cursive;
-    	}
-    </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
