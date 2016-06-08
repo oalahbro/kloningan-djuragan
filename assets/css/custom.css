@@ -11,13 +11,10 @@ a.navbar-brand, .title-page small {
 	position:relative;
 	top: -15px;
 	left: 0;
-
 }
-
 .navbar {
 	margin-bottom:0;
 }
-
 .subnav {
 	margin:0;
 	top: 0px;
@@ -49,7 +46,6 @@ a.navbar-brand, .title-page small {
 	-o-animation: roll 3s infinite;
 	transform: rotate(30deg);
 }
-
 .title-page i, .title-page small {
 	display: block;
 	color: teal;
@@ -94,7 +90,6 @@ fieldset[disabled] .btn-clean.active {
 	font-weight: bold;
 	cursor: default;
 }
-
 .btn-lunas.disabled,
 .btn-lunas[disabled],
 fieldset[disabled] .btn-lunas,
@@ -123,7 +118,6 @@ fieldset[disabled] .btn-lunas.active {
 	font-weight: bold;
 	cursor: default;
 }
-
 .btn-dp.disabled,
 .btn-dp[disabled],
 fieldset[disabled] .btn-dp,
@@ -152,7 +146,6 @@ fieldset[disabled] .btn-dp.active {
 	font-weight: bold;
 	cursor: default;
 }
-
 .bootstrap-datetimepicker-widget {
 	top: 0;
 	left: 0;
@@ -380,27 +373,4 @@ fieldset[disabled] .btn-dp.active {
 @keyframes roll {
 	0% { transform: rotate(0); }
 	100% { transform: rotate(360deg); }
-}
-
-@-webkit-keyframes bounce {
-	0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
-	40% {-webkit-transform: translateY(-30px);}
-	60% {-webkit-transform: translateY(-15px);}
-}
-
-@-moz-keyframes bounce {
-	0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
-	40% {-moz-transform: translateY(-30px);}
-	60% {-moz-transform: translateY(-15px);}
-}
-
-@-o-keyframes bounce {
-	0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
-	40% {-o-transform: translateY(-30px);}
-	60% {-o-transform: translateY(-15px);}
-}
-@keyframes bounce {
-	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-	40% {transform: translateY(-30px);}
-	60% {transform: translateY(-15px);}
 }
