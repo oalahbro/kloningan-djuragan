@@ -1,53 +1,89 @@
+@import url(bootstrap.min.css);
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
 body {
-	background: #f8f8f8;
 	margin-top: 70px;
 }
-.cloning {
-	margin-bottom: 5px;
+a.navbar-brand, .title-page small {
+	font-family: 'Pacifico', cursive;
+}
+.badge-notify{
+	background: #D73C3C;
+	position:relative;
+	top: -15px;
+	left: 0;
+
 }
 
-.lembar {
-	background: white;
-	min-height: 100vh;
-	position: relative;
-	z-index: 2;
-	margin-bottom: 60px;
+.navbar {
+	margin-bottom:0;
 }
-.page-header .judul h1 {
-	margin: 0;
+
+.subnav {
+	margin:0;
+	top: 0px;
+	z-index: 1020;
+	background-color: rgb(247,247,247); 
+	border-bottom: 1px solid #E1E1E1;
+	padding: 8px 0px 5px 0px;
+	transition: all 2s ease;
+	-webkit-transition: all 2s ease;
+	-moz-transition: all 2s ease;
+	-o-transition: all 2s ease;
 }
-footer {
+.subnav.affix {
 	position: fixed;
-	bottom: 0;
+	top: 70px;
 	width: 100%;
-	background: #222;
-	color: #ccc;
-	padding: 20px 0;
-	z-index: 1;
+	z-index:10;
 }
-footer .credit {
-	margin: 0 15px;
+.title-page {
+	text-align: center;
+	margin-top: 10px;
+	padding-bottom: 9px;
+	margin: 40px 0 20px;
 }
-.jadi-loading {
-	width: 300px;
-	margin: 50px auto;
+.title-page i {
+	animation: roll 3s infinite;
+	-webkit-animation: roll 3s infinite;
+	-moz-animation: roll 3s infinite;
+	-o-animation: roll 3s infinite;
+	transform: rotate(30deg);
 }
-.text-bold {
-	font-weight: bold;
+
+.title-page i, .title-page small {
+	display: block;
+	color: teal;
 }
-.nama_pemesan {
-	font-size: 1.3em;
-}
-.label-info2 {
-	background-color:#5BC0DE;
-}
-.label-info2[href]:hover, .label-info2[href]:focus {
-	background-color:#5BC0DE;
+.page-content {
+	min-height: 70vh;
 }
 .btn-margin {
 	margin-top: 5px;
 }
-.btn-clean.disabled, .btn-clean[disabled], fieldset[disabled] .btn-clean, .btn-clean.disabled:hover, .btn-clean[disabled]:hover, fieldset[disabled] .btn-clean:hover, .btn-clean.disabled:focus, .btn-clean[disabled]:focus, fieldset[disabled] .btn-clean:focus, .btn-clean.disabled.focus, .btn-clean[disabled].focus, fieldset[disabled] .btn-clean.focus, .btn-clean.disabled:active, .btn-clean[disabled]:active, fieldset[disabled] .btn-clean:active, .btn-clean.disabled.active, .btn-clean[disabled].active, fieldset[disabled] .btn-clean.active {
+.label-info2 {
+	background-color: #5BC0DE;
+}
+table .label {
+	font-size: 0.9em;
+}
+.btn-clean.disabled,
+.btn-clean[disabled],
+fieldset[disabled] .btn-clean,
+.btn-clean.disabled:hover,
+.btn-clean[disabled]:hover,
+fieldset[disabled] .btn-clean:hover,
+.btn-clean.disabled:focus,
+.btn-clean[disabled]:focus,
+fieldset[disabled] .btn-clean:focus,
+.btn-clean.disabled.focus,
+.btn-clean.focus[disabled],
+fieldset[disabled] .btn-clean.focus,
+.btn-clean.disabled:active,
+.btn-clean[disabled]:active,
+fieldset[disabled] .btn-clean:active,
+.btn-clean.disabled.active,
+.btn-clean.active[disabled],
+fieldset[disabled] .btn-clean.active {
 	background-color: transparent;
 	border-color: transparent;
 	border-bottom-width: 2px;
@@ -56,8 +92,27 @@ footer .credit {
 	border-top-color: black;
 	color: black;
 	font-weight: bold;
+	cursor: default;
 }
-.btn-lunas.disabled, .btn-lunas[disabled], fieldset[disabled] .btn-lunas, .btn-lunas.disabled:hover, .btn-lunas[disabled]:hover, fieldset[disabled] .btn-lunas:hover, .btn-lunas.disabled:focus, .btn-lunas[disabled]:focus, fieldset[disabled] .btn-lunas:focus, .btn-lunas.disabled.focus, .btn-lunas[disabled].focus, fieldset[disabled] .btn-lunas.focus, .btn-lunas.disabled:active, .btn-lunas[disabled]:active, fieldset[disabled] .btn-lunas:active, .btn-lunas.disabled.active, .btn-lunas[disabled].active, fieldset[disabled] .btn-lunas.active {
+
+.btn-lunas.disabled,
+.btn-lunas[disabled],
+fieldset[disabled] .btn-lunas,
+.btn-lunas.disabled:hover,
+.btn-lunas[disabled]:hover,
+fieldset[disabled] .btn-lunas:hover,
+.btn-lunas.disabled:focus,
+.btn-lunas[disabled]:focus,
+fieldset[disabled] .btn-lunas:focus,
+.btn-lunas.disabled.focus,
+.btn-lunas.focus[disabled],
+fieldset[disabled] .btn-lunas.focus,
+.btn-lunas.disabled:active,
+.btn-lunas[disabled]:active,
+fieldset[disabled] .btn-lunas:active,
+.btn-lunas.disabled.active,
+.btn-lunas.active[disabled],
+fieldset[disabled] .btn-lunas.active {
 	background-color: transparent;
 	border-color: transparent;
 	border-top-width: 2px;
@@ -66,8 +121,27 @@ footer .credit {
 	border-bottom-color: green;
 	color: green;
 	font-weight: bold;
+	cursor: default;
 }
-.btn-dp.disabled, .btn-dp[disabled], fieldset[disabled] .btn-dp, .btn-dp.disabled:hover, .btn-dp[disabled]:hover, fieldset[disabled] .btn-dp:hover, .btn-dp.disabled:focus, .btn-dp[disabled]:focus, fieldset[disabled] .btn-dp:focus, .btn-dp.disabled.focus, .btn-dp[disabled].focus, fieldset[disabled] .btn-dp.focus, .btn-dp.disabled:active, .btn-dp[disabled]:active, fieldset[disabled] .btn-dp:active, .btn-dp.disabled.active, .btn-dp[disabled].active, fieldset[disabled] .btn-dp.active {
+
+.btn-dp.disabled,
+.btn-dp[disabled],
+fieldset[disabled] .btn-dp,
+.btn-dp.disabled:hover,
+.btn-dp[disabled]:hover,
+fieldset[disabled] .btn-dp:hover,
+.btn-dp.disabled:focus,
+.btn-dp[disabled]:focus,
+fieldset[disabled] .btn-dp:focus,
+.btn-dp.disabled.focus,
+.btn-dp.focus[disabled],
+fieldset[disabled] .btn-dp.focus,
+.btn-dp.disabled:active,
+.btn-dp[disabled]:active,
+fieldset[disabled] .btn-dp:active,
+.btn-dp.disabled.active,
+.btn-dp.active[disabled],
+fieldset[disabled] .btn-dp.active {
 	background-color: transparent;
 	border-color: transparent;
 	border-top-width: 2px;
@@ -76,9 +150,7 @@ footer .credit {
 	border-bottom-color: red;
 	color: red;
 	font-weight: bold;
-}
-table .label {
-	font-size: 0.9em;
+	cursor: default;
 }
 
 .bootstrap-datetimepicker-widget {
@@ -292,178 +364,43 @@ table .label {
 .bootstrap-datetimepicker-widget thead tr:first-child th:hover {
 	background: #eeeeee;
 }
-/*
-.text-bold {
-	font-weight: bold;
+
+@-webkit-keyframes roll {
+	0% { transform: rotate(0); }
+	100% { transform: rotate(360deg); }
 }
-.login .form-login .well {
-	background: white;
-	box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+@-moz-keyframes roll {
+	0% { transform: rotate(0); }
+	100% { transform: rotate(360deg); }
 }
-.login .form-login .well button {
-	margin-top: 10px;
+@-o-keyframes roll {
+	0% { transform: rotate(0); }
+	100% { transform: rotate(360deg); }
 }
-.page-content {
-	margin-bottom: 50px;
-	min-height: 100vh;
-}
-.tab-content {
-}
-.content-head {
-	background: white;
-	padding: 5px;
-	border: 1px solid #DDD;
-	margin-bottom: 20px;
-}
-.content-inti {
-	min-height: 90vh;
-	background: white;
-	padding: 10px 5px;
-	border: 1px solid #DDD;
-}
-.content-head .page-header {
-	text-align: center;
-	margin-top: 10px;
-}
-.content-head .page-header i, .content-head .page-header small {
-	display: block;
-}
-.content-head .page-header i {
-}
-.btn-tambah, .menu-table {
-	margin-bottom: 10px;
-}
-.search {
-	border: 1px solid #DDD;
-	background: white;
-	padding: 10px 20px;
-}
-tr .btn-hover-tr {
-	margin-top: 5px;
-}
-tr .btn-hover-tr > .btn-group {
-	display: none;
-}
-tr:hover .btn-hover-tr > .btn-group {
-	display: inherit;
-}
-.alert {
-	z-index: 1050;
-	position: fixed;
-	overflow: hidden;
-	opacity: 0.9;
-	margin: 30px;
-	bottom: 0;
-	right: 0;
-	transition: right 0.6s ease-out 0s;
-}
-.alert {
-	background: #333;
-	border: 1px solid #222;
-	color: white;
-	font-size: 20px;
-}
-.multiple-form-group {
-	margin-bottom: 5px;
-}
-@media (min-width:768px) {
-	.login .form-login {
-		margin-top: 10vh;
-	}
-}
-@media (min-width: 992px) {
-	.login .form-login {
-		margin-top: 20vh;
-	}
-}
-@media (min-width: 1200px) {
-	.login .form-login {
-		margin-top: 20vh;
-	}
-}
-.text-bold {
-	font-weight: bold;
-}
-.nama_pemesan {
-	font-size: 1.3em;
-}
-.label-info2 {
-	background-color:#5BC0DE;
-}
-.label-info2[href]:hover, .label-info2[href]:focus {
-	background-color:#5BC0DE;
-}
-.btn-margin {
-	margin-top: 5px;
-}
-.btn-clean.disabled, .btn-clean[disabled], fieldset[disabled] .btn-clean, .btn-clean.disabled:hover, .btn-clean[disabled]:hover, fieldset[disabled] .btn-clean:hover, .btn-clean.disabled:focus, .btn-clean[disabled]:focus, fieldset[disabled] .btn-clean:focus, .btn-clean.disabled.focus, .btn-clean[disabled].focus, fieldset[disabled] .btn-clean.focus, .btn-clean.disabled:active, .btn-clean[disabled]:active, fieldset[disabled] .btn-clean:active, .btn-clean.disabled.active, .btn-clean[disabled].active, fieldset[disabled] .btn-clean.active {
-	background-color: transparent;
-	border-color: transparent;
-	border-bottom-width: 2px;
-	border-bottom-color: black;
-	border-top-width: 2px;
-	border-top-color: black;
-	color: black;
-	font-weight: bold;
-}
-.btn-lunas.disabled, .btn-lunas[disabled], fieldset[disabled] .btn-lunas, .btn-lunas.disabled:hover, .btn-lunas[disabled]:hover, fieldset[disabled] .btn-lunas:hover, .btn-lunas.disabled:focus, .btn-lunas[disabled]:focus, fieldset[disabled] .btn-lunas:focus, .btn-lunas.disabled.focus, .btn-lunas[disabled].focus, fieldset[disabled] .btn-lunas.focus, .btn-lunas.disabled:active, .btn-lunas[disabled]:active, fieldset[disabled] .btn-lunas:active, .btn-lunas.disabled.active, .btn-lunas[disabled].active, fieldset[disabled] .btn-lunas.active {
-	background-color: transparent;
-	border-color: transparent;
-	border-top-width: 2px;
-	border-top-color: green;
-	border-bottom-width: 2px;
-	border-bottom-color: green;
-	color: green;
-	font-weight: bold;
-}
-.btn-dp.disabled, .btn-dp[disabled], fieldset[disabled] .btn-dp, .btn-dp.disabled:hover, .btn-dp[disabled]:hover, fieldset[disabled] .btn-dp:hover, .btn-dp.disabled:focus, .btn-dp[disabled]:focus, fieldset[disabled] .btn-dp:focus, .btn-dp.disabled.focus, .btn-dp[disabled].focus, fieldset[disabled] .btn-dp.focus, .btn-dp.disabled:active, .btn-dp[disabled]:active, fieldset[disabled] .btn-dp:active, .btn-dp.disabled.active, .btn-dp[disabled].active, fieldset[disabled] .btn-dp.active {
-	background-color: transparent;
-	border-color: transparent;
-	border-top-width: 2px;
-	border-top-color: red;
-	border-bottom-width: 2px;
-	border-bottom-color: red;
-	color: red;
-	font-weight: bold;
-}
-table .label {
-	font-size: 0.9em;
-}
-footer {
-	background: #222;
-	color: #ccc;
-}
-footer .credit {
-	padding: 20px;
-}
-.nav-margin {
-	margin-bottom: 20px;
+@keyframes roll {
+	0% { transform: rotate(0); }
+	100% { transform: rotate(360deg); }
 }
 
-.input-group.date .input-group-addon span {
-	display: block;
-	cursor: pointer;
-	width: 16px;
-	height: 16px;
+@-webkit-keyframes bounce {
+	0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+	40% {-webkit-transform: translateY(-30px);}
+	60% {-webkit-transform: translateY(-15px);}
 }
-.bootstrap-datetimepicker-widget.left-oriented:before {
-	left: auto;
-	right: 6px;
+
+@-moz-keyframes bounce {
+	0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+	40% {-moz-transform: translateY(-30px);}
+	60% {-moz-transform: translateY(-15px);}
 }
-.bootstrap-datetimepicker-widget.left-oriented:after {
-	left: auto;
-	right: 7px;
+
+@-o-keyframes bounce {
+	0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+	40% {-o-transform: translateY(-30px);}
+	60% {-o-transform: translateY(-15px);}
 }
-.bootstrap-datetimepicker-widget ul.list-unstyled li div.timepicker div.timepicker-picker table.table-condensed tbody > tr > td {
-	padding: 0px !important;
+@keyframes bounce {
+	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+	40% {transform: translateY(-30px);}
+	60% {transform: translateY(-15px);}
 }
-@media screen and (max-width: 767px) {
-	.bootstrap-datetimepicker-widget.timepicker-sbs {
-		width: 283px;
-	}
-}
-.bg-white {
-	background: white !important;
-	cursor: default !important;
-}
-*/

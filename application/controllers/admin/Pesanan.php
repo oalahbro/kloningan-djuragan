@@ -29,10 +29,10 @@ class Pesanan extends CI_Controller {
 	public function read($juragan = 'all', $status = 'all') {
 		$nama_juragan = $this->juragan->ambil_nama_by_username($juragan);
 		if($status === 'pending') {
-			$judul = '<i class="glyphicon glyphicon-refresh"></i> Pesanan Pending <small>'.$nama_juragan.'</small>';
+			$judul = '<i class="glyphicon glyphicon-repeat"></i> Pesanan Pending <small>'.$nama_juragan.'</small>';
 		}
 		elseif($status === 'terkirim') {
-			$judul = '<i class="glyphicon glyphicon-ok"></i> Pesanan Terkirim <small>'.$nama_juragan.'</small>';
+			$judul = '<i class="glyphicon glyphicon-thumbs-up"></i> Pesanan Terkirim <small>'.$nama_juragan.'</small>';
 		}
 		else {
 			$judul = '<i class="glyphicon glyphicon-th-large"></i> Semua Pesanan <small>'.$nama_juragan.'</small>';
