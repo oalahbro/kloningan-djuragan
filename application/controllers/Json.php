@@ -24,18 +24,23 @@ class Json extends CI_Controller {
 
 
     public function index() {
+    	$response['date'] = date('dmYhis');
 
-    	$response['items'] = array(
-    							'Korea Hunter baru saja memasukkan data pesanan baru sejumlah 1pcs',
-    							'Orderan Kamu tertinggal dari 3 juragan lainnya',
-    							'Limited Shoping baru saja memasukkan data pesanan baru sejumlah 4pcs'
-    						);
+    	$arr = array( 
+			'Korea Hunter baru saja memasukkan data pesanan baru sejumlah 1pcs',
+			'Orderan Kamu tertinggal dari 3 juragan lainnya',
+			'Limited Shoping baru saja memasukkan data pesanan baru sejumlah 4pcs'
+		);
+		shuffle($arr);
+
+    	$response['items'] = $arr;
 
     	$this->output
 	    	 ->set_status_header(200)
 	    	 ->set_content_type('application/json', 'utf-8')
-	    	 ->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+	    	 ->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 	    	 ->_display();
     	exit;
     }
 }
+
