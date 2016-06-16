@@ -124,8 +124,26 @@
 											<u>Pengirim :</u><br/>
 											<?php echo $pesanan->nama_member; ?><br/><?php echo $pesanan->hp_member; ?>
 										</div>
-									<?php } ?>
-									<?php echo $pesanan->keterangan; ?></td>
+									<?php }
+
+									echo $pesanan->keterangan; 
+									if($pesanan->customgambar !== NULL) {
+
+								?>
+								<div class="dropdown">
+								  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="glyphicon glyphicon-picture"></i> Custom Gambar <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								   <?php
+								   	$i = 1;
+								   	$gmb = explode(',', $pesanan->customgambar);
+								   	foreach ($gmb as $key ) {
+								   		echo '<li>'. anchor($key, 'Gambar ' . $i++, array('target' => '_blank')) .'</li>';
+								   	}
+								   	?>   
+								  </ul>
+								</div>
+								<?php } ?></td>
 							<td><?php echo $resi; ?></td>
 						</tr>
 					<?php }
