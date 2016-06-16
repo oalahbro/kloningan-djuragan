@@ -15,7 +15,8 @@ class Pesanan_model extends CI_Model {
 		$this->db->from('order');
 		$this->db->join('user', 'order.user_id=user.id');
 		$this->db->group_by('order.user_id'); 
-		$this->db->order_by('total', 'desc'); 
+		$this->db->order_by('total', 'desc');
+
 		
 		$query = $this->db->get();
 
@@ -166,5 +167,25 @@ class Pesanan_model extends CI_Model {
 		if($ubah)
 			$this->update_count($user_id);
 			return TRUE;
+	}
+
+	// newsticker
+	function today_input($kecuali_user_id = null) {
+
+		$hari_ini = mdate('%Y-%m-%d', time());
+
+		$this->db->select('order.user_id, count(order.id) as jumlah_pesanan, sum(order.jumlah) as total_pesanan, user.nama');
+		$this->db->from('order');
+		$this->db->join('user', 'order.user_id = user.id');
+		$this->db->group_by('order.user_id');
+
+		$this->db->where('DATE(order.tanggal_order) >= ', $hari_ini);
+		if($kecuali_user_id !== NULL) {
+			$this->db->having('order.user_id !=', $kecuali_user_id);
+		}
+
+		$query = $this->db->get();
+
+		return $query;
 	}
 }

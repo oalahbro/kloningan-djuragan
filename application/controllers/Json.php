@@ -22,16 +22,13 @@ class Json extends CI_Controller {
     }
     */
 
-
     public function index() {
     	$response['date'] = date('dmYhis');
 
-    	$arr = array( 
-			'Korea Hunter baru saja memasukkan data pesanan baru sejumlah 1pcs',
-			'Orderan Kamu tertinggal dari 3 juragan lainnya',
-			'Limited Shoping baru saja memasukkan data pesanan baru sejumlah 4pcs'
-		);
-		shuffle($arr);
+    	$array2 = array('');
+    	$array3 = array('');
+
+    	$arr = array_merge($this->input_hari_ini(), $array2,$array3);
 
     	$response['items'] = $arr;
 
@@ -42,5 +39,39 @@ class Json extends CI_Controller {
 	    	 ->_display();
     	exit;
     }
-}
 
+    public function status_ranking() {
+    	$array = array();
+    }
+
+    public function input_hari_ini() {
+    	$array = array();
+
+    	$kecuali_user_id = data_session('id');
+    	$q = $this->pesanan->today_input($kecuali_user_id);
+
+    	if($q->num_rows() > 0) {
+	    	foreach ($q->result() as $key ) {
+	    		$array[] = $key->nama . ' udah masukin ' . $key->jumlah_pesanan . ' data closingan hari ini dengan total pesanan sebanyak ' .  $key->total_pesanan . 'pcs.';
+	    	}
+	    }
+	    else {
+	    	$gak_ada_data = array(
+				"Kok sepi sih datanya ? Kamu ngapain aja nih ..",
+				"Udah ngiklan belum ?",
+				"Semangat lagi ya, masak datanya kosong begini.",
+				"Kepo boleh kan ? data closingan nya mana bos ?",
+				"Dari kemarin sepi banget, kamu kemana aja kok gak ngisi data ?",
+				"Stock nya numpuk tuh, ayo sikat abis."
+			);
+
+	    	$array[] = random_element($gak_ada_data);
+	    }
+    	shuffle($array);
+    	return $array;
+    }
+
+
+
+
+}
