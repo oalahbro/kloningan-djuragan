@@ -50,7 +50,7 @@
 						$tombol_edit .= '<ul class="dropdown-menu" aria-labelledby="editing-' . $pesanan->id . '">';
 							$tombol_edit .= '<li>'. anchor('admin/pesanan/update/' . $pesanan->unik, '<i class="glyphicon glyphicon-pencil"></i> Ubah') .'</li>';
 							$tombol_edit .= '<li>'. anchor('admin/pesanan/duplicate/' . $pesanan->unik, '<i class=" glyphicon glyphicon-duplicate"></i> Duplikat') .'</li>';
-							$tombol_edit .= '<li>'. anchor('admin/pesanan/delete/' . $pesanan->unik, '<i class="glyphicon glyphicon-trash"></i> Hapus') .'</li>';
+							$tombol_edit .= '<li>'. anchor('', '<i class="glyphicon glyphicon-trash"></i> Hapus', array('data-unik' => $pesanan->unik, 'data-id' => $pesanan->id, 'class' => 'hapusdata')) .'</li>';
 						$tombol_edit .= '</ul>';
 						$tombol_edit .= '</div>';
 
@@ -160,7 +160,40 @@
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="HapusDataAlert" tabindex="-1" role="dialog" aria-labelledby="HapusDataAlertLabel">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="HapusDataAlertLabel">Hapus Data</h4>
+			</div>
+			<div class="modal-body">
+				<div class="well well-sm">
+					Hapus data pesanan dengan ID-<span class="dataid"></span>.
+					<br/>Penghapusan data tidak dapat dibatalkan.
+				</div>
+			</div>
+			<div class="modal-footer">
+				<?php echo form_open('admin/pesanan/delete', '', array('unik' => '')) ?>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Save changes</button>
+				<?php echo form_close(); ?>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript">
+	// hapus data
+	$('a.hapusdata').click(function(event) {
+		event.preventDefault();
+		$('#HapusDataAlert').modal({show: true});
+		$('.dataid').text($(this).data("id"));
+		$('[name="unik"]').val($(this).data("unik"));
+	});
+
+	// pagination
 	$('.akses a').click(function(event) {
 		event.preventDefault();
 		$("html, body").animate({scrollTop: 0}, 3000);
