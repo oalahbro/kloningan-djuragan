@@ -28,9 +28,9 @@
 						$status_pending = 'btn-primary';
 					}
 
-					echo anchor('admin/pesanan/read/' . $juragan . '/all', 'Semua', array('class' => 'btn ' . $status_all));
-					echo anchor('admin/pesanan/read/' . $juragan . '/terkirim', 'Terkirim', array('class' => 'btn ' . $status_terkirim));
-					echo anchor('admin/pesanan/read/' . $juragan . '/pending', 'Pending', array('class' => 'btn ' . $status_pending));
+					echo anchor('admin/pesanan/read/' . $juragan . '/all', '<i class="glyphicon glyphicon-th-large"></i> Semua', array('class' => 'btn ' . $status_all));
+					echo anchor('admin/pesanan/read/' . $juragan . '/terkirim', '<i class="glyphicon glyphicon-thumbs-up"></i> Terkirim', array('class' => 'btn ' . $status_terkirim));
+					echo anchor('admin/pesanan/read/' . $juragan . '/pending', '<i class="glyphicon glyphicon-repeat"></i> Pending', array('class' => 'btn ' . $status_pending));
 					?>
 				</div>
 				<div class="cari col-sm-3">
