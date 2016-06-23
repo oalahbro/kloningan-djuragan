@@ -383,3 +383,6 @@ tr .btn-hover-tr > .dropdown {
 tr:hover .btn-hover-tr > .dropdown {
 	display: inherit;
 }
+.cloning {
+	margin-bottom: 5px;
+}
