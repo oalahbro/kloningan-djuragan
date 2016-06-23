@@ -170,14 +170,14 @@
 			</div>
 			<div class="modal-body">
 				<div class="well well-sm">
-					Hapus data pesanan dengan ID-<span class="dataid"></span>.
+					Hapus data pesanan dengan ID #<span class="dataid"></span>.
 					<br/>Penghapusan data tidak dapat dibatalkan.
 				</div>
 			</div>
 			<div class="modal-footer">
 				<?php echo form_open('admin/pesanan/delete', '', array('unik' => '')) ?>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
+				<button type="submit" class="btn btn-danger">Hapus</button>
 				<?php echo form_close(); ?>
 			</div>
 		</div>

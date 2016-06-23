@@ -169,6 +169,71 @@ class Pesanan_model extends CI_Model {
 			return TRUE;
 	}
 
+	function get_user_id_by_pesanan($unik) {
+		$this->db->select('user_id');
+		$this->db->where('unik', $unik);
+		$query = $this->db->get('order');
+
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
+			return $row->user_id;
+		}
+	}
+
+	function hapus($pesanan_unik) {
+		$user_id = $this->get_user_id_by_pesanan($pesanan_unik);
+						
+		$this->db->where('unik', $pesanan_unik);
+		$hapus = $this->db->delete('order');
+
+		if($hapus) {
+			$this->update_count($user_id);
+			return TRUE;
+		}
+	}
+
+	function count_order_kirim($id = false, $barang) {
+		$array = array('Pending', 'Terkirim');
+		if(in_array($barang, $array)) {
+			$this->db->where('barang', $barang);
+			$this->db->where('del', NULL);
+			if( ! empty($id)) {
+				$this->db->where('user_id', $id);
+			}	
+			$this->db->from('order');
+			$count = $this->db->count_all_results();
+
+			return $count;
+		}
+	}
+
+	function count_order_transfer($id = false, $transfer) {
+		$array = array('Belum', 'Masuk');
+		if(in_array($transfer, $array)) {
+			$this->db->where('status_transfer', $transfer);
+			$this->db->where('del', NULL);
+			if( ! empty($id)) {
+				$this->db->where('user_id', $id);
+			}			
+			$this->db->from('order');
+			$count = $this->db->count_all_results();
+
+			return $count;
+		}
+	}
+
+	function update_count($user_id) {
+		$data_count = array(
+			'transfer' => $this->count_order_transfer($user_id, 'Belum'),
+			'kirim' => $this->count_order_kirim($user_id, 'Pending')
+		);
+
+		$this->db->where('user_id', $user_id);
+		$this->db->update('count_order', $data_count);
+
+		return TRUE;
+	}
+
 	// newsticker
 	function today_input($kecuali_user_id = null) {
 
