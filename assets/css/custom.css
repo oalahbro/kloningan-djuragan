@@ -374,3 +374,12 @@ fieldset[disabled] .btn-dp.active {
 	0% { transform: rotate(0); }
 	100% { transform: rotate(360deg); }
 }
+tr .btn-hover-tr {
+	margin-top: 5px;
+}
+tr .btn-hover-tr > .dropdown {
+	display: none;
+}
+tr:hover .btn-hover-tr > .dropdown {
+	display: inherit;
+}

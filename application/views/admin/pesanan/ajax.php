@@ -87,7 +87,7 @@
 					?>
 						<tr<?php echo $status_class; ?>>
 							<td><?php echo $pesanan->id; ?></td>
-							<td><?php echo anchor('admin/pesanan/read/' . $pesanan->username . '/' . $status, $pesanan->juragan); echo $tombol_edit;?></td>
+							<td><?php echo anchor('admin/pesanan/read/' . $pesanan->username . '/' . $status, $pesanan->juragan); echo '<div class="btn-hover-tr">' . $tombol_edit . '</div>'; ?></td>
 							<td class="<?php echo $transfer_class; ?>"><?php echo '<abbr title="' . $pesanan->tanggal_order . '">' . nice_date($pesanan->tanggal_order, 'd-M-y') . '</abbr>'; echo $button_transfer; echo $button_kirim; ?></td>
 							<td><?php echo '<span class="nama_pemesan"><strong>' . strtoupper($pesanan->nama) . '</strong></span><br/><span class="label label-info2">' . $pesanan->hp . '</span><br/>';
 								echo strtoupper($pesanan->alamat); ?></td>
