@@ -169,6 +169,7 @@ class Pesanan_model extends CI_Model {
 			return TRUE;
 	}
 
+	// ambil data `user_id` dari data `unik` pesanan
 	function get_user_id_by_pesanan($unik) {
 		$this->db->select('user_id');
 		$this->db->where('unik', $unik);
@@ -180,6 +181,7 @@ class Pesanan_model extends CI_Model {
 		}
 	}
 
+	// hapus data pesanan
 	function hapus($pesanan_unik) {
 		$user_id = $this->get_user_id_by_pesanan($pesanan_unik);
 						
@@ -192,36 +194,7 @@ class Pesanan_model extends CI_Model {
 		}
 	}
 
-	function count_order_kirim($id = false, $barang) {
-		$array = array('Pending', 'Terkirim');
-		if(in_array($barang, $array)) {
-			$this->db->where('barang', $barang);
-			$this->db->where('del', NULL);
-			if( ! empty($id)) {
-				$this->db->where('user_id', $id);
-			}	
-			$this->db->from('order');
-			$count = $this->db->count_all_results();
-
-			return $count;
-		}
-	}
-
-	function count_order_transfer($id = false, $transfer) {
-		$array = array('Belum', 'Masuk');
-		if(in_array($transfer, $array)) {
-			$this->db->where('status_transfer', $transfer);
-			$this->db->where('del', NULL);
-			if( ! empty($id)) {
-				$this->db->where('user_id', $id);
-			}			
-			$this->db->from('order');
-			$count = $this->db->count_all_results();
-
-			return $count;
-		}
-	}
-
+	// update data count 
 	function update_count($user_id) {
 		$data_count = array(
 			'transfer' => $this->count_order_transfer($user_id, 'Belum'),
@@ -232,6 +205,38 @@ class Pesanan_model extends CI_Model {
 		$this->db->update('count_order', $data_count);
 
 		return TRUE;
+	}
+
+	// re-count data kirim barang
+	function count_order_kirim($user_id = false, $barang) {
+		$array = array('Pending', 'Terkirim');
+		if(in_array($barang, $array)) {
+			$this->db->where('barang', $barang);
+			$this->db->where('del', NULL);
+			if( ! empty($user_id)) {
+				$this->db->where('user_id', $user_id);
+			}	
+			$this->db->from('order');
+			$count = $this->db->count_all_results();
+
+			return $count;
+		}
+	}
+
+	// re-count data transfer
+	function count_order_transfer($user_id = false, $transfer) {
+		$array = array('Belum', 'Masuk');
+		if(in_array($transfer, $array)) {
+			$this->db->where('status_transfer', $transfer);
+			$this->db->where('del', NULL);
+			if( ! empty($user_id)) {
+				$this->db->where('user_id', $user_id);
+			}			
+			$this->db->from('order');
+			$count = $this->db->count_all_results();
+
+			return $count;
+		}
 	}
 
 	// newsticker
