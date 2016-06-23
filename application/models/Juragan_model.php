@@ -5,8 +5,8 @@ date_default_timezone_set('Asia/Jakarta');
 
 class Juragan_model extends CI_Model {
 
+	// ambil semua data user dengan level user
 	public function ambil() {
-
 		$this->db->from('user');
 		$this->db->join('count_order', 'count_order.user_id = user.id');
 
@@ -17,6 +17,7 @@ class Juragan_model extends CI_Model {
 		return $query;
 	}
 
+	// ambik `nama` dari username
 	public function ambil_nama_by_username($username) {
 		$query =$this->db->get_where('user', array('username' => $username));
 		$row = $query->row();
@@ -28,6 +29,7 @@ class Juragan_model extends CI_Model {
 		}
 	}
 
+	// ambil `nnama` dari unik pesanan 
 	public function ambil_nama_by_pesanan_unik($pesanan_unik) {
 		$pesanan = $this->db->get_where('order', array('unik' => $pesanan_unik));
 		$p = $pesanan->row();
@@ -43,6 +45,7 @@ class Juragan_model extends CI_Model {
 		}
 	}
 
+	// ambil data `id` dari username
 	public function ambil_id_by_username($username) {
 		$query =$this->db->get_where('user', array('username' => $username));
 		$row = $query->row();
