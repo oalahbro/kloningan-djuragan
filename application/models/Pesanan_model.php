@@ -169,7 +169,7 @@ class Pesanan_model extends CI_Model {
 			return TRUE;
 	}
 
-	// 
+	// ambil data pesanan dari data unik pesanan
 	function get_pesanan_by_unik($pesanan_unik) {
 		$query = $this->db->get_where('order', array('unik' => $pesanan_unik));
 		return $query;
