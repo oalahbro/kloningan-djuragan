@@ -48,7 +48,7 @@ class Pesanan extends CI_Controller {
 
 		$this->load->view('admin/header', $this->data);
 		$this->load->view('admin/pesanan/read', $this->data);
-		$this->load->view('admin/footer', $this->data);
+		$this->load->view('admin/footer-pesanan', $this->data);
 	}
 
 	public function read_ajax($juragan = 'all', $status = 'all'){
@@ -86,7 +86,192 @@ class Pesanan extends CI_Controller {
 		}
 	}
 
-	public function update() {
+	public function create($juragan) {
+		$nama_juragan = $this->juragan->ambil_nama_by_username($juragan);
+
+		if($this->form_validation->run('submit') === FALSE) {
+			$this->data = array(
+				'title' => 'Edit Pesanan',
+				'judul' => '<i class="glyphicon glyphicon-plus"></i> Tambah Data Pesanan <small>' . $nama_juragan . '</small>',
+				'active' => 'pesanan',
+				'juragan' => $juragan,
+				'status' => ''
+			);
+
+			$this->load->view('admin/header', $this->data);
+			$this->load->view('admin/pesanan/create', $this->data);
+			$this->load->view('admin/footer-selain-pesanan', $this->data);
+		}
+		else {
+			$user_id= input_post('id');
+			$nama 	= input_post('nama');
+			$alamat = nl2br(input_post('alamat'));
+
+			// kode
+			$kode 	= "";
+			foreach(input_post('kode') as $key => $value){
+			    $kode .= $value .", ";
+			}
+			$kode = reduce_multiples($kode, ", ", TRUE);
+			// jumlah
+			$jumlah = "";
+			foreach(input_post('jumlah') as $key => $value){
+			    $jumlah .= $value .", ";
+			}
+			$jumlah = reduce_multiples($jumlah, ", ", TRUE);
+			// size
+			$size 	= "";
+			foreach(input_post('size') as $key => $value){
+			    $size .= $value .", ";
+			}
+			$size = reduce_multiples($size, ", ", TRUE);
+
+			$s_kode 	= explode(', ', $kode);
+			$s_jmlh 	= explode(', ', $jumlah);
+			$s_size 	= explode(', ', $size);
+
+			$ukuran 	= array_map('trim', explode(",",$jumlah));
+			$totale 	= array_sum($ukuran);
+
+			$pesanan 	= "";
+			$jumlah_array = count($ukuran);
+			for ($i = 0; $i < $jumlah_array; ++$i) {
+			    $pesanan .= $s_kode[$i].','
+			    			.$s_size[$i].','
+			    			.$s_jmlh[$i].'# ';
+			}
+			$pesanan = reduce_multiples($pesanan, "# ", TRUE);
+
+			//echo $pesanan;
+			$hp 	= input_post('hp');
+			$harga 	= str_replace('.', '', input_post('harga'));
+			$ongkir	= str_replace('.', '', input_post('ongkir'));
+			$transfer =  str_replace('.', '', input_post('transfer'));
+			$status = input_post('status');
+			$bank 	= input_post('bank');
+			$keterangan = nl2br(input_post('keterangan'));
+			if(empty($keterangan)) {
+				$keterangan = NULL;
+			}
+			$image 	= input_post('image');
+
+			$data = array(
+				'user_id' => $user_id,
+				'nama' 	=> $nama,
+				'alamat' => $alamat,
+				'hp' 	=> $hp,
+				'pesanan' => $pesanan,
+				'harga' => $harga,
+				'ongkir' => $ongkir,
+				'jumlah' => $totale,
+				'transfer' => $transfer,
+				'status' => $status,
+				'bank' => $bank,
+				'keterangan' => $keterangan,
+				'data' => 'baru'
+			);
+
+			$this->pesanan_model->add($user_id, $data);
+			$this->session->set_userdata(array('info' => 'Data pesanan baru sudah disimpan.', 'info_tampil' => TRUE));
+
+			redirect('administrator?pg=pending&juragan=' . $user_id);
+		}
+	}
+
+	public function update($pesanan_unik) {
+		$nama_juragan = $this->juragan->ambil_nama_by_pesanan_unik($pesanan_unik);
+
+
+		$id 		= $pesanan_unik;
+
+		$cek_pesanan = $this->pesanan->get_pesanan_by_unik($pesanan_unik);
+		$row = $cek_pesanan->row(); 
+		
+		if($this->form_validation->run('submit') === FALSE) {
+			$this->data = array(
+				'title' => 'Edit Pesanan',
+				'judul' => '<i class="glyphicon glyphicon-edit"></i> Sunting Data Pesanan <small>' . $nama_juragan . '</small>',
+				'active' => 'pesanan'
+			);
+
+			$this->load->view('admin/header', $this->data);
+			$this->load->view('admin/pesanan/edit', $this->data);
+			$this->load->view('admin/footer', $this->data);
+		}
+		else
+		{
+			$id 	= input_post('id');
+			$nama 	= input_post('nama');
+			$alamat = input_post('alamat');
+
+			// kode
+			$kode ="";
+			foreach(input_post('kode') as $key => $value){
+			    $kode .= $value .", ";
+			}
+			$kode = reduce_multiples($kode, ", ", TRUE);
+			// jumlah
+			$jumlah ="";
+			foreach(input_post('jumlah') as $key => $value){
+			    $jumlah .= $value .", ";
+			}
+			$jumlah = reduce_multiples($jumlah, ", ", TRUE);
+			// size
+			$size ="";
+			foreach(input_post('size') as $key => $value){
+			    $size .= $value .", ";
+			}
+			$size = reduce_multiples($size, ", ", TRUE);
+
+			$s_kode 	= explode(', ', $kode);
+			$s_jmlh 	= explode(', ', $jumlah);
+			$s_size 	= explode(', ', $size);
+
+			$ukuran 	= array_map('trim', explode(",",$jumlah));
+			$totale 	= array_sum($ukuran);
+
+			$pesanan ="";
+			$jumlah_array = count($ukuran);
+			for ($i = 0; $i < $jumlah_array; ++$i) {
+			    $pesanan .= $s_kode[$i].','
+			    			.$s_size[$i].','
+			    			.$s_jmlh[$i].'# ';
+			}
+			$pesanan = reduce_multiples($pesanan, "# ", TRUE);
+
+			$hp 	= input_post('hp');
+			$harga 	= str_replace('.', '', input_post('harga'));
+			$ongkir	= str_replace('.', '', input_post('ongkir'));
+			$transfer =  str_replace('.', '', input_post('transfer'));
+			$status = input_post('status');
+			$bank 	= input_post('bank');
+			$keterangan = nl2br(input_post('keterangan'));
+			if(empty($keterangan))
+			{
+				$keterangan = NULL;
+			}
+			$image 	= input_post('image');
+
+			$data = array(
+				'nama' 	=> $nama,
+				'alamat' => $alamat,
+				'hp' 	=> $hp,
+				'pesanan' => $pesanan,
+				'harga' => $harga,
+				'ongkir' => $ongkir,
+				'jumlah' => $totale,
+				'transfer' => $transfer,
+				'status' => $status,
+				'bank' => $bank,
+				'keterangan' => $keterangan,
+				'data' => 'baru'
+			);
+
+			$this->pesanan_model->update_pesanan($id, $data);
+			$this->session->set_userdata(array('info' => 'Pesanan <u>ID-' . $id . '</u> berhasil diubah!', 'info_tampil' => TRUE));
+
+			redirect('administrator?pg=' . $halaman . '$juragan=' . $juragan);
+		}
 	}
 
 	public function delete() {
