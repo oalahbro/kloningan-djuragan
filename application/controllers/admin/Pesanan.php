@@ -90,6 +90,9 @@ class Pesanan extends CI_Controller {
 	}
 
 	public function delete() {
+		$this->pesanan->hapus($this->input->post('unik'));
+		redirect($this->agent->referrer());
+	
 	}
 
 	public function set_transfer() {
