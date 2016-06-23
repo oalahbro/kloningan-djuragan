@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo base_url('assets/js/bootstrap-typeahead.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/moment.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap-datetimepicker.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/clone-form.js'); ?>"></script>
 
 	<script type="text/javascript">
 		(function ($) {
