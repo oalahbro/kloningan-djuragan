@@ -28,6 +28,21 @@ class Juragan_model extends CI_Model {
 		}
 	}
 
+	public function ambil_nama_by_pesanan_unik($pesanan_unik) {
+		$pesanan = $this->db->get_where('order', array('unik' => $pesanan_unik));
+		$p = $pesanan->row();
+
+
+		$query =$this->db->get_where('user', array('id' => $p->user_id));
+		$row = $query->row();
+		if ($query->num_rows() > 0) {
+			return $row->nama;
+		}
+		else {
+			return 'All Juragan';
+		}
+	}
+
 	public function ambil_id_by_username($username) {
 		$query =$this->db->get_where('user', array('username' => $username));
 		$row = $query->row();
