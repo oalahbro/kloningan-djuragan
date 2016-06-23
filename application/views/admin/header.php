@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<ul class="dropdown-menu">
 							<?php 
 							foreach (list_juragan()->result() as $key) {
-								echo '<li>' .  anchor('admin/pesanan/create' . $key->username, $key->nama) . '</li>';
+								echo '<li>' .  anchor('admin/pesanan/create/' . $key->username, $key->nama) . '</li>';
 							} ?>
 						</ul>
 					</li>
