@@ -169,6 +169,12 @@ class Pesanan_model extends CI_Model {
 			return TRUE;
 	}
 
+	// 
+	function get_pesanan_by_unik($pesanan_unik) {
+		$query = $this->db->get_where('order', array('unik' => $pesanan_unik));
+		return $query;
+	}
+
 	// ambil data `user_id` dari data `unik` pesanan
 	function get_user_id_by_pesanan($unik) {
 		$this->db->select('user_id');
