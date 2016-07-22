@@ -196,7 +196,7 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<?php echo form_textarea(array('name' => 'keterangan', 'id' => 'keterangan', 'class' => 'form-control', 'placeholder' => 'keterangan', 'rows' => '4'),
-								$pesanan->keterangan); ?>
+								str_ireplace('<br />', '', $pesanan->keterangan)); ?>
 							</div>
 						</div>
 					</div>
