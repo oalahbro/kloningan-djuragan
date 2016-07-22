@@ -91,7 +91,7 @@ class Pesanan extends CI_Controller {
 
 		if($this->form_validation->run('submit') === FALSE) {
 			$this->data = array(
-				'title' => 'Edit Pesanan',
+				'title' => 'Tambah Pesanan ' . $nama_juragan,
 				'judul' => '<i class="glyphicon glyphicon-plus"></i> Tambah Data Pesanan <small>' . $nama_juragan . '</small>',
 				'active' => 'pesanan',
 				'juragan' => $juragan,
