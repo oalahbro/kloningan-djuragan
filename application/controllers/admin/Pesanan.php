@@ -103,25 +103,25 @@ class Pesanan extends CI_Controller {
 			$this->load->view('admin/footer-selain-pesanan', $this->data);
 		}
 		else {
-			$user_id= input_post('id');
-			$nama 	= input_post('nama');
-			$alamat = nl2br(input_post('alamat'));
+			$user_id= $this->input->post('id');
+			$nama 	= $this->input->post('nama');
+			$alamat = nl2br($this->input->post('alamat'));
 
 			// kode
 			$kode 	= "";
-			foreach(input_post('kode') as $key => $value){
+			foreach($this->input->post('kode') as $key => $value){
 			    $kode .= $value .", ";
 			}
 			$kode = reduce_multiples($kode, ", ", TRUE);
 			// jumlah
 			$jumlah = "";
-			foreach(input_post('jumlah') as $key => $value){
+			foreach($this->input->post('jumlah') as $key => $value){
 			    $jumlah .= $value .", ";
 			}
 			$jumlah = reduce_multiples($jumlah, ", ", TRUE);
 			// size
 			$size 	= "";
-			foreach(input_post('size') as $key => $value){
+			foreach($this->input->post('size') as $key => $value){
 			    $size .= $value .", ";
 			}
 			$size = reduce_multiples($size, ", ", TRUE);
@@ -143,17 +143,17 @@ class Pesanan extends CI_Controller {
 			$pesanan = reduce_multiples($pesanan, "# ", TRUE);
 
 			//echo $pesanan;
-			$hp 	= input_post('hp');
-			$harga 	= str_replace('.', '', input_post('harga'));
-			$ongkir	= str_replace('.', '', input_post('ongkir'));
-			$transfer =  str_replace('.', '', input_post('transfer'));
-			$status = input_post('status');
-			$bank 	= input_post('bank');
-			$keterangan = nl2br(input_post('keterangan'));
+			$hp 	= $this->input->post('hp');
+			$harga 	= str_replace('.', '', $this->input->post('harga'));
+			$ongkir	= str_replace('.', '', $this->input->post('ongkir'));
+			$transfer =  str_replace('.', '', $this->input->post('transfer'));
+			$status = $this->input->post('status');
+			$bank 	= $this->input->post('bank');
+			$keterangan = nl2br($this->input->post('keterangan'));
 			if(empty($keterangan)) {
 				$keterangan = NULL;
 			}
-			$image 	= input_post('image');
+			$image 	= $this->input->post('image');
 
 			$data = array(
 				'user_id' => $user_id,
@@ -199,25 +199,25 @@ class Pesanan extends CI_Controller {
 			$this->load->view('admin/footer-selain-pesanan', $this->data);
 		}
 		else {
-			$id 	= input_post('id');
-			$nama 	= input_post('nama');
-			$alamat = input_post('alamat');
+			$id 	= $this->input->post('id');
+			$nama 	= $this->input->post('nama');
+			$alamat = $this->input->post('alamat');
 
 			// kode
 			$kode ="";
-			foreach(input_post('kode') as $key => $value){
+			foreach($this->input->post('kode') as $key => $value){
 			    $kode .= $value .", ";
 			}
 			$kode = reduce_multiples($kode, ", ", TRUE);
 			// jumlah
 			$jumlah ="";
-			foreach(input_post('jumlah') as $key => $value){
+			foreach($this->input->post('jumlah') as $key => $value){
 			    $jumlah .= $value .", ";
 			}
 			$jumlah = reduce_multiples($jumlah, ", ", TRUE);
 			// size
 			$size ="";
-			foreach(input_post('size') as $key => $value){
+			foreach($this->input->post('size') as $key => $value){
 			    $size .= $value .", ";
 			}
 			$size = reduce_multiples($size, ", ", TRUE);
@@ -238,18 +238,18 @@ class Pesanan extends CI_Controller {
 			}
 			$pesanan = reduce_multiples($pesanan, "# ", TRUE);
 
-			$hp 	= input_post('hp');
-			$harga 	= str_replace('.', '', input_post('harga'));
-			$ongkir	= str_replace('.', '', input_post('ongkir'));
-			$transfer =  str_replace('.', '', input_post('transfer'));
-			$status = input_post('status');
-			$bank 	= input_post('bank');
-			$keterangan = nl2br(input_post('keterangan'));
+			$hp 	= $this->input->post('hp');
+			$harga 	= str_replace('.', '', $this->input->post('harga'));
+			$ongkir	= str_replace('.', '', $this->input->post('ongkir'));
+			$transfer =  str_replace('.', '', $this->input->post('transfer'));
+			$status = $this->input->post('status');
+			$bank 	= $this->input->post('bank');
+			$keterangan = nl2br($this->input->post('keterangan'));
 			if(empty($keterangan))
 			{
 				$keterangan = NULL;
 			}
-			$image 	= input_post('image');
+			$image 	= $this->input->post('image');
 
 			$data = array(
 				'nama' 	=> $nama,
@@ -266,7 +266,7 @@ class Pesanan extends CI_Controller {
 				'data' => 'baru'
 			);
 
-			$this->pesanan_model->update_pesanan($id, $data);
+			$this->pesanan->update_pesanan($id, $data);
 			$this->session->set_userdata(array('info' => 'Pesanan <u>ID-' . $id . '</u> berhasil diubah!', 'info_tampil' => TRUE));
 
 			redirect('administrator?pg=' . $halaman . '$juragan=' . $juragan);
