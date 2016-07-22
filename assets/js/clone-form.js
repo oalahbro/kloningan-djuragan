@@ -1,4 +1,6 @@
 $(function () {
+    var no     = $('.clonedInput').length;
+
     $('#btnAdd').click(function () {
         var num     = $('.clonedInput').length, // Checks to see how many "duplicatable" input fields we currently have
             newNum  = new Number(num + 1),      // The numeric ID of the new input field being added, increasing by 1 each time
@@ -6,7 +8,7 @@ $(function () {
 
         newElem.find('.kode').attr('id', 'kode' + newNum).val('');
         newElem.find('.size').attr('id', 'kode' + newNum);
-        newElem.find('.jumlah').attr('id', 'jumlah' + newNum).val('');
+        newElem.find('.jumlah').attr('id', 'jumlah' + newNum).val('1');
 
         $('#entry' + num).after(newElem);
         $('#kode' + newNum).focus();
@@ -28,5 +30,12 @@ $(function () {
         return false;
     });
     $('#btnAdd').attr('disabled', false);
-    $('#btnDel').addClass('hide');
+    if(no > 1) {
+        $('#btnDel').addClass('show');
+    }
+    else {
+        $('#btnDel').addClass('hide');
+    }
+
+
 });
