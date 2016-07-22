@@ -122,6 +122,7 @@
 											$query = $this->pesanan->get_size()->result();
 
 											$options = array();
+											$options['0'] = '-- pilih size --';
 											foreach ($query as $size) {
 												$options[$size->size] = $size->size;
 											}
@@ -287,7 +288,7 @@
 					<div class="form-group">
 						<label for="custom gambar">Custom Gambar</label>
 						<div class="tombol-picker">
-							<button class="btn btn-info" id="DOCS_IMAGES">Pilih / Unggah Gambar</button>
+							<button type="button" class="btn btn-info" id="DOCS_IMAGES">Pilih / Unggah Gambar</button>
 						</div>
 
 						<div class="row">

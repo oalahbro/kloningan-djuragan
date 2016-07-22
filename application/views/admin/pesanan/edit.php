@@ -26,7 +26,7 @@
 			<div class="panel panel-danger">
 				<?php 
 					$atribut_form = array('class' => 'form-horizontal');
-					$hidden_form = array('image' => '');
+					$hidden_form = array('image' => $pesanan->customgambar);
 					echo form_open_multipart('', $atribut_form, $hidden_form);
 				?>
 				<div class="panel-body">
@@ -93,6 +93,7 @@
 											$query = $this->pesanan->get_size()->result();
 
 											$options = array();
+											$options['0'] = '-- pilih size --';
 											foreach ($query as $size) {
 												$options[$size->size] = $size->size;
 											}
@@ -205,12 +206,21 @@
 					<div class="form-group">
 						<label for="custom gambar">Custom Gambar</label>
 						<div class="tombol-picker">
-							<button class="btn btn-info" id="DOCS_IMAGES">Pilih / Unggah Gambar</button>
+							<button type="button" class="btn btn-info" id="DOCS_IMAGES">Pilih / Unggah Gambar</button>
 						</div>
 
 						<div class="row">
 							<div class="col-sm-6">
-								<pre id="result">Tidak ada gambar</pre>
+							<?php
+								echo '<pre id="result">';
+								 
+								$gmb = explode(',', $pesanan->customgambar);
+								foreach ($gmb as $key ) {
+									echo $key . '<br />';
+								}
+								echo '</pre>';
+								?>
+								
 							</div>
 						</div>
 					</div>

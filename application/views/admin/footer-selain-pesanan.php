@@ -143,6 +143,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	            })
 		    }, 5000);
 
+            $('option[value="0"]').attr('disabled','disabled');
+
 		})(jQuery);
 	</script>
 	
