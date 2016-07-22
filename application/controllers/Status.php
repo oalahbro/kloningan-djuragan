@@ -43,6 +43,6 @@ class Status extends CI_Controller {
 
 		$this->load->view('admin/header', $this->data);
 		$this->load->view('admin/status', $this->data);
-		$this->load->view('admin/footer', $this->data);
+		$this->load->view('admin/footer-selain-pesanan', $this->data);
 	}
 }
