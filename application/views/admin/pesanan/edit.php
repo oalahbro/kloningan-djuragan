@@ -48,7 +48,7 @@
 						<div class="row">
 							<div class="col-sm-8">
 								<?php echo form_textarea(array('name' => 'alamat', 'id' => 'alamat', 'class' => 'form-control', 'required' => '', 'placeholder' => 'alamat lengkap', 'rows' => '4'),
-								$pesanan->alamat); ?>
+								str_ireplace('<br />', '', $pesanan->alamat)); ?>
 							</div>
 						</div>
 					</div>
@@ -167,13 +167,13 @@
 
 						<div class="radio">
 							<label>
-								<input required="" id="orderStatus2" value="Lunas" type="radio" name="status" <?php echo set_radio('status', 'Lunas'); ?>>
+								<input required="" id="orderStatus2" value="Lunas" type="radio" name="status" <?php if($pesanan->status === 'Lunas') { echo set_radio('status', 'Lunas', TRUE); } ?>>
 								<span class="label label-success">Lunas</span>
 							</label>
 						</div>
 						<div class="radio">
 							<label>
-								<input required="" id="orderStatus1" value="DP" type="radio" name="status" <?php echo set_radio('status', 'DP'); ?>>
+								<input required="" id="orderStatus1" value="DP" type="radio" name="status"<?php if($pesanan->status === 'DP') { echo set_radio('status', 'DP', TRUE); } ?>>
 								<span class="label label-warning">DP</span> <small><em>--down payment--</em></small>
 							</label>
 						</div>
