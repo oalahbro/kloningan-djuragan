@@ -30,6 +30,22 @@
 					echo form_open_multipart('', $atribut_form, $hidden_form);
 				?>
 				<div class="panel-body">
+					<?php if($member !== NULL) { ?>
+						<!-- field nama member -->
+						<div class="form-group">
+							<label for="nama">Nama Member</label>
+							<div class="row">
+								<div class="col-sm-4">
+									<select class="form-control" name="member_id">
+										<option selected="" disabled="">- pilih member -</option>
+										<?php foreach ($member->result() as $members) { ?>
+											<option value="<?php echo $members->id; ?>"><?php echo $members->nama_member; ?> (<?php echo $members->user_card; ?>)</option>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
 
 					<!-- field nama -->
 					<div class="form-group">

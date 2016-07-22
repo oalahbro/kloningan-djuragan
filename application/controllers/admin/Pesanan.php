@@ -95,6 +95,7 @@ class Pesanan extends CI_Controller {
 				'judul' => '<i class="glyphicon glyphicon-plus"></i> Tambah Data Pesanan <small>' . $nama_juragan . '</small>',
 				'active' => 'pesanan',
 				'juragan' => $juragan,
+				'member' => $this->juragan->memberlist($juragan),
 				'status' => ''
 			);
 

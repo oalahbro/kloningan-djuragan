@@ -34,7 +34,6 @@ class Juragan_model extends CI_Model {
 		$pesanan = $this->db->get_where('order', array('unik' => $pesanan_unik));
 		$p = $pesanan->row();
 
-
 		$query =$this->db->get_where('user', array('id' => $p->user_id));
 		$row = $query->row();
 		if ($query->num_rows() > 0) {
@@ -55,5 +54,23 @@ class Juragan_model extends CI_Model {
 		else {
 			return '';
 		}
+	}
+
+	// menampilkan daftar member jika ada
+	public function memberlist($username) {
+		$user_id = $this->ambil_id_by_username($username);
+
+		$query = $this->db->get_where('user', array('username' => $username));
+		$row = $query->row();
+
+		if($row->membership === '1') {
+			$this->db->order_by('nama_member', 'asc');
+			$return = $this->db->get_where('membership', array('user_id' => $user_id));
+		}
+		else {
+			$return = NULL;
+		}
+
+		return $return;
 	}
 }

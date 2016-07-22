@@ -127,7 +127,6 @@
 									<?php }
 
 									if($pesanan->customgambar !== NULL) {
-
 										?>
 										<div class="dropdown">
 											<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="glyphicon glyphicon-picture"></i> Custom Gambar <span class="caret"></span>
