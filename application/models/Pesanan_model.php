@@ -264,4 +264,10 @@ class Pesanan_model extends CI_Model {
 
 		return $query;
 	}
+
+	function get_size() {	
+		$this->db->order_by('id', 'asc');
+		$size = $this->db->get('size');
+		return $size;
+	}
 }
