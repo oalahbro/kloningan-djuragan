@@ -19,7 +19,6 @@
 			</div>
 		</div>
 	</div>
-
 </div>
 <div class="container-fluid">
 	<div class="row">
@@ -27,7 +26,7 @@
 					<div class="panel panel-danger">
 						<?php 
 							$atribut_form = array('class' => 'form-horizontal');
-							$hidden_form = array();
+							$hidden_form = array('image' => '');
 							echo form_open_multipart('', $atribut_form, $hidden_form);
 						?>
 						<div class="panel-body">
@@ -77,7 +76,7 @@
 										<div class="col-sm-4">
 											<div class="input-group">
 												<span class="input-group-addon">UKURAN</span>
-												<select required="" name="size[]" class="form-control size">
+												<select name="size[]" class="form-control size">
 													<option selected="" disabled="">-- ukuran --</option>
 													<?php /* $query = $this->produk_model->get_size()->result();
 													foreach ($query as $size) { ?>
@@ -178,6 +177,20 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<?php echo form_textarea(array('value' => set_value('keterangan'), 'name' => 'keterangan', 'id' => 'keterangan', 'class' => 'form-control', 'placeholder' => 'keterangan', 'rows' => '4')); ?>
+									</div>
+								</div>
+							</div>
+
+							<!-- field custom gambar -->
+							<div class="form-group">
+								<label for="custom gambar">Custom Gambar</label>
+								<div class="tombol-picker">
+									<button class="btn btn-info" id="DOCS_IMAGES">Pilih / Unggah Gambar</button>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-6">
+										<pre id="result">Tidak ada gambar</pre>
 									</div>
 								</div>
 							</div>
