@@ -104,9 +104,14 @@ class Pesanan extends CI_Controller {
 			$this->load->view('admin/footer-selain-pesanan', $this->data);
 		}
 		else {
-			$user_id= $this->input->post('id');
+			$user_id= $this->input->post('user_id');
+			$member_id= $this->input->post('member_id');
 			$nama 	= $this->input->post('nama');
 			$alamat = nl2br($this->input->post('alamat'));
+
+			if($member_id === NULL) {
+				$member_id = '0';
+			}
 
 			// kode
 			$kode 	= "";
@@ -155,9 +160,13 @@ class Pesanan extends CI_Controller {
 				$keterangan = NULL;
 			}
 			$image 	= $this->input->post('image');
+			if(empty($image)) {
+				$image = NULL;
+			}
 
 			$data = array(
 				'user_id' => $user_id,
+				'member_id' => $member_id,
 				'nama' 	=> $nama,
 				'alamat' => $alamat,
 				'hp' 	=> $hp,
@@ -169,10 +178,11 @@ class Pesanan extends CI_Controller {
 				'status' => $status,
 				'bank' => $bank,
 				'keterangan' => $keterangan,
-				'data' => 'baru'
+				'customgambar' => $image,
+				'unik' => $user_id . '_' .random_string('unique', 32)
 			);
 
-			$this->pesanan_model->add($user_id, $data);
+			$this->pesanan->add($user_id, $data);
 			$this->session->set_userdata(array('info' => 'Data pesanan baru sudah disimpan.', 'info_tampil' => TRUE));
 
 			redirect('administrator?pg=pending&juragan=' . $user_id);
@@ -201,8 +211,13 @@ class Pesanan extends CI_Controller {
 		}
 		else {
 			$id 	= $this->input->post('id');
+			$member_id= $this->input->post('member_id');
 			$nama 	= $this->input->post('nama');
 			$alamat = $this->input->post('alamat');
+
+			if($member_id === NULL) {
+				$member_id = '0';
+			}
 
 			// kode
 			$kode ="";
@@ -251,9 +266,13 @@ class Pesanan extends CI_Controller {
 				$keterangan = NULL;
 			}
 			$image 	= $this->input->post('image');
+			if(empty($image)) {
+				$image = NULL;
+			}
 
 			$data = array(
 				'nama' 	=> $nama,
+				'member_id' => $member_id,
 				'alamat' => $alamat,
 				'hp' 	=> $hp,
 				'pesanan' => $pesanan,
@@ -264,10 +283,10 @@ class Pesanan extends CI_Controller {
 				'status' => $status,
 				'bank' => $bank,
 				'keterangan' => $keterangan,
-				'data' => 'baru'
+				'customgambar' => $image
 			);
 
-			$this->pesanan->update_pesanan($id, $data);
+			$this->pesanan->update($id, $data);
 			$this->session->set_userdata(array('info' => 'Pesanan <u>ID-' . $id . '</u> berhasil diubah!', 'info_tampil' => TRUE));
 
 			redirect('administrator?pg=' . $halaman . '$juragan=' . $juragan);
