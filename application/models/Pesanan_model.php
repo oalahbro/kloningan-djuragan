@@ -267,6 +267,32 @@ class Pesanan_model extends CI_Model {
 		}
 	}
 
+	// fungsi untuk hitung jumlah pesanan
+	function count_order($halaman = 'all', $username) {
+		$juragan_id = $this->juragan->ambil_id_by_username($username);
+
+
+		$this->db->select('o.*, u.nama as juragan, u.username, m.nama_member, m.hp as hp_member');
+		$this->db->from('order o');
+		$this->db->join('user u', 'u.id = o.user_id');
+		$this->db->join('membership m', 'm.id = o.member_id', 'left');
+
+		if($halaman === 'terkirim') {
+			$this->db->order_by('o.status_transfer desc, o.barang desc, o.cek_kirim desc, o.cek_transfer desc, o.tanggal_order desc');
+			$this->db->having(array('o.barang' => 'terkirim'));
+		}
+		elseif($halaman === 'pending') {
+			$this->db->having(array('o.barang' => 'pending'));
+		}
+		
+		if($juragan_id > 0) {
+			$this->db->having(array('o.user_id' => $juragan_id));
+		}
+
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
 	// newsticker
 	function today_input($kecuali_user_id = null) {
 

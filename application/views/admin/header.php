@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</ul>
 				
 				<ul class="nav navbar-nav navbar-right">
-					<li><?php echo anchor('', '<span class="glyphicon glyphicon-bullhorn"></span> <span class="label badge-notify">3</span>'); ?></li>
+					<!-- <li><?php echo anchor('', '<span class="glyphicon glyphicon-bullhorn"></span> <span class="label badge-notify">3</span>'); ?></li>-->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> Pengaturan <span class="caret"></span></a>
 						<ul class="dropdown-menu">
