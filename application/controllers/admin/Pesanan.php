@@ -183,9 +183,9 @@ class Pesanan extends CI_Controller {
 			);
 
 			$this->pesanan->add($user_id, $data);
-			$this->session->set_userdata(array('info' => 'Data pesanan baru sudah disimpan.', 'info_tampil' => TRUE));
+			// $this->session->set_userdata(array('info' => 'Data pesanan baru sudah disimpan.', 'info_tampil' => TRUE));
 
-			redirect('administrator?pg=pending&juragan=' . $user_id);
+			redirect('admin/pesanan/read/' . $juragan);
 		}
 	}
 
@@ -261,8 +261,7 @@ class Pesanan extends CI_Controller {
 			$status = $this->input->post('status');
 			$bank 	= $this->input->post('bank');
 			$keterangan = nl2br($this->input->post('keterangan'));
-			if(empty($keterangan))
-			{
+			if(empty($keterangan)) {
 				$keterangan = NULL;
 			}
 			$image 	= $this->input->post('image');
@@ -287,8 +286,7 @@ class Pesanan extends CI_Controller {
 			);
 
 			$this->pesanan->update($id, $data);
-			$this->session->set_userdata(array('info' => 'Pesanan <u>ID-' . $id . '</u> berhasil diubah!', 'info_tampil' => TRUE));
-
+			//$this->session->set_userdata(array('info' => 'Pesanan <u>ID-' . $id . '</u> berhasil diubah!', 'info_tampil' => TRUE));
 			redirect('administrator?pg=' . $halaman . '$juragan=' . $juragan);
 		}
 	}
