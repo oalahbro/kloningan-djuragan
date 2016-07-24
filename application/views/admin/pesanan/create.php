@@ -26,7 +26,7 @@
 			<div class="panel panel-danger">
 				<?php 
 					$atribut_form = array('class' => 'form-horizontal');
-					$hidden_form = array('image' => '');
+					$hidden_form = array('image' => '', 'user_id' => $this->juragan->ambil_id_by_username($juragan));
 					echo form_open_multipart('', $atribut_form, $hidden_form);
 				?>
 				<div class="panel-body">

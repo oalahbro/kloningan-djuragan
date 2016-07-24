@@ -26,7 +26,7 @@
 			<div class="panel panel-danger">
 				<?php 
 					$atribut_form = array('class' => 'form-horizontal');
-					$hidden_form = array('image' => $pesanan->customgambar);
+					$hidden_form = array('image' => $pesanan->customgambar, 'id' => $pesanan->id);
 					echo form_open_multipart('', $atribut_form, $hidden_form);
 				?>
 				<div class="panel-body">
