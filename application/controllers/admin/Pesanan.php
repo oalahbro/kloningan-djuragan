@@ -160,7 +160,7 @@ class Pesanan extends CI_Controller {
 				$keterangan = NULL;
 			}
 			$image 	= $this->input->post('image');
-			if(empty($image)) {
+			if(empty($image) || $image === 'undefined') {
 				$image = NULL;
 			}
 
@@ -266,7 +266,7 @@ class Pesanan extends CI_Controller {
 				$keterangan = NULL;
 			}
 			$image 	= $this->input->post('image');
-			if(empty($image)) {
+			if(empty($image) || $image === 'undefined') {
 				$image = NULL;
 			}
 
