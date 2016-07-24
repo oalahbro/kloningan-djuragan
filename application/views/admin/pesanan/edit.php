@@ -33,7 +33,7 @@
 					<?php
 					$juragan = $this->juragan->ambil_username_by_id($pesanan->user_id);
 					$member = $this->juragan->memberlist($juragan);
-					if($member !== NULL) { ?>
+					if($pesanan->member_id !== '0') { ?>
 						<!-- field nama member -->
 						<div class="form-group">
 							<label for="nama">Nama Member</label>
