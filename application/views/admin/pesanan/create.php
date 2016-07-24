@@ -46,6 +46,9 @@
 										echo form_dropdown('member_id', $options, '0', array('id' => 'size', 'class' => 'form-control size'));
 									?>
 								</div>
+								<div class="col-sm-4">
+									*) <em>pilih jika merupakan pesanan member.</em>
+								</div>
 							</div>
 						</div>
 					<?php } ?>
