@@ -56,6 +56,18 @@ class Juragan_model extends CI_Model {
 		}
 	}
 
+	// ambil data `username` dari id
+	public function ambil_username_by_id($user_id) {
+		$query =$this->db->get_where('user', array('id' => $user_id));
+		$row = $query->row();
+		if ($query->num_rows() > 0) {
+			return $row->username;
+		}
+		else {
+			return '';
+		}
+	}
+
 	// menampilkan daftar member jika ada
 	public function memberlist($username) {
 		$user_id = $this->ambil_id_by_username($username);
