@@ -89,19 +89,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     	if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
     		for (var i = 0; i < data[google.picker.Response.DOCUMENTS].length; i++) {
     			var doc = data[google.picker.Response.DOCUMENTS][i],
-    				FILEID = doc[google.picker.Document.URL];
+    				FILEID = 'http://googledrive.com/host/' + doc[google.picker.Document.ID];
     			arr.push(
     				FILEID
     				);
 
     		}
-
-    		// var arrs = arr.toString().replace(/,/g, "<br/>");
-    		var js = JSON.stringify(arr);
+    		var js1 = arr.toString().replace(/,/g, "<br/>");
+    		var js2 = arr.toString();
     	}
     	// var message = 'Gambar Terpilih: <br>' + arrs;
-    	document.getElementById('result').innerHTML = js;
-    	document.getElementsByName('image')[0].value = js; // populated form
+    	document.getElementById('result').innerHTML = js1;
+    	document.getElementsByName('image')[0].value = js2; // populated form
     }
 
 </script>
