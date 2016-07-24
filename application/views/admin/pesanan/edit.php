@@ -30,6 +30,27 @@
 					echo form_open_multipart('', $atribut_form, $hidden_form);
 				?>
 				<div class="panel-body">
+					<?php
+					$juragan = $this->juragan->ambil_username_by_id($pesanan->user_id);
+					$member = $this->juragan->memberlist($juragan);
+					if($member !== NULL) { ?>
+						<!-- field nama member -->
+						<div class="form-group">
+							<label for="nama">Nama Member</label>
+							<div class="row">
+								<div class="col-sm-4">
+									<?php 
+										$options = array();
+										$options['0'] = '-- pilih member --';
+										foreach ($member->result() as $members) {
+											$options[$members->id] = strtoupper($members->nama_member) . ' (' . $members->user_card . ')';
+										}
+										echo form_dropdown('member_id', $options, $pesanan->member_id, array('id' => 'size', 'class' => 'form-control size'));
+									?>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
 
 					<!-- field nama -->
 					<div class="form-group">
