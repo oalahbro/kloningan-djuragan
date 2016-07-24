@@ -1,11 +1,26 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<header>
-	<div class="jumbotron">
-		<h1>Status</h1>
+<div class="page-header">
+	<div class="title-page">
+		<div class="container-fluid">
+			<h1><?php echo $judul; ?></h1>
+		</div>
 	</div>
-</header>
+
+	<div class="subnav">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="menu col-sm-9">
+					<?php 
+					echo anchor('admin/pesanan', '<i class="glyphicon glyphicon-thumbs-up"></i> Terkirim <span class="badge"></span>', array('class' => 'btn btn-primary'));
+					echo anchor('admin/pesanan', '<i class="glyphicon glyphicon-th-large"></i> Semua <span class="badge"></span>', array('class' => 'btn btn-default'));
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="page-content">
 	<div class="well">

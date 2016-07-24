@@ -32,7 +32,8 @@ class Status extends CI_Controller {
 
 
 		$this->data = array(
-			'title' => 'Status Order per Juragan',
+			'title' => 'Status Pesanan',
+			'judul' => '<i class="glyphicon glyphicon-sort-by-order"></i> Pesanan Pending <small>All Juragan</small>',
 			'tanggal_mulai' => $tanggal_mulai,
 			'tanggal_akhir' => $tanggal_akhir,
 			'total_pesanan' => $this->pesanan->total_pesanan($tanggal_mulai, $tanggal_akhir),
