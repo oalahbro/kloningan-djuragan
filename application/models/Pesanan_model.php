@@ -5,6 +5,7 @@ date_default_timezone_set('Asia/Jakarta');
 
 class Pesanan_model extends CI_Model {
 
+	// fungsi untuk menambahkan pesanan
 	function add($user_id, $data) {
 		$tgl = mdate("%Y-%m-%d %H:%i:%s", now());
 
@@ -18,6 +19,7 @@ class Pesanan_model extends CI_Model {
 		return TRUE;
 	}
 
+	// fungsi untuk update pesanan
 	function update($id, $data) {
 		$this->db->where('id', $id);
 		$this->db->update('order', $data);
