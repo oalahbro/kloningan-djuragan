@@ -10,6 +10,7 @@
 			<div class="row">
 				<div class="menu col-sm-9">
 					<?php 
+					$juragan = $this->juragan->ambil_username_by_id($pesanan->user_id);
 					echo anchor('admin/pesanan/read/' . $juragan . '/all', '<i class="glyphicon glyphicon-th-large"></i> Semua', array('class' => 'btn btn-default'));
 					echo anchor('admin/pesanan/read/' . $juragan . '/terkirim', '<i class="glyphicon glyphicon-thumbs-up"></i> Terkirim', array('class' => 'btn btn-default'));
 					echo anchor('admin/pesanan/read/' . $juragan . '/pending', '<i class="glyphicon glyphicon-repeat"></i> Pending', array('class' => 'btn btn-default'));

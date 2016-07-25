@@ -64,7 +64,7 @@ class Juragan_model extends CI_Model {
 			return $row->username;
 		}
 		else {
-			return '';
+			return 'all';
 		}
 	}
 

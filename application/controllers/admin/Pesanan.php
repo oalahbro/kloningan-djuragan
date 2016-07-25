@@ -201,7 +201,6 @@ class Pesanan extends CI_Controller {
 				'title' => 'Edit Pesanan',
 				'judul' => '<i class="glyphicon glyphicon-edit"></i> Sunting Data Pesanan <small>' . $nama_juragan . '</small>',
 				'active' => 'pesanan',
-				'juragan' => '',
 				'pesanan' => $row
 			);
 
