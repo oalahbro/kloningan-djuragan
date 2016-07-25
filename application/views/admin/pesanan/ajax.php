@@ -49,7 +49,6 @@
 						$tombol_edit .= '</button>';
 						$tombol_edit .= '<ul class="dropdown-menu" aria-labelledby="editing-' . $pesanan->id . '">';
 							$tombol_edit .= '<li>'. anchor('admin/pesanan/update/' . $pesanan->unik, '<i class="glyphicon glyphicon-pencil"></i> Ubah') .'</li>';
-							$tombol_edit .= '<li>'. anchor('admin/pesanan/duplicate/' . $pesanan->unik, '<i class=" glyphicon glyphicon-duplicate"></i> Duplikat') .'</li>';
 							$tombol_edit .= '<li>'. anchor('', '<i class="glyphicon glyphicon-trash"></i> Hapus', array('data-unik' => $pesanan->unik, 'data-id' => $pesanan->id, 'class' => 'hapusdata')) .'</li>';
 						$tombol_edit .= '</ul>';
 						$tombol_edit .= '</div>';
