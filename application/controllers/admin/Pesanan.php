@@ -291,6 +291,26 @@ class Pesanan extends CI_Controller {
 		}
 	}
 
+	public function duplicate($pesanan_unik) {
+		$nama_juragan = $this->juragan->ambil_nama_by_pesanan_unik($pesanan_unik);
+
+		$id = $pesanan_unik;
+		$cek_pesanan = $this->pesanan->get_pesanan_by_unik($pesanan_unik);
+		$row = $cek_pesanan->row(); 
+		
+		$this->data = array(
+			'title' => 'Duplicate Pesanan',
+			'judul' => '<i class="glyphicon glyphicon-duplicate"></i> Duplicate Data Pesanan <small>' . $nama_juragan . '</small>',
+			'active' => 'pesanan',
+			'pesanan' => $row
+		);
+
+		$this->load->view('admin/header', $this->data);
+		$this->load->view('admin/pesanan/duplicate', $this->data);
+		$this->load->view('admin/footer-selain-pesanan', $this->data);
+	
+	}
+
 	public function delete() {
 		$this->pesanan->hapus($this->input->post('unik'));
 		redirect($this->agent->referrer());
