@@ -287,7 +287,7 @@ class Pesanan extends CI_Controller {
 
 			$this->pesanan->update($id, $data);
 			//$this->session->set_userdata(array('info' => 'Pesanan <u>ID-' . $id . '</u> berhasil diubah!', 'info_tampil' => TRUE));
-			redirect('administrator?pg=' . $halaman . '$juragan=' . $juragan);
+			redirect('administrator');
 		}
 	}
 
