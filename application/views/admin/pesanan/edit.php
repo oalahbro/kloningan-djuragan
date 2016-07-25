@@ -14,7 +14,8 @@
 					echo anchor('admin/pesanan/read/' . $juragan . '/all', '<i class="glyphicon glyphicon-th-large"></i> Semua', array('class' => 'btn btn-default'));
 					echo anchor('admin/pesanan/read/' . $juragan . '/terkirim', '<i class="glyphicon glyphicon-thumbs-up"></i> Terkirim', array('class' => 'btn btn-default'));
 					echo anchor('admin/pesanan/read/' . $juragan . '/pending', '<i class="glyphicon glyphicon-repeat"></i> Pending', array('class' => 'btn btn-default'));
-					echo anchor('admin/pesanan/create/' . $juragan, '<i class="glyphicon glyphicon-plus"></i> Tambah', array('class' => 'btn btn-primary'));
+					echo anchor('admin/pesanan/create/' . $juragan, '<i class="glyphicon glyphicon-plus"></i> Tambah', array('class' => 'btn btn-default'));
+					echo anchor('admin/pesanan/read/' . $juragan, '<i class="glyphicon glyphicon-edit"></i> Sunting', array('class' => 'btn btn-primary'));
 					?>
 				</div>
 			</div>
