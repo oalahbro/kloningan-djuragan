@@ -296,6 +296,13 @@ class Pesanan extends CI_Controller {
 	}
 
 	public function set_transfer() {
+		$id = $this->input->post('id');
+		$stat = $this->input->post('status');
+
+		$unik = $this->pesanan->get_unik_by_id($pesanan_id);
+		$user_id = $this->pesanan->get_user_id_by_pesanan($unik);
+
+		$this->pesanan->set_to_transfer($id, $stat, $user_id);
 	}
 
 	public function set_kirim() {
