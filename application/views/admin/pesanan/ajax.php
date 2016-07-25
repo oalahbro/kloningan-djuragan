@@ -30,14 +30,14 @@
 						elseif($pesanan->barang === 'Pending' && $pesanan->status_transfer === 'Masuk') {
 							$transfer_class = ' danger';
 							$status_class = '';
-								$button_kirim = form_button(array('title' => 'Sudah dikirim', 'id' => 'ok_' . $pesanan->id, 'class' => 'btn btn-success submit-resi btn-xs tooltips btn-block btn-kirim', 'content' => '<i class="glyphicon glyphicon-ok"></i>'));
+								$button_kirim = form_button(array('title' => 'Sudah dikirim', 'data-id' => $pesanan->id, 'data-tanggal' => $pesanan->cek_kirim, 'data-barang' => $pesanan->barang, 'data-kurir' => $pesanan->kurir, 'data-resi' => $pesanan->resi, 'id' => 'ok_' . $pesanan->id, 'class' => 'btn btn-success submit-resi btn-xs tooltips btn-block btn-kirim', 'content' => '<i class="glyphicon glyphicon-ok"></i>'));
 
 								$button_transfer = form_button(array('title' => 'Belum Transfer', 'id' => 'remove_' . $pesanan->id, 'class' => 'btn btn-default btn-xs tooltips btn-block btn-transfer', 'content' => '<i class="glyphicon glyphicon-remove"></i>'));
 						}
 						elseif($pesanan->barang === 'Terkirim' && $pesanan->status_transfer === 'Masuk') {
 							$transfer_class = '';
 							$status_class = ' class="danger"';
-							$button_kirim = form_button(array('title' => 'Belum dikirim','id' => 'remove_' . $pesanan->id, 'class' => 'btn btn-default btn-xs tooltips btn-block btn-kirim', 'content' => '<i class="glyphicon glyphicon-remove"></i>'));
+							$button_kirim = form_button(array('title' => 'Belum dikirim','data-id' => $pesanan->id, 'data-tanggal' => $pesanan->cek_kirim, 'data-barang' => $pesanan->barang, 'data-kurir' => $pesanan->kurir, 'data-resi' => $pesanan->resi, 'id' => 'remove_' . $pesanan->id, 'class' => 'btn btn-default btn-xs tooltips btn-block btn-kirim', 'content' => '<i class="glyphicon glyphicon-remove"></i>'));
 							$button_transfer = '<div class="text-center btn-margin "><a href="#" class="btn btn-success btn-xs disabled btn-block"><i class="glyphicon glyphicon-ok"></i> Masuk</a></div>';
 						}
 
@@ -188,12 +188,19 @@
 <div class="modal fade" id="ResiModal" tabindex="-1" role="dialog" aria-labelledby="ResiModalLabel">
 	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
-			<?php echo form_open('admin/pesanan/delete', '', array('unik' => '')) ?>
+			<?php echo form_open('admin/pesanan/set_kirim', '', array('unik' => '')) ?>
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="ResiModalLabel">Hapus Data</h4>
+				<h4 class="modal-title" id="ResiModalLabel">Submit Resi #<span class="dataid"></span></h4>
 			</div>
 			<div class="modal-body">
+				<div class="form-group">
+					<?php 
+					echo form_label('Tanggal Kirim', 'tanggal');
+					echo form_input(array('name' => 'tanggal', 'id' => 'tanggal', 'class' => 'form-control tanggal', 'placeholder' => '10000', 'autocomplete'=> 'off', 'data-date-format'=> 'DD-MM-YYYY'), mdate("%d-%m-%Y", now()));
+					?>
+				</div>
+
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="form-group">
@@ -231,9 +238,8 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				
 				<button type="button" class="btn btn-default" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
-				<button type="submit" class="btn btn-danger">Hapus</button>
+				<button type="submit" class="btn btn-primary">Simpan</button>
 				<?php echo form_close(); ?>
 			</div>
 		</div>
@@ -283,6 +289,14 @@
 	});
 
 	// setting kirim status
+	<?php $date_today = mdate("%Y-%m-%d", now()); ?>
+	$('#tanggal').datetimepicker({
+    	pickTime: false,
+    	maxDate: new Date("<?php echo $date_today; ?>"),
+    	showToday: true,
+    	useCurrent: true
+    });
+
 	$('.btn-kirim').click(function(event) {
 		event.preventDefault();
 		$('#ResiModal').modal({show: true});
@@ -308,32 +322,6 @@
 		}
 	});
 
-	/*
-
-	$('.btn-kirim').click(function(event) {
-		event.preventDefault();
-		var result = $(this).attr("id").split('_');
-
-		flash();
-		var box = $(".bootstrap-flash");
-
-		$.ajax({type: "POST",
-			url: "<?php echo site_url('admin/pesanan/kiriman'); ?>",
-			data: { id: result[1], status: result[0] },
-			success:function(){
-				box.find("p").html('Berhasil, data kirim pesanan <b>#' + result[1] + '</b> sudah diupdate!'),
-				box.addClass('alert-success');
-
-				$('#search-btn').trigger('click');
-				$("html, body").animate({scrollTop: 0}, 1000);
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				box.find("p").html('Maaf, Ada kesalahan sistem!'),
-				box.addClass('alert-danger');
-			}
-		});
-	});
-	*/
 
 	function flash() {
 		$("body").append('<div class="bootstrap-flash alert" role="alert" style="position:fixed;top:40px;left:25%;width:50%;float:left;z-index:1500;"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p></p></div>');
