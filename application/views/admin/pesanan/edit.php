@@ -248,7 +248,7 @@
 
 				</div>
 				<div class="panel-footer">
-					<button type="submit" class="btn btn-primary"> Simpan </button>
+					<button type="submit" class="btn btn-primary">Update</button>
 				</div>
 				<?php echo form_close(); ?>
 			</div>
