@@ -29,7 +29,7 @@
 				<?php 
 					$atribut_form = array('class' => 'form-horizontal');
 					$hidden_form = array('image' => $pesanan->customgambar, 'id' => $pesanan->id);
-					echo form_open_multipart('', $atribut_form, $hidden_form);
+					echo form_open('', $atribut_form, $hidden_form);
 				?>
 				<div class="panel-body">
 					<?php
