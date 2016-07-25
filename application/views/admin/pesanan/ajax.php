@@ -184,6 +184,62 @@
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="ResiModal" tabindex="-1" role="dialog" aria-labelledby="ResiModalLabel">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<?php echo form_open('admin/pesanan/delete', '', array('unik' => '')) ?>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="ResiModalLabel">Hapus Data</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<?php
+							echo form_label('Kurir', 'kurir_list');
+							$options = array();
+							foreach ($this->kurir->show_all()->result() as $kurir) {
+								$options[$kurir->nama] = strtoupper($kurir->nama);
+							}
+							$options['lainnya'] = 'LAINNYA';
+							echo form_dropdown('kurir_list', $options, 'JNE', array('id' => 'kurir_list', 'class' => 'form-control'));
+							?>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<?php 
+							echo form_label('Lainnya', 'lain');
+							echo form_input(array('name' => 'lain', 'id' => 'lain', 'class' => 'form-control lain', 'disabled' => 'disabled', 'placeholder' => 'kurir lainnya'))
+							?>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<?php 
+					echo form_label('Tarif Ongkir FIX', 'ongkir');
+					echo form_input(array('name' => 'ongkir', 'id' => 'ongkir', 'class' => 'form-control ongkir', 'placeholder' => '10000'))
+					?>
+				</div>
+				<div class="form-group">
+					<?php 
+					echo form_label('No. Resi / keterangan', 'resi');
+					echo form_input(array('name' => 'resi', 'id' => 'resi', 'class' => 'form-control resi', 'required' => '', 'autocomplete' => 'off', 'placeholder' => 'nomor resi'))
+					?>
+				</div>
+			</div>
+			<div class="modal-footer">
+				
+				<button type="button" class="btn btn-default" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
+				<button type="submit" class="btn btn-danger">Hapus</button>
+				<?php echo form_close(); ?>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript">
 	// hapus data
 	$('a.hapusdata').click(function(event) {
@@ -210,14 +266,14 @@
 		var box = $(".bootstrap-flash");
 
 		$.ajax({type: "POST",
-			url: "<?php echo site_url('admin/pesanan/transferan'); ?>",
+			url: "<?php echo site_url('admin/pesanan/set_transfer'); ?>",
 			data: { id: result[1], status: result[0] },
 			success:function(){
 				box.find("p").html('Berhasil, data transfer pesanan <b>#' + result[1] + '</b> sudah diupdate!'),
 				box.addClass('alert-success');
 
 				$('#search-btn').trigger('click');
-				$("html, body").animate({scrollTop: 0}, 3000);
+				$("html, body").animate({scrollTop: 0}, 1000);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				box.find("p").html('Maaf, Ada kesalahan sistem!'),
@@ -227,6 +283,33 @@
 	});
 
 	// setting kirim status
+	$('.btn-kirim').click(function(event) {
+		event.preventDefault();
+		$('#ResiModal').modal({show: true});
+		$('.dataid').text($(this).data("id"));
+		$('[name="unik"]').val($(this).data("unik"));
+	});
+
+
+	$("#kurir_list").change(function() {
+		if ($(this).val() === "lainnya") {
+			$('.lain').attr('disabled', false);
+			$('.lain').attr('required', true);
+		}
+		else {
+			$('.lain').attr('disabled', true);
+		}
+		if($(this).val() === "COD") {
+			<?php $dt = mdate("%d%m%Y", now()); ?>
+			$('#resi').val('COD<?php echo $dt; ?>');
+		}
+		else {
+			$('#resi').val('');	
+		}
+	});
+
+	/*
+
 	$('.btn-kirim').click(function(event) {
 		event.preventDefault();
 		var result = $(this).attr("id").split('_');
@@ -242,7 +325,7 @@
 				box.addClass('alert-success');
 
 				$('#search-btn').trigger('click');
-				$("html, body").animate({scrollTop: 0}, 3000);
+				$("html, body").animate({scrollTop: 0}, 1000);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				box.find("p").html('Maaf, Ada kesalahan sistem!'),
@@ -250,6 +333,7 @@
 			}
 		});
 	});
+	*/
 
 	function flash() {
 		$("body").append('<div class="bootstrap-flash alert" role="alert" style="position:fixed;top:40px;left:25%;width:50%;float:left;z-index:1500;"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p></p></div>');
