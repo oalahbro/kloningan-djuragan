@@ -117,6 +117,7 @@ class Pesanan_model extends CI_Model {
 		if( ! empty($cari)) {
 			$this->db->like('o.nama', $cari);
 			$this->db->or_like('o.kode', $cari);
+			$this->db->or_like('o.id', $cari);
 			$this->db->or_like('o.resi', $cari);
 			$this->db->or_like('o.alamat', $cari);
 			$this->db->or_like('o.keterangan', $cari);
@@ -165,8 +166,8 @@ class Pesanan_model extends CI_Model {
 		$this->db->where('id', $id);
 		$ubah = $this->db->update('order', $data);
 
-		//if($ubah)
-			//$this->update_count($user_id);
+		if($ubah)
+			$this->update_count($user_id);
 		return TRUE;
 	}
 
@@ -195,6 +196,16 @@ class Pesanan_model extends CI_Model {
 	function get_pesanan_by_unik($pesanan_unik) {
 		$query = $this->db->get_where('order', array('unik' => $pesanan_unik));
 		return $query;
+	}
+
+	function get_unik_by_id($pesanan_id) {
+		$this->db->where('id', $pesanan_id);
+		$query = $this->db->get('order');
+
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
+			return $row->unik;
+		}
 	}
 
 	// ambil data `user_id` dari data `unik` pesanan
