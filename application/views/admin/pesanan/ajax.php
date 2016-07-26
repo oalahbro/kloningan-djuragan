@@ -30,14 +30,14 @@
 						elseif($pesanan->barang === 'Pending' && $pesanan->status_transfer === 'Masuk') {
 							$transfer_class = ' danger';
 							$status_class = '';
-								$button_kirim = form_button(array('title' => 'Sudah dikirim', 'data-id' => $pesanan->id, 'data-tanggal' => $pesanan->cek_kirim, 'data-barang' => $pesanan->barang, 'data-kurir' => $pesanan->kurir, 'data-resi' => $pesanan->resi, 'id' => 'ok_' . $pesanan->id, 'class' => 'btn btn-success submit-resi btn-xs tooltips btn-block btn-kirim', 'content' => '<i class="glyphicon glyphicon-ok"></i>'));
+								$button_kirim = form_button(array('title' => 'Sudah dikirim', 'data-id' => $pesanan->id, 'data-tanggal' => $pesanan->cek_kirim, 'data-barang' => $pesanan->barang, 'data-kurir' => $pesanan->kurir, 'data-resi' => $pesanan->resi, 'id' => 'ok_' . $pesanan->id, 'data-unik' => $pesanan->unik, 'class' => 'btn btn-success submit-resi btn-xs tooltips btn-block btn-kirim', 'content' => '<i class="glyphicon glyphicon-ok"></i>'));
 
 								$button_transfer = form_button(array('title' => 'Belum Transfer', 'id' => 'remove_' . $pesanan->id, 'class' => 'btn btn-default btn-xs tooltips btn-block btn-transfer', 'content' => '<i class="glyphicon glyphicon-remove"></i>'));
 						}
 						elseif($pesanan->barang === 'Terkirim' && $pesanan->status_transfer === 'Masuk') {
 							$transfer_class = '';
 							$status_class = ' class="danger"';
-							$button_kirim = form_button(array('title' => 'Belum dikirim','data-id' => $pesanan->id, 'data-tanggal' => $pesanan->cek_kirim, 'data-barang' => $pesanan->barang, 'data-kurir' => $pesanan->kurir, 'data-resi' => $pesanan->resi, 'id' => 'remove_' . $pesanan->id, 'class' => 'btn btn-default btn-xs tooltips btn-block btn-kirim', 'content' => '<i class="glyphicon glyphicon-remove"></i>'));
+							$button_kirim = form_button(array('title' => 'Belum dikirim','data-id' => $pesanan->id, 'data-tanggal' => $pesanan->cek_kirim, 'data-barang' => $pesanan->barang, 'data-kurir' => $pesanan->kurir, 'data-resi' => $pesanan->resi, 'id' => 'remove_' . $pesanan->id, 'data-unik' => $pesanan->unik, 'class' => 'btn btn-default btn-xs tooltips btn-block btn-kirim', 'content' => '<i class="glyphicon glyphicon-remove"></i>'));
 							$button_transfer = '<div class="text-center btn-margin btn-block"><a href="#" class="btn btn-success btn-xs disabled btn-block"><i class="glyphicon glyphicon-ok"></i> Masuk</a></div>';
 						}
 

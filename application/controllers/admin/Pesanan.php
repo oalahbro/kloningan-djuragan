@@ -306,15 +306,41 @@ class Pesanan extends CI_Controller {
 	}
 
 	public function set_kirim() {
+		$unik = $this->input->post('unik');
 		$tanggal = $this->input->post('tanggal');
-		$kurir = $this->input->post('kurir');
+		$kurir = $this->input->post('kurir_list');
 		$lain = $this->input->post('lain');
 		$ongkir = $this->input->post('ongkir');
 		$resi = $this->input->post('resi');
 
-		$unik = $this->pesanan->get_unik_by_id($pesanan_id);
-		$user_id = $this->pesanan->get_user_id_by_pesanan($unik);
+		if($ongkir === '') {
+			$ongkir = NULL;
+		}
 
-		$this->pesanan->set_to_transfer($id, $stat, $user_id);
+		if($tanggal !== '') {
+			$t = date("Y-m-d", strtotime($tanggal));
+			$tanggal = $t . ' ' . mdate("%H:%i:%s", now());
+			$stat = 'Terkirim';
+			$resi = $resi;
+			$kurir = $kurir;
+		}
+		else {
+			$tanggal = NULL;
+			$stat = 'Pending';
+			$resi = NULL;
+			$kurir = NULL;
+		}
+
+		$data = array(
+			'cek_kirim' =>$tanggal,
+			'barang' => $stat,
+			'resi' => $resi,
+			'kurir' => $kurir,
+			'ongkir_fix' => $ongkir
+		);
+
+		$user_id = $this->pesanan->get_user_id_by_pesanan($unik);
+		$this->pesanan->set_to_kirim($unik, $data, $user_id);
+		redirect();
 	}
 }

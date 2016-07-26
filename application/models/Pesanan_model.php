@@ -171,20 +171,8 @@ class Pesanan_model extends CI_Model {
 		return TRUE;
 	}
 
-	function set_to_kirim($id, $okremove, $user_id) {
-		if($okremove === 'remove') {
-			$stat = 'Pending';
-			$tanggal = NULL;
-		}
-
-		$data = array(
-			'cek_kirim' =>$tanggal,
-			'barang' => $stat,
-			'resi' => NULL,
-			'kurir' => NULL,
-			'ongkir_fix' => NULL
-		);
-		$this->db->where('id', $id);
+	function set_to_kirim($unik, $data, $user_id) {
+		$this->db->where('unik', $unik);
 		$ubah = $this->db->update('order', $data);
 
 		if($ubah)
