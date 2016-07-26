@@ -299,9 +299,22 @@
 
 	$('.btn-kirim').click(function(event) {
 		event.preventDefault();
+		var id = $(this).data("id");
+		var unik = $(this).data("unik");
+
 		$('#ResiModal').modal({show: true});
-		$('.dataid').text($(this).data("id"));
-		$('[name="unik"]').val($(this).data("unik"));
+		$('#ResiModal').on('shown.bs.modal', function (e) {
+		  // do something...
+		  	$('.dataid').text(id);
+			$('[name="unik"]').val(unik);
+
+			$('[name="ongkir"]').val('');
+			$('[name="resi"]').val('');
+			$('[name="kurir_list"]').val('JNE');
+			$('[name="lain"]').val('');
+			$('.lain').attr('disabled', true);
+			$('.lain').attr('required', false);
+		})
 	});
 
 	$('.btn-kirim-edit').click(function(event) {
@@ -344,6 +357,8 @@
 			}
 		})
 	});
+
+	
 
 
 	$("#kurir_list").change(function() {
