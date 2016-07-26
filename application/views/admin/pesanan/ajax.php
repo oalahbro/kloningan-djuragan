@@ -38,7 +38,7 @@
 							$transfer_class = '';
 							$status_class = ' class="danger"';
 							$button_kirim = form_button(array('title' => 'Belum dikirim','data-id' => $pesanan->id, 'data-tanggal' => $pesanan->cek_kirim, 'data-barang' => $pesanan->barang, 'data-kurir' => $pesanan->kurir, 'data-resi' => $pesanan->resi, 'id' => 'remove_' . $pesanan->id, 'class' => 'btn btn-default btn-xs tooltips btn-block btn-kirim', 'content' => '<i class="glyphicon glyphicon-remove"></i>'));
-							$button_transfer = '<div class="text-center btn-margin "><a href="#" class="btn btn-success btn-xs disabled btn-block"><i class="glyphicon glyphicon-ok"></i> Masuk</a></div>';
+							$button_transfer = '<div class="text-center btn-margin btn-block"><a href="#" class="btn btn-success btn-xs disabled btn-block"><i class="glyphicon glyphicon-ok"></i> Masuk</a></div>';
 						}
 
 						/////////////////////// button edit ///////////////////////////
