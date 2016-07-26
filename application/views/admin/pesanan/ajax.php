@@ -37,7 +37,7 @@
 						elseif($pesanan->barang === 'Terkirim' && $pesanan->status_transfer === 'Masuk') {
 							$transfer_class = '';
 							$status_class = ' class="danger"';
-							$button_kirim = form_button(array('title' => 'Belum dikirim','data-id' => $pesanan->id, 'data-tanggal' => $pesanan->cek_kirim, 'data-barang' => $pesanan->barang, 'data-kurir' => $pesanan->kurir, 'data-resi' => $pesanan->resi, 'id' => 'remove_' . $pesanan->id, 'data-unik' => $pesanan->unik, 'class' => 'btn btn-default btn-xs tooltips btn-block btn-kirim', 'content' => '<i class="glyphicon glyphicon-remove"></i>'));
+							$button_kirim = form_button(array('title' => 'Belum dikirim','data-id' => $pesanan->id, 'data-tanggal' => $pesanan->cek_kirim, 'data-barang' => $pesanan->barang, 'data-kurir' => $pesanan->kurir, 'data-resi' => $pesanan->resi, 'id' => 'remove_' . $pesanan->id, 'data-unik' => $pesanan->unik, 'data-ongkir' => $pesanan->ongkir_fix, 'class' => 'btn btn-default btn-xs tooltips btn-block btn-kirim-edit', 'content' => '<i class="glyphicon glyphicon-remove"></i>'));
 							$button_transfer = '<div class="text-center btn-margin btn-block"><a href="#" class="btn btn-success btn-xs disabled btn-block"><i class="glyphicon glyphicon-ok"></i> Masuk</a></div>';
 						}
 
@@ -294,7 +294,7 @@
     	pickTime: false,
     	maxDate: new Date("<?php echo $date_today; ?>"),
     	showToday: true,
-    	useCurrent: true
+    	useCurrent: false
     });
 
 	$('.btn-kirim').click(function(event) {
@@ -302,6 +302,49 @@
 		$('#ResiModal').modal({show: true});
 		$('.dataid').text($(this).data("id"));
 		$('[name="unik"]').val($(this).data("unik"));
+	});
+
+	$('.btn-kirim-edit').click(function(event) {
+		event.preventDefault();
+		var id = $(this).data("id");
+		var unik = $(this).data("unik");
+		var kurir = $(this).data("kurir");
+		var resi = $(this).data("resi");
+		var ongkir = $(this).data("ongkir");
+		var d = new Date($(this).data("tanggal"));
+		var newdate = d.getDate() + "-"+ (d.getMonth()+1) +"-"+ d.getFullYear();
+
+		var arr = new Array();
+		var ddl = document.getElementById('kurir_list');
+		for (i = 0; i < ddl.options.length; i++) {
+			arr[i] = ddl .options[i].value;
+		}
+
+		$('#ResiModal').modal({show: true});
+		$('#ResiModal').on('shown.bs.modal', function (e) {
+		  // do something...
+		  	$('.dataid').text(id);
+			$('[name="unik"]').val(unik);
+			$('[name="tanggal"]').val(newdate);
+
+			$('[name="ongkir"]').val(ongkir);
+			$('[name="resi"]').val(resi);
+
+			if(jQuery.inArray(kurir,arr) == -1){
+				$('.lain').attr('disabled', false);
+				$('.lain').attr('required', true);
+				$('[name="kurir_list"]').val('lainnya');
+				$('[name="lain"]').val(kurir);
+			}
+			else {
+				$('.lain').attr('disabled', true);
+				$('.lain').attr('required', false);
+				$('[name="kurir_list"]').val(kurir);
+				$('[name="lain"]').val('');
+			}
+		})
+
+		
 	});
 
 
@@ -326,4 +369,6 @@
 	function flash() {
 		$("body").append('<div class="bootstrap-flash alert" role="alert" style="position:fixed;top:40px;left:25%;width:50%;float:left;z-index:1500;"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p></p></div>');
 	}
+
+
 </script>
