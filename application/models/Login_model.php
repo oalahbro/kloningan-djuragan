@@ -5,7 +5,39 @@ date_default_timezone_set('Asia/Jakarta');
 
 class Login_model extends CI_Model {
 
-	function login($username, $password) {
+	public function check($username, $password) {
+		$query = $this->db->get_where('juragan', array('username' => $username));
+		if ($query->num_rows() === 1) {
+			$row = $query->row();
+
+			$sandi 	= explode('_', $row->password);
+
+			$pass 	= hash('sha256', $password);
+			$hash 	= hash('sha256', $sandi[0] . $pass);
+
+			if($hash === $sandi[1]) {
+				$sess_array = array(
+					'id' => $row->id,
+					'nama' => $row->nama_cs,
+					'level' => $row->level,
+					'login' => TRUE
+					//'last_login' => $row->last_login
+					);
+				$this->session->set_userdata('logged_in', $sess_array);
+
+				return TRUE;
+			}
+
+		}
+
+	}
+
+
+
+
+
+
+	function check_old($username, $password) {
 		$query = $this->db->get_where('user', array('username' => $username));
 
 		if ($query->num_rows() === 1) {

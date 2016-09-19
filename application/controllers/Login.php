@@ -25,7 +25,6 @@ class Login extends CI_Controller {
 		}
     }
 
-
 	public function index() {
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -40,7 +39,7 @@ class Login extends CI_Controller {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 			
-			$login = $this->login->login($username, $password);
+			$login = $this->login->check($username, $password);
 
 			if($login) {
 				$sesi = array(
