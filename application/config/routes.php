@@ -54,7 +54,7 @@ $route['default_controller'] = 'login';
 $route['admin'] = 'admin/pesanan/read';
 $route['administrator'] = 'admin/pesanan/read';
 
-$route['juragan'] = 'juragan/pesanan';
+$route['juragan'] = 'juragan/dasbor';
 $route['user'] = 'juragan/pesanan';
 
 $route['404_override'] = '';
