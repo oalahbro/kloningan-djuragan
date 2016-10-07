@@ -68,6 +68,14 @@ class Juragan_model extends CI_Model {
 		}
 	}
 
+	public function ambil_nama_by_id($user_id) {
+		$query =$this->db->get_where('user', array('id' => $user_id));
+		$row = $query->row();
+		if ($query->num_rows() > 0) {
+			return $row->nama;
+		}
+	}
+
 	// menampilkan daftar member jika ada
 	public function memberlist($username) {
 		$user_id = $this->ambil_id_by_username($username);
@@ -84,5 +92,60 @@ class Juragan_model extends CI_Model {
 		}
 
 		return $return;
+	}
+
+
+
+	/////////////////////////////////////////// NEW HERE ///
+
+	// menambahkan user - CS
+	public function tambah_user($nama, $username, $password, $level = 'user') {
+		$unik 	= random_string('alnum', 4);
+		$sandi 	= hash('sha256', $password);
+		$pass 	= hash('sha256', $unik . $sandi);
+
+		$input_array = array(
+			'nama_cs' => $nama,
+			'username' => $username,
+			'password' => $unik . '_' . $pass,
+			'level' => $level,
+			'register' => mdate("%Y-%m-%d %H:%i:%s", now())
+			);
+
+		$this->db->insert('juragan', $input_array);
+
+		return TRUE;
+	}
+
+	// authentic CS pada juragan
+	public function juragan_auth($username, $juragan) {
+		$query = $this->db->get_where('juragan', array('username' => $username));
+		if ($query->num_rows() === 1) {
+			$row = $query->row();
+
+			$ja = $this->db->get_where('juragan_auth', array('juragan_id' => $row->id));
+
+			if ($ja->num_rows() === 1) {
+				// update
+				$this->db->where('id', $row->id);
+				$this->db->update('juragan_auth', array('allow_id' => $juragan));
+			}
+			else {
+				// insert
+				$input_array = array(
+					'juragan_id' => $row->id,
+					'allow_id' => $juragan
+					);
+
+				$this->db->insert('juragan_auth', $input_array);
+			}		
+		}
+		return TRUE;		
+	}
+
+	//
+	public function auth_list($user_id) {
+		$query = $this->db->get_where('juragan_auth', array('juragan_id' => $user_id));
+		return $query;
 	}
 }
