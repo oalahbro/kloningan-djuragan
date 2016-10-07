@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="row">
+		<h2>Pilih Akun Juragan</h2>
+		<ul class="ds-btn">
+			<?php 
+			$row = $auth_list->row();
+			$list = explode(',' , $row->allow_id);
+			foreach($list as $i =>$key) {
+
+				$username = $this->juragan->ambil_username_by_id($key);
+				$nama = $this->juragan->ambil_nama_by_id($key);
+
+				echo '<li>';
+				echo anchor('juragan/dasbor/select/' . $key, '<i class="glyphicon glyphicon-user pull-left"></i><span>' . $nama . '</span>', array('class' => 'btn btn-lg btn-primary') );
+				echo '</li>';
+			} ?>
+		</ul>
+	</div>
+</div>
