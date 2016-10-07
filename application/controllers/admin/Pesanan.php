@@ -1,16 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * admin/Pesanan
- *
- * Merupakan halaman pesanan, yang akan diproses dihalaman ini adalah menampilkan data pesanan,  membuat data pesanan, mengubah data pesanan, dan menghapus data pesanan serta melakukan fungsi yang lain.
- * 
- * @package 	Juragan
- * @version 	7.0
- * @author 	Toto Prayogo
- * @link 	http://totoprayogo.com
- */
 class Pesanan extends CI_Controller {
 
 	public function __construct() {
