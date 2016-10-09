@@ -8,6 +8,12 @@ function _warna($str = 'warna') {
 	return '#'.$code;
 }
 
+function _nama_juragan($juragan_id) {
+	$CI =& get_instance();
+
+	return $CI->juragan->_ambil_nama_juragan_dari_id($juragan_id);
+}
+
 function data_session($field) {
 	$TO =& get_instance();
 	$sesi = $TO->session->userdata('logged_in');

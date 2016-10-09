@@ -5,6 +5,18 @@ date_default_timezone_set('Asia/Jakarta');
 
 class Juragan_model extends CI_Model {
 
+	public function _ambil_nama_juragan_dari_id($juragan_id) {
+		$query = $this->db->get_where('user', array('id' => $juragan_id));
+
+		$row = $query->row();
+		if ($query->num_rows() > 0) {
+			return $row->nama;
+		}
+		else {
+			return 'Unknown';
+		}
+	}
+
 	// ambil semua data user dengan level user
 	public function ambil() {
 		$this->db->from('user');
