@@ -18,7 +18,7 @@ class Dasbor extends CI_Controller {
 
     public function index() {
     	// redirect ke pilihan pertama `allowed_id`
-		$data = $this->session->userdata('juragan')['id'];
+		$data = $this->session->userdata('juragan')['id_juragan'];
 		if(isset($data)) {
 			redirect('juragan/pesanan');
 		}
@@ -46,13 +46,14 @@ class Dasbor extends CI_Controller {
 
 			if(in_array($user_id, $array_auth)) {
 				$sess_array = array(
-					'id' => $user_id
+					'id_juragan' => $user_id
 					);
 				$this->session->set_userdata('juragan', $sess_array);
 				redirect('juragan');
 			}
 			else {
-				show_404();
+				// show_404();
+				redirect('');
 			}
 		}
     }
