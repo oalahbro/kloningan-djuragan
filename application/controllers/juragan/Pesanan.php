@@ -17,13 +17,16 @@ class Pesanan extends CI_Controller {
     }
 
     public function index() {
+    	$data = $this->session->userdata('juragan')['id_juragan'];
+    	$juragan = _nama_juragan($data);
+
     	$this->data = array(
-			'title' => 'Pilih Juragan',
+			'title' => 'Pesanan - ' . $juragan . ' | ' . $this->config->item('site_name'),
 			'active' => 'pesanan'
 			);
 
 		$this->load->view('juragan/header', $this->data);
-		$this->load->view('juragan/dasbor', $this->data);
+		$this->load->view('juragan/pesanan/dasbor', $this->data);
 		$this->load->view('juragan/footer', $this->data);
     }
 }
