@@ -1,6 +1,7 @@
 <div class="container">
 	<div class="row">
 		<h2>Pilih Akun Juragan</h2>
+		<p>pilih yang akan dikelola</p>
 		<ul class="ds-btn">
 			<?php 
 			$row = $auth_list->row();
