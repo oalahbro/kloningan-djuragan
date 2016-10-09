@@ -26,6 +26,7 @@ class Pesanan extends CI_Controller {
 			);
 
 		$this->load->view('juragan/header', $this->data);
+		$this->load->view('juragan/menu', $this->data);
 		$this->load->view('juragan/pesanan/dasbor', $this->data);
 		$this->load->view('juragan/footer', $this->data);
     }
