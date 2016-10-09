@@ -1,6 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+function _warna($str = 'warna') {
+	$code = dechex(crc32($str));
+	$code = substr($code, 0, 6);
+	// echo '<span style="color:#'.$code.'">#'.$code.'</span>';
+	return '#'.$code;
+}
+
 function data_session($field) {
 	$TO =& get_instance();
 	$sesi = $TO->session->userdata('logged_in');
