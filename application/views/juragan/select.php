@@ -12,7 +12,7 @@
 				$nama = $this->juragan->ambil_nama_by_id($key);
 
 				echo '<li>';
-				echo anchor('juragan/dasbor/select/' . $key, '<i class="glyphicon glyphicon-user pull-left"></i><span>' . $nama . '</span>', array('class' => 'btn btn-lg', 'style' => 'background-color:' . _warna($nama) . ';color:#fff;') );
+				echo anchor('juragan/dasbor/select/' . $key, $nama, array('class' => 'btn btn-lg', 'style' => 'background-color:' . _warna($nama) . ';color:#fff;') );
 				echo '</li>';
 			} ?>
 		</ul>
