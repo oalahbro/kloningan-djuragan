@@ -5,19 +5,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dasbor extends CI_Controller {
 
 	public function __construct() {
-    	parent::__construct();
-    	if(is_login() !== TRUE) {
-    		redirect('login'); // belum masuk ? dialihkan ke halaman `login`
-    	}
-    	else {
+		parent::__construct();
+		if(is_login() !== TRUE) {
+			redirect('login'); // belum masuk ? dialihkan ke halaman `login`
+		}
+		else {
 			if(is_user_level('user') !== TRUE) {
 				redirect('admin'); // dialihkan ke halaman `juragan` jika bukan login sebagai `admin`
 			}
 		}
-    }
+	}
 
-    public function index() {
-    	// redirect ke pilihan pertama `allowed_id`
+	public function index() {
+		// redirect ke pilihan pertama `allowed_id`
 		$data = $this->session->userdata('juragan')['id_juragan'];
 		if(isset($data)) {
 			redirect('juragan/pesanan');
@@ -25,9 +25,9 @@ class Dasbor extends CI_Controller {
 		else {
 			redirect('juragan/dasbor/select');
 		}
-    }
+	}
 
-    public function select($user_id = '') {
+	public function select($user_id = '') {
 		if($user_id === '') {
 			$this->data = array(
 				'title' => 'Pilih Juragan',
@@ -56,5 +56,5 @@ class Dasbor extends CI_Controller {
 				redirect('');
 			}
 		}
-    }
+	}
 }
