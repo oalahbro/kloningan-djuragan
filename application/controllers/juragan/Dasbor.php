@@ -30,7 +30,7 @@ class Dasbor extends CI_Controller {
 	public function select($user_id = '') {
 		if($user_id === '') {
 			$this->data = array(
-				'title' => 'Pilih Juragan',
+				'title' => 'Pilih Juragan | ' . $this->config->item('site_name'),
 				'auth_list' => $this->juragan->auth_list(data_session('id'))
 				);
 
