@@ -31,7 +31,7 @@ class Login extends CI_Controller {
 		
 		if($this->form_validation->run() === FALSE) {
 			$this->data = array(
-				'title' => 'Login'
+				'title' => 'Login | ' . $this->config->item('site_name')
 				);
 			$this->load->view('public/login', $this->data);
 		}
