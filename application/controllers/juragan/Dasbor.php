@@ -57,4 +57,14 @@ class Dasbor extends CI_Controller {
 			}
 		}
 	}
+
+	function warna($str = 'abc') {
+		$code = dechex(crc32($str));
+		$code = substr($code, 0, 6);
+		echo '<span style="color:#'.$code.'">#'.$code.'</span>';
+	}
+
+
+
+
 }
