@@ -17,14 +17,15 @@ class Pesanan extends CI_Controller {
     }
 
     public function pilih_juragan($juragan_id = 0, $string_to_warna = 'string') {
-    	// ambil session id_juragan
-
 		$query = $this->juragan->auth_list(data_session('id'));
 		$row = $query->row();
+		
 
 		$array_auth = explode(',', $row->allow_id);
 		$nama = $this->juragan->ambil_nama_by_id($array_auth[0]);
 		$url_nama = url_title($nama, '-', TRUE);
+
+		$s_id = $this->session->userdata('juragan')['id_juragan'];
 
 		if($juragan_id !== 0) {
 			if(in_array($juragan_id, $array_auth)) {
@@ -35,12 +36,14 @@ class Pesanan extends CI_Controller {
 				$this->session->set_userdata('juragan', $sess_array);
 			}
 		}
-		else {				
-			$sess_array = array(
-				'id_juragan' => $array_auth[0],
-				'warna_juragan' => _warna($url_nama)
-				);
-			$this->session->set_userdata('juragan', $sess_array);
+		else {
+			if( ! isset($s_id)) {
+				$sess_array = array(
+					'id_juragan' => $array_auth[0],
+					'warna_juragan' => _warna($url_nama)
+					);
+				$this->session->set_userdata('juragan', $sess_array);
+			}
 		}
 
 		redirect('juragan/pesanan');
