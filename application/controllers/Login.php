@@ -15,8 +15,8 @@ class Login extends CI_Controller {
 
 	public function __construct() {
     	parent::__construct();
-    	if(is_login() === TRUE) {
-			if((is_user_level('admin') === TRUE) || (is_user_level('superadmin') === TRUE)) {
+    	if(_is_login() === TRUE) {
+			if((_is_user_level('admin') === TRUE) || (_is_user_level('superadmin') === TRUE)) {
 				redirect('admin');
 			}
 			else {

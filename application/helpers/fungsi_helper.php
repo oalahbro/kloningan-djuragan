@@ -82,7 +82,7 @@ function data_session($field) {
 	return $data;
 }
 
-function is_login() {
+function _is_login() {
 	$login = data_session('login');
 	if($login) {
 		return TRUE;
@@ -90,7 +90,7 @@ function is_login() {
 }
 
 // default $level = 'superadmin'
-function is_user_level($level = 'superadmin') {
+function _is_user_level($level = 'superadmin') {
 	if(data_session('level') === $level) {
 		return TRUE;
 	}

@@ -11,11 +11,11 @@ class Pesanan extends CI_Controller {
 
     	$this->s_id = $this->session->userdata('juragan')['id_juragan'];
 
-    	if(is_login() !== TRUE) {
+    	if(_is_login() !== TRUE) {
     		redirect('login'); // belum masuk ? dialihkan ke halaman `login`
     	}
     	else {
-			if(is_user_level('user') !== TRUE) {
+			if(_is_user_level('user') !== TRUE) {
 				redirect('admin'); // dialihkan ke halaman `juragan` jika bukan login sebagai `admin`
 			}
 		}
