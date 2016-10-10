@@ -62,23 +62,34 @@ class Pesanan extends CI_Controller {
 
 		$this->load->view('juragan/header', $this->data);
 		$this->load->view('juragan/menu', $this->data);
-		$this->load->view('juragan/pesanan/dasbor', $this->data);
+		$this->load->view('juragan/pesanan/tulis', $this->data);
 		$this->load->view('juragan/footer', $this->data);
     }
 
     // fungsi menampilkan daftar pesanan 
-    public function daftar($u = '') {
+    public function daftar($status = 'all') {
     	$juragan = _nama_juragan($this->s_id);
 
+    	if($status === 'terkirim') {
+    		$judul = 'Pesanan Terkirim';
+    	}
+    	elseif($status === 'pending') {
+    		$judul = 'Pesanan Pending';
+    	}
+    	else {
+    		$judul = 'Semua Pesanan';
+    	}
+
     	$this->data = array(
-			'title' => 'Pesanan - ' . $juragan . ' | ' . $this->config->item('site_name'),
+			'title' => $judul . ' - ' . $juragan . ' | ' . $this->config->item('site_name'),
+			'sub_title' => $judul,
 			'active' => 'pesanan',
 			'juragan' => $juragan
 			);
 
 		$this->load->view('juragan/header', $this->data);
 		$this->load->view('juragan/menu', $this->data);
-		$this->load->view('juragan/pesanan/dasbor', $this->data);
+		$this->load->view('juragan/pesanan/daftar', $this->data);
 		$this->load->view('juragan/footer', $this->data);
     }
 }
