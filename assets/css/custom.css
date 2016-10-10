@@ -10,3 +10,9 @@
 .nav-up {
 	top: -45px;
 }
+.navbar-light .navbar-toggler {
+	color: #333;
+}
+.navbar-dark .navbar-toggler {
+	color: #fff;
+}
