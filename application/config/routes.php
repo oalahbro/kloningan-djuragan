@@ -59,4 +59,4 @@ $route['juragan/pesanan'] = 'juragan/pesanan/daftar';
 $route['user'] = 'juragan/pesanan';
 
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = TRUE;
