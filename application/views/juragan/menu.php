@@ -20,6 +20,8 @@ else {
 			<?php 
 			$row = _auth()->row();
 			$list = explode(',' , $row->allow_id);
+			shuffle($list);
+
 			foreach($list as $i => $key) {
 				$username = $this->juragan->ambil_username_by_id($key);
 				$nama = $this->juragan->ambil_nama_by_id($key);
