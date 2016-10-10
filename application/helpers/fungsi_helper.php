@@ -1,11 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// ambil data auth dari juragan yang diijinkan
 function _auth($value='') {
 	$CI =& get_instance();
 	return $CI->juragan->auth_list(data_session('id'));
 }
 
+// rubah warna ke RGB
 function _HTMLToRGB($htmlCode) {
 	if($htmlCode[0] == '#')
 		$htmlCode = substr($htmlCode, 1);
@@ -21,6 +23,7 @@ function _HTMLToRGB($htmlCode) {
 	return $b + ($g << 0x8) + ($r << 0x10);
 }
 
+// rubah RGB ke HSL
 function _RGBToHSL($RGB) {
 	$r = 0xFF & ($RGB >> 0x10);
 	$g = 0xFF & ($RGB >> 0x8);
@@ -63,18 +66,21 @@ function _RGBToHSL($RGB) {
 	return (object) Array('hue' => $h, 'saturation' => $s, 'lightness' => $l);
 }
 
+// rubah string ke kode warna
 function _warna($str = 'warna') {
 	$code = dechex(crc32($str));
 	$code = substr($code, 0, 6);
-	// echo '<span style="color:#'.$code.'">#'.$code.'</span>';
+
 	return '#'.$code;
 }
 
+// ambil nama juragan berdasarkan id
 function _nama_juragan($juragan_id) {
 	$CI =& get_instance();
 	return $CI->juragan->_ambil_nama_juragan_dari_id($juragan_id);
 }
 
+// ambil isi session login
 function data_session($field) {
 	$TO =& get_instance();
 	$sesi = $TO->session->userdata('logged_in');
@@ -82,6 +88,7 @@ function data_session($field) {
 	return $data;
 }
 
+// cek sudah login atau belum
 function _is_login() {
 	$login = data_session('login');
 	if($login) {
