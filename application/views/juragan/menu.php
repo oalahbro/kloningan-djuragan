@@ -66,6 +66,20 @@ else {
 				<li class="nav-item"><?php echo anchor('juragan/stock', 'Stok', array('class' => 'nav-link'));?></li>
 				<li class="nav-item"><?php echo anchor('juragan/status', 'Status', array('class' => 'nav-link'));?></li>
 			</ul>
+			
+			<ul class="nav navbar-nav pull-xs-right">
+				<li class="nav-item btn-group">
+					<a class="dropdown-toggle nav-link" id="dropdown-pesanan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<?php echo data_session('nama'); ?>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-pesanan">
+						<?php
+						echo anchor('juragan/profil', 'Ubah Password', array('class' => 'dropdown-item'));
+						echo anchor('logout', 'Keluar', array('class' => 'dropdown-item'));
+						?>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>
