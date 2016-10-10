@@ -44,10 +44,14 @@ class Pesanan extends CI_Controller {
 				$this->session->set_userdata('juragan', $sess_array);
 			}
 		}
-    // fungsi menampilkan daftar pesanan 
 		redirect('juragan/pesanan');
     }
 
+    // fungsi tulis data pesanan baru
+    public function tulis_baru() {
+    }
+
+    // fungsi menampilkan daftar pesanan 
     public function daftar($u = '') {
     	$data = $this->session->userdata('juragan')['id_juragan'];
     	$juragan = _nama_juragan($data);

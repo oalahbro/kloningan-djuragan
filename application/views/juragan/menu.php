@@ -54,16 +54,9 @@ else {
 						?>
 					</div>
 				</li>
-				<li class="nav-item">
-					<a href="about.html" class="nav-link">About</a>
-				</li>
-				<li class="nav-item">
-					<a href="services.html" class="nav-link">Services</a>
-				</li>
-				<li class="nav-item">
-					<a href="contact.html" class="nav-link">Contact</a>
-				</li>
-
+				<li class="nav-item"><?php echo anchor('juragan/pesanan/tulis-baru', 'Tambah Pesanan', array('class' => 'nav-link'));?></li>
+				<li class="nav-item"><?php echo anchor('juragan/stock', 'Stok', array('class' => 'nav-link'));?></li>
+				<li class="nav-item"><?php echo anchor('juragan/status', 'Status', array('class' => 'nav-link'));?></li>
 			</ul>
 		</div>
 	</div>
