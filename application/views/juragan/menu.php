@@ -46,9 +46,9 @@ else {
 					</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown-pesanan">
 						<?php
-						echo anchor('juragan/pesanan/list/all', 'Semua', array('class' => 'dropdown-item'));
-						echo anchor('juragan/pesanan/list/terkirim', 'Terkirim', array('class' => 'dropdown-item'));
-						echo anchor('juragan/pesanan/list/pending', 'Pending', array('class' => 'dropdown-item'));
+						echo anchor('juragan/pesanan/daftar/all', 'Semua', array('class' => 'dropdown-item'));
+						echo anchor('juragan/pesanan/daftar/terkirim', 'Terkirim', array('class' => 'dropdown-item'));
+						echo anchor('juragan/pesanan/daftar/pending', 'Pending', array('class' => 'dropdown-item'));
 						?>
 					</div>
 				</li>
