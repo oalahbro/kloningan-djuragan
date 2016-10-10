@@ -162,6 +162,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				if (st > lastScrollTop && st > navbarHeight){
 					// Scroll Down
 					$('#scrolll').removeClass('nav-down').addClass('nav-up');
+					$('#navbar-header').collapse('hide');
 				} else {
 					// Scroll Up
 					if(st + $(window).height() < $(document).height()) {
