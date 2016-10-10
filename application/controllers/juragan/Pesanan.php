@@ -17,18 +17,17 @@ class Pesanan extends CI_Controller {
     }
 
     public function pilih_juragan($juragan_id = 0, $string_to_warna = 'string') {
-		$query = $this->juragan->auth_list(data_session('id'));
+		$query = $this->juragan->auth_list(data_session('id')); // ambil data sesson login
 		$row = $query->row();
-		
 
 		$array_auth = explode(',', $row->allow_id);
 		$nama = $this->juragan->ambil_nama_by_id($array_auth[0]);
 		$url_nama = url_title($nama, '-', TRUE);
 
-		$s_id = $this->session->userdata('juragan')['id_juragan'];
+		$s_id = $this->session->userdata('juragan')['id_juragan']; // ambil data session id_juragan
 
 		if($juragan_id !== 0) {
-			if(in_array($juragan_id, $array_auth)) {
+			if(in_array($juragan_id, $array_auth)) { // set session juragan dari pilihan daftar allow_id
 				$sess_array = array(
 					'id_juragan' => $juragan_id,
 					'warna_juragan' => _warna($string_to_warna)
@@ -37,7 +36,7 @@ class Pesanan extends CI_Controller {
 			}
 		}
 		else {
-			if( ! isset($s_id)) {
+			if( ! isset($s_id)) { // set session juragan dari pertama login, diambil dari daftar pertama
 				$sess_array = array(
 					'id_juragan' => $array_auth[0],
 					'warna_juragan' => _warna($url_nama)
@@ -45,7 +44,7 @@ class Pesanan extends CI_Controller {
 				$this->session->set_userdata('juragan', $sess_array);
 			}
 		}
-
+    // fungsi menampilkan daftar pesanan 
 		redirect('juragan/pesanan');
     }
 
