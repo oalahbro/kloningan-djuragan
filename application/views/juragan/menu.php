@@ -42,7 +42,7 @@ else {
 		</ul>
 		</div>
 	</div>
-	<div id="scrolll" class="navbar clearHeader navbar-full navbar-<?php echo $class_navbar; ?> bg-faded navbar-static-top" style="background-color:<?php echo $warna; ?>;">
+	<div id="scrolll" class="navbar clearHeader navbar-full navbar-<?php echo $class_navbar; ?> bg-faded navbar-static-top" style="background-color:<?php echo $warna; ?>;" role="navigation">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header">
 			&#9776;
 		</button>
