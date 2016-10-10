@@ -27,8 +27,16 @@ else {
 				$nama = $this->juragan->ambil_nama_by_id($key);
 				$url_nama = url_title($nama, '-', TRUE);
 
+				$hsl_ = _RGBToHSL(_HTMLToRGB(_warna($url_nama)));
+				if($hsl_->lightness > 150) {
+					$btn_class = 'light';
+				}
+				else {
+					$btn_class = 'dark';
+				}
+
 				echo '<li class="list-inline-item">';
-				echo anchor('juragan/pesanan/pilih_juragan/' . $key . '/' . $url_nama, $nama, array('class' => 'btn', 'style' => 'background-color:' . _warna($url_nama) . ';color:#fff;') );
+				echo anchor('juragan/pesanan/pilih_juragan/' . $key . '/' . $url_nama, $nama, array('class' => 'btn btn-'. $btn_class, 'style' => 'background-color:' . _warna($url_nama) . ';') );
 				echo '</li>';
 			} ?>
 		</ul>
