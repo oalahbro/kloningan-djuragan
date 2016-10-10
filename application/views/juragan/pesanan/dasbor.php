@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<h2>Pilih Akun Juragan</h2>
 		<ul class="ds-btn">

@@ -1,1 +1,12 @@
 @import url(bootstrap.min.css);
+
+#scrolll {
+	transition: all 2s ease;
+	-webkit-transition: all 2s ease;
+	-moz-transition: all 2s ease;
+	-o-transition: all 2s ease;
+}
+
+.nav-up {
+	top: -45px;
+}
