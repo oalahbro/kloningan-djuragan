@@ -51,7 +51,7 @@ else {
 		<div id="sticker">
 			<ul class="nav navbar-nav">
 				<li class="nav-item btn-group">
-					<a class="dropdown-toggle nav-link" type="button" id="dropdown-pesanan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<a class="dropdown-toggle nav-link" id="dropdown-pesanan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Pesanan
 					</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown-pesanan">
