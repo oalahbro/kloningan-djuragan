@@ -52,3 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'masuk';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['admin'] = 'admin/pesanan/lihat';
+$route['admin/pesanan'] = 'admin/pesanan/lihat';
