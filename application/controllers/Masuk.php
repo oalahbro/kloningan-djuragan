@@ -21,10 +21,10 @@ class Masuk extends CI_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		
 		if($this->form_validation->run() === FALSE) {
-			$this->data = array(
-				'title' => 'Login | ' // . $this->config->item('site_name')
+			$data = array(
+				'title' => 'Login'
 				);
-			$this->load->view('v_masuk');
+			$this->load->view('v_masuk', $data);
 		}
 		else {
 			$username = $this->input->post('username');
