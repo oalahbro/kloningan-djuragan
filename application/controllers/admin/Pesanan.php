@@ -16,8 +16,23 @@ class Pesanan extends CI_Controller {
 	}
 
 	public function lihat($juragan = 'semua', $status = 'semua') {
+
+		if($status === 'semua') {
+			$title_navbar = 'Semua Pesanan';
+		}
+		elseif ($status === 'pending') {
+			$title_navbar = 'Pesanan Pending';
+		}
+		elseif ($status === 'terkirim') {
+			$title_navbar = 'Pesanan Terkirim';
+		}
+		elseif ($status === 'draft') {
+			$title_navbar = 'Data Sementara';
+		}
+
 		$data = array(
-			'title' => 'Pesanan'
+			'title' => 'Pesanan',
+			'title_navbar' => $title_navbar,
 			);
 
 		$this->load->view('admin/header', $data);
