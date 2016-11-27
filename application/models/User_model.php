@@ -18,7 +18,7 @@ class User_model extends CI_Model {
 			'daftar' => mdate('%Y-%m-%d %H:%i:%s', now())
 			);
 
-		$this->db->insert('juragan', $data);
+		$this->db->insert('pengguna', $data);
 
 		return TRUE;
 	}

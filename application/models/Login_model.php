@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Login_model extends CI_Model {
 
 	public function check($username, $password) {
-		$query = $this->db->get_where('juragan', array('username' => $username));
+		$query = $this->db->get_where('pengguna', array('username' => $username));
 		if ($query->num_rows() === 1) {
 			$row = $query->row();
 
@@ -29,7 +29,7 @@ class Login_model extends CI_Model {
 				$last_login = mdate("%Y-%m-%d %H:%i:%s", now());
 
 				$this->db->where('id', $row->id);
-				$this->db->update('juragan', array('password' => $unik . '_' . $katasandi, 'login' => $last_login ));
+				$this->db->update('pengguna', array('password' => $unik . '_' . $katasandi, 'login' => $last_login ));
 
 				return TRUE;
 			}
