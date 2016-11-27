@@ -34,6 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 		<div class="navbar navbar-full bg-faded navbar-static-top navbar-dark bg-inverse">
+			<?php echo anchor('admin/pesanan', $nama_juragan, array('class' => 'navbar-brand')); ?>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
 
