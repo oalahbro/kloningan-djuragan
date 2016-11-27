@@ -79,7 +79,20 @@ class Upgrade extends CI_Controller {
 			echo form_close();
 		}
 		else {
+			// simpan data admin
+			$username = $this->input->post('username');
+			$password = $this->input->post('password');
+
+			$sign = $this->user->daftar($username, $password, 'superadmin');
+
+			if($sign) {
+				redirect('upgrade/step3');
+			}
 
 		}
+	}
+
+	public function step3() {
+		# code...
 	}
 }
