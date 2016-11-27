@@ -31,10 +31,8 @@ class Masuk extends CI_Controller {
 			$password = $this->input->post('password');
 			
 			$this->login->check($username, $password);
+
+			redirect();
 		}
-
-
-
-		
 	}
 }
