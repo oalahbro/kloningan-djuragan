@@ -37,10 +37,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<?php 
 					echo form_open();
 
-					// echo heading('Masuk', 2, array('class' => 'text-xs-center'));
+					echo '<div class="form-group">';
+						echo form_input(array('name' => 'username', 'placeholder' => 'username', 'class' => 'form-control'));
+					echo '</div>';
 
-					echo form_input(array('name' => 'username', 'placeholder' => 'username', 'class' => 'form-control'));
-					echo form_password(array('name' => 'password', 'placeholder' => 'password', 'class' => 'form-control'));
+					echo '<div class="form-group">';
+						echo form_password(array('name' => 'password', 'placeholder' => 'password', 'class' => 'form-control'));
+					echo '</div>';
+					
 					echo form_button(array('class' => 'btn btn-primary', 'content' => 'Masuk', 'type' => 'submit'));
 
 					echo form_close();
