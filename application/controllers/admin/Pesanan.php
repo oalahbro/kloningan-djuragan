@@ -33,11 +33,16 @@ class Pesanan extends CI_Controller {
 		$data = array(
 			'title' => 'Pesanan',
 			'title_navbar' => $title_navbar,
-			'nama_juragan' => $this->juragan->ambil_nama($juragan)
+			'nama_juragan' => $this->juragan->ambil_nama($juragan),
+			'juragan' => $juragan
 			);
 
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/pesanan/show', $data);
 		$this->load->view('admin/footer', $data);
+	}
+
+	public function tulis($juragan) {
+		
 	}
 }

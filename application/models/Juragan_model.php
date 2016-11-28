@@ -5,6 +5,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Juragan_model extends CI_Model {
 
+	public function anbil_data() {
+		$q = $this->db->get('juragan');
+
+		return $q;
+	}
+
 	public function ambil_nama($nama_alias) {
 		$this->db->where('nama_alias', $nama_alias);
 		$q = $this->db->get('juragan');
