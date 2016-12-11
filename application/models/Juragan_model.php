@@ -25,4 +25,17 @@ class Juragan_model extends CI_Model {
 		return $nama;
 	}
 
+	public function ambil_warna($nama_alias) {
+		$this->db->where('nama_alias', $nama_alias);
+		$q = $this->db->get('juragan');
+
+		$row = $q->row();
+		if ($q->num_rows() === 1) {
+			$nama = $row->warna_default;			
+		}
+		else {
+			$nama = '#222';
+		}
+		return $nama;
+	}
 }

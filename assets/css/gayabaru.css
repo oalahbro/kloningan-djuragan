@@ -1,0 +1,12 @@
+.btn-select {
+	margin-bottom: 5px;
+}
+#navbar-header {
+	background: white;
+}
+.navbar-dark .navbar-toggler, .btn-dark, .btn-dark:hover {
+	color: #fff;
+}
+.navbar-light .navbar-toggler, .btn-light, .btn-light:hover {
+	color: #333;
+}
