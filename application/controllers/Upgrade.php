@@ -65,6 +65,7 @@ class Upgrade extends CI_Controller {
 			echo 'done create table `pengguna`';
 			echo '<hr/>Daftarkan data admin:';
 			echo form_open();
+
 				echo form_label('username', 'username');
 				echo form_input('username');
 				echo '<br/>';
@@ -134,6 +135,10 @@ class Upgrade extends CI_Controller {
 				'constraint' => 5,
 				'null' => FALSE
 				),
+			'warna_default' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 7
+				)
 			);
 		$this->dbforge->add_field($fields);
 		$this->dbforge->add_key('id', TRUE);
@@ -151,11 +156,12 @@ class Upgrade extends CI_Controller {
 					'id' => $v->user_id,
 					'nama' => $v->nama,
 					'nama_alias' => $v->username,
-					'shortcode' => $v->short,
+					'shortcode' => strtolower($v->short),
 					'membership' => $v->membership,
 					'transfer_pending' => $v->transfer,
 					'kirim_pending' => $v->kirim,
-					'total_pesanan' => $v->total
+					'total_pesanan' => $v->total,
+					'warna_default' => warna($v->username)
 					));
 			}
 
@@ -165,13 +171,209 @@ class Upgrade extends CI_Controller {
 			// hapus tabel count_order
 			// $this->dbforge->drop_table('count_order',TRUE);
 
-
-
-
-			redirect('upgrade/step4');
+			//redirect('upgrade/step4');
 		}
 	}
 
 	public function step4() {
+		// move data from `order` to `pesanan`
+		$this->dbforge->drop_table('pesanan',TRUE);
+		//$this->dbforge->drop_table('pesanan_additional',TRUE);
+
+		$fields = array(
+			'id' => array(
+				'type' => 'INT',
+				'constraint' => 11,
+				'auto_increment' => TRUE
+				),
+			'juragan_id' => array(
+				'type' => 'INT',
+				'constraint' => 11
+				),
+			'pengguna_id' => array(
+				'type' => 'INT',
+				'constraint' => 11
+				), 	
+			'member_id' => array(
+				'type' => 'INT',
+				'constraint' => 11,
+				'default' => 0
+				),
+			'status_pesanan' => array(
+				'type' => 'ENUM("0","1","2")',
+				'default' => '1',
+				'null' => FALSE
+				),
+			'tanggal' => array(
+				'type' => 'DATETIME'
+				),
+			'nama' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 100
+				),
+			'alamat' => array(
+				'type' =>'TEXT'
+				),
+			'hp' => array(
+				'type' => 'VARCHAR',
+				'constraint' => '30'
+				),
+			'pesanan' => array(
+				'type' => 'TEXT'
+				),
+			'total_biaya' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 11,
+				'default' => '0',
+				'null' => FALSE
+				),
+			'total_ongkir' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 22,
+				'default' => '0',
+				'null' => FALSE
+				),
+			'total_transfer' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 11,
+				'default' => '0',
+				'null' => FALSE
+				),
+			'status_kirim' => array(
+				'type' => 'ENUM("0","1")', 
+				'default' => '0',
+				'null' => FALSE
+				),
+			'status_transfer' => array(
+				'type' => 'ENUM("0","1")', 
+				'default' => '0',
+				'null' => FALSE
+				),
+			'status_biaya_transfer' => array(
+				'type' => 'ENUM("0","1")', 
+				'default' => '0',
+				'null' => FALSE
+				),
+			'bank' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 50,
+				),
+			'kurir_resi' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 120,
+				'default' => NULL,
+				'null' => TRUE
+				),
+			'cek_kirim' => array(
+				'type' => 'DATETIME',
+				'default' => NULL,
+				'null' => TRUE
+				),
+			'cek_transfer' => array(
+				'type' => 'DATETIME',
+				'default' => NULL,
+				'null' => TRUE
+				),
+			'gambar' => array(
+				'type' => 'TEXT',
+				'default' => NULL,
+				'null' => TRUE
+				),
+			'keterangan' => array(
+				'type' => 'TEXT',
+				'default' => NULL,
+				'null' => TRUE
+				),
+			'uid' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 40,
+				'unique' => TRUE
+				)
+			);
+		$this->dbforge->add_field($fields)
+					  ->add_key('id', TRUE);
+
+		if($this->dbforge->create_table('pesanan', FALSE, array('ENGINE' => 'InnoDB'))) {			
+
+			$this->db->where('del', NULL);
+			$q = $this->db->get('order');
+			$i = 0;
+
+			foreach ($q->result() as $v) {
+
+				$cek_kirim = $v->cek_kirim;
+				if(empty($v->cek_kirim)) {
+					$cek_kirim = NULL;
+				}
+				$cek_transfer = $v->cek_transfer;
+				if(empty($v->cek_transfer)) {
+					$cek_transfer = NULL;
+				}
+
+				if($v->status_transfer === 'Masuk') {
+					$status_transfer = '1';
+				}
+				else {
+					$status_transfer = '0';
+				}
+
+				if($v->status === 'Lunas') {
+					$status_biaya_transfer = 1;
+				}
+				else {
+					$status_biaya_transfer = 0;
+				}
+
+				if($v->barang === 'Terkirim') {
+					$status_kirim = '1';
+				}
+				else {
+					$status_kirim = '0';
+				}
+
+				
+				if($v->member_id === '0') {
+					$member_id = '';
+
+				}
+				else {
+					$member_id = $v->member_id;	
+				}
+
+				if( empty($v->keterangan) ) {
+					$keterangan = NULL;
+				}
+				else {
+					$keterangan =  $v->keterangan;
+				}
+
+				$this->db->insert('pesanan', array(
+					'id' => $v->id,
+					'juragan_id' => $v->user_id,
+					'pengguna_id' => 1,
+					'member_id' => $v->member_id,
+					'tanggal' => $v->tanggal_order,
+					'nama' => $v->nama,
+					'alamat' => $v->alamat,
+					'hp' => $v->hp,
+					'pesanan' => $v->pesanan,
+					'total_biaya' => $v->harga,
+					'total_ongkir' => $v->ongkir . ',' . $v->ongkir_fix,
+					'total_transfer' => $v->transfer,
+					'status_kirim' => $status_kirim,
+					'status_transfer' => $status_transfer,
+					'status_biaya_transfer' => $status_biaya_transfer,
+					'bank' => $v->bank,
+					'kurir_resi' => $v->kurir . ',' . $v->resi,
+					'cek_kirim' => $cek_kirim,
+					'cek_transfer' => $cek_transfer,
+					'gambar' => $v->customgambar,
+					'keterangan' => $keterangan,
+					'uid' => do_hash($v->id . time())
+					));
+			}
+
+			redirect('upgrade/step5');
+		}
 	}
 }
