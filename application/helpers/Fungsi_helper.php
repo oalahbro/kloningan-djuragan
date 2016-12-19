@@ -41,6 +41,12 @@ function rupiah($angka) {
 	return $format;
 }
 
+function tanggal($data_tanggal, $format = "d-M-y") {
+	$data = date($format, strtotime($data_tanggal));
+
+	return $data;
+}
+
 function warna($str = 'warna') {
 	$code = dechex(crc32($str));
 	$code = substr($code, 0, 6);
