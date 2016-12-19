@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pesanan_model extends CI_Model {
 
-	public function ambil() {
+	public function ambil($juragan, $status, $hal = 0, $cari = '') {
 
 		$this->db->select('p.*, j.nama as nama_juragan, j.nama_alias as alias_juragan, j.warna_default, u.nama as cs, u.username' 
 
@@ -16,7 +16,27 @@ class Pesanan_model extends CI_Model {
 		$this->db->join('pengguna u', 'u.id=p.pengguna_id');
 
 
-		$this->db->order_by('p.id', 'desc');
+		if($juragan !== 'semua') {
+			$this->db->where('j.nama_alias', $juragan);
+		}
+
+		if($status === 'terkirim') {
+			// $this->db->order_by('o.status_transfer desc, o.status_kirim desc, o.cek_kirim desc, o.cek_transfer desc, o.tanggal_order desc');
+			$this->db->having(array('p.status_kirim' => '1'));
+		}
+		elseif($status === 'pending') {
+			$this->db->having(array('p.status_kirim' => '0'));
+		}
+
+
+		
+		if($status !== 'terkirim') {
+			$this->db->order_by('p.status_biaya_transfer asc, p.status_kirim asc, p.tanggal desc');
+		}
+		elseif($status === 'terkirim') {
+			$this->db->order_by('p.status_kirim asc, p.tanggal desc');
+		}
+
 		$this->db->limit(30);
 		return $this->db->get();
 	}
