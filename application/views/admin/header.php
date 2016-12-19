@@ -42,9 +42,30 @@ else {
 				<h3>Pilih Juragan</h3>
 				<?php 
 				foreach ($this->juragan->anbil_data()->result() as $j) { 
-					echo anchor('admin/pesanan/lihat/' . $j->nama_alias, $j->nama . ' <span class="tag tag-pill tag-danger">'.$j->kirim_pending.'</span>', array('class' => 'btn btn-outline-primary'));
+
+					$hsl_ = _RGBToHSL(_HTMLToRGB($j->warna_default));
+					if($hsl_->lightness > 150) {
+						$btn_class = 'light';
+					}
+					else {
+						$btn_class = 'dark';
+					}
+
+
+						$notif_transfer = "<span class='tag tag-pill tag-danger'>".$j->transfer_pending."</span>";
+
+						$notif_kirim = "<span class='tag tag-pill tag-info'>".$j->kirim_pending."</span>";
+
+					$stt = array(
+						'class' => 'btn btn-select btn-'. $btn_class, // btn btn-outline-primary btn-select
+						'style' => 'background: ' . $j->warna_default
+						);
+
+					echo anchor('admin/pesanan/lihat/' . $j->nama_alias, $j->nama, $stt);
 					?>
-				<?php } ?>
+				<?php }
+
+				 ?>
 			</div>
 		</div>
 		<div class="navbar navbar-full bg-faded navbar-static-top navbar-<?php echo $class_navbar; ?>" style="background-color:<?php echo $warna; ?>;">
