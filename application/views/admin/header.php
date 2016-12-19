@@ -1,5 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+$hsl = _RGBToHSL(_HTMLToRGB($warna));
+if($hsl->lightness > 150) {
+	$class_navbar = 'light';
+}
+else {
+	$class_navbar = 'dark';
+}
+
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<?php } ?>
 			</div>
 		</div>
-		<div class="navbar navbar-full bg-faded navbar-static-top navbar-dark bg-inverse">
+		<div class="navbar navbar-full bg-faded navbar-static-top navbar-<?php echo $class_navbar; ?>" style="background-color:<?php echo $warna; ?>;">
 			<?php echo anchor('admin/pesanan', $nama_juragan, array('class' => 'navbar-brand')); ?>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
