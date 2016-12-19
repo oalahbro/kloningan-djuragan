@@ -10,10 +10,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<title><?php echo $title; ?></title>
 
-	<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 	<?php echo link_tag('assets/css/bootstrap.min.css'); ?>
 	<?php echo link_tag('assets/css/gayabaru.css'); ?>
 
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.pjax.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/js/pace.min.js'); ?>"></script>
+
+	<script type="text/javascript">
+		$(document).pjax('a', '#main', { 
+			fragment: '#main', 
+			timeout: 3000 
+		});
+	</script>
 </head>
 <body>
 	<div id="main">
