@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </head>
 <body>
-
+	<div id="main">
 	<div class="pos-f-t">
 		<div class="collapse" id="navbar-header">
 			<div class="container-fluid p-1">
