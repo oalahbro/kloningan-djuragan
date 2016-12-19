@@ -41,6 +41,7 @@ else {
 			<div class="container-fluid p-1">
 				<h3>Pilih Juragan</h3>
 				<?php 
+				// notif
 				foreach ($this->juragan->anbil_data()->result() as $j) { 
 
 					$hsl_ = _RGBToHSL(_HTMLToRGB($j->warna_default));
@@ -73,7 +74,7 @@ else {
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
 
-			<span class="navbar-text text-muted"><?php echo $title_navbar; ?></span>
+			<!-- <span class="navbar-text text-muted"><?php echo $title_navbar; ?></span> -->
 
 			<div class="form-inline float-xs-right">
 				<button class="btn btn-outline-warning hidden-sm-up" type="button" data-toggle="collapse" data-target="#menu-navbar-" aria-controls="menu-navbar-" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
@@ -128,3 +129,5 @@ else {
 			</div>
 		</div>
 	</div>
+
+
