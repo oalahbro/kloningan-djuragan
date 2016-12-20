@@ -9,7 +9,7 @@ $(function () {
 		maxNum  = 2,
 		newElem = $('#phone' + num).clone().attr('id', 'phone' + newNum).fadeIn('slow');
 
-		newElem.find('.number_phone').attr('id', 'ID' + newNum + '_phone_number').attr('name', 'ID' + newNum + '_phone_number').val('');
+		newElem.find('.number_phone').val('');
 
 		$('#phone' + num).after(newElem);
 		$('#ID' + newNum + '_title').focus();
@@ -21,16 +21,37 @@ $(function () {
 	});
 
 	$('#btnDel_2').click(function () {
-		if (confirm("Kamu yakin akan menghapus kolom HP ?")) {
-			var num = $('.clonedInput_2').length;
-			$('#phone' + num).slideUp('slow', function () {
-				$(this).remove();
-				if (num -1 === 1)
-					$('#btnDel_2').attr('disabled', true).hide('slow');
-				$('#btnAdd_2').attr('disabled', false).show('slow');
-			});
-		}
-		return false;
+		swal({
+			title: "Kamu yakin akan menghapus?",
+			text: "Kolom HP 2 akan dihapus dan tidak dapat dibatalkan",
+			type: "warning",
+			animation: "slide-from-top",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yup, hapus!",
+			cancelButtonText: "Tidak",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm){
+			if (isConfirm) {
+				var num = $('.clonedInput_2').length;
+				$('#phone' + num).slideUp('slow', function () {
+					$(this).remove();
+					if (num -1 === 1)
+						$('#btnDel_2').attr('disabled', true).hide('slow');
+					$('#btnAdd_2').attr('disabled', false).show('slow');
+				});
+
+				swal({
+					title: "Dihapus!",
+					text: "Kolom HP 2 sudah dihapus",
+					timer: 1100,
+					type: "success",
+					showConfirmButton: false
+				});
+			}
+		});
 	});
 	$('#btnAdd_2').attr('disabled', false).show('slow');
 	$('#btnDel_2').attr('disabled', true).hide('slow');
@@ -46,7 +67,9 @@ $(function () {
 		$('#entry' + num).after(newElem);
 		$('#btnDel').attr('disabled', false).show('slow');
 
-		newElem.find('.select_ttl').attr('id', 'ID' + newNum + '_title').attr('name', 'ID' + newNum + '_title').val('');
+		newElem.find('.kode').val('');
+		newElem.find('.ukuran').val('');
+		newElem.find('.jumlah').val('');
 
 		/*
 		if (newNum == 5)
@@ -55,18 +78,39 @@ $(function () {
 	});
 
 	$('#btnDel').click(function () {
-		if (confirm("Are you sure you wish to remove this section? This cannot be undone.")) {
-			var num = $('.clonedInput').length;
-			$('#entry' + num).slideUp('slow', function () {
-				$(this).remove();
+		swal({
+			title: "Kamu yakin akan menghapus?",
+			text: "Kolom pesanan terakhir akan dihapus dan tidak dapat dibatalkan",
+			type: "warning",
+			animation: "slide-from-top",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yup, hapus!",
+			cancelButtonText: "Tidak",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm){
+			if (isConfirm) {
+				var num = $('.clonedInput').length;
+				$('#entry' + num).slideUp('slow', function () {
+					$(this).remove();
 
-				if (num -1 === 1)
-					$('#btnDel').attr('disabled', true).hide('slow');
+					if (num -1 === 1)
+						$('#btnDel').attr('disabled', true).hide('slow');
 
-				$('#btnAdd').attr('disabled', false).show('slow');
-			});
-		}
-		return false;
+					$('#btnAdd').attr('disabled', false).show('slow');
+				});
+
+				swal({
+					title: "Dihapus!",
+					text: "Kolom pesanan terakhir sudah dihapus",
+					timer: 1100,
+					type: "success",
+					showConfirmButton: false
+				});
+			}
+		});
 	});
 
 	$('#btnAdd').attr('disabled', false).show('slow');
