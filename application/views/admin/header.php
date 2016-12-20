@@ -31,7 +31,7 @@ else {
 	
 
 	<script type="text/javascript">
-		$(document).pjax('a', '#main', { 
+		$(document).pjax('a[data-pjax]', '#main', { 
 			fragment: '#main', 
 			timeout: 3000 
 		});
@@ -73,7 +73,7 @@ else {
 			</div>
 		</div>
 		<div class="navbar navbar-full bg-faded navbar-static-top navbar-<?php echo $class_navbar; ?>" style="background-color:<?php echo $warna; ?>;">
-			<?php echo anchor('admin/pesanan', $nama_juragan, array('class' => 'navbar-brand')); ?>
+			<?php echo anchor('admin/pesanan', $nama_juragan, array('class' => 'navbar-brand', 'data-pjax' => '')); ?>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
 
@@ -89,11 +89,11 @@ else {
 							Daftar Pesanan
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/semua', 'Semua', array('class' => 'dropdown-item')); ?>
-							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/pending', 'Pending', array('class' => 'dropdown-item')); ?>
-							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/terkirim', 'Terkirim', array('class' => 'dropdown-item')); ?>
+							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/semua', 'Semua', array('data-pjax' => '', 'class' => 'dropdown-item')); ?>
+							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/pending', 'Pending', array('data-pjax' => '', 'class' => 'dropdown-item')); ?>
+							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/terkirim', 'Terkirim', array('data-pjax' => '', 'class' => 'dropdown-item')); ?>
 							<div class="dropdown-divider"></div>
-							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/draft', 'Draft', array('class' => 'dropdown-item')); ?>
+							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/draft', 'Draft', array('data-pjax' => '', 'class' => 'dropdown-item')); ?>
 
 						</div>
 					</li>
