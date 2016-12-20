@@ -22,10 +22,13 @@ else {
 
 	<?php echo link_tag('assets/css/bootstrap.min.css'); ?>
 	<?php echo link_tag('assets/css/gayabaru.css'); ?>
+	<?php echo link_tag('assets/css/sweetalert.css'); ?>
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.pjax.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/js/pace.min.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/js/sweetalert.min.js'); ?>"></script>
+	
 
 	<script type="text/javascript">
 		$(document).pjax('a', '#main', { 
