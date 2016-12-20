@@ -84,7 +84,7 @@ else {
 				</div>
 			<div class="collapse navbar-toggleable-xs" id="menu-navbar-">
 				<ul class="nav navbar-nav">
-					<li class="nav-item dropdown active">
+					<li class="nav-item dropdown<?php if($active === 'pesanan') {echo ' active';} ?>">
 						<a class="nav-link dropdown-toggle" href="#!" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Daftar Pesanan
 						</a>
@@ -98,10 +98,10 @@ else {
 						</div>
 					</li>
 
-					<li class="nav-item"><?php echo anchor('admin/pesanan/tulis/' . $juragan, 'Tulis Pesanan', array('class' => 'nav-link')); ?></li>
-					<li class="nav-item"><?php echo anchor('admin/statistics', 'Statistik', array('class' => 'nav-link')); ?></li>
-					<li class="nav-item"><?php echo anchor('admin/stock', 'Stok', array('class' => 'nav-link')); ?></li>
-					<li class="nav-item"><?php echo anchor('admin/pesanan/export', 'Eksport', array('class' => 'nav-link')); ?></li>
+					<li class="nav-item <?php if($active === 'tulis') {echo ' active';} ?>"><?php echo anchor('admin/pesanan/tulis/' . $juragan, 'Tulis Pesanan', array('class' => 'nav-link')); ?></li>
+					<li class="nav-item <?php if($active === 'statistik') {echo ' active';} ?>"><?php echo anchor('admin/statistics', 'Statistik', array('class' => 'nav-link')); ?></li>
+					<li class="nav-item <?php if($active === 'stok') {echo ' active';} ?>"><?php echo anchor('admin/stock', 'Stok', array('class' => 'nav-link')); ?></li>
+					<li class="nav-item <?php if($active === 'eksport') {echo ' active';} ?>"><?php echo anchor('admin/pesanan/export', 'Eksport', array('class' => 'nav-link')); ?></li>
 				</ul>
 
 				<ul class="nav navbar-nav float-sm-right">
