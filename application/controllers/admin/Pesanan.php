@@ -42,7 +42,26 @@ class Pesanan extends CI_Controller {
 		$this->load->view('admin/footer', $data);
 	}
 
-	public function tulis($juragan) {
-		
+	public function tulis($juragan = NULL) {
+
+		$nama_juragan = $this->juragan->ambil_nama($juragan);
+		$warna = $this->juragan->ambil_warna($juragan);
+		$title_navbar = 'Semua Pesanan';
+		$lead = '';
+
+		$data = array(
+			'title' => 'Tulis data Pesanan | ' . $nama_juragan,
+			'title_navbar' => $title_navbar,
+			'lead' => $lead,
+			'active' => 'tulis',
+			'nama_juragan' => $nama_juragan,
+			'juragan' => $juragan,
+			'warna' => $warna
+			);
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/pesanan/write', $data);
+		$this->load->view('admin/footer', $data);
+	
 	}
 }
