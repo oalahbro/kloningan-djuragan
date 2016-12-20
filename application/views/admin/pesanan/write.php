@@ -373,7 +373,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    	if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
 	    		for (var i = 0; i < data[google.picker.Response.DOCUMENTS].length; i++) {
 	    			var doc = data[google.picker.Response.DOCUMENTS][i],
-	    				FILEID = 'http://googledrive.com/host/' + doc[google.picker.Document.ID];
+	    				FILEID = doc[google.picker.Document.URL];
 	    			arr.push(
 	    				FILEID
 	    				);
@@ -390,7 +390,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</script>
 
 	<script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
-	
+
 	<script type="text/javascript">
 		var myEl = document.getElementById('DOCS_IMAGES');
 
