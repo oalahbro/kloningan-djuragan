@@ -15,26 +15,38 @@ class Pesanan extends CI_Controller {
 		}
 	}
 
-	public function lihat($juragan = 'semua', $status = 'semua') {
+	public function lihat($juragan = 'semua', $status = 'semua', $halaman = 0) {
+
+		$nama_juragan = $this->juragan->ambil_nama($juragan);
+		$warna = $this->juragan->ambil_warna($juragan);
 
 		if($status === 'semua') {
 			$title_navbar = 'Semua Pesanan';
+			$lead = 'Semua pesanan yang terkirim, pending dan belum transfer dari ' . $nama_juragan . ', kecuali data Draft.';
 		}
 		elseif ($status === 'pending') {
 			$title_navbar = 'Pesanan Pending';
+			$lead = 'Pesanan yang belum diproses pengirimannya dari ' . $nama_juragan . '.';
 		}
 		elseif ($status === 'terkirim') {
 			$title_navbar = 'Pesanan Terkirim';
+			$lead = 'Semua data pesanan terkirim ' . $nama_juragan . '.';
 		}
 		elseif ($status === 'draft') {
 			$title_navbar = 'Data Sementara';
+			$lead = 'Ini adalah data sementara dari ' . $nama_juragan . ', baiknya jangan disentuh dahulu.';
 		}
 
 		$data = array(
-			'title' => 'Pesanan',
+			'title' => $title_navbar . ' | ' . $nama_juragan,
 			'title_navbar' => $title_navbar,
-			'nama_juragan' => $this->juragan->ambil_nama($juragan),
-			'juragan' => $juragan
+			'lead' => $lead,
+			'active' => 'pesanan',
+			'nama_juragan' => $nama_juragan,
+			'juragan' => $juragan,
+			'status' => $status,
+			'warna' => $warna,
+			'pesanan' => $this->pesanan->ambil($juragan, $status, $hal ="0", $cari="")
 			);
 
 		$this->load->view('admin/header', $data);
