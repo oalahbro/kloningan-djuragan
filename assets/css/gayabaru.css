@@ -47,6 +47,9 @@ fieldset[disabled] .btn-clean.active {
     text-transform: uppercase;
     border-radius: 0;
 }
+.berijarakbawah {
+    margin-bottom: 10px;
+}
 
 /**
  * PACE .JS

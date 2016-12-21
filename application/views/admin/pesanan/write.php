@@ -110,9 +110,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							'type' => 'number'
 							);
 
-						echo '<div class="form-group ">';
+						echo '<div class="form-group">';
 							echo form_label('Kode / Ukuran / Jumlah', 'kode');
-							echo '<div class="row clonedInput" id="entry1">';
+							echo '<div class="row clonedInput berijarakbawah" id="entry1">';
 								// kode
 								echo '<div class="col-sm-4">';
 									echo '<div class="input-group"><span class="input-group-addon">Kode</span>';
