@@ -180,3 +180,6 @@ fieldset[disabled] .btn-clean.active {
     content: "\ea10";
 }
 
+.gambar-uploaded {
+    margin: 20px 0;
+}
