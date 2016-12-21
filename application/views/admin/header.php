@@ -28,7 +28,8 @@ else {
 	<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.pjax.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/js/pace.min.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/js/sweetalert.min.js'); ?>"></script>
-	
+	<script type="text/javascript" src="<?php echo base_url('assets/js/typeahead.bundle.js'); ?>"></script>	
+
 
 	<script type="text/javascript">
 		$(document).pjax('a[data-pjax]', '#main', { 
