@@ -419,4 +419,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 
 		}, false);
+
+		////// TYPEAHEAD
+
+		var databank = new Bloodhound({
+			datumTokenizer: Bloodhound.tokenizers.whitespace,
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+
+			prefetch: '<?php echo site_url('json/bank'); ?>',
+			remote: {
+				url: '<?php echo site_url('json/bank'); ?>?q=%cari',
+				wildcard: '%cari'
+			}
+		});
+
+		$('#bank .typeahead').typeahead(null, {
+			name: 'bank',
+			display: 'bank',
+			source: databank,
+			hint: true,
+			highlight: true,
+			minLength: 1,
+			templates: {
+				suggestion: function (data) {
+					return '<div>' + data.bank + '</div>';
+				}
+			}
+		});
+
 	</script>
