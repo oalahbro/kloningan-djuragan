@@ -40,8 +40,34 @@ class Json extends CI_Controller {
 	         ->set_output(json_encode($a, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 	         ->_display();
 	    exit;
+	}
 
+	public function produk() {
+		$q = $this->input->get('q');
 
+		if( ! empty($q)) {
+			$this->db->like('kode', $q,'both');
+		}
+
+		$q = $this->db->get('produk_daftar');
+
+		$a = array();
+		$i = 0;
+		if($q->num_rows() > 0) {
+			foreach ($q->result() as $r) {
+				$a[] = array('nama' => $r->nama,'kode' => strtoupper($r->kode), 'harga' => $r->harga);
+			}
+		}
+		else {
+			$a[] = array('nama' => 'Custom', 'kode' => 'Custom', 'harga' => '270000');
+		}
+
+		$this->output
+	         ->set_status_header(200)
+	         ->set_content_type('application/json', 'utf-8')
+	         ->set_output(json_encode($a, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+	         ->_display();
+	    exit;
 	}
 
 }

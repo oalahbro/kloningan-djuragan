@@ -93,7 +93,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$form_kode = array(
 							'name' => 'kode[]',
 							'id' => 'kode',
-							'class' => 'form-control kode',
+							'class' => 'form-control kode typeahead',
 							'placeholder' => 'kode',
 							'required' => 'required',
 							'autocomplete' => 'off'
@@ -114,7 +114,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							echo form_label('Kode / Ukuran / Jumlah', 'kode');
 							echo '<div class="row clonedInput berijarakbawah" id="entry1">';
 								// kode
-								echo '<div class="col-sm-4">';
+								echo '<div class="col-sm-4" id="kode">';
 									echo '<div class="input-group"><span class="input-group-addon">Kode</span>';
 										echo form_input($form_kode, set_value('kode[]'));
 									echo '</div>';
@@ -433,6 +433,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		});
 
+		var dataproduk = new Bloodhound({
+			datumTokenizer: Bloodhound.tokenizers.whitespace,
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+
+			prefetch: '<?php echo site_url('json/produk'); ?>',
+			remote: {
+				url: '<?php echo site_url('json/produk'); ?>?q=%cari',
+				wildcard: '%cari'
+			}
+		});
+
 		$('#bank .typeahead').typeahead(null, {
 			name: 'bank',
 			display: 'bank',
@@ -443,6 +454,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			templates: {
 				suggestion: function (data) {
 					return '<div>' + data.bank + '</div>';
+				}
+			}
+		});
+
+		$('#kode .typeahead').typeahead(null, {
+			name: 'kode',
+			display: 'kode',
+			source: dataproduk,
+			hint: true,
+			highlight: true,
+			minLength: 1,
+			templates: {
+				suggestion: function (data) {
+					return '<div><strong>' + data.kode + '</strong> - Rp ' + data.harga.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</div>';
 				}
 			}
 		});
