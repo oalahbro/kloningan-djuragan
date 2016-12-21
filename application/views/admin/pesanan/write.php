@@ -428,7 +428,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			prefetch: '<?php echo site_url('json/bank'); ?>',
 			remote: {
-				url: '<?php echo site_url('json/bank'); ?>?q=%cari',
+				url: '<?php echo site_url('json/bank'); ?>?juragan=<?php echo $juragan; ?>&q=%cari',
 				wildcard: '%cari'
 			}
 		});
