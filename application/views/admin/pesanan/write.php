@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-
 <div class="jumbotron jumbotron-fluid" style="margin-top: 100px">
 	<div class="container">
 		<h1 class="display-3">Tulis Pesanan Baru</h1>
@@ -142,17 +141,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         echo '</div>';
 
 
-                        // status pembayaran
-                        echo '<label for="orderStatus">Status Pembayaran</label>
-                    	<div class="clearfix"></div>
-                    	<div class="btn-group" data-toggle="buttons">
-                    		<label class="btn btn-info active">
-                    		<input type="radio" name="options" id="option1" autocomplete="off" checked /> Lunas
-                    		</label>
-                    		<label class="btn btn-info">
-                    			<input type="radio" name="options" id="option2" autocomplete="off" /> DP
-                    		</label>
-                    	</div>';
+                        echo '<div class="row">';
+                        	echo '<div class="col-sm-3">';
+                        		// status pembayaran
+		                        echo '<div class="form-group ">';
+			                        echo '<label for="orderStatus">Status Pembayaran</label>
+			                    	<div class="clearfix"></div>
+			                    	<div class="btn-group" data-toggle="buttons">
+			                    		<label class="btn btn-info active">
+			                    		<input type="radio" name="options" id="option1" autocomplete="off" checked /> Lunas
+			                    		</label>
+			                    		<label class="btn btn-info">
+			                    			<input type="radio" name="options" id="option2" autocomplete="off" /> DP
+			                    		</label>
+			                    	</div>';
+		                    	echo '</div>';
+                        	echo '</div>';
+                        	echo '<div class="col-sm-3">';
+		                     	 // form field bank
+	                    		$form_bank = array(
+	                    			'name' => 'bank',
+	                    			'id' => 'bank',
+	                    			'class' => 'form-control typeahead',
+	                    			'placeholder' => 'bank',
+	                    			'required' => 'required'
+	                    			);
+
+                    			echo '<div class="form-group" id="bank">';
+                    				echo form_label('Bank', 'bank');
+                    				echo form_input($form_bank, set_value('bank'));
+                    			echo '</div>';
+
+		                     echo '</div>';
+
+                        echo '</div>';
+                        
 
                     	echo '<div class="row">';
                     		echo '<div class="col-sm-4">';
@@ -215,22 +238,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	                    		echo '</div>';
 
                     		echo '</div>';
-                    		echo '<div class="col-sm-3">';
-		                     	 // form field bank
-	                    		$form_bank = array(
-	                    			'name' => 'bank',
-	                    			'id' => 'bank',
-	                    			'class' => 'form-control',
-	                    			'placeholder' => 'bank',
-	                    			'required' => 'required'
-	                    			);
-
-                    			echo '<div class="form-group ">';
-                    				echo form_label('Bank', 'bank');
-                    				echo form_input($form_bank, set_value('bank'));
-                    			echo '</div>';
-
-		                     echo '</div>';
+                    		
                         echo '</div>';
 
 
@@ -253,7 +261,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             echo '</div>';
                         echo '</div>';
                        
-
                     	?>
 
                         
