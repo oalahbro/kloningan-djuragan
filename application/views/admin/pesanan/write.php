@@ -20,7 +20,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             		);
 
             	$hide = array(
+            		'image' => ''
             		);
+
             	echo form_open('', $attr, $hide);
             	?>
                     <div class="panel-body">  
@@ -262,11 +264,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     			<button type="button" class="btn btn-info" id="DOCS_IMAGES">Pilih / Unggah Gambar</button>
                     		</div>
 
-                    		<div class="row">
-                    			<div class="col-sm-6">
-                    				<pre id="result">Tidak ada gambar</pre>
-                    			</div>
-                    		</div>
+                    		<div id="result" class="list-group gambar-uploaded"></div>
                     	</div>
 
 
@@ -369,22 +367,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    }
 	    // A simple callback implementation.
 	    function pickerCallback(data) {
-	    	var arr = [];
+	    	var linked = [];
+	    	var image = [];
+
 	    	if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
 	    		for (var i = 0; i < data[google.picker.Response.DOCUMENTS].length; i++) {
-	    			var doc = data[google.picker.Response.DOCUMENTS][i],
-	    				FILEID = doc[google.picker.Document.URL];
-	    			arr.push(
-	    				FILEID
-	    				);
+	    			var doc = data[google.picker.Response.DOCUMENTS][i];
+	    			var url = doc[google.picker.Document.URL];
+	    			var icon = doc[google.picker.Document.ICON_URL];
+	    			var name = doc[google.picker.Document.NAME];
+
+	    			var link = '<a href="'+url+'" target="_blank" class="list-group-item list-group-item-action list-group-item-success"><img src="'+icon+'" alt="icon"/> '+name+'</a>';
+
+	    			linked.push(link);
+	    			image.push(url);
 
 	    		}
-	    		var js1 = arr.toString().replace(/,/g, "<br/>");
-	    		var js2 = arr.toString();
 	    	}
-	    	// var message = 'Gambar Terpilih: <br>' + arrs;
-	    	document.getElementById('result').innerHTML = js1;
-	    	document.getElementsByName('image')[0].value = js2; // populated form
+	    	document.getElementById('result').innerHTML = linked.toString().replace(/,/g, "");
+	    	document.getElementsByName('image')[0].value = image.toString(); // populated form
 	    }
 
 	</script>
