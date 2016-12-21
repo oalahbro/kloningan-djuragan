@@ -283,7 +283,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$('.calc').on('keyup', function(){
+		$('.calc').bind("change keyup",function(){
 			$('.transfer').val( parseInt($('.harga').val()) + parseInt($('.ongkir').val()));
 		});
 	});
