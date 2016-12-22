@@ -553,6 +553,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			$('#btnAdd').attr('disabled', false).show('slow');
 			$('#btnDel').attr('disabled', true).hide('slow');
+
+			createTypeahead( '#entry1 .typeahead', 'name');
 		});
 
 		////// TYPEAHEAD
@@ -601,18 +603,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		});
 
-		$('#kode .typeahead').typeahead(null, {
-			name: 'kode',
-			display: 'kode',
-			source: dataproduk,
-			hint: true,
-			highlight: true,
-			minLength: 1,
-			templates: {
-				suggestion: function (data) {
-					return '<div><strong>' + data.kode + '</strong> - Rp ' + data.harga.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</div>';
+		function createTypeahead($el, $name) {
+			$($el).typeahead({
+				classNames: {
+					input: 'Typeahead-input',
+					hint: 'Typeahead-hint',
+					selectable: 'tt-select',
+					menu: 'dropdown-menu',
+					suggestion: 'dropdown-item'
 				}
-			}
-		});
+			}, {
+				name: $name,
+				display: 'kode',
+				source: dataproduk,
+				hint: true,
+				highlight: true,
+				minLength: 1,
+				templates: {
+					suggestion: function (data) {
+						return '<div><strong>' + data.kode + '</strong><small class="float-xs-right"><em>Rp ' + data.harga.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</em></small></div>';
+					}
+				}
+			});
+		}
 
 	</script>
