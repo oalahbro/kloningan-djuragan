@@ -579,7 +579,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		});
 
-		$('#bank .typeahead').typeahead(null, {
+		$('#bank .typeahead').typeahead({
+			classNames: {
+				input: 'Typeahead-input',
+				hint: 'Typeahead-hint',
+				selectable: 'tt-select',
+				menu: 'dropdown-menu',
+				suggestion: 'dropdown-item'
+			}
+		}, {
 			name: 'bank',
 			display: 'bank',
 			source: databank,
