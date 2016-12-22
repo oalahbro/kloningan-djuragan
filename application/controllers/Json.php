@@ -59,7 +59,7 @@ class Json extends CI_Controller {
 			}
 		}
 		else {
-			$a[] = array('nama' => 'Custom', 'kode' => 'Custom', 'harga' => '270000');
+			$a[] = array('nama' => 'Custom', 'kode' => 'Custom', 'harga' => '0');
 		}
 
 		$this->output
