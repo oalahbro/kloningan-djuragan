@@ -36,19 +36,19 @@ fieldset[disabled] .btn-clean:active,
 .btn-clean.disabled.active,
 .btn-clean[disabled].active,
 fieldset[disabled] .btn-clean.active {
-    background-color: transparent;
-    border-color: transparent;
-    border-bottom-width: 2px;
-    border-bottom-color: black;
-    border-top-width: 2px;
-    border-top-color: black;
-    color: black;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 0;
+	background-color: transparent;
+	border-color: transparent;
+	border-bottom-width: 2px;
+	border-bottom-color: black;
+	border-top-width: 2px;
+	border-top-color: black;
+	color: black;
+	font-weight: bold;
+	text-transform: uppercase;
+	border-radius: 0;
 }
 .berijarakbawah {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 /**
@@ -139,90 +139,65 @@ fieldset[disabled] .btn-clean.active {
 
 
 @font-face {
-    font-family: 'icomoon';
-    src:  url('../fonts/icomoon.eot?uwylwo');
-    src:  url('../fonts/icomoon.eot?uwylwo#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?uwylwo') format('truetype'),
-    url('../fonts/icomoon.woff?uwylwo') format('woff'),
-    url('../fonts/icomoon.svg?uwylwo#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'icomoon';
+	src:  url('../fonts/icomoon.eot?uwylwo');
+	src:  url('../fonts/icomoon.eot?uwylwo#iefix') format('embedded-opentype'),
+	url('../fonts/icomoon.ttf?uwylwo') format('truetype'),
+	url('../fonts/icomoon.woff?uwylwo') format('woff'),
+	url('../fonts/icomoon.svg?uwylwo#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
 
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .icon-pencil:before {
-    content: "\e905";
+	content: "\e905";
 }
 .icon-delete:before {
-    content: "\e9ac";
+	content: "\e9ac";
 }
 .icon-plus:before {
-    content: "\ea0a";
+	content: "\ea0a";
 }
 .icon-min:before {
-    content: "\ea0b";
+	content: "\ea0b";
 }
 .icon-remove:before {
-    content: "\ea0f";
+	content: "\ea0f";
 }
 .icon-ok:before {
-    content: "\ea10";
+	content: "\ea10";
 }
 
 .gambar-uploaded {
-    margin: 20px 0;
+	margin: 20px 0;
 }
 
 /* TYPEAHEAD */
 
-.tt-query {
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+.input-group .Typeahead-input:not(:first-child) {
+	border-bottom-left-radius: 0 !important;
+	border-top-left-radius: 0 !important;
 }
-
-.tt-hint {
-    color: #ccc;
+.Typeahead-input {
+	float: none !important;
+	border-radius: .25rem !important;
 }
-
-.tt-menu {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-
-    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
-}
-
-.tt-suggestion {
-    padding: 3px 15px;
-}
-
-.tt-suggestion:hover {
-    cursor: pointer;
-    color: #fff;
-    background-color: #0097cf;
-}
-
-.tt-suggestion.tt-cursor {
-    color: #fff;
-    background-color: #0097cf;
+.tt-select {
+	cursor: pointer;
+	cursor: hand;
 }
