@@ -1,3 +1,10 @@
+.footer {
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #333;
+}
+
+
 .normal-text {
 	font-size: 100% !important;
 	font-weight: 400 !important;
