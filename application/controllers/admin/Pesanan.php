@@ -37,6 +37,18 @@ class Pesanan extends CI_Controller {
 			$lead = 'Ini adalah data sementara dari ' . $nama_juragan . ', baiknya jangan disentuh dahulu.';
 		}
 
+
+		$config['base_url'] = site_url('admin/pesanan/lihat/' . $juragan . '/' . $status ); //'http://example.com/index.php/test/page/';
+		$config['total_rows'] = $this->pesanan->ambil($juragan, $status, NULL, $cari="")->num_rows();
+		$config['per_page'] = 30;
+		$config['attributes'] = array('class' => 'page-link', 'data-pjax' => '');
+
+		$this->pagination->initialize($config);
+
+
+
+
+
 		$data = array(
 			'title' => $title_navbar . ' | ' . $nama_juragan,
 			'title_navbar' => $title_navbar,
@@ -46,7 +58,7 @@ class Pesanan extends CI_Controller {
 			'juragan' => $juragan,
 			'status' => $status,
 			'warna' => $warna,
-			'pesanan' => $this->pesanan->ambil($juragan, $status, $hal ="0", $cari="")
+			'pesanan' => $this->pesanan->ambil($juragan, $status, $halaman, $cari="")
 			);
 
 		$this->load->view('admin/header', $data);

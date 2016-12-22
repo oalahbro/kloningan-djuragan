@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pesanan_model extends CI_Model {
 
-	public function ambil($juragan, $status, $hal = 0, $cari = '') {
+	public function ambil($juragan, $status, $hal = NULL, $cari = '') {
 
 		$this->db->select('p.*, j.nama as nama_juragan, j.nama_alias as alias_juragan, j.warna_default, u.nama as cs, u.username' 
 
@@ -37,7 +37,10 @@ class Pesanan_model extends CI_Model {
 			$this->db->order_by('p.status_kirim asc, p.tanggal desc');
 		}
 
-		$this->db->limit(30);
+		if($hal !== NULL) {
+			$this->db->limit(30);
+			$this->db->offset($hal);
+		}
 		return $this->db->get();
 	}
 

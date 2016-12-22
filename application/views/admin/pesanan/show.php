@@ -170,4 +170,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	</table>
 </div>
+<?php echo $this->pagination->create_links(); ?>
 </div>
