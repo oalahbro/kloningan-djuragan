@@ -99,6 +99,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							'autocomplete' => 'off'
 							);
 
+						$form_size = array(
+							'name' => 'size[]',
+							'id' => 'size',
+							'class' => 'form-control size',
+							'placeholder' => 'size',
+							'required' => 'required',
+							'autocomplete' => 'off'
+							);
+
 						$form_jumlah = array(
 							'name' => 'jumlah[]',
 							'id' => 'jumlah',
@@ -110,32 +119,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							'type' => 'number'
 							);
 
-						echo '<div class="form-group">';
-							echo form_label('Kode / Ukuran / Jumlah', 'kode');
-							echo '<div class="row clonedInput berijarakbawah" id="entry1">';
-								// kode
-								echo '<div class="col-sm-4" id="kode">';
-									echo '<div class="input-group"><span class="input-group-addon">Kode</span>';
-										echo form_input($form_kode, set_value('kode[]'));
+						echo '<div>';
+							echo '<div class="form-group" id="ngok">';
+								echo form_label('Kode / Ukuran / Jumlah', 'kode');
+								echo '<div class="row clonedInput berijarakbawah" id="entry1">';
+									// kode
+									echo '<div class="col-sm-4">';
+										echo '<div class="input-group"><span class="input-group-addon">Kode</span>';
+											echo form_input($form_kode, set_value('kode[]'));
+										echo '</div>';
 									echo '</div>';
-								echo '</div>';
 
-								// ukuran
-								echo '<div class="col-sm-4">';
-									echo '<div class="input-group"><span class="input-group-addon">Ukuran</span>';
-										echo form_input($form_kode, set_value('ukuran[]'));
+									// ukuran
+									echo '<div class="col-sm-4">';
+										echo '<div class="input-group"><span class="input-group-addon">Ukuran</span>';
+											echo form_input($form_size, set_value('size[]'));
+										echo '</div>';
 									echo '</div>';
-								echo '</div>';
 
-								// jumlah
-								echo '<div class="col-sm-4">';
-									echo '<div class="input-group"><span class="input-group-addon">Jumlah</span>';
-										echo form_input($form_jumlah, set_value('jumlah[]'));
+									// jumlah
+									echo '<div class="col-sm-4">';
+										echo '<div class="input-group"><span class="input-group-addon">Jumlah</span>';
+											echo form_input($form_jumlah, set_value('jumlah[]'));
+										echo '</div>';
 									echo '</div>';
-								echo '</div>';
 
+								echo '</div>';
+								
 							echo '</div>';
-
 							echo form_button(array('id' => 'btnAdd', 'class' => 'btn btn-success', 'content' => '<i class="icon-plus"></i>'));
 							echo form_button(array('id' => 'btnDel', 'class' => 'btn btn-default', 'content' => '<i class="icon-min"></i>', 'disabled' => 'disabled'));
 						echo '</div>';
