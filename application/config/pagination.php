@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 $config = array(
-	'full_tag_open' 	=> '<nav aria-label="Page navigation"><ul class="pagination">',
+	'full_tag_open' 	=> '<nav aria-label="Page navigation" class="text-xs-center"><ul class="pagination">',
 	'full_tag_close' 	=> '</ul></nav>',
 
 	'cur_tag_open' 		=> '<li class="page-item active"><span class="page-link">',

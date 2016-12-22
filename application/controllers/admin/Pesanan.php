@@ -38,14 +38,13 @@ class Pesanan extends CI_Controller {
 		}
 
 
-		$config['base_url'] = site_url('admin/pesanan/lihat/' . $juragan . '/' . $status ); //'http://example.com/index.php/test/page/';
+		// setting pagination
+		$config['base_url'] = site_url('admin/pesanan/lihat/' . $juragan . '/' . $status );
 		$config['total_rows'] = $this->pesanan->ambil($juragan, $status, NULL, $cari="")->num_rows();
 		$config['per_page'] = 30;
 		$config['attributes'] = array('class' => 'page-link', 'data-pjax' => '');
-
+		$config['reuse_query_string'] = TRUE;
 		$this->pagination->initialize($config);
-
-
 
 
 
