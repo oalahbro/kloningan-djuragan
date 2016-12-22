@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		</div>
 	</div>
-	<footer class="footer">
+	<footer>
 		<div class="container-fluid">
 			<div class="credit">&copy; 2014 - 2016 Pesanan <span class="text-muted">by Toto</span></div>
 		</div>

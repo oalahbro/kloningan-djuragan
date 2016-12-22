@@ -45,7 +45,6 @@ else {
 			<div class="container-fluid p-1">
 				<h3>Pilih Juragan</h3>
 				<?php 
-				// notif
 				foreach ($this->juragan->anbil_data()->result() as $j) { 
 
 					$hsl_ = _RGBToHSL(_HTMLToRGB($j->warna_default));
@@ -56,21 +55,14 @@ else {
 						$btn_class = 'dark';
 					}
 
-
-						$notif_transfer = "<span class='tag tag-pill tag-danger'>".$j->transfer_pending."</span>";
-
-						$notif_kirim = "<span class='tag tag-pill tag-info'>".$j->kirim_pending."</span>";
-
 					$stt = array(
-						'class' => 'btn btn-select btn-'. $btn_class, // btn btn-outline-primary btn-select
+						'class' => 'btn btn-select btn-'. $btn_class,
 						'style' => 'background: ' . $j->warna_default
 						);
 
 					echo anchor('admin/pesanan/lihat/' . $j->nama_alias, $j->nama, $stt);
-					?>
-				<?php }
-
-				 ?>
+				}
+				?>
 			</div>
 		</div>
 		<div class="navbar navbar-full bg-faded navbar-static-top navbar-<?php echo $class_navbar; ?>" style="background-color:<?php echo $warna; ?>;">
@@ -86,10 +78,10 @@ else {
 			<div class="collapse navbar-toggleable-xs" id="menu-navbar-">
 				<ul class="nav navbar-nav">
 					<li class="nav-item dropdown<?php if($active === 'pesanan') {echo ' active';} ?>">
-						<a class="nav-link dropdown-toggle" href="#!" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="nav-link dropdown-toggle" href="#!" id="dropPesanan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Daftar Pesanan
 						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<div class="dropdown-menu" aria-labelledby="dropPesanan">
 							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/semua', 'Semua', array('data-pjax' => '', 'class' => 'dropdown-item')); ?>
 							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/pending', 'Pending', array('data-pjax' => '', 'class' => 'dropdown-item')); ?>
 							<?php echo anchor('admin/pesanan/lihat/' . $juragan . '/terkirim', 'Terkirim', array('data-pjax' => '', 'class' => 'dropdown-item')); ?>
@@ -107,10 +99,10 @@ else {
 
 				<ul class="nav navbar-nav float-sm-right">
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#!" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="nav-link dropdown-toggle" href="#!" id="dropPengaturan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Pengaturan
 						</a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropPengaturan">
 							<?php echo anchor('admin/pengaturan/produk', 'Data Produk', array('class' => 'dropdown-item')); ?>
 							<?php echo anchor('admin/pengaturan/juragan', 'Data Juragan', array('class' => 'dropdown-item')); ?>
 							<div class="dropdown-divider"></div>
@@ -119,10 +111,10 @@ else {
 						</div>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#!" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="nav-link dropdown-toggle" href="#!" id="dropUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<?php echo data_session('nama'); ?>
 						</a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
 							<?php echo anchor('admin/pengaturan/password', 'Ubah Sandi', array('class' => 'dropdown-item')); ?>
 							<div class="dropdown-divider"></div>
 							<?php echo anchor('keluar', 'Keluar', array('class' => 'dropdown-item')); ?>

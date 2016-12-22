@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 
-<div>
+<div class="add-pesanan">
 	<div class="col-sm-8 offset-sm-1">
 		<div class="well">
 			<div class="panel panel-danger">
@@ -160,10 +160,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="clearfix"></div>
 									<div class="btn-group" data-toggle="buttons">
 										<label class="btn btn-info active">
-										<input type="radio" name="options" id="option1" autocomplete="off" checked /> Lunas
+										<input type="radio" name="options" id="option1" checked /> Lunas
 										</label>
 										<label class="btn btn-info">
-											<input type="radio" name="options" id="option2" autocomplete="off" /> DP
+											<input type="radio" name="options" id="option2" /> DP
 										</label>
 									</div>';
 								echo '</div>';
@@ -172,7 +172,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								 // form field bank
 								$form_bank = array(
 									'name' => 'bank',
-									'id' => 'bank',
+									'id' => 'banks',
 									'class' => 'form-control typeahead',
 									'placeholder' => 'bank',
 									'required' => 'required'
@@ -204,7 +204,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								echo '<div class="form-group ">';
 									echo form_label('Harga', 'harga');
 									echo '<div class="input-group">';
-										echo '<span class="input-group-addon" id="basic-addon1">Rp</span>';
+										echo '<span class="input-group-addon" id="addonharga">Rp</span>';
 										echo form_input($form_harga, set_value('harga'));
 									echo '</div>';
 								echo '</div>';
@@ -223,7 +223,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								echo '<div class="form-group ">';
 									echo form_label('Ongkir', 'ongkir');
 									echo '<div class="input-group">';
-										echo '<span class="input-group-addon" id="basic-addon1">Rp</span>';
+										echo '<span class="input-group-addon" id="addonongkir">Rp</span>';
 										echo form_input($form_ongkir, set_value('ongkir'));
 									echo '</div>';
 								echo '</div>';
@@ -243,7 +243,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								echo '<div class="form-group ">';
 									echo form_label('Transfer', 'transfer');
 									echo '<div class="input-group">';
-										echo '<span class="input-group-addon" id="basic-addon1">Rp</span>';
+										echo '<span class="input-group-addon" id="addontransfer">Rp</span>';
 										echo form_input($form_transfer, set_value('transfer'));
 									echo '</div>';
 								echo '</div>';
@@ -277,7 +277,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						
 						<!-- custom gambar -->
 						<div class="form-group">
-							<label for="custom gambar">Custom Gambar</label>
+							<label for="customgambar">Custom Gambar</label>
 							<div class="tombol-picker">
 								<button type="button" class="btn btn-info" id="DOCS_IMAGES">Pilih / Unggah Gambar</button>
 							</div>
@@ -296,6 +296,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+<div class="clearfix"></div>
 
 <script type="text/javascript" src="<?php echo base_url('assets/js/clone-form.js'); ?>"></script>
 <script type="text/javascript">

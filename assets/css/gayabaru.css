@@ -1,8 +1,8 @@
-.footer {
+footer {
   height: 60px;
   background-color: #333;
 }
-.footer .credit {
+footer .credit {
 	color: #eee;
 	padding: 20px 0 10px 0;
 }
@@ -13,6 +13,7 @@
 
 .btn-select {
 	margin-bottom: 5px;
+	margin-right: 5px;
 }
 #navbar-header {
 	background: white;
@@ -57,6 +58,9 @@ fieldset[disabled] .btn-clean.active {
 }
 .berijarakbawah {
 	margin-bottom: 10px;
+}
+#content {
+	margin-bottom: 90px;
 }
 
 /**
