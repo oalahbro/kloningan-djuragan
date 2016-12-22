@@ -1,10 +1,11 @@
 .footer {
-  /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #333;
 }
-
-
+.footer .credit {
+	color: #eee;
+	padding: 20px 0 10px 0;
+}
 .normal-text {
 	font-size: 100% !important;
 	font-weight: 400 !important;
