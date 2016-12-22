@@ -599,14 +599,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				selectable: 'tt-select',
 				menu: 'dropdown-menu',
 				suggestion: 'dropdown-item'
-			}
+			},
+			hint: true,
+			highlight: true,
+			minLength: 1,
 		}, {
 			name: 'bank',
 			display: 'bank',
 			source: databank,
-			hint: true,
-			highlight: true,
-			minLength: 1,
+			limit: 7,
 			templates: {
 				suggestion: function (data) {
 					return '<div>' + data.bank + '</div>';
@@ -622,14 +623,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					selectable: 'tt-select',
 					menu: 'dropdown-menu',
 					suggestion: 'dropdown-item'
-				}
+				},
+				hint: true,
+				highlight: true,
+				minLength: 1
 			}, {
 				name: $name,
 				display: 'kode',
 				source: dataproduk,
-				hint: true,
-				highlight: true,
-				minLength: 1,
+				limit: 8,
 				templates: {
 					suggestion: function (data) {
 						return '<div><strong>' + data.kode + '</strong><small class="float-xs-right"><em>Rp ' + data.harga.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</em></small></div>';
