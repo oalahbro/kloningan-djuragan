@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="col-sm-8 offset-sm-1">
 		<div class="well">
 			<div class="panel panel-danger">
+			<?php echo validation_errors(); ?>
 				<?php 
 				$attr = array(
 					'class' => 'form-new'
@@ -443,9 +444,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				newElem.find('.number_phone').val('');
 
 				$('#phone' + num).after(newElem);
-				$('#ID' + newNum + '_title').focus();
 
 				$('#btnDel_2').attr('disabled', false).show('slow');
+				$('#phone' + newNum + ' .number_phone').focus();
 
 				if (newNum == maxNum)
 					$('#btnAdd_2').attr('disabled', true).hide('slow');
@@ -634,7 +635,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				limit: 8,
 				templates: {
 					suggestion: function (data) {
-						return '<div><strong>' + data.kode + '</strong><small class="float-xs-right"><em>Rp ' + data.harga.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</em></small></div>';
+						return '<div>' + data.kode + '<small class="float-xs-right"><em>Rp ' + data.harga.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</em></small></div>';
 					}
 				}
 			});
