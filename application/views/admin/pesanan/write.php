@@ -16,7 +16,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<?php echo validation_errors(); ?>
 				<?php 
 				$attr = array(
-					'class' => 'form-new'
+					'class' => 'form-new',
+					'data-toggle' => 'validator'
 					);
 
 				$hide = array(
@@ -45,14 +46,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							echo '</div>';
 						echo '</div>';
 
-
 						// form field hp
 						$form_hp = array(
 							'name' => 'hp[]',
 							'id' => 'hp',
 							'class' => 'form-control number_phone',
 							'placeholder' => '08xxxxxxxxx',
-							'required' => 'required'
+							'required' => 'required',
+							'pattern' => '^(0)[0-9]{9,11}$'
 							);
 
 						echo '<div class="form-group ">';
@@ -117,7 +118,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							'required' => 'required',
 							'autocomplete' => 'off',
 							'min' => 1,
-							'type' => 'number'
+							'type' => 'number',
+							'pattern' => '^\d+$'
 							);
 
 						echo '<div>';
@@ -187,7 +189,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							 echo '</div>';
 
 						echo '</div>';
-						
+
 
 						echo '<div class="row">';
 							echo '<div class="col-sm-4">';
@@ -198,8 +200,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									'class' => 'form-control harga calc',
 									'placeholder' => '280000',
 									'required' => 'required',
-									'type' => 'number',
-									'min' => 0
+									'pattern' => '^(?:[1-9]\d*|0)$'
 									);
 
 								echo '<div class="form-group ">';
@@ -217,8 +218,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									'class' => 'form-control ongkir calc',
 									'placeholder' => '20000',
 									'required' => 'required',
-									'type' => 'number',
-									'min' => 0
+									'pattern' => '^(?:[1-9]\d*|0)$'
 									);
 
 								echo '<div class="form-group ">';
@@ -237,8 +237,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									'class' => 'form-control transfer',
 									'placeholder' => '20000',
 									'required' => 'required',
-									'type' => 'number',
-									'min' => 0
+									'pattern' => '^(?:[1-9]\d*|0)$'
 									);
 
 								echo '<div class="form-group ">';
@@ -408,6 +407,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 	</script>
+
+	<script type="text/javascript" src="<?php echo base_url('assets/js/validator.js'); ?>"></script>	
 
 	<script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
 
