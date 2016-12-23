@@ -259,7 +259,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							'id' => 'keterangan',
 							'class' => 'form-control',
 							'placeholder' => 'keterangan -opsional-',
-							'required' => 'required',
 							'rows' => 5
 							);
 						
