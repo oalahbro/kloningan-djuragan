@@ -213,3 +213,6 @@ fieldset[disabled] .btn-clean.active {
 	cursor: pointer;
 	cursor: hand;
 }
+.tt-open {
+	width: 100%;
+}
