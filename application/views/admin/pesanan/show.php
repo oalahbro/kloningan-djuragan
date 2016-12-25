@@ -58,6 +58,54 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$button_transfer = '<div class="text-center btn-margin "><a href="#" class="btn btn-success btn-xs disabled btn-block"><i class="glyphicon glyphicon-ok"></i> Masuk</a></div>';
 					}
 
+
+					$resi = '';
+					if( ! empty($key->kurir_resi)) {
+						$resi_ = explode(',', $key->kurir_resi);
+
+						
+						if( empty($resi_[2])) {
+							$resi_d = nice_date($key->tanggal, 'd-M-Y');
+						}
+						else {
+							$resi_d = nice_date($resi_d[3], 'd-M-Y');
+						}
+
+						$resi_p = '';
+						if( ! empty($resi_[1])) {
+							$resi_p = $resi_[1];
+						}
+
+						$resi = '<strong>' . $resi_[0] . '</strong><br/>';
+						$resi .= '<em>' . $resi_[1] . '<br/>';
+						$resi .= '<small>terkirim : '. $resi_d .'</small></em>';
+					}
+
+					$gambar = '';
+					if( ! empty($key->gambar)) {
+						$gmb = explode(',', $key->gambar);
+						$gci = 1;
+
+						if(count($gmb) > 1) {
+							$gambar = '<div class="btn-group">';
+								$gambar .= '<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Custom Gambar</button>';
+								$gambar .= '<div class="dropdown-menu">';
+									foreach ($gmb as $src) {
+										$gambar .= '<a href='.$src.' class="dropdown-item" target="_blank">Gambar '.$gci++.'</a>';
+									}
+								$gambar .= '</div>';
+							$gambar .= '</div>';
+						}
+						else {
+							$gambar .= '<a href='.$gmb[0].' class="btn btn-warning" target="_blank">Custom Gambar</a>';
+						}
+
+					}
+
+
+
+
+
 				?>
 
 					<tr<?php echo $status_class; ?>>
@@ -143,10 +191,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							else {
 								$transfer .= '<div>transfer : <span class="tag tag-danger normal-text">' . rupiah($trf[0]) . '</span></div>';
 							}
-
-
-
-
 							?>
 							<div style="margin-bottom: 5px;">
 								<button type="button" class="btn btn-secondary btn-sm btn-block btn-clean" disabled><?php echo $key->bank; ?></button>
@@ -159,8 +203,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<?php echo $transfer; ?>
 							</div>
 						</td>
-						<td>Keterangan</td>
-						<td>Resi</td>
+						<td><?php echo $key->keterangan; ?><br/><?php echo $gambar; ?></td>
+						<td><?php echo $resi; ?></td>
 					</tr>
 					
 				<?php }
