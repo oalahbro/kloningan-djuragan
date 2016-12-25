@@ -360,6 +360,11 @@ class Upgrade extends CI_Controller {
 				$keterangan =  $v->keterangan;
 			}
 
+			$kurir = NULL;
+			if( ! empty($v->resi)) {
+				$kurir = reduce_multiples($v->kurir . ',' . $v->resi, ",", TRUE);
+			}
+
 			$this->db->insert('pesanan', array(
 				'juragan_id' => $v->user_id,
 				'pengguna_id' => 1,
@@ -376,7 +381,7 @@ class Upgrade extends CI_Controller {
 				'status_transfer' => $status_transfer,
 				'status_biaya_transfer' => $status_biaya_transfer,
 				'bank' => $v->bank,
-				'kurir_resi' => reduce_multiples($v->kurir . ',' . $v->resi, ",", TRUE),
+				'kurir_resi' => $kurir,
 				'cek_kirim' => $cek_kirim,
 				'cek_transfer' => $cek_transfer,
 				'gambar' => $v->customgambar,
