@@ -31,7 +31,7 @@ class Pesanan_model extends CI_Model {
 
 		
 		if($status !== 'terkirim') {
-			$this->db->order_by('p.status_biaya_transfer asc, p.status_kirim asc, p.tanggal desc');
+			$this->db->order_by('p.status_transfer asc, p.status_kirim asc, p.tanggal desc');
 		}
 		elseif($status === 'terkirim') {
 			$this->db->order_by('p.status_kirim asc, p.tanggal desc');
