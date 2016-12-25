@@ -284,11 +284,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div id="result" class="list-group gambar-uploaded"></div>
 						</div>
 
-
-
 					</div>
 					<div class="panel-footer">
 						<button type="submit" class="btn btn-primary"> Simpan </button>
+						<?php echo form_input(array('type' => 'submit', 'name' => 'save_draft', 'class' => 'btn btn-warning'), 'Simpan sebagai draft'); ?>
 					</div>
 				</form>
 			</div>
@@ -297,16 +296,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 <div class="clearfix"></div>
 
-<script type="text/javascript" src="<?php echo base_url('assets/js/clone-form.js'); ?>"></script>
-<script type="text/javascript">
+	<script type="text/javascript">
 
-	$(document).ready(function(){
-		$('.calc').bind("change keyup",function(){
-			$('.transfer').val( parseInt($('.harga').val()) + parseInt($('.ongkir').val()));
+		$(document).ready(function(){
+			$('.calc').bind("change keyup",function(){
+				$('.transfer').val( parseInt($('.harga').val()) + parseInt($('.ongkir').val()));
+			});
 		});
-	});
 
-</script>
+	</script>
 
 	<!-- The Google API Loader script. -->
 	<script type="text/javascript">

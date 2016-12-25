@@ -67,24 +67,76 @@ class Pesanan extends CI_Controller {
 
 	public function tulis($juragan = NULL) {
 
-		$nama_juragan = $this->juragan->ambil_nama($juragan);
-		$warna = $this->juragan->ambil_warna($juragan);
-		$title_navbar = 'Semua Pesanan';
-		$lead = '';
+		$this->form_validation->set_rules('nama', 'nama', 'required');
+		$this->form_validation->set_rules('hp[]', 'hp', 'required|regex_match[/^\d{10,12}$/]');
+		$this->form_validation->set_rules('alamat', 'alamat', 'required');
+		$this->form_validation->set_rules('kode[]', 'kode', 'required');
+		$this->form_validation->set_rules('size[]', 'size', 'required');
+		$this->form_validation->set_rules('jumlah[]', 'jumlah', 'required');
+		$this->form_validation->set_rules('bank', 'bank', 'required');
+		$this->form_validation->set_rules('harga', 'harga', 'required');
+		$this->form_validation->set_rules('ongkir', 'ongkir', 'required');
+		$this->form_validation->set_rules('transfer', 'transfer', 'required');
+		$this->form_validation->set_rules('keterangan', 'keterangan', '');
+		
+		
+		if($this->form_validation->run() === FALSE) {
+			$nama_juragan = $this->juragan->ambil_nama($juragan);
+			$warna = $this->juragan->ambil_warna($juragan);
+			$title_navbar = 'Semua Pesanan';
+			$lead = '';
 
-		$data = array(
-			'title' => 'Tulis data Pesanan | ' . $nama_juragan,
-			'title_navbar' => $title_navbar,
-			'lead' => $lead,
-			'active' => 'tulis',
-			'nama_juragan' => $nama_juragan,
-			'juragan' => $juragan,
-			'warna' => $warna
+			$data = array(
+				'title' => 'Tulis data Pesanan | ' . $nama_juragan,
+				'title_navbar' => $title_navbar,
+				'lead' => $lead,
+				'active' => 'tulis',
+				'nama_juragan' => $nama_juragan,
+				'juragan' => $juragan,
+				'warna' => $warna
+				);
+
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/pesanan/write', $data);
+			$this->load->view('admin/footer', $data);
+		}
+		else {
+			$nama = $this->input->post('nama');
+			$hp = $this->input->post('hp[]');
+			$alamat = $this->input->post('alamat');
+			$kode = $this->input->post('kode[]');
+			$size = $this->input->post('size[]');
+			$jumlah = $this->input->post('jumlah[]');
+			$bank = $this->input->post('bank');
+			$harga = $this->input->post('harga');
+			$ongkir = $this->input->post('ongkir');
+			$transfer = $this->input->post('transfer');
+			$keterangan = $this->input->post('keterangan');
+
+			$pesanan['kode'] = $kode;
+			$pesanan['jumlah'] = $jumlah;
+			$pesanan['size'] = $size;
+
+
+			print('<pre>');
+			print_r(
+				array(
+					'nama' => $nama,
+					'hp' => $hp,
+					'alamat' => $alamat,
+					'pesanan' => $pesanan,
+					'bank' => $bank,
+					'harga' => $harga,
+					'ongkir' => $ongkir,
+					'transfer' => $transfer,
+					'keterangan' => $keterangan
+
+				)
 			);
+			print('</pre>');
+		}
 
-		$this->load->view('admin/header', $data);
-		$this->load->view('admin/pesanan/write', $data);
-		$this->load->view('admin/footer', $data);
+		
 	
 	}
 }

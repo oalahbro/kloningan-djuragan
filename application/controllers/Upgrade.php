@@ -171,7 +171,7 @@ class Upgrade extends CI_Controller {
 			// hapus tabel count_order
 			// $this->dbforge->drop_table('count_order',TRUE);
 
-			//redirect('upgrade/step4');
+			redirect('upgrade/step4');
 		}
 	}
 
@@ -286,94 +286,116 @@ class Upgrade extends CI_Controller {
 				),
 			'uid' => array(
 				'type' => 'VARCHAR',
-				'constraint' => 40,
+				'constraint' => 16,
 				'unique' => TRUE
 				)
 			);
 		$this->dbforge->add_field($fields)
 					  ->add_key('id', TRUE);
 
-		if($this->dbforge->create_table('pesanan', FALSE, array('ENGINE' => 'InnoDB'))) {			
-
-			$this->db->where('del', NULL);
-			$q = $this->db->get('order');
-			$i = 0;
-
-			foreach ($q->result() as $v) {
-
-				$cek_kirim = $v->cek_kirim;
-				if(empty($v->cek_kirim)) {
-					$cek_kirim = NULL;
-				}
-				$cek_transfer = $v->cek_transfer;
-				if(empty($v->cek_transfer)) {
-					$cek_transfer = NULL;
-				}
-
-				if($v->status_transfer === 'Masuk') {
-					$status_transfer = '1';
-				}
-				else {
-					$status_transfer = '0';
-				}
-
-				if($v->status === 'Lunas') {
-					$status_biaya_transfer = 1;
-				}
-				else {
-					$status_biaya_transfer = 0;
-				}
-
-				if($v->barang === 'Terkirim') {
-					$status_kirim = '1';
-				}
-				else {
-					$status_kirim = '0';
-				}
-
-				
-				if($v->member_id === '0') {
-					$member_id = '';
-
-				}
-				else {
-					$member_id = $v->member_id;	
-				}
-
-				if( empty($v->keterangan) ) {
-					$keterangan = NULL;
-				}
-				else {
-					$keterangan =  $v->keterangan;
-				}
-
-				$this->db->insert('pesanan', array(
-					'id' => $v->id,
-					'juragan_id' => $v->user_id,
-					'pengguna_id' => 1,
-					'member_id' => $v->member_id,
-					'tanggal' => $v->tanggal_order,
-					'nama' => $v->nama,
-					'alamat' => $v->alamat,
-					'hp' => $v->hp,
-					'pesanan' => $v->pesanan,
-					'total_biaya' => $v->harga,
-					'total_ongkir' => $v->ongkir . ',' . $v->ongkir_fix,
-					'total_transfer' => $v->transfer,
-					'status_kirim' => $status_kirim,
-					'status_transfer' => $status_transfer,
-					'status_biaya_transfer' => $status_biaya_transfer,
-					'bank' => $v->bank,
-					'kurir_resi' => $v->kurir . ',' . $v->resi,
-					'cek_kirim' => $cek_kirim,
-					'cek_transfer' => $cek_transfer,
-					'gambar' => $v->customgambar,
-					'keterangan' => $keterangan,
-					'uid' => do_hash($v->id . time())
-					));
-			}
+		if($this->dbforge->create_table('pesanan', FALSE, array('ENGINE' => 'InnoDB'))) {
 
 			redirect('upgrade/step5');
 		}
+	}
+
+	public function step5($page = 0) {
+		$this->db->where('del', NULL);
+		$c = $this->db->get('order');
+
+		$jumlah = $c->num_rows();
+		$pageUpdate = 0;
+
+		$this->db->where('del', NULL);
+		$this->db->limit(150);
+		$this->db->offset($page);
+		$this->db->order_by('id', 'asc');
+		$q = $this->db->get('order');
+
+
+		foreach ($q->result() as $v) {
+
+			$cek_kirim = $v->cek_kirim;
+			if(empty($v->cek_kirim)) {
+				$cek_kirim = NULL;
+			}
+			$cek_transfer = $v->cek_transfer;
+			if(empty($v->cek_transfer)) {
+				$cek_transfer = NULL;
+			}
+
+			if($v->status_transfer === 'Masuk') {
+				$status_transfer = '1';
+			}
+			else {
+				$status_transfer = '0';
+			}
+
+			if($v->status === 'Lunas') {
+				$status_biaya_transfer = 1;
+			}
+			else {
+				$status_biaya_transfer = 0;
+			}
+
+			if($v->barang === 'Terkirim') {
+				$status_kirim = '1';
+			}
+			else {
+				$status_kirim = '0';
+			}
+
+			if($v->member_id === '0') {
+				$member_id = '';
+
+			}
+			else {
+				$member_id = $v->member_id;	
+			}
+
+			if( empty($v->keterangan) ) {
+				$keterangan = NULL;
+			}
+			else {
+				$keterangan =  $v->keterangan;
+			}
+
+			$this->db->insert('pesanan', array(
+				'juragan_id' => $v->user_id,
+				'pengguna_id' => 1,
+				'member_id' => $v->member_id,
+				'tanggal' => $v->tanggal_order,
+				'nama' => $v->nama,
+				'alamat' => $v->alamat,
+				'hp' => $v->hp,
+				'pesanan' => $v->pesanan,
+				'total_biaya' => $v->harga,
+				'total_ongkir' => reduce_multiples($v->ongkir . ',' . $v->ongkir_fix, ",", TRUE),
+				'total_transfer' => $v->transfer,
+				'status_kirim' => $status_kirim,
+				'status_transfer' => $status_transfer,
+				'status_biaya_transfer' => $status_biaya_transfer,
+				'bank' => $v->bank,
+				'kurir_resi' => reduce_multiples($v->kurir . ',' . $v->resi, ",", TRUE),
+				'cek_kirim' => $cek_kirim,
+				'cek_transfer' => $cek_transfer,
+				'gambar' => $v->customgambar,
+				'keterangan' => $keterangan,
+				'uid' => url_title($v->user_id . $v->id . random_string('alnum', 16))
+				));
+		}
+
+		$upup = $page + 150;
+		if($upup > $jumlah) {
+			// redirect('upgrade/step6');
+			echo 'updated done 100%';
+		}
+		else {
+			echo 'updated ' . $upup . ' / ' . $jumlah . ' ( ' . round(($upup/$jumlah)*100) . '% )';
+			header( "refresh:1;url=" . site_url('upgrade/step5/'. $upup . '?' . random_string('alnum', 16) ) );
+		}
+		
+
+
 	}
 }
