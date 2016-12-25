@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div>
 	<div class="container-fluid">
 		<table class="table table-hover table-bordered">
-			<thead class="thead-default">
+			<thead>
 				<tr>
 					<th>#</th>
 					<th>Juragan</th>
