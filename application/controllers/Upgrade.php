@@ -366,6 +366,7 @@ class Upgrade extends CI_Controller {
 			}
 
 			$this->db->insert('pesanan', array(
+				'id' => $v->id,
 				'juragan_id' => $v->user_id,
 				'pengguna_id' => 1,
 				'member_id' => $v->member_id,
