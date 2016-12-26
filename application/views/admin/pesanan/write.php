@@ -141,21 +141,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									echo '</div>';
 
 									// jumlah
-									echo '<div class="col-sm-4">';
+									echo '<div class="col-sm-3 col-xs-11">';
 										echo '<div class="input-group"><span class="input-group-addon">Jumlah</span>';
 											echo form_input($form_jumlah, set_value('jumlah[]'));
 										echo '</div>';
 									echo '</div>';
 
+									//
+									echo '<div class="col-xs-1">';
+										echo form_button(array('class' => 'btn btn-success btnAdd', 'content' => '<i class="icon-plus"></i>'));
+									echo '</div>';
 								echo '</div>';
-								
+								echo '<div id="form_p_clone"></div>';
 							echo '</div>';
-							echo form_button(array('id' => 'btnAdd', 'class' => 'btn btn-success', 'content' => '<i class="icon-plus"></i>'));
-							echo form_button(array('id' => 'btnDel', 'class' => 'btn btn-default', 'content' => '<i class="icon-min"></i>', 'disabled' => 'disabled'));
 						echo '</div>';
 
 
-						echo '<div class="row">';
+						echo '<div class="row" id="status_f">';
 							echo '<div class="col-sm-3">';
 								// status pembayaran
 								echo '<div class="form-group ">';
@@ -295,6 +297,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 <div class="clearfix"></div>
+<?php 
+echo '<div class="row berijarakbawah hide" id="templatePesanan">';
+	// kode
+	echo '<div class="col-sm-4">';
+		echo '<div class="input-group"><span class="input-group-addon">Kode</span>';
+			echo form_input($form_kode, set_value('kode[]'));
+		echo '</div>';
+	echo '</div>';
+
+	// ukuran
+	echo '<div class="col-sm-4">';
+		echo '<div class="input-group"><span class="input-group-addon">Ukuran</span>';
+			echo form_input($form_size, set_value('size[]'));
+		echo '</div>';
+	echo '</div>';
+
+	// jumlah
+	echo '<div class="col-sm-3">';
+		echo '<div class="input-group"><span class="input-group-addon">Jumlah</span>';
+			echo form_input($form_jumlah, set_value('jumlah[]'));
+		echo '</div>';
+	echo '</div>';
+
+	// remove button
+	echo '<div class="col-sm-1">';
+		echo form_button(array('class' => 'btn btn-default btnDel', 'content' => '<i class="icon-min"></i>'));
+	echo '</div>';
+
+echo '</div>';
+?>
 
 	<script type="text/javascript">
 
@@ -405,7 +437,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 	</script>
-	
+
 	<script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
 
 	<script type="text/javascript">
@@ -428,143 +460,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 
 		}, false);
-
-
-		/////////// CLONER
-		$(function () {
-			$('#btnAdd_2').click(function () {
-				var num     = $('.clonedInput_2').length,
-				newNum  = new Number(num + 1), 
-				maxNum  = 2,
-				newElem = $('#phone' + num).clone().attr('id', 'phone' + newNum).fadeIn('slow');
-
-				newElem.find('.number_phone').val('');
-
-				$('#phone' + num).after(newElem);
-
-				$('#btnDel_2').attr('disabled', false).show('slow');
-				$('#phone' + newNum + ' .number_phone').focus();
-
-				if (newNum == maxNum)
-					$('#btnAdd_2').attr('disabled', true).hide('slow');
-			});
-
-			$('#btnDel_2').click(function () {
-				swal({
-					title: "Kamu yakin akan menghapus?",
-					text: "Kolom HP 2 akan dihapus dan tidak dapat dibatalkan",
-					type: "warning",
-					animation: "slide-from-top",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "Yup, hapus!",
-					cancelButtonText: "Tidak",
-					closeOnConfirm: false,
-					closeOnCancel: true
-				},
-				function(isConfirm){
-					if (isConfirm) {
-						var num = $('.clonedInput_2').length;
-						$('#phone' + num).slideUp('slow', function () {
-							$(this).remove();
-							if (num -1 === 1)
-								$('#btnDel_2').attr('disabled', true).hide('slow');
-							$('#btnAdd_2').attr('disabled', false).show('slow');
-						});
-
-						swal({
-							title: "Dihapus!",
-							text: "Kolom HP 2 sudah dihapus",
-							timer: 1100,
-							type: "success",
-							showConfirmButton: false
-						});
-					}
-				});
-			});
-			$('#btnAdd_2').attr('disabled', false).show('slow');
-			$('#btnDel_2').attr('disabled', true).hide('slow');
-
-
-			///////////////////// PESANAN /////////////////////
-
-			$('#btnAdd').click(function () {
-
-				var n = $('.update').length,
-					nn = new Number(n + 2);
-
-					html = '<div class="row clonedInput berijarakbawah" id="entry' + nn + '">';
-						html += '<div class="col-sm-4 update">';
-							html += '<div class="input-group">';
-								html += '<span class="input-group-addon">Kode</span>';
-								html += '<input type="text" name="kode[]" value="" id="kode" class="form-control kode typeahead" placeholder="kode" required="required" autocomplete="off" />';
-							html += '</div>';
-						html += '</div>';
-						html += '<div class="col-sm-4">';
-							html += '<div class="input-group">';
-								html += '<span class="input-group-addon">Ukuran</span>';
-								html += '<input type="text" name="size[]" value="" id="size" class="form-control size" placeholder="size" required="required" autocomplete="off" />';
-							html += '</div>';
-						html += '</div>';
-
-						html += '<div class="col-sm-4">';
-							html += '<div class="input-group">';
-								html += '<span class="input-group-addon">Jumlah</span>';
-								html += '<input type="number" name="jumlah[]" value="" id="jumlah" class="form-control jumlah" placeholder="jumlah" required="required" autocomplete="off" min="1" />';
-							html += '</div>';
-						html += '</div>';
-					html += '</div>';
-
-				$('#btnDel').attr('disabled', false).show('slow');
-				$('#ngok').append(html).show('slow');
-				
-
-				createTypeahead('#entry' + nn + ' .typeahead', 'aa'+nn);
-
-				$('#entry' + nn + ' .kode').focus();
-			});
-
-			$('#btnDel').click(function () {
-				swal({
-					title: "Kamu yakin akan menghapus?",
-					text: "Kolom pesanan terakhir akan dihapus dan tidak dapat dibatalkan",
-					type: "warning",
-					animation: "slide-from-top",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "Yup, hapus!",
-					cancelButtonText: "Tidak",
-					closeOnConfirm: false,
-					closeOnCancel: true
-				},
-				function(isConfirm){
-					if (isConfirm) {
-						var num = $('.clonedInput').length;
-						$('#entry' + num).slideUp('slow', function () {
-							$(this).remove();
-
-							if (num -1 === 1)
-								$('#btnDel').attr('disabled', true).hide('slow');
-
-							$('#btnAdd').attr('disabled', false).show('slow');
-						});
-
-						swal({
-							title: "Dihapus!",
-							text: "Kolom pesanan terakhir sudah dihapus",
-							timer: 1100,
-							type: "success",
-							showConfirmButton: false
-						});
-					}
-				});
-			});
-
-			$('#btnAdd').attr('disabled', false).show('slow');
-			$('#btnDel').attr('disabled', true).hide('slow');
-
-			createTypeahead( '#entry1 .typeahead', 'name');
-		});
+		
 
 		////// TYPEAHEAD
 
@@ -622,7 +518,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					menu: 'dropdown-menu',
 					suggestion: 'dropdown-item'
 				},
-				hint: true,
+				hint: false,
 				highlight: true,
 				minLength: 1
 			}, {
@@ -637,5 +533,59 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				}
 			});
 		}
+
+
+		/** CLONING */
+		$(document).ready(function() {
+			createTypeahead('[name="kode[]"]', 'kode1');
+
+			var pesananIndex = 0;
+			$('.form-new').on('click', '.btnAdd', function() {
+				pesananIndex++;
+				var $template = $('#templatePesanan'),
+					$clone    = $template
+										.clone()
+										.removeClass('hide')
+										.removeAttr('id')
+										.attr('data-pesanan-index', pesananIndex)
+										.insertBefore($('#form_p_clone'));
+				$clone.end();
+
+				createTypeahead('[data-pesanan-index="'+ pesananIndex +'"] [name="kode[]"]', 'kode'+ pesananIndex);
+
+			});
+
+			$('.form-new').on('click', '.btnDel', function() {
+				var $row  = $(this).parents('.berijarakbawah');
+
+				swal({
+					title: "Kamu yakin akan menghapus?",
+					text: "Kolom HP 2 akan dihapus dan tidak dapat dibatalkan",
+					type: "warning",
+					animation: "slide-from-top",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Yup, hapus!",
+					cancelButtonText: "Tidak",
+					closeOnConfirm: false,
+					closeOnCancel: true
+				},
+				function(isConfirm){
+					if (isConfirm) {
+
+						$row.slideUp("slow", function() { $(this).remove(); } );
+
+						swal({
+							title: "Dihapus!",
+							text: "Kolom HP 2 sudah dihapus",
+							timer: 1100,
+							type: "success",
+							showConfirmButton: false
+						});
+					}
+				});
+				
+			});
+		});
 
 	</script>
