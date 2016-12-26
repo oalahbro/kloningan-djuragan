@@ -405,9 +405,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 	</script>
-
-	<script type="text/javascript" src="<?php echo base_url('assets/js/validator.js'); ?>"></script>	
-
+	
 	<script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
 
 	<script type="text/javascript">
