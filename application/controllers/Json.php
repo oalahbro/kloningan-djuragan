@@ -70,4 +70,119 @@ class Json extends CI_Controller {
 	    exit;
 	}
 
+	public function pesanan() {
+
+		$q = $this->db->select('p.*, u.nama_alias as username, u.nama as juragan')
+					  ->from('pesanan p')
+					  ->join('juragan u', 'p.juragan_id=u.id')
+					  ->limit(30)
+					  ->order_by('p.id', 'desc')
+					  ->get();
+
+
+		$a = array();
+		if($q->num_rows() > 0) {
+			foreach ($q->result() as $r) {
+				// pesanan
+				$pesanan = explode('#', strtoupper($r->pesanan));
+				$pesan = array();
+				foreach ($pesanan as $key) {
+					$p2 = explode(',', $key);
+
+					$pesan[] = array(
+						'kode' => $p2[0],
+						'size' => $p2[1],
+						'jumlah' => $p2[2]
+						);
+				}
+
+				// hp 
+				$hp = array();
+				$ph = explode(',', $r->hp);
+				foreach ($ph as $v) {
+					$hp[] = $v;
+				}
+
+				// gambar
+				$gambar = array();
+				$gmb = explode(',', $r->gambar);
+				foreach ($gmb as $img) {
+					$gambar[] = $img;
+				}
+
+				// kurir & resi
+				$kurir = NULL;
+				$resi = NULL;
+				$tanggal_kirim = NULL;
+
+				if($r->kurir_resi !== NULL) {
+					$kr = explode(',', $r->kurir_resi);
+					
+					if(isset($kr[0])) {
+						$kurir = $kr[0];
+					}
+					if(isset($kr[1])) {
+						$resi = $kr[1];
+					}
+					if(isset($kr[2])) {
+						$tanggal_kirim = $kr[2];
+					}
+				}
+
+				$a['row'][] = 
+					array(
+						'id' => $r->id,
+						'tanggal' => array(
+							'submit' => $r->tanggal,
+							'cek_kirim' => $r->cek_kirim,
+							'cek_transfer' => $r->cek_transfer
+							),
+						'member_id' => $r->member_id,
+						'pemesan' => array(
+							'nama' => strtoupper($r->nama),
+							'alamat' => strtoupper($r->alamat),
+							'hp' => $hp
+							),
+						'pesanan' => array('produk' => $pesan, 'gambar' =>$gambar),
+						'biaya' => array(
+							'harga' => $r->total_biaya,
+							'ongkir' => $r->total_ongkir,
+							'ongkir_fix' => $r->total_ongkir,
+							'transfer1' => $r->total_transfer,
+							'transfer2' => $r->total_transfer,
+							'bank' => strtoupper($r->bank)
+							),
+						'status' => array(
+							'transfer' => $r->status_transfer,
+							'biaya_transfer' => $r->status_biaya_transfer
+							),
+						'pengiriman' => array(
+							'status' => $r->status_kirim,
+							'kurir' => $kurir,
+							'resi' => $resi,
+							'tanggal' => $tanggal_kirim
+							),
+						'juragan' => array(
+							'id' => $r->juragan_id,
+							'nama' => $r->juragan,
+							'username' => $r->username
+							),
+						'uid' => $r->uid
+						);
+			}
+			$a['pagination'] = array(
+					'limit' => 30,
+					'total' => $q->num_rows()
+					);
+		}
+
+		$this->output
+	         ->set_status_header(200)
+	         ->set_content_type('application/json', 'utf-8')
+	         ->set_output(json_encode($a, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+	         ->_display();
+	    exit;
+
+	}
+
 }
