@@ -39,4 +39,8 @@ class Auth extends CI_Controller {
 	public function register() {
 	}
 
+	// halaman lupa sandi
+	public function forgot() {
+	}
+
 }
