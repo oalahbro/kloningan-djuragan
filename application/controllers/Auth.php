@@ -15,7 +15,7 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	// halaman login
+	// halaman masuk system
 	public function login() {
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');

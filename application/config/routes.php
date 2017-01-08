@@ -53,7 +53,7 @@ $route['default_controller'] = 'auth/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['login'] = 'auth/login';
+$route['masuk'] = 'auth/login';
 
 $route['admin'] = 'admin/pesanan/lihat';
 $route['admin/pesanan'] = 'admin/pesanan/lihat';
