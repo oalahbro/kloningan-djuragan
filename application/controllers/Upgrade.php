@@ -235,7 +235,7 @@ class Upgrade extends CI_Controller {
 				),
 			'total_transfer' => array(
 				'type' => 'VARCHAR',
-				'constraint' => 11,
+				'constraint' => 22,
 				'default' => '0',
 				'null' => FALSE
 				),
@@ -270,8 +270,9 @@ class Upgrade extends CI_Controller {
 				'null' => TRUE
 				),
 			'cek_transfer' => array(
-				'type' => 'DATETIME',
+				'type' => 'VARCHAR',
 				'default' => NULL,
+				'constraint' => 39,
 				'null' => TRUE
 				),
 			'gambar' => array(
@@ -306,8 +307,10 @@ class Upgrade extends CI_Controller {
 		$jumlah = $c->num_rows();
 		$pageUpdate = 0;
 
+		$limit = 120;
+
 		$this->db->where('del', NULL);
-		$this->db->limit(150);
+		$this->db->limit($limit);
 		$this->db->offset($page);
 		$this->db->order_by('id', 'asc');
 		$q = $this->db->get('order');
@@ -332,10 +335,10 @@ class Upgrade extends CI_Controller {
 			}
 
 			if($v->status === 'Lunas') {
-				$status_biaya_transfer = 1;
+				$status_biaya_transfer = '1';
 			}
 			else {
-				$status_biaya_transfer = 0;
+				$status_biaya_transfer = '0';
 			}
 
 			if($v->barang === 'Terkirim') {
@@ -391,17 +394,15 @@ class Upgrade extends CI_Controller {
 				));
 		}
 
-		$upup = $page + 150;
+		$upup = $page + $limit;
 		if($upup > $jumlah) {
 			// redirect('upgrade/step6');
 			echo 'updated done 100%';
 		}
 		else {
 			echo 'updated ' . $upup . ' / ' . $jumlah . ' ( ' . round(($upup/$jumlah)*100) . '% )';
-			header( "refresh:1;url=" . site_url('upgrade/step5/'. $upup . '?' . random_string('alnum', 16) ) );
+			header( "refresh:0.5;url=" . site_url('upgrade/step5/'. $upup . '?' . random_string('alnum', 16) ) );
 		}
-		
-
 
 	}
 }

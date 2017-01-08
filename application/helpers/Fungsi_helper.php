@@ -36,7 +36,7 @@ function _is_user_level($level = 'superadmin') {
  */
 function rupiah($angka) {
 	$angka = str_replace(' ', '', $angka);
-	$format = "Rp " . number_format($angka , 0 , '', '.' ) . ",-";
+	$format = "Rp " . number_format($angka , 0 , '', '.' );
 
 	return $format;
 }

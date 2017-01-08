@@ -59,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						echo '<div class="form-group ">';
 							echo form_label('HP', 'hp');
 							echo '<div class="row">';
-								echo '<div class="col-sm-3 clonedInput_2" id="phone1">';
+								echo '<div class="col-sm-3" id="cloneHP">';
 									echo form_input($form_hp, set_value('hp[]'));
 								echo '</div>';
 
@@ -156,23 +156,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							echo '</div>';
 						echo '</div>';
 
-
 						echo '<div class="row" id="status_f">';
 							echo '<div class="col-sm-3">';
+								echo form_label('Status Pembayaran', 'sttb');
 								// status pembayaran
-								echo '<div class="form-group ">';
-									echo '<label for="orderStatus">Status Pembayaran</label>
-									<div class="clearfix"></div>
-									<div class="btn-group" data-toggle="buttons">
-										<label class="btn btn-info active">
-										<input type="radio" name="options" id="option1" checked /> Lunas
-										</label>
-										<label class="btn btn-info">
-											<input type="radio" name="options" id="option2" /> DP
-										</label>
-									</div>';
+								echo '<div class="form-group">';
+									echo '<div class="form-check">';
+										echo '<label class="form-check-label">';
+											echo form_radio(array('class' => 'form-check-input', 'name' => 'status_transfer'), '1'); 
+											echo '<span class="tag tag-success">Lunas</span>';
+										echo '</label>';
+									echo '</div>';
+
+									echo '<div class="form-check">';
+										echo '<label class="form-check-label">';
+											echo form_radio(array('class' => 'form-check-input', 'name' => 'status_transfer'), '0'); 
+											echo '<span class="tag tag-warning">DP</span> <em>--Down Payment--</em>';
+										echo '</label>';
+									echo '</div>';
 								echo '</div>';
 							echo '</div>';
+
 							echo '<div class="col-sm-3">';
 								 // form field bank
 								$form_bank = array(
@@ -187,9 +191,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									echo form_label('Bank', 'bank');
 									echo form_input($form_bank, set_value('bank'));
 								echo '</div>';
-
 							 echo '</div>';
-
 						echo '</div>';
 
 
@@ -249,9 +251,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										echo form_input($form_transfer, set_value('transfer'));
 									echo '</div>';
 								echo '</div>';
-
 							echo '</div>';
-							
 						echo '</div>';
 
 
@@ -460,7 +460,7 @@ echo '</div>';
 			}
 
 		}, false);
-		
+
 
 		////// TYPEAHEAD
 
@@ -540,6 +540,8 @@ echo '</div>';
 			createTypeahead('[name="kode[]"]', 'kode1');
 
 			var pesananIndex = 0;
+			$('#btnDel_2').prop('disabled', true).hide('fast');
+
 			$('.form-new').on('click', '.btnAdd', function() {
 				pesananIndex++;
 				var $template = $('#templatePesanan'),
@@ -552,7 +554,6 @@ echo '</div>';
 				$clone.end();
 
 				createTypeahead('[data-pesanan-index="'+ pesananIndex +'"] [name="kode[]"]', 'kode'+ pesananIndex);
-
 			});
 
 			$('.form-new').on('click', '.btnDel', function() {
@@ -584,7 +585,53 @@ echo '</div>';
 						});
 					}
 				});
-				
+			});
+
+			$('.form-new').on('click', '#btnAdd_2', function() {
+				var $template = $('#cloneHP'),
+					$clone    = $template
+										.clone()
+										.removeClass('hide')
+										.removeAttr('id')
+										.addClass('isihp')
+										.insertAfter($('#cloneHP'));
+				$clone.end();
+				$('#btnAdd_2').prop('disabled', true).hide('slow');
+				$('#btnDel_2').prop('disabled', false).show('slow');
+
+			});
+
+			$('.form-new').on('click', '#btnDel_2', function() {
+				var $row  = $('.isihp');
+
+				swal({
+					title: "Kamu yakin akan menghapus?",
+					text: "Kolom HP 2 akan dihapus dan tidak dapat dibatalkan",
+					type: "warning",
+					animation: "slide-from-top",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Yup, hapus!",
+					cancelButtonText: "Tidak",
+					closeOnConfirm: false,
+					closeOnCancel: true
+				},
+				function(isConfirm){
+					if (isConfirm) {
+
+						$row.toggle("slow", function() { $(this).remove(); } );
+						$('#btnAdd_2').prop('disabled', false).show('slow');
+						$('#btnDel_2').prop('disabled', true).hide('slow');
+
+						swal({
+							title: "Dihapus!",
+							text: "Kolom HP 2 sudah dihapus",
+							timer: 1000,
+							type: "success",
+							showConfirmButton: false
+						});
+					}
+				});
 			});
 		});
 

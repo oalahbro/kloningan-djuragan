@@ -17,6 +17,7 @@ class Juragan_model extends CI_Model {
 		$q = $this->db->get('juragan');
 
 		$row = $q->row();
+		$nama = '';
 		if ($q->num_rows() === 1) {
 			$nama = $row->id;
 		}

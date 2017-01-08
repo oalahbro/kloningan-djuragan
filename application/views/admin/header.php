@@ -66,9 +66,9 @@ else {
 			</div>
 		</div>
 		<div class="navbar navbar-full bg-faded navbar-static-top navbar-<?php echo $class_navbar; ?>" style="background-color:<?php echo $warna; ?>;">
-			<?php echo anchor('admin/pesanan', $nama_juragan, array('class' => 'navbar-brand', 'data-pjax' => '')); ?>
-
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
+			<?php echo anchor('', 'Web Pesanan', array('class' => 'navbar-brand')); ?>
+			
+			<button class="navbar-toggler float-xs-left" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
 
 			<!-- <span class="navbar-text text-muted"><?php echo $title_navbar; ?></span> -->
 

@@ -32,30 +32,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					if($key->status_kirim === '0' && $key->status_transfer === '0') {
 						$transfer_class = '';
 						$status_class = '';
-						$button_kirim = '<div class="text-center btn-margin "><a href="#" class="btn btn-default btn-xs disabled btn-block"><i class="glyphicon glyphicon-refresh text-info"></i> pending</a></div>';
-						$button_transfer = '<div class="btn-margin btn-group btn-group-justified" role="group" aria-label="btn-transfer">
-						<div class="btn-group" role="group">'.
-							form_button(array('title' => 'Transfer Masuk', 'id' => 'transfer-ok_' . $key->id, 'class' => 'btn btn-success submit-btn btn-xs tooltips', 'content' => '<i class="glyphicon glyphicon-ok"></i>')). '</div><div class="btn-group" role="group">'.
-							form_button(array('class' => 'btn btn-default disabled btn-xs', 'content' => '<i class="glyphicon glyphicon-remove"></i>')).'</div></div>';
+						$button_kirim = form_button(array('class' => 'btn btn-secondary btn-block text-xs-left btn-sm', 'disabled' => '', 'content' => '<span class="icon-ok"></span> Kirim'));
+						$button_transfer = form_button(array('class' => 'btn btn-success btn-block text-xs-left btn-sm', 'content' => '<span class="icon-ok"></span> Transfer '));
 					}
 					elseif($key->status_kirim === '0' && $key->status_transfer === '1') {
 						$transfer_class = ' table-success';
 						$status_class = '';
-						$button_kirim = '<div class="btn-margin btn-group btn-group-justified" role="group" aria-label="btn-kirim">
-						<div class="btn-group" role="group">'.
-						form_button(array('title' => 'Sudah dikirim', 'id' => $key->id, 'class' => 'btn btn-success submit-resi btn-xs tooltips', 'content' => '<i class="glyphicon glyphicon-ok"></i>')). '</div><div class="btn-group" role="group">'.
-						form_button(array('class' => 'btn btn-default disabled btn-xs', 'content' => '<i class="glyphicon glyphicon-remove"></i>')).'</div></div>';
-						$button_transfer = '<div class="btn-margin btn-group btn-group-justified" role="group" aria-label="btn-transfer"><div class="btn-group" role="group">'.
-						form_button(array('class' => 'btn btn-success disabled btn-xs', 'content' => '<i class="glyphicon glyphicon-ok"></i>')). '</div><div class="btn-group" role="group">' .
-						form_button(array('title' => 'Belum Transfer', 'id' => 'transfer-remove_' . $key->id, 'class' => 'btn btn-default submit-btn btn-xs tooltips', 'content' => '<i class="glyphicon glyphicon-remove"></i>')).'</div></div>';
+						$button_kirim = form_button(array('class' => 'btn btn-success btn-block text-xs-left btn-sm', 'content' => '<span class="icon-ok"></span> Kirim'));
+						$button_transfer = form_button(array('class' => 'btn btn-warning btn-block text-xs-left btn-sm', 'content' => '<span class="icon-remove"></span> Transfer'));
 					}
 					elseif($key->status_kirim === '1' && $key->status_transfer === '1') {
 						$transfer_class = '';
 						$status_class = ' class="table-success"';
-						$button_kirim = '<div class="btn-margin btn-group btn-group-xs btn-group-justified" role="group" aria-label="btn-kirim"><div class="btn-group" role="group">'.
-						form_button(array('class' => 'btn btn-success disabled btn-xs', 'content' => '<i class="glyphicon glyphicon-ok"></i>')). '</div><div class="btn-group" role="group">' .
-						form_button(array('title' => 'Belum dikirim','id' => 'kirim-remove_' . $key->id, 'class' => 'btn btn-default submit-btn btn-xs tooltips', 'content' => '<i class="glyphicon glyphicon-remove"></i>')).'</div></div>';
-						$button_transfer = '<div class="text-center btn-margin "><a href="#" class="btn btn-success btn-xs disabled btn-block"><i class="glyphicon glyphicon-ok"></i> Masuk</a></div>';
+						$button_kirim = form_button(array('class' => 'btn btn-success btn-block text-xs-left btn-sm', 'content' => '<span class="icon-remove"></span> Kirim'));
+						$button_transfer = form_button(array('class' => 'btn btn-secondary btn-block text-xs-left btn-sm', 'disabled' => '', 'content' => '<span class="icon-ok"></span> Transfer'));
 					}
 
 
@@ -77,7 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						}
 
 						$resi = '<strong>' . $resi_[0] . '</strong><br/>';
-						$resi .= '<em>' . $resi_[1] . '<br/>';
+						$resi .= '<em>' . $resi_p . '<br/>';
 						$resi .= '<small>terkirim : '. $resi_d .'</small></em>';
 					}
 
@@ -102,17 +92,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 					}
 
-
-
-
-
 				?>
 
 					<tr<?php echo $status_class; ?>>
 						<td><?php echo $key->id; ?></td>
 						<td><?php echo anchor('admin/pesanan/lihat/' . $key->alias_juragan, $key->nama_juragan); ?><!-- <br/><?php echo $key->cs; ?>--></td>
 						<td class="<?php echo $transfer_class;?>"><?php echo '<abbr title="'.$key->tanggal.'">'.tanggal($key->tanggal).'</abbr>'; ?>
-						<?php echo $button_kirim; ?></td>
+						<?php echo $button_transfer; ?>
+						<?php echo $button_kirim; ?>
+						
+						</td>
 						<td>
 							<strong><?php echo strtoupper($key->nama); ?></strong><br/>
 							<?php 
@@ -154,7 +143,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<td>
 							<?php 
 							//////// penampakan bank
-							if($key->status_biaya_transfer === '1') {
+							if($key->status_biaya_transfer === '0') {
 								$status = 'DP';
 							}
 							else {
@@ -179,18 +168,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							//////// penampakan transfer
 							$trf = explode(',', $key->total_transfer);
-
 							$transfer = '';
-							if($key->status_biaya_transfer === '1') {
-								if(isset($trf[1])) {
-									$transfer .= '<div>transfer 1 : <span class="tag tag-danger normal-text">' . rupiah($trf[0]) . '</span></div>';
-									$transfer .= '<div>transfer 2 : <span class="tag tag-danger normal-text">' . rupiah($trf[1]) . '</span></div>';
-								}
 
+							// jika status transfer belum lunas, maka menamplkan tombol pelunasan
+							if($key->status_transfer === '0' && $key->status_biaya_transfer === '0') {
+								if(isset($trf[1])) {
+									$transfer .= '<div>DP : <span class="tag tag-danger normal-text">' . rupiah($trf[0]) . '</span></div>';
+									$transfer .= '<div>Lunas : <span class="tag tag-danger normal-text">' . rupiah($trf[1]) . '</span></div>';
+								}
+								else {
+									$transfer .= '<div>DP : <span class="tag tag-danger normal-text">' . rupiah($trf[0]) . '</span></div>';
+									$transfer .= '<div><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".modalPelunasan" data-nama="'.$key->nama.'" data-uid="'.$key->uid.'" data-id="'.$key->id.'">Pelunasan</button></div>';
+								}
+							}
+							elseif($key->status_transfer === '1' && $key->status_biaya_transfer === '0') {
+								if(isset($trf[1])) {
+									$transfer .= '<div>DP : <span class="tag tag-danger normal-text">' . rupiah($trf[0]) . '</span></div>';
+									$transfer .= '<div>Lunas : <span class="tag tag-danger normal-text">' . rupiah($trf[1]) . '</span></div>';
+								}
 							}
 							else {
 								$transfer .= '<div>transfer : <span class="tag tag-danger normal-text">' . rupiah($trf[0]) . '</span></div>';
 							}
+
 							?>
 							<div style="margin-bottom: 5px;">
 								<button type="button" class="btn btn-secondary btn-sm btn-block btn-clean" disabled><?php echo $key->bank; ?></button>
@@ -216,3 +216,71 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 	<?php echo $this->pagination->create_links(); ?>
 </div>
+
+
+
+<!-- Small modal -->
+<div class="modal fade modalPelunasan" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="exampleModalLabel">Pelunasan #<span class="kodePesanan"></span></h4>
+			</div>
+			<div class="modal-body">
+				<div class="">
+					<p class="text-success">Pelunasan untuk pesanan #<span class="kodePesanan"></span> atas nama <strong class="namaPemesan"></strong>.</p>
+				</div>
+				<?php echo form_open('admin/pesanan/set_pelunasan', '',array('uid' => '')); ?>
+
+					<div class="form-group">
+						
+						<?php 
+						$form_pelunasan = array(
+							'name' => 'pelunasan',
+							'id' => 'pelunasan',
+							'class' => 'form-control pelunasan',
+							'placeholder' => '150000',
+							'required' => 'required',
+							'pattern' => '^(?:[1-9]\d*|0)$',
+							'title' => 'nominal uang'
+							);
+						echo form_label('Total Pelunasan', 'pelunasan');
+						echo '<div class="input-group">';
+						echo '<span class="input-group-addon" id="basic-addon1">Rp</span>';
+						echo form_input($form_pelunasan);
+						echo '</div>';
+						?>
+					</div>
+
+					<div class="form-group">
+						<label for="message-text" class="form-control-label">Keterangan:</label>
+						<textarea class="form-control" id="message-text"></textarea>
+					</div>
+
+					<?php echo form_button(array('class' => 'btn btn-primary', 'type' => 'submit', 'content' => 'Simpan')); ?>
+
+				<?php echo form_close(); ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('.modalPelunasan').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var recipient = button.data('nama') // Extract info from data-* attributes
+		var uid = button.data('uid') // Extract info from data-* attributes
+		var id = button.data('id') // Extract info from data-* attributes
+		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		var modal = $(this)
+		modal.find('.namaPemesan').text(recipient)
+		modal.find('.kodePesanan').text(id)
+		modal.find('[name="uid"]').val(uid)
+		// modal.find('.modal-body input').val(recipient)
+	});
+
+</script>

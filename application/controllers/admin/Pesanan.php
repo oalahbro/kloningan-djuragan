@@ -79,7 +79,6 @@ class Pesanan extends CI_Controller {
 		$this->form_validation->set_rules('transfer', 'transfer', 'required');
 		$this->form_validation->set_rules('keterangan', 'keterangan', '');
 		
-		
 		if($this->form_validation->run() === FALSE) {
 			$nama_juragan = $this->juragan->ambil_nama($juragan);
 			$warna = $this->juragan->ambil_warna($juragan);
@@ -116,7 +115,6 @@ class Pesanan extends CI_Controller {
 			$pesanan['kode'] = $kode;
 			$pesanan['jumlah'] = $jumlah;
 			$pesanan['size'] = $size;
-
 
 			print('<pre>');
 			print_r(

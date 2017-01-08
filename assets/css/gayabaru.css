@@ -16,13 +16,16 @@ footer .credit {
 	margin-right: 5px;
 }
 #navbar-header {
-	background: white;
+	background: #999;
 }
 .navbar-dark .navbar-toggler, .btn-dark, .btn-dark:hover {
 	color: #fff;
 }
 .navbar-light .navbar-toggler, .btn-light, .btn-light:hover {
 	color: #333;
+}
+.navbar-toggler {
+	margin-right: 15px;
 }
 .biaya div {
 	margin-bottom: 5px;
