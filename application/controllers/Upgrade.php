@@ -30,6 +30,10 @@ class Upgrade extends CI_Controller {
 				'constraint' => '100',
 				'unique' => TRUE
 				),
+			'email' => array(
+				'type' => 'VARCHAR',
+				'constraint' => '100'
+				),
 			'password' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '69'
@@ -47,6 +51,11 @@ class Upgrade extends CI_Controller {
 				'type' => 'DATETIME',
 				'null' => TRUE
 				),
+			'reset' => array(
+				'type' => 'VARCHAR',
+				'constraint' => '40',
+				'null' => TRUE
+				)
 			);
 		$this->dbforge->add_field($fields);
 		$this->dbforge->add_key('id', TRUE);
@@ -70,6 +79,10 @@ class Upgrade extends CI_Controller {
 				echo form_input('username');
 				echo '<br/>';
 
+				echo form_label('email', 'email');
+				echo form_input('email');
+				echo '<br/>';
+
 				echo form_label('password', 'password');
 				echo form_password('password');
 
@@ -82,8 +95,9 @@ class Upgrade extends CI_Controller {
 			// simpan data admin
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
+			$email = $this->input->post('email');
 
-			$sign = $this->user->daftar($username, $password, 'superadmin');
+			$sign = $this->user->daftar($username, $username, $password, $email, 'superadmin');
 
 			if($sign) {
 				redirect('upgrade/step3');
