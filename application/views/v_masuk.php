@@ -1,65 +1,91 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<!-- Required meta tags always come first -->
+
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Alba Bootstrap 4 Admin Template">
+    <meta name="author" content="Lukasz Holeczek">
+    <meta name="keyword" content="Alba Bootstrap 4 Admin Template">
+    <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
 
-	<title><?php echo $title; ?></title>
+    <title><?php echo $title; ?></title>
 
-	<?php echo link_tag('assets/css/bootstrap.min.css'); ?>
+    <!-- Icons -->
+    <?php echo link_tag('assets/css/font-awesome.min.css'); ?>
+    <?php echo link_tag('assets/css/simple-line-icons.css'); ?>
 
-	<style type="text/css">
-		
-	.login {
-		margin-top: 50%;
-	}
-	.login .form-control {
-		margin-bottom: 5px;
-	}
-
-	</style>
+    <!-- Main styles for this application -->
+    <?php echo link_tag('assets/css/style.css'); ?>
 
 </head>
+
 <body>
+    <div class="container d-table">
+        <div class="d-100vh-va-middle">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card-group">
+                        <div class="card p-2">
+                            <div class="card-block">
+                                <h1>Masuk</h1>
+                                <p class="text-muted">Masuk dengan akunmu</p>
+                                <?php 
+								echo form_open();
 
-<div class="container">
-	<div class="row">
-		<div class="col-sm-4 offset-sm-4">
-			<div class="card card-outline-primary login">
-				<div class="card-header">
-					Masuk | Pesanan Limited
-				</div>
-				<div class="card-block">
-					<?php 
-					echo form_open();
+								echo '<div class="input-group mb-1">';
+									echo '<span class="input-group-addon"><i class="icon-user"></i></span>';
+									echo form_input(array('name' => 'username', 'placeholder' => 'username', 'class' => 'form-control'));
+								echo '</div>';
 
-					echo '<div class="form-group">';
-						echo form_input(array('name' => 'username', 'placeholder' => 'username', 'class' => 'form-control'));
-					echo '</div>';
+								echo '<div class="input-group mb-2">';
+									echo '<span class="input-group-addon"><i class="icon-lock"></i></span>';
+									echo form_password(array('name' => 'password', 'placeholder' => 'password', 'class' => 'form-control'));
+								echo '</div>';
 
-					echo '<div class="form-group">';
-						echo form_password(array('name' => 'password', 'placeholder' => 'password', 'class' => 'form-control'));
-					echo '</div>';
-					
-					echo form_button(array('class' => 'btn btn-primary', 'content' => 'Masuk', 'type' => 'submit'));
+								echo ' <div class="row">';
+									echo '<div class="col-xs-6">';
+										echo form_button(array('class' => 'btn btn-primary px-2', 'content' => 'Masuk', 'type' => 'submit'));
+									echo '</div>';
 
-					echo form_close();
-					?>
-				</div>
-				<!-- <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p> -->
-			</div>
-		</div>
-	</div>
-</div>
+                                    echo '<div class="col-xs-6 text-xs-right">';
+                                    	echo anchor('lupa', 'Lupa Sandi?', array('class' => 'btn btn-link px-0'));
+                                    echo '</div>';
+                                echo '</div>';
+								
+								echo form_close();
+								?>
+                            </div>
+                        </div>
+                        <div class="card card-inverse card-primary py-3 hidden-md-down" style="width:44%">
+                            <div class="card-block text-xs-center">
+                                <div>
+                                    <h2>Daftar</h2>
+                                    <p>Bila belum memiliki akun, harap daftarkan diri terlebih dahulu.</p>
+                                    <?php echo anchor('daftar', 'Daftar Sekarang', array('class' => 'btn btn-primary active mt-1')); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!-- jQuery first, then Tether, then Bootstrap JS. -->
-	<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+
+    <!-- Bootstrap and necessary plugins -->
+    <script src="<?php echo base_url('assets/js/libs/jquery.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/libs/tether.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/libs/bootstrap.min.js'); ?>"></script>
 
 </body>
 </html>
+
+
+
+

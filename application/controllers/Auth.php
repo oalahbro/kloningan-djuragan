@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Masuk extends CI_Controller {
+class Auth extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -15,8 +15,8 @@ class Masuk extends CI_Controller {
 		}
 	}
 
-	// halaman utama, jika belum login
-	public function index() {
+	// halaman login
+	public function login() {
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		
@@ -31,8 +31,7 @@ class Masuk extends CI_Controller {
 			$password = $this->input->post('password');
 			
 			$this->login->check($username, $password);
-
-			redirect();
+			redirect('');
 		}
 	}
 }
