@@ -54,6 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['masuk'] = 'auth/login';
+$route['daftar'] = 'auth/register';
 
 $route['admin'] = 'admin/pesanan/lihat';
 $route['admin/pesanan'] = 'admin/pesanan/lihat';

@@ -34,4 +34,9 @@ class Auth extends CI_Controller {
 			redirect('');
 		}
 	}
+
+	// halaman daftar user
+	public function register() {
+	}
+
 }
