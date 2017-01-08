@@ -56,6 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['masuk'] = 'auth/login';
 $route['lupa'] = 'auth/forgot';
 $route['daftar'] = 'auth/register';
+$route['keluar'] = 'auth/logout';
 
 $route['admin'] = 'admin/pesanan/lihat';
 $route['admin/pesanan'] = 'admin/pesanan/lihat';

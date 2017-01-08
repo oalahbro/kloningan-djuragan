@@ -43,4 +43,7 @@ class Auth extends CI_Controller {
 	public function forgot() {
 	}
 
+	// halaman keluar system
+	public function logout() {
+	}
 }
