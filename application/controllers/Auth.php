@@ -24,7 +24,9 @@ class Auth extends CI_Controller {
 			$data = array(
 				'title' => 'Login'
 				);
-			$this->load->view('v_masuk', $data);
+			$this->load->view('publik/i_header', $data);
+			$this->load->view('publik/v_masuk', $data);
+			$this->load->view('publik/i_footer', $data);
 		}
 		else {
 			$username = $this->input->post('username');
