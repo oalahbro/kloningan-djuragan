@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // date_default_timezone_set('Asia/Jakarta');
 
 class User_model extends CI_Model {
-
 	public function daftar($nama, $username, $password, $email, $level = 'user') {
 		$unik = random_string('alnum', 5);
 		$pass = do_hash($unik . $password);

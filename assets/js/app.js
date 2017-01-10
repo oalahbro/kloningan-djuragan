@@ -272,10 +272,10 @@ $(document).ready(function($){
 
 		if ($(this).hasClass('layout-toggler') && $('body').hasClass('sidebar-off-canvas')) {
 			$('body').toggleClass('sidebar-opened').parent().toggleClass('sidebar-opened');
-		} else if ($(this).hasClass('layout-toggler') && ($('body').hasClass('sidebar-nav') || bodyClass == 'sidebar-nav')) {
+		} else if ($(this).hasClass('layout-toggler') && ($('body').hasClass('sidebar-navt') || bodyClass == 'sidebar-navt')) {
 			$('body').toggleClass('sidebar-nav');
 			localStorage.setItem('body-class', 'sidebar-nav');
-			if (bodyClass == 'sidebar-nav') {
+			if (bodyClass == 'sidebar-navt') {
 				localStorage.clear();
 			}
 		} else {

@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 echo form_open();
 
                 echo '<div class="input-group mb-1">';
-                echo '<span class="input-group-addon"><i class="icon-user"></i></span>';
+                echo '<span class="input-group-addon">@</span>';
                 echo form_input(array('name' => 'username', 'placeholder' => 'username', 'class' => 'form-control'));
                 echo '</div>';
 

@@ -47,22 +47,18 @@ class Pesanan extends CI_Controller {
 		$this->pagination->initialize($config);
 
 
-
 		$data = array(
 			'title' => $title_navbar . ' | ' . $nama_juragan,
-			'title_navbar' => $title_navbar,
-			'lead' => $lead,
-			'active' => 'pesanan',
-			'nama_juragan' => $nama_juragan,
-			'juragan' => $juragan,
-			'status' => $status,
-			'warna' => $warna,
-			'pesanan' => $this->pesanan->ambil($juragan, $status, $halaman, $cari="")
+			'breadcrumb' => array(
+				'admin' => 'Admin',
+				'admin/pesanan' => 'Pesanan',
+				'admin/pesanan/lihat/' . $juragan => 'Semua '
+				)
 			);
 
-		$this->load->view('admin/header', $data);
+		$this->load->view('admin/i_header', $data);
 		$this->load->view('admin/pesanan/show', $data);
-		$this->load->view('admin/footer', $data);
+		$this->load->view('admin/i_footer', $data);
 	}
 
 	public function tulis($juragan = NULL) {
