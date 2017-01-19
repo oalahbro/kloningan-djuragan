@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <title><?php echo $title; ?></title>
 
-    <!-- Icons -->
+     <!-- Icons -->
     <?php echo link_tag('assets/css/font-awesome.min.css'); ?>
     <?php echo link_tag('assets/css/simple-line-icons.css'); ?>
 
@@ -25,7 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </head>
 
-<body>
-    <div class="container d-table">
-        <div class="d-100vh-va-middle">
-            <div class="row">
+<body class="app flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                

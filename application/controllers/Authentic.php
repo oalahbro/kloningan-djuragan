@@ -52,10 +52,10 @@ class Authentic extends CI_Controller {
 		}
 		else {
 			$this->form_validation->set_rules('nama', 'nama', 'required');
-			$this->form_validation->set_rules('username', 'username', 'required');
-			$this->form_validation->set_rules('email', 'email', 'required');
-			$this->form_validation->set_rules('sandi1', 'sandi1', 'required');
-			$this->form_validation->set_rules('sandi2', 'sandi2', 'required');
+			$this->form_validation->set_rules('username', 'username', 'required|is_unique[pengguna.username]');
+			$this->form_validation->set_rules('email', 'email', 'required|is_unique[pengguna.email]|valid_email');
+			$this->form_validation->set_rules('sandi1', 'sandi', 'required|matches[sandi2]');
+			$this->form_validation->set_rules('sandi2', 'konfirmasi sandi', 'required');
 			
 			if($this->form_validation->run() === FALSE) {
 				$data = array(
@@ -71,7 +71,7 @@ class Authentic extends CI_Controller {
 				$email = $this->input->post('email');
 				$nama = $this->input->post('nama');
 				
-				$this->user->daftar($nama, $username, $password, $email, 'user');
+				$this->user->daftar($nama, $username, $password, $email);
 				redirect('');
 			}
 		}

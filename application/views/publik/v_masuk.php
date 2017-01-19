@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<div class="col-md-8 offset-md-2">
-    <div class="card-group">
-        <div class="card p-2">
+<div class="card-group mb-0">
+    <div class="card p-2">
+        <div class="card-block">
             <div class="card-block">
-                <h1>Masuk</h1>
-                <p class="text-muted">Masuk dengan akunmu</p>
+                <h2>Masuk</h2>
+                <p class="text-muted">Masuk sistem dengan akun pribadi.<br/><?php echo anchor('daftar', 'Daftar sekarang'); ?> jika belum memiliki akun pribadi.</p>
                 <?php 
                 echo form_open();
 
@@ -21,26 +21,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 echo '</div>';
 
                 echo ' <div class="row">';
-                echo '<div class="col-xs-6">';
+                echo '<div class="col-6">';
                 echo form_button(array('class' => 'btn btn-primary px-2', 'content' => 'Masuk', 'type' => 'submit'));
                 echo '</div>';
 
-                echo '<div class="col-xs-6 text-xs-right">';
+                echo '<div class="col-6 text-right">';
                 echo anchor('lupa', 'Lupa Sandi?', array('class' => 'btn btn-link px-0'));
                 echo '</div>';
                 echo '</div>';
 
                 echo form_close();
                 ?>
-            </div>
-        </div>
-        <div class="card card-inverse card-primary py-3 hidden-md-down" style="width:44%">
-            <div class="card-block text-xs-center">
-                <div>
-                    <h2>Daftar</h2>
-                    <p>Bila belum memiliki akun, harap daftarkan diri terlebih dahulu.</p>
-                    <?php echo anchor('daftar', 'Daftar Sekarang', array('class' => 'btn btn-primary active mt-1')); ?>
-                </div>
             </div>
         </div>
     </div>
