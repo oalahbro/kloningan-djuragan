@@ -22,19 +22,15 @@ class Pesanan extends CI_Controller {
 
 		if($status === 'semua') {
 			$title_navbar = 'Semua Pesanan';
-			$lead = 'Semua pesanan yang terkirim, pending dan belum transfer dari ' . $nama_juragan . ', kecuali data Draft.';
 		}
 		elseif ($status === 'pending') {
 			$title_navbar = 'Pesanan Pending';
-			$lead = 'Pesanan yang belum diproses pengirimannya dari ' . $nama_juragan . '.';
 		}
 		elseif ($status === 'terkirim') {
 			$title_navbar = 'Pesanan Terkirim';
-			$lead = 'Semua data pesanan terkirim ' . $nama_juragan . '.';
 		}
 		elseif ($status === 'draft') {
 			$title_navbar = 'Data Sementara';
-			$lead = 'Ini adalah data sementara dari ' . $nama_juragan . ', baiknya jangan disentuh dahulu.';
 		}
 
 
@@ -52,8 +48,11 @@ class Pesanan extends CI_Controller {
 			'breadcrumb' => array(
 				'admin' => 'Admin',
 				'admin/pesanan' => 'Pesanan',
-				'admin/pesanan/lihat/' . $juragan => 'Semua '
-				)
+				'admin/pesanan/lihat/' . $juragan => $nama_juragan,
+				'admin/pesanan/lihat/' . $juragan . '/' . $status => ucfirst($status)
+				),
+			'juragan' => $juragan,
+			'status' => $status
 			);
 
 		$this->load->view('admin/i_header', $data);
