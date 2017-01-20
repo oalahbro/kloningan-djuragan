@@ -19,21 +19,16 @@ class Authentic extends CI_Controller {
 		}
 		else {
 
-			$this->form_validation->set_rules('username', 'Username', 'required');
-			$this->form_validation->set_rules('password', 'Password', 'required');
+			$this->form_validation->set_rules('username', 'username', 'required');
+			$this->form_validation->set_rules('password', 'password', 'required');
+
+			$this->form_validation->set_error_delimiters('<div class="form-control-feedback">', '</div>');
 			
 			if($this->form_validation->run() === FALSE) {
 				$data = array(
 					'title' => 'Login'
 					);
-				$w = $this->input->post('username');
-				if(isset($w)) {
-					$sesi_ = array(
-						'type' 	=> 'warning',
-						'text' 	=> 'harap isi semua field'
-						);
-					$this->session->set_userdata($sesi_);
-				}
+				
 				$this->load->view('publik/i_header', $data);
 				$this->load->view('publik/v_masuk', $data);
 				$this->load->view('publik/i_footer', $data);

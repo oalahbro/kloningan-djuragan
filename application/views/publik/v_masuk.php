@@ -16,15 +16,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				echo form_open();
 
-				echo '<div class="input-group mb-1">';
-				echo '<span class="input-group-addon">@</span>';
-				echo form_input(array('name' => 'username', 'placeholder' => 'username', 'class' => 'form-control'));
+				// username
+				$err_username = '';
+				if( ! empty(form_error('username')) ) {
+					$err_username = 'has-danger';
+				}
+				echo '<div class="form-group '.$err_username.'">';
+					echo '<div class="input-group mb-2 mr-sm-2 mb-sm-0">';
+						echo '<div class="input-group-addon"><i class="icon-user"></i></div>';
+						echo form_input(array('name' => 'username', 'placeholder' => 'username', 'class' => 'form-control'), set_value('username'));
+					echo '</div>';
+					echo form_error('username');
 				echo '</div>';
 
-				echo '<div class="input-group mb-2">';
-				echo '<span class="input-group-addon"><i class="icon-lock"></i></span>';
-				echo form_password(array('name' => 'password', 'placeholder' => 'password', 'class' => 'form-control'));
+				// password
+				$err_password = '';
+				if( ! empty(form_error('password')) ) {
+					$err_password = 'has-danger';
+				}
+				echo '<div class="form-group '.$err_password.'">';
+					echo '<div class="input-group mb-2 mr-sm-2 mb-sm-0">';
+						echo '<div class="input-group-addon"><i class="icon-lock"></i></div>';
+						echo form_password(array('name' => 'password', 'placeholder' => 'password', 'class' => 'form-control'));
+					echo '</div>';
+					echo form_error('password');
 				echo '</div>';
+
+
 
 				echo ' <div class="row">';
 				echo '<div class="col-6">';
