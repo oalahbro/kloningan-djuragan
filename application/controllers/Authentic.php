@@ -64,6 +64,8 @@ class Authentic extends CI_Controller {
 			$this->form_validation->set_rules('email', 'email', 'required|is_unique[pengguna.email]|valid_email');
 			$this->form_validation->set_rules('sandi1', 'sandi', 'required|matches[sandi2]');
 			$this->form_validation->set_rules('sandi2', 'konfirmasi sandi', 'required');
+
+			$this->form_validation->set_error_delimiters('<div class="form-control-feedback">', '</div>');
 			
 			if($this->form_validation->run() === FALSE) {
 				$data = array(
