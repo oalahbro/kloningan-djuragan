@@ -12,6 +12,20 @@ function data_session($field) {
 	return $data;
 }
 
+function show_alert() {
+	$TO =& get_instance();
+	
+	$t = $TO->session->userdata('text');
+	$return = '';
+	if(isset($t)) { 
+		$return .= '<div class="alert alert-'.$TO->session->userdata('type').'" role="alert">';
+			$return .= $TO->session->userdata('text');
+		$return .= '</div>';
+	}
+
+	return $return;
+}
+
 /**
  * LOGIN
  *

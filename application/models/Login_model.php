@@ -7,7 +7,20 @@ class Login_model extends CI_Model {
 
 	public function check($username, $password) {
 		$query = $this->db->get_where('pengguna', array('username' => $username));
+		
+		$sesi_ = array(
+			'type' 	=> 'danger',
+			'text' 	=> '<strong>' . $username . '</strong> tidak terdaftar'
+			);
+		$return = FALSE;
+
 		if ($query->num_rows() === 1) {
+			$sesi_ = array(
+				'type' 	=> 'danger',
+				'text' 	=> 'password salah'
+				);
+			$return = FALSE;
+
 			$row = $query->row();
 
 			$sandi 	= explode('_', $row->password);
@@ -31,8 +44,16 @@ class Login_model extends CI_Model {
 				$this->db->where('id', $row->id);
 				$this->db->update('pengguna', array('password' => $unik . '_' . $katasandi, 'login' => $last_login ));
 
-				return TRUE;
+				$sesi_ = array(
+					'type' 	=> 'success',
+					'text' 	=> 'Kamu sudah login'
+					);
+				$return = TRUE;
 			}
 		}
+
+		$this->session->set_userdata($sesi_);
+
+		return $return;
 	}
 }
