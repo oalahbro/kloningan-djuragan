@@ -61,9 +61,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<li class="nav-item">
 				<a class="nav-link navbar-toggler sidebar-toggler" href="#">☰</a>
 			</li>
+	
 			<li class="nav-item  px-1 dropdown">
-				<a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-					Pesanan <span class="icon-options-vertical"></span>
+				<a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+					Pesanan 
 				</a>
 				<div class="dropdown-menu dropdown-menu-left dropdown-menu-lg">
 					<?php 
@@ -95,7 +96,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 
 					<?php if(pengguna_baru() > 0) { ?>
-					<a href="#" class="dropdown-item">
+					<a href="<?php echo site_url('admin/pengaturan/juragan/baru'); ?>" class="dropdown-item">
 						<i class="icon-user-follow text-success"></i> User Baru
 						<span class="badge badge-success"><?php echo pengguna_baru(); ?></span>
 					</a>
@@ -129,19 +130,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<span class="hidden-md-down">Pengaturan</span>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right">
-
 					<a class="dropdown-item" href="#"><i class="fa fa-cogs"></i> Web</a>
 					<a class="dropdown-item" href="#"><i class="fa fa-user"></i> Juragan</a>
 				</div>
 			</li>
 
-			<li class="nav-item dropdown hidden-md-down px-1">
+			<li class="nav-item dropdown px-1">
 				<a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-					<span class="hidden-md-down"><?php echo data_session('nama') ?></span>
+					<?php echo data_session('nama') ?>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right">
 					<div class="dropdown-header text-center">
-						<strong>Pengaturan</strong>
+						<strong>Profil</strong>
 					</div>
 
 					<a class="dropdown-item" href="#"><i class="fa fa-user"></i> Ubah Profil</a>

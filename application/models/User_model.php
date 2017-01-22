@@ -30,4 +30,35 @@ class User_model extends CI_Model {
 		return $q->num_rows();
 	}
 
+	public function get($status, $limit=NULL, $offset=NULL, $cari = '') {
+
+		if( ! empty($cari)) {
+			$array_cari = explode(" ", reduce_multiples($cari, " ", TRUE));
+
+			$this->db->like('id', $cari, 'both');
+			foreach($array_cari as $item){
+				$this->db->or_like('nama', $item, 'both');
+				$this->db->or_like('email', $item, 'both');
+			}
+		}
+
+		if($status === 'baru') {
+			$this->db->where('level', NULL);
+		}
+		elseif($status === 'aktif') {
+			$this->db->where('level !=', NULL);
+			$this->db->having('level', 'user');
+		}
+
+		//
+
+		if($limit !== NULL && $offset !== NULL) {
+			$this->db->limit($limit);
+			$this->db->offset($offset);
+		}
+		$q = $this->db->get('pengguna');
+
+		return $q;
+	}
+
 }

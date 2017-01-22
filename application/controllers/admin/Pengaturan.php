@@ -19,24 +19,19 @@ class Pengaturan extends CI_Controller {
 		show_404();
 	}
 
-	public function juragan() {
-		$nama_juragan = $this->juragan->ambil_nama($juragan);
-		$warna = $this->juragan->ambil_warna($juragan);
-		$title_navbar = 'Semua Pesanan';
-		$lead = '';
+	public function juragan($status = 'semua') {
 
 		$data = array(
-			'title' => 'Tulis data Pesanan | ' . $nama_juragan,
-			'title_navbar' => $title_navbar,
-			'lead' => $lead,
-			'active' => 'tulis',
-			'nama_juragan' => $nama_juragan,
-			'juragan' => $juragan,
-			'warna' => $warna
+			'title' => 'Pengaturan User | Pesanan Juragan',
+			'breadcrumb' => array(
+				'admin' => 'Admin',
+				'admin/pengaturan/juragan' => 'Pengaturan User',
+				'admin/pengaturan/juragan/' . $status => ucfirst($status)
+				)
 			);
 
-		$this->load->view('admin/header', $data);
-		$this->load->view('admin/pengaturan/juragan', $data);
-		$this->load->view('admin/footer', $data);
+		$this->load->view('admin/i_header', $data);
+		$this->load->view('admin/pengaturan/v_juragan', $data);
+		$this->load->view('admin/i_footer', $data);
 	}
 }
