@@ -126,3 +126,21 @@ function _RGBToHSL($RGB) {
 
 	return (object) Array('hue' => $h, 'saturation' => $s, 'lightness' => $l);
 }
+
+
+// counting
+function pengguna_baru() {
+	$TO =& get_instance();
+	return $TO->user->baru();
+}
+
+function count_pesanan($juragan = 'semua', $status = 'semua') {
+	$TO =& get_instance();
+	$q = $TO->pesanan->count($juragan, $status);
+	return $q->num_rows();
+}
+
+function persen($pending, $total) {
+	$persen = ($pending/$total)*100;
+	return $persen;
+}

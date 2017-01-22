@@ -74,4 +74,24 @@ class Pesanan_model extends CI_Model {
 			}
 		}
 	}
+
+	public function count($juragan = 'semua', $status = 'semua') {
+		if($juragan !== 'semua') {
+			$this->db->having('u.nama_alias', $juragan);
+		}
+
+		if($status === 'terkirim') {
+			$this->db->having(array('p.status_kirim' => '1'));
+		}
+		elseif($status === 'pending') {
+			$this->db->having(array('p.status_kirim' => '0'));
+		}
+
+		$q = $this->db->select('p.*, u.nama_alias as username, u.nama as juragan')
+					  ->from('pesanan p')
+					  ->join('juragan u', 'p.juragan_id=u.id')
+					  ->get();
+		return $q;
+
+	}
 }

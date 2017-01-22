@@ -86,102 +86,71 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<li class="nav-item dropdown hidden-md-down">
 				<a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 					<i class="icon-bell"></i>
-					<span class="badge badge-pill badge-danger">5</span>
+					<span class="badge badge-pill badge-danger"><?php echo pengguna_baru() + count_pesanan('semua', 'pending'); ?></span>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
 
 					<div class="dropdown-header text-center">
-						<strong>You have 5 notifications</strong>
+						<strong>Notifikasi</strong>
 					</div>
 
+					<?php if(pengguna_baru() > 0) { ?>
 					<a href="#" class="dropdown-item">
-						<i class="icon-user-follow text-success"></i> New user registered
+						<i class="icon-user-follow text-success"></i> User Baru
+						<span class="badge badge-success"><?php echo pengguna_baru(); ?></span>
 					</a>
+					<?php } ?>
+
 					<a href="#" class="dropdown-item">
-						<i class="icon-user-unfollow text-danger"></i> User deleted
-					</a>
-					<a href="#" class="dropdown-item">
-						<i class="icon-chart text-info"></i> Sales report is ready
-					</a>
-					<a href="#" class="dropdown-item">
-						<i class="icon-basket-loaded text-primary"></i> New client
-					</a>
-					<a href="#" class="dropdown-item">
-						<i class="icon-speedometer text-warning"></i> Server overloaded
+						<i class="icon-basket-loaded text-primary"></i> Pesanan Pending
+						<span class="badge badge-primary"><?php echo count_pesanan('semua', 'pending'); ?></span>
 					</a>
 
 					<div class="dropdown-header text-center">
-						<strong>Server</strong>
+						<strong>Status</strong>
 					</div>
 
 					<a href="#" class="dropdown-item">
 						<div class="text-uppercase mb-q">
-							<small><b>CPU Usage</b>
-							</small>
+							<small><b>Pesanan</b></small>
 						</div>
 						<span class="progress progress-xs">
-							<div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="progress-bar bg-info" role="progressbar" style="width: <?php echo persen(count_pesanan('semua', 'terkirim'),count_pesanan()); ?>%" aria-valuenow="<?php echo persen(count_pesanan('semua', 'terkirim'),count_pesanan()); ?>" aria-valuemin="0" aria-valuemax="100"></div>
 						</span>
-						<small class="text-muted">348 Processes. 1/4 Cores.</small>
+						<small class="text-muted"><?php echo count_pesanan('semua', 'terkirim'); ?> / <?php echo count_pesanan(); ?></small>
 					</a>
-					<a href="#" class="dropdown-item">
-						<div class="text-uppercase mb-q">
-							<small><b>Memory Usage</b>
-							</small>
-						</div>
-						<span class="progress progress-xs">
-							<div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-						</span>
-						<small class="text-muted">11444GB/16384MB</small>
-					</a>
-					<a href="#" class="dropdown-item">
-						<div class="text-uppercase mb-q">
-							<small><b>SSD 1 Usage</b>
-							</small>
-						</div>
-						<span class="progress progress-xs">
-							<div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-						</span>
-						<small class="text-muted">243GB/256GB</small>
-					</a>
+			
 
 				</div>
 			</li>
 
-
-			<li class="nav-item dropdown hidden-md-down">
+			<li class="nav-item dropdown hidden-md-down px-1">
 				<a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-					<img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-					<span class="hidden-md-down">admin</span>
+					<span class="hidden-md-down">Pengaturan</span>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right">
 
+					<a class="dropdown-item" href="#"><i class="fa fa-cogs"></i> Web</a>
+					<a class="dropdown-item" href="#"><i class="fa fa-user"></i> Juragan</a>
+				</div>
+			</li>
+
+			<li class="nav-item dropdown hidden-md-down px-1">
+				<a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+					<span class="hidden-md-down"><?php echo data_session('nama') ?></span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right">
 					<div class="dropdown-header text-center">
-						<strong>Account</strong>
+						<strong>Pengaturan</strong>
 					</div>
 
-					<a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-					<a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
-					<a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a>
-					<a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments<span class="badge badge-warning">42</span></a>
-
-					<div class="dropdown-header text-center">
-						<strong>Settings</strong>
-					</div>
-
-					<a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-					<a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
-					<a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-default">42</span></a>
-					<a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
+					<a class="dropdown-item" href="#"><i class="fa fa-user"></i> Ubah Profil</a>
 					<div class="divider"></div>
-					<a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock Account</a>
 					<a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
 				</div>
 			</li>
 		</ul>
 	</header>
-
-
 
 	<div class="app-body">
 		<div class="sidebar">
