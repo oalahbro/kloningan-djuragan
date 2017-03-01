@@ -55,20 +55,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 							</div>
 							<table id="example" class="table table-border table-hover" cellspacing="0" width="100%">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Juragan</th>
-								<th>Tanggal</th>
-								<th>Pemesan</th>
-								<th>Pesanan</th>
-								<th>Biaya</th>
-								<th>Keterangan</th>
-								<th>Resi</th>
-								
-							</tr>
-						</thead>
-					</table>
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Juragan</th>
+										<th>Tanggal</th>
+										<th>Pemesan</th>
+										<th>Pesanan</th>
+										<th>Biaya</th>
+										<th>Keterangan</th>
+										<th>Resi</th>
+										
+									</tr>
+								</thead>
+							</table>
 						</div>
 					</div>
 
@@ -92,11 +92,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					"columns": [
 					{
 						"data": "id",
-						"createdCell": function (td, cellData, rowData, row, col) {
+						/*"createdCell": function (td, cellData, rowData, row, col) {
 							if ( rowData.tanggal.cek_kirim == null ) {
 								$(td).addClass('bg-warning')
 							}
-						}
+						}*/
 					},
 					{ 
 						"data": "juragan",
@@ -106,17 +106,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						}
 					},
 					{
-						"data": "tanggal.submit",
+						"data": "status",
 						"render": function ( data, type, full, meta ) {
-							var r = data.split(' ');
-							return '<abbr title="'+ data +'">' + r[0] + '</abbr>';
+							var r = data.submit.split(' ');
+							var but = '';
+							var col = '';
+							var drop = '';
+
+							if(data.transfer !== '0' && data.kirim !== '0') {
+								// belum dicheck
+								but = 'Terkirim';
+								col = 'success';
+								drop = '<button class="dropdown-item">Edit Resi</button>';
+								drop += '<button class="dropdown-item">Batal Kirim</button>';
+							}
+							else if(data.transfer !== '0' && data.kirim === '0') {
+								// transfer cek
+								but = 'Pending';
+								col = 'warning';
+								drop = '<button class="dropdown-item">Batal Transfer</button>';
+								drop += '<button class="dropdown-item">Set Kirim</button>';
+							}
+							else {
+								//
+								but = 'Belum Cek';
+								col = 'danger';
+								drop = '<button class="dropdown-item">Transfer Masuk</button>';
+							}
+
+							var btn = '<div class="btn-group">' + 
+							  '<button type="button" class="btn btn-' + col + '">' + but + '</button>' +
+							  '<button type="button" class="btn btn-' + col + ' dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+							    '<span class="sr-only">Toggle Dropdown</span>' +
+							  '</button>' +
+							  '<div class="dropdown-menu">' +
+							    drop +
+							    '<div class="dropdown-divider"></div>' +
+							    '<button class="dropdown-item">Separated link</button>' +
+							  '</div>' + 
+							'</div>';
+							return '<abbr title="'+ r[1] + ' ' + r[2] +'">' + r[0] + '</abbr>' + btn;
 						}
 					},
 					{
 						"data": "pemesan",
 						"render": function ( data, type, full, meta ) {
 							var nama = '<strong>'+data.nama+'</strong><br/>';
-							var hp1 = '<span class="tag tag-info">'+data.hp[0]+'</span>';
+							var hp1 = '<span class="badge badge-info">'+data.hp[0]+'</span>';
 							var hp2 = '';
 							var alamat = '<br/>'+data.alamat+'';
 							if(data.hp[1] != undefined) {
@@ -130,13 +166,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					{
 						"data": "biaya",
 						"render": function (data, type, full, meta) {
-							var biaya = '<div>biaya: <span class="tag tag-warning">'+data.harga+'</span></div>';
-							var ongkir = '<div>ongkir: <span class="tag tag-success">' +data.ongkir+ '</span></div>';
-							var ongkir_fix = '<div>ongkir fix: <span class="tag tag-info">' +data.ongkir_fix+ '</span></div>';
-							var dp = '<div>transfer: <span class="tag tag-danger">' +data.transfer1+ '</span></div>';
+							var biaya = '<div>biaya: <span class="badge badge-warning">'+data.harga+'</span></div>';
+							var ongkir = '<div>ongkir: <span class="badge badge-success">' +data.ongkir+ '</span></div>';
+							var ongkir_fix = '<div>ongkir fix: <span class="badge badge-info">' +data.ongkir_fix+ '</span></div>';
+							var dp = '<div>transfer: <span class="badge badge-danger">' +data.transfer1+ '</span></div>';
 
 							if(data.ongkir < 100) {
-								ongkir = '<div><span class="tag tag-success">FREE ONGKIR</span></div>';
+								ongkir = '<div><span class="badge badge-success">FREE ONGKIR</span></div>';
 							}
 
 							if(data.ongkir_fix < 100) {

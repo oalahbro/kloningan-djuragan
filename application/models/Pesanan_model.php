@@ -5,23 +5,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pesanan_model extends CI_Model {
 
-	public function ambil($juragan, $status, $hal = NULL, $cari = '') {
+	public function ambil($juragan, $status, $limit=NULL, $offset=NULL, $cari = '') {
 
-		$this->db->select('p.*, j.nama as nama_juragan, j.nama_alias as alias_juragan, j.warna_default, u.nama as cs, u.username' 
+		if( ! empty($cari)) {
+			$array_cari = explode(" ", reduce_multiples($cari, " ", TRUE));
 
-			);
-
-		$this->db->from('pesanan p');
-		$this->db->join('juragan j', 'j.id=p.juragan_id');
-		$this->db->join('pengguna u', 'u.id=p.pengguna_id');
-
+			$this->db->like('p.id', $cari, 'both');
+			foreach($array_cari as $item){
+				$this->db->or_like('p.nama', $item, 'both');
+				$this->db->or_like('p.alamat', $item, 'both');
+				$this->db->or_like('p.keterangan', $item, 'both');
+				$this->db->or_like('p.pesanan', $item, 'both');
+				$this->db->or_like('p.hp', $item, 'both');
+			}
+		}
 
 		if($juragan !== 'semua') {
-			$this->db->where('j.nama_alias', $juragan);
+			$this->db->having('u.nama_alias', $juragan);
 		}
 
 		if($status === 'terkirim') {
-			// $this->db->order_by('o.status_transfer desc, o.status_kirim desc, o.cek_kirim desc, o.cek_transfer desc, o.tanggal_order desc');
+		// $this->db->order_by('o.status_transfer desc, o.status_kirim desc, o.cek_kirim desc, o.cek_transfer desc, o.tanggal_order desc');
 			$this->db->having(array('p.status_kirim' => '1'));
 		}
 		elseif($status === 'pending') {
@@ -29,7 +33,6 @@ class Pesanan_model extends CI_Model {
 		}
 
 
-		
 		if($status !== 'terkirim') {
 			$this->db->order_by('p.status_transfer asc, p.status_kirim asc, p.tanggal desc');
 		}
@@ -37,11 +40,16 @@ class Pesanan_model extends CI_Model {
 			$this->db->order_by('p.status_kirim asc, p.cek_kirim desc, p.tanggal desc');
 		}
 
-		if($hal !== NULL) {
-			$this->db->limit(30);
-			$this->db->offset($hal);
+		if($limit !== NULL && $offset !== NULL) {
+			$this->db->limit($limit);
+			$this->db->offset($offset);
 		}
-		return $this->db->get();
+
+		$q = $this->db->select('p.*, u.nama_alias as username, u.nama as juragan')
+					  ->from('pesanan p')
+					  ->join('juragan u', 'p.juragan_id=u.id')
+					  ->get();
+		return $q;
 	}
 
 	public function check($username, $password) {

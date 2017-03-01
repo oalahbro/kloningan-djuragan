@@ -1,62 +1,69 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<div class="card-group mb-0">
-	<div class="card p-2">
+
+<div class="d-flex justify-content-center align-items-center logon pt-3 pb-3">
+	<div class="card bayangan">
+		<div class="card-header">
+			<ul class="nav nav-tabs card-header-tabs">
+				<li class="nav-item">
+					<?php echo anchor('masuk', 'Masuk', array('class' => 'nav-link active')) ?>
+				</li>
+				<li class="nav-item">
+					<?php echo anchor('daftar', 'Daftar', array('class' => 'nav-link')) ?>
+				</li>
+				<li class="nav-item">
+					<?php echo anchor('lupa', 'Lupa sandi ?', array('class' => 'nav-link')) ?>
+				</li>
+			</ul>
+		</div>
 		<div class="card-block">
-			<div class="card-block">
-				<h2>Masuk</h2>
-				<p class="text-muted">Masuk sistem dengan akun pribadi.<br/><?php echo anchor('daftar', 'Daftar sekarang'); ?> jika belum memiliki akun pribadi.</p>
+			<div>
+				<?php echo form_open(); ?>
 
-				<?php 
+					<?php 
+					$err_username = '';
+					if( ! empty(form_error('username')) ) {
+						$err_username = ' has-danger';
+					}
 
-				echo show_alert();
-				$array_items = array('type', 'text');
-				$this->session->unset_userdata($array_items);
-
-				echo form_open();
-
-				// username
-				$err_username = '';
-				if( ! empty(form_error('username')) ) {
-					$err_username = 'has-danger';
-				}
-				echo '<div class="form-group '.$err_username.'">';
-					echo '<div class="input-group mb-2 mr-sm-2 mb-sm-0">';
-						echo '<div class="input-group-addon"><i class="icon-user"></i></div>';
-						echo form_input(array('name' => 'username', 'placeholder' => 'username', 'class' => 'form-control'), set_value('username'));
-					echo '</div>';
-					echo form_error('username');
-				echo '</div>';
-
-				// password
-				$err_password = '';
-				if( ! empty(form_error('password')) ) {
-					$err_password = 'has-danger';
-				}
-				echo '<div class="form-group '.$err_password.'">';
-					echo '<div class="input-group mb-2 mr-sm-2 mb-sm-0">';
-						echo '<div class="input-group-addon"><i class="icon-lock"></i></div>';
-						echo form_password(array('name' => 'password', 'placeholder' => 'password', 'class' => 'form-control'));
-					echo '</div>';
-					echo form_error('password');
-				echo '</div>';
-
-
-
-				echo ' <div class="row">';
-				echo '<div class="col-6">';
-				echo form_button(array('class' => 'btn btn-primary px-2', 'content' => 'Masuk', 'type' => 'submit'));
-				echo '</div>';
-
-				echo '<div class="col-6 text-right">';
-				echo anchor('lupa', 'Lupa Sandi?', array('class' => 'btn btn-link px-0'));
-				echo '</div>';
-				echo '</div>';
-
-				echo form_close();
-				?>
+					$err_password = '';
+					if( ! empty(form_error('password')) ) {
+						$err_password = ' has-danger';
+					}
+					?>
+					<div class="form-group<?php echo $err_username; ?>">
+						<?php
+							$username = array(
+								'name' => 'username',
+								'id' => 'username',
+								'class' => 'form-control',
+								'placeholder' => 'username'
+								);
+							// echo form_label('Username', 'username');
+							echo form_input($username);
+							echo form_error('username');
+						?>
+					</div>
+					<div class="form-group<?php echo $err_password; ?>">
+						<?php
+							$password = array(
+								'name' => 'password',
+								'id' => 'password',
+								'class' => 'form-control',
+								'placeholder' => 'sandi'
+								);
+							// echo form_label('Sandi', 'password');
+							echo form_password($password);
+							echo form_error('password');
+						?>
+					</div>
+					<div class="tombol">
+						<?php echo form_button(array('class' => 'btn btn-primary', 'type' => 'submit', 'content' => 'Masuk')); ?>
+					</div>
+				<?php echo form_close(); ?>
 			</div>
+
 		</div>
 	</div>
 </div>

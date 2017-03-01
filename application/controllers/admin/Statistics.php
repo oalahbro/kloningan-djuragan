@@ -17,20 +17,16 @@ class Statistics extends CI_Controller {
 
 	public function index() {
 		$data = array(
-			'title' => 'Data Statistik | Pesanan Juragan',
-			'title_navbar' => $title_navbar,
-			'lead' => $lead,
-			'active' => 'pesanan',
-			'nama_juragan' => $nama_juragan,
-			'juragan' => $juragan,
-			'status' => $status,
-			'warna' => $warna,
-			'pesanan' => $this->pesanan->ambil($juragan, $status, $halaman, $cari="")
+			'title' => 'Dashboard | Pesanan Juragan',
+			'breadcrumb' => array(
+				'admin' => 'Admin',
+				'admin/statistics' => 'Statistik'
+				)
 			);
 
-		$this->load->view('admin/header', $data);
-		$this->load->view('admin/pesanan/show', $data);
-		$this->load->view('admin/footer', $data);
+		$this->load->view('admin/i_header', $data);
+		$this->load->view('admin/v_statistik', $data);
+		$this->load->view('admin/i_footer', $data);
 
 
 	}

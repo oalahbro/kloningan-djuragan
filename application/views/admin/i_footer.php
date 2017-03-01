@@ -11,27 +11,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </footer>
 
     <!-- Bootstrap and necessary plugins -->
-    <script src="<?php echo base_url('assets/js/libs/tether.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/libs/bootstrap.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/libs/pace.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/tether.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 
+    <script type="text/javascript">
+        /* Open when someone clicks on the span element */
+function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+}
 
+/* Close when someone clicks on the "x" symbol inside the overlay */
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}
 
-    <!-- GenesisUI main scripts -->
-
-    <script src="<?php echo base_url('assets/js/app.js'); ?>"></script>
-
-
-
-
-
-    <!-- Plugins and scripts required by this views -->
-    <script src="<?php echo base_url('assets/js/libs/toastr.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/libs/gauge.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/libs/moment.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/libs/daterangepicker.js'); ?>"></script>
-
-    <!-- <script src="<?php echo base_url('assets/js/views/main.js'); ?>"></script>-->
-
+    </script>
 </body>
 </html>

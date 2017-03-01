@@ -40,8 +40,8 @@ class Upgrade extends CI_Controller {
 				),
 			'level' => array(
 				'type' => 'ENUM("superadmin","admin","user")',
-				'default' => 'user',
-				'null' => FALSE
+				'default' => NULL,
+				'null' => TRUE
 				),
 			'daftar' => array(
 				'type' => 'DATETIME',

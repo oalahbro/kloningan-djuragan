@@ -22,7 +22,7 @@ class Authentic extends CI_Controller {
 			$this->form_validation->set_rules('username', 'username', 'required');
 			$this->form_validation->set_rules('password', 'password', 'required');
 
-			$this->form_validation->set_error_delimiters('<div class="form-control-feedback">', '</div>');
+			$this->form_validation->set_error_delimiters('<div class="form-control-feedback"><small><em>', '</em></small></div>');
 			
 			if($this->form_validation->run() === FALSE) {
 				$data = array(
@@ -60,7 +60,7 @@ class Authentic extends CI_Controller {
 			$this->form_validation->set_rules('sandi1', 'sandi', 'required|matches[sandi2]');
 			$this->form_validation->set_rules('sandi2', 'konfirmasi sandi', 'required');
 
-			$this->form_validation->set_error_delimiters('<div class="form-control-feedback">', '</div>');
+			$this->form_validation->set_error_delimiters('<div class="form-control-feedback"><small><em>', '</em></small></div>');
 			
 			if($this->form_validation->run() === FALSE) {
 				$data = array(
