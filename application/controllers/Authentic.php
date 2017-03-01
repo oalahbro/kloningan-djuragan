@@ -1,13 +1,29 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Authentic
+ *
+ * @package     application
+ * @subpackage  controllers
+ * @since    	1.0.0
+ * @version 	4.0.0
+ * @author      Toto Prayogo
+ * @link        http://totoprayogo.com
+ */
 class Authentic extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
 	}
 
-	// halaman masuk system
+	/**
+	 * Fungsi login user
+	 *
+	 * @param       string  username    Input string
+	 * @param       string  password    Input string
+	 * @return      null setelah submit validasi akan menghasilkan redirect
+	 */
 	public function login() {
 		if(is_login() === TRUE) {
 			if((_is_user_level('admin') === TRUE) || (_is_user_level('superadmin') === TRUE)) {
@@ -43,7 +59,16 @@ class Authentic extends CI_Controller {
 		}
 	}
 
-	// halaman daftar user
+	/**
+	 * Fungsi register user
+	 *
+	 * @param       string  nama    Input string
+	 * @param       string  username    Input string
+	 * @param       string  email    Input string
+	 * @param       string  sandi1    Input string
+	 * @param       string  sandi2    Input string
+	 * @return      null setelah submit validasi akan menghasilkan redirect
+	 */
 	public function register() {
 		if(is_login() === TRUE) {
 			if((_is_user_level('admin') === TRUE) || (_is_user_level('superadmin') === TRUE)) {
@@ -82,7 +107,13 @@ class Authentic extends CI_Controller {
 		}
 	}
 
-	// halaman lupa sandi
+	/**
+	 * Fungsi forgot password
+	 *
+	 * @param       string  username    Input string
+	 * @param       string  password    Input string
+	 * @return      null setelah submit validasi akan menghasilkan redirect
+	 */
 	public function forgot() {
 		if(is_login() === TRUE) {
 			if((_is_user_level('admin') === TRUE) || (_is_user_level('superadmin') === TRUE)) {
@@ -114,7 +145,12 @@ class Authentic extends CI_Controller {
 		}
 	}
 
-	// halaman set ulang sandi
+	/**
+	 * Fungsi reset password
+	 *
+	 * @param       string  $uid    Input string
+	 * @return      null setelah submit validasi akan menghasilkan redirect
+	 */
 	public function reset_password($uid) {
 		if(is_login() === TRUE) {
 			if((_is_user_level('admin') === TRUE) || (_is_user_level('superadmin') === TRUE)) {
