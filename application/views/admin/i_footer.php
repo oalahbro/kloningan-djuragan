@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$(".openNav").click(function(){
 			// $("body").addClass("sidebar-hidden");
 			$( "body" ).toggleClass( "sidebar-hidden" );
+			$( ".sidebar-toggler" ).toggleClass( "is-active" );
 		}); 
 
 	</script>
