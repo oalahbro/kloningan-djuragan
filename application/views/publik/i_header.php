@@ -21,4 +21,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 
 <body>
+	<?php
+	if(isset($_SESSION['type'])) {
+		echo '<div class="notifikasi '.$_SESSION['type'].' bayangan">';
+		echo '<p class="lead">' .$_SESSION['text'] . '</p>';
+		echo '</div>';
+	}
+	unset($_SESSION['type'])
+	?>
+
     <div class="container">

@@ -1,6 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Pesanan
+ *
+ * @package     application
+ * @subpackage  controllers/admin
+ * @since    	1.0.0
+ * @version 	4.0.0
+ * @author      Toto Prayogo
+ * @link        http://totoprayogo.com
+ */
 class Pesanan extends CI_Controller {
 
 	public function __construct() {

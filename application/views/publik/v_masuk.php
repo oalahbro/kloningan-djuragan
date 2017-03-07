@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <div class="d-flex justify-content-center align-items-center logon pt-3 pb-3">
+	<div class="judul">
+		
+	</div>
 	<div class="card bayangan">
 		<div class="card-header">
 			<ul class="nav nav-tabs card-header-tabs">

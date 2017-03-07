@@ -9,6 +9,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo base_url('assets/js/tether.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 
+	<script type="text/javascript">
+		setTimeout(function() {
+			$('.notifikasi').fadeOut('slow');
+		}, 3000); // <-- time in milliseconds
+	</script>
+
 </body>
 </html>
 
