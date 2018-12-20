@@ -1,18 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
 if( ! function_exists('save_url_encode')) {
 	function save_url_encode($input) {
 		$TO =& get_instance();
-	    return strtr($TO->encrypt->encode($input), '+/=', '-_,');
+        // return strtr($TO->encryption->encrypt($input), '+/=', '-_,');
+        return strtr($TO->encryption->encrypt($input), '+/=', '._-');
 	}
 }
 
 if( ! function_exists('save_url_decode')) {
 	function save_url_decode($input) {
 		$TO =& get_instance();
-	    return $TO->encrypt->decode(strtr($input, '-_,', '+/='));
+        // return $TO->encryption->decrypt(strtr($input, '-_,', '+/='));
+        return $TO->encryption->decrypt(strtr($input, '._-', '+/='));
 	}
 }
 
