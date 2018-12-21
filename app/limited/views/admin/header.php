@@ -33,7 +33,7 @@ echo doctype('html5'); ?>
 	echo link_tag('https://cdn.rawgit.com/t4t5/sweetalert/32bd141c/dist/sweetalert.css');
 	?>
 	<title><?php echo judul('full'); ?></title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
 </head>
 
 <body><?php 
