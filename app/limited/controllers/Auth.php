@@ -1,13 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-date_default_timezone_set('Asia/Jakarta');
-
 class Auth extends public_controller
 {
-
 	public function __construct() {
 		parent::__construct();
+	}
+
+	public function index() {
+		redirect('auth/masuk');
 	}
 
 	public function daftar() {
@@ -54,7 +55,6 @@ class Auth extends public_controller
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		
-
 		if ($this->form_validation->run() === FALSE) {
 
 			$this->data = array();
@@ -73,17 +73,8 @@ class Auth extends public_controller
 				$this->session->set_userdata($masuk);
 				$data = array('login_terakhir' => time());
 				$this->pengguna->update($username, $data);
-				if($masuk['level'] === 'admin' OR $masuk['level'] === 'superadmin') {
-					redirect('admin');
-				}
-				else {
-					redirect('');
-				}
 			}
-			else {
-
-				redirect('login?alert=' . save_url_encode($masuk['error']));
-			}
+			redirect('auth/masuk');
 		}
 	}
 

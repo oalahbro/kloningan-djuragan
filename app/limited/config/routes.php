@@ -49,19 +49,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'auth/masuk';
+$route['default_controller'] = 'dasbor';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['download'] = 'download';
 
-$route['login'] = 'auth/masuk';
+//$route['login'] = 'auth/masuk';
 $route['logout'] = 'keluar';
 $route['valid'] = 'auth/valid';
-$route['forgot'] = 'auth/lupa';
-$route['register'] = 'auth/daftar';
+//$route['forgot'] = 'auth/lupa';
+//$route['register'] = 'auth/daftar';
 $route['excel'] = 'excel';
 
+$route['admin'] = 'admin/pesanan/lihat';
+/*
 $route['admin'] = 'admin/pesanan/lihat';
 $route['admin/pesanan'] = 'admin/pesanan/lihat';
 $route['admin/pesanan/sunting'] = 'admin/pesanan/sunting';
@@ -75,6 +77,7 @@ $route['pesanan/tambah'] = 'reseller/pesanan/tambah';
 $route['pesanan/sunting'] = 'reseller/pesanan/sunting';
 $route['pesanan/(:any)'] = 'reseller/pesanan/lihat/$1';
 
+
 $route['(:any)'] = 'cs/pesanan/lihat/$1';
 $route['(:any)/tambah'] = 'cs/pesanan/tambah/$1';
 $route['(:any)/sunting'] = 'cs/pesanan/sunting';
@@ -82,3 +85,4 @@ $route['(:any)/pesanan'] = 'cs/pesanan/lihat/$1';
 $route['(:any)/pesanan/(:any)'] = 'cs/pesanan/lihat/$1/$2';
 
 $route['(:any)/chart'] = 'cs/chart';
+*/
