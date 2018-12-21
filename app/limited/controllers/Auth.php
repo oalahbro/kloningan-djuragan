@@ -46,7 +46,7 @@ class Auth extends public_controller
 				// kirim email validasi
 				$this->kirim_email_validasi($id_pengguna);
 
-				redirect('?alert=' . save_url_encode(5));
+				redirect('auth/masuk');
 			}
 		}
 	}

@@ -156,21 +156,6 @@ class Pengguna_model extends CI_Model
 			return TRUE;
 		}
 	}
-
-	/**
-	 * _relation data pengguna ke database *
-	 * $this->db->where(array('pengguna_id' => $pengguna_id, 'juragan_id' => $juragan_id));
-	 $q = $this->db->get()rray;
-
-	 if($q->num_rows() > 0) {
-		 // SKIP
-	 }
-	 else {
-		 // insert
-	 }
-
-	 * @return      bool
-	 */
 	public function simpan($data) {
 		$this->db->insert($this->tabel, $data); 
 
