@@ -134,7 +134,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <?php
-                                            echo form_label('Tariff Ongkir', 'ongkir');
+                                            echo form_label('Tarif Ongkir', 'ongkir');
                                             echo form_input(array('name' => 'ongkir', 'id'=> 'ongkir', 'class' => 'form-control ongkir', 'type' => 'number', 'min' => '0', 'required' => ''), '0');
                                         ?>
                                     </div>

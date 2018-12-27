@@ -149,7 +149,7 @@ $pesanan = $q->row();
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <?php
-                                            echo form_label('Tariff Ongkir', 'ongkir');
+                                            echo form_label('Tarif Ongkir', 'ongkir');
                                             echo form_input(array('name' => 'ongkir', 'id'=> 'ongkir', 'class' => 'form-control ongkir', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('ongkir', $pesanan->ongkir));
                                         ?>
                                     </div>

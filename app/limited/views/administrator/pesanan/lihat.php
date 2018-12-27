@@ -321,7 +321,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         echo $status_bayar;
                                         echo '<span class="d-block text-right">harga produk : <span class="badge badge-info">'. harga($harga_total)  .'</span></span>';
                                         if($pesanan->ongkir > 0) {
-                                            echo '<span class="d-block text-right">tariff ongkir : <span class="badge badge-dark">'. harga($pesanan->ongkir)  .'</span></span>';
+                                            echo '<span class="d-block text-right">tarif ongkir : <span class="badge badge-dark">'. harga($pesanan->ongkir)  .'</span></span>';
                                         }
                                         if($pesanan->unik > 0) {
                                             echo '<span class="d-block text-right">digit unik : <span class="badge badge-secondary">'. harga($pesanan->unik)  .'</span></span>';
