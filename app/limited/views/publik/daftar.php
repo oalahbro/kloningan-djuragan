@@ -6,6 +6,8 @@ echo form_open('auth/daftar', array('class' => 'form-signin'));
 
 	echo heading('Silakan Daftar', 1, array('class' => 'h3 font-weight-normal'));
 
+	echo validation_errors('<div class="alert alert-danger">', '</div>');
+
 	// nama
 	echo form_label('Nama', 'nama', array('class' => 'sr-only'));
 	echo form_input(array('name' => 'nama','class' => 'form-control top', 'id' => 'nama', 'placeholder' => 'nama', 'required' => 'required'), set_value('nama'));

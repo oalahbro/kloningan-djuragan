@@ -1,46 +1,79 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 echo doctype('html5'); ?>
-<html lang="en">
+<html>
 <head>
 	<meta charset="utf-8"/>
 	<?php
 	$meta = array(
 		array(
-			'name' => 'X-UA-Compatible',
-			'content' => 'IE=edge', 'type' => 'equiv'
-			),
-		array(
 			'name' => 'viewport',
 			'content' => 'width=device-width, initial-scale=1'
 			),
-		/*
-		array(
-			'name' => 'description',
-			'content' => 'My Great Site'
-			),
-		array(
-			'name' => 'keywords',
-			'content' => 'love, passion, intrigue, deception'
-			),
-		*/
-			);
+		);
 
 	echo meta($meta);
 	// 
-	echo link_tag('assets/css/bootstrap.min.css');
-	echo link_tag('assets/css/backend.css');
-	echo link_tag('https://cdn.rawgit.com/t4t5/sweetalert/32bd141c/dist/sweetalert.css');
+	echo link_tag('berkas/css/bootstrap.min.css');
+	echo link_tag('berkas/css/backend.css');
+	// echo link_tag('berkas/css/fontawesome.css');
+	// echo link_tag('berkas/css/solid.css');
 	?>
+	
+
 	<title><?php echo judul('full'); ?></title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
+	<script src="<?php echo base_url('berkas/js/backend.js'); ?>"></script>
+	<script src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js"></script>
 </head>
 
-<body><?php 
-	$session_pesan = $this->session->userdata('pesan_tampil');
-	if($session_pesan) { echo '<div class="alert alert-info alert-custom">' . $this->session->userdata('pesan') . '</div>'; $this->session->unset_userdata('pesan');?>
-	<?php } $this->session->unset_userdata('pesan_tampil');?>
+<body>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+	<div>
+		<?php echo anchor('', judul('name') , array('class' => 'navbar-brand')); ?>
+		<button class="sidebar-toggle"><i class="fas fa-folder"></i> Pesanan</button>
+	</div>
 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Link</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>
+		</ul>
+  </div>
+</nav>
+
+<div class="d-flex align-items-stretch">
+    <div class="sidebar bg-dark toggled">
+        <ul class="list-unstyled">
+			<?php
+			$username = $this->session->userdata('username');
+			$dr = $this->pengguna->_juragan_cs($username);
+
+			foreach ($dr->result() as $key) {
+				echo '<li>';
+					echo anchor('j_' . $key->slug, '<i class="fas fa-user-circle"></i> ' . $key->nama, array());
+				echo '</li>';
+			}
+			?>
+        </ul>
+    </div>
+<?php
+
+
+?>
+	<?php /*
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -89,3 +122,4 @@ echo doctype('html5'); ?>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+*/ ?>

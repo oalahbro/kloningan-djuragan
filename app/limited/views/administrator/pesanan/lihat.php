@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
 
                 <label class="sr-only" for="inlineFormInputName2">Name</label>
-                <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="cari data">
                 <button type="submit" class="btn btn-primary mb-2">Submit</button>
             </form>
             <div id="main-table">
@@ -50,9 +50,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th style="width: 120px">Faktur</th>
+                                <th style="width: 120px">Faktur #</th>
                                 <th style="width: 120px">Juragan</th>
-                                <th style="width: 160px;">Tanggal</th>
+                                <th style="width: 160px;">Status</th>
                                 <th>Pemesan</th>
                                 <th style="width: 200px;">Pesanan</th>
                                 <th style="width: 240px">Biaya</th>
@@ -83,7 +83,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         }
 
                                         foreach ($bayar as $ter) {
-                                            if($ter->tanggal_cek !== 'NULL') {
+                                            if($ter->tanggal_cek !== NULL) {
                                                 // yang sudah dicek
                                                 $dibayar += $ter->jumlah;
                                             }
@@ -127,166 +127,176 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <tr id="pesanan-<?php echo $pesanan->id_faktur; ?>">
                                     <td>
                                         <?php 
-                                        echo $pesanan->seri_faktur;
+                                        echo strtoupper($pesanan->seri_faktur);
+                                        echo '<span class="d-block"><abbr title="'.unix_to_human($pesanan->tanggal_dibuat).'"><i class="fas fa-calendar-day"></i> ' . mdate('%d-%M-%y', $pesanan->tanggal_dibuat) . '</abbr></span>';
                                         ?>
-                                    </td>
-                                    <td>
-                                        <?php echo anchor('pesanan/' .$pesanan->slug, $pesanan->nama_juragan); ?><br/>
                                     </td>
                                     <td>
                                         <?php 
-                                        echo '<span class="d-block">' . mdate('%d-%M-%y') . '</span>';
-                                        // status transfer
-                                        switch ($pesanan->status_transfer) {
-                                            case "d_lunas":
-                                                // sudah lunas
-                                                $c_trf = 'text-success';
-                                                $i_trf = 'fa-check-double';
-                                                $t_trf = 'Pembayaran Lunas';
-                                                break;
-                                            case "e_lebih":
-                                                // sudah lunas dan mempunyai kelebihan
-                                                $c_trf = 'text-info';
-                                                $i_trf = 'fa-plus';
-                                                $t_trf = 'Pembayaran Lunas & memiliki kelebihan';
-                                                break;
-                                            case "c_sebagian":
-                                                // belum lunas / dp yang dibayarkan sudah ada
-                                                $c_trf = 'text-warning';
-                                                $i_trf = 'fa-ellipsis-h';
-                                                $t_trf = 'Pembayaran belum lunas';
-                                                break;
-                                            case "b_menunggu":
-                                                // pembayaran lanjutan dp perlu dicek
-                                                $c_trf = 'text-primary';
-                                                $i_trf = 'fa-redo fa-spin';
-                                                $t_trf = 'Pembayaran ada yang perlu dicek';
-                                                break;
-                                            default:
-                                                // belum ada
-                                                $c_trf = 'text-danger';
-                                                $i_trf = 'fa-times';
-                                                $t_trf = 'Pembayaran Belum ada';
-                                        }
+                                        echo anchor('pesanan/' .$pesanan->slug, $pesanan->nama_juragan); 
+                                        echo '<hr/><span class="text-muted small">CS: '.$pesanan->nama_cs.'</span>';
                                         ?>
-                                        <div class="fa-2x d-inline-block cek_pembayaran" data-faktur="<?php echo $pesanan->seri_faktur; ?>" data-id="<?php echo $pesanan->id_faktur?>" data-toggle="tooltip" data-placement="top" title="<?php echo $t_trf; ?>">
-                                            <span class="fa-layers fa-fw">
-                                                <i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
-                                                <i class="fas fa-wallet text-secondary" data-fa-transform="shrink-6"></i>
-                                                <span class="fa-layers fa-fw">                            
-                                                    <i class="fas fa-circle <?php echo $c_trf; ?>" data-fa-transform="shrink-8 down-1 right-5"></i>
-                                                    <i class="fas <?php echo $i_trf; ?> text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
-                                                </span>
-                                            </span>
-                                        </div>
-
-                                        <?php
-                                        // status paket
-                                        switch ($pesanan->status_paket) {
-                                            case "diproses":
-                                                // paket diproses
-                                                $c_pkt = 'text-success';
-                                                $i_pkt = 'fa-check-double';
-                                                $mi_pkt = 'fa-box';
-                                                $t_pkt = 'Pesanan diproses';
-                                                $s_pkt = 'belum diproses';
-                                                break;
-                                            default:
-                                                // belum diproses
-                                                $c_pkt = 'text-danger';
-                                                $i_pkt = 'fa-times';
-                                                $mi_pkt = 'fa-box-open';
-                                                $t_pkt = 'Pesanan Belum diproses';
-                                                $s_pkt = 'diproses';
-                                        }
-                                        ?>
-                                        <div class="fa-2x d-inline-block set_paket" data-status="<?php echo $s_pkt; ?>" data-faktur="<?php echo $pesanan->seri_faktur; ?>" data-id="<?php echo $pesanan->id_faktur?>" data-toggle="tooltip" data-placement="top" title="<?php echo $t_pkt; ?>">
-                                            <span class="fa-layers fa-fw">
-                                                <i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
-                                                <i class="fas <?php echo $mi_pkt; ?> text-secondary" data-fa-transform="shrink-6"></i>
+                                    </td>
+                                    <td>
+                                        <div class="mn" data-kurang="<?php echo $kekurangan; ?>" data-faktur="<?php echo strtoupper($pesanan->seri_faktur); ?>" data-id="<?php echo $pesanan->id_faktur?>" >
+                                            <?php 
+                                            // status transfer
+                                            switch ($pesanan->status_transfer) {
+                                                case "d_lunas":
+                                                    // sudah lunas
+                                                    $c_trf = 'text-success';
+                                                    $a_trf = 'cek_pembayaran';
+                                                    $i_trf = 'fa-check-double';
+                                                    $t_trf = 'Pembayaran Lunas';
+                                                    break;
+                                                case "e_lebih":
+                                                    // sudah lunas dan mempunyai kelebihan
+                                                    $c_trf = 'text-info';
+                                                    $a_trf = 'cek_pembayaran';
+                                                    $i_trf = 'fa-plus';
+                                                    $t_trf = 'Pembayaran Lunas & memiliki kelebihan';
+                                                    break;
+                                                case "c_sebagian":
+                                                    // belum lunas / dp yang dibayarkan sudah ada
+                                                    $c_trf = 'text-warning';
+                                                    $a_trf = 'cek_pembayaran';
+                                                    $i_trf = 'fa-ellipsis-h';
+                                                    $t_trf = 'Pembayaran belum lunas';
+                                                    break;
+                                                case "b_menunggu":
+                                                    // pembayaran lanjutan dp perlu dicek
+                                                    $c_trf = 'text-primary';
+                                                    $a_trf = 'cek_pembayaran';
+                                                    $i_trf = 'fa-redo fa-spin';
+                                                    $t_trf = 'Pembayaran ada yang perlu dicek';
+                                                    break;
+                                                default:
+                                                    // belum ada
+                                                    $c_trf = 'text-danger';
+                                                    $a_trf = 'tambah_pembayaran';
+                                                    $i_trf = 'fa-times';
+                                                    $t_trf = 'Pembayaran Belum ada';
+                                            }
+                                            ?>
+                                            <div class="fa-2x d-inline-block <?php echo $a_trf; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $t_trf; ?>">
                                                 <span class="fa-layers fa-fw">
-                                                    <i class="fas fa-circle <?php echo $c_pkt; ?>" data-fa-transform="shrink-8 down-1 right-5"></i>
-                                                    <i class="fas <?php echo $i_pkt; ?> text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+                                                    <i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
+                                                    <i class="fas fa-wallet text-secondary" data-fa-transform="shrink-6"></i>
+                                                    <span class="fa-layers fa-fw">                            
+                                                        <i class="fas fa-circle <?php echo $c_trf; ?>" data-fa-transform="shrink-8 down-1 right-5"></i>
+                                                        <i class="fas <?php echo $i_trf; ?> text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+                                                    </span>
                                                 </span>
-                                            </span>
-                                        </div>
+                                            </div>
 
-                                        <?php
-                                        // status kirim
-                                        switch ($pesanan->status_kirim) {
-                                            
-                                            case "b_dikirim":
-                                                // pesanan dikirim
-                                                $c_krm = 'text-success';
-                                                $i_krm = 'fa-check-double';
-                                                $mi_krm = 'fa-plane-departure';
-                                                $t_krm = 'Pesanan telah dikirim';
-                                                break;
-                                            case "d_sebagian":
-                                                // pesanan dikirim / diambil sebagian
-                                                $c_krm = 'text-warning';
-                                                $i_krm = 'fa-ellipsis-h';
-                                                $mi_krm = 'fa-cubes';
-                                                $t_krm = 'Pesanan telah dikirim sebagian';
-                                                break;
-                                            case "c_diambil":
-                                                // pesanan diambil
-                                                $c_krm = 'text-success';
-                                                $i_krm = 'fa-check-double';
-                                                $mi_krm = 'fa-people-carry';
-                                                $t_krm = 'Pesanan diambil';
-                                                break;
-                                            default:
-                                                // belum kirim / ambil
-                                                $c_krm = 'text-danger';
-                                                $i_krm = 'fa-times';
-                                                $mi_krm = 'fa-cubes';
-                                                $t_krm = 'Pesanan Belum dikirim';
-                                        }
-                                        ?>
-                                        <div class="fa-2x d-inline-block set_kirim" data-faktur="<?php echo $pesanan->seri_faktur; ?>" data-id="<?php echo $pesanan->id_faktur?>" data-toggle="tooltip" data-placement="top" title="<?php echo $t_krm; ?>">
-                                            <span class="fa-layers fa-fw">
-                                                <i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
-                                                <i class="fas <?php echo $mi_krm; ?> text-secondary" data-fa-transform="shrink-6"></i>
+                                            <?php
+                                            // status paket
+                                            switch ($pesanan->status_paket) {
+                                                case "diproses":
+                                                    // paket diproses
+                                                    $c_pkt = 'text-success';
+                                                    $i_pkt = 'fa-check-double';
+                                                    $mi_pkt = 'fa-box';
+                                                    $t_pkt = 'Pesanan diproses';
+                                                    $a_krm = 'set_kirim';
+                                                    $s_pkt = 'batal proses';
+                                                    break;
+                                                default:
+                                                    // belum diproses
+                                                    $c_pkt = 'text-danger';
+                                                    $i_pkt = 'fa-times';
+                                                    $mi_pkt = 'fa-box-open';
+                                                    $t_pkt = 'Pesanan Belum diproses';
+                                                    $a_krm = 'cant_kirim';
+                                                    $s_pkt = 'diproses';
+                                            }
+                                            ?>
+                                            <div class="fa-2x d-inline-block set_paket" data-status="<?php echo $s_pkt; ?>" data-faktur="<?php echo $pesanan->seri_faktur; ?>" data-id="<?php echo $pesanan->id_faktur?>" data-toggle="tooltip" data-placement="top" title="<?php echo $t_pkt; ?>">
                                                 <span class="fa-layers fa-fw">
-                                                    <i class="fas fa-circle <?php echo $c_krm; ?>" data-fa-transform="shrink-8 down-1 right-5"></i>
-                                                    <i class="fas <?php echo $i_krm; ?> text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+                                                    <i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
+                                                    <i class="fas <?php echo $mi_pkt; ?> text-secondary" data-fa-transform="shrink-6"></i>
+                                                    <span class="fa-layers fa-fw">
+                                                        <i class="fas fa-circle <?php echo $c_pkt; ?>" data-fa-transform="shrink-8 down-1 right-5"></i>
+                                                        <i class="fas <?php echo $i_pkt; ?> text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+                                                    </span>
                                                 </span>
-                                            </span>
-                                        </div>
+                                            </div>
 
-                                        <!-- // sdfjh -->
+                                            <?php
+                                            // status kirim
+                                            switch ($pesanan->status_kirim) {
+                                                
+                                                case "b_dikirim":
+                                                    // pesanan dikirim
+                                                    $c_krm = 'text-success';
+                                                    $i_krm = 'fa-check-double';
+                                                    $mi_krm = 'fa-plane-departure';
+                                                    $t_krm = 'Pesanan telah dikirim';
+                                                    break;
+                                                case "d_sebagian":
+                                                    // pesanan dikirim / diambil sebagian
+                                                    $c_krm = 'text-warning';
+                                                    $i_krm = 'fa-ellipsis-h';
+                                                    $mi_krm = 'fa-cubes';
+                                                    $t_krm = 'Pesanan telah dikirim sebagian';
+                                                    break;
+                                                case "c_diambil":
+                                                    // pesanan diambil
+                                                    $c_krm = 'text-success';
+                                                    $i_krm = 'fa-check-double';
+                                                    $mi_krm = 'fa-people-carry';
+                                                    $t_krm = 'Pesanan diambil';
+                                                    break;
+                                                default:
+                                                    // belum kirim / ambil
+                                                    $c_krm = 'text-danger';
+                                                    $i_krm = 'fa-times';
+                                                    $mi_krm = 'fa-cubes';
+                                                    $t_krm = 'Pesanan Belum dikirim';
+                                            }
+                                            ?>
+                                            <div class="fa-2x d-inline-block <?php echo $a_krm; ?>" data-faktur="<?php echo $pesanan->seri_faktur; ?>" data-id="<?php echo $pesanan->id_faktur?>" data-toggle="tooltip" data-placement="top" title="<?php echo $t_krm; ?>">
+                                                <span class="fa-layers fa-fw">
+                                                    <i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
+                                                    <i class="fas <?php echo $mi_krm; ?> text-secondary" data-fa-transform="shrink-6"></i>
+                                                    <span class="fa-layers fa-fw">
+                                                        <i class="fas fa-circle <?php echo $c_krm; ?>" data-fa-transform="shrink-8 down-1 right-5"></i>
+                                                        <i class="fas <?php echo $i_krm; ?> text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                        </div>
                                         
                                         <div class="dropdown dropright">
                                             <button class="btn btn-outline-primary btn-sm btn-block" type="button" id="buttonDropdown-<?php echo $pesanan->id_faktur?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-cog fa-spin"></i>
                                             </button>
-                                            <div class="dropdown-menu" aria-labelledby="buttonDropdown-<?php echo $pesanan->id_faktur?>">
+                                            <div class="dropdown-menu mn" data-kurang="<?php echo $kekurangan; ?>" data-faktur="<?php echo strtoupper($pesanan->seri_faktur); ?>" data-id="<?php echo $pesanan->id_faktur?>" aria-labelledby="buttonDropdown-<?php echo $pesanan->id_faktur?>">
                                                 <h6 class="dropdown-header">Status Pembayaran</h6>
-                                                <a class="cek_pembayaran dropdown-item" data-faktur="<?php echo $pesanan->seri_faktur; ?>" data-id="<?php echo $pesanan->id_faktur?>" href="#!">Cek Pembayaran</a>
-                                                <a class="tambah_pembayaran dropdown-item" data-faktur="<?php echo $pesanan->seri_faktur; ?>" data-id="<?php echo $pesanan->id_faktur?>" href="#!" data-kurang="<?php echo $kekurangan; ?>">Tambah Pembayaran</a>
+                                                <a class="cek_pembayaran dropdown-item" href="#!">Cek Pembayaran</a>
+                                                <a class="tambah_pembayaran dropdown-item">Tambah Pembayaran</a>
                                                 <div class="dropdown-divider"></div>
                                                 <h6 class="dropdown-header">Status Pengiriman</h6>
-                                                <a class="dropdown-item" href="#">Set / Sunting</a>
+                                                <a class="dropdown-item <?php echo $a_krm; ?>" href="#!">Set / Sunting</a>
                                                 <div class="dropdown-divider"></div>
                                                 <h6 class="dropdown-header">Lainnya</h6>
-                                                <a class="dropdown-item" href="#">Sunting</a>
+                                                <?php echo anchor('pesanan/sunting/' . $pesanan->seri_faktur, 'Sunting', array('class' => 'dropdown-item') ); ?>
                                                 <a class="dropdown-item" href="#">Unduh PDF</a>
-                                                <a class="text-danger dropdown-item" href="#">Hapus</a>
+                                                <a class="text-danger hapus_pesanan dropdown-item" href="#!">Hapus</a>
                                             </div>
                                         </div>
-
                                     </td>
                                     <td>
                                         <?php
-                                        echo '<span class="font-weight-bold">' . $pesanan->nama . '</span><br/>';
+                                        echo '<span class="font-weight-bold">' . strtoupper( $pesanan->nama ) . '</span><br/>';
                                         echo '<span class="badge badge-dark">' . $pesanan->hp1 . '</span>' . ($pesanan->hp2 !== NULL? '<span class="sr-only"> / </span><span class="ml-1 badge badge-dark">' . $pesanan->hp2 . '</span>': '') . '<br/>';
-                                        echo strtoupper($pesanan->alamat);
+                                        echo nl2br(strtoupper($pesanan->alamat));
                                         ?>
                                     </td>
                                     <td>
                                         <?php
-                                        echo ($pesanan->tipe === NULL? '': '<span class="d-block text-uppercase py-1 text-center text-light font-weight-bold border border-primary bg-primary rounded px-2 mb-1">'.$pesanan->tipe.'</span>');
+                                        echo ($pesanan->tipe === NULL? '': '<span class="d-block text-uppercase py-1 text-center text-light font-weight-bold border border-danger bg-danger rounded px-2 mb-1">'.$pesanan->tipe.'</span>');
 
                                         echo $hproduk;
                                         echo '<hr/><em>total: <span class="badge badge-dark">' . $jumlah_produk . '</span> pcs</em>';
@@ -294,21 +304,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </td>
                                     <td>
                                         <?php
-                                        if($dibayar === 0) {
-                                            $status_bayar = '<span class="d-block text-center border border-danger text-uppercase py-1 font-weight-bold rounded">Belum Lunas</span>';
-                                        }
-                                        else if($wajib_bayar > $dibayar) {
+                                       if($wajib_bayar > $dibayar && $dibayar > 0) {
                                             $status_bayar = '<span class="d-block text-center border border-warning text-uppercase py-1 font-weight-bold rounded">Kredit</span>';
                                         }
-                                        else {
+                                        else if($wajib_bayar === $dibayar) {
                                             $status_bayar = '<span class="d-block text-center border border-success text-uppercase py-1 font-weight-bold rounded">Lunas</span>';
+                                        }
+                                        else if($wajib_bayar < $dibayar) {
+                                            $status_bayar = '<span class="d-block text-center border border-primary text-uppercase py-1 font-weight-bold rounded">Kelebihan</span>';
+                                        }
+                                        else {
+                                            $status_bayar = '<span class="d-block text-center border border-danger text-uppercase py-1 font-weight-bold rounded">Belum Lunas</span>';
                                         }
 
                                         //
                                         echo $status_bayar;
-                                        echo '<span class="d-block text-right">harga : <span class="badge badge-info">'. harga($harga_total)  .'</span></span>';
+                                        echo '<span class="d-block text-right">harga produk : <span class="badge badge-info">'. harga($harga_total)  .'</span></span>';
                                         if($pesanan->ongkir > 0) {
-                                            echo '<span class="d-block text-right">ongkir : <span class="badge badge-dark">'. harga($pesanan->ongkir)  .'</span></span>';
+                                            echo '<span class="d-block text-right">tariff ongkir : <span class="badge badge-dark">'. harga($pesanan->ongkir)  .'</span></span>';
                                         }
                                         if($pesanan->unik > 0) {
                                             echo '<span class="d-block text-right">digit unik : <span class="badge badge-secondary">'. harga($pesanan->unik)  .'</span></span>';
@@ -349,25 +362,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         ?>
                                         <?php
                                         if($pesanan->keterangan !== NULL) { ?>
-                                            <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseKeterangan" aria-expanded="false" aria-controls="collapseKeterangan">
-                                                Keterangan
+                                            <button class="btn btn-outline-info dropdown-toggle btn-sm" type="button" data-toggle="collapse" data-target="#collapseKeterangan<?php echo $pesanan->id_faktur; ?>" aria-expanded="false" aria-controls="collapseKeterangan<?php echo $pesanan->id_faktur; ?>">
+                                                <i class="fas fa-scroll"></i> Keterangan
                                             </button>
                                         <?php 
                                         } 
                                         if($pesanan->pengiriman !== NULL) {
                                         ?>
-                                        <button class="btn btn-dark btn-sm" type="button" data-toggle="collapse" data-target="#collapseResi" aria-expanded="false" aria-controls="collapseResi">
-                                            Resi Kirim
+                                        <button class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseResi<?php echo $pesanan->id_faktur; ?>" aria-expanded="false" aria-controls="collapseResi<?php echo $pesanan->id_faktur; ?>">
+                                            <i class="fas fa-receipt"></i> Resi Kirim
                                         </button>
-                                        <div class="collapse show" id="collapseResi">
-                                            <div class="bg-light border border-primary p-1 mt-2 rounded">
+                                        <div class="collapse show" id="collapseResi<?php echo $pesanan->id_faktur; ?>">
+                                            <div class="bg-light border border-dark p-1 mt-2 rounded">
                                                 <?php 
                                                 echo '<h6>Pengiriman : </h6>';
                                                 echo '<ul class="ml-0 pl-3">';
                                                 foreach ($kirim as $kirim) {
                                                     echo '<li><span class="font-weight-bold">' . strtoupper($kirim->kurir) . '</span>';
                                                     echo '<br/>' . $kirim->resi;
-                                                    echo '<br/>' . $kirim->tanggal_kirim;
+                                                    echo '<br/><small class="text-muted">tanggal: ' . mdate('%d-%m-%Y', $kirim->tanggal_kirim) . '</small>';
                                                     echo ($kirim->ongkir > 0? '<br/>ongkir: <span class="badge badge-secondary">' . harga($kirim->ongkir) . '</span>': '');
                                                     echo '</li>';
                                                 }
@@ -378,10 +391,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                         <?php }
                                         if($pesanan->keterangan !== NULL) { ?>
-                                        <div class="collapse<?php echo ($pesanan->pengiriman !== NULL? '': ' show'); ?>" id="collapseKeterangan">
+                                        <div class="collapse<?php echo ($pesanan->pengiriman !== NULL? '': ' show'); ?>" id="collapseKeterangan<?php echo $pesanan->id_faktur; ?>">
                                             <p>
                                                 <?php 
-                                                echo $pesanan->keterangan;
+                                                echo nl2br($pesanan->keterangan);
                                                 ?>
                                             </p>
                                         </div>

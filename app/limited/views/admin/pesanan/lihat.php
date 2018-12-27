@@ -355,7 +355,7 @@ else {
 			}
 
 			var script_arr = [
-			'<?php echo base_url('assets/js/bootstrap.min.js'); ?>', 
+			'<?php echo base_url('berkas/js/bootstrap.bundle.min.js'); ?>', 
 			'<?php echo base_url('assets/js/pace.min.js'); ?>'
 			];
 

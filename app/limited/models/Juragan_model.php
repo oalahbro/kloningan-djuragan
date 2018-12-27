@@ -20,11 +20,7 @@ class Juragan_model extends CI_Model
 		return $q;
 	}
 
-	/**
-	 * Cek Juragan berdasarkan `$slug`
-	 *
-	 * @return      bool
-	 */
+	
 	public function cek($slug) {
 		$q = $this->db->where('slug', $slug)->get($this->tabel);
 

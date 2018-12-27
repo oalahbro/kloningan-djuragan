@@ -17,14 +17,15 @@ class public_controller extends MY_Controller {
 				redirect('admin');
 			}
 			elseif($this->session->level === 'reseller') {
-				redirect('pesanan');
+				//redirect('pesanan');
+				show_404();
 			}
 			else {
 				// ambil juragan yg diijinkan berdasarkan slug
 				$user_slug = $this->session->username;
 				$juragan = $this->pengguna->_juragan_terakhir($user_slug);
 				$juragan = $this->juragan->_slug($juragan);
-				redirect($juragan);
+				redirect('j_' . $juragan);
 			}
 		}
     }

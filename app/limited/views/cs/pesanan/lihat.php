@@ -14,35 +14,40 @@ else {
 	$judul = 'Semua Pesanan';
 }
 ?>
-<div id="pesan_update"></div>
-
-<div class="" id="utamaOrder">
-	<div class="page-header">
-		<h1><?php echo $judul; ?> <small><?php echo $nama_juragan; ?></small></h1>
-	</div>
-
-	<div class="container-fluid navigasi">
-		<ul class="nav nav-tabs">
-			<li role="presentation" class="<?php echo ($status === 'all' ? 'active':''); ?>"><?php echo anchor( $juragan . '/pesanan/all', 'Semua'); ?></li>
-			<li role="presentation" class="<?php echo ($status === 'pending' ? 'active':''); ?>"><?php echo anchor( $juragan . '/pesanan/pending', 'Pending'); ?></li>
-			<li role="presentation" class="<?php echo ($status ==='terkirim' ? 'active':''); ?>"><?php echo anchor( $juragan . '/pesanan/terkirim', 'Terkirim'); ?></li>
-			<li role="presentation"><?php echo anchor($juragan . '/tambah', 'Tambah'); ?></li>
-		</ul>
-	</div>
+<div class="content">
+	<div class="" id="utamaOrder">
+		<div class="jumbotron jumbotron-fluid mb-3 pb-0 ">
+			<div class="container-fluid">
+				<h1><?php echo $judul; ?> <span class="font-weight-light"><?php echo $nama_juragan; ?></span></h1>
+				
+				<ul class="nav nav-tabs mt-5">
+					<li class="nav-item">
+						<?php echo anchor( 'j_' . $juragan . '/pesanan/all', 'Semua', array('class' => 'nav-link' . ($status === 'all' ? ' active':''))); ?>
+					</li>
+					<li class="nav-item">
+						<?php echo anchor( 'j_' . $juragan . '/pesanan/pending', 'Pending', array('class' => 'nav-link' . ($status === 'pending' ? ' active':''))); ?>
+					</li>
+					<li class="nav-item">
+						<?php echo anchor( 'j_' . $juragan . '/pesanan/terkirim', 'Terkirim', array('class' => 'nav-link' . ($status === 'terkirim' ? ' active':''))); ?>
+					</li>
+					<li class="nav-item">
+						<?php echo anchor( 'j_' . $juragan . '/tambah', 'Tambah', array('class' => 'nav-link')); ?>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
 
 	<div class="utama">
-		<div class="container-fluid">
+		<div class="p-sm-3">
 			<div class="row">
-				<div class="col-sm-3">
-
-					<form class="form-inline limited" method="get">
-						<div class="form-group">
-							<label class="sr-only">Limit</label>
-							<p class="form-control-static">Limit</p>
+				<div class="col-sm-3 d-none d-sm-block mb-2">
+					<form class="form-row" method="get">
+						<div class="col-2">
+							<?php echo form_label('Limit', 'limit', array('class' => 'my-1 float-right')) ?>
 						</div>
-						<div class="form-group">
-							<label for="inputPassword2" class="sr-only">Limit</label>
-							<select class="form-control" name="limit">
+						<div class="col-4">
+							<select class="custom-select" name="limit" id="limit">
 								<option value="<?php echo save_url_encode(10); ?>"<?php echo ((int) $limit === 10 ? ' selected=""': ''); ?>>10</option>
 								<option value="<?php echo save_url_encode(30); ?>"<?php echo ((int) $limit === 30 ? ' selected=""': ''); ?>>30</option>
 								<option value="<?php echo save_url_encode(50); ?>"<?php echo ((int) $limit === 50 ? ' selected=""': ''); ?>>50</option>
@@ -50,20 +55,21 @@ else {
 								<option value="<?php echo save_url_encode(150); ?>"<?php echo ((int) $limit === 150 ? ' selected=""': ''); ?>>150</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-default">OK</button>
+						<div class="col">
+							<button type="submit" class="btn btn-outline-primary">OK</button>
+						</div>
 					</form>
-
 				</div>
 
-				<div class="col-sm-3 col-sm-push-6">
-					<?php echo form_open('', array('method' => 'get', 'id' => 'myForm', 'class' => 'form-inline')); ?>
-
-						<div class="form-group">
+				<div class="col mb-2">
+					<?php echo form_open('', array('method' => 'get', 'id' => 'myForm', 'class' => 'form-row float-md-right')); ?>
+						<div class="col-8 pl-3">
 							<?php 
-
 							echo form_input('cari', $cari, array('class' => 'form-control', 'id' => 'cari', 'placeholder' => 'cari data' )) ?>
 						</div>
-						<button type="submit" class="btn btn-default" id="search-btn">OK</button>
+						<div class="col pr-3">
+							<button type="submit" class="btn btn-outline-primary btn-block" id="search-btn">OK</button>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -72,7 +78,7 @@ else {
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>Tanggal</th>
+							<th style="min-width: 160px">Tanggal</th>
 							<th>Pemesan</th>
 							<th style="min-width: 160px">Pesanan</th>
 							<th style="min-width: 170px">Biaya</th>
@@ -93,19 +99,31 @@ else {
 
 								$button_sunting = '';
 								$button_remove = '';
+								$status_transfer = '';
 
 								// lets play with button
 								if($key->status_transfer === 'ada' && $key->status_kirim === 'pending') {
 									$class_tr = ''; // default
-									$class_td = 'success';
+									$class_td = 'table-success';
+									$status_transfer = '
+									<span class="fa-stack" style="vertical-align: top;">
+  <i class="fas fa-circle fa-stack-2x text-success"></i>
+  <i class="fas fa-money-check fa-stack-1x fa-inverse"></i>
+</span>
+';
 
 									$button_transfer = '<button class="btn btn-success btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-ok"></i> Ada</button>';
 
 									$button_Kirim = '<button class="btn btn-default btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-refresh"></i> Pending</button>';
 								}
 								else if($key->status_transfer === 'ada' && $key->status_kirim === 'terkirim') {
-									$class_tr = 'success'; // default
+									$class_tr = 'table-success'; // default
 									$class_td = '';
+									$status_transfer = '
+									<span class="fa-stack" style="vertical-align: top;">
+  <i class="fas fa-circle fa-stack-2x text-success"></i>
+  <i class="fas fa-money-check fa-stack-1x fa-inverse"></i>
+</span>';
 
 									$button_transfer = '<button class="btn btn-success btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-ok"></i> Ada</button>';
 
@@ -114,6 +132,85 @@ else {
 								else {
 									$class_tr = ''; // default
 									$class_td = '';
+									$status_transfer = '
+<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Belum dibayar">
+	<span class="fa-layers fa-fw">
+		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
+		<i class="fas fa-wallet text-secondary" data-fa-transform="shrink-6"></i>
+		<span class="fa-layers fa-fw">
+			<i class="fas fa-circle text-danger" data-fa-transform="shrink-8 down-1 right-5"></i>
+			<i class="fas fa-spinner fa-spin text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+		</span>
+	</span>
+</div>
+
+<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Belum Lunas">
+	<span class="fa-layers fa-fw">
+		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
+		<i class="fas fa-wallet text-secondary" data-fa-transform="shrink-6"></i>
+		<span class="fa-layers fa-fw">
+			<i class="fas fa-circle text-warning" data-fa-transform="shrink-8 down-1 right-5"></i>
+			<i class="fas fa-check text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+		</span>
+	</span>
+</div>
+
+<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Pesanan Lunas">
+	<span class="fa-layers fa-fw">
+		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
+		<i class="fas fa-wallet text-secondary" data-fa-transform="shrink-6"></i>
+		<span class="fa-layers fa-fw">
+			<i class="fas fa-circle text-success" data-fa-transform="shrink-8 down-1 right-5"></i>
+			<i class="fas fa-check-double text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+		</span>
+	</span>
+</div>
+
+<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Pesanan belum diproses">
+	<span class="fa-layers fa-fw">
+		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
+		<i class="fas fa-box-open text-secondary" data-fa-transform="shrink-6"></i>
+		<span class="fa-layers fa-fw">
+			<i class="fas fa-circle text-danger" data-fa-transform="shrink-8 down-1 right-5"></i>
+			<i class="fas fa-spinner fa-spin text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+		</span>
+	</span>
+</div>
+
+<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Pesanan telah diproses">
+	<span class="fa-layers fa-fw">
+		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
+		<i class="fas fa-box text-secondary" data-fa-transform="shrink-6"></i>
+		<span class="fa-layers fa-fw">
+			<i class="fas fa-circle text-success" data-fa-transform="shrink-8 down-1 right-5"></i>
+			<i class="fas fa-check text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+		</span>
+	</span>
+</div>
+
+<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Paket pesanan belum dikirim">
+	<span class="fa-layers fa-fw">
+		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
+		<i class="fas fa-cubes text-secondary" data-fa-transform="shrink-6"></i>
+		<span class="fa-layers fa-fw">
+			<i class="fas fa-circle text-danger" data-fa-transform="shrink-8 down-1 right-5"></i>
+			<i class="fas fa-spinner fa-spin text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+		</span>
+	</span>
+</div>
+
+<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Paket pesanan telah dikirim">
+	<span class="fa-layers fa-fw">
+		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
+		<i class="fas fa-cubes text-secondary" data-fa-transform="shrink-6"></i>
+		<span class="fa-layers fa-fw">
+			<i class="fas fa-circle text-success" data-fa-transform="shrink-8 down-1 right-5"></i>
+			<i class="fas fa-check text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
+		</span>
+	</span>
+</div>
+
+';
 
 									if($id_submitted === $key->oleh) {
 										$button_sunting = '<li>' . anchor($juragan . '/sunting?id=' . $slug_edit, 'Sunting'). '</li>';
@@ -132,8 +229,11 @@ else {
 									<td><?php echo $key->id_pesanan; ?></td>
 									<td class="<?php echo $class_td; ?>">
 										<abbr title="<?php echo unix_to_human($key->tanggal_submit); ?>"><?php echo mdate('%d-%M-%y', $key->tanggal_submit); ?></abbr>
-										<?php echo $button_transfer; ?>
-										<?php echo $button_Kirim; ?>
+										<?php // echo $button_transfer; ?>
+										<?php // echo $button_Kirim; ?>
+										<div class="my-2">
+											<?php echo $status_transfer; ?>
+										</div>
 										<!-- Single button -->
 										<div class="btn-group btn-block">
 										<button type="button" class="btn btn-default btn-xs dropdown-toggle deropdowen" id="menuD-<?php echo $key->id_pesanan; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -224,7 +324,8 @@ else {
 		</div>
 	</div>
 </div>
-
+</div>
+</div>
 <script>
 	(function($){
 		$(document).ready(function(){
@@ -241,13 +342,14 @@ else {
 			}
 
 			var script_arr = [
-			'<?php echo base_url('assets/js/bootstrap.min.js'); ?>', 
+			'<?php echo base_url('berkas/js/bootstrap.bundle.min.js'); ?>', 
 			'<?php echo base_url('assets/js/pace.min.js'); ?>'
 			];
 
 			$.getMultiScripts(script_arr).done(function() {
                 // all scripts loaded
-                $('.deropdowen').dropdown();                
+				// $('.deropdowen').dropdown();
+				$('[data-toggle="tooltip"]').tooltip()
             });
 
             // Used to detect initial (useless) popstate.

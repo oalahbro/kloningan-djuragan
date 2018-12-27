@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pengguna extends admin_controller
 {
-
 	public function __construct() {
 		parent::__construct();
 	}
@@ -116,7 +115,38 @@ class Pengguna extends admin_controller
 			redirect('admin/pengguna/sunting?id=' . $id);
 		}
 		else {
+			// juragan 
 			$jur = NULL;
+
+			// cek didatabase sudah ada atau belum, 
+			// jika sudah ada maka skip 
+			// jika belum maka ditambah
+			// jika berkurang maka hapus
+			$usr = save_url_decode($id);
+			$usr_id = $this->pengguna->_id($usr);
+
+			$jcs = $this->pengguna->get_juragan($usr_id);
+
+			$simp = array();
+			$sbm = array();
+
+			foreach ($jcs->result() as $smpj) {
+				$simp[] = $smpj->juragan_id;
+			}
+
+			$simpan = array_diff($juragan, $simp);
+			$hapus = array_diff($simp, $juragan);
+
+			$prnt = array('simpan' => $simpan, 'hapus' => $hapus);
+
+			print('<pre>');
+			print_r($prnt);
+			print('</pre>');
+
+
+			/*
+
+
 
 			if($level === 'cs') {
 				$jur = json_encode($juragan);
@@ -159,7 +189,8 @@ class Pengguna extends admin_controller
 				$redirect = 0;
 			}
 
-			redirect('admin/pengguna/lihat?ok=' . save_url_encode( $redirect ) );
+			// redirect('admin/pengguna/lihat?ok=' . save_url_encode( $redirect ) );
+			*/
 		}
 	}
 

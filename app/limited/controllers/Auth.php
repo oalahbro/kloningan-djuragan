@@ -39,12 +39,12 @@ class Auth extends public_controller
 				);
 
 			$save = $this->pengguna->simpan($data);
-
 			$id_pengguna = $this->db->insert_id();
 
 			if($save) {
 				// kirim email validasi
 				$this->kirim_email_validasi($id_pengguna);
+				$this->session->set_flashdata('notifikasi', '<div class="alert alert-info">Harap cek email ya.</div>');
 
 				redirect('auth/masuk');
 			}

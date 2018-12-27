@@ -54,6 +54,8 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['download'] = 'download';
+$route['upgrade'] = 'upgrade';
+$route['upgrade/(:any)'] = 'upgrade/$1';
 
 //$route['login'] = 'auth/masuk';
 $route['logout'] = 'keluar';
@@ -62,7 +64,30 @@ $route['valid'] = 'auth/valid';
 //$route['register'] = 'auth/daftar';
 $route['excel'] = 'excel';
 
-$route['admin'] = 'admin/pesanan/lihat';
+// $route['admin'] = 'admin/faktur/index';
+$route['pesanan'] = 'admin/faktur/lihat';
+$route['pesanan/(:any)'] = 'admin/faktur/lihat/$1';
+$route['pesanan/sunting/(:any)'] = 'admin/faktur/sunting/$1';
+
+$route['get/pembayaran'] = 'admin/faktur/ambil_pembayaran';
+$route['post/pembayaran'] = 'admin/faktur/simpan_pembayaran';
+$route['post/paket'] = 'admin/faktur/ubah_paket';
+
+$route['del/pesanan'] = 'admin/faktur/hapus_pesanan';
+$route['del/pembayaran'] = 'admin/faktur/hapus_pembayaran';
+
+$route['add/pesanan'] = 'admin/faktur/tambah_pesanan';
+$route['add/pembayaran'] = 'admin/faktur/tambah_pembayaran';
+$route['add/pengiriman'] = 'admin/faktur/tambah_pengiriman';
+
+
+
+
+$route['j_(:any)'] = 'cs/pesanan/lihat/$1';
+$route['j_(:any)/tambah'] = 'cs/pesanan/tambah/$1';
+$route['j_(:any)/sunting'] = 'cs/pesanan/sunting';
+$route['j_(:any)/pesanan'] = 'cs/pesanan/lihat/$1';
+$route['j_(:any)/pesanan/(:any)'] = 'cs/pesanan/lihat/$1/$2';
 /*
 $route['admin'] = 'admin/pesanan/lihat';
 $route['admin/pesanan'] = 'admin/pesanan/lihat';
@@ -76,13 +101,6 @@ $route['pesanan'] = 'reseller/pesanan/lihat';
 $route['pesanan/tambah'] = 'reseller/pesanan/tambah';
 $route['pesanan/sunting'] = 'reseller/pesanan/sunting';
 $route['pesanan/(:any)'] = 'reseller/pesanan/lihat/$1';
-
-
-$route['(:any)'] = 'cs/pesanan/lihat/$1';
-$route['(:any)/tambah'] = 'cs/pesanan/tambah/$1';
-$route['(:any)/sunting'] = 'cs/pesanan/sunting';
-$route['(:any)/pesanan'] = 'cs/pesanan/lihat/$1';
-$route['(:any)/pesanan/(:any)'] = 'cs/pesanan/lihat/$1/$2';
 
 $route['(:any)/chart'] = 'cs/chart';
 */

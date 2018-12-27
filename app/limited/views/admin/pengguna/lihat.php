@@ -55,13 +55,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							foreach ($q->result() as $p) { 
 								$en_user = save_url_encode($p->username);
-
-								$jur = json_decode(($p->juragan === NULL ? '[]': $p->juragan));
+								$jur = $this->pengguna->get_juragan($p->id)->result();
 
 								$juragan = '';
 								foreach ($jur as $a) {
-									$slug = $this->juragan->_slug($a);
-									$juragan .= anchor('admin/pesanan/lihat/' . $slug, '<span class="label label-'.random_element($col).'">' . $this->juragan->_nama($a) . '</span>') .' ';
+									$slug = $this->juragan->_slug($a->juragan_id);
+									$juragan .= anchor('admin/pesanan/lihat/' . $slug, '<span class="label label-'.random_element($col).'">' . $this->juragan->_nama($a->juragan_id) . '</span>') .' ';
 								}
 								?>
 								<tr>

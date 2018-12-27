@@ -79,14 +79,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						}
 
 						$selected = array();
-						if($q->juragan !== NULL) {
-							$selected = json_decode($q->juragan);
+						$qr = $this->pengguna->get_juragan($q->id)->result();
+						foreach ($qr as $key) {
+							$selected[] = $key->juragan_id;
 						}
 
 						echo form_multiselect('juragan[]', $option, $selected, array('class' => 'form-control') );
 						?>
 						<p class="help-block">tekan tombol CTRL untuk memilih lebih dari satu (hanya untuk role CS)</p>
 					</div>
+
+					<?php
+					$array1 = array("a" => "green", "red", "blue", "red");
+					$array2 = array("b" => "green", "yellow", "red");
+					$result = array_diff($array1, $array2);
+					
+					print_r($result);
+
+					?>
 
 					<div class="form-group">
 						<?php

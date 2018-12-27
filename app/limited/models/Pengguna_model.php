@@ -108,11 +108,13 @@ class Pengguna_model extends CI_Model
 
 	public function _juragan_terakhir($username) {
 		$id_pengguna = $this->_id($username);
-		$q =  $this->_detail($id_pengguna);
 
-		$r = $q->row();
+		$this->db->where('pengguna_id', $id_pengguna);
+		$q = $this->db->get('pengguna_relation');
 
-		$jur = (array) json_decode($r->juragan);
+		foreach ($q->result() as $key) {
+			$jur[] = $key->juragan_id;
+		}
 
 		$this->db->where('juragan', $jur[0]);
 
@@ -130,11 +132,13 @@ class Pengguna_model extends CI_Model
 
 	public function _juragan_cs($username) {
 		$id_pengguna = $this->_id($username);
-		$q =  $this->_detail($id_pengguna);
 
-		$r = $q->row();
-		$jur = (array) json_decode($r->juragan);
+		$this->db->where('pengguna_id', $id_pengguna);
+		$q = $this->db->get('pengguna_relation');
 
+		foreach ($q->result() as $key) {
+			$jur[] = $key->juragan_id;
+		}
 
 		$t = $this->db->where_in('id', $jur)
 					->order_by('nama', 'asc')
@@ -145,11 +149,13 @@ class Pengguna_model extends CI_Model
 
 	public function juragan($username, $juragan) {
 		$id_pengguna = $this->_id($username);
-		$q =  $this->_detail($id_pengguna);
+		$this->db->where('pengguna_id', $id_pengguna);
+		$q = $this->db->get('pengguna_relation');
 
-		$r = $q->row();
+		foreach ($q->result() as $key) {
+			$jur[] = $key->juragan_id;
+		}
 
-		$jur = (array) json_decode($r->juragan);
 		$jid = $this->juragan->_id($juragan);
 
 		if(in_array($jid, $jur)) {
@@ -171,11 +177,6 @@ class Pengguna_model extends CI_Model
 		if ($this->db->affected_rows() > 0) {
 			return TRUE;
 		}
-	}
-
-	public function _juragan($username)
-	{
-		# code...
 	}
 
 	/**
