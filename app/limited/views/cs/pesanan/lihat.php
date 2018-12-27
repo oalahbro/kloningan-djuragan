@@ -22,16 +22,13 @@ else {
 				
 				<ul class="nav nav-tabs mt-5">
 					<li class="nav-item">
-						<?php echo anchor( 'j_' . $juragan . '/pesanan/all', 'Semua', array('class' => 'nav-link' . ($status === 'all' ? ' active':''))); ?>
+						<?php echo anchor( 'kardusin/' . $juragan . '/all', 'Semua', array('class' => 'nav-link' . ($status === 'all' ? ' active':''))); ?>
 					</li>
 					<li class="nav-item">
-						<?php echo anchor( 'j_' . $juragan . '/pesanan/pending', 'Pending', array('class' => 'nav-link' . ($status === 'pending' ? ' active':''))); ?>
+						<?php echo anchor( 'kardusin/' . $juragan . '/pending', 'Pending', array('class' => 'nav-link' . ($status === 'pending' ? ' active':''))); ?>
 					</li>
 					<li class="nav-item">
-						<?php echo anchor( 'j_' . $juragan . '/pesanan/terkirim', 'Terkirim', array('class' => 'nav-link' . ($status === 'terkirim' ? ' active':''))); ?>
-					</li>
-					<li class="nav-item">
-						<?php echo anchor( 'j_' . $juragan . '/tambah', 'Tambah', array('class' => 'nav-link')); ?>
+						<?php echo anchor( 'kardusin/' . $juragan . '/terkirim', 'Terkirim', array('class' => 'nav-link' . ($status === 'terkirim' ? ' active':''))); ?>
 					</li>
 				</ul>
 			</div>
@@ -105,112 +102,23 @@ else {
 								if($key->status_transfer === 'ada' && $key->status_kirim === 'pending') {
 									$class_tr = ''; // default
 									$class_td = 'table-success';
-									$status_transfer = '
-									<span class="fa-stack" style="vertical-align: top;">
-  <i class="fas fa-circle fa-stack-2x text-success"></i>
-  <i class="fas fa-money-check fa-stack-1x fa-inverse"></i>
-</span>
-';
+									
+									$button_transfer = '<button class="btn btn-success btn-sm btn-block" disabled="disabled"><i class="glyphicon glyphicon-ok"></i> Ada</button>';
 
-									$button_transfer = '<button class="btn btn-success btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-ok"></i> Ada</button>';
-
-									$button_Kirim = '<button class="btn btn-default btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-refresh"></i> Pending</button>';
+									$button_Kirim = '<button class="btn btn-secondary btn-sm btn-block" disabled="disabled"><i class="glyphicon glyphicon-refresh"></i> Pending</button>';
 								}
 								else if($key->status_transfer === 'ada' && $key->status_kirim === 'terkirim') {
 									$class_tr = 'table-success'; // default
 									$class_td = '';
-									$status_transfer = '
-									<span class="fa-stack" style="vertical-align: top;">
-  <i class="fas fa-circle fa-stack-2x text-success"></i>
-  <i class="fas fa-money-check fa-stack-1x fa-inverse"></i>
-</span>';
 
-									$button_transfer = '<button class="btn btn-success btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-ok"></i> Ada</button>';
+									$button_transfer = '<button class="btn btn-success btn-sm btn-block" disabled="disabled"><i class="glyphicon glyphicon-ok"></i> Ada</button>';
 
-									$button_Kirim = '<button class="btn btn-success btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-ok"></i> Terkirim</button>';
+									$button_Kirim = '<button class="btn btn-success btn-sm btn-block" disabled="disabled"><i class="glyphicon glyphicon-ok"></i> Terkirim</button>';
 								}
 								else {
 									$class_tr = ''; // default
 									$class_td = '';
-									$status_transfer = '
-<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Belum dibayar">
-	<span class="fa-layers fa-fw">
-		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
-		<i class="fas fa-wallet text-secondary" data-fa-transform="shrink-6"></i>
-		<span class="fa-layers fa-fw">
-			<i class="fas fa-circle text-danger" data-fa-transform="shrink-8 down-1 right-5"></i>
-			<i class="fas fa-spinner fa-spin text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
-		</span>
-	</span>
-</div>
-
-<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Belum Lunas">
-	<span class="fa-layers fa-fw">
-		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
-		<i class="fas fa-wallet text-secondary" data-fa-transform="shrink-6"></i>
-		<span class="fa-layers fa-fw">
-			<i class="fas fa-circle text-warning" data-fa-transform="shrink-8 down-1 right-5"></i>
-			<i class="fas fa-check text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
-		</span>
-	</span>
-</div>
-
-<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Pesanan Lunas">
-	<span class="fa-layers fa-fw">
-		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
-		<i class="fas fa-wallet text-secondary" data-fa-transform="shrink-6"></i>
-		<span class="fa-layers fa-fw">
-			<i class="fas fa-circle text-success" data-fa-transform="shrink-8 down-1 right-5"></i>
-			<i class="fas fa-check-double text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
-		</span>
-	</span>
-</div>
-
-<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Pesanan belum diproses">
-	<span class="fa-layers fa-fw">
-		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
-		<i class="fas fa-box-open text-secondary" data-fa-transform="shrink-6"></i>
-		<span class="fa-layers fa-fw">
-			<i class="fas fa-circle text-danger" data-fa-transform="shrink-8 down-1 right-5"></i>
-			<i class="fas fa-spinner fa-spin text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
-		</span>
-	</span>
-</div>
-
-<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Pesanan telah diproses">
-	<span class="fa-layers fa-fw">
-		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
-		<i class="fas fa-box text-secondary" data-fa-transform="shrink-6"></i>
-		<span class="fa-layers fa-fw">
-			<i class="fas fa-circle text-success" data-fa-transform="shrink-8 down-1 right-5"></i>
-			<i class="fas fa-check text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
-		</span>
-	</span>
-</div>
-
-<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Paket pesanan belum dikirim">
-	<span class="fa-layers fa-fw">
-		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
-		<i class="fas fa-cubes text-secondary" data-fa-transform="shrink-6"></i>
-		<span class="fa-layers fa-fw">
-			<i class="fas fa-circle text-danger" data-fa-transform="shrink-8 down-1 right-5"></i>
-			<i class="fas fa-spinner fa-spin text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
-		</span>
-	</span>
-</div>
-
-<div class="fa-2x d-inline-block" data-toggle="tooltip" data-placement="top" title="Paket pesanan telah dikirim">
-	<span class="fa-layers fa-fw">
-		<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>
-		<i class="fas fa-cubes text-secondary" data-fa-transform="shrink-6"></i>
-		<span class="fa-layers fa-fw">
-			<i class="fas fa-circle text-success" data-fa-transform="shrink-8 down-1 right-5"></i>
-			<i class="fas fa-check text-light" data-fa-transform="shrink-10 down-1 right-5"></i>
-		</span>
-	</span>
-</div>
-
-';
+									
 
 									if($id_submitted === $key->oleh) {
 										$button_sunting = '<li>' . anchor($juragan . '/sunting?id=' . $slug_edit, 'Sunting'). '</li>';
@@ -220,23 +128,21 @@ else {
 										$button_remove = '<li>' . anchor($juragan . '/hapus?id=' . $slug_edit, 'Hapus'). '</li>';
 									}
 
-									$button_transfer = '<button class="btn btn-default btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-remove"></i> Belum</button>';
+									$button_transfer = '<button class="btn btn-secondary btn-sm btn-block" disabled="disabled"><i class="glyphicon glyphicon-remove"></i> Belum</button>';
 
-									$button_Kirim = '<button class="btn btn-default btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-refresh"></i> Pending</button>';
+									$button_Kirim = '<button class="btn btn-secondary btn-sm btn-block" disabled="disabled"><i class="glyphicon glyphicon-refresh"></i> Pending</button>';
 								}
 								?>
 								<tr class="<?php echo $class_tr; ?>">
 									<td><?php echo $key->id_pesanan; ?></td>
 									<td class="<?php echo $class_td; ?>">
 										<abbr title="<?php echo unix_to_human($key->tanggal_submit); ?>"><?php echo mdate('%d-%M-%y', $key->tanggal_submit); ?></abbr>
-										<?php // echo $button_transfer; ?>
-										<?php // echo $button_Kirim; ?>
-										<div class="my-2">
-											<?php echo $status_transfer; ?>
-										</div>
+										<?php echo $button_transfer; ?>
+										<?php echo $button_Kirim; ?>
+										
 										<!-- Single button -->
 										<div class="btn-group btn-block">
-										<button type="button" class="btn btn-default btn-xs dropdown-toggle deropdowen" id="menuD-<?php echo $key->id_pesanan; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<button type="button" class="btn btn-secondary btn-sm dropdown-toggle deropdowen" id="menuD-<?php echo $key->id_pesanan; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												Aksi <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu" aria-labelledby="menuD-<?php echo $key->id_pesanan; ?>">
@@ -250,7 +156,7 @@ else {
 									<td><?php
 									$pm = json_decode($key->pemesan);
 									echo '<strong>' . strtoupper( $pm->n ) . '</strong><br/>';
-									echo '<span class="label label-info">' . strtoupper( $pm->p[0] ) . '</span>' . (isset($pm->p[1]) ? ' <span class="sr-only">/</span> <span class="label label-info">' . $pm->p[1] . '</span>': '' );
+									echo '<span class="badge badge-info">' . strtoupper( $pm->p[0] ) . '</span>' . (isset($pm->p[1]) ? ' <span class="sr-only">/</span> <span class="badge badge-info">' . $pm->p[1] . '</span>': '' );
 									echo '<br/>' . strtoupper( nl2br( $pm->a) );
 									?></td>
 									<td><?php
@@ -259,19 +165,19 @@ else {
 										$total_pesanan = $total_pesanan+$pesan->q;
 										echo strtoupper($pesan->c) . ' (' .strtoupper($pesan->s). ') = ' . $pesan->q . 'pcs<br/>';
 									}
-									echo '<hr/><em class="text-info">total: <span class="label label-default">' . $total_pesanan . '</span> pcs</em>';
+									echo '<hr/><em class="text-info">total: <span class="badge badge-secondary">' . $total_pesanan . '</span> pcs</em>';
 									?></td>
 									<td>
 									<?php
 									
-									echo '<button class="btn btn-bank btn-block btn-xs">' . strtoupper($biaya->b) . '</button>';
-									echo '<button class="btn btn-status btn-block btn-xs '. $biaya->s .'">' . strtoupper($biaya->s) . '</button>';
+									echo '<div class="border border-primary text-center mb-2">' . strtoupper($biaya->b) . '</div>';
+									echo '<div class="border text-center mb-2 border-'. ($biaya->s === 'dp'? 'danger': 'success') .'">' . strtoupper($biaya->s) . '</div>';
 									echo '<div class="text-right">';
-									echo 'harga : <span class="label label-info">' . harga($biaya->m->h) . '</span><br/>';
-									echo (isset($biaya->m->o) && $biaya->m->o > 0 ? 'ongkir : <span class="label label-success">' . harga($biaya->m->o) . '</span>': '<span class="label label-success">FREE ONGKIR</span>') . '<br/>';
-									echo (isset($biaya->m->of)? 'ongkir fix : <span class="label label-warning">' . harga($biaya->m->of) . '</span><br/>' : '');
-									echo (isset($biaya->m->d) && $biaya->m->d > 0? 'diskon : <span class="label label-default">- ' . harga($biaya->m->d) . '</span><br/>' : '');
-									echo 'transfer : <span class="label label-danger">' . harga($biaya->m->t) . '</span><br/>';
+									echo 'harga : <span class="badge badge-info">' . harga($biaya->m->h) . '</span><br/>';
+									echo (isset($biaya->m->o) && $biaya->m->o > 0 ? 'ongkir : <span class="badge badge-success">' . harga($biaya->m->o) . '</span>': '<span class="badge badge-success">FREE ONGKIR</span>') . '<br/>';
+									echo (isset($biaya->m->of)? 'ongkir fix : <span class="badge badge-warning">' . harga($biaya->m->of) . '</span><br/>' : '');
+									echo (isset($biaya->m->d) && $biaya->m->d > 0? 'diskon : <span class="badge badge-secondary">- ' . harga($biaya->m->d) . '</span><br/>' : '');
+									echo 'transfer : <span class="badge badge-danger">' . harga($biaya->m->t) . '</span><br/>';
 									echo '</div>';
 									?>
 									

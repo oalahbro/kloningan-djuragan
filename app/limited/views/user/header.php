@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 echo doctype('html5'); 
-$dr = $this->juragan->_semua();
+$username = $this->session->userdata('username');
+$dr = $this->pengguna->_juragan_cs($username);
 ?>
 <html>
 <head>
@@ -42,7 +43,7 @@ $dr = $this->juragan->_semua();
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 			<li class="nav-item active">
-				<?php echo anchor('add/pesanan', 'Tulis Pesanan', array('class'=>'nav-link')) ?>
+				<?php echo anchor('myneworder', 'Tulis Pesanan', array('class'=>'nav-link')) ?>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -50,10 +51,8 @@ $dr = $this->juragan->_semua();
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<?php
-					echo anchor('arsip', 'Semua Juragan', array('class'=> 'dropdown-item'));
-					echo '<div class="dropdown-divider"></div>';
 					foreach ($dr->result() as $key) {
-						echo anchor('arsip/pesanan/' . $key->slug . '/all', $key->nama, array('class'=> 'dropdown-item'));
+						echo anchor('kardusin/' . $key->slug . '/all', $key->nama, array('class'=> 'dropdown-item'));
 					}
 					?>
 				</div>
@@ -76,10 +75,9 @@ $dr = $this->juragan->_semua();
     <div class="sidebar bg-dark toggled">
         <ul class="list-unstyled">
 			<?php
-			echo '<li>' .anchor('pesanan/s_juragan', '<i class="fas fa-users"></i> Semua Juragan') . '</li>';
 			foreach ($dr->result() as $key) {
 				echo '<li>';
-					echo anchor('pesanan/' . $key->slug, '<i class="fas fa-user-circle"></i> ' . $key->nama);
+					echo anchor('myorder/' . $key->slug, '<i class="fas fa-user-circle"></i> ' . $key->nama, array());
 				echo '</li>';
 			}
 			?>

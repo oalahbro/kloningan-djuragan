@@ -133,7 +133,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </td>
                                     <td>
                                         <?php 
-                                        echo anchor('pesanan/' .$pesanan->slug, $pesanan->nama_juragan); 
+                                        echo anchor('myorder/' .$pesanan->slug, $pesanan->nama_juragan); 
                                         echo '<hr/><span class="text-muted small">CS: '.$pesanan->nama_cs.'</span>';
                                         ?>
                                     </td>
@@ -275,15 +275,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <div class="dropdown-menu mn" data-kurang="<?php echo $kekurangan; ?>" data-faktur="<?php echo strtoupper($pesanan->seri_faktur); ?>" data-id="<?php echo $pesanan->id_faktur?>" aria-labelledby="buttonDropdown-<?php echo $pesanan->id_faktur?>">
                                                 <h6 class="dropdown-header">Status Pembayaran</h6>
                                                 <a class="cek_pembayaran dropdown-item" href="#!">Cek Pembayaran</a>
-                                                <a class="tambah_pembayaran dropdown-item">Tambah Pembayaran</a>
+                                                <!-- <a class="tambah_pembayaran dropdown-item">Tambah Pembayaran</a> -->
                                                 <div class="dropdown-divider"></div>
-                                                <h6 class="dropdown-header">Status Pengiriman</h6>
-                                                <a class="dropdown-item <?php echo $a_krm; ?>" href="#!">Set / Sunting</a>
+                                                
                                                 <div class="dropdown-divider"></div>
                                                 <h6 class="dropdown-header">Lainnya</h6>
-                                                <?php echo anchor('pesanan/sunting/' . $pesanan->seri_faktur, 'Sunting', array('class' => 'dropdown-item') ); ?>
+                                                <?php // echo anchor('pesanan/sunting/' . $pesanan->seri_faktur, 'Sunting', array('class' => 'dropdown-item') ); ?>
                                                 <a class="dropdown-item" href="#">Unduh PDF</a>
-                                                <a class="text-danger hapus_pesanan dropdown-item" href="#!">Hapus</a>
+                                                
                                             </div>
                                         </div>
                                     </td>
@@ -390,9 +389,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
 
                                         <?php }
-                                        if($pesanan->keterangan !== NULL  || $pesanan->gambar !== NULL) { ?>
+                                        if($pesanan->keterangan !== NULL || $pesanan->gambar !== NULL) { ?>
                                         <div class="collapse<?php echo ($pesanan->pengiriman !== NULL? '': ' show'); ?>" id="collapseKeterangan<?php echo $pesanan->id_faktur; ?>">
-                                            <?php 
+                                        <?php 
                                             if($pesanan->keterangan !== NULL) {
                                                 echo '<p>' . nl2br($pesanan->keterangan) . '</p>';
                                             }

@@ -116,18 +116,18 @@ class Pengguna_model extends CI_Model
 			$jur[] = $key->juragan_id;
 		}
 
-		$this->db->where('juragan', $jur[0]);
+		$this->db->where('juragan_id', $jur[0]);
 
 		for ($i=1; $i < count($jur) ; $i++) { 
-			$this->db->or_where('juragan', $jur[$i]);
+			$this->db->or_where('juragan_id', $jur[$i]);
 		}
-		$this->db->order_by('id_pesanan', 'desc');
+		$this->db->order_by('id_faktur', 'desc');
 		$this->db->limit(1);
-		$gp = $this->db->get('pesanan');
+		$gp = $this->db->get('faktur');
 
 		$t = $gp->row();
 		
-		return ($gp->num_rows() > 0 ? $t->juragan : $jur[0]);
+		return ($gp->num_rows() > 0 ? $t->juragan_id : $jur[0]);
 	}
 
 	public function _juragan_cs($username) {

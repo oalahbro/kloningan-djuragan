@@ -64,7 +64,7 @@ $route['valid'] = 'auth/valid';
 //$route['register'] = 'auth/daftar';
 $route['excel'] = 'excel';
 
-// $route['admin'] = 'admin/faktur/index';
+// bagian admin
 $route['pesanan'] = 'admin/faktur/lihat';
 $route['pesanan/(:any)'] = 'admin/faktur/lihat/$1';
 $route['pesanan/sunting/(:any)'] = 'admin/faktur/sunting/$1';
@@ -83,9 +83,21 @@ $route['add/pengiriman'] = 'admin/faktur/tambah_pengiriman';
 $route['arsip'] = 'admin/pesanan';
 $route['arsip/pesanan/(:any)/(:any)'] = 'admin/pesanan/lihat/$1/$2';
 
+// bagian user
+$route['myorder'] = 'cs/faktur';
+$route['myorder/(:any)'] = 'cs/faktur/lihat/$1';
+
+$route['myneworder'] = 'cs/faktur/tambah_pesanan';
+
+$route['myget/pengiriman'] = 'cs/faktur/ambil_pengiriman';
+$route['myget/pembayaran'] = 'cs/faktur/ambil_pembayaran';
+$route['mypost/pembayaran'] = 'cs/faktur/simpan_pembayaran';
+
+$route['kardusin/(:any)/(:any)'] = 'cs/pesanan/lihat/$1/$2';
 
 
-$route['j_(:any)'] = 'cs/pesanan/lihat/$1';
+
+
 $route['j_(:any)/tambah'] = 'cs/pesanan/tambah/$1';
 $route['j_(:any)/sunting'] = 'cs/pesanan/sunting';
 $route['j_(:any)/pesanan'] = 'cs/pesanan/lihat/$1';

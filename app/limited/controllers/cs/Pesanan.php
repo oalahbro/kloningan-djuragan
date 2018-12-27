@@ -71,7 +71,7 @@ class Pesanan extends user_controller
 
 			$query = $this->pesanan->ambil_semua($id_juragan, FALSE, $status, $limit, $per_page, $cari);
 
-			$config['base_url'] = site_url('j_' . $juragan .'/pesanan/' . $status);
+			$config['base_url'] = site_url('kardusin/' . $juragan .'/' . $status);
 			$config['total_rows'] = $this->pesanan->ambil_semua($id_juragan, FALSE, $status, FALSE, FALSE, $cari)->num_rows();
 			$config['per_page'] = $limit;
 			$config['page_query_string'] = TRUE;
@@ -89,12 +89,13 @@ class Pesanan extends user_controller
 				'limit' => $limit,
 				'juragan' => $juragan,
 				'status' => $status,
-				'cari' => $cari
+				'cari' => $cari,
+				'judul' => 'Arsip Pesanan '
 				);
 
-			$this->load->view('cs/header', $this->data);
+			$this->load->view('user/header', $this->data);
 			$this->load->view('cs/pesanan/lihat', $this->data);
-			$this->load->view('cs/footer', $this->data);
+			$this->load->view('user/footer', $this->data);
 		}
 		else {
 			show_404();

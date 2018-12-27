@@ -107,7 +107,7 @@ else {
 								// lets play with button
 								if($key->status_transfer === 'ada' && $key->status_kirim === 'pending') {
 									$class_tr = ''; // default
-									$class_td = 'success';
+									$class_td = 'table-success';
 
 									$arr_transfer['invoice']['transfer'] = FALSE;
 									$arr_kirim['invoice']['kirim'] = TRUE;
@@ -117,7 +117,7 @@ else {
 									$button_Kirim = '<button id="quick" class="btn btn-secondary btn-sm btn-block" data-button=\'' . json_encode($arr_kirim) .'\'><i class="glyphicon glyphicon-refresh"></i> Pending</button>';
 								}
 								else if($key->status_transfer === 'ada' && $key->status_kirim === 'terkirim') {
-									$class_tr = 'success'; // default
+									$class_tr = 'table-success'; // default
 									$class_td = '';
 
 									$arr_kirim['invoice']['kirim'] = FALSE;
@@ -154,7 +154,7 @@ else {
 								<tr class="<?php echo $class_tr; ?>">
 									<td><?php echo $key->id_pesanan; ?></td>
 									<td>
-										<?php echo anchor('admin/pesanan/lihat/' .$this->juragan->_slug($key->juragan), $this->juragan->_nama($key->juragan)); ?><br/>
+										<?php echo anchor('arsip/pesanan/' .$this->juragan->_slug($key->juragan) . '/all', $this->juragan->_nama($key->juragan)); ?><br/>
 									</td>
 									<td class="<?php echo $class_td; ?>">
 										<abbr title="<?php echo unix_to_human($key->tanggal_submit); ?>"><?php echo mdate('%d-%M-%y', $key->tanggal_submit); ?></abbr>
@@ -190,8 +190,8 @@ else {
 									<td>
 									<?php
 									
-									echo '<button class="btn btn-bank btn-block btn-sm">' . strtoupper($biaya->b) . '</button>';
-									echo '<button class="btn btn-status btn-block btn-sm '. $biaya->s .'">' . strtoupper($biaya->s) . '</button>';
+									echo '<div class="text-center border border-primary">' . strtoupper($biaya->b) . '</div>';
+									echo '<div class="mt-2 mb-2 border text-center border-'. ($biaya->s === 'dp'? 'success': 'danger') .'">' . strtoupper($biaya->s) . '</div>';
 									echo '<div class="text-right">';
 									echo 'harga : <span class="badge badge-info">' . harga($biaya->m->h) . '</span><br/>';
 									echo (isset($biaya->m->o) && $biaya->m->o > 0 ? 'ongkir : <span class="badge badge-success">' . harga($biaya->m->o) . '</span>': '<span class="badge badge-success">FREE ONGKIR</span>') . '<br/>';
