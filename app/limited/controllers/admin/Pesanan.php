@@ -3,12 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 date_default_timezone_set('Asia/Jakarta');
 
-class Pesanan extends admin_controller
-{
+class Pesanan extends admin_controller {
 
 	public function __construct() {
 		parent::__construct();
-		
+	}
+
+	public function index() {
+		redirect('arsip/pesanan/semua/all');
 	}
 
 	public function lihat($juragan = 'semua', $status = 'all') {
@@ -63,7 +65,7 @@ class Pesanan extends admin_controller
 
 			$query = $this->pesanan->ambil_semua($id_juragan, FALSE, $status, $limit, $per_page, $cari);
 
-			$config['base_url'] = site_url('admin/pesanan/lihat/' . $juragan .'/' . $status);
+			$config['base_url'] = site_url('arsip/pesanan/' . $juragan .'/' . $status);
 			$config['total_rows'] = $this->pesanan->ambil_semua($id_juragan, FALSE, $status, FALSE, FALSE, $cari)->num_rows();
 			$config['per_page'] = $limit;
 			$config['page_query_string'] = TRUE;
@@ -76,6 +78,7 @@ class Pesanan extends admin_controller
 
 			// data untuk disajikan
 			$this->data = array(
+				'judul' => 'Arsip Pesanan',
 				'q' => $query,
 				'pagination' => $this->pagination->create_links(),
 				'limit' => $limit,
@@ -84,9 +87,9 @@ class Pesanan extends admin_controller
 				'cari' => $cari
 				);
 
-			$this->load->view('admin/header', $this->data);
+			$this->load->view('administrator/header', $this->data);
 			$this->load->view('admin/pesanan/lihat', $this->data);
-			$this->load->view('admin/footer', $this->data);
+			$this->load->view('administrator/footer', $this->data);
 		}
 		else {
 			show_404();

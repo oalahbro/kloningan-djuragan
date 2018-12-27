@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-echo doctype('html5'); ?>
+echo doctype('html5'); 
+$dr = $this->juragan->_semua();
+?>
 <html>
 <head>
 	<meta charset="utf-8"/>
@@ -44,13 +46,16 @@ echo doctype('html5'); ?>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Arsip
+				Arsip Pesanan
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Something else here</a>
+					<?php
+					echo anchor('arsip', 'Semua Juragan', array('class'=> 'dropdown-item'));
+					echo '<div class="dropdown-divider"></div>';
+					foreach ($dr->result() as $key) {
+						echo anchor('arsip/pesanan/' . $key->slug . '/all', $key->nama, array('class'=> 'dropdown-item'));
+					}
+					?>
 				</div>
 			</li>
 		</ul>
@@ -61,7 +66,6 @@ echo doctype('html5'); ?>
     <div class="sidebar bg-dark toggled">
         <ul class="list-unstyled">
 			<?php
-			$dr = $this->juragan->_semua();
 			echo '<li>' .anchor('pesanan/s_juragan', '<i class="fas fa-users"></i> Semua Juragan') . '</li>';
 			foreach ($dr->result() as $key) {
 				echo '<li>';

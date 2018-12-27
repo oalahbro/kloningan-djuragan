@@ -80,6 +80,8 @@ $route['add/pesanan'] = 'admin/faktur/tambah_pesanan';
 $route['add/pembayaran'] = 'admin/faktur/tambah_pembayaran';
 $route['add/pengiriman'] = 'admin/faktur/tambah_pengiriman';
 
+$route['arsip'] = 'admin/pesanan';
+$route['arsip/pesanan/(:any)/(:any)'] = 'admin/pesanan/lihat/$1/$2';
 
 
 

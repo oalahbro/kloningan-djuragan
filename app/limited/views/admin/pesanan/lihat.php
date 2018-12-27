@@ -21,11 +21,17 @@ else {
 		<h1><?php echo $judul; ?> <small><?php echo $nama_juragan; ?></small></h1>
 	</div>
 
-	<div class="container-fluid navigasi">
+	<div class="container-fluid navigasi mb-3">
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="<?php echo ($status === 'all' ? 'active':''); ?>"><?php echo anchor('admin/pesanan/lihat/' . $juragan . '/all', 'Semua'); ?></li>
-			<li role="presentation" class="<?php echo ($status === 'pending' ? 'active':''); ?>"><?php echo anchor('admin/pesanan/lihat/' . $juragan . '/pending', 'Pending'); ?></li>
-			<li role="presentation" class="<?php echo ($status ==='terkirim' ? 'active':''); ?>"><?php echo anchor('admin/pesanan/lihat/' . $juragan . '/terkirim', 'Terkirim'); ?></li>
+			<li class="nav-item">
+				<?php echo anchor('arsip/pesanan/' . $juragan . '/all', 'Semua', array('class' => 'nav-link ' . ($status === 'all' ? 'active':''))); ?>
+			</li>
+			<li class="nav-item">
+				<?php echo anchor('arsip/pesanan/' . $juragan . '/pending', 'Pending', array('class' => 'nav-link ' . ($status === 'pending' ? 'active':''))); ?>
+			</li>
+			<li class="nav-item">
+				<?php echo anchor('arsip/pesanan/' . $juragan . '/terkirim', 'Terkirim', array('class' => 'nav-link ' . ($status === 'terkirim' ? 'active':''))); ?>
+			</li>
 		</ul>
 	</div>
 
@@ -49,7 +55,7 @@ else {
 								<option value="<?php echo save_url_encode(150); ?>"<?php echo ((int) $limit === 150 ? ' selected=""': ''); ?>>150</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-default">OK</button>
+						<button type="submit" class="btn btn-light">OK</button>
 					</form>
 
 				</div>
@@ -62,7 +68,7 @@ else {
 
 							echo form_input('cari', $cari, array('class' => 'form-control', 'id' => 'cari', 'placeholder' => 'cari data' )) ?>
 						</div>
-						<button type="submit" class="btn btn-default" id="search-btn">OK</button>
+						<button type="submit" class="btn btn-light" id="search-btn">OK</button>
 					</form>
 				</div>
 			</div>
@@ -73,7 +79,7 @@ else {
 						<tr>
 							<th>#</th>
 							<th>Juragan</th>
-							<th>Tanggal</th>
+							<th style="min-width: 120px">Tanggal</th>
 							<th>Pemesan</th>
 							<th style="min-width: 160px">Pesanan</th>
 							<th style="min-width: 170px">Biaya</th>
@@ -106,9 +112,9 @@ else {
 									$arr_transfer['invoice']['transfer'] = FALSE;
 									$arr_kirim['invoice']['kirim'] = TRUE;
 
-									$button_transfer = '<button id="quick" class="btn btn-success btn-xs btn-block" data-button=\'' . json_encode($arr_transfer) .'\'><i class="glyphicon glyphicon-ok"></i> Ada</button>';
+									$button_transfer = '<button id="quick" class="btn btn-success btn-sm btn-block" data-button=\'' . json_encode($arr_transfer) .'\'><i class="glyphicon glyphicon-ok"></i> Ada</button>';
 
-									$button_Kirim = '<button id="quick" class="btn btn-default btn-xs btn-block" data-button=\'' . json_encode($arr_kirim) .'\'><i class="glyphicon glyphicon-refresh"></i> Pending</button>';
+									$button_Kirim = '<button id="quick" class="btn btn-secondary btn-sm btn-block" data-button=\'' . json_encode($arr_kirim) .'\'><i class="glyphicon glyphicon-refresh"></i> Pending</button>';
 								}
 								else if($key->status_transfer === 'ada' && $key->status_kirim === 'terkirim') {
 									$class_tr = 'success'; // default
@@ -129,9 +135,9 @@ else {
 										$arr_kirim['invoice']['resi']['tanggal'] = mdate('%d-%m-%Y', $detail->s->d);
 									}
 
-									$button_transfer = '<button class="btn btn-success btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-ok"></i> Ada</button>';
+									$button_transfer = '<button class="btn btn-success btn-sm btn-block" disabled="disabled"><i class="glyphicon glyphicon-ok"></i> Ada</button>';
 
-									$button_Kirim = '<button id="quick" class="btn btn-success btn-xs btn-block" data-button=\'' . json_encode($arr_kirim) .'\'><i class="glyphicon glyphicon-ok"></i> Terkirim</button>';
+									$button_Kirim = '<button id="quick" class="btn btn-success btn-sm btn-block" data-button=\'' . json_encode($arr_kirim) .'\'><i class="glyphicon glyphicon-ok"></i> Terkirim</button>';
 								}
 								else {
 									$class_tr = ''; // default
@@ -139,9 +145,9 @@ else {
 
 									$arr_transfer['invoice']['transfer'] = TRUE;
 
-									$button_transfer = '<button id="quick" class="btn btn-default btn-xs btn-block" data-button=\'' . json_encode($arr_transfer) .'\'><i class="glyphicon glyphicon-remove"></i> Belum</button>';
+									$button_transfer = '<button id="quick" class="btn btn-light btn-sm btn-block" data-button=\'' . json_encode($arr_transfer) .'\'><i class="glyphicon glyphicon-remove"></i> Belum</button>';
 
-									$button_Kirim = '<button class="btn btn-default btn-xs btn-block" disabled="disabled"><i class="glyphicon glyphicon-refresh"></i> Pending</button>';
+									$button_Kirim = '<button class="btn btn-light btn-sm btn-block" disabled="disabled"><i class="glyphicon glyphicon-refresh"></i> Pending</button>';
 								}
 
 								?>
@@ -155,22 +161,22 @@ else {
 										<?php echo $button_transfer; ?>
 										<?php echo $button_Kirim; ?>
 										<!-- Single button -->
-										<div class="btn-group btn-block">
-										<button type="button" class="btn btn-default btn-xs dropdown-toggle deropdowen" id="menuD-<?php echo $key->id_pesanan; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												Aksi <span class="caret"></span>
+										<div class="dropdown mt-2">
+											<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton-<?php echo $key->id_pesanan; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												Aksi
 											</button>
-											<ul class="dropdown-menu" aria-labelledby="menuD-<?php echo $key->id_pesanan; ?>">
-												<li><?php echo anchor('admin/pesanan/sunting?id=' . $slug, 'Sunting' ) ?></li>
-												<li><?php echo anchor('download?id=' . $slug, 'Download Invoice (PDF)', array('target' => '_blank') ) ?></li>
-												<li role="separator" class="divider"></li>
-												<li><a id="ahapus_pesanan" data-button='<?php echo json_encode(array('slug' => $slug, 'id' => $key->id_pesanan)); ?>'>Hapus</a></li>
-											</ul>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton-<?php echo $key->id_pesanan; ?>">
+												<?php echo anchor('admin/pesanan/sunting?id=' . $slug, 'Sunting', array('class' => 'dropdown-item') ); ?>
+
+												<?php echo anchor('download?id=' . $slug, 'Download Invoice (PDF)', array('target' => '_blank', 'class' => 'dropdown-item') ) ?>
+												<a id="ahapus_pesanan" class="dropdown-item" data-button='<?php echo json_encode(array('slug' => $slug, 'id' => $key->id_pesanan)); ?>'>Hapus</a>
+											</div>
 										</div>
 									</td>
 									<td><?php
 									$pm = json_decode($key->pemesan);
 									echo '<strong>' . strtoupper( $pm->n ) . '</strong><br/>';
-									echo '<span class="label label-info">' . strtoupper( $pm->p[0] ) . '</span>' . (isset($pm->p[1]) ? ' <span class="sr-only">/</span> <span class="label label-info">' . $pm->p[1] . '</span>': '' );
+									echo '<span class="badge badge-info">' . strtoupper( $pm->p[0] ) . '</span>' . (isset($pm->p[1]) ? ' <span class="sr-only">/</span> <span class="badge badge-info">' . $pm->p[1] . '</span>': '' );
 									echo '<br/>' . strtoupper( nl2br( $pm->a) );
 									?></td>
 									<td><?php
@@ -179,19 +185,19 @@ else {
 										$total_pesanan = $total_pesanan+$pesan->q;
 										echo strtoupper($pesan->c) . ' (' .strtoupper($pesan->s). ') = ' . $pesan->q . 'pcs<br/>';
 									}
-									echo '<hr/><em class="text-info">total: <span class="label label-default">' . $total_pesanan . '</span> pcs</em>';
+									echo '<hr/><em class="text-info">total: <span class="badge badge-default">' . $total_pesanan . '</span> pcs</em>';
 									?></td>
 									<td>
 									<?php
 									
-									echo '<button class="btn btn-bank btn-block btn-xs">' . strtoupper($biaya->b) . '</button>';
-									echo '<button class="btn btn-status btn-block btn-xs '. $biaya->s .'">' . strtoupper($biaya->s) . '</button>';
+									echo '<button class="btn btn-bank btn-block btn-sm">' . strtoupper($biaya->b) . '</button>';
+									echo '<button class="btn btn-status btn-block btn-sm '. $biaya->s .'">' . strtoupper($biaya->s) . '</button>';
 									echo '<div class="text-right">';
-									echo 'harga : <span class="label label-info">' . harga($biaya->m->h) . '</span><br/>';
-									echo (isset($biaya->m->o) && $biaya->m->o > 0 ? 'ongkir : <span class="label label-success">' . harga($biaya->m->o) . '</span>': '<span class="label label-success">FREE ONGKIR</span>') . '<br/>';
-									echo (isset($biaya->m->of)? 'ongkir fix : <span class="label label-warning">' . harga($biaya->m->of) . '</span><br/>' : '');
-									echo (isset($biaya->m->d) && $biaya->m->d > 0? 'diskon : <span class="label label-default">- ' . harga($biaya->m->d) . '</span><br/>' : '');
-									echo 'transfer : <span class="label label-danger">' . harga($biaya->m->t) . '</span><br/>';
+									echo 'harga : <span class="badge badge-info">' . harga($biaya->m->h) . '</span><br/>';
+									echo (isset($biaya->m->o) && $biaya->m->o > 0 ? 'ongkir : <span class="badge badge-success">' . harga($biaya->m->o) . '</span>': '<span class="badge badge-success">FREE ONGKIR</span>') . '<br/>';
+									echo (isset($biaya->m->of)? 'ongkir fix : <span class="badge badge-warning">' . harga($biaya->m->of) . '</span><br/>' : '');
+									echo (isset($biaya->m->d) && $biaya->m->d > 0? 'diskon : <span class="badge badge-default">- ' . harga($biaya->m->d) . '</span><br/>' : '');
+									echo 'transfer : <span class="badge badge-danger">' . harga($biaya->m->t) . '</span><br/>';
 									echo '</div>';
 									?>
 									
@@ -245,53 +251,63 @@ else {
 	</div>
 </div>
 
-<!-- Modal hapus pesanan -->
-<div class="modal fade" id="hapus_pesanan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog modal-sm" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Hapus Pesanan #<span id="inHapusID"></span></h4>
-			</div>
-			<div class="modal-body">
-				<div class="well well-sm">Yakin mau hapus pesanan ini ?<br/>Penghapusan tidak dapat dibatalkan.</div>
-			</div>
-			<div class="modal-footer">
-				<?php echo form_open('admin/pesanan/hapus', array('id' => 'remove_me'), array('slug' => '', 'current' => '')); ?>
-				<button type="submit" class="btn btn-danger">Ya, Hapus</button>
-				<?php echo form_close(); ?>
-			</div>
-		</div>
-	</div>
+<!-- Modal -->
+<div class="modal fade" id="hapus_pesanan" tabindex="-1" role="dialog" aria-labelledby="hapus_pesananLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="hapus_pesananLabel">Hapus Pesanan #<span id="inHapusID"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<div class="well well-sm">Yakin mau hapus pesanan ini ?<br/>Penghapusan tidak dapat dibatalkan.</div>
+      </div>
+      <div class="modal-footer">
+		<?php echo form_open('admin/pesanan/hapus', array('id' => 'remove_me'), array('slug' => '', 'current' => '')); ?>
+		<button type="submit" class="btn btn-danger">Ya, Hapus</button>
+		<?php echo form_close(); ?>
+      </div>
+    </div>
+  </div>
 </div>
-
 
 <!-- Modal alert transfer-->
-<div class="modal fade" id="modal_transfer" tabindex="-1" role="dialog" aria-labelledby="modal_transferLabel">
-	<div class="modal-dialog modal-sm" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="modal_transferLabel">Set Transfer #<span id="numID"></span></h4>
-			</div>
-			<div class="modal-body">
-				<div class="well well-sm" id="keterangan"></div>
-			</div>
-			<?php echo form_open('admin/pesanan/set/transfer', array('class' => 'modal-footer', 'id' => 'form_tr'), array('slug' => '', 'transfer' => '', 'current' => '' )); ?>
-			<button type="submit" id="submit_tr" class="btn btn-primary">Ya!</button>
-			<?php echo form_close(); ?>
-		</div>
-	</div>
+<div class="modal fade" id="modal_transfer" tabindex="-1" role="dialog" aria-labelledby="modal_transferTitle" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_transferTitle">Set Transfer #<span id="numID"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<div class="well well-sm" id="keterangan"></div>
+      </div>
+      <div class="modal-footer">
+		<?php echo form_open('admin/pesanan/set/transfer', array('class' => 'modal-footer', 'id' => 'form_tr'), array('slug' => '', 'transfer' => '', 'current' => '' )); ?>
+		<button type="submit" id="submit_tr" class="btn btn-primary">Ya!</button>
+		<?php echo form_close(); ?>
+      </div>
+    </div>
+  </div>
 </div>
 
+
 <!-- modal resi -->
-<div class="modal fade" id="modal_resi_kirim" tabindex="-1" role="dialog" aria-labelledby="modal_transferLabel">
-	<div class="modal-dialog modal-sm">
-	    <div class="modal-content">
-	    	<?php echo form_open('admin/pesanan/set/kirim', array('id' => 'form_kirim'), array('slug' => '', 'kirim' => '', 'current' => '')); ?>
+<div class="modal fade" id="modal_resi_kirim" tabindex="-1" role="dialog" aria-labelledby="modal_resi_kirimTitle" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+	<?php echo form_open('admin/pesanan/set/kirim', array('id' => 'form_kirim'), array('slug' => '', 'kirim' => '', 'current' => '')); ?>
 	            <div class="modal-header">
-	                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	                <h4 class="modal-title" id="myModalLabel"><span class="addid">Submit Resi #<span id="invID"></span></span></h4></div>
+				
+	                <h4 class="modal-title" id="myModalLabel"><span class="addid">Submit Resi #<span id="invID"></span></span></h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+					</div>
 	            <div class="modal-body">
 	            	<div class="well well-sm" id="keterangan_"></div>
 	                <div class="row">
@@ -331,12 +347,12 @@ else {
 	                </div>
 	            </div>
 	            <div class="modal-footer">
-	                <button type="button" id="set_pending" class="btn btn-default">Set Pending</button>
+	                <button type="button" id="set_pending" class="btn btn-light">Set Pending</button>
 	                <button type="submit" id="submit_kirim" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Simpan</button>
 	            </div>
 	        <?php echo form_close(); ?>
-	    </div>
-	</div>
+    </div>
+  </div>
 </div>
 
 <script>
