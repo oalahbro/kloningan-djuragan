@@ -51,7 +51,7 @@ class Faktur_model extends CI_Model
             $this->db->offset($offset);
         }
 
-        $this->db->order_by('fak.tanggal_dibuat DESC, status_paket DESC, status_kirim ASC, status_transfer ASC');
+        $this->db->order_by('status_paket ASC, status_kirim ASC, fak.tanggal_dibuat DESC, status_transfer ASC');
 
         $this->db->group_by('fak.id_faktur');
         $q = $this->db->get();

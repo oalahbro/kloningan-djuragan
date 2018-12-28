@@ -21,6 +21,18 @@ class Pesanan_model extends CI_Model
 		}
 	}
 
+	public function ambil_satu() {
+		$this->db->having(array('status_kirim' => 'pending'));
+
+		$this->db->not_like('biaya', 'ZALORA');
+		$this->db->not_like('biaya', 'BUKALAPAK');
+	
+
+		$this->db->limit(1);
+		$this->db->order_by('status_transfer desc, status_kirim desc, tanggal_submit desc');
+		return $this->db->get($this->tabel);
+	}
+
 	/**
 	 * Ambil semua pesanan dalam database
 	 *

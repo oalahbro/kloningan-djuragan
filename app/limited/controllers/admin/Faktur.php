@@ -52,6 +52,182 @@ class Faktur extends admin_controller
 		$this->load->view('administrator/footer', $this->data);
 	}
 
+	public function migrasi() {
+		$this->form_validation->set_rules('juragan_id', 'Juragan', 'required|greater_than[0]');
+		$this->form_validation->set_rules('pengguna_id', 'Pengguna', 'required|greater_than[0]');
+		$this->form_validation->set_rules('nama', 'nama lengkap', 'required');
+		$this->form_validation->set_rules('hp1', 'hp 1', 'required');
+		// $this->form_validation->set_rules('hp2', 'hp 2', 'required');
+		$this->form_validation->set_rules('alamat', 'alamat', 'required');
+		//$this->form_validation->set_rules('kode[]', 'kode', 'required');
+		//$this->form_validation->set_rules('size[]', 'size', 'required');
+		//$this->form_validation->set_rules('harga_a[]', 'harga_a', 'required');
+		//$this->form_validation->set_rules('jumlah[]', 'jumlah', 'required');
+		$this->form_validation->set_rules('marketplace', 'marketplace', '');
+		//$this->form_validation->set_rules('rekening', 'rekening', 'required');
+		// $this->form_validation->set_rules('harga', 'total harga', 'required');
+		$this->form_validation->set_rules('ongkir', 'ongkir', 'required');
+		// $this->form_validation->set_rules('transfer', 'transfer', 'required');
+		$this->form_validation->set_rules('diskon', 'diskon', 'required');
+		$this->form_validation->set_rules('unik', 'angka unik', 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->data = array(
+				'judul' => 'Tulis Pesanan',
+				);
+
+			$this->load->view('administrator/header', $this->data);
+			$this->load->view('administrator/pesanan/migrasi', $this->data);
+			$this->load->view('administrator/footer', $this->data);
+		}
+		else {
+			//
+			$id_juragan = $this->input->post('juragan_id');
+			$slug = $this->input->post('slug');
+			$tanggal_dibuat = $this->input->post('tanggal_dibuat');
+			$faktur = $this->input->post('faktur');
+			$pengguna_id = $this->input->post('pengguna_id');
+			$nama = $this->input->post('nama');
+			$hp1 = $this->input->post('hp1');
+			$hp2 = $this->input->post('hp2');
+			$alamat = $this->input->post('alamat');
+			$produk = $this->input->post('produk'); // array
+			$pembayaran = $this->input->post('pembayaran'); // array
+			$diskon = $this->input->post('diskon');
+			$ongkir = $this->input->post('ongkir');
+			$unik = $this->input->post('unik');
+			$marketplace_ = $this->input->post('marketplace_');
+			$marketplace = $this->input->post('marketplace');
+			$keterangan = $this->input->post('keterangan');
+			$image = $this->input->post('image');
+
+			//
+			// $dj = $this->juragan->_detail($id_juragan)->row();
+			// $count = $this->faktur->get_count_this_month($id_juragan);
+			// $faktur = strtolower($dj->short . str_pad(date('ymdHis'), 11, "0", STR_PAD_LEFT));
+
+			// `faktur`
+			$data = array();
+			$data['faktur'] = array(
+				'seri_faktur' => $faktur,
+				'tanggal_dibuat' => $tanggal_dibuat,
+				'juragan_id' => $id_juragan,
+				'pengguna_id' => $pengguna_id,
+				'nama' => $nama,
+				'hp1' => $hp1,
+				'alamat' => $alamat,
+			);
+
+			// simpan to `faktur`
+			$this->faktur->add_invoice($data['faktur']);
+			$id_faktur = $this->db->insert_id(); // get `id_faktur`
+
+			// `pesanan_produk`
+			$i = 0;
+			$produk_data = array();			
+			foreach ($produk as $key) {
+				$produk_data[$i]['faktur_id'] = $id_faktur;
+				$produk_data[$i]['kode'] = $key['kode'];
+				$produk_data[$i]['ukuran'] = $key['ukuran'];
+				$produk_data[$i]['jumlah'] = $key['jumlah'];
+				$produk_data[$i]['harga'] = $key['harga'];
+
+				$i++;
+			}
+			$data['produk'] = $produk_data;
+			// simpan to `pesanan_produk`
+			$this->faktur->add_orders($data['produk']);			
+
+			// `pembayaran`
+			$pembayaran_data = array();
+			if ($marketplace === NULL && $marketplace_ !== 'on') {
+				$p = 0;
+				foreach ($pembayaran as $bayar) {
+					$pembayaran_data[$p]['faktur_id'] = $id_faktur;
+					$pembayaran_data[$p]['tanggal_bayar'] = strtotime($bayar['tanggal']);
+					$pembayaran_data[$p]['jumlah'] = $bayar['jumlah'];
+					$pembayaran_data[$p]['rekening'] = $bayar['rekening'];
+					if($bayar['cek'] !== '') {
+						$pembayaran_data[$p]['tanggal_cek'] = strtotime($bayar['cek']);
+					}
+
+					$p++;
+				}
+				$data['pembayaran'] = $pembayaran_data;
+				// simpan to `pesanan_produk`
+				$this->faktur->sub_pay($data['pembayaran']);
+			}
+
+			// `keterangan`
+			$keterangan_data = array();
+			if ($hp2 !== NULL && $hp2 !== '') {
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 'hp',
+					'val' => $hp2
+				);
+			}
+
+			if ($ongkir !== NULL && $ongkir > 0) {
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 'ongkir',
+					'val' => $ongkir
+				);
+			}
+
+			if ($diskon !== NULL  && $diskon > 0) {
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 'diskon',
+					'val' => $diskon
+				);
+			}
+
+			if ($unik !== NULL && $unik > 0) {
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 'unik',
+					'val' => $unik
+				);
+			}
+
+			if ($marketplace !== NULL && $marketplace_ === 'on') {
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 'tipe',
+					'val' => $marketplace
+				);
+			}
+
+			if ($keterangan !== NULL && $keterangan !== '') {
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 'keterangan',
+					'val' => $keterangan
+				);
+			}
+
+			if ($image !== NULL && $image !== '') {
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 'gambar',
+					'val' => $image
+				);
+			}
+
+			$data['keterangan'] = $keterangan_data;
+			if ( ! empty($data['keterangan'])) {
+				$this->faktur->sub_ket($data['keterangan']);
+			}
+			
+			//
+			$this->faktur->calc_pembayaran($id_faktur);
+			$this->pesanan->delete($slug);
+			redirect('pesanan');
+		}
+	}
+
 	public function tambah_pesanan() {
 		$this->form_validation->set_rules('juragan_id', 'Juragan', 'required|greater_than[0]');
 		$this->form_validation->set_rules('pengguna_id', 'Pengguna', 'required|greater_than[0]');

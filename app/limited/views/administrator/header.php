@@ -44,6 +44,11 @@ $dr = $this->juragan->_semua();
 			<li class="nav-item active">
 				<?php echo anchor('add/pesanan', 'Tulis Pesanan', array('class'=>'nav-link')) ?>
 			</li>
+			<?php if($_SESSION['level'] === 'superadmin') { ?>
+				<li class="nav-item active">
+					<?php echo anchor('migrasi', 'Migrasi', array('class'=>'nav-link')) ?>
+				</li>
+			<?php } ?>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Arsip Pesanan

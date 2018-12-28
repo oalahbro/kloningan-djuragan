@@ -65,6 +65,7 @@ $route['valid'] = 'auth/valid';
 $route['excel'] = 'excel';
 
 // bagian admin
+$route['migrasi'] = 'admin/faktur/migrasi';
 $route['pesanan'] = 'admin/faktur/lihat';
 $route['pesanan/(:any)'] = 'admin/faktur/lihat/$1';
 $route['pesanan/sunting/(:any)'] = 'admin/faktur/sunting/$1';
