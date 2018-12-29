@@ -75,6 +75,8 @@ body {
     z-index: 998;
     opacity: 0;
     transition: all 0.5s ease-in-out;
+    top: 0;
+    bottom: 0;
 }
 .overlay.active {
     display: block;
@@ -120,8 +122,6 @@ body {
 .sidebar [aria-expanded=true]:before{
     content:"\f0d8"
 }
-
-
 #konten{
     /* width:100%;
     overflow: hidden; */
@@ -129,10 +129,6 @@ body {
     /* padding: 20px; */
     min-height: 100vh;
     transition: all 0.3s;
-    position: absolute;
-    top: 56px;
-    right: 0;
-    z-index: 997;
 }
 .display-5{
     font-size:2.5rem;
