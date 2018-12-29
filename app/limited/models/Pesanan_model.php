@@ -26,6 +26,14 @@ class Pesanan_model extends CI_Model
 
 		$this->db->not_like('biaya', 'ZALORA');
 		$this->db->not_like('biaya', 'BUKALAPAK');
+		$this->db->not_like('biaya', 'lazada');
+		$this->db->not_like('biaya', 'blibli');
+		$this->db->not_like('biaya', 'matahari');
+		$this->db->not_like('biaya', 'zilingo');
+		$this->db->not_like('biaya', 'qoo');
+		$this->db->not_like('biaya', 'jd.id');
+		$this->db->not_like('biaya', 'tokopedia');
+		$this->db->not_like('biaya', 'shopee');
 	
 
 		$this->db->limit(1);

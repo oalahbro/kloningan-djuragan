@@ -24,9 +24,9 @@ class Faktur_model extends CI_Model
         MAX(CASE WHEN (ket.key = 'unik') THEN ket.val ELSE 0 END) AS unik,
         MAX(CASE WHEN (ket.key = 'diskon') THEN ket.val ELSE 0 END) AS diskon,
         MAX(CASE WHEN (ket.key = 'keterangan') THEN ket.val ELSE NULL END) AS keterangan,
-        MAX(CASE WHEN (ket.key = 's_transfer') THEN ket.val ELSE NULL END) AS status_transfer,
-        MAX(CASE WHEN (ket.key = 's_kirim') THEN ket.val ELSE NULL END) AS status_kirim,
-        MAX(CASE WHEN (ket.key = 's_paket') THEN ket.val ELSE NULL END) AS status_paket,
+        MAX(CASE WHEN (ket.key = 's_transfer') THEN ket.val ELSE 'belum' END) AS status_transfer,
+        MAX(CASE WHEN (ket.key = 's_kirim') THEN ket.val ELSE 'belum' END) AS status_kirim,
+        MAX(CASE WHEN (ket.key = 's_paket') THEN ket.val ELSE 'belum' END) AS status_paket,
         MAX(CASE WHEN (ket.key = 'tipe') THEN ket.val ELSE NULL END) AS tipe,
         MAX(CASE WHEN (ket.key = 'gambar') THEN ket.val ELSE NULL END) AS gambar,
         GROUP_CONCAT(DISTINCT CONCAT(kir.kurir,'|',kir.resi,'|',kir.tanggal_kirim,'|',kir.ongkir,'|',kir.id_pengiriman)) AS pengiriman,
@@ -41,7 +41,27 @@ class Faktur_model extends CI_Model
         $this->db->join('pesanan_produk pro', 'fak.id_faktur=pro.faktur_id', 'left');
         $this->db->join('juragan jur', 'fak.juragan_id=jur.id', 'left');
         $this->db->join('pengguna pen', 'pen.id=fak.pengguna_id', 'left');
-        
+
+        $this->db->where('fak.pengguna_id !=', NULL);
+
+        if (in_array($cari['pembayaran'], array('belum', 'b_menunggu', 'c_sebagian', 'd_lunas', 'e_lebih')) ) {
+            $this->db->or_where(array("ket.key" => 's_transfer', 'ket.val' => $cari['pembayaran']) );
+        }
+
+        if (in_array($cari['paket'], array('belum', 'diproses')) ) {
+            $this->db->or_where(array("ket.key" => 's_paket', 'ket.val' => $cari['paket']) );
+        }
+
+        if (in_array($cari['pengiriman'], array('belum', 'd_sebagian', 'dikirim')) ) {
+            if($cari['pengiriman'] === 'dikirim') {
+                $this->db->where(array("ket.key" => 's_kirim', 'ket.val' => 'b_dikirim') );
+                $this->db->or_where(array("ket.key" => 's_kirim', 'ket.val' => 'c_diambil') );
+            }
+            else {
+                $this->db->where(array("ket.key" => 's_kirim', 'ket.val' => $cari['pengiriman']) );
+            }
+        }
+
         if ($juragan_id !== FALSE) {
             $this->db->having('juragan_id', $juragan_id);
         }
@@ -51,7 +71,7 @@ class Faktur_model extends CI_Model
             $this->db->offset($offset);
         }
 
-        $this->db->order_by('status_paket ASC, status_kirim ASC, fak.tanggal_dibuat DESC, status_transfer ASC');
+        $this->db->order_by('status_kirim ASC, status_paket ASC, status_transfer ASC, fak.tanggal_dibuat DESC');
 
         $this->db->group_by('fak.id_faktur');
         $q = $this->db->get();
@@ -245,7 +265,7 @@ class Faktur_model extends CI_Model
             $this->update_ket($faktur_id, 's_transfer', 'd_lunas', TRUE);
         }
         else {
-            $this->update_ket($faktur_id, 's_transfer', '', FALSE);
+            $this->update_ket($faktur_id, 's_transfer', 'belum', TRUE);
         }
     }
 
@@ -324,7 +344,7 @@ class Faktur_model extends CI_Model
             $this->update_ket($faktur_id, 's_kirim', $val, TRUE);            
         }
         else {
-            $this->update_ket($faktur_id, 's_kirim', '', FALSE);
+            $this->update_ket($faktur_id, 's_kirim', 'belum', TRUE);
         }
     }
 
@@ -334,19 +354,12 @@ class Faktur_model extends CI_Model
 	 */
     public function set_package($faktur_id, $status) {
         if($status === 'diproses') {
-            $cek_status_paket = $this->db->where(array('faktur_id' => $faktur_id, 'key' => 's_paket'))->get('keterangan');
-
-            if($cek_status_paket->num_rows() > 0) {
-                $this->db->where(array('faktur_id' => $faktur_id, 'key' => 's_paket'));
-                $this->db->update('keterangan', array('val' => 'diproses'));
-            }
-            else {
-                $this->db->insert('keterangan', array('faktur_id' => $faktur_id, 'key' => 's_paket', 'val' => 'diproses' ));
-            }
+            $this->update_ket($faktur_id, 's_paket', 'diproses', TRUE);
         }
         else {
-            $this->db->where(array('faktur_id' => $faktur_id, 'key' => 's_paket'))->delete('keterangan');
-            $this->db->where(array('faktur_id' => $faktur_id, 'key' => 's_kirim'))->delete('keterangan');
+            $this->update_ket($faktur_id, 's_paket', 'belum', TRUE);
+            $this->update_ket($faktur_id, 's_kirim', 'belum', TRUE);
+
             $this->del_carry($faktur_id);
             $this->calc_carry($faktur_id);
         }

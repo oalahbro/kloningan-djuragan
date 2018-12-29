@@ -44,7 +44,7 @@ class Faktur extends admin_controller
 			'judul' => 'Pesanan ' . $nama_juragan,
 			'juragan' => $juragan,
 			'status' => $status,
-            'query' => $this->faktur->get_all($juragan_id, $by = FALSE, $limit, $per_page, $cari = NULL)
+            'query' => $this->faktur->get_all($juragan_id, $by = FALSE, $limit, $per_page, $cari)
 			);
 
 		$this->load->view('administrator/header', $this->data);
@@ -216,6 +216,18 @@ class Faktur extends admin_controller
 				);
 			}
 
+			$keterangan_data[] = array(
+				'faktur_id' => $id_faktur,
+				'key' => 's_kirim',
+				'val' => 'belum'
+			);
+			
+			$keterangan_data[] = array(
+				'faktur_id' => $id_faktur,
+				'key' => 's_paket',
+				'val' => 'belum'
+			);
+
 			$data['keterangan'] = $keterangan_data;
 			if ( ! empty($data['keterangan'])) {
 				$this->faktur->sub_ket($data['keterangan']);
@@ -385,6 +397,18 @@ class Faktur extends admin_controller
 					'val' => $image
 				);
 			}
+
+			$keterangan_data[] = array(
+				'faktur_id' => $id_faktur,
+				'key' => 's_kirim',
+				'val' => 'belum'
+			);
+
+			$keterangan_data[] = array(
+				'faktur_id' => $id_faktur,
+				'key' => 's_paket',
+				'val' => 'belum'
+			);
 
 			$data['keterangan'] = $keterangan_data;
 			if ( ! empty($data['keterangan'])) {

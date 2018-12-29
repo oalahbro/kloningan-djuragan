@@ -12,27 +12,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
 
         <div class="px-sm-3">
-            <form class="form-inline px-3 px-sm-0">
-                <select class="custom-select mb-2 mr-sm-2">
-                    <option selected="" disabled="">Opsi Pembayaran</option>
-                    <option value="1">Menunggu Konfirmasi</option>
-                    <option value="2">Sudah Lunas</option>
-                    <option value="3">Sebagian</option>
-                    <option value="3">Ada Kelebihan</option>
-                </select>
+            <?php 
+                echo form_open('', array('class' => 'form-inline px-3 px-sm-0', 'method' => 'get'));
+                // form pembayaran
+                $opsi_pembayaran = array(
+                    ''              => 'Opsi Pembayaran',
+                    'belum'         => 'Belum Lunas',
+                    'b_menunggu'    => 'Menuggu Konfirmasi',
+                    'c_sebagian'    => 'Sebagian Lunas / Kredit',
+                    'd_lunas'       => 'Lunas',
+                    'e_lebih'       => 'Ada Kelebihan'
+                );
+                echo form_dropdown('cari[pembayaran]', $opsi_pembayaran, '', array('class' => 'custom-select mb-2 mr-sm-2'));
+                
+                // form paket
+                $opsi_paket = array(
+                    ''              => 'Opsi Paket',
+                    'diproses'      => 'Diproses',
+                    'belum'         => 'Belum Diproses',
+                );
 
-                <select class="custom-select mb-2 mr-sm-2">
-                    <option selected="" disabled="">Opsi Paket</option>
-                    <option value="1">Diproses</option>
-                    <option value="2">Belum Diproses</option>
-                </select>
+                echo form_dropdown('cari[paket]', $opsi_paket, '', array('class' => 'custom-select mb-2 mr-sm-2'));
+                
+                // form pengiriman
+                $opsi_pengiriman = array(
+                    ''              => 'Opsi Pengiriman',
+                    'belum'         => 'Belum Dikirim',
+                    'd_sebagian'    => 'Dikirim Sebagian',
+                    'dikirim'       => 'Dikirim',
+                );
 
-                <select class="custom-select mb-2 mr-sm-2">
-                    <option selected="" disabled="">Opsi Pengiriman</option>
-                    <option value="1">Dikirim</option>
-                    <option value="2">Diambil</option>
-                    <option value="3">Sebagian</option>
-                </select>
+                echo form_dropdown('cari[pengiriman]', $opsi_pengiriman, '', array('class' => 'custom-select mb-2 mr-sm-2'));
+                ?>
+
+                <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group-prepend"> 
+                        <div class="input-group-text"> 
+                            <input type="checkbox" name="cek_tanggal">
+                        </div>
+                    </div>
+                    <?php
+                        echo form_input(array('class' => 'form-control', 'type' => 'date','name' => 'cari[tanggal]'));
+                    ?>
+                </div>
 
                 <div class="form-check mb-2 mr-sm-2">
                     <input class="form-check-input" type="checkbox" id="inlineFormCheck">
@@ -41,10 +63,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </label>
                 </div>
 
-                <label class="sr-only" for="inlineFormInputName2">Name</label>
-                <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="cari data">
+                <?php
+                    echo form_input(array('class' => 'form-control mb-2 mr-sm-2', 'placeholder' => 'cari data','name' => 'cari[q]'));
+                ?>
                 <button type="submit" class="btn btn-primary mb-2">Submit</button>
-            </form>
+            <?php echo form_close(); ?>
             <div id="main-table">
                 <div class="table-responsive" id="table-pesanan">
                     <table class="table table-bordered table-hover">
@@ -426,8 +449,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </tbody>
                     </table>
                 </div>
-                <?php echo $this->pagination->create_links(); ?>
             </div>
+            <?php echo $this->pagination->create_links(); ?>
         </div>
     </div>
 </div>

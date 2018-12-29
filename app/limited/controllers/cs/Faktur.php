@@ -220,6 +220,18 @@ class Faktur extends user_controller
 				);
 			}
 
+			$keterangan_data[] = array(
+				'faktur_id' => $id_faktur,
+				'key' => 's_kirim',
+				'val' => 'belum'
+			);
+			
+			$keterangan_data[] = array(
+				'faktur_id' => $id_faktur,
+				'key' => 's_paket',
+				'val' => 'belum'
+			);
+
 			$data['keterangan'] = $keterangan_data;
 			if ( ! empty($data['keterangan'])) {
 				$this->faktur->sub_ket($data['keterangan']);
