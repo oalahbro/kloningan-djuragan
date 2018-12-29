@@ -33,7 +33,7 @@ $dr = $this->pengguna->_juragan_cs($username);
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 	<div>
 		<?php echo anchor('', judul('name') , array('class' => 'navbar-brand')); ?>
-		<?php echo form_button(array('class' => 'btn-juragan', 'id' => 'sidebarCollapse', 'content' => '<i class="fas fa-user-circle"></i>')) ?>
+		<?php echo form_button(array('class' => 'btn-juragan', 'data-toggle' => "collapse", 'data-target' => "#sidebar", 'id' => 'sidebarCollapse', 'content' => '<i class="fas fa-user-circle"></i>')); ?>
 	</div>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,9 +72,10 @@ $dr = $this->pengguna->_juragan_cs($username);
 </nav>
 
 <div class="wrapper">
-	<nav id="sidebar" class="bg-dark">
+	<nav id="sidebar" class="collapse bg-dark">
 		<div class="sidebar">
 			<ul class="list-unstyled">
+				<h6 class="dropdown-header">Pilih Juragan</h6>
 				<?php
 				foreach ($dr->result() as $key) {
 					echo '<li>';

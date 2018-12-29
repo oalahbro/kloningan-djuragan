@@ -3,23 +3,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 </div> 
 <!-- /.wrapper -->
-<div class="overlay"></div>
+<div class="overlay" data-toggle="collapse" data-target="#sidebar"></div>
 
     <script src="<?php echo base_url('berkas/js/gpicker.js'); ?>"></script>
     <script src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
     <script>
     
     $(function () {
-        $('#dismiss, .overlay').on('click', function () {
-            $('#sidebar').removeClass('active');
-            $('.overlay').removeClass('active');
+        $('#sidebar').on('shown.bs.collapse', function () {
+            $('.overlay').toggleClass('active');
+            $('body').toggleClass('modal-open');
         });
 
-        $(document).on("click", "#sidebarCollapse", function(e){
-            $('#sidebar').toggleClass('active');
+        $('#sidebar').on('hidden.bs.collapse', function () {
             $('.overlay').toggleClass('active');
-        });
-        
+            $('body').toggleClass('modal-open');
+        })
+
         // create random string
         // https://stackoverflow.com/a/1349426/2094645
         function makeid() {
