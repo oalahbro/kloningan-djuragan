@@ -22,7 +22,7 @@ $dr = $this->juragan->_semua();
 
 	<title><?php echo $judul; ?></title>
     <script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
-    <script src="<?php echo base_url('berkas/js/bootstrap.bundle.min.js'); ?>"></script>
+	<script src="<?php echo base_url('berkas/js/bootstrap.bundle.min.js'); ?>"></script>
 	<script src="<?php echo base_url('berkas/js/backend.js'); ?>"></script>
 	<script src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js"></script>
 	<script src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js"></script>
@@ -32,7 +32,7 @@ $dr = $this->juragan->_semua();
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 	<div>
 		<?php echo anchor('', judul('name') , array('class' => 'navbar-brand')); ?>
-		<button class="sidebar-toggle"><i class="fas fa-folder"></i> Pesanan</button>
+		<?php echo form_button(array('class' => 'btn-juragan', 'id' => 'sidebarCollapse', 'content' => '<i class="fas fa-user-circle"></i>')) ?>
 	</div>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,16 +77,19 @@ $dr = $this->juragan->_semua();
   </div>
 </nav>
 
-<div class="d-flex align-items-stretch">
-    <div class="sidebar bg-dark toggled">
-        <ul class="list-unstyled">
-			<?php
-			echo '<li>' .anchor('pesanan/s_juragan', '<i class="fas fa-users"></i> Semua Juragan') . '</li>';
-			foreach ($dr->result() as $key) {
-				echo '<li>';
-					echo anchor('pesanan/' . $key->slug, '<i class="fas fa-user-circle"></i> ' . $key->nama);
-				echo '</li>';
-			}
-			?>
-        </ul>
-    </div>
+<div class="wrapper">
+	<nav id="sidebar" class="bg-dark">
+		<div class="sidebar">
+			<ul class="list-unstyled">
+				<?php
+				echo '<li>' .anchor('pesanan/s_juragan', '<i class="fas fa-users"></i> Semua Juragan') . '</li>';
+				foreach ($dr->result() as $key) {
+					echo '<li>';
+						echo anchor('pesanan/' . $key->slug, '<i class="fas fa-user-circle"></i> ' . $key->nama);
+					echo '</li>';
+				}
+				?>
+			</ul>
+		</div>
+	</nav>
+	<div class="d-flex align-items-stretch">

@@ -1,11 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+</div> 
+<!-- /.wrapper -->
+<div class="overlay"></div>
+
     <script src="<?php echo base_url('berkas/js/gpicker.js'); ?>"></script>
     <script src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
     <script>
     
     $(function () {
+        $('#dismiss, .overlay').on('click', function () {
+            $('#sidebar').removeClass('active');
+            $('.overlay').removeClass('active');
+        });
+
+        $(document).on("click", "#sidebarCollapse", function(e){
+            $('#sidebar').toggleClass('active');
+            $('.overlay').toggleClass('active');
+        });
         
         // create random string
         // https://stackoverflow.com/a/1349426/2094645

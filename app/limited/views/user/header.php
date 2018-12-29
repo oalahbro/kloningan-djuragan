@@ -33,7 +33,7 @@ $dr = $this->pengguna->_juragan_cs($username);
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 	<div>
 		<?php echo anchor('', judul('name') , array('class' => 'navbar-brand')); ?>
-		<button class="sidebar-toggle"><i class="fas fa-folder"></i> Pesanan</button>
+		<?php echo form_button(array('class' => 'btn-juragan', 'id' => 'sidebarCollapse', 'content' => '<i class="fas fa-user-circle"></i>')) ?>
 	</div>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,15 +71,19 @@ $dr = $this->pengguna->_juragan_cs($username);
   </div>
 </nav>
 
+<div class="wrapper">
+	<nav id="sidebar" class="bg-dark">
+		<div class="sidebar">
+			<ul class="list-unstyled">
+				<?php
+				foreach ($dr->result() as $key) {
+					echo '<li>';
+						echo anchor('myorder/' . $key->slug, '<i class="fas fa-user-circle"></i> ' . $key->nama, array());
+					echo '</li>';
+				}
+				?>
+			</ul>
+		</div>
+	</nav>
+
 <div class="d-flex align-items-stretch">
-    <div class="sidebar bg-dark toggled">
-        <ul class="list-unstyled">
-			<?php
-			foreach ($dr->result() as $key) {
-				echo '<li>';
-					echo anchor('myorder/' . $key->slug, '<i class="fas fa-user-circle"></i> ' . $key->nama, array());
-				echo '</li>';
-			}
-			?>
-        </ul>
-    </div>
