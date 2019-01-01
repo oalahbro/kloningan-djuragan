@@ -356,6 +356,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
         });
 
+        $(document).on("keyup change", '[name="cari[cek_tanggal]"]',function(){
+            if(this.checked) {
+                //Do stuff
+                $('[name="cari[tanggal]"]').prop('disabled', false);
+            }
+            else {
+                $('[name="cari[tanggal]"]').prop('disabled', true);
+            }
+        });
+        
         var transfer_field = $('.transfer'),
 			diskon_field = $('.diskon'),
 			ongkir_field = $('.ongkir'),

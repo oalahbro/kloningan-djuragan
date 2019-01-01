@@ -22,7 +22,7 @@ class Pesanan_model extends CI_Model
 	}
 
 	public function ambil_satu() {
-		$this->db->having(array('status_kirim' => 'pending'));
+		// $this->db->having(array('status_kirim' => 'pending'));
 
 		$this->db->not_like('biaya', 'ZALORA');
 		$this->db->not_like('biaya', 'BUKALAPAK');

@@ -86,5 +86,4 @@ $dr = $this->pengguna->_juragan_cs($username);
 			</ul>
 		</div>
 	</nav>
-
-<div class="d-flex align-items-stretch">
+	<div class="d-flex align-items-stretch">

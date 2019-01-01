@@ -24,9 +24,9 @@ class Faktur_model extends CI_Model
         MAX(CASE WHEN (ket.key = 'unik') THEN ket.val ELSE 0 END) AS unik,
         MAX(CASE WHEN (ket.key = 'diskon') THEN ket.val ELSE 0 END) AS diskon,
         MAX(CASE WHEN (ket.key = 'keterangan') THEN ket.val ELSE NULL END) AS keterangan,
-        MAX(CASE WHEN (ket.key = 's_transfer') THEN ket.val ELSE 'belum' END) AS status_transfer,
-        MAX(CASE WHEN (ket.key = 's_kirim') THEN ket.val ELSE 'belum' END) AS status_kirim,
-        MAX(CASE WHEN (ket.key = 's_paket') THEN ket.val ELSE 'belum' END) AS status_paket,
+        MAX(CASE WHEN (ket.key = 's_transfer') THEN ket.val ELSE 'belum_transfer' END) AS status_transfer,
+        MAX(CASE WHEN (ket.key = 's_kirim') THEN ket.val ELSE 'belum_kirim' END) AS status_kirim,
+        MAX(CASE WHEN (ket.key = 's_paket') THEN ket.val ELSE 'belum_diproses' END) AS status_paket,
         MAX(CASE WHEN (ket.key = 'tipe') THEN ket.val ELSE NULL END) AS tipe,
         MAX(CASE WHEN (ket.key = 'gambar') THEN ket.val ELSE NULL END) AS gambar,
         GROUP_CONCAT(DISTINCT CONCAT(kir.kurir,'|',kir.resi,'|',kir.tanggal_kirim,'|',kir.ongkir,'|',kir.id_pengiriman)) AS pengiriman,
@@ -42,26 +42,128 @@ class Faktur_model extends CI_Model
         $this->db->join('juragan jur', 'fak.juragan_id=jur.id', 'left');
         $this->db->join('pengguna pen', 'pen.id=fak.pengguna_id', 'left');
 
-        $this->db->where('fak.pengguna_id !=', NULL);
-
-        if (in_array($cari['pembayaran'], array('belum', 'b_menunggu', 'c_sebagian', 'd_lunas', 'e_lebih')) ) {
-            $this->db->or_where(array("ket.key" => 's_transfer', 'ket.val' => $cari['pembayaran']) );
-        }
-
-        if (in_array($cari['paket'], array('belum', 'diproses')) ) {
-            $this->db->or_where(array("ket.key" => 's_paket', 'ket.val' => $cari['paket']) );
-        }
-
-        if (in_array($cari['pengiriman'], array('belum', 'd_sebagian', 'dikirim')) ) {
-            if($cari['pengiriman'] === 'dikirim') {
-                $this->db->where(array("ket.key" => 's_kirim', 'ket.val' => 'b_dikirim') );
-                $this->db->or_where(array("ket.key" => 's_kirim', 'ket.val' => 'c_diambil') );
+        // pencarian
+        if($cari !== NULL ) {
+            // pembayaran ada           
+            
+            $query = '';
+            $dbyr = in_array($cari['pembayaran'], array('belum_transfer', 'b_menunggu', 'c_sebagian', 'd_lunas', 'e_lebih'));
+            $dpkt = in_array($cari['paket'], array('belum_diproses', 'diproses'));
+            $dkrm = in_array($cari['pengiriman'], array('belum_kirim', 'd_sebagian', 'dikirim'));
+           
+            if($dpkt && !empty($cari['paket'])) {
+                $query_p = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_paket' AND `val` = '".$cari['paket']."') ";
             }
-            else {
-                $this->db->where(array("ket.key" => 's_kirim', 'ket.val' => $cari['pengiriman']) );
+            
+            if($dbyr && !empty($cari['pembayaran'])) {
+                $query_b = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_transfer' AND `val` = '".$cari['pembayaran']."') ";
             }
+
+            if($dkrm && !empty($cari['pengiriman'])) {
+                if($cari['pengiriman'] === 'dikirim') {
+                    $query_k = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_kirim' AND `val` = 'b_dikirim' OR `val` = 'c_diambil') ";
+                }
+                else {
+                    $query_k = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_kirim' AND `val` = '".$cari['pengiriman']."')";
+                }
+            }
+
+            // $cari
+            if(!empty($cari['marketplace'])) {
+                $query_m = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 'tipe') ";
+            }
+
+            if(!empty($cari['q'])) {
+                $query_q =  "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `val` LIKE '%".$cari['q']."%') OR fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `pesanan_produk` WHERE `kode` LIKE '%".$cari['q']."%') ";
+            }
+
+            if(!empty($cari['tanggal'])) {
+                $query_t =  "fak.id_faktur IN (SELECT DISTINCT id_faktur FROM `faktur` WHERE DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_dibuat, '%Y-%m-%d %H:%i:%s'), '+00:00', '+00:00'))='".$cari['tanggal']."') ";
+            }
+
+            // ada bayar, ada paket, ada kirim
+            if(!empty($cari['pembayaran']) && !empty($cari['paket']) && !empty($cari['pengiriman'])) {
+                $query .= $query_b . " AND " . $query_p . " AND " . $query_k;
+            }
+            // ada bayar, ada paket, belum kirim
+            else if(!empty($cari['pembayaran']) && !empty($cari['paket']) && empty($cari['pengiriman'])) {
+                $query .= $query_b . " AND " . $query_p;
+            }
+            // ada bayar, belum paket, ada kirim
+            else if(!empty($cari['pembayaran']) && empty($cari['paket']) && !empty($cari['pengiriman'])) {
+                $query .= $query_b . " AND " . $query_k;
+            }
+            // ada bayar, ada paket, belum kirim
+            else if(empty($cari['pembayaran']) && !empty($cari['paket']) && !empty($cari['pengiriman'])) {
+                $query .= $query_p . " AND " . $query_k;
+            }
+            // ada bayar, belum paket, belum kirim
+            else if(!empty($cari['pembayaran']) && empty($cari['paket']) && empty($cari['pengiriman'])) {
+                $query .= $query_b;
+            }
+            // belum bayar, belum paket, ada kirim
+            else if(empty($cari['pembayaran']) && empty($cari['paket']) && !empty($cari['pengiriman'])) {
+                $query .= $query_k;
+            }
+            else if(empty($cari['pembayaran']) && !empty($cari['paket']) && empty($cari['pengiriman'])) {
+                $query .= $query_p;
+            }
+            
+            if(!empty($cari['pembayaran']) || !empty($cari['paket']) || !empty($cari['pengiriman'])) {
+                $query .= " AND ";
+            }
+
+            /////////////////////
+            
+            if(!empty($cari['marketplace']) && !empty($cari['tanggal']) && !empty($cari['q']) ) {
+                $query .= $query_m . " AND " . $query_t . " AND " . $query_q;
+            }
+            else if(!empty($cari['marketplace']) && empty($cari['tanggal']) && !empty($cari['q'])) {
+                $query .= $query_m . " AND " . $query_q;
+            }
+            else if(empty($cari['marketplace']) && !empty($cari['tanggal']) && !empty($cari['q'])) {
+                $query .= $query_t . " AND " . $query_q;
+            }
+            else if(!empty($cari['marketplace']) && !empty($cari['tanggal']) && empty($cari['q'])) {
+                $query .= $query_m . " AND " . $query_t;
+            }
+            else if(empty($cari['marketplace']) && empty($cari['tanggal']) && !empty($cari['q'])) {
+                $query .= $query_q;
+            }
+            else if(!empty($cari['marketplace']) && empty($cari['tanggal']) && empty($cari['q'])) {
+                $query .= $query_m;
+            }
+            else if(empty($cari['marketplace']) && !empty($cari['tanggal']) && empty($cari['q'])) {
+                $query .= $query_t;
+            }
+            
+           
+            ///////////////////
+            if(!empty($cari['pembayaran']) || !empty($cari['paket']) || !empty($cari['pengiriman']) || !empty($cari['marketplace']) || !empty($cari['tanggal']) || !empty($cari['q'])  ) {
+                $this->db->where( $query, NULL);
+            }
+
+        
+            if(!empty($cari['q'])) {
+                
+                $searchTerms = explode(' ', $cari['q']);
+                $searchTermBits = array();
+                foreach ($searchTerms as $term) {
+                    $term = trim($term);
+                    if ( ! empty($term)) {
+                        $this->db->or_like('fak.id_faktur',  $term, 'both');
+                        $this->db->or_like('fak.nama',  $term, 'both');
+                        $this->db->or_like('fak.hp1',  $term, 'both');
+                        $this->db->or_like('fak.alamat',  $term, 'both');
+                    }
+                }
+            }
+
+
         }
 
+
+       
         if ($juragan_id !== FALSE) {
             $this->db->having('juragan_id', $juragan_id);
         }
@@ -265,7 +367,7 @@ class Faktur_model extends CI_Model
             $this->update_ket($faktur_id, 's_transfer', 'd_lunas', TRUE);
         }
         else {
-            $this->update_ket($faktur_id, 's_transfer', 'belum', TRUE);
+            $this->update_ket($faktur_id, 's_transfer', 'belum_transfer', TRUE);
         }
     }
 
@@ -327,6 +429,10 @@ class Faktur_model extends CI_Model
         return $this->db->insert('pengiriman', $data);
     }
 
+    public function sub_carries($data) {
+        return $this->db->insert_batch('pengiriman', $data);
+    }
+
     public function calc_carry($faktur_id, $kirim_cod = 'kirim', $yes_no = 'ya') {
         $kirim = $this->get_carry($faktur_id);
 
@@ -344,7 +450,7 @@ class Faktur_model extends CI_Model
             $this->update_ket($faktur_id, 's_kirim', $val, TRUE);            
         }
         else {
-            $this->update_ket($faktur_id, 's_kirim', 'belum', TRUE);
+            $this->update_ket($faktur_id, 's_kirim', 'belum_kirim', TRUE);
         }
     }
 
@@ -357,8 +463,8 @@ class Faktur_model extends CI_Model
             $this->update_ket($faktur_id, 's_paket', 'diproses', TRUE);
         }
         else {
-            $this->update_ket($faktur_id, 's_paket', 'belum', TRUE);
-            $this->update_ket($faktur_id, 's_kirim', 'belum', TRUE);
+            $this->update_ket($faktur_id, 's_paket', 'belum_diproses', TRUE);
+            $this->update_ket($faktur_id, 's_kirim', 'belum_kirim', TRUE);
 
             $this->del_carry($faktur_id);
             $this->calc_carry($faktur_id);

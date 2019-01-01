@@ -93,6 +93,8 @@ class Faktur extends admin_controller
 			$alamat = $this->input->post('alamat');
 			$produk = $this->input->post('produk'); // array
 			$pembayaran = $this->input->post('pembayaran'); // array
+			$pengiriman = $this->input->post('pengiriman'); // array
+			$terkirim = $this->input->post('terkirim');
 			$diskon = $this->input->post('diskon');
 			$ongkir = $this->input->post('ongkir');
 			$unik = $this->input->post('unik');
@@ -216,17 +218,47 @@ class Faktur extends admin_controller
 				);
 			}
 
-			$keterangan_data[] = array(
-				'faktur_id' => $id_faktur,
-				'key' => 's_kirim',
-				'val' => 'belum'
-			);
-			
-			$keterangan_data[] = array(
-				'faktur_id' => $id_faktur,
-				'key' => 's_paket',
-				'val' => 'belum'
-			);
+			$pengiriman_data = array();
+			if (isset($terkirim) && ($terkirim === 'b_dikirim' || $terkirim === 'c_diambil') ) {
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 's_kirim',
+					'val' => $terkirim
+				);
+				
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 's_paket',
+					'val' => 'diproses'
+				);
+
+				$p = 0;
+				foreach ($pengiriman as $bayar) {
+					$pengiriman_data[$p]['faktur_id'] = $id_faktur;
+					$pengiriman_data[$p]['kurir'] = $bayar['kurir'];
+					$pengiriman_data[$p]['resi'] = $bayar['resi'];
+					$pengiriman_data[$p]['tanggal_kirim'] = strtotime($bayar['tanggal_kirim']);
+					$pengiriman_data[$p]['ongkir'] = $bayar['ongkir'];
+
+					$p++;
+				}
+				$data['pengiriman'] = $pengiriman_data;
+				// simpan to `pengiriman`
+				$this->faktur->sub_carries($data['pengiriman']);
+			}
+			else {
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 's_kirim',
+					'val' => 'belum_kirim'
+				);
+				
+				$keterangan_data[] = array(
+					'faktur_id' => $id_faktur,
+					'key' => 's_paket',
+					'val' => 'belum_diproses'
+				);
+			}
 
 			$data['keterangan'] = $keterangan_data;
 			if ( ! empty($data['keterangan'])) {
@@ -401,13 +433,13 @@ class Faktur extends admin_controller
 			$keterangan_data[] = array(
 				'faktur_id' => $id_faktur,
 				'key' => 's_kirim',
-				'val' => 'belum'
+				'val' => 'belum_kirim'
 			);
 
 			$keterangan_data[] = array(
 				'faktur_id' => $id_faktur,
 				'key' => 's_paket',
-				'val' => 'belum'
+				'val' => 'belum_diproses'
 			);
 
 			$data['keterangan'] = $keterangan_data;

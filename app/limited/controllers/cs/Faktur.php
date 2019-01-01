@@ -53,7 +53,7 @@ class Faktur extends user_controller
 				'judul' => 'Pesanan ' . $nama_juragan,
 				'juragan' => $juragan,
 				'status' => $status,
-				'query' => $this->faktur->get_all($juragan_id, $by = FALSE, $limit, $per_page, $cari = NULL)
+				'query' => $this->faktur->get_all($juragan_id, $by = FALSE, $limit, $per_page, $cari)
 				);
 
 			$this->load->view('user/header', $this->data);

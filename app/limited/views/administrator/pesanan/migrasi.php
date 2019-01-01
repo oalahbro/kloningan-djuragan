@@ -66,13 +66,7 @@ $biaya = json_decode( $pesanan->biaya );
                         ?>
                     </div>
                 </div>
-                <?php 
-                
 
-                print('<pre>');
-                print_r($detail->p);
-                print('</pre>');
-                ?>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <?php
@@ -250,6 +244,53 @@ $biaya = json_decode( $pesanan->biaya );
                     </div>
                 </div>
 
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="terkirim" id="inlineRadio1" value="b_dikirim">
+                    <label class="form-check-label" for="inlineRadio1">dikirim</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="terkirim" id="inlineRadio2" value="c_diambil">
+                    <label class="form-check-label" for="inlineRadio2">diambil</label>
+                </div>
+               
+                <div id="multiKirim">
+                    <label for="rekening">Pengiriman</label>
+                    <div class="listPengiriman" id="pengiriman" data-kirim="0">
+                        <div class="form-row mb-0 pb-0" id="formKirim">
+                            <div class="form-group col">
+                                <?php
+                                    //echo form_label('Rekening', 'rekening');
+                                    echo form_input(array('name' => 'pengiriman[0][kurir]', 'id'=> 'kurir', 'class' => 'form-control rekening senter', 'placeholder' => 'kurir','required' => ''), set_value('pengiriman[0][rekening]', $detail->s->k));
+                                ?>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <?php
+                                    //echo form_label('Tanggal Transfer', 'tanggal_transfer');
+                                    echo form_input(array('name' => 'pengiriman[0][resi]', 'id'=> 'resi', 'class' => 'form-control tanggal_transfer senter', 'required' => ''), set_value('pengiriman[0][resi]', $detail->s->n) );
+                                ?>
+                            </div>
+                            <div class="form-group col">
+                                <?php
+                                    //echo form_label('Jumlah ', 'transfer');
+                                    echo form_input(array('name' => 'pengiriman[0][ongkir]', 'id'=> 'ongkir', 'class' => 'form-control transfer senter', 'type' => 'number', 'min' => '0','required' => ''), set_value('pengiriman[0][ongkir]', (isset($biaya->m->of)? $biaya->m->of: '0')));
+                                ?>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <?php
+                                    //echo form_label('Tanggal Transfer', 'tanggal_transfer');
+                                    echo form_input(array('name' => 'pengiriman[0][tanggal_kirim]', 'id'=> 'tanggal_kirim', 'class' => 'form-control tanggal_kirim senter', 'type' => 'date'), set_value('pengiriman[0][tanggal_kirim]', ($pesanan->tanggal_cek_kirim === NULL? '': mdate('%Y-%m-%d', $pesanan->tanggal_cek_kirim) )));
+                                ?>
+                            </div>
+                            <div class="form-group col-2 col-sm-1">
+                                <?php
+                                echo form_button(array('class' => 'btn btn-success btnAddKirim btn-block senter', 'content' => '<i class="fas fa-plus"></i>'));
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
                 <hr/>
 
                 <div class="form-group">
@@ -296,4 +337,25 @@ $biaya = json_decode( $pesanan->biaya );
             createPicker(viewId, setOAuthToken);
         }
     }, false);
+
+
+
+     // pembayaran multiple via transfer
+     var ti = $("#multiKirim .listPembayaran").length;
+        $(document).on("click", ".btnAddKirim", function(e){
+            e.preventDefault();
+            ti++;
+            var clone = $('#pengiriman').clone('#formKirim');
+
+            clone.attr('data-kirim', ti);
+
+            clone.find("#kurir").attr({name: 'pengiriman['+ti+'][kurir]', id: 'kurir-'+ti}).val('');
+            clone.find("#resi").attr({name: 'pengiriman['+ti+'][resi]', id: 'resi-'+ti}).val('');
+            clone.find("#ongkir").attr({name: 'pengiriman['+ti+'][ongkir]', id: 'ongkir-'+ti}).val('0');
+            clone.find("#tanggal_kirim").attr({name: 'pengiriman['+ti+'][tanggal_kirim]', id: 'tanggal_kirim-'+ti}).val("<?php echo mdate('%Y-%m-%d', now()); ?>");
+
+            $('#multiKirim').append(clone);
+
+            $('[data-kirim="'+ti+'"] .btnAddKirim').replaceWith( '<button type="button" class="btn btn-outline-danger senter btn-block btnDelKirim"><i class="fas fa-minus"></i></button>' );
+        });
 </script>
