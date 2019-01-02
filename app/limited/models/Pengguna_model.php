@@ -29,6 +29,8 @@ class Pengguna_model extends CI_Model
 		// kecuali superadmin 
 		$this->db->where_not_in('p.level', array('superadmin'));
 
+		$this->db->order_by('nama asc');
+
 		$q = $this->db->get();
 		return $q;
 	}

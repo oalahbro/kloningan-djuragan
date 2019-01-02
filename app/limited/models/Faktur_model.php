@@ -81,40 +81,51 @@ class Faktur_model extends CI_Model
                 $query_t =  "fak.id_faktur IN (SELECT DISTINCT id_faktur FROM `faktur` WHERE DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_dibuat, '%Y-%m-%d %H:%i:%s'), '+00:00', '+00:00'))='".$cari['tanggal']."') ";
             }
 
-            // ada bayar, ada paket, ada kirim
+            // pembayaran, paket, pengiriman
             if(!empty($cari['pembayaran']) && !empty($cari['paket']) && !empty($cari['pengiriman'])) {
                 $query .= $query_b . " AND " . $query_p . " AND " . $query_k;
             }
-            // ada bayar, ada paket, belum kirim
             else if(!empty($cari['pembayaran']) && !empty($cari['paket']) && empty($cari['pengiriman'])) {
                 $query .= $query_b . " AND " . $query_p;
             }
-            // ada bayar, belum paket, ada kirim
             else if(!empty($cari['pembayaran']) && empty($cari['paket']) && !empty($cari['pengiriman'])) {
                 $query .= $query_b . " AND " . $query_k;
             }
-            // ada bayar, ada paket, belum kirim
             else if(empty($cari['pembayaran']) && !empty($cari['paket']) && !empty($cari['pengiriman'])) {
                 $query .= $query_p . " AND " . $query_k;
             }
-            // ada bayar, belum paket, belum kirim
             else if(!empty($cari['pembayaran']) && empty($cari['paket']) && empty($cari['pengiriman'])) {
                 $query .= $query_b;
             }
-            // belum bayar, belum paket, ada kirim
             else if(empty($cari['pembayaran']) && empty($cari['paket']) && !empty($cari['pengiriman'])) {
                 $query .= $query_k;
             }
             else if(empty($cari['pembayaran']) && !empty($cari['paket']) && empty($cari['pengiriman'])) {
                 $query .= $query_p;
             }
-            
-            if(!empty($cari['pembayaran']) || !empty($cari['paket']) || !empty($cari['pengiriman'])) {
-                $query .= " AND ";
+
+            // marketplace, tanggal, query
+            if(!empty($cari['pembayaran']) OR !empty($cari['paket']) OR !empty($cari['pengiriman'])) {
+                $qand = TRUE;
+            }
+            else {
+                $qand = FALSE;
             }
 
-            /////////////////////
-            
+            if(!empty($cari['marketplace']) || !empty($cari['tanggal']) || !empty($cari['q']) ) {
+                $q2and = TRUE;
+            }
+            else {
+                $q2and = FALSE;
+            }
+
+            if($qand && $q2and) {
+                $query .= " AND ";
+            }
+            else {
+                $query .= '';
+            }
+
             if(!empty($cari['marketplace']) && !empty($cari['tanggal']) && !empty($cari['q']) ) {
                 $query .= $query_m . " AND " . $query_t . " AND " . $query_q;
             }
@@ -137,33 +148,27 @@ class Faktur_model extends CI_Model
                 $query .= $query_t;
             }
             
-           
             ///////////////////
             if(!empty($cari['pembayaran']) || !empty($cari['paket']) || !empty($cari['pengiriman']) || !empty($cari['marketplace']) || !empty($cari['tanggal']) || !empty($cari['q'])  ) {
                 $this->db->where( $query, NULL);
             }
-
         
             if(!empty($cari['q'])) {
-                
                 $searchTerms = explode(' ', $cari['q']);
                 $searchTermBits = array();
                 foreach ($searchTerms as $term) {
                     $term = trim($term);
                     if ( ! empty($term)) {
                         $this->db->or_like('fak.id_faktur',  $term, 'both');
+                        $this->db->or_like('fak.seri_faktur',  $term, 'both');
                         $this->db->or_like('fak.nama',  $term, 'both');
                         $this->db->or_like('fak.hp1',  $term, 'both');
                         $this->db->or_like('fak.alamat',  $term, 'both');
                     }
                 }
             }
-
-
         }
 
-
-       
         if ($juragan_id !== FALSE) {
             $this->db->having('juragan_id', $juragan_id);
         }
@@ -173,7 +178,7 @@ class Faktur_model extends CI_Model
             $this->db->offset($offset);
         }
 
-        $this->db->order_by('status_kirim ASC, status_paket ASC, status_transfer ASC, fak.tanggal_dibuat DESC');
+        $this->db->order_by('status_kirim ASC, status_paket ASC, status_transfer ASC, kir.tanggal_kirim DESC');
 
         $this->db->group_by('fak.id_faktur');
         $q = $this->db->get();
