@@ -240,9 +240,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     $a_krm = 'set_kirim';
                                                     $s_pkt = 'batal proses';
                                                     break;
+                                                case "proses_batal":
+                                                    // paket diproses
+                                                    $c_pkt = 'text-danger';
+                                                    $i_pkt = 'fa-ban';
+                                                    $mi_pkt = 'fa-box';
+                                                    $t_pkt = 'Pesanan dibatalkan';
+                                                    $a_krm = 'cset_kirim';
+                                                    $s_pkt = 'batal proses';
+                                                    break;
                                                 default:
                                                     // belum diproses
-                                                    $c_pkt = 'text-danger';
+                                                    $c_pkt = 'text-warning';
                                                     $i_pkt = 'fa-times';
                                                     $mi_pkt = 'fa-box-open';
                                                     $t_pkt = 'Pesanan Belum diproses';

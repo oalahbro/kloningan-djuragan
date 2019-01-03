@@ -298,6 +298,11 @@ class Faktur_model extends CI_Model
         return $this->db->insert_batch('pembayaran', $data);
     }
 
+    public function sub_pay_($data) {
+        $this->db->insert('pembayaran', $data);
+        return TRUE;
+    }
+
     public function del_pay($id_pembayaran) {
         $this->db->delete('pembayaran', array('id_pembayaran' => $id_pembayaran));
         return TRUE;
@@ -430,12 +435,24 @@ class Faktur_model extends CI_Model
         return TRUE;
     }
 
+    public function del_carry_($id_pengiriman) {
+        $this->db->delete('pengiriman', array('id_pengiriman' => $id_pengiriman));
+        return TRUE;
+    }
+
     public function sub_carry($data) {
         return $this->db->insert('pengiriman', $data);
     }
 
     public function sub_carries($data) {
         return $this->db->insert_batch('pengiriman', $data);
+    }
+
+    public function update_carry($id_pengiriman, $data) {
+        $this->db->where('id_pengiriman', $id_pengiriman);
+        $this->db->update('pengiriman', $data);
+        
+        return TRUE;
     }
 
     public function calc_carry($faktur_id, $kirim_cod = 'kirim', $yes_no = 'ya') {
