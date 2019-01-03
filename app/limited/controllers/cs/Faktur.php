@@ -223,13 +223,13 @@ class Faktur extends user_controller
 			$keterangan_data[] = array(
 				'faktur_id' => $id_faktur,
 				'key' => 's_kirim',
-				'val' => 'belum'
+				'val' => 'belum_kirim'
 			);
 			
 			$keterangan_data[] = array(
 				'faktur_id' => $id_faktur,
 				'key' => 's_paket',
-				'val' => 'belum'
+				'val' => 'belum_proses'
 			);
 
 			$data['keterangan'] = $keterangan_data;

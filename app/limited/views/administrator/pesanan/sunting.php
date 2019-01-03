@@ -419,16 +419,20 @@ $pesanan = $q->row();
                         'value'         => 'ya'
                     );
                     
-                    $arr_kir = array('checked' => TRUE);
-                    if($pesanan->status_kirim === 'belum_kirim' && $pesanan->status_paket === 'belum_diproses') {
+                    if($pesanan->status_kirim === 'belum_kirim' && $pesanan->status_paket !== 'diproses') {
                         $arr_kir = array(
                             'checked' => FALSE,
                             'disabled' => ''
                         );
                     }
-                    else {
+                    else if($pesanan->status_kirim === 'belum_kirim' && $pesanan->status_paket === 'diproses') {
                         $arr_kir = array(
                             'checked' => FALSE
+                        );
+                    }
+                    else {
+                        $arr_kir = array(
+                            'checked' => TRUE
                         );
                     }
 
@@ -585,7 +589,7 @@ $pesanan = $q->row();
                 <div class="form-group">
                     <?php
                         echo form_label('Keterangan', 'keterangan');
-                        echo form_textarea(array('name' => 'keterangan', 'rows' => 3, 'id'=> 'keterangan', 'class' => 'form-control', 'placeholder' => 'keterangan tambahan'), set_value('keterangan', $pesanan->keterangan));
+                        echo form_textarea(array('name' => 'keterangan', 'rows' => 3, 'id'=> 'keterangan', 'class' => 'form-control', 'placeholder' => 'keterangan tambahan'), set_value('keterangan', html_entity_decode($pesanan->keterangan)));
                     ?>
                 </div>
 

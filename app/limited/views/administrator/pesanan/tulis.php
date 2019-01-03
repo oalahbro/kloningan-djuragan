@@ -356,7 +356,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 'id'            => 'pengiriman_selesai',
                                 'class'         => 'custom-control-input',
                                 'checked'       => TRUE,
-                                'value'         => 'ya'
+                                'value'         => 'ya',
+                                'disabled'      => ''
                             );
                             
                             echo form_checkbox($data);

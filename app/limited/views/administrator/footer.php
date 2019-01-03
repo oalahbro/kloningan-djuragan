@@ -468,9 +468,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             if(this.checked) {
                 //Do stuff
                 $('.carry').prop('disabled', false);
+                $('#pengiriman_selesai').prop('disabled', false);
             }
             else {
                 $('.carry').prop('disabled', true);
+                $('#pengiriman_selesai').prop('disabled', true);
             }
         });
 

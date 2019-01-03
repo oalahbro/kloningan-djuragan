@@ -463,7 +463,7 @@ class Faktur extends admin_controller
 				);
 			}
 
-			if ($status_paket === 'diproses') {
+			if ($status_paket === 'diproses' && $pengiriman_ === 'ya') {
 				if ($pengiriman_selesai === 'ya') {
 					$keterangan_data[] = array(
 						'faktur_id' => $id_faktur,
