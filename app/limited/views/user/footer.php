@@ -337,7 +337,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         // form tambah pesanan
         $(document).on("keyup change", "#hp1",function(){
-        // $('#hp').on("change keyup", function(e) {
 			var isi = $(this).val();
 			var str = isi.substr(isi.length - 3); // DXB
 			
@@ -356,6 +355,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
         });
 
+        $(document).on("keyup change", '[name="pembayaran_"]',function(){
+            if(this.checked) {
+                //Do stuff
+                $('.bankir').prop('disabled', true);
+                $('#dataPembayaran').collapse('hide');
+            }
+            else {
+                $('.bankir').prop('disabled', false);
+                $('#dataPembayaran').collapse('show');
+            }
+        });
+
         $(document).on("keyup change", '[name="cari[cek_tanggal]"]',function(){
             if(this.checked) {
                 //Do stuff
@@ -366,11 +377,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
         });
         
-        var transfer_field = $('.transfer'),
-			diskon_field = $('.diskon'),
-			ongkir_field = $('.ongkir'),
-			unik_field = $('.unik'),
-			harga_field = $('[name="harga_total"]');
 
         var pesananIndex = $("#ngok .cloning-me").length;
         
@@ -389,7 +395,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $('[data-prod="'+pesananIndex+'"] .btnAdd').replaceWith( '<button type="button" class="btn btn-outline-danger btnDel"><i class="fas fa-minus"></i></button>' );            
         });
 
-        // pembayaran multiple via transfer
+        // cloning form pembayaran
         var ti = $("#multiBayar .listPembayaran").length;
         $(document).on("click", ".btnAddTransfer", function(e){
             e.preventDefault();
@@ -397,14 +403,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             var clone = $('#pembayaranViaTransfer').clone('#formTransfer');
 
             clone.attr('data-transfer', ti);
-
+            clone.find("#id_pembayaran").remove();
             clone.find("#rekening").attr({name: 'pembayaran['+ti+'][rekening]', id: 'rekening-'+ti}).val('');
             clone.find("#tanggal_transfer").attr({name: 'pembayaran['+ti+'][tanggal]', id: 'tanggal_transfer-'+ti}).val("<?php echo mdate('%Y-%m-%d', now()); ?>");
             clone.find("#jumlah_transfer").attr({name: 'pembayaran['+ti+'][jumlah]', id: 'jumlah_transfer-'+ti}).val('0');
+            clone.find("#tanggal_cek").attr({name: 'pembayaran['+ti+'][cek]', class: 'form-control tanggal_cek bankir sudah_cek-'+ti, id: 'tanggal_cek-'+ti}).prop('disabled', true).val();
+            clone.find(".form-check-input").attr({name: 'pembayaran['+ti+'][sudah_cek]', id: 'sudah_cek-'+ti}).attr('checked', false).prop('disabled', true);
+            clone.find(".form-check-label").attr({for: 'sudah_cek-'+ti});
 
             $('#multiBayar').append(clone);
 
-            $('[data-transfer="'+ti+'"] .btnAddTransfer').replaceWith( '<button type="button" class="btn btn-outline-danger bankir btn-block btnDelTransfer"><i class="fas fa-minus"></i></button>' );
+            $('[data-transfer="'+ti+'"] .btnAddTransfer').replaceWith( '<button type="button" class="btn btn-outline-danger bankir btnDelTransfer"><i class="fas fa-minus"></i></button>' );
         });
 
         $(document).on("click", ".btnDel", function(e){
@@ -513,16 +522,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             })
         }
 
-        
+        // kalkulasi form
+        $(document).on("change", ".calc", function(e){
+            var $form = $('#konten');
+			var $row = $form.find('[data-prod]'),
+                $diskon = parseInt($('.diskon').val(), 10),
+                $ongkir = parseInt($('.ongkir').val(), 10),
+                $unik = parseInt($('.unik').val(), 10),
+			    $total = 0,
+                $finaltotal = 0;
 
-        // hapus pembayaran
-        $(document).on("click", ".hapus_bayar", function(e){
-            e.preventDefault();
-            var id = $(this).attr('data-id');
+        	$row.each(function () {
+        		var i = $(this).attr("data-prod");
+                console.log(i);
 
-            $('#modalPembayaran').modal('hide');
-            $('.modal_hapus_bayar').modal({backdrop: 'static', show: true, keyboard: false});
-        })
+                var h = parseInt($('[name="produk['+i+'][harga]"]').val(), 10);
+                var q = parseInt($('[name="produk['+i+'][jumlah]"]').val(), 10);
+                var t = h * q;
+                if ( ! isNaN(t)) $total += t;
+        	});
+
+            $finaltotal += $total;
+            $finaltotal += $ongkir;
+            $finaltotal += $unik;
+            $finaltotal -= $diskon;
+
+            $('.wajib_dibayar').text('Rp '+ format($finaltotal));
+            $('#jumlah_transfer').val($finaltotal);
+            $('.angka_unik').text('Rp '+ format($unik));
+            $('.tarif_ongkir').text('Rp '+ format($ongkir));
+            $('.total_diskon').text('Rp '+ format($diskon));
+            $('.total_harga_produk').text('Rp '+ format($total));
+        });
+
+        function format(n, sep, decimals) {
+            sep = sep || "."; // Default to period as decimal separator
+            //decimals = decimals || 2; // Default to 2 decimals
+
+            return n.toLocaleString().split(sep)[0] + ',-'
+                // + sep
+                //+ n.toFixed(decimals).split(sep)[1];
+        }
     })
     </script>
 </body>

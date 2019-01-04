@@ -38,6 +38,7 @@ class Pesanan_model extends CI_Model
 
 		$this->db->limit(1);
 		$this->db->order_by('status_transfer desc, status_kirim desc, tanggal_submit desc');
+		// $this->db->order_by('tanggal_submit', 'RANDOM');
 		return $this->db->get($this->tabel);
 	}
 

@@ -104,6 +104,7 @@ class Faktur extends user_controller
 			$ongkir = $this->input->post('ongkir');
 			$unik = $this->input->post('unik');
 			$marketplace_ = $this->input->post('marketplace_');
+			$pembayaran_ = $this->input->post('pembayaran_');
 			$marketplace = $this->input->post('marketplace');
 			$keterangan = $this->input->post('keterangan');
 			$image = $this->input->post('image');
@@ -145,21 +146,26 @@ class Faktur extends user_controller
 			// simpan to `pesanan_produk`
 			$this->faktur->add_orders($data['produk']);			
 
+			$data['opsi_bayar'] = $pembayaran_;
 			// `pembayaran`
-			$pembayaran_data = array();
-			if ($marketplace === NULL && $marketplace_ !== 'on') {
-				$p = 0;
-				foreach ($pembayaran as $bayar) {
-					$pembayaran_data[$p]['faktur_id'] = $id_faktur;
-					$pembayaran_data[$p]['tanggal_bayar'] = strtotime($bayar['tanggal']);
-					$pembayaran_data[$p]['jumlah'] = $bayar['jumlah'];
-					$pembayaran_data[$p]['rekening'] = $bayar['rekening'];
+			if($pembayaran_ !== 'ya') {
+				$pembayaran_data = array();
+				$pembayaran_submit = array_filter($pembayaran);
+				if (!empty($pembayaran_submit)) {
+					$p = 0;
+					foreach ($pembayaran as $bayar) {
+						$pembayaran_data[$p]['faktur_id'] = $id_faktur;
+						$pembayaran_data[$p]['tanggal_bayar'] = strtotime($bayar['tanggal']);
+						$pembayaran_data[$p]['jumlah'] = $bayar['jumlah'];
+						$pembayaran_data[$p]['rekening'] = $bayar['rekening'];
+						$pembayaran_data[$p]['tanggal_cek'] = (empty($bayar['cek']) ? NULL: strtotime($bayar['cek']));
 
-					$p++;
+						$p++;
+					}
+					$data['pembayaran'] = $pembayaran_data;
+					// simpan to `pesanan_produk`
+					$this->faktur->sub_pay($data['pembayaran']);
 				}
-				$data['pembayaran'] = $pembayaran_data;
-				// simpan to `pesanan_produk`
-				$this->faktur->sub_pay($data['pembayaran']);
 			}
 
 			// `keterangan`

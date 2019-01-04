@@ -95,20 +95,21 @@ $biaya = json_decode( $pesanan->biaya );
                         echo form_textarea(array('name' => 'alamat', 'rows' => 3, 'id'=> 'alamat', 'class' => 'form-control','required' => '', 'placeholder' => 'alamat lengkap'),set_value('nama', $buyer->a));
                     ?>
                 </div>
-                
+
                 <div class="form-group" id="ngok">
                     <label for="kode">Produk dipesan</label>
                     <?php 
-                    $p = 1;
+                    $harga_produk = 0;
+                    $produkIndex = 1;
                     foreach ($detail->p as $produk) {
                     ?>
-                    <div class="mb-2 cloning-me" id="dup" data-prod="<?php echo $p; ?>">
+                    <div class="mb-2 cloning-me" id="dup" data-prod="<?php echo $produkIndex; ?>">
                         <div class="form-row" id="main-form">
                             <div class="col mb-2">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Kode</span></div>
                                     <?php
-                                        echo form_input(array('name' => 'produk['.$p.'][kode]', 'id'=> 'kode', 'class' => 'form-control kode', 'placeholder' => 'kode', 'required' => 'required'), set_value('produk['.$p.'][kode]', $produk->c));
+                                        echo form_input(array('name' => 'produk['.$produkIndex.'][kode]', 'id'=> 'kode-' . $produkIndex, 'class' => 'form-control kode', 'placeholder' => 'kode', 'required' => 'required'), set_value('', $produk->c));
                                     ?>
                                 </div>
                             </div>
@@ -116,7 +117,7 @@ $biaya = json_decode( $pesanan->biaya );
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Harga @</span></div>
                                     <?php
-                                        echo form_input(array('name' => 'produk['.$p.'][harga]', 'id'=> 'harga', 'class' => 'form-control calc harga', 'placeholder' => '250000', 'pattern' => '^(?:[1-9]\d*|0)$', 'required' => '', 'type' => 'number', 'min' => '0'), set_value('produk['.$p.'][kode]', $produk->h));
+                                        echo form_input(array('name' => 'produk['.$produkIndex.'][harga]', 'id'=> 'harga-' . $produkIndex, 'class' => 'form-control calc harga', 'placeholder' => '250000', 'pattern' => '^(?:[1-9]\d*|0)$', 'required' => '', 'type' => 'number', 'min' => '0'), set_value('', (isset($produk->h)?$produk->h: $biaya->m->h/$pesanan->count)));
                                     ?>
                                 </div>
                             </div>
@@ -130,7 +131,8 @@ $biaya = json_decode( $pesanan->biaya );
                                     foreach ($size_j as $key ) {
                                         $opt[$key] = $key;
                                     }
-                                    echo form_dropdown('produk['.$p.'][ukuran]', $opt, $produk->s, array('id' => 'ukuran', 'class'=> 'custom-select ukuran', 'required' => ''));
+
+                                    echo form_dropdown('produk['.$produkIndex.'][ukuran]', $opt, $produk->s, array('id' => 'ukuran-' . $produkIndex, 'class'=> 'custom-select ukuran', 'required' => ''));
                                     ?>
                                 </div>
                             </div>
@@ -138,24 +140,31 @@ $biaya = json_decode( $pesanan->biaya );
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Jumlah</span></div>
                                     <?php
-                                        echo form_input(array('name' => 'produk['.$p.'][jumlah]', 'id'=> 'jumlah', 'class' => 'form-control calc jumlah', 'placeholder' => '1', 'min' => '1', 'pattern' => '^\d+$', 'required' => '', 'type' => 'number'), set_value('produk['.$p.'][kode]', $produk->q));
+                                        echo form_input(array('name' => 'produk['.$produkIndex.'][jumlah]', 'id'=> 'jumlah-' . $produkIndex, 'class' => 'form-control calc jumlah', 'placeholder' => '1', 'min' => '1', 'pattern' => '^\d+$', 'required' => '', 'type' => 'number'), set_value('produk['.$produkIndex.'][jumlah]', $produk->q));
                                     ?>
                                 </div>
                             </div>
                             <div class="col-sm-1 mb-2">
-                                <button type="button" class="btn btn-success btnAdd"><i class="fas fa-plus"></i></button>
+                                <?php
+                                if ($produkIndex === 1) { ?>
+                                    <button type="button" class="btn btn-success btnAdd"><i class="fas fa-plus"></i></button>
+                                <?php } else { ?>
+                                    <button type="button" class="btn btn-outline-danger btnDel"><i class="fas fa-minus"></i></button>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
-                    <?php
-                    $p++;
+                    <?php 
+                        $harga_produk += (isset($produk->h)?$produk->h: $biaya->m->h/$pesanan->count) * $produk->q;
+                        $produkIndex++;
                     }
                     ?>
                 </div>
-
+               
                 <hr/>
+
                 <div class="row">
-                    <div class="col-sm-5">
+                    <div class="col-sm-7 mb-3">
 
                         <div class="card bg-light">
                             <div class="card-body">
@@ -163,132 +172,374 @@ $biaya = json_decode( $pesanan->biaya );
                                     <div class="form-group col-sm-4">
                                         <?php
                                             echo form_label('Diskon', 'diskon');
-                                            echo form_input(array('name' => 'diskon', 'id'=> 'diskon', 'class' => 'form-control diskon', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('diskon',(isset($biaya->m->d) ? $biaya->m->d: 0 )));
+                                            echo form_input(array('name' => 'diskon', 'id'=> 'diskon', 'class' => 'form-control diskon calc', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('diskon', (isset($biaya->m->d) ? $biaya->m->d: 0 )));
                                         ?>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <?php
                                             echo form_label('Tarif Ongkir', 'ongkir');
-                                            echo form_input(array('name' => 'ongkir', 'id'=> 'ongkir', 'class' => 'form-control ongkir', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('ongkir', (isset($biaya->m->o) ? $biaya->m->o: 0 )));
+                                            echo form_input(array('name' => 'ongkir', 'id'=> 'ongkir', 'class' => 'form-control ongkir calc', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('diskon', (isset($biaya->m->o) ? $biaya->m->o: 0 )));
                                         ?>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <?php
                                             echo form_label('3 digit angka unik', 'unik');
-                                            echo form_input(array('name' => 'unik', 'id'=> 'unik', 'class' => 'form-control unik', 'type' => 'number', 'min' => '0','required' => ''), (isset($biaya->m->u) ? $biaya->m->u: 0 ));
+                                            echo form_input(array('name' => 'unik', 'id'=> 'unik', 'class' => 'form-control unik calc', 'type' => 'number', 'min' => '0','required' => ''), set_value('diskon', (isset($biaya->m->u) ? $biaya->m->u: 0 )));
                                         ?>
                                     </div>
                                 </div>
-                                <small class="text-muted">3 digit angka unik diisi otomatis, dambil dari 3 digit angka hp terakhir, beri angka 0 jika tidak dibutuhkan</small>
+                                <small class="text-muted">3 digit angka unik diisi otomatis, dambil dari 3 digit angka hp terakhir,<br/>beri nilai 0 jika tidak dibutuhkan</small>
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-sm-7">
-                        <div class="Lead total_harga_produk" ></div>
+                    <div class="col-sm-5 mb-3">
+                        <h6>Ulasan Biaya</h6>
+                        <div class="lead">
+                            <div>Total Harga Produk <span class="float-right total_harga_produk"><?php echo harga($harga_produk); ?></span></div>
+                            <div>Tarif Ongkir <span class="float-right tarif_ongkir"><?php 
+                            $ongkir_ = (isset($biaya->m->o) ? $biaya->m->o: 0 );
+                            echo harga($ongkir_); ?></span></div>
+                            <div>Angka Unik <span class="float-right angka_unik"><?php 
+                            $unik_ = (isset($biaya->m->u) ? $biaya->m->u: 0 );
+                            echo harga($unik_); ?></span></div>
+                            <div>Diskon <span class="float-right total_diskon"><?php 
+                            $diskon_ = (isset($biaya->m->d) ? $biaya->m->d: 0 );
+                            echo harga($diskon_); ?></span></div>
+                            <div>Biaya Wajib Dibayar <span class="float-right wajib_dibayar"><?php
+                            
+                            echo harga($harga_produk + $ongkir_ + $unik_ - $diskon_) ?></span></div>
+                        </div>                        
+                    </div>
+                </div>
 
-                        <div class="card bg-light border-primary">
-                            <div class="card-body">
-                                <div class="form-row">
-                                    <div class="form-group col-sm-6">
-                                        <?php echo form_label('Pesanan Marketplace?', 'nama'); ?>
-                                        <div class="input-group ">
+                <div class="form-row">
+                    <div class="form-group col-sm-5">
+                        <?php echo form_label('Pesanan Marketplace?', 'marketplace_'); ?>
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <?php 
+                                    $data = array(
+                                        'name'          => 'marketplace_',
+                                        'id'            => 'marketplace_',
+                                        'value'         => 'on',
+                                        'checked'       => FALSE,
+                                    );
+                                    
+                                    echo form_checkbox($data);
+                                    ?>
+                                </div>
+                            </div>
+                            <?php
+                        
+                            $arr = array('disabled' => '');
+                            
+                            echo form_input(array_merge(array('class' => 'form-control', 'name' => 'marketplace', 'placeholder' => 'misal: Tokopedia, Shopee, ...', 'required' => ''), $arr));
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <?php echo form_label('Status Paket', 'status_paket'); ?>
+                            <?php
+                            $opsi_paket_ = array(
+                                'belum_diproses' => 'Belum Diproses',
+                                'diproses'       => 'Diproses',
+                                'proses_batal'   => 'Dibatalkan'
+                            );
+                            
+                            echo form_dropdown('status_paket', $opsi_paket_, 'diproses', array('class' => 'custom-select', 'id' => 'status_paket'));
+                            ?>
+                    </div>                
+                </div>
+
+                <div class="custom-control custom-switch mb-2">
+                    <?php 
+                    $data = array(
+                        'name'          => 'pembayaran_',
+                        'id'            => 'pembayaran_',
+                        'class'         => 'custom-control-input',
+                        'value'         => 'ya'
+                    );
+
+                    $arr_tr = array('checked' => FALSE);
+                    if ($pesanan->status_transfer === 'belum_transfer') {
+                        $arr_tr = array('checked' => TRUE);
+                    } 
+                    
+                    echo form_checkbox(array_merge($data,$arr_tr));
+                    echo form_label('Menunggu pembayaran/pencairan?', 'pembayaran_', array('class' => 'custom-control-label'));
+                    ?>
+                </div>
+
+                <div class="card bg-light mb-3 collapse <?php echo ($pesanan->status_transfer === 'belum'? '': 'show') ?>" id="dataPembayaran">
+                    <div class="card-body">
+                        <div id="multiBayar">
+                            <label for="rekening">Data Pembayaran</label>
+                            <?php 
+                            if ($biaya->m !== NULL) {
+                                $bayarIndex = 1;
+                                // $bayar = explode(',', $detail->p);
+
+                                //foreach($biaya->m as $bayar) { 
+                                    // $arr_bayar[$kunci] = explode('|', $str);
+                                ?>
+                                <div class="listPembayaran" id="pembayaranViaTransfer" data-transfer="<?php echo $bayarIndex; ?>">
+                                    <div class="form-row mb-0 pb-0" id="formTransfer">
+
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Rek?</span>
+                                            </div>
+                                            <?php
+                                                echo form_input(array('name' => 'pembayaran['.$bayarIndex.'][rekening]', 'id'=> 'rekening', 'class' => 'form-control rekening bankir', 'placeholder' => 'Cash / Bank','required' => ''), $biaya->b);
+                                            ?>
+                                        </div>
+
+                                        <div class="input-group mb-3 col-sm-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Tggl Bayar</span>
+                                            </div>
+                                            <?php
+                                                echo form_input(array('name' => 'pembayaran['.$bayarIndex.'][tanggal]', 'id'=> 'tanggal_transfer', 'class' => 'form-control tanggal_transfer bankir', 'type' => 'date','required' => ''), mdate('%Y-%m-%d', $pesanan->tanggal_submit));
+                                            ?>
+                                        </div>
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Jumlah</span>
+                                            </div>
+                                            <?php
+                                                echo form_input(array('name' => 'pembayaran['.$bayarIndex.'][jumlah]', 'id'=> 'jumlah_transfer', 'class' => 'form-control transfer bankir', 'type' => 'number', 'min' => '0','required' => ''), ($biaya->m->t === NULL? '0': $biaya->m->t));
+                                            ?>
+                                        </div>
+                                        <div class="input-group mb-3 col-sm-3">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <input type="checkbox" name="marketplace_">
+                                                    <div class="form-check">
+                                                        <?php
+                                                        $data_ck = array(
+                                                            'name'          => 'pembayaran['.$bayarIndex.'][sudah_cek]',
+                                                            'id'            => 'sudah_cek-'. $bayarIndex,
+                                                            'class'         => 'form-check-input sudah_cek mt-2',
+                                                            'checked'       => FALSE,
+                                                            'value'         => 'ya'
+                                                        );
+                                                        
+                                                        if($pesanan->tanggal_cek_transfer !== 'NULL') {
+                                                            $arr_by_cek = array('checked' => TRUE);
+                                                            $wct = $pesanan->tanggal_cek_transfer;
+                                                            $arr_by_cek_input = array();
+                                                        }
+                                                        else {
+                                                            $arr_by_cek = array('checked' => FALSE);
+                                                            $arr_by_cek_input = array('disabled' => '');
+                                                            $wct = now();
+                                                        }
+
+                                                        echo form_checkbox(array_merge($data_ck, $arr_by_cek));
+                                                        echo form_label('Cek', 'sudah_cek-'.$bayarIndex, array('class' => 'form-check-label'));
+                                                        ?>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <input type="text" disabled="" placeholder="misal: Tokopedia, Shopee,..." name="marketplace" class="form-control" required="">
+                                            <?php
+                                                echo form_input(array_merge($arr_by_cek_input,array('name' => 'pembayaran['.$bayarIndex.'][cek]', 'id'=> 'tanggal_cek', 'class' => 'form-control tanggal_cek sudah_cek-'.$bayarIndex, 'type' => 'date')), mdate('%Y-%m-%d', $wct));
+                                            ?>
+                                        </div>
+                                        <div class="form-group col-2 col-sm-1">
+                                            <?php
+                                            if($bayarIndex === 1) {
+                                                echo form_button(array('class' => 'btn btn-success btnAddTransfer bankir', 'content' => '<i class="fas fa-plus"></i>'));
+                                            }
+                                            else {
+                                                echo form_button(array('class' => 'btn btn-outline-danger btnDelTransfer bankir', 'content' => '<i class="fas fa-minus"></i>'));
+                                            }
+                                            
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="multiBayar">
-                                    <label for="rekening">Pembayaran via transfer / cash</label>
-                                    <div class="listPembayaran" id="pembayaranViaTransfer" data-transfer="0">
-                                        <div class="form-row mb-0 pb-0" id="formTransfer">
-                                            <div class="form-group col">
-                                                <?php
-                                                    //echo form_label('Rekening', 'rekening');
-                                                    echo form_input(array('name' => 'pembayaran[0][rekening]', 'id'=> 'rekening', 'class' => 'form-control rekening bankir', 'placeholder' => 'Cash / Bank','required' => ''), set_value('pembayaran[0][rekening]', $biaya->b));
-                                                ?>
-                                            </div>
-                                            <div class="form-group col-sm-3">
-                                                <?php
-                                                    //echo form_label('Tanggal Transfer', 'tanggal_transfer');
-                                                    echo form_input(array('name' => 'pembayaran[0][tanggal]', 'id'=> 'tanggal_transfer', 'class' => 'form-control tanggal_transfer bankir', 'type' => 'date','required' => ''), mdate('%Y-%m-%d', $pesanan->tanggal_submit));
-                                                ?>
-                                            </div>
-                                            <div class="form-group col">
-                                                <?php
-                                                    //echo form_label('Jumlah ', 'transfer');
-                                                    echo form_input(array('name' => 'pembayaran[0][jumlah]', 'id'=> 'jumlah_transfer', 'class' => 'form-control transfer bankir', 'type' => 'number', 'min' => '0','required' => ''), set_value('pembayaran[0][jumlah]', ($biaya->m->t === NULL? '0': $biaya->m->t)));
-                                                ?>
-                                            </div>
-                                            <div class="form-group col-sm-3">
-                                                <?php
-                                                    //echo form_label('Tanggal Transfer', 'tanggal_transfer');
-                                                    echo form_input(array('name' => 'pembayaran[0][cek]', 'id'=> 'tanggal_cek', 'class' => 'form-control tanggal_cek bankir', 'type' => 'date'), set_value('pembayaran[0][cek]', ($pesanan->tanggal_cek_transfer === NULL? '': mdate('%Y-%m-%d', $pesanan->tanggal_cek_transfer) )));
-                                                ?>
-                                            </div>
-                                            <div class="form-group col-2 col-sm-1">
-                                                <?php
-                                                echo form_button(array('class' => 'btn btn-success btnAddTransfer btn-block bankir', 'content' => '<i class="fas fa-plus"></i>'));
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <?php
+                                $bayarIndex++;
+                                //}
+                            }
+                            else {
+                            ?>
+                                <div class="listPembayaran" id="pembayaranViaTransfer" data-transfer="0">
+                                    <div class="form-row mb-0 pb-0" id="formTransfer">
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="terkirim" id="inlineRadio1" value="b_dikirim">
-                    <label class="form-check-label" for="inlineRadio1">dikirim</label>
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Rek?</span>
+                                            </div>
+                                            <?php
+                                                echo form_input(array('name' => 'pembayaran[0][rekening]', 'id'=> 'rekening', 'class' => 'form-control rekening bankir', 'placeholder' => 'Cash / Bank','required' => '', 'disabled' => ''));
+                                            ?>
+                                        </div>
+
+                                        <div class="input-group mb-3 col-sm-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Tggl Bayar</span>
+                                            </div>
+                                            <?php
+                                                echo form_input(array('name' => 'pembayaran[0][tanggal]', 'id'=> 'tanggal_transfer', 'class' => 'form-control tanggal_transfer bankir', 'type' => 'date','required' => '', 'disabled' => ''), mdate('%Y-%m-%d', now()));
+                                            ?>
+                                        </div>
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Jumlah</span>
+                                            </div>
+                                            <?php
+                                                echo form_input(array('name' => 'pembayaran[0][jumlah]', 'id'=> 'jumlah_transfer', 'class' => 'form-control transfer bankir', 'type' => 'number', 'min' => '0','required' => '', 'disabled' => ''), '0');
+                                            ?>
+                                        </div>
+                                        <div class="input-group mb-3 col-sm-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <div class="form-check">
+                                                        <?php
+                                                        $data_ck = array(
+                                                            'name'          => 'pembayaran[0][sudah_cek]',
+                                                            'id'            => 'sudah_cek-0',
+                                                            'class'         => 'form-check-input sudah_cek mt-2',
+                                                            'checked'       => FALSE,
+                                                            'value'         => 'ya'
+                                                        );
+
+                                                        $arr_by_cek = array();
+                                                        $arr_by_cek_input = array();
+                                                        
+
+                                                        echo form_checkbox(array_merge($data_ck, $arr_by_cek));
+                                                        echo form_label('Cek', 'sudah_cek-0', array('class' => 'form-check-label'));
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php
+                                                echo form_input(array_merge($arr_by_cek_input,array('name' => 'pembayaran[0][cek]', 'id'=> 'tanggal_cek', 'class' => 'form-control tanggal_cek sudah_cek-0', 'type' => 'date', 'disabled' => '')), mdate('%Y-%m-%d', now()));
+                                            ?>
+                                        </div>
+                                        <div class="form-group col-2 col-sm-1">
+                                            <?php
+                                                echo form_button(array('class' => 'btn btn-success btnAddTransfer bankir', 'content' => '<i class="fas fa-plus"></i>'));
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <small class="text-muted">Pembayaran DP / Kredit cukup masukkan dana awal yang diterima</small>
+                    </div>
+                </div>                
+
+                <div class="custom-control custom-switch mb-2">
+                    <?php 
+                    $data_kir = array(
+                        'name'          => 'pengiriman_',
+                        'id'            => 'pengiriman_',
+                        'class'         => 'custom-control-input',
+                        'value'         => 'ya'
+                    );
+                    
+                    if($pesanan->status_kirim === 'belum_kirim' && $pesanan->status_paket !== 'diproses') {
+                        $arr_kir = array(
+                            'checked' => FALSE,
+                            'disabled' => ''
+                        );
+                    }
+                    else if($pesanan->status_kirim === 'belum_kirim' && $pesanan->status_paket === 'diproses') {
+                        $arr_kir = array(
+                            'checked' => FALSE
+                        );
+                    }
+                    else {
+                        $arr_kir = array(
+                            'checked' => TRUE
+                        );
+                    }
+
+                    echo form_checkbox(array_merge($data_kir, $arr_kir));
+                    echo form_label('Sudah dikirim/ diambil?', 'pengiriman_', array('class' => 'custom-control-label'));
+                    ?>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="terkirim" id="inlineRadio2" value="c_diambil">
-                    <label class="form-check-label" for="inlineRadio2">diambil</label>
-                </div>
-               
-                <div id="multiKirim">
-                    <label for="rekening">Pengiriman</label>
-                    <div class="listPengiriman" id="pengiriman" data-kirim="0">
-                        <div class="form-row mb-0 pb-0" id="formKirim">
-                            <div class="form-group col">
-                                <?php
-                                    //echo form_label('Rekening', 'rekening');
-                                    echo form_input(array('name' => 'pengiriman[0][kurir]', 'id'=> 'kurir', 'class' => 'form-control rekening senter', 'placeholder' => 'kurir','required' => ''), set_value('pengiriman[0][rekening]', $detail->s->k));
-                                ?>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <?php
-                                    //echo form_label('Tanggal Transfer', 'tanggal_transfer');
-                                    echo form_input(array('name' => 'pengiriman[0][resi]', 'id'=> 'resi', 'class' => 'form-control tanggal_transfer senter', 'required' => ''), set_value('pengiriman[0][resi]', $detail->s->n) );
-                                ?>
-                            </div>
-                            <div class="form-group col">
-                                <?php
-                                    //echo form_label('Jumlah ', 'transfer');
-                                    echo form_input(array('name' => 'pengiriman[0][ongkir]', 'id'=> 'ongkir', 'class' => 'form-control transfer senter', 'type' => 'number', 'min' => '0','required' => ''), set_value('pengiriman[0][ongkir]', (isset($biaya->m->of)? $biaya->m->of: '0')));
-                                ?>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <?php
-                                    //echo form_label('Tanggal Transfer', 'tanggal_transfer');
-                                    echo form_input(array('name' => 'pengiriman[0][tanggal_kirim]', 'id'=> 'tanggal_kirim', 'class' => 'form-control tanggal_kirim senter', 'type' => 'date'), set_value('pengiriman[0][tanggal_kirim]', ($pesanan->tanggal_cek_kirim === NULL? '': mdate('%Y-%m-%d', $pesanan->tanggal_cek_kirim) )));
-                                ?>
-                            </div>
-                            <div class="form-group col-2 col-sm-1">
-                                <?php
-                                echo form_button(array('class' => 'btn btn-success btnAddKirim btn-block senter', 'content' => '<i class="fas fa-plus"></i>'));
-                                ?>
-                            </div>
+                
+                <div class="card bg-light collapse <?php echo ($pesanan->status_kirim !== 'terkirim'? '': 'show') ?>" id="dataPengiriman">
+                    <div class="card-body">
+                        <div id="multiKirim">
+                            <label for="rekening">Data Pengiriman</label>
+                            <?php 
+                                $kirimIndex = 0; ?>
+                             
+                                <div class="listPengiriman" id="pengiriman" data-kirim="<?php echo $kirimIndex; ?>">
+                                    <div class="form-row mb-0 pb-0" id="formkirim">
+
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Kurir</span>
+                                            </div>
+                                            <?php
+                                                echo form_input(array('name' => 'pengiriman['.$kirimIndex.'][kurir]', 'id'=> 'kurir', 'class' => 'form-control kurir carry', 'placeholder' => 'kurir','required' => ''), (isset($detail->s->k)? $detail->s->k: 'Unknown'));
+                                            ?>
+                                        </div>
+
+                                        <div class="input-group mb-3 col-sm-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Resi</span>
+                                            </div>
+                                            <?php
+                                                echo form_input(array('name' => 'pengiriman['.$kirimIndex.'][resi]', 'id'=> 'resi', 'class' => 'form-control resi carry', 'placeholder' => 'nomor resi','required' => ''), (isset($detail->s->n)?$detail->s->n: 'Unknown'));
+                                            ?>
+                                        </div>
+
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Ongkir</span>
+                                            </div>
+                                            <?php
+                                                echo form_input(array('name' => 'pengiriman['.$kirimIndex.'][ongkir]', 'id'=> 'ongkir_fix', 'class' => 'form-control transfer carry', 'type' => 'number', 'min' => '0','required' => ''), (isset($biaya->m->of)? $biaya->m->of: '0' ));
+                                            ?>
+                                        </div>
+
+                                        <div class="input-group mb-3 col-sm-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Tggl Kirim</span>
+                                            </div>
+                                            <?php
+                                                echo form_input(array('name' => 'pengiriman['.$kirimIndex.'][tanggal_kirim]', 'id'=> 'tanggal_kirim', 'class' => 'form-control tanggal_kirim carry', 'type' => 'date','required' => ''), mdate('%Y-%m-%d', $pesanan->tanggal_cek_kirim));
+                                            ?>
+                                        </div>
+
+                                        <div class="form-group col-2 col-sm-1">
+                                            <?php
+                                            if($kirimIndex === 0) {
+                                                echo form_button(array('class' => 'btn btn-success btnAddKirim carry', 'content' => '<i class="fas fa-plus"></i>'));
+                                            }
+                                            else {
+                                                echo form_button(array('class' => 'btn btn-outline-danger btnDelKirim carry', 'content' => '<i class="fas fa-minus"></i>'));
+                                            }
+                                            ?>
+                                        </div>
+
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="custom-control custom-switch mb-2">
+                            <?php 
+                            $data = array(
+                                'name'          => 'pengiriman_selesai',
+                                'id'            => 'pengiriman_selesai',
+                                'class'         => 'custom-control-input',
+                                'checked'       => TRUE,
+                                'value'         => 'ya'
+                            );
+                            
+                            echo form_checkbox($data);
+                            echo form_label('Sudah dikirim semua?', 'pengiriman_selesai', array('class' => 'custom-control-label'));
+                            ?>
                         </div>
                     </div>
-                    
                 </div>
 
                 <hr/>
@@ -296,7 +547,7 @@ $biaya = json_decode( $pesanan->biaya );
                 <div class="form-group">
                     <?php
                         echo form_label('Keterangan', 'keterangan');
-                        echo form_textarea(array('name' => 'keterangan', 'rows' => 3, 'id'=> 'keterangan', 'class' => 'form-control', 'placeholder' => 'keterangan tambahan'), $detail->n);
+                        echo form_textarea(array('name' => 'keterangan', 'rows' => 3, 'id'=> 'keterangan', 'class' => 'form-control', 'placeholder' => 'keterangan tambahan'), (isset($detail->n)? $detail->n:''));
                     ?>
                 </div>
 
@@ -337,25 +588,4 @@ $biaya = json_decode( $pesanan->biaya );
             createPicker(viewId, setOAuthToken);
         }
     }, false);
-
-
-
-     // pembayaran multiple via transfer
-     var ti = $("#multiKirim .listPembayaran").length;
-        $(document).on("click", ".btnAddKirim", function(e){
-            e.preventDefault();
-            ti++;
-            var clone = $('#pengiriman').clone('#formKirim');
-
-            clone.attr('data-kirim', ti);
-
-            clone.find("#kurir").attr({name: 'pengiriman['+ti+'][kurir]', id: 'kurir-'+ti}).val('');
-            clone.find("#resi").attr({name: 'pengiriman['+ti+'][resi]', id: 'resi-'+ti}).val('');
-            clone.find("#ongkir").attr({name: 'pengiriman['+ti+'][ongkir]', id: 'ongkir-'+ti}).val('0');
-            clone.find("#tanggal_kirim").attr({name: 'pengiriman['+ti+'][tanggal_kirim]', id: 'tanggal_kirim-'+ti}).val("<?php echo mdate('%Y-%m-%d', now()); ?>");
-
-            $('#multiKirim').append(clone);
-
-            $('[data-kirim="'+ti+'"] .btnAddKirim').replaceWith( '<button type="button" class="btn btn-outline-danger senter btn-block btnDelKirim"><i class="fas fa-minus"></i></button>' );
-        });
 </script>

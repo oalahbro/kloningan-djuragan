@@ -592,17 +592,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 
         // kalkulasi form
-        
         $(document).on("change", ".calc", function(e){
-        // $(".calc").change(function(){
-            // var $harga = $(".harga");
-            // var $d = $("select[name='number']");
-            // if($r.length ==1){
-            //     var t = parseInt($r.val(), 10);
-            //     var n = parseInt($d.val(), 10);
-            //     $("#result").val(t*n);
-            // }
-
             var $form = $('#konten');
 			var $row = $form.find('[data-prod]'),
                 $diskon = parseInt($('.diskon').val(), 10),
@@ -626,22 +616,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $finaltotal += $unik;
             $finaltotal -= $diskon;
 
-            $('.wajib_dibayar').text('Rp'+ format($finaltotal));
-            $('.angka_unik').text('Rp'+ format($unik));
-            $('.tarif_ongkir').text('Rp'+ format($ongkir));
-            $('.total_diskon').text('Rp'+ format($diskon));
-            $('.total_harga_produk').text('Rp'+ format($total));
-
-        	// console.log('total: ' + sum);
-            // console.log('// --------------------------');
+            $('.wajib_dibayar').text('Rp '+ format($finaltotal));
+            $('.angka_unik').text('Rp '+ format($unik));
+            $('.tarif_ongkir').text('Rp '+ format($ongkir));
+            $('.total_diskon').text('Rp '+ format($diskon));
+            $('.total_harga_produk').text('Rp '+ format($total));
         });
 
         function format(n, sep, decimals) {
             sep = sep || "."; // Default to period as decimal separator
             //decimals = decimals || 2; // Default to 2 decimals
 
-            return n.toLocaleString().split(sep)[0]
-                + sep
+            return n.toLocaleString().split(sep)[0] + ',-'
+                // + sep
                 //+ n.toFixed(decimals).split(sep)[1];
         }
     })
