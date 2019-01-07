@@ -111,7 +111,6 @@ class Faktur extends user_controller
 
 			//
 			$dj = $this->juragan->_detail($id_juragan)->row();
-			$count = $this->faktur->get_count_this_month($id_juragan);
 			$faktur = strtolower($dj->short . str_pad(date('ymdHis'), 11, "0", STR_PAD_LEFT));
 
 			// `faktur`
@@ -249,172 +248,242 @@ class Faktur extends user_controller
 		}
 	}
 
-	public function sunting($faktur) {
-		$this->form_validation->set_rules('juragan_id', 'Juragan', 'required|greater_than[0]');
-		$this->form_validation->set_rules('pengguna_id', 'Pengguna', 'required|greater_than[0]');
-		$this->form_validation->set_rules('nama', 'nama lengkap', 'required');
-		$this->form_validation->set_rules('hp1', 'hp 1', 'required');
-		// $this->form_validation->set_rules('hp2', 'hp 2', 'required');
-		$this->form_validation->set_rules('alamat', 'alamat', 'required');
-		//$this->form_validation->set_rules('kode[]', 'kode', 'required');
-		//$this->form_validation->set_rules('size[]', 'size', 'required');
-		//$this->form_validation->set_rules('harga_a[]', 'harga_a', 'required');
-		//$this->form_validation->set_rules('jumlah[]', 'jumlah', 'required');
-		$this->form_validation->set_rules('marketplace', 'marketplace', '');
-		//$this->form_validation->set_rules('rekening', 'rekening', 'required');
-		// $this->form_validation->set_rules('harga', 'total harga', 'required');
-		$this->form_validation->set_rules('ongkir', 'ongkir', 'required');
-		// $this->form_validation->set_rules('transfer', 'transfer', 'required');
-		$this->form_validation->set_rules('diskon', 'diskon', 'required');
-		$this->form_validation->set_rules('unik', 'angka unik', 'required');
+	public function sunting($seri_faktur) {
+		$faktur = $this->faktur->get_detail($seri_faktur)->row();
+		$juragan = $this->juragan->_slug($faktur->juragan_id);
+		$cek_juragannya = $this->pengguna->juragan($_SESSION['username'], $juragan);
+		$cek_fakturnya = $this->faktur->check($seri_faktur);
 
-		if ($this->form_validation->run() == FALSE) {
-			$this->data = array(
-				'judul' => 'Sunting Pesanan',
-				'sub_judul' => strtoupper($faktur),
-				'q' => $this->faktur->get_detail($faktur)
+		if($cek_juragannya && $cek_fakturnya === 1 && $faktur->status_paket === 'belum_diproses') {
+			// edit 
+			$this->form_validation->set_rules('juragan_id', 'Juragan', 'required|greater_than[0]');
+			$this->form_validation->set_rules('id_faktur', 'Faktur', 'required|greater_than[0]');
+			$this->form_validation->set_rules('nama', 'nama lengkap', 'required');
+			$this->form_validation->set_rules('hp1', 'hp 1', 'required');
+			// $this->form_validation->set_rules('hp2', 'hp 2', 'required');
+			$this->form_validation->set_rules('alamat', 'alamat', 'required');
+			//$this->form_validation->set_rules('kode[]', 'kode', 'required');
+			//$this->form_validation->set_rules('size[]', 'size', 'required');
+			//$this->form_validation->set_rules('harga_a[]', 'harga_a', 'required');
+			//$this->form_validation->set_rules('jumlah[]', 'jumlah', 'required');
+			$this->form_validation->set_rules('marketplace', 'marketplace', '');
+			//$this->form_validation->set_rules('rekening', 'rekening', 'required');
+			// $this->form_validation->set_rules('harga', 'total harga', 'required');
+			$this->form_validation->set_rules('ongkir', 'ongkir', 'required');
+			// $this->form_validation->set_rules('transfer', 'transfer', 'required');
+			$this->form_validation->set_rules('diskon', 'diskon', 'required');
+			$this->form_validation->set_rules('unik', 'angka unik', 'required');
+
+			if ($this->form_validation->run() == FALSE) {
+				$this->data = array(
+					'judul' => 'Sunting Pesanan',
+					'sub_judul' => strtoupper($seri_faktur),
+					'faktur' => $faktur
+					);
+
+				$this->load->view('user/header', $this->data);
+				$this->load->view('user/pesanan/sunting', $this->data);
+				$this->load->view('user/footer', $this->data);
+			}
+			else {
+				//
+				$id_faktur = $this->input->post('id_faktur');
+				$id_juragan = $this->input->post('juragan_id');
+				//$pengguna_id = $this->input->post('pengguna_id');
+				$nama = $this->input->post('nama');
+				$hp1 = $this->input->post('hp1');
+				$hp2 = $this->input->post('hp2');
+				$alamat = $this->input->post('alamat');
+				$produk = $this->input->post('produk'); // array
+				$pembayaran = $this->input->post('pembayaran'); // array
+				$pembayaran_ = $this->input->post('pembayaran_');
+				$diskon = $this->input->post('diskon');
+				$ongkir = $this->input->post('ongkir');
+				$unik = $this->input->post('unik');
+				$marketplace_ = $this->input->post('marketplace_');
+				$pembayaran_ = $this->input->post('pembayaran_');
+				$marketplace = $this->input->post('marketplace');
+				$keterangan = $this->input->post('keterangan');
+				$image = $this->input->post('image');
+
+				//
+				$dj = $this->juragan->_detail($id_juragan)->row();
+				$faktur = strtolower($dj->short . str_pad(date('ymdHis'), 11, "0", STR_PAD_LEFT));
+
+				// `faktur`
+				$data = array();
+				$data['faktur'] = array(
+					//'seri_faktur' => $faktur,
+					//'tanggal_dibuat' => now(),
+					'juragan_id' => $id_juragan,
+					//'pengguna_id' => $pengguna_id,
+					'nama' => $nama,
+					'hp1' => $hp1,
+					'alamat' => $alamat,
 				);
-				
-			$this->load->view('administrator/header', $this->data);
-			$this->load->view('administrator/pesanan/sunting', $this->data);
-			$this->load->view('administrator/footer', $this->data);
+
+				$this->faktur->edit_invoice($id_faktur, $data['faktur']);
+
+				// simpan to `faktur`
+				// $this->faktur->add_invoice($data['faktur']);
+				// $id_faktur = $this->db->insert_id(); // get `id_faktur`
+
+				// `pesanan_produk`
+				$produk_database = array();
+				$produk_submit = array();
+				$the_produk = $this->faktur->get_orders($id_faktur)->result();
+
+				foreach ($the_produk as $prdb) {
+					$produk_database[] = $prdb->id_pesanproduk; 
+				}
+				$i = 0;
+				$produk_update = array();
+				$produk_insert = array();
+				$produk_delete = array();
+				foreach ($produk as $key) {
+					// update to `pesanan_produk`
+					if(isset($key['id_pesanproduk'])) {
+						$produk_submit[] = $key['id_pesanproduk'];
+
+						$produk_update[$i]['id_pesanproduk'] = $key['id_pesanproduk'];
+						$produk_update[$i]['kode'] = $key['kode'];
+						$produk_update[$i]['ukuran'] = $key['ukuran'];
+						$produk_update[$i]['jumlah'] = $key['jumlah'];
+						$produk_update[$i]['harga'] = $key['harga'];
+
+						$this->faktur->edit_order($key['id_pesanproduk'], $produk_update[$i]);
+					}
+					else {
+						$produk_insert[$i]['faktur_id'] = $id_faktur;
+						$produk_insert[$i]['kode'] = $key['kode'];
+						$produk_insert[$i]['ukuran'] = $key['ukuran'];
+						$produk_insert[$i]['jumlah'] = $key['jumlah'];
+						$produk_insert[$i]['harga'] = $key['harga'];
+						
+						$this->faktur->add_order($produk_insert[$i]);
+					}
+					$i++;
+				}
+				$data['produk']['diupdate'] = $produk_update;
+				$data['produk']['ditambah'] = $produk_insert;
+
+				// $data['produk'] = $produk_data;
+				$produk_del = array_diff($produk_database,$produk_submit);
+				foreach ($produk_del as $id) {
+					$result[] = $id;
+					$this->faktur->delete_order($id);
+				}
+				$data['produk']['dihapus'] = $produk_del;
+
+
+				// ----------------------------------------- PEMBAYARAN //
+				$pembayaran_database = array();
+				$pembayaran_submit = array();
+				$the_bayar = $this->faktur->get_pays($id_faktur)->result();
+
+				foreach ($the_bayar as $prdb) {
+					$pembayaran_database[] = $prdb->id_pembayaran; 
+				}
+
+				if($pembayaran_ !== 'ya') {
+					$i = 0;
+					$pembayaran_update = array();
+					$pembayaran_insert = array();
+					$pembayaran_delete = array();
+					foreach ($pembayaran as $key) {
+						// update to `pembayaran`
+						if(!empty($key['id_pembayaran'])) {
+							$pembayaran_submit[] = $key['id_pembayaran'];
+
+							//$pembayaran_update[$i]['id_pembayaran'] = $key['id_pembayaran'];
+							$pembayaran_update[$i]['tanggal_bayar'] = strtotime($key['tanggal']);
+							$pembayaran_update[$i]['rekening'] = $key['rekening'];
+							$pembayaran_update[$i]['jumlah'] = $key['jumlah'];
+							$pembayaran_update[$i]['tanggal_cek'] = ( !empty($key['cek']) ? strtotime($key['cek']): NULL);
+
+							$this->faktur->update_pay($key['id_pembayaran'], $pembayaran_update[$i]);
+						}
+						else {
+							$pembayaran_insert[$i]['faktur_id'] = $id_faktur;
+							$pembayaran_insert[$i]['tanggal_bayar'] = strtotime($key['tanggal']);
+							$pembayaran_insert[$i]['rekening'] = $key['rekening'];
+							$pembayaran_insert[$i]['jumlah'] = $key['jumlah'];
+							$pembayaran_insert[$i]['tanggal_cek'] = ( !empty($key['cek']) ? strtotime($key['cek']): NULL);
+							
+							$this->faktur->sub_pay_($pembayaran_insert[$i]);
+						}
+						$i++;
+					}
+					$data['pembayaran']['diupdate'] = $pembayaran_update;
+					$data['pembayaran']['ditambah'] = $pembayaran_insert;
+
+					// $data['produk'] = $pembayaran_data;
+					$pembayaran_del = array_diff($pembayaran_database, $pembayaran_submit);
+					foreach ($pembayaran_del as $id) {
+						$result[] = $id;
+						$this->faktur->del_pay($id);
+					}
+					$data['pembayaran']['dihapus'] = $pembayaran_del;
+				}
+
+				// `keterangan`
+				if ($hp2 !== NULL && $hp2 !== '') {
+					$this->faktur->update_ket($id_faktur, 'hp', $hp2);
+				}
+				else {
+					$this->faktur->update_ket($id_faktur, 'hp', $hp2, FALSE);
+				}
+	
+				if ($ongkir !== NULL && $ongkir > 0) {
+					$this->faktur->update_ket($id_faktur, 'ongkir', $ongkir);
+				}
+				else {
+					$this->faktur->update_ket($id_faktur, 'ongkir', $ongkir, FALSE);
+				}
+	
+				if ($diskon !== NULL  && $diskon > 0) {
+					$this->faktur->update_ket($id_faktur, 'diskon', $diskon);
+				}
+				else {
+					$this->faktur->update_ket($id_faktur, 'diskon', $diskon, FALSE);
+				}
+	
+				if ($unik !== NULL && $unik > 0) {
+					$this->faktur->update_ket($id_faktur, 'unik', $unik);
+				}
+				else {
+					$this->faktur->update_ket($id_faktur, 'unik', $unik, FALSE);
+				}
+	
+				if ($marketplace !== NULL && $marketplace_ === 'on') {
+					$this->faktur->update_ket($id_faktur, 'tipe', $marketplace);
+				}
+				else {
+					$this->faktur->update_ket($id_faktur, 'tipe', $marketplace, FALSE);
+				}
+	
+				if ($keterangan !== NULL && $keterangan !== '') {
+					$this->faktur->update_ket($id_faktur, 'keterangan', $keterangan);
+				}
+				else {
+					$this->faktur->update_ket($id_faktur, 'keterangan', $keterangan, FALSE);
+				}
+	
+				if ($image !== NULL && $image !== '') {
+					$this->faktur->update_ket($id_faktur, 'gambar', $image);
+				}
+				else {
+					$this->faktur->update_ket($id_faktur, 'gambar', $image, FALSE);
+				}
+	
+				$this->faktur->calc_pembayaran($id_faktur);
+				redirect('myorder');
+			}
+			
 		}
 		else {
 			//
-			$id_faktur = $this->input->post('id_faktur');
-			$id_juragan = $this->input->post('juragan_id');
-			$pengguna_id = $this->input->post('pengguna_id');
-			$nama = $this->input->post('nama');
-			$hp1 = $this->input->post('hp1');
-			$hp2 = $this->input->post('hp2');
-			$alamat = $this->input->post('alamat');
-			$produk = $this->input->post('produk'); // array
-			$pembayaran = $this->input->post('pembayaran'); // array
-			$diskon = $this->input->post('diskon');
-			$ongkir = $this->input->post('ongkir');
-			$unik = $this->input->post('unik');
-			$marketplace_ = $this->input->post('marketplace_');
-			$marketplace = $this->input->post('marketplace');
-			$keterangan = $this->input->post('keterangan');
-			$image = $this->input->post('image');
-
-			//
-			$dj = $this->juragan->_detail($id_juragan)->row();
-			$count = $this->faktur->get_count_this_month($id_juragan);
-			$faktur = strtolower($dj->short . str_pad(date('ymdHis'), 11, "0", STR_PAD_LEFT));
-
-			// `faktur`
-			$data = array();
-			$data['faktur'] = array(
-				'seri_faktur' => $faktur,
-				//'tanggal_dibuat' => now(),
-				'juragan_id' => $id_juragan,
-				'pengguna_id' => $pengguna_id,
-				'nama' => $nama,
-				'hp1' => $hp1,
-				'alamat' => $alamat,
-			);
-
-			// update to `faktur`
-			$this->faktur->edit_invoice($id_faktur, $data['faktur']);
-
-			// `pesanan_produk`
-			$produk_database = array();
-			$produk_submit = array();
-			$the_produk = $this->faktur->get_orders($id_faktur)->result();
-
-			foreach ($the_produk as $prdb) {
-				$produk_database[] = $prdb->id_pesanproduk; 
-			}
-
-			$i = 0;
-			$produk_update = array();
-			$produk_insert = array();
-			$produk_delete = array();
-			foreach ($produk as $key) {
-				// update to `pesanan_produk`
-				if(isset($key['id_pesanproduk'])) {
-					$produk_submit[] = $key['id_pesanproduk'];
-
-					$produk_update[$i]['id_pesanproduk'] = $key['id_pesanproduk'];
-					$produk_update[$i]['kode'] = $key['kode'];
-					$produk_update[$i]['ukuran'] = $key['ukuran'];
-					$produk_update[$i]['jumlah'] = $key['jumlah'];
-					$produk_update[$i]['harga'] = $key['harga'];
-
-					$this->faktur->edit_order($key['id_pesanproduk'], $produk_update[$i]);
-				}
-				else {
-					$produk_insert[$i]['faktur_id'] = $id_faktur;
-					$produk_insert[$i]['kode'] = $key['kode'];
-					$produk_insert[$i]['ukuran'] = $key['ukuran'];
-					$produk_insert[$i]['jumlah'] = $key['jumlah'];
-					$produk_insert[$i]['harga'] = $key['harga'];
-					
-					$this->faktur->add_order($produk_insert[$i]);
-				}
-				$i++;
-			}
-			// $data['produk'] = $produk_data;
-			$produk_del = array_diff($produk_database,$produk_submit);
-			foreach ($produk_del as $id) {
-				$result[] = $id;
-				$this->faktur->delete_order($id);
-			}
-
-			// `keterangan`
-			$keterangan_data = array();
-			if ($hp2 !== NULL && $hp2 !== '') {
-				$this->faktur->update_ket($id_faktur, 'hp', $hp2);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'hp', $hp2, FALSE);
-			}
-
-			if ($ongkir !== NULL && $ongkir > 0) {
-				$this->faktur->update_ket($id_faktur, 'ongkir', $ongkir);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'ongkir', $ongkir, FALSE);
-			}
-
-			if ($diskon !== NULL  && $diskon > 0) {
-				$this->faktur->update_ket($id_faktur, 'diskon', $diskon);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'diskon', $diskon, FALSE);
-			}
-
-			if ($unik !== NULL && $unik > 0) {
-				$this->faktur->update_ket($id_faktur, 'unik', $unik);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'unik', $unik, FALSE);
-			}
-
-			if ($marketplace !== NULL && $marketplace_ === 'on') {
-				$this->faktur->update_ket($id_faktur, 'tipe', $marketplace);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'tipe', $marketplace, FALSE);
-			}
-
-			if ($keterangan !== NULL && $keterangan !== '') {
-				$this->faktur->update_ket($id_faktur, 'keterangan', $keterangan);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'keterangan', $keterangan, FALSE);
-			}
-
-			if ($image !== NULL && $image !== '') {
-				$this->faktur->update_ket($id_faktur, 'gambar', $image);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'gambar', $image, FALSE);
-			}
-
-			$this->faktur->calc_pembayaran($id_faktur);
-			redirect('pesanan');
+			show_404();
 		}
 	}
 

@@ -170,7 +170,7 @@ class Faktur_model extends CI_Model
         }
 
         if ($juragan_id !== FALSE) {
-            $this->db->having('juragan_id', $juragan_id);
+            $this->db->where_in('juragan_id', $juragan_id);
         }
 
         if($limit !== FALSE && $offset !== FALSE) {
@@ -221,10 +221,8 @@ class Faktur_model extends CI_Model
         return $q;
     }
 
-    public function get_count_this_month($juragan_id) {
-        $this->db->where('juragan_id', $juragan_id);
-        $this->db->like("DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_dibuat, '%Y-%m-%d %H:%i:%s'), '+00:00', '+00:00'))",  date('Y-m', now()), 'both');
-        $this->db->order_by('id_faktur DESC');
+    public function check($seri_faktur) {
+        $this->db->where('seri_faktur', $seri_faktur);
         $q = $this->db->get('faktur');
 
         return $q->num_rows();

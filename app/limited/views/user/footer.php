@@ -306,15 +306,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         // hapus pesanan
         $(document).on("click", ".hapus_pesanan", function(e){
             e.preventDefault();
+            var tm = makeid();
             var id = $(this).attr('data-id');
             var b = $(this).attr('data-faktur');
             var result = confirm("Hapus pesanan? ini tidak dapat dibatalkan.");
             if (result) {
                 //
-                $.post('<?php echo site_url("del/pesanan") ?>', {faktur_id: id, faktur:b}, function(response) {
+                $.post('<?php echo site_url("myorder/hapus") ?>', {faktur_id: id, faktur:b}, function(response) {
                     var notif = '<div class="toast" id="toast-'+tm+'" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">';
                         notif += '<div class="toast-header">';
-                            notif += '<strong class="mr-auto text-capitalize">'+c+'</strong>';
+                            notif += '<strong class="mr-auto text-capitalize">Info</strong>';
                             notif += '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">';
                             notif += '<span aria-hidden="true">&times;</span>';
                             notif += '</button>';

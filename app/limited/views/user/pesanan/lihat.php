@@ -325,12 +325,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <h6 class="dropdown-header">Status Pembayaran</h6>
                                                 <a class="cek_pembayaran dropdown-item" href="#!">Cek Pembayaran</a>
                                                 <!-- <a class="tambah_pembayaran dropdown-item">Tambah Pembayaran</a> -->
-                                                <div class="dropdown-divider"></div>
                                                 
                                                 <div class="dropdown-divider"></div>
                                                 <h6 class="dropdown-header">Lainnya</h6>
-                                                <?php // echo anchor('pesanan/sunting/' . $pesanan->seri_faktur, 'Sunting', array('class' => 'dropdown-item') ); ?>
                                                 <a class="dropdown-item" href="#">Unduh PDF</a>
+                                                <?php 
+                                                if($pesanan->status_paket === 'belum_diproses' && $pesanan->status_transfer === 'belum_transfer') {
+                                                    echo anchor('myorder/sunting/' . $pesanan->seri_faktur, 'Sunting', array('class' => 'dropdown-item') );
+                                                    //
+                                                    echo anchor(current_url() . '#!', 'Hapus', array('class' => 'dropdown-item text-danger hapus_pesanan', 'data-id' => $pesanan->id_faktur, 'data-faktur' =>  $pesanan->seri_faktur) );
+                                                }
+                                                ?>
+                                                
                                                 
                                             </div>
                                         </div>
