@@ -324,7 +324,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <div class="dropdown-menu mn" data-kurang="<?php echo $kekurangan; ?>" data-faktur="<?php echo strtoupper($pesanan->seri_faktur); ?>" data-id="<?php echo $pesanan->id_faktur?>" aria-labelledby="buttonDropdown-<?php echo $pesanan->id_faktur?>">
                                                 <h6 class="dropdown-header">Status Pembayaran</h6>
                                                 <a class="cek_pembayaran dropdown-item" href="#!">Cek Pembayaran</a>
-                                                <!-- <a class="tambah_pembayaran dropdown-item">Tambah Pembayaran</a> -->
+                                                <?php
+                                                switch ($pesanan->status_transfer) {
+                                                    case "d_lunas":
+                                                        // sudah lunas
+                                                        $stt = FALSE;
+                                                        break;
+                                                    case "e_lebih":
+                                                        $stt = FALSE;
+                                                        break;
+                                                    default:
+                                                        $stt = TRUE;
+                                                }
+
+                                                if ($stt) { ?>
+                                                    <a class="tambah_pembayaran dropdown-item">Tambah Pembayaran</a>
+                                                <?php }
+                                                ?>
                                                 
                                                 <div class="dropdown-divider"></div>
                                                 <h6 class="dropdown-header">Lainnya</h6>

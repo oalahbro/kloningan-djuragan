@@ -568,7 +568,7 @@ class Faktur extends user_controller
 
 		$this->faktur->sub_pay($data);
 		$this->faktur->calc_pembayaran($faktur_id);
-		redirect('pesanan');
+		redirect('myorder');
 	}
 
 	public function hapus_pembayaran() {

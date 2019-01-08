@@ -86,6 +86,7 @@ $route['arsip/pesanan/(:any)/(:any)'] = 'admin/pesanan/lihat/$1/$2';
 
 // bagian user
 $route['myorder'] = 'cs/faktur';
+$route['myorder/add/pembayaran'] = 'cs/faktur/tambah_pembayaran';
 $route['myorder/sunting/(:any)'] = 'cs/faktur/sunting/$1';
 $route['myorder/hapus'] = 'cs/faktur/hapus_pesanan';
 $route['myorder/(:any)'] = 'cs/faktur/lihat/$1';

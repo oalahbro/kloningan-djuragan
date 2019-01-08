@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     konten += '<li>Jumlah: ' + pay.jumlah + '</li>';
                                 konten += '</ul>';
                                 konten += '<div class="custom-control custom-checkbox" id="chk'+i+'">';
-                                    konten += '<input type="checkbox" name="pembayaran['+pay.id+']" data-id="'+pay.id+'" value="ya" class="custom-control-input sbm" id="check'+i+'" '+(pay.tanggal_cek === null ? '/>' : ' checked=""/>');
+                                    konten += '<input type="checkbox" disabled="" name="pembayaran['+pay.id+']" data-id="'+pay.id+'" value="ya" class="custom-control-input sbm" id="check'+i+'" '+(pay.tanggal_cek === null ? '/>' : ' checked=""/>');
 
                                     if(pay.tanggal_cek === null) {
                                         var dicek = '';
@@ -185,7 +185,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             e.preventDefault();
             var konten = '';
             var $div = $(e.target).closest( ".mn" );
-            var action = '<?php echo site_url("add/pembayaran"); ?>';
+            var action = '<?php echo site_url("myorder/add/pembayaran"); ?>';
             var id = $div.attr('data-id');
             var faktur = $div.attr('data-faktur');
             var kekurangan = $div.attr('data-kurang');
@@ -212,7 +212,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 konten += '</div>';
             konten += '</div>';
 
-            doModal('Tambah Pembayaran '+ faktur, action, konten);
+            doModal('Tambah Pembayaran '+ faktur, action, konten, true);
         });
 
         // set kirim
@@ -428,7 +428,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         });
 
         // create modal 
-        function doModal(heading, action, modalContent, additionalButton='') {
+        function doModal(heading, action, modalContent, additionalButton = false) {
             html =  '<div class="modal fade" id="dynamicModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="dynamicModalTitle" aria-hidden="true">';
             html += '<div class="modal-dialog modal-dialog-centered" role="document">';
             html += '<div class="modal-content">';
@@ -441,6 +441,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             html += '</div>';
             html += '<div class="modal-footer">';
             html += '<button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Batal</button>';
+            if(additionalButton === true) {
+                html += '<button class="btn btn-primary" type="submit">Simpan</button>';
+            }
             html += '</div>';  // content
             html += '</form>';
             html += '</div>';  // dialog
