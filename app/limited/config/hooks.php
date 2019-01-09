@@ -23,6 +23,7 @@ $hook['post_controller_constructor'][] = array(
 	'filename' => 'ssl.php',
 	'filepath' => 'hooks'
 );
+*/
 
 $hook['display_override'][] = array(
 	'class' => '',
@@ -30,4 +31,3 @@ $hook['display_override'][] = array(
 	'filename' => 'compress.php',
 	'filepath' => 'hooks'
 );
-*/

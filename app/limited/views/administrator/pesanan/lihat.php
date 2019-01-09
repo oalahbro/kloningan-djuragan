@@ -89,12 +89,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th style="width: 120px">Faktur #</th>
-                                <th style="width: 120px">Juragan</th>
-                                <th style="width: 160px;">Status</th>
+                                <th class="w120">Faktur #</th>
+                                <th class="w120">Juragan</th>
+                                <th class="w160">Status</th>
                                 <th>Pemesan</th>
-                                <th style="width: 200px;">Pesanan</th>
-                                <th style="width: 240px">Biaya</th>
+                                <th class="w200">Pesanan</th>
+                                <th class="w240">Biaya</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -329,8 +329,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <a class="dropdown-item <?php echo $a_krm; ?>" href="#!">Set / Sunting</a>
                                                 <div class="dropdown-divider"></div>
                                                 <h6 class="dropdown-header">Lainnya</h6>
-                                                <?php echo anchor('pesanan/sunting/' . $pesanan->seri_faktur, 'Sunting', array('class' => 'dropdown-item') ); ?>
-                                                <a class="dropdown-item" href="#">Unduh PDF</a>
+                                                <?php 
+                                                echo anchor('pesanan/sunting/' . $pesanan->seri_faktur, 'Sunting', array('class' => 'dropdown-item'));
+                                                echo anchor('unduh_pdf/' . $pesanan->seri_faktur, 'Unduh PDF', array('class' => 'dropdown-item', 'target' => '_blank'));
+                                                ?>
                                                 <a class="text-danger hapus_pesanan dropdown-item" href="#!">Hapus</a>
                                             </div>
                                         </div>

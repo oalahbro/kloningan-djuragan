@@ -54,6 +54,8 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['download'] = 'download';
+$route['unduh_pdf/(:any)'] = 'download/pdf';
+
 $route['upgrade'] = 'upgrade';
 $route['upgrade/(:any)'] = 'upgrade/$1';
 
@@ -90,7 +92,6 @@ $route['myorder/add/pembayaran'] = 'cs/faktur/tambah_pembayaran';
 $route['myorder/sunting/(:any)'] = 'cs/faktur/sunting/$1';
 $route['myorder/hapus'] = 'cs/faktur/hapus_pesanan';
 $route['myorder/(:any)'] = 'cs/faktur/lihat/$1';
-
 
 $route['myneworder'] = 'cs/faktur/tambah_pesanan';
 
