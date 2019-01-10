@@ -23,18 +23,22 @@ $biaya = json_decode( $pesanan->biaya );
 ?>
         <div class="container">
         <?php echo validation_errors(); ?>
-            <?php echo form_open('', array('class' =>'mb-5'), array('image' => (isset($detail->i) ? json_encode($detail->i) : ''), 'tanggal_dibuat' => $pesanan->tanggal_submit, 'slug' => $pesanan->slug)); ?>
+            <?php echo form_open('', array('class' =>'mb-5'), array('image' => (isset($detail->i) ? json_encode($detail->i) : ''), 'waktu_dibuat' => mdate('%H:%i:%s', $pesanan->tanggal_submit), 'slug' => $pesanan->slug)); ?>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <?php
                             $det_jur = $this->juragan->_detail($pesanan->juragan)->row();
-
                             $short = $det_jur->short;
-
                             $faktur = $short . mdate('%y%m%d%H%i%s', $pesanan->tanggal_submit);
 
                             echo form_label('Faktur', 'faktur');
                             echo form_input(array('name' => 'faktur', 'id'=> 'faktur', 'class' => 'form-control', 'required' => ''), set_value('faktur', $faktur));
+                        ?>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <?php
+                            echo form_label('Tanggal', 'tanggal_dibuat');
+                            echo form_input(array('name' => 'tanggal_dibuat', 'id'=> 'tanggal_dibuat', 'type' => 'date', 'class' => 'form-control', 'required' => ''), set_value('tanggal_dibuat', mdate('%Y-%m-%d', $pesanan->tanggal_submit)));
                         ?>
                     </div>
                 </div>

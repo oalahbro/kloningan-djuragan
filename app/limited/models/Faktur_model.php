@@ -44,7 +44,7 @@ class Faktur_model extends CI_Model
 
         // pencarian
         if($cari !== NULL ) {
-            // pembayaran ada           
+            // pembayaran ada
             
             $query = '';
             $dbyr = in_array($cari['pembayaran'], array('belum_transfer', 'b_menunggu', 'c_sebagian', 'd_lunas', 'e_lebih'));

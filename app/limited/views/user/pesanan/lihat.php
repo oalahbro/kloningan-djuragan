@@ -90,12 +90,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th class="w120">Faktur #</th>
-                                <th class="w120">Juragan</th>
-                                <th class="w160">Status</th>
+                                <th style="width: 120px">Faktur #</th>
+                                <th style="width: 120px">Juragan</th>
+                                <th style="width: 160px">Status</th>
                                 <th>Pemesan</th>
-                                <th class="w200">Pesanan</th>
-                                <th class="w240">Biaya</th>
+                                <th style="width: 200px">Pesanan</th>
+                                <th style="width: 240px">Biaya</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>

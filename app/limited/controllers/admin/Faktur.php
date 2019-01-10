@@ -85,6 +85,7 @@ class Faktur extends admin_controller
 			$id_juragan = $this->input->post('juragan_id');
 			$slug = $this->input->post('slug');
 			$tanggal_dibuat = $this->input->post('tanggal_dibuat');
+			$waktu_dibuat = $this->input->post('waktu_dibuat');
 			$faktur = $this->input->post('faktur');
 			$pengguna_id = $this->input->post('pengguna_id');
 			$nama = $this->input->post('nama');
@@ -110,7 +111,7 @@ class Faktur extends admin_controller
 			$data = array();
 			$data['faktur'] = array(
 				'seri_faktur' => $faktur,
-				'tanggal_dibuat' => $tanggal_dibuat,
+				'tanggal_dibuat' => strtotime($tanggal_dibuat . ' ' . $waktu_dibuat ),
 				'juragan_id' => $id_juragan,
 				'pengguna_id' => $pengguna_id,
 				'nama' => $nama,
@@ -280,7 +281,7 @@ class Faktur extends admin_controller
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
 			$this->pesanan->delete($slug);
-			redirect('pesanan');
+			redirect('migrasi?cari[q]=' . $faktur);
 		}
 	}
 
@@ -317,6 +318,7 @@ class Faktur extends admin_controller
 			$id_juragan = $this->input->post('juragan_id');
 			$pengguna_id = $this->input->post('pengguna_id');
 			$nama = $this->input->post('nama');
+			$tanggal_dibuat = $this->input->post('tanggal_dibuat');
 			$hp1 = $this->input->post('hp1');
 			$hp2 = $this->input->post('hp2');
 			$alamat = $this->input->post('alamat');
@@ -343,7 +345,7 @@ class Faktur extends admin_controller
 			$data = array();
 			$data['faktur'] = array(
 				'seri_faktur' => $faktur,
-				'tanggal_dibuat' => now(),
+				'tanggal_dibuat' => strtotime($tanggal_dibuat . ' ' . mdate('%H:%i:%s', now())),
 				'juragan_id' => $id_juragan,
 				'pengguna_id' => $pengguna_id,
 				'nama' => $nama,
@@ -550,6 +552,8 @@ class Faktur extends admin_controller
 			//
 			$id_faktur = $this->input->post('id_faktur');
 			$id_juragan = $this->input->post('juragan_id');
+			$tanggal_dibuat = $this->input->post('tanggal_dibuat');
+			$waktu_dibuat = $this->input->post('waktu_dibuat');
 			$pengguna_id = $this->input->post('pengguna_id');
 			$nama = $this->input->post('nama');
 			$hp1 = $this->input->post('hp1');
@@ -574,7 +578,7 @@ class Faktur extends admin_controller
 			$data = array();
 			$data['faktur'] = array(
 				// 'seri_faktur' => $faktur,
-				// 'tanggal_dibuat' => now(),
+				'tanggal_dibuat' => strtotime($tanggal_dibuat . ' ' . $waktu_dibuat),
 				'juragan_id' => $id_juragan,
 				'pengguna_id' => $pengguna_id,
 				'nama' => $nama,

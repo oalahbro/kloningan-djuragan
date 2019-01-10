@@ -16,6 +16,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <?php
+                            echo form_label('Tanggal Pesan', 'tanggal_dibuat');
+                            echo form_input(array('name' => 'tanggal_dibuat', 'id'=> 'tanggal_dibuat', 'type' => 'date', 'class' => 'form-control', 'required' => ''), set_value('tanggal_dibuat', mdate('%Y-%m-%d', now())));
+                        ?>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <?php
                             $j = $this->juragan->_semua()->result();
                             $option = array(''=> 'Pilih Juragan');
                             foreach ($j as $juragan) {
