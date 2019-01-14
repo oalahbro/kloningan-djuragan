@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-date_default_timezone_set('Asia/Jakarta');
-
 class Upgrade extends CI_Controller {
 
 	public function __construct() {
@@ -11,11 +9,11 @@ class Upgrade extends CI_Controller {
 	}
 
 	public function index() {
-		echo anchor('upgrade/insert_pelanggan', 'Step 1');
+		echo anchor('upgrade/insert_faktur', 'Step 1');
 	}
 
 
-	public function insert_pelanggan() { 
+	public function insert_faktur() { 
 		?>
 	<!DOCTYPE html>
 	<html>
@@ -35,10 +33,7 @@ class Upgrade extends CI_Controller {
 			
 		</div>
 
-	
-	</body>
-		
-		<script type="text/javascript">
+		<script>
 			jQuery(document).ready(function($) {
 	            // setTimeout(getProgress,1000);
 	            $('#execute').click(function(){
@@ -47,7 +42,7 @@ class Upgrade extends CI_Controller {
                     call the updateStatus() function every 3 second to update progress bar value.
                     */
                     updateStatus();
-					alert('klik');
+					//alert('klik');
                     /*
                     */
                 });
@@ -55,74 +50,44 @@ class Upgrade extends CI_Controller {
 	            function updateStatus(){
 	            	$.ajax({
 	            		method: "GET",
-	            		url: "<?php echo site_url('upgrade/progress') ?>",
+	            		url: "<?php echo site_url('upgrade/progress_satu') ?>",
 	            		// data: { name: "John", location: "Boston" }
 						success: function(data) {
-							if (data.updated < data.total) {
+							if (data.yet !== 0) {
 								// 
 								updateStatus();
-								$( "#message" ).html( data.updated + ' / ' + data.total + '( ' + data.done +'% )' );
+								$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
 							}
 							else {
 								//
-								alert('done');
-								$( "#message" ).html( 'all data updated' );
+								alert('all data updated');
+								$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/hapus_status_paket_belum_proses", "next"); ?>' );
 							}
 						}
 	            	})
-
-
 	            } 
 	        });
 		</script>
+		</body>
 	</html>
-
-
 	<?php 
 	}
 
-	public function progress() {
-		
-		$q = $this->db->get('pesanan');
-		$terupdate = $this->db->get_where('pesanan', array(	'status_upgrade' =>'DONE'));
-		$pending = $this->db->get_where('pesanan', array('status_upgrade' => NULL));
+	public function progress_satu() {
 
-		$qr = $this->db->limit(40)->where('status_upgrade', NULL)->get('pesanan');
+		$q = $this->db->where(array('key' => 's_paket', 'val' => 'diproses'))->limit(30)->get('keterangan');
 
-		$r = array();
-		foreach ($qr->result() as $key) {
-			$pelanggan_ = json_decode($key->pemesan);
-            $pelanggan = array(
-                'nama' => $pelanggan_->n
-			);
-
-			$data = array(
-				'status_upgrade' => 'DONE'
-			);
-
-			$this->db->where('id_pesanan', $key->id_pesanan);
-			$this->db->update('pesanan', $data);
-	
-			$this->db->insert('pelanggan', $pelanggan);
-			$id_pelanggan = $this->db->insert_id();
-			
-			$alamate = array(
-				'pelanggan_id' => $id_pelanggan,
-				'hp1' => $pelanggan_->p[0],
-				'hp2' => (!empty($pelanggan_->p[1])? $pelanggan_->p[1]: NULL),
-				'alamat' => $pelanggan_->a
-			);
-			$this->db->insert('pelanggan_alamat', $alamate);
+		foreach ($q->result() as $key) {
+            $this->db->where('id_faktur', $key->faktur_id);
+            $this->db->update('faktur', array('status_paket' => '1', 'status_edit' => 'ya'));
+            
+            $this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 's_paket'));
 		}
 
-		$up = $terupdate->num_rows();
-		$to = $q->num_rows();
-		$yet = $pending->num_rows();
-
-		$response['total'] = $to;
-		$response['updated'] = $up;
-		$response['yet'] = $yet;
-		$response['done'] = round(($up/$to)*100);
+		$response = array(
+			'updated' => $this->db->where(array('status_edit' => 'ya'))->get('faktur')->num_rows(),
+			'yet' => $this->db->where(array('val' => 'diproses'))->get('keterangan')->num_rows(),
+		);
 
 		$this->output
 	        ->set_status_header(200)
@@ -132,180 +97,926 @@ class Upgrade extends CI_Controller {
 	    exit;
 	}
 
-	public function upup()
+	public function hapus_status_paket_belum_proses()
 	{
-		// $q = $this->db->get('pesanan');
-		// $terupdate = $this->db->get_where('pesanan', array(	'status_upgrade' =>'DONE'));
-		// $pending = $this->db->get_where('pesanan', array('status_upgrade' => NULL));
+		$this->db->delete('keterangan', array('key' => 's_paket', 'val' => 'belum_diproses'));
 
-		$qr = $this->db->limit(43)->where('status_upgrade', NULL)->order_by('id_pesanan DESC')->get('pesanan');
+		echo anchor('upgrade/hapus_status_paket_batal', 'next hapus batalan');
+	}
 
-		$r = array();
-		$i=0;
-		foreach ($qr->result() as $key) {
-			$pelanggan_ = json_decode($key->pemesan);
-            $pelanggan = array(
-				'id_pelanggan' => '',
-                'nama' => $pelanggan_->n
-			);
+	public function hapus_status_paket_batal()
+	{
+		$q = $this->db->where(array('key' => 's_paket', 'val' => 'proses_batal'))->get('keterangan');
 
-			/*
-			$data = array(
-				'status_upgrade' => 'DONE'
-			);
-			*/
-
-			// $this->db->where('id_pesanan', $key->id_pesanan);
-			// $this->db->update('pesanan', $data);
-	
-			// $this->db->insert('pelanggan', $pelanggan);
-			// $id_pelanggan = $this->db->insert_id();
+		foreach ($q->result() as $key) {
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('status_paket' => '2', 'status_edit' => 'ya'));
 			
-			$alamate = array(
-				'pelanggan_id' => '',//$id_pelanggan,
-				'hp1' => $pelanggan_->p[0],
-				'hp2' => (!empty($pelanggan_->p[1])? $pelanggan_->p[1]: NULL),
-				'alamat' => $pelanggan_->a
-			);
-
-
-
-			// faktur
-			$faktur = array(
-				'id_faktur' => $key->id_pesanan,
-				'seri_faktur' => '',
-				'tanggal_dibuat' => $key->tanggal_submit,
-				'juragan_id' => $key->juragan,
-				'pelanggan_id' => '',
-				'keterangan_id' => ''
-			);
-
-			// pembelian
-			$beli = json_decode($key->detail);
-			$biaya = json_decode($key->biaya);
-			$pembelian = array();
-			$bought = 0;
-			foreach ($beli->p as $buy) {
-				$pembelian[$bought] = array(
-					'id_pembelian' => '',
-					'faktur_id' => $key->id_pesanan,
-					'kode_produk' => $buy->c,
-					'ukuran' => $buy->s,
-					'jumlah' => $buy->q,
-					'harga' => (isset($buy->h)? $buy->h: ($biaya->m->h/$key->count)  )
-				);
-				$bought++;
-			}
-
-			// pembayaran
-			$pembayaran = array();
-			$paid = 0;
-			//foreach ($biaya->m as $paid) {
-				$pembayaran[] = array(
-					'id_keterangan' => '',
-					'faktur_id' => $key->id_pesanan,
-					'kunci' => 'transfer',
-					'isi' => $biaya->m->t,
-				);
-				if(isset($biaya->m->o)) {
-					$pembayaran[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'ongkir',
-						'isi' => $biaya->m->o,
-					);
-				}
-				if(isset($biaya->m->d)) {
-					$pembayaran[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'diskon',
-						'isi' => $biaya->m->d,
-					);
-				}
-				
-				/*
-				$pembayaran[] = array(
-					'id_keterangan' => '',
-					'faktur_id' => $key->id_pesanan,
-					'kunci' => 'status_transfer',
-					'isi' => $biaya->s,
-				);
-				*/
-
-				$pembayaran[] = array(
-					'id_keterangan' => '',
-					'faktur_id' => $key->id_pesanan,
-					'kunci' => 'rekening',
-					'isi' => $biaya->b,
-				);
-
-				if($key->tanggal_cek_transfer !== NULL) {
-					$pembayaran[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'tanggal_cek_transfer',
-						'isi' => $key->tanggal_cek_transfer,
-					);
-				}
-				//$paid++;
-			//}
-
-			// pengiriman
-			
-			$pengiriman = array();
-			//foreach ($beli->s as $sent) {
-				if(isset($beli->s)) {
-					$pengiriman[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'kurir',
-						'isi' => $beli->s->k,
-					);
-					$pengiriman[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'tanggal_kirim',
-						'isi' => $beli->s->d,
-					);
-					$pengiriman[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'resi',
-						'isi' => $beli->s->n,
-					);
-				}
-			//}
-
-			$r[$i]['faktur'] = $faktur;
-			$r[$i]['pelanggan'] = $pelanggan;
-			$r[$i]['alamat'] = $alamate;
-			$r[$i]['pembelian'] = $pembelian;
-			$r[$i]['pembayaran'] = $pembayaran;
-			$r[$i]['pengiriman'] = $pengiriman;
-			// $this->db->insert('pelanggan_alamat', $alamate);
-			$i++;
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 's_paket'));
 		}
 
+		echo anchor('upgrade/insert_faktur_status_kirim', 'next status kirim');
+	}
+
+	public function insert_faktur_status_kirim() { 
+		?>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Upgrade</title>
+		<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+	</head>
+	<body>
+		<div id="message">
+			
+		</div>
+		<div id="fetch-snowfall-data">
+			<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+		</div>
+
+		<div id="response_container2">
+			
+		</div>
+
+		<script>
+			jQuery(document).ready(function($) {
+	            // setTimeout(getProgress,1000);
+	            $('#execute').click(function(){
+	            	// $('#message').hide();
+                /*
+                    call the updateStatus() function every 3 second to update progress bar value.
+                    */
+                    updateStatus();
+					//alert('klik');
+                    /*
+                    */
+                });
+
+	            function updateStatus(){
+	            	$.ajax({
+	            		method: "GET",
+	            		url: "<?php echo site_url('upgrade/progress_dua') ?>",
+	            		// data: { name: "John", location: "Boston" }
+						success: function(data) {
+							if (data.yet !== 0) {
+								// 
+								updateStatus();
+								$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+							}
+							else {
+								//
+								alert('all data updated');
+								$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/insert_faktur_status_kirim_dua", "next"); ?>' );
+							}
+						}
+	            	})
+	            } 
+	        });
+		</script>
+		</body>
+	</html>
+	<?php 
+	}
+
+	public function progress_dua() {
+
+		$q = $this->db->where(array('key' => 's_kirim', 'val' => 'b_dikirim'))->limit(30)->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$kir = $this->db->order_by('tanggal_kirim DESC')->where('faktur_id', $key->faktur_id)->get('pengiriman')->row();
+
+            $this->db->where('id_faktur', $key->faktur_id);
+            $this->db->update('faktur', array('status_kirim' => '3', 'status_edit' => 'kir_ya', 'tanggal_kirim' => $kir->tanggal_kirim));
+            
+            $this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 's_kirim'));
+		}
+
+		$response = array(
+			'updated' => $this->db->where(array('status_edit' => 'kir_ya'))->get('faktur')->num_rows(),
+			'yet' => $this->db->where(array('val' => 'b_dikirim'))->get('keterangan')->num_rows(),
+		);
+
 		$this->output
 	        ->set_status_header(200)
 	        ->set_content_type('application/json', 'utf-8')
-	        ->set_output(json_encode($r, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+	        ->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 	        ->_display();
 	    exit;
 	}
 
-	public function get_user()
+	public function insert_faktur_status_kirim_dua() { ?>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Upgrade</title>
+		<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+	</head>
+	<body>
+		<div id="message">
+			
+		</div>
+		<div id="fetch-snowfall-data">
+			<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+		</div>
+
+		<div id="response_container2">
+			
+		</div>
+
+		<script>
+			jQuery(document).ready(function($) {
+	            // setTimeout(getProgress,1000);
+	            $('#execute').click(function(){
+	            	// $('#message').hide();
+                /*
+                    call the updateStatus() function every 3 second to update progress bar value.
+                    */
+                    updateStatus();
+					//alert('klik');
+                    /*
+                    */
+                });
+
+	            function updateStatus(){
+	            	$.ajax({
+	            		method: "GET",
+	            		url: "<?php echo site_url('upgrade/progress_dua_dua') ?>",
+	            		// data: { name: "John", location: "Boston" }
+						success: function(data) {
+							if (data.yet !== 0) {
+								// 
+								updateStatus();
+								$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+							}
+							else {
+								//
+								alert('all data updated');
+								$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/hapus_status_kirim_belum", "next"); ?>' );
+							}
+						}
+	            	})
+	            } 
+	        });
+		</script>
+		</body>
+	</html>
+	<?php 
+	}
+
+	public function progress_dua_dua() {
+
+		$q = $this->db->where(array('key' => 's_kirim', 'val' => 'c_diambil'))->limit(30)->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$kir = $this->db->order_by('tanggal_kirim DESC')->where('faktur_id', $key->faktur_id)->get('pengiriman')->row();
+
+            $this->db->where('id_faktur', $key->faktur_id);
+            $this->db->update('faktur', array('status_kirim' => '2', 'status_edit' => 'amb_ya', 'tanggal_kirim' => $kir->tanggal_kirim));
+            
+            $this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 's_kirim'));
+		}
+
+		$response = array(
+			'updated' => $this->db->where(array('status_edit' => 'amb_ya'))->get('faktur')->num_rows(),
+			'yet' => $this->db->where(array('val' => 'c_diambil'))->get('keterangan')->num_rows(),
+		);
+
+		$this->output
+	        ->set_status_header(200)
+	        ->set_content_type('application/json', 'utf-8')
+	        ->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+	        ->_display();
+	    exit;
+	}
+
+	public function hapus_status_kirim_belum()
 	{
-		$q = $this->pengguna->_semua($aktif = FALSE, $blokir = FALSE);
+		$q = $this->db->where(array('key' => 's_kirim', 'val' => 'belum_kirim'))->get('keterangan');
 
-		$this->output
-	        ->set_status_header(200)
-	        ->set_content_type('application/json', 'utf-8')
-	        ->set_output(json_encode($q->result(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
-	        ->_display();
-	    exit;
+		foreach ($q->result() as $key) {
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('status_kirim' => '0', 'status_edit' => 'kir_no'));
+			
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 's_kirim'));
+		}
+
+		echo anchor('upgrade/insert_faktur_status_transfer', 'next status transfer');
 	}
 
+	public function insert_faktur_status_transfer() { ?>
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>Upgrade</title>
+			<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+		</head>
+		<body>
+			<div id="message">
+				
+			</div>
+			<div id="fetch-snowfall-data">
+				<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+			</div>
+	
+			<div id="response_container2">
+				
+			</div>
+	
+			<script>
+				jQuery(document).ready(function($) {
+					// setTimeout(getProgress,1000);
+					$('#execute').click(function(){
+						// $('#message').hide();
+					/*
+						call the updateStatus() function every 3 second to update progress bar value.
+						*/
+						updateStatus();
+						//alert('klik');
+						/*
+						*/
+					});
+	
+					function updateStatus(){
+						$.ajax({
+							method: "GET",
+							url: "<?php echo site_url('upgrade/progress_tiga') ?>",
+							// data: { name: "John", location: "Boston" }
+							success: function(data) {
+								if (data.yet !== 0) {
+									// 
+									updateStatus();
+									$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+								}
+								else {
+									//
+									alert('all data updated');
+									$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/hapus_status_transfer_lebih", "next"); ?>' );
+								}
+							}
+						})
+					} 
+				});
+			</script>
+			</body>
+		</html>
+		<?php 
+	}
+
+	public function progress_tiga() {
+
+		$q = $this->db->where(array('key' => 's_transfer', 'val' => 'd_lunas'))->limit(30)->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$kir = $this->db->order_by('tanggal_cek DESC')->where('faktur_id', $key->faktur_id)->get('pembayaran')->row();
+
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('status_transfer' => '3', 'status_edit' => 'lun_ya', 'tanggal_transfer' => $kir->tanggal_cek));
+			
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 's_transfer'));
+		}
+
+		$response = array(
+			'updated' => $this->db->where(array('status_edit' => 'lun_ya'))->get('faktur')->num_rows(),
+			'yet' => $this->db->where(array('val' => 'd_lunas'))->get('keterangan')->num_rows(),
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
+
+	public function hapus_status_transfer_lebih()
+	{
+		$q = $this->db->where(array('key' => 's_transfer', 'val' => 'e_lebih'))->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('status_transfer' => '4', 'status_edit' => 'bay_leb'));
+			
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 's_transfer'));
+		}
+
+		echo anchor('upgrade/hapus_status_transfer_sebagian', 'next status transfer');
+	}
+
+	public function hapus_status_transfer_sebagian()
+	{
+		$q = $this->db->where(array('key' => 's_transfer', 'val' => 'c_sebagian'))->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('status_transfer' => '2', 'status_edit' => 'bay_seb'));
+			
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 's_transfer'));
+		}
+
+		echo anchor('upgrade/hapus_status_transfer_menunggu', 'next status transfer');
+	}
+
+	public function hapus_status_transfer_menunggu()
+	{
+		$q = $this->db->where(array('key' => 's_transfer', 'val' => 'b_menunggu'))->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('status_transfer' => '1', 'status_edit' => 'bay_seb'));
+			
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 's_transfer'));
+		}
+
+		echo anchor('upgrade/hapus_status_belum_transfer', 'next status transfer');
+	}
+
+	public function hapus_status_belum_transfer()
+	{
+		$q = $this->db->where(array('key' => 's_transfer', 'val' => 'belum_transfer'))->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('status_transfer' => '0', 'status_edit' => 'bay_seb'));
+			
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 's_transfer'));
+		}
+
+		echo anchor('upgrade/insert_unik', 'next status transfer');
+	}
+
+	public function insert_unik() { ?>
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>Upgrade</title>
+			<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+		</head>
+		<body>
+			<div id="message">
+				
+			</div>
+			<div id="fetch-snowfall-data">
+				<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+			</div>
+	
+			<div id="response_container2">
+				
+			</div>
+	
+			<script>
+				jQuery(document).ready(function($) {
+					// setTimeout(getProgress,1000);
+					$('#execute').click(function(){
+						// $('#message').hide();
+					/*
+						call the updateStatus() function every 3 second to update progress bar value.
+						*/
+						updateStatus();
+						//alert('klik');
+						/*
+						*/
+					});
+	
+					function updateStatus(){
+						$.ajax({
+							method: "GET",
+							url: "<?php echo site_url('upgrade/progress_unik') ?>",
+							// data: { name: "John", location: "Boston" }
+							success: function(data) {
+								if (data.yet !== 0) {
+									// 
+									updateStatus();
+									$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+								}
+								else {
+									//
+									alert('all data updated');
+									$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/insert_diskon", "next"); ?>' );
+								}
+							}
+						})
+					} 
+				});
+			</script>
+			</body>
+		</html>
+		<?php 
+	}
+
+	public function progress_unik() {
+
+		$q = $this->db->where(array('key' => 'unik'))->limit(30)->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->insert('biaya_unik', array('faktur_id' => $key->faktur_id, 'nominal' => $key->val));
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 'unik'));
+		}
+
+		$response = array(
+			'updated' => $this->db->get('biaya_unik')->num_rows(),
+			'yet' => $this->db->where(array('key' => 'unik'))->get('keterangan')->num_rows(),
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
+
+	public function insert_diskon() { ?>
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>Upgrade</title>
+			<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+		</head>
+		<body>
+			<div id="message">
+				
+			</div>
+			<div id="fetch-snowfall-data">
+				<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+			</div>
+	
+			<div id="response_container2">
+				
+			</div>
+	
+			<script>
+				jQuery(document).ready(function($) {
+					// setTimeout(getProgress,1000);
+					$('#execute').click(function(){
+						// $('#message').hide();
+					/*
+						call the updateStatus() function every 3 second to update progress bar value.
+						*/
+						updateStatus();
+						//alert('klik');
+						/*
+						*/
+					});
+	
+					function updateStatus(){
+						$.ajax({
+							method: "GET",
+							url: "<?php echo site_url('upgrade/progress_diskon') ?>",
+							// data: { name: "John", location: "Boston" }
+							success: function(data) {
+								if (data.yet !== 0) {
+									// 
+									updateStatus();
+									$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+								}
+								else {
+									//
+									alert('all data updated');
+									$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/insert_ongkir", "next"); ?>' );
+								}
+							}
+						})
+					} 
+				});
+			</script>
+			</body>
+		</html>
+		<?php 
+	}
+
+	public function progress_diskon() {
+
+		$q = $this->db->where(array('key' => 'diskon'))->limit(30)->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->insert('biaya_diskon', array('faktur_id' => $key->faktur_id, 'nominal' => $key->val));
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 'diskon'));
+		}
+
+		$response = array(
+			'updated' => $this->db->get('biaya_diskon')->num_rows(),
+			'yet' => $this->db->where(array('key' => 'diskon'))->get('keterangan')->num_rows(),
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
+
+	public function insert_ongkir() { ?>
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>Upgrade</title>
+			<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+		</head>
+		<body>
+			<div id="message">
+				
+			</div>
+			<div id="fetch-snowfall-data">
+				<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+			</div>
+	
+			<div id="response_container2">
+				
+			</div>
+	
+			<script>
+				jQuery(document).ready(function($) {
+					// setTimeout(getProgress,1000);
+					$('#execute').click(function(){
+						// $('#message').hide();
+					/*
+						call the updateStatus() function every 3 second to update progress bar value.
+						*/
+						updateStatus();
+						//alert('klik');
+						/*
+						*/
+					});
+	
+					function updateStatus(){
+						$.ajax({
+							method: "GET",
+							url: "<?php echo site_url('upgrade/progress_ongkir') ?>",
+							// data: { name: "John", location: "Boston" }
+							success: function(data) {
+								if (data.yet !== 0) {
+									// 
+									updateStatus();
+									$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+								}
+								else {
+									//
+									alert('all data updated');
+									$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/insert_hp2", "next"); ?>' );
+								}
+							}
+						})
+					} 
+				});
+			</script>
+			</body>
+		</html>
+		<?php 
+	}
+
+	public function progress_ongkir() {
+
+		$q = $this->db->where(array('key' => 'ongkir'))->limit(30)->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->insert('biaya_ongkir', array('faktur_id' => $key->faktur_id, 'nominal' => $key->val));
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 'ongkir'));
+		}
+
+		$response = array(
+			'updated' => $this->db->get('biaya_ongkir')->num_rows(),
+			'yet' => $this->db->where(array('key' => 'ongkir'))->get('keterangan')->num_rows(),
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
+
+	public function insert_hp2() { ?>
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>Upgrade</title>
+			<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+		</head>
+		<body>
+			<div id="message">
+				
+			</div>
+			<div id="fetch-snowfall-data">
+				<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+			</div>
+	
+			<div id="response_container2">
+				
+			</div>
+	
+			<script>
+				jQuery(document).ready(function($) {
+					// setTimeout(getProgress,1000);
+					$('#execute').click(function(){
+						// $('#message').hide();
+					/*
+						call the updateStatus() function every 3 second to update progress bar value.
+						*/
+						updateStatus();
+						//alert('klik');
+						/*
+						*/
+					});
+	
+					function updateStatus(){
+						$.ajax({
+							method: "GET",
+							url: "<?php echo site_url('upgrade/progress_hp2') ?>",
+							// data: { name: "John", location: "Boston" }
+							success: function(data) {
+								if (data.yet !== 0) {
+									// 
+									updateStatus();
+									$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+								}
+								else {
+									//
+									alert('all data updated');
+									$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/insert_gambar", "next"); ?>' );
+								}
+							}
+						})
+					} 
+				});
+			</script>
+			</body>
+		</html>
+		<?php 
+	}
+
+	public function progress_hp2() {
+
+		$q = $this->db->where(array('key' => 'hp'))->limit(30)->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('hp2' => $key->val));
+			
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 'hp'));
+		}
+
+		$response = array(
+			'updated' => $this->db->where('hp2 !=', NULL)->get('faktur')->num_rows(),
+			'yet' => $this->db->where(array('key' => 'hp'))->get('keterangan')->num_rows(),
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
+
+	public function insert_gambar() { ?>
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>Upgrade</title>
+			<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+		</head>
+		<body>
+			<div id="message">
+				
+			</div>
+			<div id="fetch-snowfall-data">
+				<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+			</div>
+	
+			<div id="response_container2">
+				
+			</div>
+	
+			<script>
+				jQuery(document).ready(function($) {
+					// setTimeout(getProgress,1000);
+					$('#execute').click(function(){
+						// $('#message').hide();
+					/*
+						call the updateStatus() function every 3 second to update progress bar value.
+						*/
+						updateStatus();
+						//alert('klik');
+						/*
+						*/
+					});
+	
+					function updateStatus(){
+						$.ajax({
+							method: "GET",
+							url: "<?php echo site_url('upgrade/progress_gambar') ?>",
+							// data: { name: "John", location: "Boston" }
+							success: function(data) {
+								if (data.yet !== 0) {
+									// 
+									updateStatus();
+									$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+								}
+								else {
+									//
+									alert('all data updated');
+									$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/insert_keterangan", "next"); ?>' );
+								}
+							}
+						})
+					} 
+				});
+			</script>
+			</body>
+		</html>
+		<?php 
+	}
+
+	public function progress_gambar() {
+
+		$q = $this->db->where(array('key' => 'gambar'))->limit(30)->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('gambar' => $key->val));
+			
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 'gambar'));
+		}
+
+		$response = array(
+			'updated' => $this->db->where('hp2 !=', NULL)->get('faktur')->num_rows(),
+			'yet' => $this->db->where(array('key' => 'gambar'))->get('keterangan')->num_rows(),
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
+
+	public function insert_keterangan() { ?>
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>Upgrade</title>
+			<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+		</head>
+		<body>
+			<div id="message">
+				
+			</div>
+			<div id="fetch-snowfall-data">
+				<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+			</div>
+	
+			<div id="response_container2">
+				
+			</div>
+	
+			<script>
+				jQuery(document).ready(function($) {
+					// setTimeout(getProgress,1000);
+					$('#execute').click(function(){
+						// $('#message').hide();
+					/*
+						call the updateStatus() function every 3 second to update progress bar value.
+						*/
+						updateStatus();
+						//alert('klik');
+						/*
+						*/
+					});
+	
+					function updateStatus(){
+						$.ajax({
+							method: "GET",
+							url: "<?php echo site_url('upgrade/progress_keterangan') ?>",
+							// data: { name: "John", location: "Boston" }
+							success: function(data) {
+								if (data.yet !== 0) {
+									// 
+									updateStatus();
+									$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+								}
+								else {
+									//
+									alert('all data updated');
+									$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/insert_tipe", "next"); ?>' );
+								}
+							}
+						})
+					} 
+				});
+			</script>
+			</body>
+		</html>
+		<?php 
+	}
+
+	public function progress_keterangan() {
+
+		$q = $this->db->where(array('key' => 'keterangan'))->limit(30)->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('keterangan' => $key->val));
+			
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 'keterangan'));
+		}
+
+		$response = array(
+			'updated' => $this->db->where('keterangan !=', NULL)->get('faktur')->num_rows(),
+			'yet' => $this->db->where(array('key' => 'keterangan'))->get('keterangan')->num_rows(),
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
+
+	public function insert_tipe() { ?>
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>Upgrade</title>
+			<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+		</head>
+		<body>
+			<div id="message">
+				
+			</div>
+			<div id="fetch-snowfall-data">
+				<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+			</div>
+	
+			<div id="response_container2">
+				
+			</div>
+	
+			<script>
+				jQuery(document).ready(function($) {
+					// setTimeout(getProgress,1000);
+					$('#execute').click(function(){
+						// $('#message').hide();
+					/*
+						call the updateStatus() function every 3 second to update progress bar value.
+						*/
+						updateStatus();
+						//alert('klik');
+						/*
+						*/
+					});
+	
+					function updateStatus(){
+						$.ajax({
+							method: "GET",
+							url: "<?php echo site_url('upgrade/progress_tipe') ?>",
+							// data: { name: "John", location: "Boston" }
+							success: function(data) {
+								if (data.yet !== 0) {
+									// 
+									updateStatus();
+									$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+								}
+								else {
+									//
+									alert('all data updated');
+									$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/insert_tipe", "next"); ?>' );
+								}
+							}
+						})
+					} 
+				});
+			</script>
+			</body>
+		</html>
+		<?php 
+	}
+
+	public function progress_tipe() {
+
+		$q = $this->db->where(array('key' => 'tipe'))->limit(30)->get('keterangan');
+
+		foreach ($q->result() as $key) {
+			$this->db->where('id_faktur', $key->faktur_id);
+			$this->db->update('faktur', array('tipe' => strtolower($key->val)));
+			
+			$this->db->delete('keterangan', array('faktur_id' => $key->faktur_id, 'key' => 'tipe'));
+		}
+
+		$response = array(
+			'updated' => $this->db->where('tipe !=', NULL)->get('faktur')->num_rows(),
+			'yet' => $this->db->where(array('key' => 'tipe'))->get('keterangan')->num_rows(),
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
 }
 // 10029590307b552f1b
