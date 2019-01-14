@@ -20,7 +20,7 @@ class Migration_Tambah_pengiriman extends CI_Migration {
                 ),
                 'kurir' => array(
                     'type' => 'VARCHAR',
-                    'constraint' => 15,
+                    'constraint' => 25,
                 ), 
                 'resi' => array(
                     'type' => 'VARCHAR',
