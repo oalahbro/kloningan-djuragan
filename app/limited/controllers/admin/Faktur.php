@@ -9,7 +9,7 @@ class Faktur extends admin_controller
     
     public function index() {
         redirect('pesanan');
-    }
+	}
 
 	public function lihat($juragan = 's_juragan', $status = 'semua') {
         $limit = $this->input->get('limit'); // limit tampil pesanan 
@@ -553,6 +553,7 @@ class Faktur extends admin_controller
 			$id_faktur = $this->input->post('id_faktur');
 			$id_juragan = $this->input->post('juragan_id');
 			$tanggal_dibuat = $this->input->post('tanggal_dibuat');
+			$tanggal_paket = $this->input->post('tanggal_paket');
 			$waktu_dibuat = $this->input->post('waktu_dibuat');
 			$pengguna_id = $this->input->post('pengguna_id');
 			$nama = $this->input->post('nama');
@@ -560,36 +561,22 @@ class Faktur extends admin_controller
 			$hp2 = $this->input->post('hp2');
 			$alamat = $this->input->post('alamat');
 			$produk = $this->input->post('produk'); // array
-			$pembayaran = $this->input->post('pembayaran'); // array
-			$pengiriman = $this->input->post('pengiriman'); // array
 			$diskon = $this->input->post('diskon');
 			$ongkir = $this->input->post('ongkir');
 			$unik = $this->input->post('unik');
+			$status_paket = $this->input->post('status_paket');
 			$pembayaran_ = $this->input->post('pembayaran_');
-			$pengiriman_selesai = $this->input->post('pengiriman_selesai');
+			$pembayaran = $this->input->post('pembayaran'); // array
+			$pengiriman = $this->input->post('pengiriman'); // array
+			$pengiriman_selesai = $this->input->post('pengiriman_selesai');	
 			$pengiriman_ = $this->input->post('pengiriman_');
 			$marketplace_ = $this->input->post('marketplace_');
 			$marketplace = $this->input->post('marketplace');
 			$keterangan = $this->input->post('keterangan');
 			$image = $this->input->post('image');
-			$status_paket = $this->input->post('status_paket');
 
-			// `faktur`
 			$data = array();
-			$data['faktur'] = array(
-				// 'seri_faktur' => $faktur,
-				'tanggal_dibuat' => strtotime($tanggal_dibuat . ' ' . $waktu_dibuat),
-				'juragan_id' => $id_juragan,
-				'pengguna_id' => $pengguna_id,
-				'nama' => $nama,
-				'hp1' => $hp1,
-				'alamat' => $alamat,
-			);
-
-			// update to `faktur`
-			$this->faktur->edit_invoice($id_faktur, $data['faktur']);
-
-			// `pesanan_produk`
+			// ----------------------------------------- PRODUK
 			$produk_database = array();
 			$produk_submit = array();
 			$the_produk = $this->faktur->get_orders($id_faktur)->result();
@@ -629,7 +616,6 @@ class Faktur extends admin_controller
 			$data['produk']['diupdate'] = $produk_update;
 			$data['produk']['ditambah'] = $produk_insert;
 
-			// $data['produk'] = $produk_data;
 			$produk_del = array_diff($produk_database,$produk_submit);
 			foreach ($produk_del as $id) {
 				$result[] = $id;
@@ -637,56 +623,63 @@ class Faktur extends admin_controller
 			}
 			$data['produk']['dihapus'] = $produk_del;
 
-			// ----------------------------------------- PEMBAYARAN //
-			$pembayaran_database = array();
-			$pembayaran_submit = array();
-			$the_bayar = $this->faktur->get_pays($id_faktur)->result();
+			// ----------------------------------------- PEMBAYARAN 
+			if($pembayaran_ !== 'ya') {
+				$pembayaran_database = array();
+				$pembayaran_submit = array();
+				$the_bayar = $this->faktur->get_pays($id_faktur)->result();
 
-			foreach ($the_bayar as $prdb) {
-				$pembayaran_database[] = $prdb->id_pembayaran; 
-			}
-
-			$i = 0;
-			$pembayaran_update = array();
-			$pembayaran_insert = array();
-			$pembayaran_delete = array();
-			foreach ($pembayaran as $key) {
-				// update to `pembayaran`
-				if(!empty($key['id_pembayaran'])) {
-					$pembayaran_submit[] = $key['id_pembayaran'];
-
-					//$pembayaran_update[$i]['id_pembayaran'] = $key['id_pembayaran'];
-					$pembayaran_update[$i]['tanggal_bayar'] = strtotime($key['tanggal']);
-					$pembayaran_update[$i]['rekening'] = $key['rekening'];
-					$pembayaran_update[$i]['jumlah'] = $key['jumlah'];
-					$pembayaran_update[$i]['tanggal_cek'] = ( !empty($key['cek']) ? strtotime($key['cek']): NULL);
-
-					$this->faktur->update_pay($key['id_pembayaran'], $pembayaran_update[$i]);
+				foreach ($the_bayar as $prdb) {
+					$pembayaran_database[] = $prdb->id_pembayaran; 
 				}
-				else {
-					$pembayaran_insert[$i]['faktur_id'] = $id_faktur;
-					$pembayaran_insert[$i]['tanggal_bayar'] = strtotime($key['tanggal']);
-					$pembayaran_insert[$i]['rekening'] = $key['rekening'];
-					$pembayaran_insert[$i]['jumlah'] = $key['jumlah'];
-					$pembayaran_insert[$i]['tanggal_cek'] = ( !empty($key['cek']) ? strtotime($key['cek']): NULL);
-					
-					$this->faktur->sub_pay_($pembayaran_insert[$i]);
+
+				$i = 0;
+				$pembayaran_update = array();
+				$pembayaran_insert = array();
+				$pembayaran_delete = array();
+				foreach ($pembayaran as $key) {
+					// update to `pembayaran`
+					if(!empty($key['id_pembayaran'])) {
+						$pembayaran_submit[] = $key['id_pembayaran'];
+
+						$pembayaran_update[$i]['id_pembayaran'] = $key['id_pembayaran'];
+						$pembayaran_update[$i]['tanggal_bayar'] = strtotime($key['tanggal']);
+						$pembayaran_update[$i]['rekening'] = $key['rekening'];
+						$pembayaran_update[$i]['jumlah'] = $key['jumlah'];
+						$pembayaran_update[$i]['tanggal_cek'] = ( !empty($key['cek']) ? strtotime($key['cek']): NULL);
+
+						$this->faktur->update_pay($key['id_pembayaran'], $pembayaran_update[$i]);
+					}
+					else {
+						$pembayaran_insert[$i]['faktur_id'] = $id_faktur;
+						$pembayaran_insert[$i]['tanggal_bayar'] = strtotime($key['tanggal']);
+						$pembayaran_insert[$i]['rekening'] = $key['rekening'];
+						$pembayaran_insert[$i]['jumlah'] = $key['jumlah'];
+						$pembayaran_insert[$i]['tanggal_cek'] = ( !empty($key['cek']) ? strtotime($key['cek']): NULL);
+						
+						$this->faktur->sub_pay_($pembayaran_insert[$i]);
+					}
+					$i++;
 				}
-				$i++;
-			}
-			$data['pembayaran']['diupdate'] = $pembayaran_update;
-			$data['pembayaran']['ditambah'] = $pembayaran_insert;
+				$data['pembayaran']['diupdate'] = $pembayaran_update;
+				$data['pembayaran']['ditambah'] = $pembayaran_insert;
 
-			// $data['produk'] = $pembayaran_data;
-			$pembayaran_del = array_diff($pembayaran_database, $pembayaran_submit);
-			foreach ($pembayaran_del as $id) {
-				$result[] = $id;
-				$this->faktur->del_pay($id);
+				// $data['produk'] = $pembayaran_data;
+				$pembayaran_del = array_diff($pembayaran_database, $pembayaran_submit);
+				foreach ($pembayaran_del as $id) {
+					$result[] = $id;
+					$this->faktur->del_pay($id);
+				}
+				$data['pembayaran']['dihapus'] = $pembayaran_del;
 			}
-			$data['pembayaran']['dihapus'] = $pembayaran_del;
+			else {
+				// delete all pay
+				$this->faktur->del_pays($id_faktur);
+			}
 
-			// ----------------------------------------- PENGIRIMAN //
+			// ----------------------------------------- PENGIRIMAN 
 			$kurir_terakhir = '';
+			$tgl_kirim = 0;
 			if($pengiriman_ === 'ya') {
 				$pengiriman_database = array();
 				$pengiriman_submit = array();
@@ -706,13 +699,14 @@ class Faktur extends admin_controller
 					if(!empty($key['id_pengiriman'])) {
 						$pengiriman_submit[] = $key['id_pengiriman'];
 
-						// $pengiriman_update[$i]['id_pengiriman'] = $key['id_pengiriman'];
+						$pengiriman_update[$i]['id_pengiriman'] = $key['id_pengiriman'];
 						$pengiriman_update[$i]['kurir'] = $key['kurir'];
 						$pengiriman_update[$i]['resi'] = $key['resi'];
 						$pengiriman_update[$i]['ongkir'] = $key['ongkir'];
 						$pengiriman_update[$i]['tanggal_kirim'] = ( !empty($key['tanggal_kirim']) ? strtotime($key['tanggal_kirim']): NULL);
 
 						$this->faktur->update_carry($key['id_pengiriman'], $pengiriman_update[$i]);
+						$tgl_kirim = ( !empty($key['tanggal_kirim']) ? strtotime($key['tanggal_kirim']): 0);
 					}
 					else {
 						$pengiriman_insert[$i]['faktur_id'] = $id_faktur;
@@ -722,6 +716,7 @@ class Faktur extends admin_controller
 						$pengiriman_insert[$i]['tanggal_kirim'] = ( !empty($key['tanggal_kirim']) ? strtotime($key['tanggal_kirim']): NULL);
 						
 						$this->faktur->sub_carry($pengiriman_insert[$i]);
+						$tgl_kirim = ( !empty($key['tanggal_kirim']) ? strtotime($key['tanggal_kirim']): 0);
 					}
 					$kurir_terakhir = $key['kurir'];
 					$i++;
@@ -738,76 +733,67 @@ class Faktur extends admin_controller
 				$data['pengiriman']['dihapus'] = $pengiriman_del;
 			}
 
-			if($status_paket !== 'proses_batal') {
+			if($status_paket !== '2') {
 				if($pengiriman_ === 'ya') {
 					if ($pengiriman_selesai === 'ya') {
-						$val_kirim = ( strtolower($kurir_terakhir) === 'cod'? 'c_diambil': 'b_dikirim');
+						$val_kirim = ( strtolower($kurir_terakhir) === 'cod'? '2': '3');
 					}
 					else {
-						$val_kirim = 'd_sebagian';
+						$val_kirim = '1';
 					}
 				}
 				else {
 					$this->faktur->del_carry($id_faktur);
-					$val_kirim = 'belum_kirim';
+					$val_kirim = '0';
+					$tgl_kirim = 0;
 				}
-				$this->faktur->update_ket($id_faktur, 's_kirim', $val_kirim, $upset = TRUE);
-			}
-			
-			$this->faktur->update_ket($id_faktur, 's_paket', $status_paket, $upset = TRUE);
-			
-			// `keterangan`
-			if ($hp2 !== NULL && $hp2 !== '') {
-				$this->faktur->update_ket($id_faktur, 'hp', $hp2);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'hp', $hp2, FALSE);
 			}
 
-			if ($ongkir !== NULL && $ongkir > 0) {
-				$this->faktur->update_ket($id_faktur, 'ongkir', $ongkir);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'ongkir', $ongkir, FALSE);
+			$data['diskon'] = $diskon;
+			$data['ongkir'] = $ongkir;
+			$data['unik'] = $unik;
+
+			$this->faktur->upset_biaya('diskon', $id_faktur, $diskon);
+			$this->faktur->upset_biaya('ongkir', $id_faktur, $ongkir);
+			$this->faktur->upset_biaya('unik', $id_faktur, $unik);
+
+			switch ($status_paket) {
+				case '1':
+					# paket diproses
+					$tgl_paket = ($tanggal_paket === '0'? now() : $tanggal_paket );
+					break;
+				case '2':
+					# paket dibatalkan
+					$tgl_paket = now();
+					break;
+				default:
+					# paket belum diproses
+					$tgl_paket = 0;
+					break;
 			}
 
-			if ($diskon !== NULL  && $diskon > 0) {
-				$this->faktur->update_ket($id_faktur, 'diskon', $diskon);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'diskon', $diskon, FALSE);
-			}
+			// ----------------------------------------- FAKTUR 
+			$data['faktur'] = array(
+				// 'seri_faktur' => $faktur,
+				'tanggal_dibuat' => strtotime($tanggal_dibuat . ' ' . $waktu_dibuat),
+				'juragan_id' => $id_juragan,
+				'pengguna_id' => $pengguna_id,
+				'nama' => $nama,
+				'hp1' => $hp1,
+				'hp2' => (empty($hp2)? NULL: $hp2),
+				'tipe' => (isset($marketplace)? $marketplace: NULL),
+				'status_paket' => $status_paket,
+				'status_kirim' => $val_kirim,
+				'tanggal_paket' => $tgl_paket,
+				'tanggal_kirim' => $tgl_kirim,
+				'alamat' => $alamat,
+				'gambar' => (empty($image)? NULL : $image),
+				'keterangan' => (empty($keterangan)? NULL : $keterangan),
+			);
 
-			if ($unik !== NULL && $unik > 0) {
-				$this->faktur->update_ket($id_faktur, 'unik', $unik);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'unik', $unik, FALSE);
-			}
-
-			if ($marketplace !== NULL && $marketplace_ === 'on') {
-				$this->faktur->update_ket($id_faktur, 'tipe', $marketplace);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'tipe', $marketplace, FALSE);
-			}
-
-			if ($keterangan !== NULL && $keterangan !== '') {
-				$this->faktur->update_ket($id_faktur, 'keterangan', $keterangan);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'keterangan', $keterangan, FALSE);
-			}
-
-			if ($image !== NULL && $image !== '') {
-				$this->faktur->update_ket($id_faktur, 'gambar', $image);
-			}
-			else {
-				$this->faktur->update_ket($id_faktur, 'gambar', $image, FALSE);
-			}
-
+			$this->faktur->edit_invoice($id_faktur, $data['faktur']);
 			$this->faktur->calc_pembayaran($id_faktur);
-			redirect('pesanan');
+			redirect('pesanan?cari[q]=' . $hp1);
 		}
 	}
 

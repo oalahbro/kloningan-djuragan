@@ -428,7 +428,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         });
 
         $(document).on("keyup change", '[name="status_paket"]',function(){
-            if($(this).val() === 'diproses') {
+            if($(this).val() === '1') {
                 $('[name="pengiriman_"]').prop('disabled', false);
                 //$('.carry').prop('disabled', false);
             }

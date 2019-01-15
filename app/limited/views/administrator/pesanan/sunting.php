@@ -12,7 +12,7 @@ $pesanan = $q->row();
 
         <div class="container">
         <?php echo validation_errors(); ?>
-            <?php echo form_open('', array('class' =>'mb-5'), array('image' => '', 'id_faktur' => $pesanan->id_faktur, 'waktu_dibuat' => mdate('%H:%i:%s', $pesanan->tanggal_dibuat))); ?>
+            <?php echo form_open('', array('class' =>'mb-5'), array('id_faktur' => $pesanan->id_faktur, 'image' => '', 'tanggal_paket' => $pesanan->tanggal_paket, 'waktu_dibuat' => mdate('%H:%i:%s', $pesanan->tanggal_dibuat))); ?>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <?php
@@ -153,19 +153,19 @@ $pesanan = $q->row();
                                     <div class="form-group col-sm-4">
                                         <?php
                                             echo form_label('Diskon', 'diskon');
-                                            echo form_input(array('name' => 'diskon', 'id'=> 'diskon', 'class' => 'form-control diskon calc', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('diskon', $pesanan->diskon));
+                                            echo form_input(array('name' => 'diskon', 'id'=> 'diskon', 'class' => 'form-control diskon calc', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('diskon', (!isset($pesanan->diskon)? 0: $pesanan->diskon)));
                                         ?>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <?php
                                             echo form_label('Tarif Ongkir', 'ongkir');
-                                            echo form_input(array('name' => 'ongkir', 'id'=> 'ongkir', 'class' => 'form-control ongkir calc', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('diskon', $pesanan->ongkir));
+                                            echo form_input(array('name' => 'ongkir', 'id'=> 'ongkir', 'class' => 'form-control ongkir calc', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('ongkir', (!isset($pesanan->ongkir)? 0: $pesanan->ongkir)));
                                         ?>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <?php
                                             echo form_label('3 digit angka unik', 'unik');
-                                            echo form_input(array('name' => 'unik', 'id'=> 'unik', 'class' => 'form-control unik calc', 'type' => 'number', 'min' => '0','required' => ''), set_value('diskon', $pesanan->unik));
+                                            echo form_input(array('name' => 'unik', 'id'=> 'unik', 'class' => 'form-control unik calc', 'type' => 'number', 'min' => '0','required' => ''), set_value('unik', (!isset($pesanan->unik)? 0: $pesanan->unik)));
                                         ?>
                                     </div>
                                 </div>
@@ -218,9 +218,9 @@ $pesanan = $q->row();
                         <?php echo form_label('Status Paket', 'status_paket'); ?>
                             <?php
                             $opsi_paket_ = array(
-                                'belum_diproses' => 'Belum Diproses',
-                                'diproses'       => 'Diproses',
-                                'proses_batal'   => 'Dibatalkan'
+                                '0' => 'Belum Diproses',
+                                '1' => 'Diproses',
+                                '2' => 'Dibatalkan'
                             );
                             
                             echo form_dropdown('status_paket', $opsi_paket_, $pesanan->status_paket, array('class' => 'custom-select', 'id' => 'status_paket'));
@@ -230,7 +230,7 @@ $pesanan = $q->row();
                 
                 <div class="custom-control custom-switch mb-2">
                     <?php 
-                    $data = array(
+                    $data_c = array(
                         'name'          => 'pembayaran_',
                         'id'            => 'pembayaran_',
                         'class'         => 'custom-control-input',
@@ -238,16 +238,16 @@ $pesanan = $q->row();
                     );
 
                     $arr_tr = array('checked' => FALSE);
-                    if ($pesanan->status_transfer === 'belum_transfer') {
+                    if ($pesanan->status_transfer === '0') {
                         $arr_tr = array('checked' => TRUE);
                     } 
                     
-                    echo form_checkbox(array_merge($data,$arr_tr));
+                    echo form_checkbox(array_merge($data_c, $arr_tr));
                     echo form_label('Menunggu pembayaran/pencairan?', 'pembayaran_', array('class' => 'custom-control-label'));
                     ?>
                 </div>
 
-                <div class="card bg-light mb-3 collapse <?php echo ($pesanan->status_transfer === 'belum_transfer'? '': 'show') ?>" id="dataPembayaran">
+                <div class="card bg-light mb-3 collapse <?php echo ($pesanan->status_transfer === '0'? '': 'show') ?>" id="dataPembayaran">
                     <div class="card-body">
                         <div id="multiBayar">
                             <label for="rekening">Data Pembayaran</label>
@@ -425,13 +425,13 @@ $pesanan = $q->row();
                         'value'         => 'ya'
                     );
                     
-                    if($pesanan->status_kirim === 'belum_kirim' && $pesanan->status_paket !== 'diproses') {
+                    if($pesanan->status_kirim === '0' && $pesanan->status_paket !== '1') {
                         $arr_kir = array(
                             'checked' => FALSE,
                             'disabled' => ''
                         );
                     }
-                    else if($pesanan->status_kirim === 'belum_kirim' && $pesanan->status_paket === 'diproses') {
+                    else if($pesanan->status_kirim === '0' && $pesanan->status_paket === '1') {
                         $arr_kir = array(
                             'checked' => FALSE
                         );
@@ -447,7 +447,7 @@ $pesanan = $q->row();
                     ?>
                 </div>
                 
-                <div class="card bg-light collapse <?php echo ($pesanan->status_kirim === 'belum_kirim'? '': 'show') ?>" id="dataPengiriman">
+                <div class="card bg-light collapse <?php echo ($pesanan->status_kirim === '0'? '': 'show') ?>" id="dataPengiriman">
                     <div class="card-body">
                         <div id="multiKirim">
                             <label for="rekening">Data Pengiriman</label>

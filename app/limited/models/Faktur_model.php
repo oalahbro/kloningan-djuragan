@@ -13,22 +13,15 @@ class Faktur_model extends CI_Model
 	 * Ambil semua faktur
 	 *
 	 */
-    public function get_all($juragan_id, $by = FALSE, $limit = FALSE, $offset = FALSE, $cari = NULL) {
+    public function get_all($juragan_id = FALSE, $by = FALSE, $limit = FALSE, $offset = FALSE, $cari = NULL) {
         $this->db->select("
         fak.*,
         jur.nama AS nama_juragan,
         pen.nama AS nama_cs,
         jur.slug,
-        MAX(CASE WHEN (ket.key = 'hp') THEN ket.val ELSE NULL END) AS hp2,
-        MAX(CASE WHEN (ket.key = 'ongkir') THEN ket.val ELSE 0 END) AS ongkir,
-        MAX(CASE WHEN (ket.key = 'unik') THEN ket.val ELSE 0 END) AS unik,
-        MAX(CASE WHEN (ket.key = 'diskon') THEN ket.val ELSE 0 END) AS diskon,
-        MAX(CASE WHEN (ket.key = 'keterangan') THEN ket.val ELSE NULL END) AS keterangan,
-        MAX(CASE WHEN (ket.key = 's_transfer') THEN ket.val ELSE 'belum_transfer' END) AS status_transfer,
-        MAX(CASE WHEN (ket.key = 's_kirim') THEN ket.val ELSE 'belum_kirim' END) AS status_kirim,
-        MAX(CASE WHEN (ket.key = 's_paket') THEN ket.val ELSE 'belum_diproses' END) AS status_paket,
-        MAX(CASE WHEN (ket.key = 'tipe') THEN ket.val ELSE NULL END) AS tipe,
-        MAX(CASE WHEN (ket.key = 'gambar') THEN ket.val ELSE NULL END) AS gambar,
+        disk.nominal AS diskon,
+        unk.nominal AS unik,
+        ongk.nominal AS ongkir,
         GROUP_CONCAT(DISTINCT CONCAT(kir.kurir,'|',kir.resi,'|',kir.tanggal_kirim,'|',kir.ongkir,'|',kir.id_pengiriman)) AS pengiriman,
         GROUP_CONCAT(DISTINCT CONCAT(bay.rekening,'|',bay.jumlah,'|',bay.tanggal_bayar,'|',IFNULL(bay.tanggal_cek, 'NULL'),'|',bay.id_pembayaran)) AS pembayaran,
         GROUP_CONCAT(DISTINCT CONCAT(pro.kode,'|',pro.ukuran,'|',pro.jumlah,'|',pro.harga,'|',pro.id_pesanproduk)) AS produk,
@@ -36,7 +29,9 @@ class Faktur_model extends CI_Model
 
         $this->db->from($this->tabel . ' fak');
         $this->db->join('pengiriman kir', 'fak.id_faktur=kir.faktur_id', 'left');
-        $this->db->join('keterangan ket', 'fak.id_faktur=ket.faktur_id', 'left');
+        $this->db->join('biaya_diskon disk', 'fak.id_faktur=disk.faktur_id', 'left');
+        $this->db->join('biaya_unik unk', 'fak.id_faktur=unk.faktur_id', 'left');
+        $this->db->join('biaya_ongkir ongk', 'fak.id_faktur=ongk.faktur_id', 'left');
         $this->db->join('pembayaran bay', 'fak.id_faktur=bay.faktur_id', 'left');
         $this->db->join('pesanan_produk pro', 'fak.id_faktur=pro.faktur_id', 'left');
         $this->db->join('juragan jur', 'fak.juragan_id=jur.id', 'left');
@@ -44,37 +39,74 @@ class Faktur_model extends CI_Model
 
         // pencarian
         if($cari !== NULL ) {
-            // pembayaran ada
-            
+            // pembayaran ada            
             $query = '';
-            $dbyr = in_array($cari['pembayaran'], array('belum_transfer', 'b_menunggu', 'c_sebagian', 'd_lunas', 'e_lebih'));
-            $dpkt = in_array($cari['paket'], array('belum_diproses', 'diproses'));
-            $dkrm = in_array($cari['pengiriman'], array('belum_kirim', 'd_sebagian', 'dikirim'));
-           
-            if($dpkt && !empty($cari['paket'])) {
-                $query_p = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_paket' AND `val` = '".$cari['paket']."') ";
+
+            if(!empty($cari['paket']) && in_array($cari['paket'], array('belum_diproses', 'diproses'))) {
+                switch ($cari['paket']) {
+                    case "diproses":
+                        // paket diproses
+                        $spkt = 1;
+                        break;
+                    case "batal_proses":
+                        $spkt = 2;
+                        break;
+                    default:
+                        $spkt = 0;
+                }
+
+                $query_p = "fak.status_paket IN ('".$spkt."') ";
             }
             
-            if($dbyr && !empty($cari['pembayaran'])) {
-                $query_b = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_transfer' AND `val` = '".$cari['pembayaran']."') ";
+            if(!empty($cari['pembayaran']) && in_array($cari['pembayaran'], array('belum_transfer', 'b_menunggu', 'c_sebagian', 'd_lunas', 'e_lebih'))) {
+                switch ($cari['pembayaran']) {
+                    case "e_lebih":
+                        $strf = 4;
+                        break;
+                    case "d_lunas":
+                        $strf = 3;
+                        break;
+                    case "c_sebagian":
+                        $strf = 2;
+                        break;
+                    case "b_menunggu":
+                        $strf = 1;
+                        break;
+                    default:
+                        $strf = 0;
+                }
+
+                $query_b = "fak.status_transfer IN ('".$strf."') ";
             }
 
-            if($dkrm && !empty($cari['pengiriman'])) {
+            if(!empty($cari['pengiriman']) && in_array($cari['pengiriman'], array('belum_kirim', 'd_sebagian', 'dikirim'))) {
+
                 if($cari['pengiriman'] === 'dikirim') {
                     $query_k = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_kirim' AND `val` = 'b_dikirim' OR `val` = 'c_diambil') ";
                 }
                 else {
-                    $query_k = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_kirim' AND `val` = '".$cari['pengiriman']."')";
+                    $query_k = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_kirim' AND `val` = '".$cari['pengiriman']."') ";
+                }
+
+                switch ($cari['pengiriman']) {
+                    case "dikirim":
+                        $query_k = "fak.status_kirim IN ('2','3') ";
+                        break;
+                    case "d_sebagian":
+                        $query_k = "fak.status_kirim IN ('1') ";
+                        break;
+                    default:
+                        $query_k = "fak.status_kirim IN ('0') ";
                 }
             }
 
             // $cari
-            if(!empty($cari['marketplace'])) {
-                $query_m = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 'tipe') ";
+            if(!empty($cari['marketplace']) && $cari['marketplace'] === 'ya') {
+                $query_m = "fak.tipe IS NOT NULL ";
             }
 
             if(!empty($cari['q'])) {
-                $query_q =  "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `val` LIKE '%".$cari['q']."%') OR fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `pesanan_produk` WHERE `kode` LIKE '%".$cari['q']."%') ";
+                $query_q =  "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `pesanan_produk` WHERE `kode` LIKE '%".$cari['q']."%') ";
             }
 
             if(!empty($cari['tanggal'])) {
@@ -163,7 +195,9 @@ class Faktur_model extends CI_Model
                         $this->db->or_like('fak.seri_faktur',  $term, 'both');
                         $this->db->or_like('fak.nama',  $term, 'both');
                         $this->db->or_like('fak.hp1',  $term, 'both');
+                        $this->db->or_like('fak.hp2',  $term, 'both');
                         $this->db->or_like('fak.alamat',  $term, 'both');
+                        $this->db->or_like('fak.keterangan',  $term, 'both');
                     }
                 }
             }
@@ -178,7 +212,7 @@ class Faktur_model extends CI_Model
             $this->db->offset($offset);
         }
 
-        $this->db->order_by('status_kirim ASC, status_paket ASC, status_transfer ASC, kir.tanggal_kirim DESC');
+        $this->db->order_by('status_paket ASC, status_kirim ASC, status_transfer ASC, tanggal_kirim DESC, tanggal_dibuat DESC');
 
         $this->db->group_by('fak.id_faktur');
         $q = $this->db->get();
@@ -191,16 +225,9 @@ class Faktur_model extends CI_Model
         jur.nama AS nama_juragan,
         pen.nama AS nama_cs,
         jur.slug,
-        MAX(CASE WHEN (ket.key = 'hp') THEN ket.val ELSE NULL END) AS hp2,
-        MAX(CASE WHEN (ket.key = 'ongkir') THEN ket.val ELSE 0 END) AS ongkir,
-        MAX(CASE WHEN (ket.key = 'unik') THEN ket.val ELSE 0 END) AS unik,
-        MAX(CASE WHEN (ket.key = 'diskon') THEN ket.val ELSE 0 END) AS diskon,
-        MAX(CASE WHEN (ket.key = 'keterangan') THEN ket.val ELSE NULL END) AS keterangan,
-        MAX(CASE WHEN (ket.key = 's_transfer') THEN ket.val ELSE NULL END) AS status_transfer,
-        MAX(CASE WHEN (ket.key = 's_kirim') THEN ket.val ELSE NULL END) AS status_kirim,
-        MAX(CASE WHEN (ket.key = 's_paket') THEN ket.val ELSE NULL END) AS status_paket,
-        MAX(CASE WHEN (ket.key = 'tipe') THEN ket.val ELSE NULL END) AS tipe,
-        MAX(CASE WHEN (ket.key = 'gambar') THEN ket.val ELSE NULL END) AS gambar,
+        disk.nominal AS diskon,
+        unk.nominal AS unik,
+        ongk.nominal AS ongkir,
         GROUP_CONCAT(DISTINCT CONCAT(kir.kurir,'|',kir.resi,'|',kir.tanggal_kirim,'|',kir.ongkir,'|',kir.id_pengiriman)) AS pengiriman,
         GROUP_CONCAT(DISTINCT CONCAT(bay.rekening,'|',bay.jumlah,'|',bay.tanggal_bayar,'|',IFNULL(bay.tanggal_cek, 'NULL'),'|',bay.id_pembayaran)) AS pembayaran,
         GROUP_CONCAT(DISTINCT CONCAT(pro.kode,'|',pro.ukuran,'|',pro.jumlah,'|',pro.harga,'|',pro.id_pesanproduk)) AS produk,
@@ -208,7 +235,9 @@ class Faktur_model extends CI_Model
 
         $this->db->from($this->tabel . ' fak');
         $this->db->join('pengiriman kir', 'fak.id_faktur=kir.faktur_id', 'left');
-        $this->db->join('keterangan ket', 'fak.id_faktur=ket.faktur_id', 'left');
+        $this->db->join('biaya_diskon disk', 'fak.id_faktur=disk.faktur_id', 'left');
+        $this->db->join('biaya_unik unk', 'fak.id_faktur=unk.faktur_id', 'left');
+        $this->db->join('biaya_ongkir ongk', 'fak.id_faktur=ongk.faktur_id', 'left');
         $this->db->join('pembayaran bay', 'fak.id_faktur=bay.faktur_id', 'left');
         $this->db->join('pesanan_produk pro', 'fak.id_faktur=pro.faktur_id', 'left');
         $this->db->join('juragan jur', 'fak.juragan_id=jur.id', 'left');
@@ -250,6 +279,76 @@ class Faktur_model extends CI_Model
 
         return TRUE;
     }
+
+    /**
+	 * biaya_diskon
+	 *
+	 */
+    public function get_diskon($faktur_id) {
+        $q = $this->db->get_where('biaya_diskon', array('faktur_id' => $faktur_id));
+        if($q->num_rows> 0) {
+            $r = $q->row();
+            return $r->nominal;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    /**
+	 * biaya_ongkir
+	 *
+	 */
+    public function get_ongkir($faktur_id) {
+        $q = $this->db->get_where('biaya_ongkir', array('faktur_id' => $faktur_id));
+        if($q->num_rows> 0) {
+            $r = $q->row();
+            return $r->nominal;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    /**
+	 * biaya_unik
+	 *
+	 */
+    public function get_unik($faktur_id) {
+        $q = $this->db->get_where('biaya_unik', array('faktur_id' => $faktur_id));
+        if($q->num_rows> 0) {
+            $r = $q->row();
+            return $r->nominal;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    /**
+	 * update, insert, delete : biaya_
+	 *
+	 */
+    public function upset_biaya($tabel, $faktur_id, $nominal) {
+        $table = 'biaya_' . $tabel;
+        if($nominal > 0) {    
+            $q = $this->db->get_where($table, array('faktur_id' => $faktur_id));
+            if($q->num_rows() > 0) {
+                // update
+                $this->db->where('faktur_id', $faktur_id);
+                $this->db->update($table, array('nominal' => $nominal));
+            }
+            else {
+                // insert
+                $this->db->insert($table, array('faktur_id' => $faktur_id, 'nominal' => $nominal));
+            }
+        }
+        else {
+            $this->db->where('faktur_id', $faktur_id)
+                     ->delete($table);
+        }
+    }
+
 
     /**
 	 * produk dipesan
@@ -306,6 +405,11 @@ class Faktur_model extends CI_Model
         return TRUE;
     }
 
+    public function del_pays($id_faktur) {
+        $this->db->delete('pembayaran', array('faktur_id' => $id_faktur));
+        return TRUE;
+    }
+
     public function update_pay($id_pembayaran, $data) {
         $this->db->where('id_pembayaran', $id_pembayaran);
         $this->db->update('pembayaran', $data);
@@ -327,6 +431,7 @@ class Faktur_model extends CI_Model
         $terbayar = 0;
         $belum_dibayar = 0;
         $total_harga_produk = 0;
+        $tanggal_cek = 0;
 
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $bayar) {
@@ -336,6 +441,7 @@ class Faktur_model extends CI_Model
                 else {
                     $belum_dibayar++;
                 }
+                $tanggal_cek = $bayar->tanggal_cek;
             }
         }
 
@@ -346,13 +452,13 @@ class Faktur_model extends CI_Model
         }
 
         // discount
-        $diskon = $this->get_ket($faktur_id, 'diskon');
+        $diskon = $this->get_diskon($faktur_id);
 
         // unik
-        $unik = $this->get_ket($faktur_id, 'unik');
+        $unik = $this->get_unik($faktur_id);
 
         // ongkir
-        $ongkir = $this->get_ket($faktur_id, 'ongkir');
+        $ongkir = $this->get_ongkir($faktur_id);
 
         // total wajib bayar
         $wajib_bayar = $total_harga_produk + $unik + $ongkir - $diskon;
@@ -360,23 +466,46 @@ class Faktur_model extends CI_Model
         // set
         // jika yang dibayarkan masih belum melunasi dan ada yang belum dicek / masuk
         if(($terbayar > 0 || $terbayar === 0) && $belum_dibayar > 0) {
-            $this->update_ket($faktur_id, 's_transfer', 'b_menunggu', TRUE);
+            // $this->update_ket($faktur_id, 's_transfer', 'b_menunggu', TRUE);
+            $data_tr = array(
+                'status_transfer' => '1',
+                'tanggal_transfer' => $tanggal_cek
+            );
         }
         // jika yang dibayarkan elum melunasi semua dan tidak ada yang belum dicek
         else if($terbayar > 0 && $belum_dibayar === 0 && $wajib_bayar > $terbayar) {
-            $this->update_ket($faktur_id, 's_transfer', 'c_sebagian', TRUE);
+            // $this->update_ket($faktur_id, 's_transfer', 'c_sebagian', TRUE);
+            $data_tr = array(
+                'status_transfer' => '2',
+                'tanggal_transfer' => $tanggal_cek
+            );
         }
         // jika mempunyai kelebihan
         else if($wajib_bayar < $terbayar) {
-            $this->update_ket($faktur_id, 's_transfer', 'e_lebih', TRUE);
+            // $this->update_ket($faktur_id, 's_transfer', 'e_lebih', TRUE);
+            $data_tr = array(
+                'status_transfer' => '4',
+                'tanggal_transfer' => $tanggal_cek
+            );
         }
         // jika pas pembayarannya
         else if($wajib_bayar === $terbayar) {
-            $this->update_ket($faktur_id, 's_transfer', 'd_lunas', TRUE);
+            // $this->update_ket($faktur_id, 's_transfer', 'd_lunas', TRUE);
+            $data_tr = array(
+                'status_transfer' => '3',
+                'tanggal_transfer' => $tanggal_cek
+            );
         }
         else {
-            $this->update_ket($faktur_id, 's_transfer', 'belum_transfer', TRUE);
+            // $this->update_ket($faktur_id, 's_transfer', 'belum_transfer', TRUE);
+            $data_tr = array(
+                'status_transfer' => '0',
+                'tanggal_transfer' => '0'
+            );
         }
+
+        // update
+        $this->edit_invoice($faktur_id, $data_tr);
     }
 
     /**
@@ -384,7 +513,7 @@ class Faktur_model extends CI_Model
 	 *
 	 */
     public function get_ket($faktur_id, $ket) {
-        $this->db->select("MAX(CASE WHEN (ket.key = '".$ket."') THEN ket.val ELSE 0 END) AS " .$ket);
+        $this->db->select("MAX(CASE WHEN (ket.key = '".$ket."') THEN ket.val ELSE NULL END) AS " .$ket);
         $this->db->from('keterangan ket');
         $this->db->where(array('faktur_id' => $faktur_id));
         $q = $this->db->get();

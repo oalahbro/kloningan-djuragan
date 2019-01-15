@@ -181,28 +181,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <?php 
                                             // status transfer
                                             switch ($pesanan->status_transfer) {
-                                                case "d_lunas":
+                                                case "3":
                                                     // sudah lunas
                                                     $c_trf = 'text-success';
                                                     $a_trf = 'cek_pembayaran';
                                                     $i_trf = 'fa-check-double';
                                                     $t_trf = 'Pembayaran Lunas';
                                                     break;
-                                                case "e_lebih":
+                                                case "4":
                                                     // sudah lunas dan mempunyai kelebihan
                                                     $c_trf = 'text-info';
                                                     $a_trf = 'cek_pembayaran';
                                                     $i_trf = 'fa-plus';
                                                     $t_trf = 'Pembayaran Lunas & memiliki kelebihan';
                                                     break;
-                                                case "c_sebagian":
+                                                case "2":
                                                     // belum lunas / dp yang dibayarkan sudah ada
                                                     $c_trf = 'text-warning';
                                                     $a_trf = 'cek_pembayaran';
                                                     $i_trf = 'fa-ellipsis-h';
                                                     $t_trf = 'Pembayaran belum lunas';
                                                     break;
-                                                case "b_menunggu":
+                                                case "1":
                                                     // pembayaran lanjutan dp perlu dicek
                                                     $c_trf = 'text-primary';
                                                     $a_trf = 'cek_pembayaran';
@@ -231,7 +231,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <?php
                                             // status paket
                                             switch ($pesanan->status_paket) {
-                                                case "diproses":
+                                                case "1":
                                                     // paket diproses
                                                     $c_pkt = 'text-success';
                                                     $i_pkt = 'fa-check-double';
@@ -240,7 +240,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     $a_krm = 'set_kirim';
                                                     $s_pkt = 'batal proses';
                                                     break;
-                                                case "proses_batal":
+                                                case "2":
                                                     // paket diproses
                                                     $c_pkt = 'text-danger';
                                                     $i_pkt = 'fa-ban';
@@ -274,21 +274,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             // status kirim
                                             switch ($pesanan->status_kirim) {
                                                 
-                                                case "b_dikirim":
+                                                case "3":
                                                     // pesanan dikirim
                                                     $c_krm = 'text-success';
                                                     $i_krm = 'fa-check-double';
                                                     $mi_krm = 'fa-plane-departure';
                                                     $t_krm = 'Pesanan telah dikirim';
                                                     break;
-                                                case "d_sebagian":
+                                                case "1":
                                                     // pesanan dikirim / diambil sebagian
                                                     $c_krm = 'text-warning';
                                                     $i_krm = 'fa-ellipsis-h';
                                                     $mi_krm = 'fa-cubes';
                                                     $t_krm = 'Pesanan telah dikirim sebagian';
                                                     break;
-                                                case "c_diambil":
+                                                case "2":
                                                     // pesanan diambil
                                                     $c_krm = 'text-success';
                                                     $i_krm = 'fa-check-double';
@@ -412,14 +412,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         ?>
                                         <?php
                                         if($pesanan->keterangan !== NULL || $pesanan->gambar !== NULL) { ?>
-                                            <button class="btn btn-outline-info dropdown-toggle btn-sm" type="button" data-toggle="collapse" data-target="#collapseKeterangan<?php echo $pesanan->id_faktur; ?>" aria-expanded="false" aria-controls="collapseKeterangan<?php echo $pesanan->id_faktur; ?>">
+                                            <button class="btn btn-outline-info dropdown-toggle btn-sm mb-1" type="button" data-toggle="collapse" data-target="#collapseKeterangan<?php echo $pesanan->id_faktur; ?>" aria-expanded="false" aria-controls="collapseKeterangan<?php echo $pesanan->id_faktur; ?>">
                                                 <i class="fas fa-scroll"></i> Keterangan
                                             </button>
                                         <?php 
                                         } 
                                         if($pesanan->pengiriman !== NULL) {
                                         ?>
-                                        <button class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseResi<?php echo $pesanan->id_faktur; ?>" aria-expanded="false" aria-controls="collapseResi<?php echo $pesanan->id_faktur; ?>">
+                                        <button class="btn btn-outline-dark btn-sm dropdown-toggle mb-1" type="button" data-toggle="collapse" data-target="#collapseResi<?php echo $pesanan->id_faktur; ?>" aria-expanded="false" aria-controls="collapseResi<?php echo $pesanan->id_faktur; ?>">
                                             <i class="fas fa-receipt"></i> Resi Kirim
                                         </button>
                                         <div class="collapse show" id="collapseResi<?php echo $pesanan->id_faktur; ?>">
