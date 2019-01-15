@@ -286,7 +286,7 @@ class Faktur_model extends CI_Model
 	 */
     public function get_diskon($faktur_id) {
         $q = $this->db->get_where('biaya_diskon', array('faktur_id' => $faktur_id));
-        if($q->num_rows> 0) {
+        if($q->num_rows() > 0) {
             $r = $q->row();
             return $r->nominal;
         }
@@ -301,7 +301,7 @@ class Faktur_model extends CI_Model
 	 */
     public function get_ongkir($faktur_id) {
         $q = $this->db->get_where('biaya_ongkir', array('faktur_id' => $faktur_id));
-        if($q->num_rows> 0) {
+        if($q->num_rows() > 0) {
             $r = $q->row();
             return $r->nominal;
         }
@@ -316,7 +316,7 @@ class Faktur_model extends CI_Model
 	 */
     public function get_unik($faktur_id) {
         $q = $this->db->get_where('biaya_unik', array('faktur_id' => $faktur_id));
-        if($q->num_rows> 0) {
+        if($q->num_rows() > 0) {
             $r = $q->row();
             return $r->nominal;
         }
