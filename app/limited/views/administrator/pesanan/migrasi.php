@@ -23,7 +23,7 @@ $biaya = json_decode( $pesanan->biaya );
 ?>
         <div class="container">
         <?php echo validation_errors(); ?>
-            <?php echo form_open('', array('class' =>'mb-5'), array('image' => (isset($detail->i) ? json_encode($detail->i) : ''), 'waktu_dibuat' => mdate('%H:%i:%s', $pesanan->tanggal_submit), 'slug' => $pesanan->slug)); ?>
+            <?php echo form_open('', array('class' =>'mb-5'), array('image' => (isset($detail->i) ? json_encode($detail->i) : ''), 'tanggal_paket' => $pesanan->tanggal_submit, 'waktu_dibuat' => mdate('%H:%i:%s', $pesanan->tanggal_submit), 'slug' => $pesanan->slug)); ?>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <?php
@@ -248,12 +248,12 @@ $biaya = json_decode( $pesanan->biaya );
                         <?php echo form_label('Status Paket', 'status_paket'); ?>
                             <?php
                             $opsi_paket_ = array(
-                                'belum_diproses' => 'Belum Diproses',
-                                'diproses'       => 'Diproses',
-                                'proses_batal'   => 'Dibatalkan'
+                                '0' => 'Belum Diproses',
+                                '1' => 'Diproses',
+                                '2' => 'Dibatalkan'
                             );
                             
-                            echo form_dropdown('status_paket', $opsi_paket_, 'diproses', array('class' => 'custom-select', 'id' => 'status_paket'));
+                            echo form_dropdown('status_paket', $opsi_paket_, '1', array('class' => 'custom-select', 'id' => 'status_paket'));
                             ?>
                     </div>                
                 </div>
