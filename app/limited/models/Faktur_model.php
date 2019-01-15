@@ -273,7 +273,7 @@ class Faktur_model extends CI_Model
         $this->db->delete('faktur', array('id_faktur' => $faktur_id));
 
         // pengiriman, pembayaran, pesanan_produk, keterangan
-        $tables = array('pengiriman', 'pembayaran', 'keterangan', 'pesanan_produk');
+        $tables = array('pengiriman', 'pembayaran', 'biaya_ongkir', 'biaya_diskon', 'biaya_unik', 'pesanan_produk');
         $this->db->where('faktur_id', $faktur_id);
         $this->db->delete($tables);
 
@@ -586,21 +586,32 @@ class Faktur_model extends CI_Model
         $kirim = $this->get_carry($faktur_id);
 
         if($kirim->num_rows() > 0) {
+            $r = $kirim->row();
             //
             if (strtolower($kirim_cod) === 'kirim' && $yes_no === 'ya') {
-                $val = 'b_dikirim';
+                $val = '3';
             }
             elseif (strtolower($kirim_cod) === 'cod' && $yes_no === 'ya') {
-                $val = 'c_diambil';
+                $val = '2';
             }
             else {
-                $val = 'd_sebagian';
+                $val = '1';
             }
-            $this->update_ket($faktur_id, 's_kirim', $val, TRUE);            
+            $data_update = array(
+                'status_kirim' => $val,
+                'tanggal_kirim' => $r->tanggal_kirim
+            );
+            // $this->update_ket($faktur_id, 's_kirim', $val, TRUE);            
         }
         else {
-            $this->update_ket($faktur_id, 's_kirim', 'belum_kirim', TRUE);
+            $data_update = array(
+                'status_kirim' => '0',
+                'tanggal_kirim' => '0'
+            );
+            //$this->update_ket($faktur_id, 's_kirim', 'belum_kirim', TRUE);
         }
+
+        $this->edit_invoice($faktur_id, $data_update);
     }
 
     /**
@@ -609,15 +620,28 @@ class Faktur_model extends CI_Model
 	 */
     public function set_package($faktur_id, $status) {
         if($status === 'diproses') {
-            $this->update_ket($faktur_id, 's_paket', 'diproses', TRUE);
+            $data_update = array(
+                'status_paket' => '1',
+                'tanggal_paket' => now()
+            );
+            // $this->update_ket($faktur_id, 's_paket', 'diproses', TRUE);
         }
         else {
-            $this->update_ket($faktur_id, 's_paket', 'belum_diproses', TRUE);
-            $this->update_ket($faktur_id, 's_kirim', 'belum_kirim', TRUE);
+            $data_update = array(
+                'status_paket' => '0',
+                'tanggal_paket' => '0',
+                'status_kirim' => '0',
+                'tanggal_kirim' => '0'
+            );
+
+            // $this->update_ket($faktur_id, 's_paket', 'belum_diproses', TRUE);
+            // $this->update_ket($faktur_id, 's_kirim', 'belum_kirim', TRUE);
 
             $this->del_carry($faktur_id);
             $this->calc_carry($faktur_id);
         }
+
+        $this->edit_invoice($faktur_id, $data_update);
         return TRUE;
     }
 

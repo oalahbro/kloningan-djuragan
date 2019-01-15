@@ -186,9 +186,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php echo form_label('Status Paket', 'status_paket'); ?>
                             <?php
                             $opsi_paket_ = array(
-                                'belum_diproses' => 'Belum Diproses',
-                                'diproses'       => 'Diproses',
-                                'proses_batal'   => 'Dibatalkan'
+                                '0' => 'Belum Diproses',
+                                '1' => 'Diproses',
+                                '2' => 'Dibatalkan'
                             );
                             
                             echo form_dropdown('status_paket', $opsi_paket_, 'belum_diproses', array('class' => 'custom-select', 'id' => 'status_paket'));

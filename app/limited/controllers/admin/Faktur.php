@@ -344,13 +344,18 @@ class Faktur extends admin_controller
 			// `faktur`
 			$data = array();
 			$data['faktur'] = array(
+				// 'id_faktur' => 
 				'seri_faktur' => $faktur,
 				'tanggal_dibuat' => strtotime($tanggal_dibuat . ' ' . mdate('%H:%i:%s', now())),
 				'juragan_id' => $id_juragan,
 				'pengguna_id' => $pengguna_id,
 				'nama' => $nama,
 				'hp1' => $hp1,
+				'hp2' => (empty($hp2)? NULL: $hp2),
+				'tipe' => (isset($marketplace)? $marketplace: NULL),
 				'alamat' => $alamat,
+				'gambar' => (empty($image)? NULL : $image),
+				'keterangan' => (empty($keterangan)? NULL : $keterangan),
 			);
 
 			// simpan to `faktur`
@@ -396,9 +401,9 @@ class Faktur extends admin_controller
 			}
 
 			// `pengiriman`
-			if(!empty($pengiriman_) && $status_paket === 'diproses') {
+			$kurir_terakhir = 'cod';
+			if(!empty($pengiriman_) && $status_paket === '1') {
 				$pengiriman_data = array();
-				$kurir_terakhir = 'cod';
 				$pengiriman_submit = array_filter($pengiriman);
 				if (!empty($pengiriman_submit)) {
 					$pk = 0;
@@ -417,104 +422,60 @@ class Faktur extends admin_controller
 					// simpan to `pesanan_produk`
 					$this->faktur->sub_carries($data['pengiriman']);
 				}
-			}		
-
-			// `keterangan`
-			$keterangan_data = array();
-			if ($hp2 !== NULL && $hp2 !== '') {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'hp',
-					'val' => $hp2
-				);
 			}
 
-			if ($ongkir !== NULL && $ongkir > 0) {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'ongkir',
-					'val' => $ongkir
-				);
-			}
-
-			if ($diskon !== NULL  && $diskon > 0) {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'diskon',
-					'val' => $diskon
-				);
-			}
-
-			if ($unik !== NULL && $unik > 0) {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'unik',
-					'val' => $unik
-				);
-			}
-
-			if ($marketplace !== NULL && $marketplace_ === 'on') {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'tipe',
-					'val' => $marketplace
-				);
-			}
-
-			if ($keterangan !== NULL && $keterangan !== '') {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'keterangan',
-					'val' => $keterangan
-				);
-			}
-
-			if ($image !== NULL && $image !== '') {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'gambar',
-					'val' => $image
-				);
-			}
-
-			if ($status_paket === 'diproses' && $pengiriman_ === 'ya') {
-				if ($pengiriman_selesai === 'ya') {
-					$keterangan_data[] = array(
-						'faktur_id' => $id_faktur,
-						'key' => 's_kirim',
-						'val' => ( strtolower($kurir_terakhir) === 'cod'? 'c_diambil': 'b_dikirim')
-					);
+			$tgl_kirim = 0;
+			if($status_paket !== '2') {
+				if($pengiriman_ === 'ya') {
+					if ($pengiriman_selesai === 'ya') {
+						$val_kirim = ( strtolower($kurir_terakhir) === 'cod'? '2': '3');
+					}
+					else {
+						$val_kirim = '1';
+					}
 				}
 				else {
-					$keterangan_data[] = array(
-						'faktur_id' => $id_faktur,
-						'key' => 's_kirim',
-						'val' => 'd_sebagian'
-					);
+					$this->faktur->del_carry($id_faktur);
+					$val_kirim = '0';
+					$tgl_kirim = 0;
 				}
 			}
-			else {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 's_kirim',
-					'val' => 'belum_kirim'
-				);
+
+			$data['diskon'] = $diskon;
+			$data['ongkir'] = $ongkir;
+			$data['unik'] = $unik;
+
+			$this->faktur->upset_biaya('diskon', $id_faktur, $diskon);
+			$this->faktur->upset_biaya('ongkir', $id_faktur, $ongkir);
+			$this->faktur->upset_biaya('unik', $id_faktur, $unik);
+
+			switch ($status_paket) {
+				case '1':
+					# paket diproses
+					$tgl_paket = ($tanggal_paket === '0'? now() : $tanggal_paket );
+					break;
+				case '2':
+					# paket dibatalkan
+					$tgl_paket = now();
+					break;
+				default:
+					# paket belum diproses
+					$tgl_paket = 0;
+					break;
 			}
 
-			$keterangan_data[] = array(
-				'faktur_id' => $id_faktur,
-				'key' => 's_paket',
-				'val' => $status_paket
+			$data_update = array(
+				'status_paket' => $status_paket,
+				'status_kirim' => $val_kirim,
+				'tanggal_paket' => $tgl_paket,
+				'tanggal_kirim' => $tgl_kirim,
 			);
 
-			$data['keterangan'] = $keterangan_data;
-			if ( ! empty($data['keterangan'])) {
-				$this->faktur->sub_ket($data['keterangan']);
-			}
-			
+			$this->faktur->edit_invoice($id_faktur, $data_update);
+
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
-			redirect('pesanan');
+			redirect('pesanan?cari[q]=' . $faktur);
 		}
 	}
 

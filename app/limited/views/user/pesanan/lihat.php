@@ -326,11 +326,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <a class="cek_pembayaran dropdown-item" href="#!">Cek Pembayaran</a>
                                                 <?php
                                                 switch ($pesanan->status_transfer) {
-                                                    case "d_lunas":
-                                                        // sudah lunas
+                                                    case "3": // sudah lunas
                                                         $stt = FALSE;
                                                         break;
-                                                    case "e_lebih":
+                                                    case "4": // lebih
                                                         $stt = FALSE;
                                                         break;
                                                     default:
@@ -346,7 +345,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <h6 class="dropdown-header">Lainnya</h6>
                                                 <a class="dropdown-item" href="#">Unduh PDF</a>
                                                 <?php 
-                                                if($pesanan->status_paket === 'belum_diproses' && $stt === TRUE) {
+                                                if($pesanan->status_paket === '0' && $stt === TRUE) {
                                                     echo anchor('myorder/sunting/' . $pesanan->seri_faktur, 'Sunting', array('class' => 'dropdown-item') );
                                                     //
                                                     echo anchor(current_url() . '#!', 'Hapus', array('class' => 'dropdown-item text-danger hapus_pesanan', 'data-id' => $pesanan->id_faktur, 'data-faktur' =>  $pesanan->seri_faktur) );
@@ -374,7 +373,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </td>
                                     <td>
                                         <?php
-                                       if($wajib_bayar > $dibayar && $dibayar > 0) {
+                                        if($wajib_bayar > $dibayar && $dibayar > 0) {
                                             $status_bayar = '<span class="d-block text-center border border-warning text-uppercase py-1 font-weight-bold rounded">Kredit</span>';
                                         }
                                         else if($wajib_bayar === $dibayar) {

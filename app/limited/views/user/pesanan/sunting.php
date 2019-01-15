@@ -134,19 +134,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <div class="form-group col-sm-4">
                                         <?php
                                             echo form_label('Diskon', 'diskon');
-                                            echo form_input(array('name' => 'diskon', 'id'=> 'diskon', 'class' => 'form-control diskon calc', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('diskon', $faktur->diskon));
+                                            echo form_input(array('name' => 'diskon', 'id'=> 'diskon', 'class' => 'form-control diskon calc', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('diskon', ($faktur->diskon === NULL? 0: $faktur->diskon)));
                                         ?>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <?php
                                             echo form_label('Tarif Ongkir', 'ongkir');
-                                            echo form_input(array('name' => 'ongkir', 'id'=> 'ongkir', 'class' => 'form-control ongkir calc', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('ongkir', $faktur->ongkir));
+                                            echo form_input(array('name' => 'ongkir', 'id'=> 'ongkir', 'class' => 'form-control ongkir calc', 'type' => 'number', 'min' => '0', 'required' => ''), set_value('ongkir', ($faktur->ongkir === NULL? 0: $faktur->ongkir)));
                                         ?>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <?php
                                             echo form_label('3 digit angka unik', 'unik');
-                                            echo form_input(array('name' => 'unik', 'id'=> 'unik', 'class' => 'form-control unik calc', 'type' => 'number', 'min' => '0','required' => ''), set_value('unik', $faktur->unik));
+                                            echo form_input(array('name' => 'unik', 'id'=> 'unik', 'class' => 'form-control unik calc', 'type' => 'number', 'min' => '0','required' => ''), set_value('unik', ($faktur->unik === NULL ? 0: $faktur->unik)));
                                         ?>
                                     </div>
                                 </div>

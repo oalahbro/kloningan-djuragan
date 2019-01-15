@@ -38,7 +38,7 @@ class Faktur extends user_controller
 				$per_page = 0;
 			}
 
-			$config['base_url'] = site_url('pesanan/' . $juragan);
+			$config['base_url'] = site_url('myorder/' . $juragan);
 			$config['total_rows'] = $this->faktur->get_all($juragan_id, $by = FALSE, FALSE, FALSE, $cari)->num_rows();
 			$config['per_page'] = $limit;
 			$config['page_query_string'] = TRUE;
@@ -122,7 +122,11 @@ class Faktur extends user_controller
 				'pengguna_id' => $pengguna_id,
 				'nama' => $nama,
 				'hp1' => $hp1,
+				'hp2' => (empty($hp2)? NULL: $hp2),
+				'tipe' => (isset($marketplace)? $marketplace: NULL),
 				'alamat' => $alamat,
+				'gambar' => (empty($image)? NULL : $image),
+				'keterangan' => (empty($keterangan)? NULL : $keterangan),
 			);
 
 			// simpan to `faktur`
@@ -167,81 +171,10 @@ class Faktur extends user_controller
 				}
 			}
 
-			// `keterangan`
-			$keterangan_data = array();
-			if ($hp2 !== NULL && $hp2 !== '') {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'hp',
-					'val' => $hp2
-				);
-			}
+			$this->faktur->upset_biaya('diskon', $id_faktur, $diskon);
+			$this->faktur->upset_biaya('ongkir', $id_faktur, $ongkir);
+			$this->faktur->upset_biaya('unik', $id_faktur, $unik);
 
-			if ($ongkir !== NULL && $ongkir > 0) {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'ongkir',
-					'val' => $ongkir
-				);
-			}
-
-			if ($diskon !== NULL  && $diskon > 0) {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'diskon',
-					'val' => $diskon
-				);
-			}
-
-			if ($unik !== NULL && $unik > 0) {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'unik',
-					'val' => $unik
-				);
-			}
-
-			if ($marketplace !== NULL && $marketplace_ === 'on') {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'tipe',
-					'val' => $marketplace
-				);
-			}
-
-			if ($keterangan !== NULL && $keterangan !== '') {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'keterangan',
-					'val' => $keterangan
-				);
-			}
-
-			if ($image !== NULL && $image !== '') {
-				$keterangan_data[] = array(
-					'faktur_id' => $id_faktur,
-					'key' => 'gambar',
-					'val' => $image
-				);
-			}
-
-			$keterangan_data[] = array(
-				'faktur_id' => $id_faktur,
-				'key' => 's_kirim',
-				'val' => 'belum_kirim'
-			);
-			
-			$keterangan_data[] = array(
-				'faktur_id' => $id_faktur,
-				'key' => 's_paket',
-				'val' => 'belum_diproses'
-			);
-
-			$data['keterangan'] = $keterangan_data;
-			if ( ! empty($data['keterangan'])) {
-				$this->faktur->sub_ket($data['keterangan']);
-			}
-			
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
 			redirect('myorder');
@@ -254,7 +187,7 @@ class Faktur extends user_controller
 		$cek_juragannya = $this->pengguna->juragan($_SESSION['username'], $juragan);
 		$cek_fakturnya = $this->faktur->check($seri_faktur);
 
-		if($cek_juragannya && $cek_fakturnya === 1 && $faktur->status_paket === 'belum_diproses') {
+		if($cek_juragannya && $cek_fakturnya === 1 && $faktur->status_paket === '0') {
 			// edit 
 			$this->form_validation->set_rules('juragan_id', 'Juragan', 'required|greater_than[0]');
 			$this->form_validation->set_rules('id_faktur', 'Faktur', 'required|greater_than[0]');
@@ -319,7 +252,11 @@ class Faktur extends user_controller
 					//'pengguna_id' => $pengguna_id,
 					'nama' => $nama,
 					'hp1' => $hp1,
-					'alamat' => $alamat,
+					'hp2' => (empty($hp2)? NULL: $hp2),
+					'alamat' => $alamat,					
+					'tipe' => (isset($marketplace)? $marketplace: NULL),
+					'gambar' => (empty($image)? NULL : $image),
+					'keterangan' => (empty($keterangan)? NULL : $keterangan),
 				);
 
 				$this->faktur->edit_invoice($id_faktur, $data['faktur']);
@@ -426,55 +363,9 @@ class Faktur extends user_controller
 					$data['pembayaran']['dihapus'] = $pembayaran_del;
 				}
 
-				// `keterangan`
-				if ($hp2 !== NULL && $hp2 !== '') {
-					$this->faktur->update_ket($id_faktur, 'hp', $hp2);
-				}
-				else {
-					$this->faktur->update_ket($id_faktur, 'hp', $hp2, FALSE);
-				}
-	
-				if ($ongkir !== NULL && $ongkir > 0) {
-					$this->faktur->update_ket($id_faktur, 'ongkir', $ongkir);
-				}
-				else {
-					$this->faktur->update_ket($id_faktur, 'ongkir', $ongkir, FALSE);
-				}
-	
-				if ($diskon !== NULL  && $diskon > 0) {
-					$this->faktur->update_ket($id_faktur, 'diskon', $diskon);
-				}
-				else {
-					$this->faktur->update_ket($id_faktur, 'diskon', $diskon, FALSE);
-				}
-	
-				if ($unik !== NULL && $unik > 0) {
-					$this->faktur->update_ket($id_faktur, 'unik', $unik);
-				}
-				else {
-					$this->faktur->update_ket($id_faktur, 'unik', $unik, FALSE);
-				}
-	
-				if ($marketplace !== NULL && $marketplace_ === 'on') {
-					$this->faktur->update_ket($id_faktur, 'tipe', $marketplace);
-				}
-				else {
-					$this->faktur->update_ket($id_faktur, 'tipe', $marketplace, FALSE);
-				}
-	
-				if ($keterangan !== NULL && $keterangan !== '') {
-					$this->faktur->update_ket($id_faktur, 'keterangan', $keterangan);
-				}
-				else {
-					$this->faktur->update_ket($id_faktur, 'keterangan', $keterangan, FALSE);
-				}
-	
-				if ($image !== NULL && $image !== '') {
-					$this->faktur->update_ket($id_faktur, 'gambar', $image);
-				}
-				else {
-					$this->faktur->update_ket($id_faktur, 'gambar', $image, FALSE);
-				}
+				$this->faktur->upset_biaya('diskon', $id_faktur, $diskon);
+				$this->faktur->upset_biaya('ongkir', $id_faktur, $ongkir);
+				$this->faktur->upset_biaya('unik', $id_faktur, $unik);
 	
 				$this->faktur->calc_pembayaran($id_faktur);
 				redirect('myorder');

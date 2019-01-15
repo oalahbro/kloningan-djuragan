@@ -637,3 +637,22 @@ $pesanan = $q->row();
         }
     }, false);
 </script>
+
+<?php
+// given array. 3 and 6 are missing.
+$gid = $this->db->select('id_faktur')->from('faktur')->get()->result();
+$db_id = array();
+foreach ($gid as $id) {
+    $db_id[] = $id->id_faktur;
+}
+
+
+// construct a new array:1,2....max(given array).
+$arr2 = range(1,max($db_id));                                                    
+
+// use array_diff to get the missing elements 
+$missing = array_diff($arr2, $db_id); // (3,6)
+
+// var_dump($missing);
+echo random_element($missing);
+?>
