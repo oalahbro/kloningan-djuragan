@@ -49,8 +49,8 @@ if( ! function_exists('alert_info')) {
 
 if( ! function_exists('harga')) {
 	function harga($data_harga) {
-		$data_harga = str_replace(' ', '', $data_harga);
-		$format = "Rp " . number_format($data_harga , 0 , '', '.' ) . ",-";
+		$data_harga = str_replace(' ', '', (int) $data_harga);
+		$format = "Rp " . number_format((int) $data_harga , 0 , '', '.' ) . ",-";
 
 		return $format;
 	}
