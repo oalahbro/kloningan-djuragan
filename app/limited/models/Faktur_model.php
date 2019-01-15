@@ -17,11 +17,11 @@ class Faktur_model extends CI_Model
         $this->db->select("
         fak.*,
         jur.nama AS nama_juragan,
-        pen.nama AS nama_cs,
         jur.slug,
-        disk.nominal AS diskon,
-        unk.nominal AS unik,
-        ongk.nominal AS ongkir,
+        (SELECT nama FROM pengguna WHERE id=fak.pengguna_id) AS nama_cs,
+        (SELECT nominal FROM biaya_diskon WHERE faktur_id=fak.id_faktur) AS diskon,
+        (SELECT nominal FROM biaya_unik WHERE faktur_id=fak.id_faktur) AS unik,
+        (SELECT nominal FROM biaya_ongkir WHERE faktur_id=fak.id_faktur) AS ongkir,
         GROUP_CONCAT(DISTINCT CONCAT(kir.kurir,'|',kir.resi,'|',kir.tanggal_kirim,'|',kir.ongkir,'|',kir.id_pengiriman)) AS pengiriman,
         GROUP_CONCAT(DISTINCT CONCAT(bay.rekening,'|',bay.jumlah,'|',bay.tanggal_bayar,'|',IFNULL(bay.tanggal_cek, 'NULL'),'|',bay.id_pembayaran)) AS pembayaran,
         GROUP_CONCAT(DISTINCT CONCAT(pro.kode,'|',pro.ukuran,'|',pro.jumlah,'|',pro.harga,'|',pro.id_pesanproduk)) AS produk,
@@ -29,13 +29,13 @@ class Faktur_model extends CI_Model
 
         $this->db->from($this->tabel . ' fak');
         $this->db->join('pengiriman kir', 'fak.id_faktur=kir.faktur_id', 'left');
-        $this->db->join('biaya_diskon disk', 'fak.id_faktur=disk.faktur_id', 'left');
-        $this->db->join('biaya_unik unk', 'fak.id_faktur=unk.faktur_id', 'left');
-        $this->db->join('biaya_ongkir ongk', 'fak.id_faktur=ongk.faktur_id', 'left');
+        // $this->db->join('biaya_diskon disk', 'fak.id_faktur=disk.faktur_id', 'left');
+        // $this->db->join('biaya_unik unk', 'fak.id_faktur=unk.faktur_id', 'left');
+        // $this->db->join('biaya_ongkir ongk', 'fak.id_faktur=ongk.faktur_id', 'left');
         $this->db->join('pembayaran bay', 'fak.id_faktur=bay.faktur_id', 'left');
         $this->db->join('pesanan_produk pro', 'fak.id_faktur=pro.faktur_id', 'left');
         $this->db->join('juragan jur', 'fak.juragan_id=jur.id', 'left');
-        $this->db->join('pengguna pen', 'pen.id=fak.pengguna_id', 'left');
+        // $this->db->join('pengguna pen', 'pen.id=fak.pengguna_id', 'left');
 
         // pencarian
         if($cari !== NULL ) {
