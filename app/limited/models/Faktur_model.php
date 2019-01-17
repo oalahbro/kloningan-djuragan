@@ -90,7 +90,7 @@ class Faktur_model extends CI_Model
 
                 switch ($cari['pengiriman']) {
                     case "dikirim":
-                        $query_k = "fak.status_kirim IN ('2','3') ";
+                        $query_k = "fak.status_kirim IN ('2') ";
                         break;
                     case "d_sebagian":
                         $query_k = "fak.status_kirim IN ('1') ";
@@ -589,16 +589,20 @@ class Faktur_model extends CI_Model
             $r = $kirim->row();
             //
             if (strtolower($kirim_cod) === 'kirim' && $yes_no === 'ya') {
-                $val = '3';
+                $val = '2';
+                $val_ = '2';
             }
             elseif (strtolower($kirim_cod) === 'cod' && $yes_no === 'ya') {
                 $val = '2';
+                $val_ = '1';
             }
             else {
                 $val = '1';
+                $val_ = NULL;
             }
             $data_update = array(
                 'status_kirim' => $val,
+                'status_kiriman' => $val_,
                 'tanggal_kirim' => $r->tanggal_kirim
             );
             // $this->update_ket($faktur_id, 's_kirim', $val, TRUE);            
@@ -606,6 +610,7 @@ class Faktur_model extends CI_Model
         else {
             $data_update = array(
                 'status_kirim' => '0',
+                'status_kiriman' => NULL,
                 'tanggal_kirim' => '0'
             );
             //$this->update_ket($faktur_id, 's_kirim', 'belum_kirim', TRUE);
@@ -631,6 +636,7 @@ class Faktur_model extends CI_Model
                 'status_paket' => '0',
                 'tanggal_paket' => '0',
                 'status_kirim' => '0',
+                'status_kiriman' => NULL,
                 'tanggal_kirim' => '0'
             );
 

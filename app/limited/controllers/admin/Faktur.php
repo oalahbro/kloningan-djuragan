@@ -234,15 +234,18 @@ class Faktur extends admin_controller
 			if($status_paket !== '2') {
 				if($pengiriman_ === 'ya') {
 					if ($pengiriman_selesai === 'ya') {
-						$val_kirim = ( strtolower($kurir_terakhir) === 'cod'? '2': '3');
+						$val_kirim = '2';
+						$val_kiriman = ( strtolower($kurir_terakhir) === 'cod'? '1': '2');
 					}
 					else {
 						$val_kirim = '1';
+						$val_kiriman = NULL;
 					}
 				}
 				else {
 					$this->faktur->del_carry($id_faktur);
 					$val_kirim = '0';
+					$val_kiriman = NULL;
 					$tgl_kirim = '0';
 				}
 			}
@@ -270,14 +273,17 @@ class Faktur extends admin_controller
 					break;
 			}
 
-			$data_update = array(
-				'status_paket' => $status_paket,
-				'status_kirim' => $val_kirim,
-				'tanggal_paket' => $tgl_paket,
-				'tanggal_kirim' => $tgl_kirim,
-			);
+			if($status_paket !== '2') {
+				$data_update = array(
+					'status_paket' => $status_paket,
+					'status_kirim' => $val_kirim,
+					'status_kiriman' => $val_kiriman,
+					'tanggal_paket' => $tgl_paket,
+					'tanggal_kirim' => $tgl_kirim,
+				);
 
-			$this->faktur->edit_invoice($id_faktur, $data_update);
+				$this->faktur->edit_invoice($id_faktur, $data_update);
+			}
 
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
@@ -429,15 +435,18 @@ class Faktur extends admin_controller
 			if($status_paket !== '2') {
 				if($pengiriman_ === 'ya') {
 					if ($pengiriman_selesai === 'ya') {
-						$val_kirim = ( strtolower($kurir_terakhir) === 'cod'? '2': '3');
+						$val_kirim = '2';
+						$val_kiriman = ( strtolower($kurir_terakhir) === 'cod'? '1': '2');
 					}
 					else {
 						$val_kirim = '1';
+						$val_kiriman = NULL;
 					}
 				}
 				else {
 					$this->faktur->del_carry($id_faktur);
 					$val_kirim = '0';
+					$val_kiriman = NULL;
 					$tgl_kirim = 0;
 				}
 			}
@@ -465,14 +474,17 @@ class Faktur extends admin_controller
 					break;
 			}
 
-			$data_update = array(
-				'status_paket' => $status_paket,
-				'status_kirim' => $val_kirim,
-				'tanggal_paket' => $tgl_paket,
-				'tanggal_kirim' => $tgl_kirim,
-			);
+			if($status_paket !== '2') {
+				$data_update = array(
+					'status_paket' => $status_paket,
+					'status_kirim' => $val_kirim,
+					'status_kiriman' => $val_kiriman,
+					'tanggal_paket' => $tgl_paket,
+					'tanggal_kirim' => $tgl_kirim,
+				);
 
-			$this->faktur->edit_invoice($id_faktur, $data_update);
+				$this->faktur->edit_invoice($id_faktur, $data_update);
+			}
 
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
@@ -698,15 +710,18 @@ class Faktur extends admin_controller
 			if($status_paket !== '2') {
 				if($pengiriman_ === 'ya') {
 					if ($pengiriman_selesai === 'ya') {
-						$val_kirim = ( strtolower($kurir_terakhir) === 'cod'? '2': '3');
+						$val_kirim = '2';
+						$val_kiriman = ( strtolower($kurir_terakhir) === 'cod'? '1': '2');
 					}
 					else {
 						$val_kirim = '1';
+						$val_kiriman = NULL;
 					}
 				}
 				else {
 					$this->faktur->del_carry($id_faktur);
 					$val_kirim = '0';
+					$val_kiriman = NULL;
 					$tgl_kirim = 0;
 				}
 			}
@@ -746,6 +761,7 @@ class Faktur extends admin_controller
 				'tipe' => (isset($marketplace)? strtolower( $marketplace ): NULL),
 				'status_paket' => $status_paket,
 				'status_kirim' => $val_kirim,
+				'status_kiriman' => $val_kiriman,
 				'tanggal_paket' => $tgl_paket,
 				'tanggal_kirim' => $tgl_kirim,
 				'alamat' => $alamat,

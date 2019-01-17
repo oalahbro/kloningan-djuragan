@@ -273,35 +273,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                             <?php
                                             // status kirim
-                                            switch ($pesanan->status_kirim) {
-                                                
-                                                case "3":
+                                            switch (true) {
+                                                case ($pesanan->status_kirim === '2' && $pesanan->status_kiriman === '2'):
                                                     // pesanan dikirim
                                                     $c_krm = 'text-success';
                                                     $i_krm = 'fa-check-double';
                                                     $mi_krm = 'fa-plane-departure';
                                                     $t_krm = 'Pesanan telah dikirim';
                                                     break;
-                                                case "1":
-                                                    // pesanan dikirim / diambil sebagian
-                                                    $c_krm = 'text-warning';
-                                                    $i_krm = 'fa-ellipsis-h';
-                                                    $mi_krm = 'fa-cubes';
-                                                    $t_krm = 'Pesanan telah dikirim sebagian';
-                                                    break;
-                                                case "2":
+                                            
+                                                case ($pesanan->status_kirim === '2' && $pesanan->status_kiriman === '1'):
                                                     // pesanan diambil
                                                     $c_krm = 'text-success';
                                                     $i_krm = 'fa-check-double';
                                                     $mi_krm = 'fa-people-carry';
                                                     $t_krm = 'Pesanan diambil';
                                                     break;
+                                            
+                                                case ($pesanan->status_kirim === '1'):
+                                                     // pesanan dikirim / diambil sebagian
+                                                     $c_krm = 'text-warning';
+                                                     $i_krm = 'fa-ellipsis-h';
+                                                     $mi_krm = 'fa-cubes';
+                                                     $t_krm = 'Pesanan telah dikirim sebagian';
+                                                    break;
+                                            
                                                 default:
                                                     // belum kirim / ambil
                                                     $c_krm = 'text-danger';
                                                     $i_krm = 'fa-times';
                                                     $mi_krm = 'fa-cubes';
                                                     $t_krm = 'Pesanan Belum dikirim';
+                                                    break;
                                             }
                                             ?>
                                             <div class="fa-2x d-inline-block <?php echo $a_krm; ?>" data-faktur="<?php echo $pesanan->seri_faktur; ?>" data-id="<?php echo $pesanan->id_faktur?>" data-toggle="tooltip" data-placement="top" title="<?php echo $t_krm; ?>">
