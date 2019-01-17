@@ -21,19 +21,16 @@ class Faktur_model extends CI_Model
         (SELECT nama FROM pengguna WHERE id=fak.pengguna_id) AS nama_cs,
         (SELECT nominal FROM biaya_diskon WHERE faktur_id=fak.id_faktur) AS diskon,
         (SELECT nominal FROM biaya_unik WHERE faktur_id=fak.id_faktur) AS unik,
-        (SELECT nominal FROM biaya_ongkir WHERE faktur_id=fak.id_faktur) AS ongkir,
-        GROUP_CONCAT(DISTINCT CONCAT(kir.kurir,'|',kir.resi,'|',kir.tanggal_kirim,'|',kir.ongkir,'|',kir.id_pengiriman)) AS pengiriman,
-        GROUP_CONCAT(DISTINCT CONCAT(bay.rekening,'|',bay.jumlah,'|',bay.tanggal_bayar,'|',IFNULL(bay.tanggal_cek, 'NULL'),'|',bay.id_pembayaran)) AS pembayaran,
-        GROUP_CONCAT(DISTINCT CONCAT(pro.kode,'|',pro.ukuran,'|',pro.jumlah,'|',pro.harga,'|',pro.id_pesanproduk)) AS produk,
+        (SELECT nominal FROM biaya_ongkir WHERE faktur_id=fak.id_faktur) AS ongkir
         ");
 
         $this->db->from($this->tabel . ' fak');
-        $this->db->join('pengiriman kir', 'fak.id_faktur=kir.faktur_id', 'left');
+        // $this->db->join('pengiriman kir', 'fak.id_faktur=kir.faktur_id', 'left');
         // $this->db->join('biaya_diskon disk', 'fak.id_faktur=disk.faktur_id', 'left');
         // $this->db->join('biaya_unik unk', 'fak.id_faktur=unk.faktur_id', 'left');
         // $this->db->join('biaya_ongkir ongk', 'fak.id_faktur=ongk.faktur_id', 'left');
-        $this->db->join('pembayaran bay', 'fak.id_faktur=bay.faktur_id', 'left');
-        $this->db->join('pesanan_produk pro', 'fak.id_faktur=pro.faktur_id', 'left');
+        // $this->db->join('pembayaran bay', 'fak.id_faktur=bay.faktur_id', 'left');
+        // $this->db->join('pesanan_produk pro', 'fak.id_faktur=pro.faktur_id', 'left');
         $this->db->join('juragan jur', 'fak.juragan_id=jur.id', 'left');
         // $this->db->join('pengguna pen', 'pen.id=fak.pengguna_id', 'left');
 
@@ -507,45 +504,6 @@ class Faktur_model extends CI_Model
         // update
         $this->edit_invoice($faktur_id, $data_tr);
     }
-
-    /**
-	 * keterangan
-	 *
-	 */
-    public function get_ket($faktur_id, $ket) {
-        $this->db->select("MAX(CASE WHEN (ket.key = '".$ket."') THEN ket.val ELSE NULL END) AS " .$ket);
-        $this->db->from('keterangan ket');
-        $this->db->where(array('faktur_id' => $faktur_id));
-        $q = $this->db->get();
-
-        $r = $q->row();
-
-        return $r->$ket;
-    }
-
-    public function sub_ket($data) {
-        return $this->db->insert_batch('keterangan', $data);
-    }
-
-    public function update_ket($faktur_id, $key, $val, $upset = TRUE) {
-        $this->db->where(array('faktur_id' => $faktur_id, 'key' => $key));
-        $q = $this->db->get('keterangan');
-
-        if($upset) {
-            if($q->num_rows() > 0) {
-                // update
-                $this->db->where(array('faktur_id' => $faktur_id, 'key' => $key))->update('keterangan', array('val' => $val));
-            }
-            else {
-                $this->db->insert('keterangan', array('faktur_id' => $faktur_id, 'key' => $key, 'val' => $val));
-            }
-        }
-        else {
-            $this->db->delete('keterangan', array('faktur_id' => $faktur_id, 'key' => $key));
-        }
-        return TRUE;
-    }
-
 
     /**
 	 * pengiriman

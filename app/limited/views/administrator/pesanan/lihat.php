@@ -102,26 +102,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php if ($query->num_rows() > 0) { ?>
                                 <?php foreach ($query->result() as $pesanan) { 
                                     // pembayaran
+                                    $bayar_db = $this->faktur->get_pays($pesanan->id_faktur);
+
                                     $wajib_bayar = 0;
                                     $dibayar = 0;
 
-                                    $array = array();
-                                    $bayar = array();
-                                    if ($pesanan->pembayaran !== NULL) {
-                                        $pembayaran = explode(',', $pesanan->pembayaran);
-                                        foreach($pembayaran as $key => $str) {
-                                            $array[$key] = explode('|', $str);
-                                            $data_ = array();
-                                            for ($i=0; $i < count($array); $i++) { 
-                                                $data_['bank'] = $array[$i][0];
-                                                $data_['jumlah'] = $array[$i][1];
-                                                $data_['tanggal_bayar'] = $array[$i][2];
-                                                $data_['tanggal_cek'] = ($array[$i][3] === 'NULL'? NULL: $array[$i][3]);
-                                            }
-                                            $bayar[] = (object) $data_;
-                                        }
-
-                                        foreach ($bayar as $ter) {
+                                    if ($bayar_db->num_rows() > 0) {
+                                        foreach ($bayar_db->result() as $ter) {
                                             if($ter->tanggal_cek !== NULL) {
                                                 // yang sudah dicek
                                                 $dibayar += $ter->jumlah;
@@ -130,26 +117,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     }
 
                                     // pesanan produk
+                                    $produk_db = $this->faktur->get_orders($pesanan->id_faktur);
                                     $jumlah_produk = 0;
                                     $harga_total = 0;
                                     $hproduk = '';
 
                                     $arr_produk = array();
                                     $dipesan = array();
-                                    $pesan = explode(',', $pesanan->produk);
-                                    foreach($pesan as $key => $str) {
-                                        $arr_produk[$key] = explode('|', $str);
-                                        $data_ = array();
-                                        for ($i=0; $i < count($arr_produk); $i++) { 
-                                            $data_['kode'] = $arr_produk[$i][0];
-                                            $data_['ukuran'] = $arr_produk[$i][1];
-                                            $data_['jumlah'] = $arr_produk[$i][2];
-                                            $data_['harga'] = $arr_produk[$i][3];
-                                        }
-                                        $dipesan[] = (object) $data_;
-                                    }
 
-                                    foreach ($dipesan as $produk) {
+                                    foreach ($produk_db->result() as $produk) {
                                         $jumlah_produk += $produk->jumlah;
                                         $harga_total += ($produk->harga * $produk->jumlah); // kalkulasi harga
                                         $hproduk .= '<div>' . strtoupper($produk->kode . ' (' . $produk->ukuran . ') = ') . $produk->jumlah . 'pcs</div>';
@@ -394,23 +370,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td>
                                         <?php 
                                         // pengiriman
-                                        $arr_kirim = array();
-                                        $kirim = array();
-                                        if($pesanan->pengiriman !== NULL) {
-                                            $pengiriman = explode(',', $pesanan->pengiriman);
-                                            foreach($pengiriman as $key => $str) {
-                                                $arr_kirim[$key] = explode('|', $str);
-                                                $data_ = array();
-                                                for ($i=0; $i < count($arr_kirim); $i++) { 
-                                                    $data_['kurir'] = $arr_kirim[$i][0];
-                                                    $data_['resi'] = $arr_kirim[$i][1];
-                                                    $data_['tanggal_kirim'] = $arr_kirim[$i][2];
-                                                    $data_['ongkir'] = $arr_kirim[$i][3];
-                                                }
-                                                $kirim[] = (object) $data_;
-                                            }
-                                        }
-                                
+                                        $kirim_db = $this->faktur->get_carry($pesanan->id_faktur);
                                         //
                                         ?>
                                         <?php
@@ -420,7 +380,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             </button>
                                         <?php 
                                         } 
-                                        if($pesanan->pengiriman !== NULL) {
+                                        if($kirim_db->num_rows() > 0) {
                                         ?>
                                         <button class="btn btn-outline-dark btn-sm dropdown-toggle mb-1" type="button" data-toggle="collapse" data-target="#collapseResi<?php echo $pesanan->id_faktur; ?>" aria-expanded="false" aria-controls="collapseResi<?php echo $pesanan->id_faktur; ?>">
                                             <i class="fas fa-receipt"></i> Resi Kirim
@@ -430,7 +390,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <?php 
                                                 echo '<h6>Pengiriman : </h6>';
                                                 echo '<ul class="ml-0 pl-3">';
-                                                foreach ($kirim as $kirim) {
+                                                foreach ($kirim_db->result() as $kirim) {
                                                     echo '<li><span class="font-weight-bold">' . strtoupper($kirim->kurir) . '</span>';
                                                     echo '<br/>' . $kirim->resi;
                                                     echo '<br/><small class="text-muted">tanggal: ' . mdate('%d-%m-%Y', $kirim->tanggal_kirim) . '</small>';
@@ -444,7 +404,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                         <?php }
                                         if($pesanan->keterangan !== NULL  || $pesanan->gambar !== NULL) { ?>
-                                        <div class="collapse<?php echo ($pesanan->pengiriman !== NULL? '': ' show'); ?>" id="collapseKeterangan<?php echo $pesanan->id_faktur; ?>">
+                                        <div class="collapse<?php echo ($kirim_db->num_rows() > 0? '': ' show'); ?>" id="collapseKeterangan<?php echo $pesanan->id_faktur; ?>">
                                             <?php 
                                             if($pesanan->keterangan !== NULL) {
                                                 echo '<p>' . nl2br($pesanan->keterangan) . '</p>';
