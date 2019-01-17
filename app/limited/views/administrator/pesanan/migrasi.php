@@ -447,15 +447,9 @@ $biaya = json_decode( $pesanan->biaya );
                         'value'         => 'ya'
                     );
                     
-                    if($pesanan->status_kirim === 'belum_kirim' && $pesanan->status_paket !== 'diproses') {
+                    if($pesanan->status_kirim === 'pending' ) {
                         $arr_kir = array(
                             'checked' => FALSE,
-                            'disabled' => ''
-                        );
-                    }
-                    else if($pesanan->status_kirim === 'belum_kirim' && $pesanan->status_paket === 'diproses') {
-                        $arr_kir = array(
-                            'checked' => FALSE
                         );
                     }
                     else {

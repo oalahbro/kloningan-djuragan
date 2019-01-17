@@ -115,7 +115,16 @@ class Faktur extends user_controller
 
 			// `faktur`
 			$data = array();
-			$data['faktur'] = array(
+			$data_id = array();
+			$oldis = $this->faktur->_primary('faktur', 'id_faktur');
+			if((int) $oldis !== 0) {
+				$data_id = array(
+					'id_faktur' => $oldis
+				);
+				$id_faktur = $oldis;
+			}
+
+			$data_otr = array(
 				'seri_faktur' => $faktur,
 				'tanggal_dibuat' => now(),
 				'juragan_id' => $id_juragan,
@@ -123,20 +132,34 @@ class Faktur extends user_controller
 				'nama' => $nama,
 				'hp1' => $hp1,
 				'hp2' => (empty($hp2)? NULL: $hp2),
-				'tipe' => (isset($marketplace)? $marketplace: NULL),
+				'tipe' => (isset($marketplace)? strtolower( $marketplace ): NULL),
 				'alamat' => $alamat,
 				'gambar' => (empty($image)? NULL : $image),
 				'keterangan' => (empty($keterangan)? NULL : $keterangan),
 			);
 
+			$data['faktur'] = array_merge($data_id, $data_otr);
+			
+
 			// simpan to `faktur`
 			$this->faktur->add_invoice($data['faktur']);
-			$id_faktur = $this->db->insert_id(); // get `id_faktur`
+			if((int) $oldis === 0) {
+				$id_faktur = $this->db->insert_id(); // get `id_faktur`
+			}
 
 			// `pesanan_produk`
 			$i = 0;
-			$produk_data = array();			
+			$produk_data = array();
+
 			foreach ($produk as $key) {
+
+				$pesprd_id = $this->faktur->_primary('pesanan_produk', 'id_pesanproduk');
+				if ((int) $pesprd_id !== 0) {
+					$produk_data[$i] = array(
+						'id_pesanproduk' => $pesprd_id
+					);
+				}
+				
 				$produk_data[$i]['faktur_id'] = $id_faktur;
 				$produk_data[$i]['kode'] = $key['kode'];
 				$produk_data[$i]['ukuran'] = $key['ukuran'];
@@ -145,6 +168,7 @@ class Faktur extends user_controller
 
 				$i++;
 			}
+
 			$data['produk'] = $produk_data;
 			// simpan to `pesanan_produk`
 			$this->faktur->add_orders($data['produk']);			
@@ -157,6 +181,13 @@ class Faktur extends user_controller
 				if (!empty($pembayaran_submit)) {
 					$p = 0;
 					foreach ($pembayaran as $bayar) {
+						$byr_id = $this->faktur->_primary('pembayaran', 'id_pembayaran');
+						if ((int) $byr_id !== 0) {
+							$pembayaran_data[$i] = array(
+								'id_pembayaran' => $byr_id
+							);
+						}
+
 						$pembayaran_data[$p]['faktur_id'] = $id_faktur;
 						$pembayaran_data[$p]['tanggal_bayar'] = strtotime($bayar['tanggal']);
 						$pembayaran_data[$p]['jumlah'] = $bayar['jumlah'];
@@ -177,7 +208,8 @@ class Faktur extends user_controller
 
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
-			redirect('myorder');
+			$juragan_slug = $this->juragan->_slug($id_juragan);
+			redirect('myorder/' . $juragan_slug . '?cari[q]=' . $faktur);
 		}
 	}
 
@@ -254,7 +286,7 @@ class Faktur extends user_controller
 					'hp1' => $hp1,
 					'hp2' => (empty($hp2)? NULL: $hp2),
 					'alamat' => $alamat,					
-					'tipe' => (isset($marketplace)? $marketplace: NULL),
+					'tipe' => (isset($marketplace)? strtolower( $marketplace ): NULL),
 					'gambar' => (empty($image)? NULL : $image),
 					'keterangan' => (empty($keterangan)? NULL : $keterangan),
 				);
