@@ -652,17 +652,20 @@ class Faktur_model extends CI_Model
     }
 
     public function _primary($table, $primary) {
-        $gid = $this->db->select($primary)->from($table)->get()->result();
+        $gid = $this->db->select($primary)->from($table)->get();
         
-        $db_id = array();
-        foreach ($gid as $id) {
-            $db_id[] = $id->$primary;
-        }
-        
-        $arr2 = range(1,max($db_id));                                                    
+        $missing = array();
+        if($gid->num_rows() > 0) {
+            $db_id = array();
+            foreach ($gid->result() as $id) {
+                $db_id[] = $id->$primary;
+            }
+            
+            $arr2 = range(1, max($db_id));                                                    
 
-        // use array_diff to get the missing elements 
-        $missing = array_diff($arr2, $db_id);
+            // use array_diff to get the missing elements 
+            $missing = array_diff($arr2, $db_id);
+        }
 
         if(empty($missing)) {
             return 0;
