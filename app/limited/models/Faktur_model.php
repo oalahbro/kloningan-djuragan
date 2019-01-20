@@ -15,13 +15,7 @@ class Faktur_model extends CI_Model
 	 */
     public function get_all($juragan_id = FALSE, $by = FALSE, $limit = FALSE, $offset = FALSE, $cari = NULL) {
         $this->db->select("
-        fak.*,
-        jur.nama AS nama_juragan,
-        jur.slug,
-        (SELECT nama FROM pengguna WHERE id=fak.pengguna_id) AS nama_cs,
-        (SELECT nominal FROM biaya_diskon WHERE faktur_id=fak.id_faktur) AS diskon,
-        (SELECT nominal FROM biaya_unik WHERE faktur_id=fak.id_faktur) AS unik,
-        (SELECT nominal FROM biaya_ongkir WHERE faktur_id=fak.id_faktur) AS ongkir
+        fak.*
         ");
 
         $this->db->from($this->tabel . ' fak');
@@ -31,7 +25,7 @@ class Faktur_model extends CI_Model
         // $this->db->join('biaya_ongkir ongk', 'fak.id_faktur=ongk.faktur_id', 'left');
         // $this->db->join('pembayaran bay', 'fak.id_faktur=bay.faktur_id', 'left');
         // $this->db->join('pesanan_produk pro', 'fak.id_faktur=pro.faktur_id', 'left');
-        $this->db->join('juragan jur', 'fak.juragan_id=jur.id', 'left');
+        // $this->db->join('juragan jur', 'fak.juragan_id=jur.id', 'left');
         // $this->db->join('pengguna pen', 'pen.id=fak.pengguna_id', 'left');
 
         // pencarian
@@ -211,7 +205,7 @@ class Faktur_model extends CI_Model
 
         $this->db->order_by('status_paket ASC, status_kirim ASC, status_transfer ASC, tanggal_kirim DESC, tanggal_dibuat DESC');
 
-        $this->db->group_by('fak.id_faktur');
+        // $this->db->group_by('fak.id_faktur');
         $q = $this->db->get();
         return $q;
     }

@@ -18,6 +18,10 @@ class Upgrade extends CI_Controller {
 		<head>
 			<title>Upgrade</title>
 			<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+			<style>
+			.com code {font-size:87.5%;color:#e83e8c;word-break:break-word}
+			.com:after { content: ", "}
+			</style>
 		</head>
 		<body>
 			<div id="message">
@@ -54,7 +58,8 @@ class Upgrade extends CI_Controller {
 								if (data.yet !== 0) {
 									// 
 									updateStatus();
-									$( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+									// $( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+									$('<span class="com"><code>'+data.id+'</code></span>, ').appendTo( "#message" );
 								}
 								else {
 									//
@@ -72,7 +77,7 @@ class Upgrade extends CI_Controller {
 	}
 
 	public function progress_satu() {
-		$migrasi = $this->db->where('status_kirim', 'terkirim')->like('detail', '"h"')->order_by('count desc')->get('pesanan')->row();
+		$migrasi = $this->db->where('status_kirim', 'terkirim')->order_by('count desc')->get('pesanan')->row();
 
 		$buyer = json_decode( $migrasi->pemesan );
 		$detail = json_decode( $migrasi->detail );
@@ -148,7 +153,7 @@ class Upgrade extends CI_Controller {
 			$produk_data[$i]['kode'] = $key->c;
 			$produk_data[$i]['ukuran'] = $key->s;
 			$produk_data[$i]['jumlah'] = $key->q;
-			$produk_data[$i]['harga'] = $key->h;
+			$produk_data[$i]['harga'] = (isset($produk->h)?$produk->h: $biaya->m->h/$migrasi->count);
 
 			$i++;
 		}
@@ -226,17 +231,14 @@ class Upgrade extends CI_Controller {
 
 		$this->faktur->calc_pembayaran($id_faktur);
 		$this->pesanan->delete($migrasi->slug);
-				
-
 
 		// diambil
-		$q =  $this->db->where('status_kirim', 'terkirim')->like('detail', '"h"')->get('pesanan');
-
+		$q =  $this->db->where('status_kirim', 'terkirim')->get('pesanan');
 	
 		$response = array(
-			'updated' => 0,
+			'id' => $migrasi->id_pesanan,
 			'yet' => $q->num_rows(),
-			'data' => $data
+			//'data' => $data
 		);
 	
 

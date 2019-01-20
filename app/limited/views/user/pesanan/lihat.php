@@ -132,11 +132,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         $hproduk .= '<div>' . strtoupper($produk->kode . ' (' . $produk->ukuran . ') = ') . $produk->jumlah . 'pcs</div>';
                                     }
 
+                                    $diskonku = $this->faktur->get_diskon($pesanan->id_faktur);
+                                    $ongkirku = $this->faktur->get_ongkir($pesanan->id_faktur);
+                                    $unikku = $this->faktur->get_unik($pesanan->id_faktur);
+
                                     // cal
                                     $wajib_bayar += $harga_total;
-                                    $wajib_bayar += $pesanan->ongkir;
-                                    $wajib_bayar += $pesanan->unik;
-                                    $wajib_bayar -= $pesanan->diskon;
+                                    $wajib_bayar += $ongkirku;
+                                    $wajib_bayar += $unikku;
+                                    $wajib_bayar -= $diskonku;
 
                                     $kekurangan = $wajib_bayar - $dibayar;
                                 ?>
@@ -149,8 +153,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </td>
                                     <td>
                                         <?php 
-                                        echo anchor('myorder/' .$pesanan->slug, $pesanan->nama_juragan); 
-                                        echo '<hr/><span class="text-muted small">CS: '.$pesanan->nama_cs.'</span>';
+                                        $slug  = $this->juragan->_slug($pesanan->juragan_id);
+                                        $nama  = $this->juragan->_nama($pesanan->juragan_id);
+                                        $nama_cs = $this->pengguna->_nama_pengguna($pesanan->pengguna_id);
+                                        echo anchor('myorder/' .$slug, $nama);
+                                        echo '<hr/><span class="text-muted small">CS: '.$nama_cs.'</span>';
                                         ?>
                                     </td>
                                     <td>
@@ -368,14 +375,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         //
                                         echo $status_bayar;
                                         echo '<span class="d-block text-right">harga produk : <span class="badge badge-info">'. harga($harga_total)  .'</span></span>';
-                                        if($pesanan->ongkir > 0) {
-                                            echo '<span class="d-block text-right">tarif ongkir : <span class="badge badge-dark">'. harga($pesanan->ongkir)  .'</span></span>';
+                                        if($ongkirku > 0) {
+                                            echo '<span class="d-block text-right">tarif ongkir : <span class="badge badge-dark">'. harga($ongkirku)  .'</span></span>';
                                         }
-                                        if($pesanan->unik > 0) {
-                                            echo '<span class="d-block text-right">digit unik : <span class="badge badge-secondary">'. harga($pesanan->unik)  .'</span></span>';
+                                        if($unikku > 0) {
+                                            echo '<span class="d-block text-right">digit unik : <span class="badge badge-secondary">'. harga($unikku)  .'</span></span>';
                                         }
-                                        if($pesanan->diskon > 0) {
-                                            echo '<span class="d-block text-right">diskon : <span class="badge badge-warning">-'. harga($pesanan->diskon)  .'</span></span>';
+                                        if($diskonku > 0) {
+                                            echo '<span class="d-block text-right">diskon : <span class="badge badge-warning">-'. harga($diskonku)  .'</span></span>';
                                         }
 
                                         echo '<span class="d-block text-right">wajib bayar : <span class="badge badge-success">'. harga($wajib_bayar)  .'</span></span>';
