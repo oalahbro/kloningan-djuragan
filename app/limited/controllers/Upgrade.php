@@ -77,168 +77,63 @@ class Upgrade extends CI_Controller {
 	}
 
 	public function progress_satu() {
-		$migrasi = $this->db->where('status_kirim', 'terkirim')->order_by('count desc')->get('pesanan')->row();
+		$migrasi = $this->db->where(array('status_transfer' => '2', 'status_kirim' => '2') )->get('faktur')->row();
 
-		$buyer = json_decode( $migrasi->pemesan );
-		$detail = json_decode( $migrasi->detail );
-		$biaya = json_decode( $migrasi->biaya );
 
-		switch (strtolower($biaya->b)) {
-			case 'zalora':
-			case 'lazada':
-			case 'bukalapak':
-			case 'blibli':
-			case 'shopee':
-			case 'zalora':
-			case 'berrybenka':
-			case 'mataharimall':
-			case 'qoo10':
-			case 'jd.id':
-			case 'zilingo':
-				$mrkt = strtolower( $biaya->b );
-				break;
-			
-			default:
-				$mrkt = NULL;
-				break;
-		}
+		// hitung ulang 
+		// ambil total yang wajib dibayar
+		$bayar_db = $this->faktur->get_pays($migrasi->id_faktur);
 
-		// `faktur`
-		$data = array();
-		$data_id = array();
-		$oldis = $this->faktur->_primary('faktur', 'id_faktur');
-		if((int) $oldis !== 0) {
-			$data_id = array(
-				'id_faktur' => $oldis
-			);
-			$id_faktur = $oldis;
-		}
+		$wajib_bayar = 0;
+		$dibayar = 0;
 
-		$data_otr = array(
-			// 'id_faktur' => 
-			'seri_faktur' => $migrasi->id_pesanan,
-			'tanggal_dibuat' => strtotime(mdate('%Y-%m-%d %H:%i:%s', $migrasi->tanggal_submit)),
-			'juragan_id' => $migrasi->juragan,
-			'pengguna_id' => (empty($migrasi->oleh) ? '37': $migrasi->oleh),
-			'nama' => $buyer->n,
-			'hp1' => $buyer->p[0],
-			'hp2' => (isset($buyer->p[1])? $buyer->p[1]: NULL),
-			'tipe' => $mrkt,
-			'alamat' => $buyer->a,
-			'gambar' => (isset($detail->i) ? json_encode($detail->i) : NULL),
-			'keterangan' => (isset($detail->n)? $detail->n: NULL),
-		);
-
-		$data['faktur'] = array_merge($data_id, $data_otr);
-
-		// simpan to `faktur`
-		$this->faktur->add_invoice($data['faktur']);
-		if((int) $oldis === 0) {
-			//$id_faktur = '00000';
-			$id_faktur = $this->db->insert_id(); // get `id_faktur`
-		}
-
-		// `pesanan_produk`
-		$i = 0;
-		$produk_data = array();			
-		foreach ($detail->p as $key) {
-			$pesprd_id = $this->faktur->_primary('pesanan_produk', 'id_pesanproduk');
-			if ((int) $pesprd_id !== 0) {
-				$produk_data[$i] = array(
-					'id_pesanproduk' => $pesprd_id
-				);
+		if ($bayar_db->num_rows() > 0) {
+			foreach ($bayar_db->result() as $ter) {
+				if($ter->tanggal_cek !== NULL) {
+					// yang sudah dicek
+					$dibayar += $ter->jumlah;
+					$id_pembayaran = $ter->id_pembayaran;
+				}
 			}
-
-			$produk_data[$i]['faktur_id'] = $id_faktur;
-			$produk_data[$i]['kode'] = $key->c;
-			$produk_data[$i]['ukuran'] = $key->s;
-			$produk_data[$i]['jumlah'] = $key->q;
-			$produk_data[$i]['harga'] = (isset($produk->h)?$produk->h: $biaya->m->h/$migrasi->count);
-
-			$i++;
-		}
-		$data['produk'] = $produk_data;
-		// simpan to `pesanan_produk`
-		$this->faktur->add_orders($data['produk']);
-
-		// `pembayaran`
-		$pembayaran_data = array();
-
-		//$p = 0;
-		//foreach ($biaya->m as $bayar) {
-		$byr_id = $this->faktur->_primary('pembayaran', 'id_pembayaran');
-		if ((int) $byr_id !== 0) {
-			$pembayaran_data[1] = array(
-				'id_pembayaran' => $byr_id
-			);
 		}
 		
-		$pembayaran_data[1]['faktur_id'] = $id_faktur;
-		$pembayaran_data[1]['tanggal_bayar'] = strtotime(mdate('%Y-%m-%d %H:%i:%s', $migrasi->tanggal_submit));
-		$pembayaran_data[1]['jumlah'] = ($biaya->m->t === NULL? '0': $biaya->m->t);
-		$pembayaran_data[1]['rekening'] = $biaya->b;
-		$pembayaran_data[1]['tanggal_cek'] = strtotime(mdate('%Y-%m-%d %H:%i:%s', $migrasi->tanggal_cek_transfer));
+		$produk_db = $this->faktur->get_orders($migrasi->id_faktur);
+		$jumlah_produk = 0;
+		$harga_total = 0;
+		$hproduk = '';
 
-			//$p++;
-		//}
-		$data['pembayaran'] = $pembayaran_data;
-		// simpan to `pesanan_produk`
-		$this->faktur->sub_pay($data['pembayaran']);
+		$arr_produk = array();
+		$dipesan = array();
 
-		// `pengiriman`
-		$kurir_terakhir = 'cod';
-		$tgl_kirim = 0;
-
-		$krm_id = $this->faktur->_primary('pengiriman', 'id_pengiriman');
-		if ((int) $krm_id !== 0) {
-			$pengiriman_data[2] = array(
-				'id_pengiriman' => $krm_id
-			);
+		foreach ($produk_db->result() as $produk) {
+			$jumlah_produk += $produk->jumlah;
+			$harga_total += ($produk->harga * $produk->jumlah); // kalkulasi harga
+			$hproduk .= '<div>' . strtoupper($produk->kode . ' (' . $produk->ukuran . ') = ') . $produk->jumlah . 'pcs</div>';
 		}
 
-		$pengiriman_data[2]['faktur_id'] = $id_faktur;
-		$pengiriman_data[2]['tanggal_kirim'] = strtotime(mdate('%Y-%m-%d %H:%i:%s', $migrasi->tanggal_cek_kirim));
-		$pengiriman_data[2]['kurir'] = (isset($detail->s->k)? $detail->s->k: 'Unknown');
-		$pengiriman_data[2]['resi'] = (isset($detail->s->n)?$detail->s->n: 'Unknown');
-		$pengiriman_data[2]['ongkir'] = (isset($biaya->m->of)? $biaya->m->of: '0' );
+		$diskonku = $this->faktur->get_biaya($migrasi->id_faktur, 'diskon');
+		$ongkirku = $this->faktur->get_biaya($migrasi->id_faktur, 'ongkir');
+		$unikku = $this->faktur->get_biaya($migrasi->id_faktur, 'unik');
 
-		$kurir_terakhir = (isset($detail->s->k)? $detail->s->k: 'Unknown');
+		// cal
+		$wajib_bayar += $harga_total;
+		$wajib_bayar += $ongkirku;
+		$wajib_bayar += $unikku;
+		$wajib_bayar -= $diskonku;
 
-		$data['pengiriman'] = $pengiriman_data;
-		// simpan to `pesanan_produk`
-		$this->faktur->sub_carries($data['pengiriman']);
+		$kekurangan = $wajib_bayar - $dibayar;
 
-		// 
-		$data['diskon'] = (isset($biaya->m->d) ? $biaya->m->d: 0 );
-		$data['ongkir'] = (isset($biaya->m->o) ? $biaya->m->o: 0 );
-		$data['unik'] = (isset($biaya->m->u) ? $biaya->m->u: 0 );
+		if($wajib_bayar > $dibayar) {
+			$this->faktur->update_pay($id_pembayaran, array('jumlah' => $wajib_bayar));
+			$this->faktur->calc_pembayaran($migrasi->id_faktur);
+		}
 
-		$this->faktur->upset_biaya('diskon', $id_faktur, $data['diskon']);
-		$this->faktur->upset_biaya('ongkir', $id_faktur, $data['ongkir']);
-		$this->faktur->upset_biaya('unik', $id_faktur, $data['unik']);
 
-		$data_update = array(
-			'status_paket' => '1',
-			'status_kirim' => '2',
-			'status_kiriman' => ( strtolower($kurir_terakhir) === 'cod'? '1': '2'),
-			'tanggal_paket' => strtotime(mdate('%Y-%m-%d %H:%i:%s', $migrasi->tanggal_cek_transfer)),
-			'tanggal_kirim' => strtotime(mdate('%Y-%m-%d %H:%i:%s', $migrasi->tanggal_cek_kirim)),
-		);
-
-		$data['status'] = $data_update;
-
-		$this->faktur->edit_invoice($id_faktur, $data_update);
-
-		$this->faktur->calc_pembayaran($id_faktur);
-		$this->pesanan->delete($migrasi->slug);
-
-		// diambil
-		$q =  $this->db->where('status_kirim', 'terkirim')->get('pesanan');
 	
 		$response = array(
-			'id' => $migrasi->id_pesanan,
-			'yet' => $q->num_rows(),
-			//'data' => $data
+			'id' => $migrasi->id_faktur,
+			//'data' => $data,
+			'yet' => $migrasi = $this->db->where(array('status_transfer' => '2', 'status_kirim' => '2') )->get('faktur')->num_rows()
 		);
 	
 
@@ -249,4 +144,5 @@ class Upgrade extends CI_Controller {
 	        ->_display();
 	    exit;
 	}
+
 }

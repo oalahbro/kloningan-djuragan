@@ -99,6 +99,8 @@ $route['myget/pengiriman'] = 'cs/faktur/ambil_pengiriman';
 $route['myget/pembayaran'] = 'cs/faktur/ambil_pembayaran';
 $route['mypost/pembayaran'] = 'cs/faktur/simpan_pembayaran';
 
+$route['mychart'] = 'cs/chart';
+
 $route['kardusin/(:any)/(:any)'] = 'cs/pesanan/lihat/$1/$2';
 
 

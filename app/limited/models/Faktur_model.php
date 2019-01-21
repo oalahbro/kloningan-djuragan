@@ -272,41 +272,12 @@ class Faktur_model extends CI_Model
     }
 
     /**
-	 * biaya_diskon
+	 * biaya_diskon, biaya_ongkir, biaya_unik
 	 *
 	 */
-    public function get_diskon($faktur_id) {
-        $q = $this->db->get_where('biaya_diskon', array('faktur_id' => $faktur_id));
-        if($q->num_rows() > 0) {
-            $r = $q->row();
-            return $r->nominal;
-        }
-        else {
-            return 0;
-        }
-    }
-
-    /**
-	 * biaya_ongkir
-	 *
-	 */
-    public function get_ongkir($faktur_id) {
-        $q = $this->db->get_where('biaya_ongkir', array('faktur_id' => $faktur_id));
-        if($q->num_rows() > 0) {
-            $r = $q->row();
-            return $r->nominal;
-        }
-        else {
-            return 0;
-        }
-    }
-
-    /**
-	 * biaya_unik
-	 *
-	 */
-    public function get_unik($faktur_id) {
-        $q = $this->db->get_where('biaya_unik', array('faktur_id' => $faktur_id));
+    public function get_biaya($faktur_id, $tabel) {
+        $table = 'biaya_' . $tabel;
+        $q = $this->db->get_where($table, array('faktur_id' => $faktur_id));
         if($q->num_rows() > 0) {
             $r = $q->row();
             return $r->nominal;
@@ -443,13 +414,13 @@ class Faktur_model extends CI_Model
         }
 
         // discount
-        $diskon = $this->get_diskon($faktur_id);
+        $diskon = $this->get_biaya($faktur_id, 'diskon');
 
         // unik
-        $unik = $this->get_unik($faktur_id);
+        $unik = $this->get_biaya($faktur_id, 'unik');
 
         // ongkir
-        $ongkir = $this->get_ongkir($faktur_id);
+        $ongkir = $this->get_biaya($faktur_id, 'ongkir');
 
         // total wajib bayar
         $wajib_bayar = $total_harga_produk + $unik + $ongkir - $diskon;
@@ -626,5 +597,78 @@ class Faktur_model extends CI_Model
             return random_element($missing);
         }
     }
-	
+
+    
+    public function count_faktur($juragan_id, $start_date, $end_date, $status = 'transfer') {
+		$timestamp_m = strtotime($start_date);
+        $timestamp_a = strtotime($end_date);
+
+
+        if ( ! in_array($status, array('transfer', 'semua', 'belum_lunas'))) {
+            $this->db->select('SUM(p.jumlah) as pcs');
+        }
+        else {
+            $this->db->select('f.id_faktur');
+        }
+
+        $this->db->from('faktur f');
+        //$this->db->join('pesanan_produk p', 'f.id_faktur=p.faktur_id', 'left');
+        
+        
+        if(in_array($status, array('transfer', 'kirim', 'pending', 'masuk', 'semua', 'belum_lunas')) && $timestamp_m !== false && $timestamp_a !== false) {
+            switch ($status) {
+                case 'semua':
+                    # code...
+                    $this->db->where("f.tanggal_dibuat >=",  $timestamp_m);
+                    $this->db->where('f.tanggal_dibuat <=', $timestamp_a);
+                    break;
+                
+                case 'belum_lunas':
+                    # code...
+                    $this->db->where("f.tanggal_dibuat >=",  $timestamp_m);
+                    $this->db->where('f.tanggal_dibuat <=', $timestamp_a);
+                    $this->db->where_not_in('f.status_transfer', array('3', '4'));
+                    break;
+
+                case 'transfer':
+                    # code...
+                    $this->db->where('status_transfer', '3');
+                    $this->db->where("tanggal_dibuat >=",  $timestamp_m);
+                    $this->db->where('tanggal_dibuat <=', $timestamp_a);
+
+                    $this->db->where("tanggal_transfer >=",  $timestamp_m);
+                    $this->db->where('tanggal_transfer <=', $timestamp_a);
+                    break;
+                
+                case 'kirim':
+                    # code...
+                    $this->db->where('status_kirim', '2');
+
+                    $this->db->where("tanggal_kirim >=",  $timestamp_m);
+                    $this->db->where('tanggal_kirim <=', $timestamp_a);
+                    break;
+
+                case 'masuk':
+                    # code...
+                    $this->db->where("f.tanggal_dibuat >=",  $timestamp_m);
+                    $this->db->where('f.tanggal_dibuat <=', $timestamp_a);
+                    $this->db->where('f.status_paket', '1');
+                    break;
+
+                case 'pending':
+                    # code...
+                    $this->db->where('status_transfer', '3');
+                    $this->db->where_in('status_kirim', array('0'));
+                    break;
+            }
+        }
+
+
+        $this->db->where('juragan_id', $juragan_id);
+        $this->db->group_by('f.id_faktur');
+		$q = $this->db->get();
+
+		return $q;
+    }
+   
 }

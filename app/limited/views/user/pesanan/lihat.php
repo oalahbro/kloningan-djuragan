@@ -132,9 +132,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         $hproduk .= '<div>' . strtoupper($produk->kode . ' (' . $produk->ukuran . ') = ') . $produk->jumlah . 'pcs</div>';
                                     }
 
-                                    $diskonku = $this->faktur->get_diskon($pesanan->id_faktur);
-                                    $ongkirku = $this->faktur->get_ongkir($pesanan->id_faktur);
-                                    $unikku = $this->faktur->get_unik($pesanan->id_faktur);
+                                    $diskonku = $this->faktur->get_biaya($pesanan->id_faktur, 'diskon');
+                                    $ongkirku = $this->faktur->get_biaya($pesanan->id_faktur, 'ongkir');
+                                    $unikku = $this->faktur->get_biaya($pesanan->id_faktur, 'unik');
 
                                     // cal
                                     $wajib_bayar += $harga_total;

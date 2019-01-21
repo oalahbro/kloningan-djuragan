@@ -42,8 +42,11 @@ $dr = $this->pengguna->_juragan_cs($username);
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-			<li class="nav-item active">
+			<li class="nav-item">
 				<?php echo anchor('myneworder', 'Tulis Pesanan', array('class'=>'nav-link')) ?>
+			</li>
+			<li class="nav-item">
+				<?php echo anchor('mychart', 'Chart', array('class'=>'nav-link')) ?>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
