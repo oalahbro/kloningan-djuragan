@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 $disable_ = array('disabled' => '');
                             }
 
-                            echo form_checkbox('cari[cek_tanggal]', 'ya', $check_, array('class' => 'form-check-input'));
+                            echo form_checkbox('cari[cek_tanggal]', 'ya', $check_);
                             ?>
                         </div>
                     </div>
