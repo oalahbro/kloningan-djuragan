@@ -52,20 +52,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         data: {
             labels: <?php echo json_encode($list_juragan) ?>,
             datasets: [
-            {
-                label: 'kemarin',
-                data: <?php echo json_encode($_pesanan_bln_kemarin) ?>,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 1
-            },
-            {
-                label: 'sekarang',
-                data: <?php echo json_encode($_pesanan_bln_ini) ?>,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }
+                {
+                    label: 'kemarin',
+                    data: <?php echo json_encode($_pesanan_bln_kemarin) ?>,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255,99,132,1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'sekarang',
+                    data: <?php echo json_encode($_pesanan_bln_ini) ?>,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }
             ]
         },
         options: {

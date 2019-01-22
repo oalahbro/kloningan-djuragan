@@ -67,6 +67,18 @@ $dr = $this->juragan->_semua();
 		<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Pengaturan
+				</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+					<?php 
+					echo anchor('admin/pengaturan/juragan', 'Juragan', array('class' => 'dropdown-item'));
+					echo anchor('admin/pengaturan/pengguna', 'Pengguna', array('class' => 'dropdown-item'));
+					echo anchor('admin/pengaturan/index', 'Sistem', array('class' => 'dropdown-item'));
+					?>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				<?php echo $_SESSION['nama']; ?>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
