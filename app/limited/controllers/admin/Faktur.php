@@ -150,7 +150,7 @@ class Faktur extends admin_controller
 			$i = 0;
 			$produk_data = array();			
 			foreach ($produk as $key) {
-				$pesprd_id = $this->faktur->_primary('pesanan_produk', 'id_pesanproduk');
+				$pesprd_id = $this->faktur->_primary('pesanan_produk', 'id_pesanproduk', count($produk), $i);
 				if ((int) $pesprd_id !== 0) {
 					$produk_data[$i] = array(
 						'id_pesanproduk' => $pesprd_id
@@ -177,7 +177,7 @@ class Faktur extends admin_controller
 				if (!empty($pembayaran_submit)) {
 					$p = 0;
 					foreach ($pembayaran as $bayar) {
-						$byr_id = $this->faktur->_primary('pembayaran', 'id_pembayaran');
+						$byr_id = $this->faktur->_primary('pembayaran', 'id_pembayaran', count($pembayaran), $p);
 						if ((int) $byr_id !== 0) {
 							$pembayaran_data[$p] = array(
 								'id_pembayaran' => $byr_id
@@ -207,7 +207,7 @@ class Faktur extends admin_controller
 				if (!empty($pengiriman_submit)) {
 					$pk = 0;
 					foreach ($pengiriman as $bayar) {
-						$krm_id = $this->faktur->_primary('pengiriman', 'id_pengiriman');
+						$krm_id = $this->faktur->_primary('pengiriman', 'id_pengiriman', count($pengiriman), $pk);
 						if ((int) $krm_id !== 0) {
 							$pengiriman_data[$pk] = array(
 								'id_pengiriman' => $krm_id
@@ -373,6 +373,11 @@ class Faktur extends admin_controller
 			$i = 0;
 			$produk_data = array();			
 			foreach ($produk as $key) {
+				$pesprd_id = $this->faktur->_primary('pesanan_produk', 'id_pesanproduk', count($produk), $i);
+				if ((int) $pesprd_id !== 0) {
+					$produk_data[$i]['id_pesanproduk'] = $pesprd_id;
+				}
+
 				$produk_data[$i]['faktur_id'] = $id_faktur;
 				$produk_data[$i]['kode'] = $key['kode'];
 				$produk_data[$i]['ukuran'] = $key['ukuran'];
@@ -393,6 +398,11 @@ class Faktur extends admin_controller
 				if (!empty($pembayaran_submit)) {
 					$p = 0;
 					foreach ($pembayaran as $bayar) {
+						$byr_id = $this->faktur->_primary('pembayaran', 'id_pembayaran', count($pembayaran), $p);
+						if ((int) $byr_id !== 0) {
+							$pembayaran_data[$p]['id_pembayaran'] = $byr_id;
+						}
+
 						$pembayaran_data[$p]['faktur_id'] = $id_faktur;
 						$pembayaran_data[$p]['tanggal_bayar'] = strtotime($bayar['tanggal']);
 						$pembayaran_data[$p]['jumlah'] = $bayar['jumlah'];
@@ -415,6 +425,11 @@ class Faktur extends admin_controller
 				if (!empty($pengiriman_submit)) {
 					$pk = 0;
 					foreach ($pengiriman as $bayar) {
+						$kir_id = $this->faktur->_primary('pengiriman', 'id_pengiriman', count($pengiriman), $p);
+						if ((int) $kir_id !== 0) {
+							$pengiriman_data[$pk]['id_pembayaran'] = $kir_id;
+						}
+
 						$pengiriman_data[$pk]['faktur_id'] = $id_faktur;
 						$pengiriman_data[$pk]['tanggal_kirim'] = strtotime($bayar['tanggal_kirim']);
 						$pengiriman_data[$pk]['kurir'] = $bayar['kurir'];
@@ -577,6 +592,10 @@ class Faktur extends admin_controller
 					$this->faktur->edit_order($key['id_pesanproduk'], $produk_update[$i]);
 				}
 				else {
+					$pesprd_id = $this->faktur->_primary('pesanan_produk', 'id_pesanproduk', count($produk), $i);
+					if ((int) $pesprd_id !== 0) {
+						$produk_insert[$i]['id_pesanproduk'] = $pesprd_id;
+					}
 					$produk_insert[$i]['faktur_id'] = $id_faktur;
 					$produk_insert[$i]['kode'] = $key['kode'];
 					$produk_insert[$i]['ukuran'] = $key['ukuran'];
@@ -625,6 +644,10 @@ class Faktur extends admin_controller
 						$this->faktur->update_pay($key['id_pembayaran'], $pembayaran_update[$i]);
 					}
 					else {
+						$byr_id = $this->faktur->_primary('pembayaran', 'id_pembayaran', count($pembayaran), $i);
+						if ((int) $byr_id !== 0) {
+							$pembayaran_insert[$i]['id_pembayaran'] = $byr_id;
+						}
 						$pembayaran_insert[$i]['faktur_id'] = $id_faktur;
 						$pembayaran_insert[$i]['tanggal_bayar'] = strtotime($key['tanggal']);
 						$pembayaran_insert[$i]['rekening'] = $key['rekening'];
@@ -683,6 +706,10 @@ class Faktur extends admin_controller
 						$tgl_kirim = ( !empty($key['tanggal_kirim']) ? strtotime($key['tanggal_kirim']): 0);
 					}
 					else {
+						$kir_id = $this->faktur->_primary('pengiriman', 'id_pengiriman', count($pengiriman), $i);
+						if ((int) $kir_id !== 0) {
+							$pengiriman_insert[$i]['id_pengiriman'] = $kir_id;
+						}
 						$pengiriman_insert[$i]['faktur_id'] = $id_faktur;
 						$pengiriman_insert[$i]['kurir'] = $key['kurir'];
 						$pengiriman_insert[$i]['resi'] = $key['resi'];

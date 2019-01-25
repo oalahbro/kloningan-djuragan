@@ -302,7 +302,18 @@ class Faktur_model extends CI_Model
             }
             else {
                 // insert
-                $this->db->insert($table, array('faktur_id' => $faktur_id, 'nominal' => $nominal));
+                $id_biaya = array();
+                $biaya_id = $this->_primary($table, 'id_' . $tabel);
+                if ((int) $biaya_id !== 0) {
+
+                    $id_biaya = array( 'id_' . $tabel => $biaya_id);
+                }
+
+                $data_biaya = array(
+                    'faktur_id' => $faktur_id,
+                    'nominal' => $nominal
+                );
+                $this->db->insert($table, array_merge($id_biaya, $data_biaya));
             }
         }
         else {
@@ -574,7 +585,7 @@ class Faktur_model extends CI_Model
         return TRUE;
     }
 
-    public function _primary($table, $primary) {
+    public function _primary($table, $primary, $max = 1, $i = 0) {
         $gid = $this->db->select($primary)->from($table)->get();
         
         $missing = array();
@@ -594,10 +605,14 @@ class Faktur_model extends CI_Model
             return 0;
         }
         else {
-            return random_element($missing);
+            if($max <= count($missing)) {
+                return array_values($missing)[$i];
+            }
+            else {
+                return 0;
+            }
         }
     }
-
     
     public function count_faktur($juragan_id, $start_date, $end_date, $status = 'transfer') {
 		$timestamp_m = strtotime($start_date);
