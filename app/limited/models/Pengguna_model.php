@@ -15,7 +15,7 @@ class Pengguna_model extends CI_Model
 	 *
 	 * @return      array
 	 */
-	public function _semua($aktif = FALSE, $blokir = FALSE) {
+	public function _semua($aktif = FALSE, $blokir = FALSE, $limit = FALSE, $offset = FALSE) {
 		$this->db->select('p.*');
 		$this->db->from('pengguna p');		
 		if($aktif !== FALSE && in_array($aktif, array('ya', 'tidak'))) {
@@ -29,29 +29,40 @@ class Pengguna_model extends CI_Model
 		// kecuali superadmin 
 		$this->db->where_not_in('p.level', array('superadmin'));
 
-		$this->db->order_by('nama asc');
+		if ($limit !== FALSE && $offset !== FALSE) {
+			$this->db->limit($limit);
+			$this->db->offset($offset);
+		}
+
+		$this->db->order_by('blokir desc, valid desc, aktif asc, login_terakhir asc');
 
 		$q = $this->db->get();
 		return $q;
 	}
 
-	public function simpan_relation($pengguna_id, $juragan_id) {
-		$this->db->where(array('pengguna_id' => $pengguna_id, 'juragan_id' => $juragan_id));
-		$q = $this->db->get();
+	public function get_admin() {
+		$this->db->where(array('aktif' => 'ya', 'blokir' => 'tidak', 'valid' => 'ya'));
+		$this->db->where_in('level', array('admin', 'superadmin'));
+		$q = $this->db->get('pengguna');
 
-		if($q->num_rows() > 0) {
-			// SKIP
-		}
-		else {
-			// insert
-		}
-
+		return $q;
 	}
 
 	public function get_juragan($pengguna_id) {
 		$q = $this->db->get_where('pengguna_relation', array('pengguna_id' => $pengguna_id));
 
 		return $q;
+	}
+
+	public function insert_juragan($data_batch) {
+		$this->db->insert_batch('pengguna_relation', $data_batch);
+		return TRUE;
+	}
+
+	public function delete_juragan($pengguna_id) {
+		$this->db->where('pengguna_id', $pengguna_id)
+				 ->delete('pengguna_relation');
+		return TRUE;
 	}
 
 	public function cek_baru() {
