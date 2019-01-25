@@ -103,7 +103,7 @@ $route['mychart'] = 'cs/chart';
 
 $route['kardusin/(:any)/(:any)'] = 'cs/pesanan/lihat/$1/$2';
 
-
+$route['session'] = 'dasbor/log';
 
 
 $route['j_(:any)/tambah'] = 'cs/pesanan/tambah/$1';
