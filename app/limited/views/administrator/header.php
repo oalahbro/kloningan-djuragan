@@ -91,18 +91,6 @@ $dr = $this->juragan->_semua();
 
 <div class="wrapper">
 	<nav id="sidebar" class="collapse bg-dark">
-		<div class="sidebar">
-			<ul class="list-unstyled">
-				<h6 class="dropdown-header">Pilih Juragan</h6>
-				<?php
-				echo '<li>' .anchor('pesanan/s_juragan', '<i class="fas fa-users"></i> Semua Juragan') . '</li>';
-				foreach ($dr->result() as $key) {
-					echo '<li>';
-						echo anchor('pesanan/' . $key->slug, '<i class="fas fa-user-circle"></i> ' . $key->nama);
-					echo '</li>';
-				}
-				?>
-			</ul>
-		</div>
+		<div class="sidebar" id="listJuragan"></div>
 	</nav>
 	<div class="d-flex align-items-stretch">

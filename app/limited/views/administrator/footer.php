@@ -11,6 +11,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     $(function () {
         $('#sidebar').on('shown.bs.collapse', function () {
+            // do something…
+            $('#listJuragan').empty();
+
+            $.getJSON("<?php echo site_url('admin/faktur/get_juragan'); ?>").done(function( response ) {
+                $('#listJuragan').empty().html('<h6 class="dropdown-header">Pilih Juragan</h6>');
+                $('#listJuragan').append(
+                    $('<ul>', {class: 'list-unstyled', id: 'listLi'})
+                );
+                $('#listLi').append(
+                    $('<li>', {html: '<a href="<?php echo site_url("pesanan/s_juragan") ?>"><i class="fas fa-users"></i> Semua Juragan</a>'})
+                );
+                $.each(response.data, function(index, element) {
+                    $('#listLi').append(
+                        $('<li>', {html: '<a href="<?php echo site_url("pesanan/") ?>'+element.slug+'"><i class="fas fa-user-circle"></i> '+element.nama+'</a>'})
+                    );
+                });
+            });
+
+
             $('.overlay').toggleClass('active');
             $('body').toggleClass('modal-open');
         });
