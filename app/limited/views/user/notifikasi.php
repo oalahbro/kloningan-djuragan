@@ -121,7 +121,7 @@ $(function () {
         function(data, status){
             //if(data.toggle) {
                 $('#notif-'+id+ ' .inf').toggleClass( "font-weight-bold" );
-                $('.toggleNotif').text(data.text);
+                $('#notif-'+id+ ' .toggleNotif').text(data.text);
             //}
             // console.log(id);
             // $('#main-table').load(document.URL + ' #table-pesanan');
