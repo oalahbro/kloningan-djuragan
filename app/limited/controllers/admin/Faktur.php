@@ -661,6 +661,11 @@ class Faktur extends admin_controller
 				$data['pembayaran']['diupdate'] = $pembayaran_update;
 				$data['pembayaran']['ditambah'] = $pembayaran_insert;
 
+				if(count($pembayaran_insert) > 0) {
+					$seri_faktur = $this->faktur->get_info($id_faktur, 'seri_faktur');
+					$this->notifikasi->set($_SESSION['userid'], '2', $id_juragan, $seri_faktur, 'cs');
+				}
+
 				// $data['produk'] = $pembayaran_data;
 				$pembayaran_del = array_diff($pembayaran_database, $pembayaran_submit);
 				foreach ($pembayaran_del as $id) {
@@ -724,6 +729,11 @@ class Faktur extends admin_controller
 				}
 				$data['pengiriman']['diupdate'] = $pengiriman_update;
 				$data['pengiriman']['ditambah'] = $pengiriman_insert;
+
+				if(count($pengiriman_insert) > 0) {
+					$seri_faktur = $this->faktur->get_info($id_faktur, 'seri_faktur');
+					$this->notifikasi->set($_SESSION['userid'], '8', $id_juragan, $seri_faktur, 'cs');
+				}
 
 				// $data['produk'] = $pengiriman_data;
 				$pengiriman_del = array_diff($pengiriman_database, $pengiriman_submit);
@@ -844,32 +854,36 @@ class Faktur extends admin_controller
 	}
 
 	public function simpan_pembayaran() {
-		$bayar = $this->input->post('pembayaran');
-		$faktur = $this->input->post('faktur');
+		$id_pembayaran = $this->input->post('id_pembayaran');
+		$id_faktur = $this->input->post('id_faktur');
+		$check = $this->input->post('check');
 
-		$data = array();
-		foreach ($bayar as $check => $o) {
-			if($o === 'ya') {
-				// simpan
-				if($this->faktur->check_paid($check) !== TRUE) {
-					// jika sudah dicek, maka tidak ditimpa
-					$data = array('tanggal_cek' => now());
-					$this->faktur->update_pay($check, $data);
-				}
-			}
-			else {
-				// hapus cek
-				$data = array('tanggal_cek' => NULL);
-				$this->faktur->update_pay($check, $data);
-			}
-		}
+		$data = array('tanggal_cek' => ($check === 'ya'? now(): NULL));
+		$this->faktur->update_pay($id_pembayaran, $data);
 
-		$this->faktur->calc_pembayaran($faktur);
-		redirect('pesanan');
+		$this->faktur->calc_pembayaran($id_faktur);
+		// redirect('pesanan');
+		$seri_faktur = $this->faktur->get_info($id_faktur, 'seri_faktur');
+
+		$juragan_id = $this->faktur->get_info($id_faktur, 'juragan_id');
+		$this->notifikasi->set($_SESSION['userid'], ($check === 'ya'? 3: 7), $juragan_id, $seri_faktur, 'cs');
+
+		$response = array(
+			'title' => 'Pembayaran',
+			'faktur_id' => $id_faktur,
+			'seri_faktur' => $seri_faktur,
+			'alert' => 'Data pembayaran untuk ' . strtoupper( $seri_faktur ). ' telah dicek ' . ($check === 'ya'? 'masuk': 'belum masuk')
+		);
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
 	}
 
 	public function tambah_pembayaran() {
-		$faktur_id = $this->input->post('faktur');
+		$faktur_id = $this->input->post('faktur_id');
 		$rekening = $this->input->post('rekening');
 		$jumlah = $this->input->post('jumlah');
 		$tanggal_bayar = $this->input->post('tanggal_bayar');
@@ -884,7 +898,23 @@ class Faktur extends admin_controller
 
 		$this->faktur->sub_pay($data);
 		$this->faktur->calc_pembayaran($faktur_id);
-		redirect('pesanan');
+
+		$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
+		$juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
+		$this->notifikasi->set($_SESSION['userid'], '2', $juragan_id, $seri_faktur, 'cs');
+
+		$response = array(
+			'title' => 'Pembayaran',
+			'faktur_id' => $faktur_id,
+			'seri_faktur' => $seri_faktur,
+			'alert' => 'Data pembayaran untuk ' . strtoupper( $seri_faktur ). ' telah ditambahkan'
+		);
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
 	}
 
 	public function hapus_pembayaran() {
@@ -894,20 +924,26 @@ class Faktur extends admin_controller
 		$this->faktur->del_pay($id_pembayaran);
 		$this->faktur->calc_pembayaran($id_faktur);
 
-		$data = array(
-			'notif' => 'Pembayaran sudah dihapus'
+		$seri_faktur = $this->faktur->get_info($id_faktur, 'seri_faktur');
+
+		$response = array(
+			'title' => 'Pembayaran',
+			'faktur_id' => $id_faktur,
+			'seri_faktur' => $seri_faktur,
+			'alert' => 'Data pembayaran untuk ' . strtoupper( $seri_faktur ). ' telah dihapus'
 		);
+
 		$this->output
 			->set_status_header(200)
 			->set_content_type('application/json', 'utf-8')
-			->set_output(json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 			->_display();
 		exit;
 	}
 
 	public function tambah_pengiriman() {
 		
-		$faktur_id = $this->input->post('faktur');
+		$faktur_id = $this->input->post('faktur_id');
 		$kurir = $this->input->post('kurir');
 		$lainnya = $this->input->post('lainnya');
 		$resi = $this->input->post('resi');
@@ -930,19 +966,57 @@ class Faktur extends admin_controller
 
 		$this->faktur->sub_carry($data);
 		$this->faktur->calc_carry($faktur_id, $kirim_cod, $cek);
-		redirect('pesanan');
 		
-		// var_dump($this->input->post());
+		$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
+		$juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
+		$this->notifikasi->set($_SESSION['userid'], '8', $juragan_id, $seri_faktur, 'cs');
+
+		$response = array(
+			'title' => 'Pembayaran',
+			'faktur_id' => $faktur_id,
+			'seri_faktur' => $seri_faktur,
+			'alert' => 'Pesanan ' . strtoupper( $seri_faktur ). ' telah dikirim'
+		);
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
 	}
 
 	public function ubah_paket() {
 		$faktur_id = $this->input->post('faktur_id');
-		$faktur = $this->input->post('faktur');
 		$status = $this->input->post('status');
+		
+		switch ($status) {
+			case '2':
+				# code...
+				$stt = 'dibatalkan';
+				$notif_code = 4;
+				break;
+			
+			case '1':
+				# code...
+				$stt = 'diproses';
+				$notif_code = 5;
+				break;
+
+			default:
+				# code...
+				$stt = 'belum diproses';
+				$notif_code = 6;
+				break;
+		}
+
+		$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
+		$juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
+		$this->notifikasi->set($_SESSION['userid'], $notif_code, $juragan_id, $seri_faktur, 'cs');
 
 		$this->faktur->set_package($faktur_id, $status);
 		$data = array(
-			'notif' => 'Status Paket Pesanan ' . $faktur . ' kini telah menjadi "' . $status . '"' . ($status === 'diproses'? ' dan data pengiriman telah dihapus.': ', sekarang Kamu dapat set-kirim pesanan.')
+			'title' => 'Update status paket',
+			'alert' => 'Status Paket faktur ' . strtoupper( $seri_faktur ) . ' telah menjadi "' . $stt . '"'
 		);
 
 		$this->output
@@ -952,4 +1026,30 @@ class Faktur extends admin_controller
 			->_display();
 		exit;
 	}
+
+	public function get_juragan() {
+		$jur = $this->juragan->_semua()->result();
+
+		///
+		$data = array();
+		foreach ($jur as $juragan) {
+		
+			$data[] = array(
+				'nama' => $juragan->nama,
+				'slug' => $juragan->slug
+			);
+		}
+
+		$response = array(
+			'data' => $data
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
+	
 }

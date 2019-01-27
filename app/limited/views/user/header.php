@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 echo doctype('html5'); 
-$username = $this->session->userdata('username');
-$dr = $this->pengguna->_juragan_cs($username);
 ?>
 <html>
 <head>
@@ -48,20 +46,24 @@ $dr = $this->pengguna->_juragan_cs($username);
 			<li class="nav-item">
 				<?php echo anchor('mychart', 'Chart', array('class'=>'nav-link')) ?>
 			</li>
-			<li class="nav-item dropdown">
+			<li class="nav-item dropdown" id="arsipDrop">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Arsip Pesanan
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<?php
-					foreach ($dr->result() as $key) {
-						echo anchor('kardusin/' . $key->slug . '/all', $key->nama, array('class'=> 'dropdown-item'));
-					}
-					?>
+					<div id="arsipMe"></div>
 				</div>
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+			<li class="nav-item dropdown" id="notif">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="badge badge-danger" id="count">0</span> Notifikasi
+				</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+					<div id="notifKonten" style="min-width: 200px"></div>
+				</div>
+			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				<?php echo $_SESSION['nama']; ?>
@@ -76,17 +78,6 @@ $dr = $this->pengguna->_juragan_cs($username);
 
 <div class="wrapper">
 	<nav id="sidebar" class="collapse bg-dark">
-		<div class="sidebar">
-			<ul class="list-unstyled">
-				<h6 class="dropdown-header">Pilih Juragan</h6>
-				<?php
-				foreach ($dr->result() as $key) {
-					echo '<li>';
-						echo anchor('myorder/' . $key->slug, '<i class="fas fa-user-circle"></i> ' . $key->nama, array());
-					echo '</li>';
-				}
-				?>
-			</ul>
-		</div>
+		<div class="sidebar" id="listJuragan"></div>
 	</nav>
 	<div class="d-flex align-items-stretch">

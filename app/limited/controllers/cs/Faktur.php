@@ -153,7 +153,7 @@ class Faktur extends user_controller
 
 			foreach ($produk as $key) {
 
-				$pesprd_id = $this->faktur->_primary('pesanan_produk', 'id_pesanproduk');
+				$pesprd_id = $this->faktur->_primary('pesanan_produk', 'id_pesanproduk', count($produk), $i);
 				if ((int) $pesprd_id !== 0) {
 					$produk_data[$i] = array(
 						'id_pesanproduk' => $pesprd_id
@@ -181,9 +181,9 @@ class Faktur extends user_controller
 				if (!empty($pembayaran_submit)) {
 					$p = 0;
 					foreach ($pembayaran as $bayar) {
-						$byr_id = $this->faktur->_primary('pembayaran', 'id_pembayaran');
+						$byr_id = $this->faktur->_primary('pembayaran', 'id_pembayaran', count($pembayaran), $p);
 						if ((int) $byr_id !== 0) {
-							$pembayaran_data[$i] = array(
+							$pembayaran_data[$p] = array(
 								'id_pembayaran' => $byr_id
 							);
 						}
@@ -209,6 +209,30 @@ class Faktur extends user_controller
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
 			$juragan_slug = $this->juragan->_slug($id_juragan);
+
+			$admin = $this->pengguna->get_admin();
+			$a = 0;
+			foreach ($admin->result() as $adm) {
+				$id_notif = array();
+				$notif_id = $this->faktur->_primary('notifikasi', 'id_notifikasi', $admin->num_rows(), $a);
+				if ((int) $notif_id !== 0) {
+					$id_notif = array(
+						'id_notifikasi' => $notif_id
+					);
+				}
+
+				$data_notif = array(
+					'tanggal' => now(),
+					'dari' => $pengguna_id,
+					'kepada' => $adm->id,
+					'type' => '1',
+					'juragan' => $id_juragan,
+					'url' => $faktur
+				);
+				$this->faktur->add_notif(array_merge($id_notif, $data_notif));
+				$a++;
+			}
+
 			redirect('myorder/' . $juragan_slug . '?cari[q]=' . $faktur);
 		}
 	}
@@ -491,6 +515,30 @@ class Faktur extends user_controller
 
 		$this->faktur->sub_pay($data);
 		$this->faktur->calc_pembayaran($faktur_id);
+
+		$admin = $this->pengguna->get_admin();
+		$a = 0;
+		foreach ($admin->result() as $adm) {
+			$id_notif = array();
+			$notif_id = $this->faktur->_primary('notifikasi', 'id_notifikasi', $admin->num_rows(), $a);
+			if ((int) $notif_id !== 0) {
+				$id_notif = array(
+					'id_notifikasi' => $notif_id
+				);
+			}
+
+			$data_notif = array(
+				'tanggal' => now(),
+				'dari' => $this->pengguna->_id($_SESSION['username']),
+				'kepada' => $adm->id,
+				'type' => '2',
+				'juragan' => $this->faktur->get_info($faktur_id, 'juragan_id'),
+				'url' => $this->faktur->get_info($faktur_id, 'seri_faktur')
+			);
+			$this->faktur->add_notif(array_merge($id_notif, $data_notif));
+			$a++;
+		}
+		
 		redirect('myorder');
 	}
 
@@ -578,6 +626,33 @@ class Faktur extends user_controller
 			->set_status_header(200)
 			->set_content_type('application/json', 'utf-8')
 			->set_output(json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
+
+	public function get_juragan() {
+		// $jur = $this->juragan->_semua()->result();
+		$username = $this->session->userdata('username');
+		$jur = $this->pengguna->_juragan_cs($username)->result();
+
+		///
+		$data = array();
+		foreach ($jur as $juragan) {
+		
+			$data[] = array(
+				'nama' => $juragan->nama,
+				'slug' => $juragan->slug
+			);
+		}
+
+		$response = array(
+			'data' => $data
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 			->_display();
 		exit;
 	}

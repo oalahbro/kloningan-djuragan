@@ -31,7 +31,6 @@ class Pengguna extends admin_controller
 				$blokir = 'tidak';
 			}
 
-
 			$query = $this->pengguna->_semua($aktif, $blokir);
 
 			$config['base_url'] = site_url('admin/pesanan/lihat/' . $status);
@@ -58,7 +57,7 @@ class Pengguna extends admin_controller
 		}
 		else {
 			show_404();
-		}		
+		}
 	}
 
 	public function tambah($juragan) {

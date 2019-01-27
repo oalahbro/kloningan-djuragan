@@ -10,9 +10,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script>
     
     $(function () {
-        $('#sidebar').on('shown.bs.collapse', function () {
+        var count = $("#count");
+        function loadCount() {
+            $.getJSON( "<?php echo site_url('session'); ?>", function( response ) {
+                if(response.log) {
+                    $.getJSON( "<?php echo site_url('admin/notifikasi/count'); ?>", function( num ) {
+                        count.html(num);
+                        if(num > 0) {
+                            $(document).attr("title", '('+ num + ') ' + $('h1.display-4').text());
+                        }
+                    });
+                }
+                else {
+                    window.location.href = "<?php echo base_url(); ?>";
+                }
+            });
+        }
+
+        // Load on page load (call the function loadCount):
+        loadCount()
+
+        // Set the refresh interval and call the function loadCount every 60 seconds):
+        var refreshId = setInterval(loadCount, 30000);
+        $.ajaxSetup({ cache: false });
+
+        $('#notif').on('show.bs.dropdown', function () {
+            $('#notifKonten').empty().html('<div class="text-center my-3"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
+
+            $.getJSON("<?php echo site_url('admin/notifikasi/get'); ?>", {'count': 5, 'all': 'tidak'}).done(function( response ) {
+                $('#notifKonten').empty().html('<a class="mx-3 mb-2 d-block small" href="<?php echo site_url("admin/notifikasi"); ?>">Lihat Semua Notifikasi ('+response.total+')</a>');
+                $.each(response.data, function(index, element) {
+                    $('#notifKonten').append(
+                        $('<div>', {class: 'list-group list-group-flush', html: element.data})
+                    );
+                });
+            });
+        });
+
+        $('#arsipDrop').on('show.bs.dropdown', function () {
             // do something…
-            $('#listJuragan').empty();
+            $('#arsipMe').empty().html('<div class="text-center my-3"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
+
+            $.getJSON("<?php echo site_url('admin/faktur/get_juragan'); ?>").done(function( response ) {
+                $('#arsipMe').empty();
+                
+                $('#arsipMe').append(
+                    $('<a>', {href: '<?php echo site_url("arsip") ?>', class:'dropdown-item',  text: 'Semua Juragan'})
+                );
+                $.each(response.data, function(index, element) {
+                    $('#arsipMe').append(
+                        $('<a>', {href: '<?php echo site_url("arsip/pesanan") ?>/'+element.slug+'/all', class:'dropdown-item',  text: element.nama})
+                    );
+                });
+            });
+        });
+
+        $('#sidebar').on('show.bs.collapse', function () {
+            // do something…
+            $('#listJuragan').empty().html('<div class="text-center my-3"><div class="spinner-border text-light spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
 
             $.getJSON("<?php echo site_url('admin/faktur/get_juragan'); ?>").done(function( response ) {
                 $('#listJuragan').empty().html('<h6 class="dropdown-header">Pilih Juragan</h6>');
@@ -73,8 +128,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             var id = $div.attr('data-id');
             var faktur = $div.attr('data-faktur');
 
-            console.log($div);
-
             $.ajax({
                 type:"GET",
                 url: "<?php echo site_url('get/pembayaran'); ?>",
@@ -118,85 +171,67 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         
                     }
                     // load modal
-                    doModal('Cek Pembayaran '+ faktur, action, konten);
+                    doModal('Cek Pembayaran '+ faktur, action, konten, 'cekByr', false);
                 })
             })
+        });
+
+        $(document).on("keyup change", '.cekByr .sbm',function(){
+            var id_pembayaran = $(this).attr('data-id'),
+                id_faktur = $('.cekByr [name="faktur"]').val(),
+                checking = '';
+
+            if(this.checked) {
+                checking = 'ya';
+            }
+            else {
+                checking = 'tidak';
+            }
+            
+            $('#main-table tr#pesanan-' + id_faktur ).empty().append('<td colspan="7" class="text-center"><div class="spinner-border spinner-border-lg" role="status"><span class="sr-only">Loading...</span></div></td>');
+
+            $.post("<?php echo site_url('post/pembayaran'); ?>", {
+                id_faktur: id_faktur,
+                id_pembayaran: id_pembayaran,
+                check: checking
+            },
+            function(response, status){
+                $.get('<?php echo site_url("pesanan"); ?>?cari[q]='+ response.seri_faktur, function(data) {
+                    var oContent = $(data).find('#pesanan-' + id_faktur);
+
+                    $('#main-table tr#pesanan-' + id_faktur).replaceWith(oContent);
+                    $('#main-table tr#pesanan-' + id_faktur).delay(100).fadeOut().fadeIn('slow');
+                });
+
+                $("#dynamicModal").modal('hide');
+                createToast(response.title, response.alert);
+            });
+            
         });
 
         $(document).on("click", ".hapusPembayaran", function(e){
             var id = $(this).attr('data-id');
             var faktur = $(this).attr('data-faktur');
             var $delel = $(this).closest( "li" );
-            $.post("<?php echo site_url('del/pembayaran'); ?>",
-            {
+
+            $('#main-table tr#pesanan-' + faktur ).empty().append('<td colspan="7" class="text-center"><div class="spinner-border spinner-border-lg" role="status"><span class="sr-only">Loading...</span></div></td>');
+
+            $.post("<?php echo site_url('del/pembayaran'); ?>", {
                 idfaktur: faktur,
                 idpembayaran: id,
             },
-            function(data, status){
-                
+            function(response, status){
+                $.get('<?php echo site_url("pesanan"); ?>?cari[q]='+ response.seri_faktur, function(data) {
+                    var oContent = $(data).find('#pesanan-' + faktur);
+
+                    $('#main-table tr#pesanan-' + faktur).replaceWith(oContent);
+                    $('#main-table tr#pesanan-' + faktur).delay(100).fadeOut().fadeIn('slow');
+                });
+
                 $delel.remove();
-                $('#main-table').load(document.URL + ' #table-pesanan');
+                $("#dynamicModal").modal('hide');
+                createToast(response.title, response.alert);
             });
-        });
-
-        $(document).on("click", ".sunting_pembayaran", function(e){
-            e.preventDefault();
-
-            var $div = $(this).closest( ".mn" );
-
-            var konten = '';
-            var action = '<?php echo site_url("post/pembayaran"); ?>';
-            var id = $div.attr('data-id');
-            var faktur = $div.attr('data-faktur');
-
-            console.log($div);
-
-            $.ajax({
-                type:"GET",
-                url: "<?php echo site_url('get/pembayaran'); ?>",
-                data: {id: id},
-                dataType: 'json',
-                success: (function( data ) {
-
-                    if (data.length === 0) {
-                        konten += '<p class="alert alert-danger">Tidak ditemukan data pembayaran</p>';
-                    }
-                    else {
-                        konten += '<input name="faktur" type="hidden" value="'+id+'"/>';
-                        
-                        konten += '<ul id="list_pembayaran">';
-                        for (i = 0; i < data.length; i++) {
-                            const pay = data[i];
-                            konten += '<input name="pembayaran['+pay.id+']" type="hidden" value="tidak"/>';
-
-                            konten += '<li>';
-                                konten += '<span class="font-weight-bold"><a href="#!" data-id="'+pay.id+'" class="sunting_pembayaran text-reset">' + pay.rekening + '</a></span>';
-                                konten += '<ul>';
-                                    konten += '<li>Tanggal bayar/transfer: ' + pay.tanggal_bayar + '</li>';
-                                    konten += '<li>Jumlah: ' + pay.jumlah + '</li>';
-                                konten += '</ul>';
-                                konten += '<div class="custom-control custom-checkbox" id="chk'+i+'">';
-                                    konten += '<input type="checkbox" name="pembayaran['+pay.id+']" data-id="'+pay.id+'" value="ya" class="custom-control-input sbm" id="check'+i+'" '+(pay.tanggal_cek === null ? '/>' : ' checked=""/>');
-
-                                    if(pay.tanggal_cek === null) {
-                                        var dicek = '';
-                                    }
-                                    else {
-                                        var dicek = '<div class="small text-muted">dicek pada: '+pay.tanggal_cek+'</div>';
-                                    }
-                                    
-                                    konten += '<label for="check'+i+'" class="custom-control-label">Dana ada/sudah masuk?</label>';
-                                    konten += dicek;
-                                konten += '</div>';
-                            konten += '</li>';
-                        }
-                        konten += '</ul>';
-                        
-                    }
-                    // load modal
-                    doModal('Cek Pembayaran '+ faktur, action, konten);
-                })
-            })
         });
 
         // tambah pembayaran
@@ -209,7 +244,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             var faktur = $div.attr('data-faktur');
             var kekurangan = $div.attr('data-kurang');
 
-            konten += '<input name="faktur" type="hidden" value="'+id+'"/>';
+            konten += '<input name="faktur_id" type="hidden" value="'+id+'"/>';
 
             konten += '<div class="form-group">';
                 konten += '<label for="rekening">Tujuan Transfer</label>';
@@ -220,7 +255,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 konten += '<div class="col-sm-6">';
                     konten += '<div class="form-group">';
                         konten += '<label for="jumlah">Jumlah</label>';
-                        konten += '<input type="number" min="0" name="jumlah" required="" value="'+kekurangan+'" id="jumlah" class="form-control" placeholder="misal: 200000" />';
+                        konten += '<input type="number" min="0" name="jumlah" required="" value="'+kekurangan+'" id="jumlah" class="form-control" placeholder="misal: 200000" step="any" />';
                     konten += '</div>';
                 konten += '</div>';
                 konten += '<div class="col-sm-6">';
@@ -231,7 +266,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 konten += '</div>';
             konten += '</div>';
 
-            doModal('Tambah Pembayaran '+ faktur, action, konten);
+            doModal('Tambah Pembayaran '+ faktur, action, konten, 'addByr');
+        });
+
+        $(document).on("keyup change", '.addByr [name="jumlah"]',function(){
+            if ($(this).val() > 0) {
+                $(this)[0].setCustomValidity('');
+                // alert('hhhh');
+                return true;
+            }
+            else {
+                $(this)[0].setCustomValidity('The number must not be zero');
+                // alert('iii');
+                return false;
+            }
+        });
+
+        $(document).on('submit','.addByr form',function(e){
+            e.preventDefault();
+            e.stopPropagation();
+
+            var $form = $(this); //wrap this in jQuery
+            var faktur_id = $('.addByr [name="faktur_id"]').val();
+            // alert('the action is: ' + $form.attr('action'));
+            
+            var datastring = $form.serialize();
+
+            $('#main-table tr#pesanan-' + faktur_id ).empty().append('<td colspan="7" class="text-center"><div class="spinner-border spinner-border-lg" role="status"><span class="sr-only">Loading...</span></div></td>');
+
+            $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: datastring,
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                    //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
+                    // do what ever you want with the server response
+                    $.get('<?php echo site_url("pesanan"); ?>?cari[q]='+ data.seri_faktur, function(data) {
+                        var oContent = $(data).find('#pesanan-' + faktur_id);
+
+                        $('#main-table tr#pesanan-' + faktur_id).replaceWith(oContent);
+                        $('#main-table tr#pesanan-' + faktur_id).delay(100).fadeOut().fadeIn('slow');
+                    });
+
+                    $("#dynamicModal").modal('hide');
+                    createToast(data.title, data.alert);
+
+                },
+                error: function() {
+                    alert('error handling here');
+                }
+            });
         });
 
         // set kirim
@@ -249,7 +335,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 option += '<option value="'+v+'">'+v+'</option>';
             });
             
-            konten += '<input name="faktur" type="hidden" value="'+id+'"/>';
+            konten += '<input name="faktur_id" type="hidden" value="'+id+'"/>';
             konten += '<input name="cek" type="hidden" value="tidak"/>';
 
             konten += '<div class="form-row">';
@@ -296,7 +382,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 konten += '<label class="custom-control-label" for="cek_satu">Pesanan "'+faktur+'" selesai dikirimkan dalam satu resi ini</label>';
             konten += '</div>';
 
-            doModal('Tambah Pengiriman '+ faktur, action, konten);
+            doModal('Tambah Pengiriman '+ faktur, action, konten, 'addKrm');
 
             $("#kurir_list").change(function() {
                 if ($(this).val() === "lainnya") {
@@ -307,12 +393,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 }
 
                 if ($(this).val() === "COD") {
-                    $('#resi').val('COD-<?php echo date("dmY") ?>');
+                    $('#resi').val('COD<?php echo date("dmY") ?>');
                 } else {
                     $('#resi').val('');
                 }
             });
         });
+
+        $(document).on('submit','.addKrm form',function(e){
+            e.preventDefault();
+            e.stopPropagation();
+
+            var $form = $(this); //wrap this in jQuery
+            var faktur_id = $('.addKrm [name="faktur_id"]').val();
+            // alert('the action is: ' + $form.attr('action'));
+            
+            var datastring = $form.serialize();
+
+            $('#main-table tr#pesanan-' + faktur_id ).empty().append('<td colspan="7" class="text-center"><div class="spinner-border spinner-border-lg" role="status"><span class="sr-only">Loading...</span></div></td>');
+
+            $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: datastring,
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                    //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
+                    // do what ever you want with the server response
+                    $.get('<?php echo site_url("pesanan"); ?>?cari[q]='+ data.seri_faktur, function(data) {
+                        var oContent = $(data).find('#pesanan-' + faktur_id);
+
+                        $('#main-table tr#pesanan-' + faktur_id).replaceWith(oContent);
+                        $('#main-table tr#pesanan-' + faktur_id).delay(100).fadeOut().fadeIn('slow');
+                    });
+
+                    $("#dynamicModal").modal('hide');
+                    createToast(data.title, data.alert);
+
+                },
+                error: function() {
+                    alert('error handling here');
+                }
+            });
+        })
 
         $(document).on("click", ".cant_kirim", function(e){
             e.preventDefault();
@@ -320,26 +444,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             var id = $div.attr('data-id');
             var faktur = $div.attr('data-faktur');
             var tm = makeid();
-            var notif = '';
-
-            notif += '<div class="toast" id="toast-'+tm+'" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">';
-                notif += '<div class="toast-header">';
-                    notif += '<strong class="mr-auto">Gagal Set</strong>';
-                    notif += '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">';
-                    notif += '<span aria-hidden="true">&times;</span>';
-                    notif += '</button>';
-                notif += '</div>';
-                notif += '<div class="toast-body">';
-                    notif += 'Pesanan '+faktur+' belum dapat di-set kirim karena belum diproses ';
-                notif += '</div>';
-            notif += '</div>';
-
-            $('#message').append(notif);
-
-            $('.toast').toast('show');
-            $('#toast-'+tm).on('hidden.bs.toast', function () {
-                $(this).remove();
-            });
+            createToast('Atur Pengiriman', 'Pesanan '+faktur+' belum dapat di-set kirim karena belum diproses ');
         });
 
         // set paket
@@ -349,43 +454,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             var id = $div.attr('data-id');
             var status = $(this).attr('data-status');
             var faktur = $div.attr('data-faktur');
+            var action = '<?php echo base_url(); ?>';
+            var konten = '<input name="status_paket" type="hidden" value=""/>';
 
-            if (status === 'diproses') {
-                status_update(id,faktur,status);
-            }
-            else {
-                var result = confirm("Data pengiriman juga akan akan dihapus");
-                if (result) {
-                    status_update(id,faktur,status);
-                }
-            }
+            konten += '<div id="'+id+'" data-faktur="'+faktur+'" data-current="'+status+'" class="button-radios d-flex text-light justify-content-center">';
+                konten += '<div data-status="belumproses" class="mx-1 radio border text-center justify-content-center d-flex align-items-center rounded-circle '+ (status === 'belumproses' ? 'bg-primary': 'bg-dark') +'" data-value="0"><span>Belum diproses</span></div>';
+                konten += '<div data-status="diproses" class="mx-1 radio border text-center justify-content-center d-flex align-items-center rounded-circle '+(status === 'diproses'? 'bg-primary': 'bg-dark')+'" data-value="1"><span>Diproses</span></div>';
+                konten += '<div data-status="dibatalkan" class="mx-1 radio border text-center justify-content-center d-flex align-items-center rounded-circle '+(status === 'dibatalkan'? 'bg-primary': 'bg-dark')+'" data-value="2"><span>Dibatalkan</span></div>';
+
+            konten += '</div>';
+
+            doModal('Atur status paket '+ faktur, action, konten, 'aturpaket', false);
         });
 
-        function status_update(a,b,c) {
-            var tm = makeid();
-            var notif = '';
+        $(document).on("click", ".button-radios .radio", function(e){
+            $(this).parent().find('.radio').removeClass('bg-primary').addClass('bg-dark');
+            $(this).removeClass('bg-dark').addClass('bg-primary');
+            var status = $(this).attr('data-value');
+            var status_text = $(this).attr('data-status');
+            var faktur_id = $(this).parent().attr('id');
+            var current = $(this).parent().attr('data-current');
+            var faktur = $(this).parent().attr('data-faktur');
 
-            $.post('<?php echo site_url("post/paket") ?>', {faktur_id: a, faktur:b, status: c}, function(response) {
-                notif += '<div class="toast" id="toast-'+tm+'" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">';
-                    notif += '<div class="toast-header">';
-                        notif += '<strong class="mr-auto text-capitalize">'+c+'</strong>';
-                        notif += '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">';
-                        notif += '<span aria-hidden="true">&times;</span>';
-                        notif += '</button>';
-                    notif += '</div>';
-                    notif += '<div class="toast-body">';
-                        notif += response.notif;
-                    notif += '</div>';
-                notif += '</div>';
-                    
-                $('#message').append(notif);
-                $('#toast-'+tm).toast('show');
-                $('#toast-'+tm).on('hidden.bs.toast', function () {
-                    $(this).remove();
+            if(current === status_text) {
+                $("#dynamicModal").modal('hide');
+            }
+            else {
+                $('#main-table tr#pesanan-' + faktur_id).empty().append('<td colspan="7" class="text-center"><div class="spinner-border spinner-border-lg" role="status"><span class="sr-only">Loading...</span></div></td>');
+
+                $.post('<?php echo site_url("post/paket") ?>', {faktur_id: faktur_id, status: status}, function(response) {
+
+                    $.get('<?php echo site_url("pesanan"); ?>?cari[q]='+ faktur, function(data) {
+                        var oContent = $(data).find('#pesanan-' + faktur_id);
+
+                        $('#main-table tr#pesanan-' + faktur_id).replaceWith(oContent);
+                        $('#main-table tr#pesanan-' + faktur_id).delay(100).fadeOut().fadeIn('slow');
+                    });
+
+                    $("#dynamicModal").modal('hide');
+                    createToast(response.title, response.alert);
                 });
-                $('#main-table').load(document.URL + ' #table-pesanan');
-            });
-        }
+            }
+        });
         
         // hapus pesanan
         $(document).on("click", ".hapus_pesanan", function(e){
@@ -398,27 +508,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             if (result) {
                 //
                 $.post('<?php echo site_url("del/pesanan") ?>', {faktur_id: id, faktur:b}, function(response) {
-                    var notif = '<div class="toast" id="toast-'+tm+'" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">';
-                        notif += '<div class="toast-header">';
-                            notif += '<strong class="mr-auto text-capitalize">Dihapus</strong>';
-                            notif += '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">';
-                            notif += '<span aria-hidden="true">&times;</span>';
-                            notif += '</button>';
-                        notif += '</div>';
-                        notif += '<div class="toast-body">';
-                            notif += response.notif;
-                        notif += '</div>';
-                    notif += '</div>';
-                        
-                    $('#message').append(notif);
-                    $('#toast-'+tm).toast('show');
-                    $('#toast-'+tm).on('hidden.bs.toast', function () {
-                        $(this).remove();
-                    });
-                    $('#main-table').load(document.URL + ' #table-pesanan');
+                    createToast('Pesanan dihapus', response.notif);
+                    $('#main-table tr#pesanan-' + id).hide('slow', function(){ $(this).remove(); });
                 });
             }
-            
         });
 
         // form tambah pesanan
@@ -581,9 +674,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         });
 
         // create dynamic modal 
-        function doModal(heading, action, modalContent, additionalButton='') {
+        function doModal(heading, action, modalContent, clform='', btnsbmt=true) {
             html =  '<div class="modal fade" id="dynamicModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="dynamicModalTitle" aria-hidden="true">';
-            html += '<div class="modal-dialog modal-dialog-centered" role="document">';
+            html += '<div class="modal-dialog modal-dialog-centered '+clform+'" role="document">';
             html += '<div class="modal-content">';
             html += '<form action="'+action+'" method="post">';
             html += '<div class="modal-header">';
@@ -594,7 +687,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             html += '</div>';
             html += '<div class="modal-footer">';
             html += '<button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Batal</button>';
-            html += '<button class="btn btn-success" type="submit">Simpan</button>';
+            if(btnsbmt) {
+                html += '<button class="btn btn-success" type="submit">Simpan</button>';
+            }
             html += '</div>';  // content
             html += '</form>';
             html += '</div>';  // dialog
@@ -606,6 +701,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $("#dynamicModal").modal('show');
 
             $('#dynamicModal').on('hidden.bs.modal', function (e) {
+                $(this).remove();
+            });
+        }
+
+        // create Toast
+        function createToast(title, content) {
+            var notif = '';
+            var tm = makeid();
+
+            notif += '<div class="toast" id="toast-'+tm+'" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">';
+                notif += '<div class="toast-header">';
+                    notif += '<strong class="mr-auto text-capitalize">'+title+'</strong>';
+                    notif += '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">';
+                    notif += '<span aria-hidden="true">&times;</span>';
+                    notif += '</button>';
+                notif += '</div>';
+                notif += '<div class="toast-body">';
+                    notif += content;
+                notif += '</div>';
+            notif += '</div>';
+
+            $('#message').append(notif);
+            $('#toast-'+tm).toast('show');
+            $('#toast-'+tm).on('hidden.bs.toast', function () {
                 $(this).remove();
             });
         }

@@ -161,3 +161,8 @@ body {
     height: 40px;
   }
   
+  .button-radios > .radio {
+      width: 100px;
+      height: 100px;
+      cursor:pointer;
+  }

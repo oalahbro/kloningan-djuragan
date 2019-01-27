@@ -241,6 +241,17 @@ class Faktur_model extends CI_Model
         return $q;
     }
 
+    public function get_info($id_faktur, $info) {
+        $this->db->where('id_faktur', $id_faktur);
+        $q = $this->db->get('faktur');
+
+        if ($q->num_rows() > 0) {
+            $r = $q->row();
+
+            return $r->$info;
+        }
+    }
+
     public function check($seri_faktur) {
         $this->db->where('seri_faktur', $seri_faktur);
         $q = $this->db->get('faktur');
@@ -558,12 +569,45 @@ class Faktur_model extends CI_Model
 	 *
 	 */
     public function set_package($faktur_id, $status) {
+        switch ($status) {
+            case '1':
+                # diproses
+                $data_update = array(
+                    'status_paket' => '1',
+                    'tanggal_paket' => now()
+                );
+                break;
+            
+            case '2':
+                # dibatalkan
+                $data_update = array(
+                    'status_paket' => '2',
+                    'tanggal_paket' => now()
+                );
+                break;
+            
+            default:
+                # belumproses
+                $data_update = array(
+                    'status_paket' => '0',
+                    'tanggal_paket' => '0',
+                    'status_kirim' => '0',
+                    'status_kiriman' => NULL,
+                    'tanggal_kirim' => '0'
+                );
+
+                $this->del_carry($faktur_id);
+                $this->calc_carry($faktur_id);
+                break;
+        }
+
+
+        /*
         if($status === 'diproses') {
             $data_update = array(
                 'status_paket' => '1',
                 'tanggal_paket' => now()
             );
-            // $this->update_ket($faktur_id, 's_paket', 'diproses', TRUE);
         }
         else {
             $data_update = array(
@@ -573,13 +617,10 @@ class Faktur_model extends CI_Model
                 'status_kiriman' => NULL,
                 'tanggal_kirim' => '0'
             );
-
-            // $this->update_ket($faktur_id, 's_paket', 'belum_diproses', TRUE);
-            // $this->update_ket($faktur_id, 's_kirim', 'belum_kirim', TRUE);
-
             $this->del_carry($faktur_id);
             $this->calc_carry($faktur_id);
         }
+        */
 
         $this->edit_invoice($faktur_id, $data_update);
         return TRUE;
@@ -684,6 +725,58 @@ class Faktur_model extends CI_Model
 		$q = $this->db->get();
 
 		return $q;
+    }
+
+    public function notif($kepada, $limit, $all_not, $offset) {
+        $this->db->where('kepada', $kepada);
+
+		if($all_not === 'tidak') {
+			$this->db->where('dibaca', '0');
+		}
+
+		if($limit !== FALSE) {
+			$this->db->limit($limit);
+        }
+        
+        if($offset !== FALSE) {
+            $this->db->offset($offset);
+        }
+
+        $this->db->order_by('tanggal desc');
+		$q = $this->db->get('notifikasi');
+        return $q;
+    }
+
+    public function get_notif_detail($id_notifikasi, $tanggal) {
+        $this->db->where(array('id_notifikasi' => $id_notifikasi, 'tanggal' => $tanggal));
+        $q = $this->db->get('notifikasi');
+
+        return $q;
+    }
+
+    public function add_notif($data) {
+        $this->db->insert('notifikasi',$data);
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        }
+    }
+
+    public function del_notif($id_notifikasi) {
+        $this->db->where(array('id_notifikasi' => $id_notifikasi));
+        $q = $this->db->delete('notifikasi');
+
+        if ($this->db->affected_rows() > -1) {
+            return TRUE;
+        }
+    }
+
+    public function edit_notif($id_notifikasi, $data) {
+        $this->db->where(array('id_notifikasi' => $id_notifikasi));
+        $q = $this->db->update('notifikasi', $data);
+
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        }
     }
    
 }

@@ -58,11 +58,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             }
 
                             echo form_checkbox('cari[cek_tanggal]', 'ya', $check_);
+
+                            $val_tgl = $this->input->get('cari[tanggal]');
+                            if( ! isset($val_tgl)) {
+                                $val_tgl = mdate('%Y-%m-%d', now());
+                            }
                             ?>
                         </div>
                     </div>
                     <?php
-                        echo form_input(array_merge(array('class' => 'form-control', 'type' => 'date','name' => 'cari[tanggal]', 'placeholder' => 'tanggal data masuk'), $disable_) , $this->input->get('cari[tanggal]'));
+                        echo form_input(array_merge(array('class' => 'form-control', 'type' => 'date','name' => 'cari[tanggal]', 'placeholder' => 'tanggal data masuk'), $disable_), $val_tgl);
                     ?>
                 </div>
 
@@ -221,7 +226,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     $mi_pkt = 'fa-box';
                                                     $t_pkt = 'Pesanan diproses';
                                                     $a_krm = 'set_kirim';
-                                                    $s_pkt = 'batal proses';
+                                                    $s_pkt = 'diproses';
                                                     break;
                                                 case "2":
                                                     // paket diproses
@@ -230,7 +235,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     $mi_pkt = 'fa-box';
                                                     $t_pkt = 'Pesanan dibatalkan';
                                                     $a_krm = 'cset_kirim';
-                                                    $s_pkt = 'batal proses';
+                                                    $s_pkt = 'dibatalkan';
                                                     break;
                                                 default:
                                                     // belum diproses
@@ -239,7 +244,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     $mi_pkt = 'fa-box-open';
                                                     $t_pkt = 'Pesanan Belum diproses';
                                                     $a_krm = 'cant_kirim';
-                                                    $s_pkt = 'diproses';
+                                                    $s_pkt = 'belumproses';
                                             }
                                             ?>
                                             <div class="fa-2x d-inline-block set_paket" data-status="<?php echo $s_pkt; ?>" data-faktur="<?php echo $pesanan->seri_faktur; ?>" data-id="<?php echo $pesanan->id_faktur?>" data-toggle="tooltip" data-placement="top" title="<?php echo $t_pkt; ?>">

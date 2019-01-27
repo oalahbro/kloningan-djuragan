@@ -10,7 +10,75 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script>
     
     $(function () {
+        var count = $("#count");
+        function loadCount() {
+            $.getJSON( "<?php echo site_url('session'); ?>", function( response ) {
+                if(response.log) {
+                    $.getJSON( "<?php echo site_url('cs/notifikasi/count'); ?>", function( num ) {
+                        count.html(num);
+                        if(num > 0) {
+                            $(document).attr("title", '('+ num + ') ' + $('h1.display-4').text());
+                        }
+                    });
+                }
+                else {
+                    window.location.href = "<?php echo base_url(); ?>";
+                }
+            });
+        }
+
+        // Load on page load (call the function loadCount):
+        loadCount()
+
+        // Set the refresh interval and call the function loadCount every 60 seconds):
+        var refreshId = setInterval(loadCount, 30000);
+        $.ajaxSetup({ cache: false });
+
+        $('#notif').on('show.bs.dropdown', function () {
+            $('#notifKonten').empty().html('<div class="text-center my-3"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
+
+            $.getJSON("<?php echo site_url('cs/notifikasi/get'); ?>", {'count': 5, 'all': 'tidak'}).done(function( response ) {
+                $('#notifKonten').empty().html('<a class="mx-3 mb-2 d-block small" href="<?php echo site_url("cs/notifikasi"); ?>">Lihat Semua Notifikasi ('+response.total+')</a>');
+                $.each(response.data, function(index, element) {
+                    $('#notifKonten').append(
+                        $('<div>', {class: 'list-group list-group-flush', html: element.data})
+                    );
+                });
+            });
+        });
+
+        $('#arsipDrop').on('shown.bs.dropdown', function () {
+            // do something…
+            $('#arsipMe').empty().html('<div class="text-center my-3"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
+
+            $.getJSON("<?php echo site_url('cs/faktur/get_juragan'); ?>").done(function( response ) {
+                $('#arsipMe').empty();
+                
+                $.each(response.data, function(index, element) {
+                    $('#arsipMe').append(
+                        $('<a>', {href: '<?php echo site_url("kardusin") ?>/'+element.slug+'/all', class:'dropdown-item',  text: element.nama})
+                    );
+                });
+            });
+        });
+
         $('#sidebar').on('shown.bs.collapse', function () {
+            // do something…
+            $('#listJuragan').empty().html('<div class="text-center my-3"><div class="spinner-border text-light spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
+
+            $.getJSON("<?php echo site_url('cs/faktur/get_juragan'); ?>").done(function( response ) {
+                $('#listJuragan').empty().html('<h6 class="dropdown-header">Pilih Juragan</h6>');
+                $('#listJuragan').append(
+                    $('<ul>', {class: 'list-unstyled', id: 'listLi'})
+                );
+                $.each(response.data, function(index, element) {
+                    $('#listLi').append(
+                        $('<li>', {html: '<a href="<?php echo site_url("myorder/") ?>'+element.slug+'"><i class="fas fa-user-circle"></i> '+element.nama+'</a>'})
+                    );
+                });
+            });
+
+
             $('.overlay').toggleClass('active');
             $('body').toggleClass('modal-open');
         });

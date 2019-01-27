@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 echo doctype('html5'); 
-$dr = $this->juragan->_semua();
 ?>
 <html>
 <head>
@@ -49,22 +48,24 @@ $dr = $this->juragan->_semua();
 					<?php echo anchor('migrasi', 'Migrasi', array('class'=>'nav-link')) ?>
 				</li>
 			<?php } ?>
-			<li class="nav-item dropdown">
+			<li class="nav-item dropdown" id="arsipDrop">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Arsip Pesanan
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<?php
-					echo anchor('arsip', 'Semua Juragan', array('class'=> 'dropdown-item'));
-					echo '<div class="dropdown-divider"></div>';
-					foreach ($dr->result() as $key) {
-						echo anchor('arsip/pesanan/' . $key->slug . '/all', $key->nama, array('class'=> 'dropdown-item'));
-					}
-					?>
+					<div id="arsipMe"></div>
 				</div>
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+			<li class="nav-item dropdown" id="notif">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="badge badge-danger" id="count">0</span> Notifikasi
+				</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+					<div id="notifKonten" style="min-width: 200px"></div>
+				</div>
+			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Pengaturan

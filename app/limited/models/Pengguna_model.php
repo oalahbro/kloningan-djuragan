@@ -143,6 +143,17 @@ class Pengguna_model extends CI_Model
 		return ($gp->num_rows() > 0 ? $t->juragan_id : $jur[0]);
 	}
 
+	public function _cs_juragan($id_juragan) {
+		
+		$this->db->from('pengguna_relation r');
+		$this->db->join('pengguna p', 'p.id=r.pengguna_id');
+		$this->db->where(array('aktif' => 'ya', 'blokir' => 'tidak', 'valid' => 'ya'));
+		$this->db->where_in('r.juragan_id', array($id_juragan));
+		$q = $this->db->get();
+
+		return $q;
+	}
+
 	public function _juragan_cs($username) {
 		$id_pengguna = $this->_id($username);
 
@@ -211,6 +222,7 @@ class Pengguna_model extends CI_Model
 				// jika sandi benar
 				$data['nama'] = $ru->nama;
 				$data['username'] = $ru->username;
+				$data['userid'] = $ru->id;
 				$data['level'] = $ru->level;
 				$data['email'] = $ru->email;
 

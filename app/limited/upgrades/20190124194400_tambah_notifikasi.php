@@ -28,7 +28,7 @@ class Migration_Tambah_notifikasi extends CI_Migration {
                     'unsigned' => TRUE,
                 ),
                 'type' => array(
-                    'type' => 'ENUM("1","2","3","4","5")', // 1: tambah pesanan, 2: tambah biaya, 3: kirim semua, 4: kirim sebagian, 5: transfer cek
+                    'type' => 'ENUM("1","2","3","4","5")', // 1: tambah pesanan, 2: tambah biaya, 3: paket, 4: kirim, 5: transfer cek
                     'NULL' => FALSE,
                     'default' => '1'
                 ),
