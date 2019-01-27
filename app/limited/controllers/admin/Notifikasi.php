@@ -72,7 +72,8 @@ class Notifikasi extends admin_controller {
 
 		$response = array(
 			'toggle' => ($toggle? TRUE:FALSE),
-			'text' => ($baca === '0'? 'Tandai belum dilihat': 'Tandai Sudah dilihat')
+			'text' => ($baca === '0'? 'Tandai belum dilihat': 'Tandai Sudah dilihat'),
+			'baca' => ($baca === '0'? '1': '0')
 		);
 		$this->output
 			->set_status_header(200)

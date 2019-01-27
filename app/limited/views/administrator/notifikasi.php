@@ -71,8 +71,6 @@ $(function () {
             if(data.del) {
                 $('#notif-'+id).remove();
             }
-            // console.log(id);
-            // $('#main-table').load(document.URL + ' #table-pesanan');
         });
     });
 
@@ -88,12 +86,9 @@ $(function () {
             baca: baca
         },
         function(data, status){
-            //if(data.toggle) {
-                $('#notif-'+id+ ' .inf').toggleClass( "font-weight-bold" );
-                $('#notif-'+id+ ' .toggleNotif').text(data.text);
-            //}
-            // console.log(id);
-            // $('#main-table').load(document.URL + ' #table-pesanan');
+            $('#notif-'+id+ ' .inf').toggleClass( "font-weight-bold" );
+            $('#notif-'+id+ ' .toggleNotif').text(data.text);
+            $('#notif-'+id).attr('data-baca', data.baca);
         });
     });
 });
