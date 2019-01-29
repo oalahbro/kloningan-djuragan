@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         echo '<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="notif-'.$notifikasi->id_notifikasi.'" data-id="'.$notifikasi->id_notifikasi.'" data-baca="'.$notifikasi->dibaca.'">';
                             echo '<div><span class="text-muted d-inline-block mr-3">'. mdate('%d-%m-%Y', $notifikasi->tanggal) .'</span>';
                             echo '<a href="'.$url.'" class="text-decoration-none inf text-dark d-inline-block '.($notifikasi->dibaca === '0'? 'font-weight-bold':'').'">';
-                                echo '<p class="mb-0"><span class="text-primary">'.$nama.'</span> '.$status.' <span class="text-primary">'.$notifikasi->url.'</span></p>';
+                                echo '<p class="mb-0"><span class="text-primary">'.$nama.'</span> '.$status.' <span class="text-primary">'. strtoupper( $notifikasi->url ) .'</span></p>';
                             echo '</a></div>';
                             echo '<div class="dropdown"><button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  id="mm-'.$notifikasi->id_notifikasi.'" class="btn btn-link btn-sm"><i class="fas fa-chevron-down"></i></button>
 

@@ -101,7 +101,7 @@ class Notifikasi extends user_controller {
 
 	public function count() {
 		$id_ = $this->pengguna->_id($_SESSION['username']);
-		$response = $this->faktur->notif($id_, 5, 'tidak', FALSE)->num_rows();
+		$response = $this->faktur->notif($id_, FALSE, 'tidak', FALSE)->num_rows();
 
 		$this->output
 			->set_status_header(200)
