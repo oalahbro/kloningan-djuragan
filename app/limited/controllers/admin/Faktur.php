@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Faktur extends admin_controller
-{
+class Faktur extends admin_controller {
 	public function __construct() {
 		parent::__construct();
     }
@@ -744,25 +743,6 @@ class Faktur extends admin_controller
 				$data['pengiriman']['dihapus'] = $pengiriman_del;
 			}
 
-			if($status_paket !== '2') {
-				if($pengiriman_ === 'ya') {
-					if ($pengiriman_selesai === 'ya') {
-						$val_kirim = '2';
-						$val_kiriman = ( strtolower($kurir_terakhir) === 'cod'? '1': '2');
-					}
-					else {
-						$val_kirim = '1';
-						$val_kiriman = NULL;
-					}
-				}
-				else {
-					$this->faktur->del_carry($id_faktur);
-					$val_kirim = '0';
-					$val_kiriman = NULL;
-					$tgl_kirim = 0;
-				}
-			}
-
 			$data['diskon'] = $diskon;
 			$data['ongkir'] = $ongkir;
 			$data['unik'] = $unik;
@@ -774,15 +754,43 @@ class Faktur extends admin_controller
 			switch ($status_paket) {
 				case '1':
 					# paket diproses
-					$tgl_paket = ($tanggal_paket === '0'? now() : $tanggal_paket );
+					if($pengiriman_ === 'ya') {
+						$data_status = array(
+							'status_paket' => '1',
+							'status_kirim' => ($pengiriman_selesai === 'ya'? '2': '1'),
+							'status_kiriman' => ( strtolower($kurir_terakhir) === 'cod'? '1': '2'),
+							'tanggal_paket' => ($tanggal_paket === '0'? now() : $tanggal_paket ),
+							'tanggal_kirim' => $tgl_kirim
+						);
+					}
+					else {
+						$data_status = array(
+							'status_paket' => '1',
+							'status_kirim' => '0',
+							'status_kiriman' => NULL,
+							'tanggal_paket' => ($tanggal_paket === '0'? now() : $tanggal_paket ),
+							'tanggal_kirim' => '0'
+						);
+					}
 					break;
 				case '2':
 					# paket dibatalkan
-					$tgl_paket = now();
+					$data_status = array(
+						'status_paket' => '2',
+						'tanggal_paket' => now()
+					);
 					break;
 				default:
 					# paket belum diproses
-					$tgl_paket = 0;
+					$this->faktur->del_carry($id_faktur);
+
+					$data_status = array(
+						'status_paket' => '0',
+						'status_kirim' => '0',
+						'status_kiriman' => NULL,
+						'tanggal_paket' => '0',
+						'tanggal_kirim' => '0'
+					);
 					break;
 			}
 
@@ -796,17 +804,12 @@ class Faktur extends admin_controller
 				'hp1' => $hp1,
 				'hp2' => (empty($hp2)? NULL: $hp2),
 				'tipe' => (isset($marketplace)? strtolower( $marketplace ): NULL),
-				'status_paket' => $status_paket,
-				'status_kirim' => $val_kirim,
-				'status_kiriman' => $val_kiriman,
-				'tanggal_paket' => $tgl_paket,
-				'tanggal_kirim' => $tgl_kirim,
 				'alamat' => $alamat,
 				'gambar' => (empty($image)? NULL : $image),
-				'keterangan' => (empty($keterangan)? NULL : $keterangan),
+				'keterangan' => (empty($keterangan)? NULL : $keterangan)
 			);
 
-			$this->faktur->edit_invoice($id_faktur, $data['faktur']);
+			$this->faktur->edit_invoice($id_faktur, array_merge($data['faktur'], $data_status));
 			$this->faktur->calc_pembayaran($id_faktur);
 			redirect('pesanan?cari[q]=' . $hp1);
 		}
