@@ -19,20 +19,11 @@ class Faktur_model extends CI_Model
         ");
 
         $this->db->from($this->tabel . ' fak');
-        // $this->db->join('pengiriman kir', 'fak.id_faktur=kir.faktur_id', 'left');
-        // $this->db->join('biaya_diskon disk', 'fak.id_faktur=disk.faktur_id', 'left');
-        // $this->db->join('biaya_unik unk', 'fak.id_faktur=unk.faktur_id', 'left');
-        // $this->db->join('biaya_ongkir ongk', 'fak.id_faktur=ongk.faktur_id', 'left');
-        // $this->db->join('pembayaran bay', 'fak.id_faktur=bay.faktur_id', 'left');
-        // $this->db->join('pesanan_produk pro', 'fak.id_faktur=pro.faktur_id', 'left');
-        // $this->db->join('juragan jur', 'fak.juragan_id=jur.id', 'left');
-        // $this->db->join('pengguna pen', 'pen.id=fak.pengguna_id', 'left');
-
-        // pencarian
-        if($cari !== NULL ) {
-            // pembayaran ada            
+        // pencarian di halaman juragan
+        if ($cari !== NULL) {
             $query = '';
 
+            // pencarian status paket
             if(!empty($cari['paket']) && in_array($cari['paket'], array('belum_diproses', 'diproses'))) {
                 switch ($cari['paket']) {
                     case "diproses":
@@ -49,6 +40,7 @@ class Faktur_model extends CI_Model
                 $query_p = "fak.status_paket IN ('".$spkt."') ";
             }
             
+            // pencarian pembayaran
             if(!empty($cari['pembayaran']) && in_array($cari['pembayaran'], array('belum_transfer', 'b_menunggu', 'c_sebagian', 'd_lunas', 'e_lebih'))) {
                 switch ($cari['pembayaran']) {
                     case "e_lebih":
@@ -70,35 +62,60 @@ class Faktur_model extends CI_Model
                 $query_b = "fak.status_transfer IN ('".$strf."') ";
             }
 
+            // pencarian pengiriman
             if(!empty($cari['pengiriman']) && in_array($cari['pengiriman'], array('belum_kirim', 'd_sebagian', 'dikirim'))) {
-
-                if($cari['pengiriman'] === 'dikirim') {
-                    $query_k = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_kirim' AND `val` = 'b_dikirim' OR `val` = 'c_diambil') ";
-                }
-                else {
-                    $query_k = "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `keterangan` WHERE `key` = 's_kirim' AND `val` = '".$cari['pengiriman']."') ";
-                }
 
                 switch ($cari['pengiriman']) {
                     case "dikirim":
-                        $query_k = "fak.status_kirim IN ('2') ";
+                        $skrm = 2;
                         break;
                     case "d_sebagian":
-                        $query_k = "fak.status_kirim IN ('1') ";
+                        $skrm = 1;
                         break;
                     default:
-                        $query_k = "fak.status_kirim IN ('0') ";
+                        $skrm = 0;
                 }
+
+                $query_k = "fak.status_kirim IN ('".$skrm."') ";
             }
 
-            // $cari
+            //  pencarian marketplace
             if(!empty($cari['marketplace']) && $cari['marketplace'] === 'ya') {
                 $query_m = "fak.tipe IS NOT NULL ";
             }
-
+           
+            // pencarian `query` && `tanggal`
             if(!empty($cari['q'])) {
-                $query_q =  "fak.id_faktur IN (SELECT DISTINCT faktur_id FROM `pesanan_produk` WHERE `kode` LIKE '%".$cari['q']."%') ";
+                $query_q = "fak.id_faktur IN (
+                    SELECT DISTINCT f.id_faktur
+                    FROM faktur f
+                    INNER JOIN pesanan_produk p ON f.id_faktur=p.faktur_id
+                    WHERE ";
+
+                if(!empty($cari['tanggal'])) {
+                    $query_q .= "DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_dibuat, '%Y-%m-%d %H:%i:%s'), '+00:00', '+00:00'))='".$cari['tanggal']."' AND ";
+                }
+
+                $query_q .= "p.kode LIKE '%".$cari['q']."%' ";
+
+                $searchTerms = explode(' ', $cari['q']);
+                $searchTermBits = array();
+                foreach ($searchTerms as $term) {
+                    $term = trim($term);
+                    if ( ! empty($term)) {
+                        $query_q .= "OR f.id_faktur LIKE '%".$term."%' ";
+                        $query_q .= "OR f.seri_faktur LIKE '%".$term."%' ";
+                        $query_q .= "OR f.nama LIKE '%".$term."%' ";
+                        $query_q .= "OR f.hp1 LIKE '%".$term."%' ";
+                        $query_q .= "OR f.hp2 LIKE '%".$term."%' ";
+                        $query_q .= "OR f.alamat LIKE '%".$term."%' ";
+                        $query_q .= "OR f.keterangan LIKE '%".$term."%' ";
+                    }
+                }
+
+                $query_q .= ") ";
             }
+ 
 
             if(!empty($cari['tanggal'])) {
                 $query_t =  "fak.id_faktur IN (SELECT DISTINCT id_faktur FROM `faktur` WHERE DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_dibuat, '%Y-%m-%d %H:%i:%s'), '+00:00', '+00:00'))='".$cari['tanggal']."') ";
@@ -156,7 +173,7 @@ class Faktur_model extends CI_Model
                 $query .= $query_m . " AND " . $query_q;
             }
             else if(empty($cari['marketplace']) && !empty($cari['tanggal']) && !empty($cari['q'])) {
-                $query .= $query_t . " AND " . $query_q;
+                $query .= $query_q;
             }
             else if(!empty($cari['marketplace']) && !empty($cari['tanggal']) && empty($cari['q'])) {
                 $query .= $query_m . " AND " . $query_t;
@@ -174,23 +191,6 @@ class Faktur_model extends CI_Model
             ///////////////////
             if(!empty($cari['pembayaran']) || !empty($cari['paket']) || !empty($cari['pengiriman']) || !empty($cari['marketplace']) || !empty($cari['tanggal']) || !empty($cari['q'])  ) {
                 $this->db->where( $query, NULL);
-            }
-        
-            if(!empty($cari['q'])) {
-                $searchTerms = explode(' ', $cari['q']);
-                $searchTermBits = array();
-                foreach ($searchTerms as $term) {
-                    $term = trim($term);
-                    if ( ! empty($term)) {
-                        $this->db->or_like('fak.id_faktur',  $term, 'both');
-                        $this->db->or_like('fak.seri_faktur',  $term, 'both');
-                        $this->db->or_like('fak.nama',  $term, 'both');
-                        $this->db->or_like('fak.hp1',  $term, 'both');
-                        $this->db->or_like('fak.hp2',  $term, 'both');
-                        $this->db->or_like('fak.alamat',  $term, 'both');
-                        $this->db->or_like('fak.keterangan',  $term, 'both');
-                    }
-                }
             }
         }
 
