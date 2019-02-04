@@ -46,14 +46,6 @@ echo doctype('html5');
 			<li class="nav-item">
 				<?php echo anchor('mychart', 'Chart', array('class'=>'nav-link')) ?>
 			</li>
-			<li class="nav-item dropdown" id="arsipDrop">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Arsip Pesanan
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<div id="arsipMe"></div>
-				</div>
-			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 			<li class="nav-item dropdown" id="notif">

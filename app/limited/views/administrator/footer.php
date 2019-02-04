@@ -47,24 +47,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             });
         });
 
-        $('#arsipDrop').on('show.bs.dropdown', function () {
-            // do something…
-            $('#arsipMe').empty().html('<div class="text-center my-3"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
-
-            $.getJSON("<?php echo site_url('admin/faktur/get_juragan'); ?>").done(function( response ) {
-                $('#arsipMe').empty();
-                
-                $('#arsipMe').append(
-                    $('<a>', {href: '<?php echo site_url("arsip") ?>', class:'dropdown-item',  text: 'Semua Juragan'})
-                );
-                $.each(response.data, function(index, element) {
-                    $('#arsipMe').append(
-                        $('<a>', {href: '<?php echo site_url("arsip/pesanan") ?>/'+element.slug+'/all', class:'dropdown-item',  text: element.nama})
-                    );
-                });
-            });
-        });
-
         $('#sidebar').on('show.bs.collapse', function () {
             // do something…
             $('#listJuragan').empty().html('<div class="text-center my-3"><div class="spinner-border text-light spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');

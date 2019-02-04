@@ -83,9 +83,6 @@ $route['add/pesanan'] = 'admin/faktur/tambah_pesanan';
 $route['add/pembayaran'] = 'admin/faktur/tambah_pembayaran';
 $route['add/pengiriman'] = 'admin/faktur/tambah_pengiriman';
 
-$route['arsip'] = 'admin/pesanan';
-$route['arsip/pesanan/(:any)/(:any)'] = 'admin/pesanan/lihat/$1/$2';
-
 // bagian user
 $route['myorder'] = 'cs/faktur';
 $route['myorder/add/pembayaran'] = 'cs/faktur/tambah_pembayaran';
@@ -100,8 +97,6 @@ $route['myget/pembayaran'] = 'cs/faktur/ambil_pembayaran';
 $route['mypost/pembayaran'] = 'cs/faktur/simpan_pembayaran';
 
 $route['mychart'] = 'cs/chart';
-
-$route['kardusin/(:any)/(:any)'] = 'cs/pesanan/lihat/$1/$2';
 
 $route['session'] = 'dasbor/log';
 
