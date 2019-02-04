@@ -107,10 +107,6 @@ class Faktur extends admin_controller {
 			$status_paket = $this->input->post('status_paket');
 			$pengiriman_selesai = $this->input->post('pengiriman_selesai');
 
-			//
-			$dj = $this->juragan->_detail($id_juragan)->row();
-			$faktur = strtolower($dj->short . str_pad(date('ymdHis'), 11, "0", STR_PAD_LEFT));
-
 			// `faktur`
 			$data = array();
 			$data_id = array();
@@ -123,7 +119,6 @@ class Faktur extends admin_controller {
 			}
 
 			$data_otr = array(
-				// 'id_faktur' => 
 				'seri_faktur' => $faktur,
 				'tanggal_dibuat' => strtotime($tanggal_dibuat . ' ' . $waktu_dibuat ),
 				'juragan_id' => $id_juragan,
@@ -198,12 +193,12 @@ class Faktur extends admin_controller {
 			}
 
 			// `pengiriman`
-			$kurir_terakhir = 'cod';
 			$tgl_kirim = 0;
-			if(!empty($pengiriman_) && $status_paket === '1') {
+			$kurir_terakhir = '';
+			if($pengiriman_ === 'ya') {
 				$pengiriman_data = array();
-				$pengiriman_submit = array_filter($pengiriman);
-				if (!empty($pengiriman_submit)) {
+				//$pengiriman_submit = array_filter($pengiriman);
+				if (!empty($pengiriman)) {
 					$pk = 0;
 					foreach ($pengiriman as $bayar) {
 						$krm_id = $this->faktur->_primary('pengiriman', 'id_pengiriman', count($pengiriman), $pk);
@@ -230,25 +225,6 @@ class Faktur extends admin_controller {
 				}
 			}
 
-			if($status_paket !== '2') {
-				if($pengiriman_ === 'ya') {
-					if ($pengiriman_selesai === 'ya') {
-						$val_kirim = '2';
-						$val_kiriman = ( strtolower($kurir_terakhir) === 'cod'? '1': '2');
-					}
-					else {
-						$val_kirim = '1';
-						$val_kiriman = NULL;
-					}
-				}
-				else {
-					$this->faktur->del_carry($id_faktur);
-					$val_kirim = '0';
-					$val_kiriman = NULL;
-					$tgl_kirim = '0';
-				}
-			}
-
 			$data['diskon'] = $diskon;
 			$data['ongkir'] = $ongkir;
 			$data['unik'] = $unik;
@@ -257,32 +233,51 @@ class Faktur extends admin_controller {
 			$this->faktur->upset_biaya('ongkir', $id_faktur, $ongkir);
 			$this->faktur->upset_biaya('unik', $id_faktur, $unik);
 
+			
 			switch ($status_paket) {
 				case '1':
 					# paket diproses
-					$tgl_paket = ($tanggal_paket === '0'? now() : $tanggal_paket );
+					if($pengiriman_ === 'ya') {
+						$data_status = array(
+							'status_paket' => '1',
+							'status_kirim' => ($pengiriman_selesai === 'ya'? '2': '1'),
+							'status_kiriman' => ( strtolower($kurir_terakhir) === 'cod'? '1': '2'),
+							'tanggal_paket' => ($tanggal_paket === '0'? now() : $tanggal_paket ),
+							'tanggal_kirim' => $tgl_kirim
+						);
+					}
+					else {
+						$data_status = array(
+							'status_paket' => '1',
+							'status_kirim' => '0',
+							'status_kiriman' => NULL,
+							'tanggal_paket' => ($tanggal_paket === '0'? now() : $tanggal_paket ),
+							'tanggal_kirim' => '0'
+						);
+					}
 					break;
 				case '2':
 					# paket dibatalkan
-					$tgl_paket = now();
+					$data_status = array(
+						'status_paket' => '2',
+						'tanggal_paket' => now()
+					);
 					break;
 				default:
 					# paket belum diproses
-					$tgl_paket = 0;
+					$this->faktur->del_carry($id_faktur);
+
+					$data_status = array(
+						'status_paket' => '0',
+						'status_kirim' => '0',
+						'status_kiriman' => NULL,
+						'tanggal_paket' => '0',
+						'tanggal_kirim' => '0'
+					);
 					break;
 			}
 
-			if($status_paket !== '2') {
-				$data_update = array(
-					'status_paket' => $status_paket,
-					'status_kirim' => $val_kirim,
-					'status_kiriman' => $val_kiriman,
-					'tanggal_paket' => $tgl_paket,
-					'tanggal_kirim' => $tgl_kirim,
-				);
-
-				$this->faktur->edit_invoice($id_faktur, $data_update);
-			}
+			$this->faktur->edit_invoice($id_faktur, $data_status);
 
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
@@ -417,11 +412,11 @@ class Faktur extends admin_controller {
 			}
 
 			// `pengiriman`
-			$kurir_terakhir = 'cod';
-			if(!empty($pengiriman_) && $status_paket === '1') {
+			$kurir_terakhir = '';
+			if($pengiriman_ === 'ya') {
 				$pengiriman_data = array();
-				$pengiriman_submit = array_filter($pengiriman);
-				if (!empty($pengiriman_submit)) {
+				//$pengiriman_submit = array_filter($pengiriman);
+				if (!empty($pengiriman)) {
 					$pk = 0;
 					foreach ($pengiriman as $bayar) {
 						$kir_id = $this->faktur->_primary('pengiriman', 'id_pengiriman', count($pengiriman), $p);
@@ -445,26 +440,6 @@ class Faktur extends admin_controller {
 				}
 			}
 
-			$tgl_kirim = 0;
-			if($status_paket !== '2') {
-				if($pengiriman_ === 'ya') {
-					if ($pengiriman_selesai === 'ya') {
-						$val_kirim = '2';
-						$val_kiriman = ( strtolower($kurir_terakhir) === 'cod'? '1': '2');
-					}
-					else {
-						$val_kirim = '1';
-						$val_kiriman = NULL;
-					}
-				}
-				else {
-					$this->faktur->del_carry($id_faktur);
-					$val_kirim = '0';
-					$val_kiriman = NULL;
-					$tgl_kirim = 0;
-				}
-			}
-
 			$data['diskon'] = $diskon;
 			$data['ongkir'] = $ongkir;
 			$data['unik'] = $unik;
@@ -476,30 +451,48 @@ class Faktur extends admin_controller {
 			switch ($status_paket) {
 				case '1':
 					# paket diproses
-					$tgl_paket = ($tanggal_paket === '0'? now() : $tanggal_paket );
+					if($pengiriman_ === 'ya') {
+						$data_status = array(
+							'status_paket' => '1',
+							'status_kirim' => ($pengiriman_selesai === 'ya'? '2': '1'),
+							'status_kiriman' => ( strtolower($kurir_terakhir) === 'cod'? '1': '2'),
+							'tanggal_paket' => ($tanggal_paket === '0'? now() : $tanggal_paket ),
+							'tanggal_kirim' => $tgl_kirim
+						);
+					}
+					else {
+						$data_status = array(
+							'status_paket' => '1',
+							'status_kirim' => '0',
+							'status_kiriman' => NULL,
+							'tanggal_paket' => ($tanggal_paket === '0'? now() : $tanggal_paket ),
+							'tanggal_kirim' => '0'
+						);
+					}
 					break;
 				case '2':
 					# paket dibatalkan
-					$tgl_paket = now();
+					$data_status = array(
+						'status_paket' => '2',
+						'tanggal_paket' => now()
+					);
 					break;
 				default:
 					# paket belum diproses
-					$tgl_paket = 0;
+					$this->faktur->del_carry($id_faktur);
+
+					$data_status = array(
+						'status_paket' => '0',
+						'status_kirim' => '0',
+						'status_kiriman' => NULL,
+						'tanggal_paket' => '0',
+						'tanggal_kirim' => '0'
+					);
 					break;
 			}
 
-			if($status_paket !== '2') {
-				$data_update = array(
-					'status_paket' => $status_paket,
-					'status_kirim' => $val_kirim,
-					'status_kiriman' => $val_kiriman,
-					'tanggal_paket' => $tgl_paket,
-					'tanggal_kirim' => $tgl_kirim,
-				);
-
-				$this->faktur->edit_invoice($id_faktur, $data_update);
-			}
-
+			$this->faktur->edit_invoice($id_faktur, $data_status);
+			
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
 			redirect('pesanan?cari[q]=' . $faktur);

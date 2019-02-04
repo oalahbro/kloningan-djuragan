@@ -139,7 +139,7 @@ class Notifikasi extends admin_controller {
 			}
 
 			$data[] = array(
-				'data' => '<a href="'. $url .'" class="small list-group-item list-group-item-action '.($notifikasi->dibaca === '0'? 'font-weight-bold':'').'"><div class="d-flex w-100 justify-content-between"><p class="mb-0">'.$ico.' <span class="text-primary">'.$nama.'</span> '.$status.' <span class="text-primary">'.strtoupper( $notifikasi->url ).'</span></p></div><small class="text-muted">'. mdate('%d-%m-%Y', $notifikasi->tanggal) .'</small></a>'
+				'data' => '<a href="'. $url .'" class="small list-group-item list-group-item-action '.($notifikasi->dibaca === '0'? 'font-weight-bold':'').'"><div class="d-flex w-100 justify-content-between"><p class="mb-0">'.$ico.' <span class="text-primary">'.$nama.'</span> '.$status.' <span class="text-primary">'.strtoupper( $notifikasi->url ).'</span></p></div><small class="text-muted">'. mdate('%d-%m-%Y %H:%i:%s', $notifikasi->tanggal) .'</small></a>'
 			);
 		}
 

@@ -63,7 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         }
                         
                         echo '<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="notif-'.$notifikasi->id_notifikasi.'" data-id="'.$notifikasi->id_notifikasi.'" data-baca="'.$notifikasi->dibaca.'">';
-                            echo '<div><span class="text-muted d-inline-block mr-3">'. mdate('%d-%m-%Y', $notifikasi->tanggal) .'</span>';
+                            echo '<div><span class="text-muted d-inline-block mr-3">'. mdate('%d-%m-%Y %H:%i:%s', $notifikasi->tanggal) .'</span>';
                             echo '<a href="'.$url.'" class="text-decoration-none inf text-dark d-inline-block '.($notifikasi->dibaca === '0'? 'font-weight-bold':'').'">';
                                 echo '<p class="mb-0">'.$isi.'</p>';
                             echo '</a></div>';
