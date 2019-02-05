@@ -31,15 +31,24 @@ class Auth extends public_controller
 			$password = $this->input->post('password');
 			$username = $this->input->post('username');
 
-			$data = array(
+			$data_id = array();
+			$id_pengguna = $this->faktur->_primary('pengguna', 'id');
+			if ((int) $id_pengguna !== 0) {
+				$data_id = array('id' => $id_pengguna);
+			}
+
+			$data_ = array(
 				'nama' => $nama,
 				'email' => strtolower( $email ),
 				'sandi' => password_hash($password, PASSWORD_BCRYPT),
 				'username' => strtolower( $username )
 				);
 
-			$save = $this->pengguna->simpan($data);
-			$id_pengguna = $this->db->insert_id();
+			$save = $this->pengguna->simpan(array_merge($data_id,$data_));
+
+			if ((int) $id_pengguna === 0) {
+				$id_pengguna = $this->db->insert_id();
+			}
 
 			if($save) {
 				// kirim email validasi
