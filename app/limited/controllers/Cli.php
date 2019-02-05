@@ -12,11 +12,8 @@ class Cli extends CI_Controller {
     }
     
     public function hapus_notif() {
-        $this->db->where(array(
-            'tanggal <' => 'UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 7 DAY))',
-            'dibaca' => '1'
-        ));
-        $this->db->delete('notifikasi');
+        $this->db->delete('notifikasi', array('tanggal <' => 'UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 7 DAY))','dibaca' => '1'));
+        $this->db->delete('notifikasi', array('tanggal <' => 'UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 30 DAY))'));
 
         echo 'del';
     }
