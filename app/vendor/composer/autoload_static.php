@@ -11,6 +11,10 @@ class ComposerStaticInit55e68dfcb33381d4935e9349b6996929
         array (
             'Picqer\\Barcode\\' => 15,
         ),
+        'L' => 
+        array (
+            'Lcobucci\\JWT\\' => 13,
+        ),
         'F' => 
         array (
             'FontLib\\' => 8,
@@ -33,6 +37,10 @@ class ComposerStaticInit55e68dfcb33381d4935e9349b6996929
         'Picqer\\Barcode\\' => 
         array (
             0 => __DIR__ . '/..' . '/picqer/php-barcode-generator/src',
+        ),
+        'Lcobucci\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
         ),
         'FontLib\\' => 
         array (
