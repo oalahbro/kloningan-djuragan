@@ -1,16 +1,39 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends public_controller
-{
+/**
+ * Auth
+ *
+ * Semua yang berkaitan dengan `auth` ada disini
+ * daftar, masuk, lupa sandi, validasi dan reset
+ *
+ * halaman baku akan dikirim ke `auth/masuk`
+ */
+
+class Auth extends public_controller {
+
 	public function __construct() {
 		parent::__construct();
 	}
 
+	/**
+	 * Halaman Index auth
+	 *
+	 */
 	public function index() {
 		redirect('auth/masuk');
 	}
 
+	/**
+	 * Halaman pendaftaran akun baru
+	 *
+	 * @param 	string 	$username 	Input String
+	 * @param 	string 	$password 	Input String
+	 * @param 	string 	$nama 		Input String
+	 * @param 	string 	$email 		Input string
+	 * 
+	 * @return 	mixed 	redirect to `auth/masuk`
+	 */
 	public function daftar() {
 		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[pengguna.username]|alpha_dash');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -60,6 +83,14 @@ class Auth extends public_controller
 		}
 	}
 
+	/**
+	 * Halaman masuk
+	 *
+	 * @param 	string 	$username 	Input String
+	 * @param 	string 	$password 	Input String
+	 * 
+	 * @return 	mixed 	redirect to `auth/masuk`
+	 */
 	public function masuk() {
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
