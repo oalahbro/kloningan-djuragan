@@ -20,7 +20,7 @@ echo doctype('html5');
 	?>
 
 	<title><?php echo $judul; ?></title>
-    <script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
+    <script src="<?php echo base_url('berkas/js/jquery-3.3.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('berkas/js/bootstrap.bundle.min.js'); ?>"></script>
 	<script src="<?php echo base_url('berkas/js/backend.js'); ?>"></script>
 	<script src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js"></script>

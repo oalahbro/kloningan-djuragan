@@ -252,6 +252,14 @@ class Faktur_model extends CI_Model
         }
     }
 
+    public function get_custom_info($id_faktur, $info) {
+        $this->db->select($info);
+        $this->db->where('id_faktur', $id_faktur);
+        $q = $this->db->get('faktur');
+
+        return $q->row();
+    }
+
     public function check($seri_faktur) {
         $this->db->where('seri_faktur', $seri_faktur);
         $q = $this->db->get('faktur');
@@ -291,7 +299,7 @@ class Faktur_model extends CI_Model
         $q = $this->db->get_where($table, array('faktur_id' => $faktur_id));
         if($q->num_rows() > 0) {
             $r = $q->row();
-            return $r->nominal;
+            return (int) $r->nominal;
         }
         else {
             return 0;

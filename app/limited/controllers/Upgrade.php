@@ -17,7 +17,7 @@ class Upgrade extends CI_Controller {
 		<html>
 		<head>
 			<title>Upgrade</title>
-			<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
+			<script src="<?php echo base_url('berkas/js/jquery-3.3.1.min.js') ?>"></script>
 			<style>
 			.com code {font-size:87.5%;color:#e83e8c;word-break:break-word}
 			.com:after { content: ", "}

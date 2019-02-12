@@ -87,9 +87,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             return text;
         }
 
-        // init tooltips
-        $(document).find('[data-toggle="tooltip"]').tooltip();
-
         //
         $(document).on("click", "input[type='number']", function(e){
             $(this).select();
@@ -170,7 +167,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 checking = 'tidak';
             }
             
-            $('#main-table tr#pesanan-' + id_faktur ).empty().append('<td colspan="7" class="text-center"><div class="spinner-border spinner-border-lg" role="status"><span class="sr-only">Loading...</span></div></td>');
+            $("#dynamicModal").modal('hide');
+            $('#main-table tr#pesanan-' + id_faktur + ' .status' ).empty().append('<div class="text-center"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
 
             $.post("<?php echo site_url('post/pembayaran'); ?>", {
                 id_faktur: id_faktur,
@@ -181,11 +179,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $.get('<?php echo site_url("pesanan"); ?>?cari[q]='+ response.seri_faktur, function(data) {
                     var oContent = $(data).find('#pesanan-' + id_faktur);
 
-                    $('#main-table tr#pesanan-' + id_faktur).replaceWith(oContent);
+                    // $('#main-table tr#pesanan-' + id_faktur).replaceWith(oContent);
+                    load_pembayaran('#pesanan-'+ id_faktur +' .pesanan','#pesanan-'+ id_faktur +' .status', '#pesanan-'+ id_faktur +' .pembayaran', id_faktur, function() {});
                     $('#main-table tr#pesanan-' + id_faktur).delay(100).fadeOut().fadeIn('slow');
                 });
 
-                $("#dynamicModal").modal('hide');
+                
                 createToast(response.title, response.alert);
             });
             
@@ -274,7 +273,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             
             var datastring = $form.serialize();
 
-            $('#main-table tr#pesanan-' + faktur_id ).empty().append('<td colspan="7" class="text-center"><div class="spinner-border spinner-border-lg" role="status"><span class="sr-only">Loading...</span></div></td>');
+            $("#dynamicModal").modal('hide');
+            $('#main-table tr#pesanan-' + faktur_id ).empty().append('<div class="text-center"><div class="spinner-border spinner-border-lg" role="status"><span class="sr-only">Loading...</span></div></div>');
 
             $.ajax({
                 type: "POST",
@@ -288,11 +288,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     $.get('<?php echo site_url("pesanan"); ?>?cari[q]='+ data.seri_faktur, function(data) {
                         var oContent = $(data).find('#pesanan-' + faktur_id);
 
-                        $('#main-table tr#pesanan-' + faktur_id).replaceWith(oContent);
+                        // $('#main-table tr#pesanan-' + faktur_id).replaceWith(oContent);
+                        load_pembayaran('#pesanan-'+ faktur_id +' .pesanan','#pesanan-'+ faktur_id +' .status', '#pesanan-'+ faktur_id +' .pembayaran', faktur_id, function() {});
                         $('#main-table tr#pesanan-' + faktur_id).delay(100).fadeOut().fadeIn('slow');
                     });
 
-                    $("#dynamicModal").modal('hide');
                     createToast(data.title, data.alert);
 
                 },
@@ -462,18 +462,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $("#dynamicModal").modal('hide');
             }
             else {
-                $('#main-table tr#pesanan-' + faktur_id).empty().append('<td colspan="7" class="text-center"><div class="spinner-border spinner-border-lg" role="status"><span class="sr-only">Loading...</span></div></td>');
+                $("#dynamicModal").modal('hide');
+                $('#main-table tr#pesanan-' + faktur_id + ' .status').empty().append('<div colspan="7" class="text-center"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
 
                 $.post('<?php echo site_url("post/paket") ?>', {faktur_id: faktur_id, status: status}, function(response) {
 
                     $.get('<?php echo site_url("pesanan"); ?>?cari[q]='+ faktur, function(data) {
                         var oContent = $(data).find('#pesanan-' + faktur_id);
 
-                        $('#main-table tr#pesanan-' + faktur_id).replaceWith(oContent);
-                        $('#main-table tr#pesanan-' + faktur_id).delay(100).fadeOut().fadeIn('slow');
+                        // $('#main-table tr#pesanan-' + faktur_id).replaceWith(oContent);
+                        load_pembayaran('#pesanan-'+ faktur_id +' .pesanan','#pesanan-'+ faktur_id +' .status', '#pesanan-'+ faktur_id +' .pembayaran', faktur_id, function() {});
+                        $('#main-table tr#pesanan-' + faktur_id + ' .status').delay(100).fadeOut().fadeIn('slow');
                     });
 
-                    $("#dynamicModal").modal('hide');
                     createToast(response.title, response.alert);
                 });
             }

@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 echo form_open('auth/daftar', array('class' => 'form-signin'));
-	echo img(array('src'   => 'assets/img/logo.png', 'alt'   => 'Logo', 'width' => '150', 'height'=> '150', 'class' => 'mb-4 rounded border p-2 bg-light'));
+	echo img(array('src'   => 'berkas/img/logo.png', 'alt'   => 'Logo', 'width' => '150', 'height'=> '150', 'class' => 'mb-4 rounded border p-2 bg-light'));
 
 	echo heading('Silakan Daftar', 1, array('class' => 'h3 font-weight-normal'));
 

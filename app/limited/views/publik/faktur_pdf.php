@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 
-	<img src="<?php echo base_url('assets/img/logo.png') ?>" style="float:right; max-height: 120px; margin-right: 30px; height: auto; ">
+	<img src="<?php echo base_url('berkas/img/logo.png') ?>" style="float:right; max-height: 120px; margin-right: 30px; height: auto; ">
 	<div class="isi">
 		<header>
 			Tanggal cetak : <?php echo mdate('%d-%M-%y', now()); ?><br/>
