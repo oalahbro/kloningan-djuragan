@@ -23,10 +23,6 @@ class ComposerStaticInit55e68dfcb33381d4935e9349b6996929
         array (
             'Dompdf\\' => 7,
         ),
-        'C' => 
-        array (
-            'Curl\\' => 5,
-        ),
         'B' => 
         array (
             'Box\\Spout\\' => 10,
@@ -49,10 +45,6 @@ class ComposerStaticInit55e68dfcb33381d4935e9349b6996929
         'Dompdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
-        ),
-        'Curl\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/php-curl-class/php-curl-class/src/Curl',
         ),
         'Box\\Spout\\' => 
         array (

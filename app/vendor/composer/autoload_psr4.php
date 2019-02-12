@@ -10,6 +10,5 @@ return array(
     'Lcobucci\\JWT\\' => array($vendorDir . '/lcobucci/jwt/src'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),
     'Dompdf\\' => array($vendorDir . '/dompdf/dompdf/src'),
-    'Curl\\' => array($vendorDir . '/php-curl-class/php-curl-class/src/Curl'),
     'Box\\Spout\\' => array($vendorDir . '/box/spout/src/Spout'),
 );
