@@ -66,10 +66,12 @@ $route['valid'] = 'auth/valid';
 //$route['register'] = 'auth/daftar';
 $route['excel'] = 'excel';
 
+$route['pesanan'] = 'faktur/index';
+$route['pesanan/(:any)'] = 'faktur/arsip/$1';
+
+
 // bagian admin
 $route['migrasi'] = 'admin/faktur/migrasi';
-$route['pesanan'] = 'admin/faktur/lihat';
-$route['pesanan/(:any)'] = 'admin/faktur/lihat/$1';
 $route['pesanan/sunting/(:any)'] = 'admin/faktur/sunting/$1';
 
 $route['get/pembayaran'] = 'admin/faktur/ambil_pembayaran';
@@ -100,11 +102,6 @@ $route['mychart'] = 'cs/chart';
 
 $route['session'] = 'dasbor/log';
 
-
-$route['j_(:any)/tambah'] = 'cs/pesanan/tambah/$1';
-$route['j_(:any)/sunting'] = 'cs/pesanan/sunting';
-$route['j_(:any)/pesanan'] = 'cs/pesanan/lihat/$1';
-$route['j_(:any)/pesanan/(:any)'] = 'cs/pesanan/lihat/$1/$2';
 /*
 $route['admin'] = 'admin/pesanan/lihat';
 $route['admin/pesanan'] = 'admin/pesanan/lihat';
