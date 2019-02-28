@@ -4,7 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script>
 $(function () {
+    var mess = '<div id="message" class="position-fixed mr-3" style="z-index: 1060;max-width: 500px; top: 70px; right: 0"></div>';
     var count = $("#count");
+
+    $('body').append(mess);
+
     function loadCount() {
         $.getJSON( "<?php echo site_url('session'); ?>", function( response ) {
             if(response.log) {
@@ -86,21 +90,20 @@ function makeid() {
     return text;
 }
 // create dynamic modal 
-
 function doModal(h, c) {
-  var a = '<div class="modal fade" id="dynamicModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="dynamicModalTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header">' + ('<h5 class="modal-title" id="dynamicModalTitle">' + h + "</h5>") + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-  a += '<div class="modal-body">';
-  a += c;
-  a += "</div>";
-  a += "</div>";
-  a += "</div>";
-  a += "</div>";
-  $("body").append(a);
-  $("#dynamicModal").modal();
-  $("#dynamicModal").modal("show");
-  $("#dynamicModal").on("hidden.bs.modal", function(a) {
-    $(this).remove();
-  });
+    var a = '<div class="modal fade" id="dynamicModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="dynamicModalTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header">' + ('<h5 class="modal-title" id="dynamicModalTitle">' + h + "</h5>") + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+    a += '<div class="modal-body">';
+    a += c;
+    a += "</div>";
+    a += "</div>";
+    a += "</div>";
+    a += "</div>";
+    $("body").append(a);
+    $("#dynamicModal").modal();
+    $("#dynamicModal").modal("show");
+    $("#dynamicModal").on("hidden.bs.modal", function(a) {
+        $(this).remove();
+    });
 }
 
 // create Toast

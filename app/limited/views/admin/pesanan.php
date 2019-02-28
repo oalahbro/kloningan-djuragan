@@ -5,7 +5,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php echo $this->load->view("_inc/header", $judul, TRUE) ?>
 <?php echo $this->load->view("admin/_inc/navbar", '', TRUE) ?>
 
-
         <div class="konten" id="konten">
             <div class="jumbotron jumbotron-fluid">
                 <div class="container-fluid">

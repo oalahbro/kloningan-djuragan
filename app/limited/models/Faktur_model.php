@@ -383,6 +383,11 @@ class Faktur_model extends CI_Model
         return $this->db->get_where('pembayaran', array('faktur_id' => $faktur_id));
     }
 
+    public function get_pay($id_pembayaran) {
+        $q = $this->db->where(array('id_pembayaran' => $id_pembayaran))->get('pembayaran');
+        return $q;
+    }
+
     public function sub_pay($data) {
         return $this->db->insert_batch('pembayaran', $data);
     }
