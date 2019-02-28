@@ -84,7 +84,31 @@ class Faktur extends CI_Controller {
 			);
 
 		$this->load->view($this->template . '/pesanan', $this->data);
-    }
+	}
+	
+	public function ambil_pembayaran() {
+		$id = $this->input->get('id');
+
+		$q = $this->faktur->get_pays($id);
+
+		$data = array();
+		foreach ($q->result() as $bayar) {
+			$data[] = array(
+				'id' => (int) $bayar->id_pembayaran,
+				'rekening' => $bayar->rekening,
+				'jumlah' => harga($bayar->jumlah),
+				'tanggal_bayar' => mdate('%d-%m-%Y', $bayar->tanggal_bayar),
+				'tanggal_cek' => ( $bayar->tanggal_cek !== NULL ? mdate('%d-%m-%Y', $bayar->tanggal_cek) : NULL)
+			);
+		}
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
 
     public function tambah_pembayaran() {
 		$this->form_validation->set_rules('faktur_id', 'Faktur ID', 'required');

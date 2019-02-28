@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <script>
-var row = $("#main-table tbody tr"), tanggal_sekarang = "<?php echo mdate('%Y-%m-%d', now()); ?>", spinner = '<div class="text-center"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>', spinner_btn = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...', i = 0, cmd, totalCommands = row.length;
+var row = $("#main-table tbody tr"), tanggal_sekarang = "<?php echo mdate('%Y-%m-%d', now()); ?>", spinner = '<div class="text-center"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>', spinner_btn = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...', i = 0, cmd, totalCommands = row.length, uri = "<?php echo site_url(); ?>/";
 
 function loadingData(c, a) {
 	if (!(c >= totalCommands)) {
@@ -32,8 +32,8 @@ function load_tooltips() {
 
 // load "juragan" column
 function load_juragan(c, a, e) {
-	$.getJSON("<?php echo site_url() ?>/admin/faktur/json_juragan/" + a, function(a) {
-		var b = '<a href="<?php echo site_url() ?>/pesanan/' + a.slug + '">' + a.nama + "</a>";
+	$.getJSON(uri + "admin/faktur/json_juragan/" + a, function(a) {
+		var b = '<a href="'+uri+'pesanan/' + a.slug + '">' + a.nama + "</a>";
 		a = '<hr/><span class="text-muted small">CS: ' + a.nama_cs + "</span>";
 		$(c).empty().append(b + a);
 		e();
@@ -42,7 +42,7 @@ function load_juragan(c, a, e) {
 
 // load "status", "pesanan", "pembayaran" column
 function load_pembayaran(c, a, e, b, m) {
-	$.getJSON("<?php echo site_url('admin/faktur/json_pembayaran') ?>/" + b, function(b) {
+	$.getJSON(uri + "admin/faktur/json_pembayaran/" + b, function(b) {
 		var f = "", v = "", n = "", w = "", x = "", y = "";
 		switch(b.status) {
 		case 1:
@@ -198,7 +198,7 @@ function load_pembayaran(c, a, e, b, m) {
 // load "keterangan" column
 function load_keterangan(c, a) {
 	var e = "", b = "", m = "", f = "", u = "show";
-	$.getJSON("<?php echo site_url('admin/faktur/json_keterangan') ?>/" + a, function(a) {
+	$.getJSON(uri + "admin/faktur/json_keterangan/" + a, function(a) {
 		if ("undefined" !== typeof a.ket || "undefined" !== typeof a.gambar) {
 		e = '<button class="btn btn-outline-info dropdown-toggle btn-sm mb-1 mr-1" type="button" data-toggle="collapse" data-target="#collapseKeterangan-' + a.id + '" aria-expanded="false" aria-controls="collapseKeterangan-' + a.id + '"><i class="fas fa-scroll"></i> Keterangan</button>';
 		}
@@ -238,7 +238,7 @@ function load_keterangan(c, a) {
 // load data pembayaran, modal inside
 function load_data_pembayaran(c) {
 	var a = "";
-	$.ajax({type:"GET", url:"<?php echo site_url('get/pembayaran'); ?>", data:{id:c}, dataType:"json", success:function(e) {
+	$.ajax({type:"GET", url:uri + "faktur/ambil_pembayaran", data:{id:c}, dataType:"json", success:function(e) {
 		a += '<div class="pt-3">';
 		if (0 === e.length) {
 			a += '<p class="alert alert-danger">Tidak ditemukan data pembayaran</p>';
@@ -316,7 +316,7 @@ function load_data_tambahPembayaran(c) {
 
 // load form edit pembayaran, modal inside
 function load_data_suntingPembayaran(c) {
-	var a = "", e = "<?php echo site_url('faktur/detail_pembayaran'); ?>/" + c;
+	var a = "", e = uri + "faktur/detail_pembayaran/" + c;
 	$("#nav-sunting-tab").html("");
 	$.getJSON(e, function(b) {
 		a += '<form class="mt-3" method="post" accept-charset="utf-8">';
@@ -394,7 +394,7 @@ $(document).on("click", ".submitMe", function(c) {
 	c = a.closest("form").serialize();
 	a.prop("disabled", !0).html(spinner_btn);
 
-	$.ajax({type:"POST", url:"<?php echo site_url('faktur/tambah_pembayaran') ?>", data:c, dataType:"json", success:function(a) {
+	$.ajax({type:"POST", url:uri + "faktur/tambah_pembayaran", data:c, dataType:"json", success:function(a) {
 		if (a.status) {
 			$("#nav-cek").tab("show");
 			var b = "#pesanan-" + a.faktur_id;
@@ -421,7 +421,7 @@ $(document).on("keyup change", "#nav-cek-tab .sbm", function() {
 	checking = "";
 	checking = this.checked ? "ya" : "tidak";
 	c.prop("disabled", !0);
-	$.post("<?php echo site_url('post/pembayaran'); ?>", {id_faktur:id_faktur, id_pembayaran:id_pembayaran, check:checking}, function(a, c) {
+	$.post(uri + "faktur/check_pembayaran", {id_faktur:id_faktur, id_pembayaran:id_pembayaran, check:checking}, function(a, c) {
 		var b = "#pesanan-" + a.faktur_id;
 		$(b + " .pesanan").html(spinner);
 		$(b + " .status").html(spinner);
@@ -451,7 +451,7 @@ $(document).on("click", ".simpanMe", function(c) {
 	var a = $(this);
 	c = a.closest("form").serialize();
 	a.prop("disabled", !0).html(spinner_btn);
-	$.ajax({type:"POST", url:"<?php echo site_url('faktur/simpan_pembayaran') ?>", data:c, dataType:"json", success:function(a) {
+	$.ajax({type:"POST", url:uri + "faktur/simpan_pembayaran", data:c, dataType:"json", success:function(a) {
 		if (a.status) {
 			$("#nav-cek").tab("show");
 			var b = "#pesanan-" + a.faktur_id;
@@ -474,7 +474,7 @@ $(document).on("click", ".simpanMe", function(c) {
 $(document).on("click", ".hapusBayar", function(c) {
 	c.preventDefault();
 	c = $(this).closest(".dropdown").attr("data-id");
-	$.post("<?php echo site_url('faktur/hapus_pembayaran'); ?>", {idpembayaran:c}, function(a, c) {
+	$.post(uri + "faktur/hapus_pembayaran", {idpembayaran:c}, function(a, c) {
 		var b = "#pesanan-" + a.faktur_id;
 		$(b + " .pesanan").html(spinner);
 		$(b + " .status").html(spinner);
