@@ -318,39 +318,50 @@ function load_data_tambahPembayaran(c) {
 function load_data_suntingPembayaran(c) {
 	var a = "", e = uri + "faktur/detail_pembayaran/" + c;
 	$("#nav-sunting-tab").html("");
+	
+	a += '<form class="mt-3" method="post" accept-charset="utf-8">';
+	a += '<input name="id_pembayaran" type="hidden" value=""/>';
+	a += '<input name="faktur_id" type="hidden" value=""/>';
+	a += '<div class="form-row mb-0">';
+	a += '<div class="col-6 form-group">';
+	a += '<label for="rekening">Tujuan Bayar</label>';
+	a += '<input class="form-control" value="" id="rekening" type="text" name="rek" placeholder="mis: cash, mandiri, bca, bni, ..." required="">';
+	a += "</div>";
+	a += '<div class="col-6 form-group">';
+	a += '<label for="tanggal_bayar">Tanggal Bayar</label>';
+	a += '<input class="form-control" id="tanggal_bayar" type="date" name="tanggal_bayar" value="" required="">';
+	a += "</div>";
+	a += '<div class="col-6 form-group">';
+	a += '<label for="nominal">Jumlah Dana</label>';
+	a += '<input class="form-control" id="nominal" type="number" min="0" name="nominal" placeholder="mis: 350000" value="" required="">';
+	a += "</div>";
+	a += '<div class="col-6 form-group">';
+	a += '<label for="tanggal_cek">Dana ada?</label>';
+	a += '<div class="input-group mb-2 mr-sm-2">';
+	a += '<div class="input-group-prepend">';
+	a += '<div class="input-group-text">';
+	a += '<input type="checkbox" name="ada_dana" value="ya">';
+	a += "</div>";
+	a += "</div>";
+	a += '<input type="date" id="tanggal_cek" name="tanggal_cek" value="' + tanggal_sekarang + '" class="form-control" disabled="" required="">';
+	a += "</div>";
+	a += "</div>";
+	a += "</div>";
+	a += '<hr/><button type="button" class="btn btn-primary simpanMe">Simpan</button>';
+	a += "</form>";
+	$("#nav-sunting-tab").html(a);
+	
 	$.getJSON(e, function(b) {
-		a += '<form class="mt-3" method="post" accept-charset="utf-8">';
-		a += '<input name="id_pembayaran" type="hidden" value="' + c + '"/>';
-		a += '<input name="faktur_id" type="hidden" value="' + b.faktur_id + '"/>';
-		a += '<div class="form-row mb-0">';
-		a += '<div class="col-6 form-group">';
-		a += '<label for="rekening">Tujuan Bayar</label>';
-		a += '<input class="form-control" value="' + b.rekening + '" id="rekening" type="text" name="rek" placeholder="mis: cash, mandiri, bca, bni, ..." required="">';
-		a += "</div>";
-		a += '<div class="col-6 form-group">';
-		a += '<label for="tanggal_bayar">Tanggal Bayar</label>';
-		a += '<input class="form-control" id="tanggal_bayar" type="date" name="tanggal_bayar" value="' + b.tanggal_bayar + '" required="">';
-		a += "</div>";
-		a += '<div class="col-6 form-group">';
-		a += '<label for="nominal">Jumlah Dana</label>';
-		a += '<input class="form-control" id="nominal" type="number" min="0" name="nominal" placeholder="mis: 350000" value="' + b.jumlah + '" required="">';
-		a += "</div>";
-		a += '<div class="col-6 form-group">';
-		a += '<label for="tanggal_cek">Dana ada?</label>';
-		a += '<div class="input-group mb-2 mr-sm-2">';
-		a += '<div class="input-group-prepend">';
-		a += '<div class="input-group-text">';
-		a += '<input type="checkbox" name="ada_dana" value="ya">';
-		a += "</div>";
-		a += "</div>";
-		a += '<input type="date" id="tanggal_cek" name="tanggal_cek" value="' + tanggal_sekarang + '" class="form-control" disabled="" required="">';
-		a += "</div>";
-		a += "</div>";
-		a += "</div>";
-		a += '<hr/><button type="button" class="btn btn-primary simpanMe">Simpan</button>';
-		a += "</form>";
-		$("#nav-sunting-tab").html(a);
-		null !== b.tanggal_cek && ($('#nav-sunting-tab input[type="checkbox"]').prop("checked", !0), $('#nav-sunting-tab input[name="tanggal_cek"]').prop("disabled", !1).val(b.tanggal_cek));
+		$('#nav-sunting-tab [name="id_pembayaran"]').val(c);
+		$('#nav-sunting-tab [name="faktur_id"]').val(b.faktur_id);
+		$('#nav-sunting-tab [name="rek"]').val(b.rekening);
+		$('#nav-sunting-tab [name="tanggal_bayar"]').val(b.tanggal_bayar);
+		$('#nav-sunting-tab [name="nominal"]').val(b.jumlah);
+
+		if (b.tanggal_cek !== null) {
+			$('#nav-sunting-tab [name="tanggal_cek"]').val(b.tanggal_cek).prop('disabled', false);
+			$('#nav-sunting-tab [name="ada_dana"]').prop('checked', true);			
+		}
 	});
 }
 
@@ -364,9 +375,9 @@ $(document).on("click", ".ckbyr", function(c) {
 	var b = '<nav><div data-id="' + c + '" class="nav nav-tabs" id="nav-tab" role="tablist"><a class="nav-item nav-link active" id="nav-cek" data-toggle="tab" href="#nav-cek-tab" role="tab" aria-controls="nav-cek-tab" aria-selected="true">Cek</a><a class="nav-item nav-link" id="nav-tambah" data-toggle="tab" href="#nav-tambah-tab" role="tab" aria-controls="nav-tambah-tab" aria-selected="">Tambah</a>';
 	b += '<a class="nav-item nav-link d-none" id="nav-sunting" data-toggle="tab" href="#nav-sunting-tab" role="tab" aria-controls="nav-sunting-tab" aria-selected="true">Sunting</a></div></nav>';
 	b += '<div class="tab-content" id="nav-tabContent">';
-	b += '<div class="tab-pane fade show active" id="nav-cek-tab" role="tabpanel" aria-labelledby="nav-cek-tab">' + spinner + "</div>";
-	b += '<div class="tab-pane fade" id="nav-tambah-tab" role="tabpanel" aria-labelledby="nav-tambah-tab">' + spinner + "</div>";
-	b += '<div class="tab-pane fade" data-id="" id="nav-sunting-tab" role="tabpanel" aria-labelledby="nav-sunting-tab">' + spinner + "</div>";
+	b += '<div class="tab-pane fade show active" id="nav-cek-tab" role="tabpanel" aria-labelledby="nav-cek-tab"></div>';
+	b += '<div class="tab-pane fade" id="nav-tambah-tab" role="tabpanel" aria-labelledby="nav-tambah-tab"></div>';
+	b += '<div class="tab-pane fade" id="nav-sunting-tab" role="tabpanel" aria-labelledby="nav-sunting-tab"></div>';
 	b += "</div>";
 	doModal("Pembayaran " + e, b, "moodal_status_pembayaran");
 	"0" === a ? ($("#nav-tambah").tab("show"), load_data_tambahPembayaran(c)) : ($("#nav-cek").tab("show"), load_data_pembayaran(c));
@@ -378,7 +389,27 @@ $(document).on("shown.bs.tab", 'a[data-toggle="tab"]', function(c) {
 	c = a.closest("div").data("id");
 	a = a.attr("id");
 	$("#" + a + "-tab").html(spinner);
-	"nav-tambah" === a ? (load_data_tambahPembayaran(c), $("#nav-sunting").addClass("d-none")) : "nav-cek" === a && (load_data_pembayaran(c), $("#nav-sunting").addClass("d-none"));
+
+	switch (a) {
+		case 'nav-tambah':
+			load_data_tambahPembayaran(c);
+			 $("#nav-sunting").addClass("d-none");
+			break;
+		
+		case 'nav-cek':
+			load_data_pembayaran(c);
+			 $("#nav-sunting").addClass("d-none");
+			break;
+	
+		case 'nav-sunting':
+			$("#nav-sunting").removeClass("d-none");
+
+			var tab = $('#nav-tabContent').data('id');
+			load_data_suntingPembayaran(tab);
+			break;
+	}
+
+	console.log(a);
 });
 
 // switch check dana, modal inside
@@ -439,9 +470,7 @@ $(document).on("click", ".suntingBayar", function(c) {
 	c.preventDefault();
 	c = $(this).closest(".dropdown").attr("data-id");
 	$("#nav-sunting").tab("show");
-	$("#nav-sunting-tab").attr("data-id", c);
-	load_data_suntingPembayaran(c);
-	$("#nav-sunting").removeClass("d-none");
+	$("#nav-tabContent").attr("data-id", c);
 });
 
 // save sunting pembayaran
