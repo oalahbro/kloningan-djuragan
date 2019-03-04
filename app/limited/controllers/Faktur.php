@@ -308,4 +308,46 @@ class Faktur extends CI_Controller {
 			->_display();
 		exit;
 	}
+
+	public function ubah_paket() {
+		$faktur_id = $this->input->post('faktur_id');
+		$status = $this->input->post('status');
+		
+		switch ($status) {
+			case '2':
+				# code...
+				$stt = 'dibatalkan';
+				$notif_code = 4;
+				break;
+			
+			case '1':
+				# code...
+				$stt = 'diproses';
+				$notif_code = 5;
+				break;
+
+			default:
+				# code...
+				$stt = 'belum diproses';
+				$notif_code = 6;
+				break;
+		}
+
+		$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
+		$juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
+		$this->notifikasi->set($_SESSION['userid'], $notif_code, $juragan_id, $seri_faktur, 'cs');
+
+		$this->faktur->set_package($faktur_id, $status);
+		$data = array(
+			'title' => 'Update status paket',
+			'alert' => 'Status Paket faktur ' . strtoupper( $seri_faktur ) . ' telah menjadi "' . $stt . '"'
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
 }

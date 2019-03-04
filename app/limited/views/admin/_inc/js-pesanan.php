@@ -515,4 +515,48 @@ $(document).on("click", ".hapusBayar", function(c) {
 		createToast(a.title, a.alert);
 	});
 });
+
+// set paket
+$(document).on("click", ".set_paket", function(e){
+	e.preventDefault();
+	var $div = $(e.target).closest( ".mn" );
+	var id = $div.attr('data-id');
+	var status = $(this).attr('data-status');
+	var faktur = $div.attr('data-faktur');
+	var konten = '';
+
+	konten += '<div id="'+id+'" data-faktur="'+faktur+'" data-current="'+status+'" class="button-radios d-flex text-light justify-content-center">';
+		konten += '<div data-status="belumproses" class="mx-1 radio border text-center justify-content-center d-flex align-items-center rounded-circle '+ (status === 'belumproses' ? 'bg-warning': 'bg-dark') +'" data-value="0"><span>Belum diproses</span></div>';
+		konten += '<div data-status="diproses" class="mx-1 radio border text-center justify-content-center d-flex align-items-center rounded-circle '+(status === 'diproses'? 'bg-success': 'bg-dark')+'" data-value="1"><span>Diproses</span></div>';
+		konten += '<div data-status="dibatalkan" class="mx-1 radio border text-center justify-content-center d-flex align-items-center rounded-circle '+(status === 'dibatalkan'? 'bg-danger': 'bg-dark')+'" data-value="2"><span>Dibatalkan</span></div>';
+	konten += '</div>';
+
+	doModal('Atur status paket '+ faktur, konten);
+});
+
+// when clicked radio button status paket
+$(document).on("click", ".button-radios .radio", function(e){
+	var status = $(this).attr('data-value'),
+		status_text = $(this).attr('data-status'),
+		faktur_id = $(this).parent().attr('id'),
+		current = $(this).parent().attr('data-current'),
+		faktur = $(this).parent().attr('data-faktur'),
+		b = "#pesanan-" + faktur_id;
+
+	$("#dynamicModal").modal('hide');
+	if(current !== status_text) {
+		$.post('<?php echo site_url("faktur/ubah_paket") ?>', {faktur_id: faktur_id, status: status}, function(response) {
+			$(b + " .pesanan").html(spinner);
+			$(b + " .status").html(spinner);
+			$(b + " .pembayaran").html(spinner);
+			$(b + " .keterangan").html(spinner);
+			load_pembayaran(b + " .pesanan", b + " .status", b + " .pembayaran", faktur_id, function() {
+				load_tooltips();
+			});
+			load_keterangan(b + " .keterangan", faktur_id);
+
+			createToast(response.title, response.alert);
+		});
+	}
+});
 </script>
