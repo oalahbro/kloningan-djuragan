@@ -155,19 +155,31 @@ class Pengguna_model extends CI_Model
 	}
 
 	public function _juragan_cs($username) {
-		$id_pengguna = $this->_id($username);
+		// ambil data juragan per pengguna sesuai level		
+		$p = $this->db->get_where('pengguna', array('username' => $username))->row();
 
-		$this->db->where('pengguna_id', $id_pengguna);
-		$q = $this->db->get('pengguna_relation');
+		switch ($p->level) {
+			case 'admin':
+			case 'superadmin':
+			case 'viewer':
+				$t = $this->juragan->_semua();
+				break;
+			
+			case 'cs':
+			case 'reseller':
+				$id_pengguna = $this->_id($username);
+				$this->db->where('pengguna_id', $id_pengguna);
+				$q = $this->db->get('pengguna_relation');
 
-		foreach ($q->result() as $key) {
-			$jur[] = $key->juragan_id;
+				foreach ($q->result() as $key) {
+					$jur[] = $key->juragan_id;
+				}
+		
+				$t = $this->db->where_in('id', $jur)
+							->order_by('nama', 'asc')
+							->get('juragan');
+				break;
 		}
-
-		$t = $this->db->where_in('id', $jur)
-					->order_by('nama', 'asc')
-					->get('juragan');
-
 		return $t;
 	}
 

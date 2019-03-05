@@ -48,12 +48,12 @@ class Faktur extends CI_Controller {
         }
 	}
 
+	// ambil data juragan
 	public function get_juragan() {
 		$jur = $this->juragan->_semua()->result();
 
 		$data = array();
 		foreach ($jur as $juragan) {
-		
 			$data[] = array(
 				'nama' => $juragan->nama,
 				'slug' => $juragan->slug
@@ -67,7 +67,7 @@ class Faktur extends CI_Controller {
 		$this->output
 			->set_status_header(200)
 			->set_content_type('application/json', 'utf-8')
-			->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 			->_display();
 		exit;
 	}
