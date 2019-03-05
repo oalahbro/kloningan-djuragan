@@ -563,6 +563,15 @@ $(document).on("click", ".button-radios .radio", function(e){
 });
 
 // set kirim
+$(document).on("click", ".cant_kirim", function(e){
+	e.preventDefault();
+	var $div = $(this).closest(".mn");
+	var id = $div.attr('data-id');
+	var faktur = $div.attr('data-faktur');
+	var tm = makeid();
+	createToast('Atur Pengiriman', 'Pesanan '+faktur+' belum dapat di-set kirim karena belum diproses ');
+});
+
 $(document).on("click", ".set_kirim", function(e){
 	e.preventDefault();
 	var a = $(this).closest(".mn");
@@ -579,25 +588,24 @@ $(document).on("click", ".set_kirim", function(e){
 	b += "</div>";
 	doModal("Pengiriman " + e, b);
 
-	if (a === "0") {
+	if (a !== "0") {
 		$("#nav-cek-kirim").tab("show");
 		load_data_pengiriman(c);
 	}
 	else {
+		$("#nav-tambah-kirim").tab("show");
 		load_data_tambah_pengiriman(c);
 	}
-
-	// "0" === a ? ($("#nav-tambah").tab("show"), load_data_tambahPembayaran(c)) : ($("#nav-cek").tab("show"), load_data_pembayaran(c));
 });
 
 //
 function load_data_pengiriman(id) {
-	$('#nav-cek-kirim-tab').html(id);
+	$('#nav-cek-kirim-tab').html('cek');
 }
 
 //
 function load_data_tambah_pengiriman(id) {
-	$('#nav-tambah-kirim-tab').html(id);
+	$('#nav-tambah-kirim-tab').html('tambah');
 }
 
 $(document).on("shown.bs.tab", 'a[data-inf="tab_kirim"]', function(c) {
@@ -624,8 +632,6 @@ $(document).on("shown.bs.tab", 'a[data-inf="tab_kirim"]', function(c) {
 			// load_data_suntingPembayaran(tab);
 			break;
 	}
-
-	console.log(a);
 });
 
 </script>
