@@ -32,7 +32,7 @@ function load_tooltips() {
 
 // load "juragan" column
 function load_juragan(c, a, e) {
-	$.getJSON(uri + "admin/faktur/json_juragan/" + a, function(a) {
+	$.getJSON(uri + "faktur/json_juragan/" + a, function(a) {
 		var b = '<a href="'+uri+'pesanan/' + a.slug + '">' + a.nama + "</a>";
 		a = '<hr/><span class="text-muted small">CS: ' + a.nama_cs + "</span>";
 		$(c).empty().append(b + a);
@@ -42,7 +42,7 @@ function load_juragan(c, a, e) {
 
 // load "status", "pesanan", "pembayaran" column
 function load_pembayaran(c, a, e, b, m) {
-	$.getJSON(uri + "admin/faktur/json_pembayaran/" + b, function(b) {
+	$.getJSON(uri + "faktur/json_pembayaran/" + b, function(b) {
 		var f = "", v = "", n = "", w = "", x = "", y = "";
 		switch(b.status) {
 		case 1:
@@ -66,7 +66,7 @@ function load_pembayaran(c, a, e, b, m) {
 		"undefined" != typeof b.diskon && (n = '<span class="d-block text-right">diskon : <span class="badge badge-warning">-' + b.diskon + "</span></span>");
 		var z = '<span class="d-block text-right">wajib bayar : <span class="badge badge-success">' + b.wajib_bayar + "</span></span>";
 		"undefined" != typeof b.terbayar && (x = '<span class="d-block text-right">dibayar : <span class="badge badge-danger">' + b.terbayar + "</span></span>");
-		var d = '<div class="mn" data-statustransfer="' + b.status_transfer + '" data-kurang="0" data-faktur="' + b.seri_faktur + '" data-id="' + b.id_faktur + '">';
+		var d = '<div class="mn" id="buttoncollect" data-statustransfer="' + b.status_transfer + '" data-kurang="0" data-statuskirim="'+ b.status_kirim +'" data-faktur="' + b.seri_faktur + '" data-id="' + b.id_faktur + '">';
 		switch(b.status_transfer) {
 		case "3":
 			var g = "text-success";
@@ -155,6 +155,7 @@ function load_pembayaran(c, a, e, b, m) {
 		default:
 			$c_krm = "text-danger", $i_krm = "fa-times", $mi_krm = "fa-cubes", $t_krm = "Pesanan Belum dikirim";
 		}
+
 		d += '<div class="fa-2x d-inline-block ' + r + '" data-toggle="tooltip" data-placement="top" title="' + $t_krm + '">';
 		d += '<span class="fa-layers fa-fw">';
 		d += '<i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>';
@@ -183,6 +184,7 @@ function load_pembayaran(c, a, e, b, m) {
 		d += "</div>";
 		d += "</div>";
 		d += "</div>";
+
 		"undefined" != typeof b.tipe && (w = '<span class="d-block text-uppercase py-1 text-center text-light font-weight-bold border border-danger bg-danger rounded px-2 mb-1">' + b.tipe + "</span>");
 		for (i = 0; i < b.produk.length; i++) {
 		y += "<div>" + b.produk[i].c + " (" + b.produk[i].s + ") = " + b.produk[i].q + "pcs</div>";
@@ -191,14 +193,14 @@ function load_pembayaran(c, a, e, b, m) {
 		$(c).empty().append(w + y + b);
 		$(a).empty().append(d);
 		$(e).empty().append(p + q + v + f + n + z + x);
-		m();
+		m();		
 	});
 }
 
 // load "keterangan" column
 function load_keterangan(c, a) {
 	var e = "", b = "", m = "", f = "", u = "show";
-	$.getJSON(uri + "admin/faktur/json_keterangan/" + a, function(a) {
+	$.getJSON(uri + "faktur/json_keterangan/" + a, function(a) {
 		if ("undefined" !== typeof a.ket || "undefined" !== typeof a.gambar) {
 		e = '<button class="btn btn-outline-info dropdown-toggle btn-sm mb-1 mr-1" type="button" data-toggle="collapse" data-target="#collapseKeterangan-' + a.id + '" aria-expanded="false" aria-controls="collapseKeterangan-' + a.id + '"><i class="fas fa-scroll"></i> Keterangan</button>';
 		}
@@ -372,8 +374,8 @@ $(document).on("click", ".ckbyr", function(c) {
 	c = a.attr("data-id");
 	var e = a.attr("data-faktur");
 	a = a.attr("data-statustransfer");
-	var b = '<nav><div data-id="' + c + '" class="nav nav-tabs" id="nav-tab" role="tablist"><a class="nav-item nav-link active" id="nav-cek" data-toggle="tab" href="#nav-cek-tab" role="tab" aria-controls="nav-cek-tab" aria-selected="true">Cek</a><a class="nav-item nav-link" id="nav-tambah" data-toggle="tab" href="#nav-tambah-tab" role="tab" aria-controls="nav-tambah-tab" aria-selected="">Tambah</a>';
-	b += '<a class="nav-item nav-link d-none" id="nav-sunting" data-toggle="tab" href="#nav-sunting-tab" role="tab" aria-controls="nav-sunting-tab" aria-selected="true">Sunting</a></div></nav>';
+	var b = '<nav><div data-id="' + c + '" class="nav nav-tabs" id="nav-tab" role="tablist"><a class="nav-item nav-link active" id="nav-cek" data-toggle="tab" data-inf="tab_bayar" href="#nav-cek-tab" role="tab" aria-controls="nav-cek-tab" aria-selected="true">Cek</a><a class="nav-item nav-link" id="nav-tambah" data-toggle="tab" data-inf="tab_bayar" href="#nav-tambah-tab" role="tab" aria-controls="nav-tambah-tab" aria-selected="">Tambah</a>';
+	b += '<a class="nav-item nav-link d-none" id="nav-sunting" data-toggle="tab" data-inf="tab_bayar" href="#nav-sunting-tab" role="tab" aria-controls="nav-sunting-tab" aria-selected="true">Sunting</a></div></nav>';
 	b += '<div class="tab-content" id="nav-tabContent">';
 	b += '<div class="tab-pane fade show active" id="nav-cek-tab" role="tabpanel" aria-labelledby="nav-cek-tab"></div>';
 	b += '<div class="tab-pane fade" id="nav-tambah-tab" role="tabpanel" aria-labelledby="nav-tambah-tab"></div>';
@@ -384,7 +386,7 @@ $(document).on("click", ".ckbyr", function(c) {
 });
 
 // moving tab pembayaran, modal inside
-$(document).on("shown.bs.tab", 'a[data-toggle="tab"]', function(c) {
+$(document).on("shown.bs.tab", 'a[data-inf="tab_bayar"]', function(c) {
 	var a = $(c.target);
 	c = a.closest("div").data("id");
 	a = a.attr("id");
@@ -559,4 +561,71 @@ $(document).on("click", ".button-radios .radio", function(e){
 		});
 	}
 });
+
+// set kirim
+$(document).on("click", ".set_kirim", function(e){
+	e.preventDefault();
+	var a = $(this).closest(".mn");
+	c = a.attr("data-id");
+	var e = a.attr("data-faktur");
+	a = a.attr("data-statuskirim");
+	var b = '<nav><div data-id="' + c + '" class="nav nav-tabs" id="nav-tab" role="tablist">';
+	b += '<a class="nav-item nav-link active" id="nav-cek-kirim" data-toggle="tab" data-inf="tab_kirim" href="#nav-cek-kirim-tab" role="tab" aria-controls="nav-cek-kirim-tab" aria-selected="true">Cek</a><a class="nav-item nav-link" id="nav-tambah-kirim" data-toggle="tab" data-inf="tab_kirim" href="#nav-tambah-kirim-tab" role="tab" aria-controls="nav-tambah-kirim-tab" aria-selected="">Tambah</a>';
+	b += '<a class="nav-item nav-link d-none" id="nav-sunting-kirim" data-toggle="tab" data-inf="tab_kirim" href="#nav-sunting-kirim-tab" role="tab" aria-controls="nav-sunting-kirim-tab" aria-selected="true">Sunting</a></div></nav>';
+	b += '<div class="tab-content" id="nav-tabContent">';
+	b += '<div class="tab-pane fade show active" id="nav-cek-kirim-tab" role="tabpanel" aria-labelledby="nav-cek-kirim-tab"></div>';
+	b += '<div class="tab-pane fade" id="nav-tambah-kirim-tab" role="tabpanel" aria-labelledby="nav-tambah-kirim-tab"></div>';
+	b += '<div class="tab-pane fade" id="nav-sunting-kirim-tab" role="tabpanel" aria-labelledby="nav-sunting-kirim-tab"></div>';
+	b += "</div>";
+	doModal("Pengiriman " + e, b);
+
+	if (a === "0") {
+		$("#nav-cek-kirim").tab("show");
+		load_data_pengiriman(c);
+	}
+	else {
+		load_data_tambah_pengiriman(c);
+	}
+
+	// "0" === a ? ($("#nav-tambah").tab("show"), load_data_tambahPembayaran(c)) : ($("#nav-cek").tab("show"), load_data_pembayaran(c));
+});
+
+//
+function load_data_pengiriman(id) {
+	$('#nav-cek-kirim-tab').html(id);
+}
+
+//
+function load_data_tambah_pengiriman(id) {
+	$('#nav-tambah-kirim-tab').html(id);
+}
+
+$(document).on("shown.bs.tab", 'a[data-inf="tab_kirim"]', function(c) {
+	var a = $(c.target);
+	c = a.closest("div").data("id");
+	a = a.attr("id");
+	$("#" + a + "-tab").html(spinner);
+
+	switch (a) {
+		case 'nav-tambah-kirim':
+			load_data_tambah_pengiriman(c);
+			 $("#nav-sunting-kirim").addClass("d-none");
+			break;
+		
+		case 'nav-cek-kirim':
+			load_data_pengiriman(c);
+			 $("#nav-sunting-kirim").addClass("d-none");
+			break;
+	
+		case 'nav-sunting-kirim':
+			$("#nav-sunting-sunting").removeClass("d-none");
+
+			var tab = $('#nav-tabContent').data('id');
+			// load_data_suntingPembayaran(tab);
+			break;
+	}
+
+	console.log(a);
+});
+
 </script>

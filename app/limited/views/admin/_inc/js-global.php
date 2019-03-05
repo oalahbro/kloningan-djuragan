@@ -49,12 +49,9 @@ $(function () {
     });
 
     $('#sidebar').on('show.bs.collapse', function () {
-
         $("<div>").attr({'class': "overlay active",'data-toggle': "collapse",'data-target': "#sidebar"}).appendTo("body");
-
         $('#listJuragan').empty().append('<div class="text-center my-3"><div class="spinner-border text-light spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
-
-        $.getJSON("<?php echo site_url('admin/faktur/get_juragan'); ?>").done(function( response ) {
+        $.getJSON("<?php echo site_url('faktur/get_juragan'); ?>").done(function( response ) {
             $('#listJuragan').empty().html('<h6 class="dropdown-header">Pilih Juragan</h6>');
             $('#listJuragan').append(
                 $('<ul>', {class: 'list-unstyled', id: 'listLi'})
