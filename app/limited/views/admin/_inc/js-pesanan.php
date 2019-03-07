@@ -70,32 +70,28 @@ function load_pembayaran(c, a, e, b, m) {
 		switch(b.status_transfer) {
 		case "3":
 			var g = "text-success";
-			var h = "cek_pembayaran ckbyr";
 			var k = "fa-check-double";
 			var l = "Pembayaran Lunas";
 			break;
 		case "4":
 			g = "text-info";
-			h = "cek_pembayaran ckbyr";
 			k = "fa-plus";
 			l = "Pembayaran Lunas & memiliki kelebihan";
 			break;
 		case "2":
 			g = "text-warning";
-			h = "cek_pembayaran ckbyr";
 			k = "fa-ellipsis-h";
 			l = "Pembayaran belum lunas";
 			break;
 		case "1":
 			g = "text-primary";
-			h = "cek_pembayaran ckbyr";
 			k = "fa-redo fa-spin";
 			l = "Pembayaran ada yang perlu dicek";
 			break;
 		default:
-			g = "text-danger", h = "tambah_pembayaran ckbyr", k = "fa-times", l = "Pembayaran Belum ada";
+			g = "text-danger", k = "fa-times", l = "Pembayaran Belum ada";
 		}
-		d = d + ('<div class="fa-2x d-inline-block ' + h + '" data-toggle="tooltip" data-placement="top" title="' + l + '">') + '<span class="fa-layers fa-fw"><i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>';
+		d = d + ('<div class="fa-2x d-inline-block ckbyr" data-toggle="tooltip" data-placement="top" title="' + l + '">') + '<span class="fa-layers fa-fw"><i class="fas fa-circle text-light" data-fa-transform="grow-2"></i>';
 		d += '<i class="fas fa-wallet text-secondary" data-fa-transform="shrink-6"></i>';
 		d += '<span class="fa-layers fa-fw">';
 		d += '<i class="fas fa-circle ' + g + '" data-fa-transform="shrink-8 down-1 right-5"></i>';
@@ -106,7 +102,7 @@ function load_pembayaran(c, a, e, b, m) {
 		switch(b.status_paket) {
 		case "1":
 			g = "text-success";
-			h = "fa-check-double";
+			var h = "fa-check-double";
 			k = "fa-box";
 			l = "Pesanan diproses";
 			var r = "set_kirim";
@@ -169,17 +165,14 @@ function load_pembayaran(c, a, e, b, m) {
 		d += '<div class="dropdown dropright">';
 		d += '<button class="btn btn-outline-primary btn-sm btn-block" type="button" id="setting-' + b.id_faktur + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog fa-spin"></i></button>';
 		d += '<div class="dropdown-menu"aria-labelledby="setting-' + b.id_faktur + '">';
-		d += '<button class="cek_pembayaran dropdown-item">Cek Pembayaran</button>';
-		d += '<button class="tambah_pembayaran dropdown-item">Tambah Pembayaran</button>';
-		d += '<div class="dropdown-divider"></div>';
-		d += '<button class="ubah_status dropdown-item">Ubah Status Paket</button>';
-		d += '<div class="dropdown-divider"></div>';
-		d += '<button class="cek_pengiriman dropdown-item">Cek Pengiriman</button>';
-		d += '<button class="tambah_pengiriman dropdown-item">Tambah Pengiriman</button>';
+		d += '<h6 class="dropdown-header">Atur</h6>';
+		d += '<button class="ckbyr dropdown-item">Pembayaran</button>';
+		d += '<button class="set_paket dropdown-item" data-status="' + t + '">Status Paket</button>';
+		d += '<button class="' + r + ' dropdown-item">Pengiriman</button>';
 		d += '<div class="dropdown-divider"></div>';
 		d += '<h6 class="dropdown-header">Lainnya</h6>';
-		d += '<a class="dropdown-item" href="#">Unduh PDF</a>';
-		d += '<a href="http://localhost/juragan.onlinesukses.com/index.php/myorder/sunting/sd190209203834" class="dropdown-item">Sunting</a>';
+		d += '<a class="dropdown-item" href="' + uri + 'faktur/pdf/' + b.seri_faktur + '">Unduh PDF</a>';
+		d += '<a href="' + uri + 'faktur/sunting/' + b.seri_faktur + '" class="dropdown-item">Sunting</a>';
 		d += '<button class="dropdown-item text-danger hapus_pesanan">Hapus</button>';
 		d += "</div>";
 		d += "</div>";
@@ -907,6 +900,16 @@ $(document).on("click", ".hapusKirim", function(c) {
 		load_data_pengiriman(a.faktur_id);
 		createToast(a.title, a.alert);
 	});
+});
+
+$(document).on("keyup change", '[name="cari[cek_tanggal]"]',function(){
+    if(this.checked) {
+        //Do stuff
+        $('[name="cari[tanggal]"]').prop('disabled', false);
+    }
+    else {
+        $('[name="cari[tanggal]"]').prop('disabled', true);
+    }
 });
 
 </script>
