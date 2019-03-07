@@ -602,6 +602,7 @@ $(document).on("click", ".set_kirim", function(e){
 //
 function load_data_pengiriman(id) {
 	var a = "";
+	$('#nav-cek-kirim-tab').html(spinner);
 	$.ajax({type:"GET", url:uri + "faktur/ambil_pengiriman", data:{id:id}, dataType:"json", success:function(e) {
 		a += '<div class="pt-3">';
 		if (0 === e.length) {
@@ -659,6 +660,7 @@ function load_data_tambah_pengiriman(id) {
 			konten += '<div class="form-group">';
 				konten += '<label for="kurir_list">Kurir</label>';
 				konten += '<select name="kurir" class="custom-select" id="kurir_list">';
+				konten += '<option selected="" disabled="" value="">Pilih Kurir</option>';
 				konten += option;
 				konten += '<option value="lainnya">Lainnya</option></select>';
 			konten += '</div>';
@@ -818,7 +820,7 @@ $(document).on("click", ".SimpanSuntingKirim", function(c) {
 			var b = "#pesanan-" + a.faktur_id;
 			$(b + " .keterangan").html(spinner);
 			$(b + " .status").html(spinner);
-			
+
 			load_keterangan(b + " .keterangan", a.faktur_id, function() {
 			});
 			load_pembayaran(b + " .pesanan", b + " .status", b + " .pembayaran", a.faktur_id, function() {

@@ -568,44 +568,60 @@ class Faktur extends CI_Controller {
 	}
 
 	public function tambah_pengiriman() {
-		$faktur_id = $this->input->post('faktur_id');
-		$kurir = $this->input->post('kurir');
-		$lainnya = $this->input->post('lainnya');
-		$resi = $this->input->post('resi');
-		$tanggal_kirim = $this->input->post('tanggal_kirim');
-		$ongkir = $this->input->post('ongkir');
-		$cek = $this->input->post('cek');
+		$this->form_validation->set_rules('faktur_id', 'Faktur ID', 'required');
+		$this->form_validation->set_rules('resi', 'Resi', 'required');
+		$this->form_validation->set_rules('tanggal_kirim', 'Tanggal Kirim', 'required|regex_match["[0-9]{4}-[0-9]{2}-[0-9]{2}"]');
+		$this->form_validation->set_rules('ongkir', 'Ongkir', 'required|numeric');
+		$this->form_validation->set_rules('kurir', 'Kurir', 'required');
+		$this->form_validation->set_rules('lainnya', 'Kurir Lainnya', '');
 
-		$data = array(
-			'faktur_id' => $faktur_id,
-			'kurir' => ($kurir === 'lainnya'? $lainnya: $kurir),
-			'resi' => $resi,
-			'tanggal_kirim' => strtotime($tanggal_kirim),
-			'ongkir' => $ongkir
-		);
-
-		$kirim_cod = 'kirim';
-		if (strtolower($kurir) === 'cod') {
-			$kirim_cod = 'cod';
+		if ($this->form_validation->run() == FALSE) {
+			$status = 500;
+			$response = array(
+				'status' => FALSE
+			);
 		}
+		else {
+			$faktur_id = $this->input->post('faktur_id');
+			$kurir = $this->input->post('kurir');
+			$lainnya = $this->input->post('lainnya');
+			$resi = $this->input->post('resi');
+			$tanggal_kirim = $this->input->post('tanggal_kirim');
+			$ongkir = $this->input->post('ongkir');
+			$cek = $this->input->post('cek');
 
-		$this->faktur->sub_carry($data);
-		$this->faktur->calc_carry($faktur_id, $kirim_cod, $cek);
-		
-		$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
-		// $juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
-		// $this->notifikasi->set($_SESSION['userid'], '8', $juragan_id, $seri_faktur, 'cs');
+			$data = array(
+				'faktur_id' => $faktur_id,
+				'kurir' => ($kurir === 'lainnya'? $lainnya: $kurir),
+				'resi' => $resi,
+				'tanggal_kirim' => strtotime($tanggal_kirim),
+				'ongkir' => $ongkir
+			);
 
-		$response = array(
-			'title' => 'Pengiriman',
-			'faktur_id' => $faktur_id,
-			'seri_faktur' => strtoupper( $seri_faktur ),
-			'alert' => 'Pesanan ' . strtoupper( $seri_faktur ) . ' telah dikirim dengan resi ' . strtoupper($kurir . ' - ' . $resi ),
-			'status' => true
-		);
+			$kirim_cod = 'kirim';
+			if (strtolower($kurir) === 'cod') {
+				$kirim_cod = 'cod';
+			}
+
+			$this->faktur->sub_carry($data);
+			$this->faktur->calc_carry($faktur_id, $kirim_cod, $cek);
+			
+			$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
+			// $juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
+			// $this->notifikasi->set($_SESSION['userid'], '8', $juragan_id, $seri_faktur, 'cs');
+
+			$status = 200;
+			$response = array(
+				'title' => 'Pengiriman',
+				'faktur_id' => $faktur_id,
+				'seri_faktur' => strtoupper( $seri_faktur ),
+				'alert' => 'Pesanan ' . strtoupper( $seri_faktur ) . ' telah dikirim dengan resi ' . strtoupper($kurir . ' - ' . $resi ),
+				'status' => true
+			);
+		}
 		
 		$this->output
-			->set_status_header(200)
+			->set_status_header($status)
 			->set_content_type('application/json', 'utf-8')
 			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 			->_display();

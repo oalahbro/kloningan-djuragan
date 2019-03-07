@@ -76,6 +76,10 @@ $(function () {
     });
 });
 
+$(document).on("click", "input[type='number']", function(e){
+    $(this).select();
+});
+
 // create random string
 // https://stackoverflow.com/a/1349426/2094645
 function makeid() {
