@@ -513,6 +513,11 @@ class Faktur_model extends CI_Model
         return $this->db->get_where('pengiriman', array('faktur_id' => $faktur_id));
     }
 
+    public function get_carry_($id_pengiriman) {
+        $q = $this->db->where(array('id_pengiriman' => $id_pengiriman))->get('pengiriman');
+        return $q;
+    }
+
     public function del_carry($faktur_id) {
         $this->db->where('faktur_id', $faktur_id);
         $this->db->delete('pengiriman');

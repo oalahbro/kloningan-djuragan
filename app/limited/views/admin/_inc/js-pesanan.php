@@ -208,7 +208,7 @@ function load_keterangan(c, a) {
 			u = "";
 			m = '<button class="btn btn-outline-dark btn-sm dropdown-toggle mb-1" type="button" data-toggle="collapse" data-target="#collapseResi-' + a.id + '" aria-expanded="false" aria-controls="collapseResi-' + a.id + '"><i class="fas fa-receipt"></i> Resi Kirim</button>';
 			f = '<div class="collapse show" id="collapseResi-' + a.id + '">';
-			f += '<div class="bg-light border border-dark p-1 mt-2 rounded">';
+			f += '<div class="bg-light border border-dark p-1 mt-2 rounded amplop">';
 			f += "<h6>Pengiriman : </h6>";
 			f += '<ul class="ml-0 pl-3">';
 			for (i = 0; i < a.pengiriman.length; i++) {
@@ -349,7 +349,7 @@ function load_data_suntingPembayaran(c) {
 	a += "</div>";
 	a += "</div>";
 	a += "</div>";
-	a += '<hr/><button type="button" class="btn btn-primary simpanMe">Simpan</button>';
+	a += '<hr/><button type="button" class="btn btn-primary simpanSuntingBayar">Simpan</button>';
 	a += "</form>";
 	$("#nav-sunting-tab").html(a);
 	
@@ -476,7 +476,7 @@ $(document).on("click", ".suntingBayar", function(c) {
 });
 
 // save sunting pembayaran
-$(document).on("click", ".simpanMe", function(c) {
+$(document).on("click", ".simpanSuntingBayar", function(c) {
 	c.preventDefault();
 	c.stopPropagation();
 	var a = $(this);
@@ -572,6 +572,7 @@ $(document).on("click", ".cant_kirim", function(e){
 	createToast('Atur Pengiriman', 'Pesanan '+faktur+' belum dapat di-set kirim karena belum diproses ');
 });
 
+// 
 $(document).on("click", ".set_kirim", function(e){
 	e.preventDefault();
 	var a = $(this).closest(".mn");
@@ -600,14 +601,267 @@ $(document).on("click", ".set_kirim", function(e){
 
 //
 function load_data_pengiriman(id) {
-	$('#nav-cek-kirim-tab').html('cek');
+	var a = "";
+	$.ajax({type:"GET", url:uri + "faktur/ambil_pengiriman", data:{id:id}, dataType:"json", success:function(e) {
+		a += '<div class="pt-3">';
+		if (0 === e.length) {
+			a += '<p class="alert alert-danger">Tidak ditemukan data pengiriman</p>';
+		} else {
+			a += '<input name="faktur" type="hidden" value="' + c + '"/>';
+			a += '<div id="list_pembayaran" class="list-group">';
+			for (i = 0; i < e.length; i++) {
+				var b = e[i],
+					m = '';
+				if (null !== b.ongkir) {
+					m = '<br/>ongkir: <span class="badge badge-success">' + b.ongkir + '</span>';
+				}
+				a += '<div class="list-group-item list-group-item-action">';
+				a += '<div class="d-flex justify-content-between">';
+				a += '<div class="d-flex w-100 justify-content-start">';
+				a += "<div>";
+				a += '<h5 class="mb-1 text-uppercase">' + b.kurir + ' <span class="badge badge-secondary">' + b.resi + "</span></h5>";
+				a += '<p class="mb-1">dikirim  pada ' + b.tanggal_kirim + m + "</p>";
+				a += "</div>";
+				a += "</div>";
+				a += '<div class="dropdown" data-id="' + b.id + '">';
+				a += '<button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="mm-' + i + '" class="btn btn-outline-secondary btn-sm"><i class="fas fa-chevron-down"></i></button>';
+				a += '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="mm-' + i + '">';
+				a += '<button class="dropdown-item suntingKirim">Sunting</button>';
+				a += '<button class="dropdown-item hapusKirim">Hapus</button>';
+				a += "</div>";
+				a += "</div>";
+				a += "</div>";
+				a += "</div>";
+			}
+			a += "</div>";
+		}
+		a += "</div>";
+		$('#nav-cek-kirim-tab').html(a);
+	}
+	});	
 }
 
 //
 function load_data_tambah_pengiriman(id) {
-	$('#nav-tambah-kirim-tab').html('tambah');
+	var kurir = <?php echo $this->config->item("list_kurir") ?>,
+		option = '',
+		konten = '';
+
+	$.each(kurir, function(i,v){
+		option += '<option value="'+v+'">'+v+'</option>';
+	});
+
+	konten += '<form>';
+
+	konten += '<input name="faktur_id" type="hidden" value="'+id+'"/>';
+	konten += '<div class="form-row">';
+		konten += '<div class="col-sm-4">';
+			konten += '<div class="form-group">';
+				konten += '<label for="kurir_list">Kurir</label>';
+				konten += '<select name="kurir" class="custom-select" id="kurir_list">';
+				konten += option;
+				konten += '<option value="lainnya">Lainnya</option></select>';
+			konten += '</div>';
+		konten += '</div>';
+
+		konten += '<div class="col-sm-8">';
+			konten += '<div class="form-group">';
+				konten += '<label for="lainnya">Kurir Lain</label>';
+				konten += '<input type="text" name="lainnya" disabled="" required="" value="" id="lainnya" class="form-control" placeholder="kurir lainnya" />';
+			konten += '</div>';
+		konten += '</div>';
+	konten += '</div>';
+
+	konten += '<div class="form-group">';
+		konten += '<label for="resi">No Resi</label>';
+		konten += '<input type="text" name="resi" value="" required="" id="resi" class="form-control" placeholder="JOG98798777" />';
+	konten += '</div>';
+
+	konten += '<div class="form-row">';
+		konten += '<div class="col-sm-4">';
+			konten += '<div class="form-group">';
+				konten += '<label for="tanggal_kirim">Tanggal Kirim</label>';
+				konten += '<input type="date" name="tanggal_kirim" required="" value="<?php echo mdate("%Y-%m-%d", now()); ?>" id="tanggal_kirim" class="form-control" placeholder="" />';                       
+			konten += '</div>';
+		konten += '</div>';
+
+		konten += '<div class="col-sm-8">';
+			konten += '<div class="form-group">';
+				konten += '<label for="ongkir">Biaya Ongkir</label>';
+				konten += '<input type="number" min="0" name="ongkir" required="" value="0" id="ongkir" class="form-control" placeholder="9000" />';
+			konten += '</div>';
+		konten += '</div>';
+	konten += '</div>';
+
+	konten += '<div class="custom-control custom-checkbox">';
+		konten += '<input type="checkbox" checked="" class="custom-control-input" name="cek" value="ya" id="cek_satu">';
+		konten += '<label class="custom-control-label" for="cek_satu">Pesanan ini sudah selesai dikirim</label>';
+	konten += '</div>';
+
+	konten += '<hr/><button type="button" class="btn btn-primary tambahKirim">Tambah</button>';
+	konten += '</form>';
+
+	$('#nav-tambah-kirim-tab').html(konten);
+
+	$("#kurir_list").change(function() {
+		if ($(this).val() === "lainnya") {
+			$('#lainnya').attr('disabled', false);
+			$('#lainnya').attr('required', true);
+		} else {
+			$('#lainnya').attr('disabled', true);
+		}
+
+		if ($(this).val() === "COD") {
+			$('#resi').val('COD<?php echo date("dmY") ?>');
+		} else {
+			$('#resi').val('');
+		}
+	});
 }
 
+function load_data_sunting_pengiriman(id) {
+	var kurir = <?php echo $this->config->item("list_kurir") ?>,
+		option = '',
+		konten = '';
+
+	$.each(kurir, function(i,v){
+		option += '<option value="'+v+'">'+v+'</option>';
+	});
+
+	$.ajax({type:"GET", url:uri + "faktur/detail_pengiriman", data:{id:id}, dataType:"json", success:function(e) {
+		konten += '<form>';
+
+		konten += '<input name="faktur_id" type="hidden" value="'+e.faktur_id+'"/>';
+		konten += '<input name="id_pengiriman" type="hidden" value="'+id+'"/>';
+		konten += '<div class="form-row">';
+			konten += '<div class="col-sm-4">';
+				konten += '<div class="form-group">';
+					konten += '<label for="kurir_list">Kurir</label>';
+					konten += '<select name="kurir" class="custom-select" id="kurir_list">';
+					konten += '<option value="" disabled="">Pilih Kurir</option>';
+					konten += option;
+					konten += '<option value="lainnya">Lainnya</option></select>';
+				konten += '</div>';
+			konten += '</div>';
+
+			konten += '<div class="col-sm-8">';
+				konten += '<div class="form-group">';
+					konten += '<label for="lainnya">Kurir Lain</label>';
+					konten += '<input type="text" name="lainnya" disabled="" required="" value="" id="lainnya" class="form-control" placeholder="kurir lainnya" />';
+				konten += '</div>';
+			konten += '</div>';
+		konten += '</div>';
+
+		konten += '<div class="form-group">';
+			konten += '<label for="resi">No Resi</label>';
+			konten += '<input type="text" name="resi" value="'+e.resi+'" required="" id="resi" class="form-control" placeholder="JOG98798777" />';
+		konten += '</div>';
+
+		konten += '<div class="form-row">';
+			konten += '<div class="col-sm-4">';
+				konten += '<div class="form-group">';
+					konten += '<label for="tanggal_kirim">Tanggal Kirim</label>';
+					konten += '<input type="date" name="tanggal_kirim" required="" value="'+e.tanggal_kirim+'" id="tanggal_kirim" class="form-control" placeholder="" />';                       
+				konten += '</div>';
+			konten += '</div>';
+
+			konten += '<div class="col-sm-8">';
+				konten += '<div class="form-group">';
+					konten += '<label for="ongkir">Biaya Ongkir</label>';
+					konten += '<input type="number" min="0" name="ongkir" required="" value="'+e.ongkir+'" id="ongkir" class="form-control" placeholder="9000" />';
+				konten += '</div>';
+			konten += '</div>';
+		konten += '</div>';
+
+		konten += '<hr/><button type="button" class="btn btn-primary SimpanSuntingKirim">Simpan</button>';
+		konten += '</form>';
+
+		$('#nav-sunting-kirim-tab').html(konten);
+
+		$("#kurir_list").change(function() {
+			if ($(this).val() === "lainnya") {
+				$('#lainnya').attr('disabled', false);
+				$('#lainnya').attr('required', true);
+			} else {
+				$('#lainnya').attr('disabled', true);
+			}
+		});
+
+		if($.inArray( e.kurir, kurir ) > -1) {
+			$('[name="kurir"]').val(e.kurir);
+		}
+		else {
+			$('[name="lainnya"]').attr('disabled', false).val(e.kurir);
+			$('[name="kurir"]').val('lainnya');
+		}
+	}
+	});
+}
+
+// 
+$(document).on("click", ".suntingKirim", function(c) {
+	c.preventDefault();
+	c = $(this).closest(".dropdown").attr("data-id");
+	$("#nav-sunting-kirim").tab("show");
+	$("#nav-tabContent").attr("data-id", c);
+});
+
+$(document).on("click", ".SimpanSuntingKirim", function(c) {
+	c.preventDefault();
+	c.stopPropagation();
+	var a = $(this);
+	c = a.closest("form").serialize();
+	a.prop("disabled", !0).html(spinner_btn);
+	$.ajax({type:"POST", url:uri + "faktur/simpan_pengiriman", data:c, dataType:"json", success:function(a) {
+		if (a.status) {
+			$("#nav-cek-kirim").tab("show");
+			var b = "#pesanan-" + a.faktur_id;
+			$(b + " .keterangan").html(spinner);
+			$(b + " .status").html(spinner);
+			
+			load_keterangan(b + " .keterangan", a.faktur_id, function() {
+			});
+			load_pembayaran(b + " .pesanan", b + " .status", b + " .pembayaran", a.faktur_id, function() {
+				load_tooltips();
+			});
+			createToast(a.title, a.alert);
+		}
+	}, error:function() {
+		createToast("Error", "Pastikan form diisi dengan benar.");
+		a.prop("disabled", !1).html("Tambah");
+	}
+	});
+});
+
+// simpan data kirim baru
+$(document).on("click", ".tambahKirim", function(c) {
+	c.preventDefault();
+	c.stopPropagation();
+	var a = $(this);
+	c = a.closest("form").serialize();
+	a.prop("disabled", !0).html(spinner_btn);
+	$.ajax({type:"POST", url:uri + "faktur/tambah_pengiriman", data:c, dataType:"json", success:function(a) {
+		if (a.status) {
+			$("#nav-cek-kirim").tab("show");
+			var b = "#pesanan-" + a.faktur_id;
+			$(b + " .keterangan").html(spinner);
+			$(b + " .status").html(spinner);
+			
+			load_keterangan(b + " .keterangan", a.faktur_id, function() {
+			});
+			load_pembayaran(b + " .pesanan", b + " .status", b + " .pembayaran", a.faktur_id, function() {
+				load_tooltips();
+			});
+			createToast(a.title, a.alert);
+		}
+	}, error:function() {
+		createToast("Error", "Pastikan form diisi dengan benar.");
+		a.prop("disabled", !1).html("Tambah");
+	}
+	});
+});
+
+// 
 $(document).on("shown.bs.tab", 'a[data-inf="tab_kirim"]', function(c) {
 	var a = $(c.target);
 	c = a.closest("div").data("id");
@@ -626,10 +880,10 @@ $(document).on("shown.bs.tab", 'a[data-inf="tab_kirim"]', function(c) {
 			break;
 	
 		case 'nav-sunting-kirim':
-			$("#nav-sunting-sunting").removeClass("d-none");
+			$("#nav-sunting-kirim").removeClass("d-none");
 
 			var tab = $('#nav-tabContent').data('id');
-			// load_data_suntingPembayaran(tab);
+			load_data_sunting_pengiriman(tab);
 			break;
 	}
 });
