@@ -713,4 +713,29 @@ class Faktur extends CI_Controller {
 			->_display();
 		exit;
 	}
+
+	public function hapus_pengiriman() {
+		$id_pengiriman = $this->input->post('idpengiriman');
+
+		$id_faktur = $this->faktur->get_carry_($id_pengiriman)->row()->faktur_id;
+
+		$this->faktur->del_carry_($id_pengiriman);
+		$this->faktur->calc_carry($id_faktur);
+
+		$seri_faktur = $this->faktur->get_info($id_faktur, 'seri_faktur');
+
+		$response = array(
+			'title' => 'Pengiriman',
+			'faktur_id' => (int) $id_faktur,
+			'seri_faktur' => strtoupper( $seri_faktur ),
+			'alert' => 'Data pengiriman untuk ' . strtoupper( $seri_faktur ). ' telah dihapus'
+		);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
 }

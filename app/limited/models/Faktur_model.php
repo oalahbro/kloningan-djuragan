@@ -510,7 +510,7 @@ class Faktur_model extends CI_Model
 	 *
 	 */
     public function get_carry($faktur_id) {
-        return $this->db->get_where('pengiriman', array('faktur_id' => $faktur_id));
+        return $this->db->order_by('tanggal_kirim asc')->get_where('pengiriman', array('faktur_id' => $faktur_id));
     }
 
     public function get_carry_($id_pengiriman) {

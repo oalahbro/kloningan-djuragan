@@ -890,4 +890,23 @@ $(document).on("shown.bs.tab", 'a[data-inf="tab_kirim"]', function(c) {
 	}
 });
 
+// delete pengiriman
+$(document).on("click", ".hapusKirim", function(c) {
+	c.preventDefault();
+	c = $(this).closest(".dropdown").attr("data-id");
+	$.post(uri + "faktur/hapus_pengiriman", {idpengiriman:c}, function(a) {
+		var b = "#pesanan-" + a.faktur_id;
+		$(b + " .keterangan").html(spinner);
+		$(b + " .status").html(spinner);
+		
+		load_keterangan(b + " .keterangan", a.faktur_id, function() {
+		});
+		load_pembayaran(b + " .pesanan", b + " .status", b + " .pembayaran", a.faktur_id, function() {
+			load_tooltips();
+		});
+		load_data_pengiriman(a.faktur_id);
+		createToast(a.title, a.alert);
+	});
+});
+
 </script>
