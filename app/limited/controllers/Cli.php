@@ -12,11 +12,21 @@ class Cli extends CI_Controller {
     }
     
     public function hapus_notif() {
-        // SELECT * FROM `notifikasi` WHERE tanggal < UNIX_TIMESTAMP(NOW() - INTERVAL 3 WEEK ) AND dibaca='0' 
         $c = $this->db->get_where('notifikasi', array('tanggal < UNIX_TIMESTAMP(NOW() - INTERVAL 3 WEEK )' => NULL))->num_rows();
-        $this->db->delete('notifikasi', array('tanggal < UNIX_TIMESTAMP(NOW() - INTERVAL 3 WEEK )' => NULL));
-        // $this->db->delete('notifikasi', array('tanggal <' => 'UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 30 DAY))'));
+        if($c > 0) {
+            $this->db->delete('notifikasi', array('tanggal < UNIX_TIMESTAMP(NOW() - INTERVAL 3 WEEK )' => NULL));
+        }
 
-        echo 'delete ' . $c . ' data';
+        $response = array(
+            'count' => $c,
+            'deleted' => ($c > 0? TRUE: FALSE)
+        );
+
+        $this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
     }
 }
