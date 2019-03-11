@@ -10,10 +10,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * halaman baku akan dikirim ke `auth/masuk`
  */
 
-class Auth extends public_controller {
+class Auth extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
+		if($this->session->logged) {
+			redirect('faktur');
+		}
 	}
 
 	/**
@@ -98,7 +101,7 @@ class Auth extends public_controller {
 		if ($this->form_validation->run() === FALSE) {
 
 			$this->data = array(
-				'judul' => 'Pesanan'
+				'judul' => 'Masuk'
 			);
 			$this->load->view('auth-masuk', $this->data);
 		}
