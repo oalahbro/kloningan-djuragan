@@ -83,6 +83,10 @@ class Faktur extends CI_Controller {
 		}
 		else {
 			$nama_juragan = 'Semua Juragan';
+
+			if ($this->session->level === 'cs') {
+				redirect('pesanan');
+			}
 		}
 
 		$limit = 25;
@@ -444,7 +448,9 @@ class Faktur extends CI_Controller {
 			$response['produk'][] = array(
 				'c' => strtoupper($produk->kode),
 				's' => strtoupper($produk->ukuran),
-				'q' => (int) $produk->jumlah
+				'q' => (int) $produk->jumlah,
+				'h' => harga($produk->harga),
+				't' => harga((int) $produk->harga * (int) $produk->jumlah)
 			);
 		}
 

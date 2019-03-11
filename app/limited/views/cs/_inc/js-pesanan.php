@@ -180,7 +180,7 @@ function load_pembayaran(c, a, e, b, m) {
 
 		"undefined" != typeof b.tipe && (w = '<span class="d-block text-uppercase py-1 text-center text-light font-weight-bold border border-danger bg-danger rounded px-2 mb-1">' + b.tipe + "</span>");
 		for (i = 0; i < b.produk.length; i++) {
-		y += "<div>" + b.produk[i].c + " (" + b.produk[i].s + ") = " + b.produk[i].q + "pcs <button data-toggle='popHarga' data-content='harga satuan: <strong>"+b.produk[i].h+"</strong><br/>harga total: <strong>"+b.produk[i].t+"</strong>' class='btn-help text-secondary'><i class='fas fa-info-circle'></i></button></div>";
+		y += "<div>" + b.produk[i].c + " (" + b.produk[i].s + ") = " + b.produk[i].q + "pcs</div>";
 		}
 		b = '<hr/><em>total: <span class="badge badge-dark">' + b.total + "</span> pcs</em>";
 		$(c).empty().append(w + y + b);
@@ -911,18 +911,5 @@ $(document).on("keyup change", '[name="cari[cek_tanggal]"]',function(){
         $('[name="cari[tanggal]"]').prop('disabled', true);
     }
 });
-
-
-
-var popOverSettings = {
-	trigger: 'focus',
-    placement: 'right',
-    container: 'body',
-	html: true,
-    selector: '[data-toggle="popHarga"]',
-	template: '<div class="popover shadow" role="tooltip"><div class="arrow"></div><div class="popover-body"></div></div>'
-}
-
-$('body').popover(popOverSettings);
 
 </script>
