@@ -66,10 +66,6 @@ $route['valid'] = 'auth/valid';
 //$route['register'] = 'auth/daftar';
 $route['excel'] = 'excel';
 
-$route['pesanan'] = 'faktur/index';
-$route['pesanan/(:any)'] = 'faktur/arsip/$1';
-
-
 // bagian admin
 $route['migrasi'] = 'admin/faktur/migrasi';
 $route['pesanan/sunting/(:any)'] = 'admin/faktur/sunting/$1';

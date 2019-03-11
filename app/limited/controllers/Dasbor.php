@@ -8,16 +8,7 @@ class Dasbor extends CI_Controller {
 
 	public function index() {
 		if($this->session->logged) {
-			if($this->session->level === 'cs') {
-				redirect('myorder');
-			}
-			else if($this->session->level === 'reseller') {
-                // redirect('pesanan');
-                show_404();
-            }
-            else {
-                redirect('pesanan');
-            }
+			redirect('faktur');
 		}
 		else {
 			redirect('auth/masuk');

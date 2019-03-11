@@ -32,20 +32,63 @@ class Faktur extends CI_Controller {
         switch ($this->session->level) {
             case 'superadmin':
             case 'admin':
-                redirect('pesanan/s_juragan');
+                redirect('faktur/data/s_juragan');
                 break;
             
             case 'cs':
                 $user_slug = $this->session->username;
                 $juragan = $this->pengguna->_juragan_terakhir($user_slug);
                 $juragan = $this->juragan->_slug($juragan);
-                redirect('pesanan/' . $juragan);
+                redirect('faktur/data/' . $juragan);
                 break;
             
             default:
                 # code...
                 break;
         }
+	}
+
+	public function data($juragan) {
+		$juragan_id = $this->juragan->_id($juragan);
+		if ($juragan !== 's_juragan') {
+			$nama_juragan = $this->juragan->_nama($juragan_id);
+		}
+		else {
+			$nama_juragan = 'Semua Juragan';
+
+			if ($this->session->level === 'cs') {
+				redirect('pesanan');
+			}
+		}
+
+        $limit      = $this->input->get('limit'); // limit tampil pesanan 
+        $per_page   = $this->input->get('halaman'); // halaman terkait
+		$cari       = $this->input->get('cari'); // cari data
+
+		$limit = 25;
+		if( ! isset($per_page)) {
+			$per_page = 0;
+		}
+
+		$config['base_url'] = site_url('faktur/arsip/' . $juragan);
+		$config['total_rows'] = $this->faktur->get_all($juragan_id, $by = FALSE, FALSE, FALSE, $cari)->num_rows();
+		$config['per_page'] = $limit;
+		$config['page_query_string'] = TRUE;
+		$config['enable_query_strings'] = TRUE;
+		$config['query_string_segment'] = 'halaman';
+		$config['reuse_query_string'] = TRUE;
+
+		// inisialisasi pagination
+		$this->pagination->initialize($config);
+
+		$this->data = array(
+			'judul' => 'Pesanan ' . $nama_juragan,
+			'juragan' => $juragan,
+			'include' => $this->template,
+            'query' => $this->faktur->get_all($juragan_id, $by = FALSE, $limit, $per_page, $cari)
+			);
+
+		$this->load->view('pesanan-lihat', $this->data);
 	}
 
 	// ambil data juragan
@@ -70,48 +113,6 @@ class Faktur extends CI_Controller {
 			->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 			->_display();
 		exit;
-	}
-
-    public function arsip($juragan) {
-        $limit      = $this->input->get('limit'); // limit tampil pesanan 
-        $per_page   = $this->input->get('halaman'); // halaman terkait
-		$cari       = $this->input->get('cari'); // cari data
-
-		$juragan_id = $this->juragan->_id($juragan);
-		if ($juragan !== 's_juragan') {
-			$nama_juragan = $this->juragan->_nama($juragan_id);
-		}
-		else {
-			$nama_juragan = 'Semua Juragan';
-
-			if ($this->session->level === 'cs') {
-				redirect('pesanan');
-			}
-		}
-
-		$limit = 25;
-		if( ! isset($per_page)) {
-			$per_page = 0;
-		}
-
-		$config['base_url'] = site_url('faktur/arsip/' . $juragan);
-		$config['total_rows'] = $this->faktur->get_all($juragan_id, $by = FALSE, FALSE, FALSE, $cari)->num_rows();
-		$config['per_page'] = $limit;
-		$config['page_query_string'] = TRUE;
-		$config['enable_query_strings'] = TRUE;
-		$config['query_string_segment'] = 'halaman';
-		$config['reuse_query_string'] = TRUE;
-
-		// inisialisasi pagination
-		$this->pagination->initialize($config);
-
-		$this->data = array(
-			'judul' => 'Pesanan ' . $nama_juragan,
-			'juragan' => $juragan,
-            'query' => $this->faktur->get_all($juragan_id, $by = FALSE, $limit, $per_page, $cari)
-			);
-
-		$this->load->view($this->template . '/pesanan-lihat', $this->data);
 	}
 
 	public function sunting($faktur) {

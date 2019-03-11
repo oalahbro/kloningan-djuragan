@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <?php echo $this->load->view("_inc/header", $judul, TRUE) ?>
-<?php echo $this->load->view("admin/_inc/navbar", '', TRUE) ?>
+<?php echo $this->load->view($include ."/_inc/navbar", '', TRUE) ?>
 
         <div class="konten" id="konten">
             <div class="jumbotron jumbotron-fluid">
@@ -178,6 +178,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 
-<?php echo $this->load->view("admin/_inc/js-global", '', TRUE); ?>
-<?php echo $this->load->view("admin/_inc/js-pesanan", '', TRUE); ?>
+<?php echo $this->load->view($include ."/_inc/js-global", '', TRUE); ?>
+<?php echo $this->load->view($include ."/_inc/js-pesanan", '', TRUE); ?>
 <?php echo $this->load->view("_inc/footer", '', TRUE); ?>
