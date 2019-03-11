@@ -97,11 +97,10 @@ class Auth extends public_controller {
 		
 		if ($this->form_validation->run() === FALSE) {
 
-			$this->data = array();
-
-			$this->load->view('publik/header', $this->data);
-			$this->load->view('publik/masuk', $this->data);
-			$this->load->view('publik/footer', $this->data);
+			$this->data = array(
+				'judul' => 'Pesanan'
+			);
+			$this->load->view('auth-masuk', $this->data);
 		}
 		else {
 			$username = $this->input->post('username');
