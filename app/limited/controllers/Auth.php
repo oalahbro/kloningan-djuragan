@@ -44,11 +44,11 @@ class Auth extends CI_Controller {
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[pengguna.email]');
 
 		if ($this->form_validation->run() === FALSE) {
-			$this->data = array();
+			$this->data = array(
+				'judul' => 'Daftar'
+			);
 
-			$this->load->view('publik/header', $this->data);
-			$this->load->view('publik/daftar', $this->data);
-			$this->load->view('publik/footer', $this->data);
+			$this->load->view('auth-daftar', $this->data);
 		}
 		else {
 			// simpan ke database
