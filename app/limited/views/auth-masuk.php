@@ -27,7 +27,7 @@ echo '<div class="mainpage">';
 				echo '<span class="float-right">' . anchor('auth/lupa', 'Lupa Sandi?', array('class' => 'small text-muted')) . '</span>';
 				echo '<span class="float-left">' . anchor('auth/daftar', 'Daftar Akun Baru', array('class' => 'small text-muted')) . '</span>';
 			echo '</div>';
-			echo '<p class="mt-5 mb-3 text-muted">&copy; 2013 - '. date('Y') .'</p>';
+			echo '<p class="mt-5 mb-3 text-muted text-center">&copy; 2013 - '. date('Y') .'</p>';
 
 		echo form_close();
 	echo '</div>';
