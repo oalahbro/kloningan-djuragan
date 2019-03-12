@@ -15,8 +15,12 @@ class Faktur extends CI_Controller {
                 case 'superadmin':
                 case 'admin':
                 $this->template = 'admin';
-                    break;
-                
+					break;
+					
+				case 'viewer':
+				$this->template = 'viewer';
+					break;
+
                 case 'cs':
                 $this->template = 'cs';
                     break;
@@ -31,7 +35,8 @@ class Faktur extends CI_Controller {
     public function index() {
         switch ($this->session->level) {
             case 'superadmin':
-            case 'admin':
+			case 'admin':
+			case 'viewer':
                 redirect('faktur/data/s_juragan');
                 break;
             
