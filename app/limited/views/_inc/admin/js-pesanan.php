@@ -33,7 +33,7 @@ function load_tooltips() {
 // load "juragan" column
 function load_juragan(c, a, e) {
 	$.getJSON(uri + "faktur/json_juragan/" + a, function(a) {
-		var b = '<a href="'+uri+'pesanan/' + a.slug + '">' + a.nama + "</a>";
+		var b = '<a href="'+uri+'faktur/data/' + a.slug + '">' + a.nama + "</a>";
 		a = '<hr/><span class="text-muted small">CS: ' + a.nama_cs + "</span>";
 		$(c).empty().append(b + a);
 		e();

@@ -57,11 +57,11 @@ $(function () {
                 $('<ul>', {class: 'list-unstyled', id: 'listLi'})
             );
             $('#listLi').append(
-                $('<li>', {html: '<a href="<?php echo site_url("pesanan/s_juragan") ?>"><i class="fas fa-users"></i> Semua Juragan</a>'})
+                $('<li>', {html: '<a href="<?php echo site_url("faktur/data/s_juragan") ?>"><i class="fas fa-users"></i> Semua Juragan</a>'})
             );
             $.each(response.data, function(index, element) {
                 $('#listLi').append(
-                    $('<li>', {html: '<a href="<?php echo site_url("pesanan/") ?>'+element.slug+'"><i class="fas fa-user-circle"></i> '+element.nama+'</a>'})
+                    $('<li>', {html: '<a href="<?php echo site_url("faktur/data/") ?>'+element.slug+'"><i class="fas fa-user-circle"></i> '+element.nama+'</a>'})
                 );
             });
         });
