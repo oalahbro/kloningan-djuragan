@@ -16,7 +16,7 @@ echo doctype('html5');
 	echo meta($meta);
 	// 
 	echo link_tag('berkas/css/bootstrap.min.css');
-	echo link_tag('berkas/css/backend.css');
+	echo link_tag('berkas/css/style.css');
 	?>
 
 	<title><?php echo $judul; ?></title>
