@@ -70,7 +70,7 @@ class Faktur extends CI_Controller {
 			$per_page = 0;
 		}
 
-		$config['base_url'] = site_url('faktur/arsip/' . $juragan);
+		$config['base_url'] = site_url('faktur/data/' . $juragan);
 		$config['total_rows'] = $this->faktur->get_all($juragan_id, $by = FALSE, FALSE, FALSE, $cari)->num_rows();
 		$config['per_page'] = $limit;
 		$config['page_query_string'] = TRUE;
