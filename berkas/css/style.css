@@ -1,7 +1,6 @@
 .mainpage, .boxed{
     height: 100vh;
 }
-
 .boxed {
     display: -ms-flexbox;
     display: flex;
@@ -12,14 +11,12 @@
     background-color: #F5E9B9;
     color: #3B0100;
 }
-
 .form-signin {
     width: 100%;
     max-width: 330px;
     padding: 15px;
     margin: auto;
 }
-
 .form-signin .form-control {
     position: relative;
     box-sizing: border-box;
@@ -114,7 +111,6 @@
 }
 .overlay.active {
     display: block;
-
 }
 .sidebar {
     overflow-y: scroll;
@@ -151,6 +147,11 @@
 }
 .sidebar [aria-expanded=true]:before{
     content:"\f0d8"
+}
+.notifikasiDrop {
+    min-width: 230px;
+    min-height: 20vh;
+    overflow-x: auto
 }
 #konten{
     width: 100%;

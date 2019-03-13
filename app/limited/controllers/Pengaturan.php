@@ -1,21 +1,49 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pengaturan extends admin_controller
+class Pengaturan extends CI_Controller
 {
+	private $template;
 
 	public function __construct() {
-		parent::__construct();
-	}
+        parent::__construct();
+        if( ! $this->session->logged) {
+            redirect('');
+        }
+        else {
+            switch ($this->session->level) {
+                case 'superadmin':
+                case 'admin':
+                $this->template = 'admin';
+					break;
+					
+				case 'viewer':
+				$this->template = 'viewer';
+					break;
+
+                case 'cs':
+                $this->template = 'cs';
+                    break;
+                
+                default:
+                    $this->template = 'reseller';
+                    break;
+            }
+        }
+    }
 
 	public function index() {
-		$data = array(
-			'judul' => 'Pengaturan Web'
-		);
-
-		$this->load->view('administrator/header', $data);
-		$this->load->view('administrator/pengaturan/web', $data);
-		$this->load->view('administrator/footer', $data);
+		if ($this->template === 'admin') {
+			$data = array(
+				'judul' => 'Pengaturan Web',
+				'include' => $this->template
+			);
+	
+			$this->load->view('pengaturan-web', $data);
+		}
+		else {
+			show_404();
+		}
 	}
 
 	public function juragan() {
@@ -77,35 +105,39 @@ class Pengaturan extends admin_controller
 	}
 
 	public function pengguna() {
-		$per_page = $this->input->get('halaman');
-		$limit = 25;
+		if ($this->template === 'admin') {
+			$per_page = $this->input->get('halaman');
+			$limit = 25;
 
-		// jika get $per_page tidak tersedia
-		if( ! isset($per_page)) {
-			$per_page = 0;
+			// jika get $per_page tidak tersedia
+			if( ! isset($per_page)) {
+				$per_page = 0;
+			}
+
+			$query = $this->pengguna->_semua(FALSE, FALSE, $limit, $per_page);
+
+			$config['base_url'] = site_url('pengaturan/pengguna/');
+			$config['total_rows'] = $this->pengguna->_semua(FALSE, FALSE, FALSE, FALSE)->num_rows();
+			$config['per_page'] = $limit;
+			$config['page_query_string'] = TRUE;
+			$config['enable_query_strings'] = TRUE;
+			$config['query_string_segment'] = 'halaman';
+			$config['reuse_query_string'] = TRUE;
+
+			// inisialisasi pagination
+			$this->pagination->initialize($config);
+
+			$this->data = array(
+				'judul' => 'Atur Pengguna',
+				'q' => $query,
+				'include' => $this->template
+				);
+
+			$this->load->view('pengaturan-pengguna', $this->data);
 		}
-
-		$query = $this->pengguna->_semua(FALSE, FALSE, $limit, $per_page);
-
-		$config['base_url'] = site_url('admin/pengaturan/pengguna/');
-		$config['total_rows'] = $this->pengguna->_semua(FALSE, FALSE, FALSE, FALSE)->num_rows();
-		$config['per_page'] = $limit;
-		$config['page_query_string'] = TRUE;
-		$config['enable_query_strings'] = TRUE;
-		$config['query_string_segment'] = 'halaman';
-		$config['reuse_query_string'] = TRUE;
-
-		// inisialisasi pagination
-		$this->pagination->initialize($config);
-
-		$this->data = array(
-			'judul' => 'Atur Pengguna',
-			'q' => $query
-			);
-
-		$this->load->view('administrator/header', $this->data);
-		$this->load->view('administrator/pengaturan/pengguna', $this->data);
-		$this->load->view('administrator/footer', $this->data);	
+		else {
+			show_404();
+		}
 	}
 
 	public function sunting_pengguna($id_username) {

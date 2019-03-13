@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Notifikasi extends admin_controller {
+class Notifikasi extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -115,12 +115,12 @@ class Notifikasi extends admin_controller {
 		$all = $this->input->get('all'); //
 
 		$id_ = $this->pengguna->_id($_SESSION['username']);
-		$q = $this->faktur->notif($id_, 5, 'tidak', FALSE);
+		$q = $this->faktur->notif($id_, $count, $all, FALSE);
 
 		///
 		$data = array();
 		foreach ($q->result() as $notifikasi) {
-			$url = site_url('admin/notifikasi/read/' . $notifikasi->id_notifikasi . '_' .  $notifikasi->tanggal);
+			$url = site_url('notifikasi/read/' . $notifikasi->id_notifikasi . '_' .  $notifikasi->tanggal);
 			
 			$nama = $this->pengguna->_nama_pengguna($notifikasi->dari);
 

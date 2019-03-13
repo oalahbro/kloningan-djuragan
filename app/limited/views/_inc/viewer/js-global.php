@@ -4,10 +4,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script>
 $(function () {
-    var mess = '<div id="message" class="position-fixed mr-3" style="z-index: 1060;max-width: 500px; top: 70px; right: 0"></div>';
+    var mess = '<div id="message" class="position-fixed mr-sm-3" style="z-index: 1060;max-width: 500px; top: 70px; right: 0"></div>';
     var count = $("#count");
 
     $('body').append(mess);
+
+    function reload() {
+        $.getJSON( "<?php echo site_url('session'); ?>", function( response ) {
+            if(!response.log) {
+                window.location.href = "<?php echo site_url(); ?>";
+            }
+        });
+    }
+
+    // Load on page load (call the function reload):
+    reload()
+
+    // Set the refresh interval and call the function reload every 60 seconds):
+    var refreshId = setInterval(reload, 15000);
 
     $.ajaxSetup({ cache: false });
 

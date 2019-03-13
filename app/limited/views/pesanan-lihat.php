@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="jumbotron jumbotron-fluid">
                 <div class="container-fluid">
                     <h3><?php echo $judul; ?></h3>
-                    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                    <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
                 </div>
             </div>
 
