@@ -184,8 +184,9 @@ function load_pembayaran(c, a, e, b, m) {
 		d += '<a class="dropdown-item" href="' + uri + 'faktur/pdf/' + b.seri_faktur + '">Unduh PDF</a>';
 
 		if(b.status_paket === '0' && $stt) {
-
 			d += '<a href="' + uri + 'faktur/sunting/' + b.seri_faktur + '" class="dropdown-item">Sunting</a>';
+		}
+		if(b.status_transfer === '0') {
 			d += '<button class="dropdown-item text-danger hapus_pesanan">Hapus</button>';
 		}
 

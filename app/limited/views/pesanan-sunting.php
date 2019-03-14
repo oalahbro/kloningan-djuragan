@@ -4,13 +4,13 @@ $pesanan = $q->row();
 ?>
 
 <?php echo $this->load->view("_inc/header", $judul, TRUE) ?>
-<?php echo $this->load->view("admin/_inc/navbar", '', TRUE) ?>
+<?php echo $this->load->view("_inc/".$include."/navbar", '', TRUE) ?>
 
     <div class="konten" id="konten">
         <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h3 class="display-4"><?php echo $judul; ?></h3>
-                <p class="lead"><?php echo $sub_judul; ?></p>
+            <div class="container-fluid">
+                <h3><?php echo $judul; ?></h3>
+                <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
             </div>
         </div>
 
@@ -642,6 +642,6 @@ $pesanan = $q->row();
     }, false);
 </script>
 
-<?php echo $this->load->view("admin/_inc/js-global", '', TRUE); ?>
-<?php echo $this->load->view("admin/_inc/js-formpesanan", '', TRUE); ?>
+<?php echo $this->load->view("_inc/".$include."/js-global", '', TRUE); ?>
+<?php echo $this->load->view("_inc/js-formpesanan", '', TRUE); ?>
 <?php echo $this->load->view("_inc/footer", '', TRUE); ?>
