@@ -5,14 +5,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script>
 $(function () {
     var mess = '<div id="message" class="position-fixed mr-3" style="z-index: 1060;max-width: 500px; top: 70px; right: 0"></div>';
-    var count = $("#count");
+    var count = $(".counter");
 
     $('body').append(mess);
 
     function loadCount() {
         $.getJSON( "<?php echo site_url('session'); ?>", function( response ) {
             if(response.log) {
-                $.getJSON( "<?php echo site_url('admin/notifikasi/count'); ?>", function( num ) {
+                $.getJSON( "<?php echo site_url('notifikasi/count'); ?>", function( num ) {
                     count.html(num);
                     if(num > 0) {
                         $(document).attr("title", '('+ num + ') ' + $('.konten h3').text());
@@ -38,8 +38,8 @@ $(function () {
     $('#notif').on('show.bs.dropdown', function () {
         $('#notifKonten').empty().html('<div class="text-center my-3"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>');
 
-        $.getJSON("<?php echo site_url('admin/notifikasi/get'); ?>", {'count': 5, 'all': 'tidak'}).done(function( response ) {
-            $('#notifKonten').empty().html('<a class="mx-3 mb-2 d-block small" href="<?php echo site_url("admin/notifikasi"); ?>">Lihat Semua Notifikasi ('+response.total+')</a>');
+        $.getJSON("<?php echo site_url('notifikasi/get'); ?>", {'count': 5, 'all': 'tidak'}).done(function( response ) {
+            $('#notifKonten').empty();
             $.each(response.data, function(index, element) {
                 $('#notifKonten').append(
                     $('<div>', {class: 'list-group list-group-flush', html: element.data})
@@ -56,12 +56,9 @@ $(function () {
             $('#listJuragan').append(
                 $('<ul>', {class: 'list-unstyled', id: 'listLi'})
             );
-            $('#listLi').append(
-                $('<li>', {html: '<a href="<?php echo site_url("pesanan/s_juragan") ?>"><i class="fas fa-users"></i> Semua Juragan</a>'})
-            );
             $.each(response.data, function(index, element) {
                 $('#listLi').append(
-                    $('<li>', {html: '<a href="<?php echo site_url("pesanan/") ?>'+element.slug+'"><i class="fas fa-user-circle"></i> '+element.nama+'</a>'})
+                    $('<li>', {html: '<a href="<?php echo site_url("faktur/data/") ?>'+element.slug+'"><i class="fas fa-user-circle"></i> '+element.nama+'</a>'})
                 );
             });
         });
@@ -72,7 +69,6 @@ $(function () {
     $('#sidebar').on('hidden.bs.collapse', function () {
         $('.overlay').remove();
         $('body').toggleClass('modal-open');
-
     });
 });
 
@@ -130,6 +126,4 @@ function createToast(title, content) {
         $(this).remove();
     });
 }
-
-
 </script>

@@ -507,7 +507,7 @@ class Faktur extends CI_Controller {
         // unik
 		$unik = $this->faktur->get_biaya($id_faktur, 'unik');
 		if($unik > 0) {
-			$response['unik'] = harga($unik);
+			$response['unik'] = 'Rp ' . str_pad($unik, 3, "0", STR_PAD_LEFT) .',-';
 		}
 
         // ongkir

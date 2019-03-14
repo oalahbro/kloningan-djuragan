@@ -21,10 +21,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 			<li class="nav-item dropdown" id="notif">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<span class="badge badge-danger" id="count">0</span> Notifikasi
+					<span class="badge badge-danger counter" id="count">0</span> Notifikasi
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<div id="notifKonten" style="min-width: 200px"></div>
+					<?php echo anchor('notifikasi', 'Lihat semua <span class="counter"></span>', array('class' => 'small d-block px-3 py-2 text-primary')); ?>
+					<div id="notifKonten" class="notifikasiDrop"></div>
 				</div>
 			</li>
 			<li class="nav-item dropdown">
@@ -33,9 +34,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<?php 
-					echo anchor('admin/pengaturan/juragan', 'Juragan', array('class' => 'dropdown-item'));
-					echo anchor('admin/pengaturan/pengguna', 'Pengguna', array('class' => 'dropdown-item'));
-					echo anchor('admin/pengaturan/index', 'Sistem', array('class' => 'dropdown-item'));
+					echo anchor('pengaturan/juragan', 'Juragan', array('class' => 'dropdown-item'));
+					echo anchor('pengaturan/pengguna', 'Pengguna', array('class' => 'dropdown-item'));
+					echo anchor('pengaturan/index', 'Sistem', array('class' => 'dropdown-item'));
 					?>
 				</div>
 			</li>
@@ -56,3 +57,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="sidebar" id="listJuragan"></div>
 	</nav>
 	<div class="d-flex align-items-stretch">
+	
