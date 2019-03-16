@@ -3,9 +3,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Notifikasi extends CI_Controller {
 
+	private $template;
+
 	public function __construct() {
-		parent::__construct();
-	}
+        parent::__construct();
+        if( ! $this->session->logged) {
+            redirect('');
+        }
+        else {
+            switch ($this->session->level) {
+                case 'superadmin':
+                case 'admin':
+                $this->template = 'admin';
+					break;
+					
+				case 'viewer':
+				$this->template = 'viewer';
+					break;
+
+                case 'cs':
+                $this->template = 'cs';
+                    break;
+                
+                default:
+                    $this->template = 'reseller';
+                    break;
+            }
+        }
+    }
 
 	public function index() {
 		$id_ = $this->pengguna->_id($_SESSION['username']);
@@ -17,7 +42,7 @@ class Notifikasi extends CI_Controller {
 			$per_page = 0;
 		}
 
-		$config['base_url'] = site_url('admin/notifikasi');
+		$config['base_url'] = site_url('notifikasi');
 		$config['total_rows'] = $this->faktur->notif($id_, FALSE, 'ya', FALSE)->num_rows();
 		$config['per_page'] = $limit;
 		$config['page_query_string'] = TRUE;
@@ -30,12 +55,11 @@ class Notifikasi extends CI_Controller {
 
 		$this->data = array(
 			'judul' => 'Notifikasi',
-			'notif' => $this->faktur->notif($id_, $limit, 'ya', $per_page)
+			'notif' => $this->faktur->notif($id_, $limit, 'ya', $per_page),
+			'include' => $this->template,
 			);
 
-		$this->load->view('administrator/header', $this->data);
-		$this->load->view('administrator/notifikasi', $this->data);
-		$this->load->view('administrator/footer', $this->data);
+		$this->load->view('notifikasi', $this->data);
 	}
 
 	public function read($id_tanggal) {
@@ -53,10 +77,13 @@ class Notifikasi extends CI_Controller {
 	
 			$toggle = $this->faktur->edit_notif($r->id_notifikasi, $data);
 
-			redirect('pesanan?cari[q]='. $r->url);
+			$toggle = $this->faktur->edit_notif($r->id_notifikasi, $data);
+			$slug = $this->juragan->_slug($r->juragan);
+
+			redirect('faktur/data/'.$slug.'?cari[q]='. $r->url);
 		}
 		else {
-			redirect('admin/notifikasi');
+			redirect('notifikasi');
 		}
 	}
 
@@ -124,23 +151,72 @@ class Notifikasi extends CI_Controller {
 			
 			$nama = $this->pengguna->_nama_pengguna($notifikasi->dari);
 
-			switch ($notifikasi->type) {
-				case '2':
-					# tambah biaya pembayaran
-					$status = 'menambah data pembayaran';
-					$ico = '<i class="fas fa-wallet"></i>';
-					break;
-				
-				default:
-					# membuat pesanan baru
-					$status = 'membuat pesanan';
-					$ico = '<i class="fas fa-file-signature"></i>';
-					break;
-			}
+			if($this->session->level === 'cs') {
+				switch ($notifikasi->type) {
+					case '2':
+						$isi = 'Penambahan biaya pembayaran <span class="text-primary">'. strtoupper( $notifikasi->url ) .'</span>';
+						$ico = '<i class="fas fa-wallet"></i>';
+						break;
+					
+					case '3':
+						$isi = 'Pembayaran pesanan <span class="text-primary">'. strtoupper( $notifikasi->url ) .'</span> dicek masuk/ada';
+						$ico = '<i class="fas fa-wallet"></i>';
+						break;
+	
+					case '7':
+						$isi = 'Pembayaran pesanan <span class="text-primary">'. strtoupper( $notifikasi->url ) .'</span> dicek belum masuk/ada';
+						$ico = '<i class="fas fa-wallet"></i>';
+						break;
+					
+					case '4':
+						$isi = 'Status paket pesanan <span class="text-primary">'. strtoupper( $notifikasi->url ) .'</span> dibatalkan';
+						$ico = '<i class="fas fa-box"></i>';
+						break;
+	
+					case '5':
+						$isi = 'Status paket pesanan <span class="text-primary">'. strtoupper( $notifikasi->url ) .'</span> diproses';
+						$ico = '<i class="fas fa-box"></i>';
+						break;
+					
+					case '6':
+						$isi = 'Status paket pesanan <span class="text-primary">'. strtoupper( $notifikasi->url ) .'</span> belum diproses';
+						$ico = '<i class="fas fa-box"></i>';
+						break;
+	
+					case '8':
+						$isi = 'Pesanan <span class="text-primary">'. strtoupper( $notifikasi->url ) .'</span> dikirim/diambil';
+						$ico = '<i class="fas fa-plane-departure"></i>';
+						break;
+					
+					default:
+						$isi = 'Dibuat pesanan baru <span class="text-primary">'. strtoupper( $notifikasi->url ) .'</span>';
+						$ico = '<i class="fas fa-file-signature"></i>';
+						break;
+				}
 
-			$data[] = array(
-				'data' => '<a href="'. $url .'" class="small list-group-item list-group-item-action '.($notifikasi->dibaca === '0'? 'font-weight-bold':'').'"><div class="d-flex w-100 justify-content-between"><p class="mb-0">'.$ico.' <span class="text-primary">'.$nama.'</span> '.$status.' <span class="text-primary">'.strtoupper( $notifikasi->url ).'</span></p></div><small class="text-muted">'. mdate('%d-%m-%Y %H:%i:%s', $notifikasi->tanggal) .'</small></a>'
-			);
+				$data[] = array(
+					'data' => '<a href="'. $url .'" class="small list-group-item list-group-item-action '.($notifikasi->dibaca === '0'? 'font-weight-bold':'').'"><div class="d-flex w-100 justify-content-between"><p class="mb-0">'.$ico.' ' .$isi.'</p></div><small class="text-muted">'. mdate('%d-%m-%Y %H:%i:%s', $notifikasi->tanggal) .'</small></a>'
+				);
+			}
+			else {
+				switch ($notifikasi->type) {
+					case '2':
+						# tambah biaya pembayaran
+						$status = 'menambah data pembayaran';
+						$ico = '<i class="fas fa-wallet"></i>';
+						break;
+					
+					default:
+						# membuat pesanan baru
+						$status = 'membuat pesanan';
+						$ico = '<i class="fas fa-file-signature"></i>';
+						break;
+				}
+
+				$data[] = array(
+					'data' => '<a href="'. $url .'" class="small list-group-item list-group-item-action '.($notifikasi->dibaca === '0'? 'font-weight-bold':'').'"><div class="d-flex w-100 justify-content-between"><p class="mb-0">'.$ico.' <span class="text-primary">'.$nama.'</span> '.$status.' <span class="text-primary">'.strtoupper( $notifikasi->url ).'</span></p></div><small class="text-muted">'. mdate('%d-%m-%Y %H:%i:%s', $notifikasi->tanggal) .'</small></a>'
+				);
+			}
 		}
 
 		$response = array(
