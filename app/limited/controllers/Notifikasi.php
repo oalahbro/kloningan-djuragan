@@ -43,7 +43,7 @@ class Notifikasi extends CI_Controller {
 		}
 
 		$config['base_url'] = site_url('notifikasi');
-		$config['total_rows'] = $this->faktur->notif($id_, FALSE, 'ya', FALSE)->num_rows();
+		$config['total_rows'] = $this->notifikasi->notif($id_, FALSE, 'ya', FALSE)->num_rows();
 		$config['per_page'] = $limit;
 		$config['page_query_string'] = TRUE;
 		$config['enable_query_strings'] = TRUE;
@@ -55,7 +55,7 @@ class Notifikasi extends CI_Controller {
 
 		$this->data = array(
 			'judul' => 'Notifikasi',
-			'notif' => $this->faktur->notif($id_, $limit, 'ya', $per_page),
+			'notif' => $this->notifikasi->notif($id_, $limit, 'ya', $per_page),
 			'include' => $this->template,
 			);
 
@@ -67,7 +67,7 @@ class Notifikasi extends CI_Controller {
 		$id = $e[0];
 		$tanggal = $e[1];
 
-		$detail_notif = $this->faktur->get_notif_detail($id, $tanggal);
+		$detail_notif = $this->notifikasi->get_notif_detail($id, $tanggal);
 		if ($detail_notif->num_rows() > 0) {
 			$r = $detail_notif->row();
 
@@ -75,9 +75,9 @@ class Notifikasi extends CI_Controller {
 				'dibaca' => '1'
 			);
 	
-			$toggle = $this->faktur->edit_notif($r->id_notifikasi, $data);
+			$toggle = $this->notifikasi->edit_notif($r->id_notifikasi, $data);
 
-			$toggle = $this->faktur->edit_notif($r->id_notifikasi, $data);
+			$toggle = $this->notifikasi->edit_notif($r->id_notifikasi, $data);
 			$slug = $this->juragan->_slug($r->juragan);
 
 			redirect('faktur/data/'.$slug.'?cari[q]='. $r->url);
@@ -95,7 +95,7 @@ class Notifikasi extends CI_Controller {
 			'dibaca' => ($baca === '0'? '1': '0')
 		);
 
-		$toggle = $this->faktur->edit_notif($id_notifikasi, $data);
+		$toggle = $this->notifikasi->edit_notif($id_notifikasi, $data);
 
 		$response = array(
 			'toggle' => ($toggle? TRUE:FALSE),
@@ -112,7 +112,7 @@ class Notifikasi extends CI_Controller {
 
 	public function hapus() {
 		$id_notifikasi = $this->input->post('id_notifikasi'); //
-		$hapus = $this->faktur->del_notif($id_notifikasi);
+		$hapus = $this->notifikasi->del_notif($id_notifikasi);
 
 		$response = array(
 			'del' => ($hapus? TRUE:FALSE)
@@ -127,7 +127,7 @@ class Notifikasi extends CI_Controller {
 
 	public function count() {
 		$id_ = $this->pengguna->_id($_SESSION['username']);
-		$response = $this->faktur->notif($id_, FALSE, 'tidak', FALSE)->num_rows();
+		$response = $this->notifikasi->notif($id_, FALSE, 'tidak', FALSE)->num_rows();
 
 		$this->output
 			->set_status_header(200)
@@ -142,7 +142,7 @@ class Notifikasi extends CI_Controller {
 		$all = $this->input->get('all'); //
 
 		$id_ = $this->pengguna->_id($_SESSION['username']);
-		$q = $this->faktur->notif($id_, $count, $all, FALSE);
+		$q = $this->notifikasi->notif($id_, $count, $all, FALSE);
 
 		///
 		$data = array();
@@ -220,7 +220,7 @@ class Notifikasi extends CI_Controller {
 		}
 
 		$response = array(
-			'total' => $this->faktur->notif($id_, FALSE, 'ya', FALSE)->num_rows(),
+			'total' => $this->notifikasi->notif($id_, FALSE, 'ya', FALSE)->num_rows(),
 			'data' => $data
 		);
 

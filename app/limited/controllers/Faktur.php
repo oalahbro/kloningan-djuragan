@@ -305,6 +305,7 @@ class Faktur extends CI_Controller {
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
 			$slug = $this->juragan->_slug($id_juragan);
+			$this->notifikasi->set($_SESSION['userid'], '1', $id_juragan, $faktur, ($this->template === 'admin'? 'cs': 'admin') );
 			redirect('faktur/data/'.$slug.'?cari[q]=' . $hp1);
 		}
 	}
