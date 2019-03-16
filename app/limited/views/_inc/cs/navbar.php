@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 			<li class="nav-item active">
-				<?php echo anchor('add/pesanan', 'Tulis Pesanan', array('class'=>'nav-link')) ?>
+				<?php echo anchor('faktur/tambah', 'Tulis Pesanan', array('class'=>'nav-link')) ?>
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
@@ -26,18 +26,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<?php echo anchor('notifikasi', 'Lihat semua <span class="counter"></span>', array('class' => 'small d-block px-3 py-2 text-primary')); ?>
 					<div id="notifKonten" class="notifikasiDrop"></div>
-				</div>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Pengaturan
-				</a>
-				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<?php 
-					echo anchor('pengaturan/juragan', 'Juragan', array('class' => 'dropdown-item'));
-					echo anchor('pengaturan/pengguna', 'Pengguna', array('class' => 'dropdown-item'));
-					echo anchor('pengaturan/index', 'Sistem', array('class' => 'dropdown-item'));
-					?>
 				</div>
 			</li>
 			<li class="nav-item dropdown">

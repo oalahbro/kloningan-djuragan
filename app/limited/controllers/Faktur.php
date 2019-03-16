@@ -96,6 +96,219 @@ class Faktur extends CI_Controller {
 		$this->load->view('pesanan-lihat', $this->data);
 	}
 
+	public function tambah() {
+		$this->form_validation->set_rules('juragan_id', 'Juragan', 'required|greater_than[0]');
+		$this->form_validation->set_rules('pengguna_id', 'Pengguna', 'required|greater_than[0]');
+		$this->form_validation->set_rules('nama', 'nama lengkap', 'required');
+		$this->form_validation->set_rules('hp1', 'hp 1', 'required');
+		// $this->form_validation->set_rules('hp2', 'hp 2', 'required');
+		$this->form_validation->set_rules('alamat', 'alamat', 'required');
+		//$this->form_validation->set_rules('kode[]', 'kode', 'required');
+		//$this->form_validation->set_rules('size[]', 'size', 'required');
+		//$this->form_validation->set_rules('harga_a[]', 'harga_a', 'required');
+		//$this->form_validation->set_rules('jumlah[]', 'jumlah', 'required');
+		$this->form_validation->set_rules('marketplace', 'marketplace', '');
+		//$this->form_validation->set_rules('rekening', 'rekening', 'required');
+		// $this->form_validation->set_rules('harga', 'total harga', 'required');
+		$this->form_validation->set_rules('ongkir', 'ongkir', 'required');
+		// $this->form_validation->set_rules('transfer', 'transfer', 'required');
+		$this->form_validation->set_rules('diskon', 'diskon', 'required');
+		$this->form_validation->set_rules('unik', 'angka unik', 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->data = array(
+				'judul' => 'Tulis Pesanan',
+				'include' => $this->template,
+				);
+
+			$this->load->view('pesanan-tambah', $this->data);
+		}
+		else {
+			//
+			$id_juragan = $this->input->post('juragan_id');
+			$pengguna_id = $this->input->post('pengguna_id');
+			$nama = $this->input->post('nama');
+			$tanggal_dibuat = $this->input->post('tanggal_dibuat');
+			$hp1 = $this->input->post('hp1');
+			$hp2 = $this->input->post('hp2');
+			$alamat = $this->input->post('alamat');
+			$produk = $this->input->post('produk'); // array
+			$pembayaran = $this->input->post('pembayaran'); // array
+			$pengiriman = $this->input->post('pengiriman'); // array
+			$diskon = $this->input->post('diskon');
+			$ongkir = $this->input->post('ongkir');
+			$unik = $this->input->post('unik');
+			$pembayaran_ = $this->input->post('pembayaran_');
+			$pengiriman_ = $this->input->post('pengiriman_');
+			$marketplace_ = $this->input->post('marketplace_');
+			$marketplace = $this->input->post('marketplace');
+			$keterangan = $this->input->post('keterangan');
+			$image = $this->input->post('image');
+			$status_paket = $this->input->post('status_paket');
+			$pengiriman_selesai = $this->input->post('pengiriman_selesai');
+
+			//
+			$dj = $this->juragan->_detail($id_juragan)->row();
+			$faktur = strtolower($dj->short . str_pad(date('ymdHis'), 11, "0", STR_PAD_LEFT));
+
+			// `faktur`
+			$data = array();
+			$data['faktur'] = array(
+				// 'id_faktur' => 
+				'seri_faktur' => $faktur,
+				'tanggal_dibuat' => strtotime($tanggal_dibuat . ' ' . mdate('%H:%i:%s', now())),
+				'juragan_id' => $id_juragan,
+				'pengguna_id' => $pengguna_id,
+				'nama' => $nama,
+				'hp1' => $hp1,
+				'hp2' => (empty($hp2)? NULL: $hp2),
+				'tipe' => (isset($marketplace)? strtolower( $marketplace ): NULL),
+				'alamat' => $alamat,
+				'gambar' => (empty($image)? NULL : $image),
+				'keterangan' => (empty($keterangan)? NULL : $keterangan),
+			);
+
+			// simpan to `faktur`
+			$this->faktur->add_invoice($data['faktur']);
+			$id_faktur = $this->db->insert_id(); // get `id_faktur`
+
+			// `pesanan_produk`
+			$i = 0;
+			$produk_data = array();			
+			foreach ($produk as $key) {
+				$pesprd_id = $this->faktur->_primary('pesanan_produk', 'id_pesanproduk', count($produk), $i);
+				if ((int) $pesprd_id !== 0) {
+					$produk_data[$i]['id_pesanproduk'] = $pesprd_id;
+				}
+
+				$produk_data[$i]['faktur_id'] = $id_faktur;
+				$produk_data[$i]['kode'] = $key['kode'];
+				$produk_data[$i]['ukuran'] = $key['ukuran'];
+				$produk_data[$i]['jumlah'] = $key['jumlah'];
+				$produk_data[$i]['harga'] = $key['harga'];
+
+				$i++;
+			}
+			$data['produk'] = $produk_data;
+			// simpan to `pesanan_produk`
+			$this->faktur->add_orders($data['produk']);			
+
+			$data['opsi_bayar'] = $pembayaran_;
+			// `pembayaran`
+			if($pembayaran_ !== 'ya') {
+				$pembayaran_data = array();
+				$pembayaran_submit = array_filter($pembayaran);
+				if (!empty($pembayaran_submit)) {
+					$p = 0;
+					foreach ($pembayaran as $bayar) {
+						$byr_id = $this->faktur->_primary('pembayaran', 'id_pembayaran', count($pembayaran), $p);
+						if ((int) $byr_id !== 0) {
+							$pembayaran_data[$p]['id_pembayaran'] = $byr_id;
+						}
+
+						$pembayaran_data[$p]['faktur_id'] = $id_faktur;
+						$pembayaran_data[$p]['tanggal_bayar'] = strtotime($bayar['tanggal']);
+						$pembayaran_data[$p]['jumlah'] = $bayar['jumlah'];
+						$pembayaran_data[$p]['rekening'] = $bayar['rekening'];
+						$pembayaran_data[$p]['tanggal_cek'] = (empty($bayar['cek']) ? NULL: strtotime($bayar['cek']));
+
+						$p++;
+					}
+					$data['pembayaran'] = $pembayaran_data;
+					// simpan to `pesanan_produk`
+					$this->faktur->sub_pay($data['pembayaran']);
+				}
+			}
+
+			// `pengiriman`
+			$kurir_terakhir = '';
+			if($pengiriman_ === 'ya') {
+				$pengiriman_data = array();
+				//$pengiriman_submit = array_filter($pengiriman);
+				if (!empty($pengiriman)) {
+					$pk = 0;
+					foreach ($pengiriman as $bayar) {
+						$kir_id = $this->faktur->_primary('pengiriman', 'id_pengiriman', count($pengiriman), $p);
+						if ((int) $kir_id !== 0) {
+							$pengiriman_data[$pk]['id_pembayaran'] = $kir_id;
+						}
+
+						$pengiriman_data[$pk]['faktur_id'] = $id_faktur;
+						$pengiriman_data[$pk]['tanggal_kirim'] = strtotime($bayar['tanggal_kirim']);
+						$pengiriman_data[$pk]['kurir'] = $bayar['kurir'];
+						$pengiriman_data[$pk]['resi'] = $bayar['resi'];
+						$pengiriman_data[$pk]['ongkir'] = $bayar['ongkir'];
+
+						$kurir_terakhir = $bayar['kurir'];
+
+						$pk++;
+					}
+					$data['pengiriman'] = $pengiriman_data;
+					// simpan to `pesanan_produk`
+					$this->faktur->sub_carries($data['pengiriman']);
+				}
+			}
+
+			$data['diskon'] = $diskon;
+			$data['ongkir'] = $ongkir;
+			$data['unik'] = $unik;
+
+			$this->faktur->upset_biaya('diskon', $id_faktur, $diskon);
+			$this->faktur->upset_biaya('ongkir', $id_faktur, $ongkir);
+			$this->faktur->upset_biaya('unik', $id_faktur, $unik);
+
+			switch ($status_paket) {
+				case '1':
+					# paket diproses
+					if($pengiriman_ === 'ya') {
+						$data_status = array(
+							'status_paket' => '1',
+							'status_kirim' => ($pengiriman_selesai === 'ya'? '2': '1'),
+							'status_kiriman' => ( strtolower($kurir_terakhir) === 'cod'? '1': '2'),
+							'tanggal_paket' => ($tanggal_paket === '0'? now() : $tanggal_paket ),
+							'tanggal_kirim' => $tgl_kirim
+						);
+					}
+					else {
+						$data_status = array(
+							'status_paket' => '1',
+							'status_kirim' => '0',
+							'status_kiriman' => NULL,
+							'tanggal_paket' => ($tanggal_paket === '0'? now() : $tanggal_paket ),
+							'tanggal_kirim' => '0'
+						);
+					}
+					break;
+				case '2':
+					# paket dibatalkan
+					$data_status = array(
+						'status_paket' => '2',
+						'tanggal_paket' => now()
+					);
+					break;
+				default:
+					# paket belum diproses
+					$this->faktur->del_carry($id_faktur);
+
+					$data_status = array(
+						'status_paket' => '0',
+						'status_kirim' => '0',
+						'status_kiriman' => NULL,
+						'tanggal_paket' => '0',
+						'tanggal_kirim' => '0'
+					);
+					break;
+			}
+
+			$this->faktur->edit_invoice($id_faktur, $data_status);
+			
+			//
+			$this->faktur->calc_pembayaran($id_faktur);
+			$slug = $this->juragan->_slug($id_juragan);
+			redirect('faktur/data/'.$slug.'?cari[q]=' . $hp1);
+		}
+	}
+
 	// ambil data juragan
 	public function get_juragan() {
 		$jur = $this->juragan->_semua()->result();
