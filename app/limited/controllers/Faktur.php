@@ -305,7 +305,7 @@ class Faktur extends CI_Controller {
 			//
 			$this->faktur->calc_pembayaran($id_faktur);
 			$slug = $this->juragan->_slug($id_juragan);
-			$this->notifikasi->set($_SESSION['userid'], '1', $id_juragan, $faktur, ($this->template === 'admin'? 'cs': 'admin') );
+			$this->notifikasi->set('1', $faktur);
 			redirect('faktur/data/'.$slug.'?cari[q]=' . $hp1);
 		}
 	}
@@ -510,7 +510,7 @@ class Faktur extends CI_Controller {
 
 					if(count($pembayaran_insert) > 0) {
 						$seri_faktur = $this->faktur->get_info($id_faktur, 'seri_faktur');
-						$this->notifikasi->set($_SESSION['userid'], '2', $id_juragan, $seri_faktur, 'cs');
+						$this->notifikasi->set('2', $seri_faktur);
 					}
 
 					// $data['produk'] = $pembayaran_data;
@@ -579,7 +579,7 @@ class Faktur extends CI_Controller {
 
 					if(count($pengiriman_insert) > 0) {
 						$seri_faktur = $this->faktur->get_info($id_faktur, 'seri_faktur');
-						$this->notifikasi->set($_SESSION['userid'], '8', $id_juragan, $seri_faktur, 'cs');
+						$this->notifikasi->set('8', $seri_faktur);
 					}
 
 					// $data['produk'] = $pengiriman_data;
@@ -912,15 +912,15 @@ class Faktur extends CI_Controller {
 			$this->faktur->calc_pembayaran($faktur_id);
 
 			$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
-			$juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
-			$this->notifikasi->set($_SESSION['userid'], '2', $juragan_id, $seri_faktur, 'cs');
+			// $juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
+			$this->notifikasi->set('2', $seri_faktur);
 
 			$status = 200;
 			$response = array(
 				'status' => true,
 				'title' => 'Pembayaran',
 				'faktur_id' => $faktur_id,
-				'seri_faktur' => strtoupper( $seri_faktur ),
+				'seri_faktur' => strtoupper( $seri_faktur ) ,
 				'alert' => 'Data pembayaran untuk ' . strtoupper( $seri_faktur ). ' telah ditambahkan'
 			);
 		}
@@ -972,7 +972,7 @@ class Faktur extends CI_Controller {
 
 			$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
 			// $juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
-			// $this->notifikasi->set($_SESSION['userid'], '2', $juragan_id, $seri_faktur, 'cs');
+			$this->notifikasi->set('2', $seri_faktur);
 
 			$status = 200;
 			$response = array(
@@ -1005,7 +1005,7 @@ class Faktur extends CI_Controller {
 		$seri_faktur = $this->faktur->get_info($id_faktur, 'seri_faktur');
 
 		$juragan_id = $this->faktur->get_info($id_faktur, 'juragan_id');
-		$this->notifikasi->set($_SESSION['userid'], ($check === 'ya'? 3: 7), $juragan_id, $seri_faktur, 'cs');
+		$this->notifikasi->set(($check === 'ya'? 3: 7), $seri_faktur);
 
 		$response = array(
 			'title' => 'Pembayaran',
@@ -1092,7 +1092,7 @@ class Faktur extends CI_Controller {
 
 		$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
 		$juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
-		$this->notifikasi->set($_SESSION['userid'], $notif_code, $juragan_id, $seri_faktur, 'cs');
+		$this->notifikasi->set($notif_code, $seri_faktur);
 
 		$this->faktur->set_package($faktur_id, $status);
 		$data = array(
@@ -1173,7 +1173,7 @@ class Faktur extends CI_Controller {
 			
 			$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
 			// $juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
-			// $this->notifikasi->set($_SESSION['userid'], '8', $juragan_id, $seri_faktur, 'cs');
+			$this->notifikasi->set('8', $seri_faktur);
 
 			$status = 200;
 			$response = array(
@@ -1259,7 +1259,7 @@ class Faktur extends CI_Controller {
 
 			$seri_faktur = $this->faktur->get_info($faktur_id, 'seri_faktur');
 			// $juragan_id = $this->faktur->get_info($faktur_id, 'juragan_id');
-			// $this->notifikasi->set($_SESSION['userid'], '2', $juragan_id, $seri_faktur, 'cs');
+			$this->notifikasi->set('2', $seri_faktur);
 
 			$status = 200;
 			$response = array(

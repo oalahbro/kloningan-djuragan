@@ -30,16 +30,16 @@ class Notifikasi_model extends CI_Model
         return $q;
     }
 
-	public function set($pengguna_id, $type, $juragan_id, $seri_faktur, $adm_or_cs = 'cs') {
+	public function set($type, $seri_faktur) {
 
-        switch ($adm_or_cs) {
-            case 'admin':
-                # code...
+		$level = $this->session->level;
+		$juragan_id = $this->faktur->get_custom_info($seri_faktur, 'juragan_id', 'seri_faktur')->juragan_id;
+        switch ($level) {
+			case 'cs':
                 $users = $this->pengguna->get_admin();
                 break;
             
-            default:
-                # code...
+            case 'admin':
                 $users = $this->pengguna->_cs_juragan($juragan_id);
                 break;
         }
@@ -56,7 +56,7 @@ class Notifikasi_model extends CI_Model
 
 			$data_notif = array(
 				'tanggal' => now(),
-				'dari' => $pengguna_id,
+				'dari' => $this->session->userid,
 				'kepada' => $user->id,
 				'type' => $type,
 				'juragan' => $juragan_id,

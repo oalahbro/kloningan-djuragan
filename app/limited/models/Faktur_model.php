@@ -252,9 +252,9 @@ class Faktur_model extends CI_Model
         }
     }
 
-    public function get_custom_info($id_faktur, $info) {
+    public function get_custom_info($id_primary, $info, $primary = 'id_faktur') {
         $this->db->select($info);
-        $this->db->where('id_faktur', $id_faktur);
+        $this->db->where($primary, $id_primary);
         $q = $this->db->get('faktur');
 
         return $q->row();
