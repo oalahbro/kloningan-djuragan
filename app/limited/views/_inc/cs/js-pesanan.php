@@ -581,6 +581,16 @@ function load_data_pengiriman(id) {
 	});	
 }
 
+$(document).on("keyup change", '[name="cari[cek_tanggal]"]',function(){
+    if(this.checked) {
+        //Do stuff
+        $('[name="cari[tanggal]"]').prop('disabled', false);
+    }
+    else {
+        $('[name="cari[tanggal]"]').prop('disabled', true);
+    }
+});
+
 var popOverSettings = {
 	trigger: 'focus',
     placement: 'right',

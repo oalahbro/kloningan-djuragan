@@ -912,8 +912,6 @@ $(document).on("keyup change", '[name="cari[cek_tanggal]"]',function(){
     }
 });
 
-
-
 var popOverSettings = {
 	trigger: 'focus',
     placement: 'right',
