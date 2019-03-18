@@ -14,8 +14,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-			<li class="nav-item active">
+			<li class="nav-item">
 				<?php echo anchor('faktur/tambah', 'Tulis Pesanan', array('class'=>'nav-link')) ?>
+			</li>
+			<li class="nav-item">
+				<?php echo anchor('chart', 'Chart', array('class'=>'nav-link')) ?>
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto mt-2 mt-lg-0">

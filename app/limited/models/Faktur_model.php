@@ -673,6 +673,42 @@ class Faktur_model extends CI_Model
         }
     }
     
+    public function counter($juragan_id, $start_date, $end_date, $status = 'belum_proses') {
+        $timestamp_m = strtotime($start_date);
+        $timestamp_a = strtotime($end_date);
+
+        switch ($status) {
+            case 'belum_proses':
+                $this->db->from('faktur f');
+                $this->db->where("f.tanggal_dibuat >=",  $timestamp_m);
+                $this->db->where('f.tanggal_dibuat <=', $timestamp_a);
+                $this->db->where('f.status_paket', '0');
+                break;
+            
+            case 'diproses':
+                $this->db->from('faktur f');
+                $this->db->where("f.tanggal_dibuat >=",  $timestamp_m);
+                $this->db->where('f.tanggal_dibuat <=', $timestamp_a);
+                $this->db->where('f.status_paket', '1');
+                break;
+
+            case 'terkirim':
+                $this->db->from('faktur f');
+                $this->db->select('COALESCE(SUM(p.jumlah),0) as pcs');
+
+                $this->db->join('pesanan_produk p', 'f.id_faktur=p.faktur_id');
+
+                $this->db->where("f.tanggal_kirim >=",  $timestamp_m);
+                $this->db->where('f.tanggal_kirim <=', $timestamp_a);
+                $this->db->where_in('f.status_kirim', '2');
+                break;
+        }
+        
+        $this->db->where_in('f.juragan_id', $juragan_id);
+        $q = $this->db->get();
+        return $q;
+    }
+    
     public function count_faktur($juragan_id, $start_date, $end_date, $status = 'transfer') {
 		$timestamp_m = strtotime($start_date);
         $timestamp_a = strtotime($end_date);
