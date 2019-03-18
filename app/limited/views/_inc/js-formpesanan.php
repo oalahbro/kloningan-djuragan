@@ -178,6 +178,7 @@ var pesananIndex = $("#ngok .cloning-me").length;
         $finaltotal -= $diskon;
 
         $('.wajib_dibayar').text('Rp '+ format($finaltotal));
+        $('#jumlah_transfer').val($finaltotal);
         $('.angka_unik').text('Rp '+ format($unik));
         $('.tarif_ongkir').text('Rp '+ format($ongkir));
         $('.total_diskon').text('Rp '+ format($diskon));
