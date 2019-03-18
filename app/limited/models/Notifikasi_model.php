@@ -39,7 +39,8 @@ class Notifikasi_model extends CI_Model
                 $users = $this->pengguna->get_admin();
                 break;
             
-            case 'admin':
+			case 'admin':
+			case 'superadmin':
                 $users = $this->pengguna->_cs_juragan($juragan_id);
                 break;
         }
