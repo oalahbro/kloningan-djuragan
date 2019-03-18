@@ -32,6 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         ''              => 'Opsi Paket',
                         'diproses'      => 'Diproses',
                         'belum_diproses' => 'Belum Diproses',
+                        'batal_proses' => 'Dibatalkan'
                     );
 
                     echo form_dropdown('cari[paket]', $opsi_paket, $this->input->get('cari[paket]'), array('class' => 'custom-select mb-2 mr-sm-2'));

@@ -24,7 +24,7 @@ class Faktur_model extends CI_Model
             $query = '';
 
             // pencarian status paket
-            if(!empty($cari['paket']) && in_array($cari['paket'], array('belum_diproses', 'diproses'))) {
+            if(!empty($cari['paket']) && in_array($cari['paket'], array('belum_diproses', 'diproses', 'batal_proses'))) {
                 switch ($cari['paket']) {
                     case "diproses":
                         // paket diproses
@@ -33,8 +33,9 @@ class Faktur_model extends CI_Model
                     case "batal_proses":
                         $spkt = 2;
                         break;
-                    default:
+                    case "belum_diproses":
                         $spkt = 0;
+                        break;
                 }
 
                 $query_p = "fak.status_paket IN ('".$spkt."') ";
@@ -708,7 +709,7 @@ class Faktur_model extends CI_Model
         $q = $this->db->get();
         return $q;
     }
-    
+
     public function count_faktur($juragan_id, $start_date, $end_date, $status = 'transfer') {
 		$timestamp_m = strtotime($start_date);
         $timestamp_a = strtotime($end_date);
