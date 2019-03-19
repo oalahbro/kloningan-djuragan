@@ -183,10 +183,8 @@ function load_pembayaran(c, a, e, b, m) {
 		d += '<h6 class="dropdown-header">Lainnya</h6>';
 		d += '<a class="dropdown-item" href="' + uri + 'faktur/pdf/' + b.seri_faktur + '">Unduh PDF</a>';
 
-		if(b.status_paket === '0' && $stt) {
+		if(b.status_paket === '0' && jQuery.inArray(b.status_transfer, ["0", "1"])!== -1 && "undefined" === typeof b.terbayar) {
 			d += '<a href="' + uri + 'faktur/sunting/' + b.seri_faktur + '" class="dropdown-item">Sunting</a>';
-		}
-		if(b.status_transfer === '0') {
 			d += '<button class="dropdown-item text-danger hapus_pesanan">Hapus</button>';
 		}
 
@@ -580,6 +578,25 @@ function load_data_pengiriman(id) {
 	}
 	});	
 }
+
+// delete pesanan
+$(document).on("click", ".hapus_pesanan", function(c) {
+	c.preventDefault();
+
+	c = $(this).closest(".mn");
+	var seri_faktur = c.attr('data-faktur'),
+		id_faktur = c.attr('data-id');
+	console.log(c);
+	if (confirm("Hapus data pesanan "+c+"?" )) {
+		// your deletion code
+		$.post(uri + "faktur/delete_faktur", {id_faktur:id_faktur}, function(a) {
+			if(a.status) {
+				location.reload();
+			}
+		});
+	}
+	return false;
+})
 
 $(document).on("keyup change", '[name="cari[cek_tanggal]"]',function(){
     if(this.checked) {

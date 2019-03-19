@@ -66,7 +66,7 @@ function load_pembayaran(c, a, e, b, m) {
 		"undefined" != typeof b.diskon && (n = '<span class="d-block text-right">diskon : <span class="badge badge-warning">-' + b.diskon + "</span></span>");
 		var z = '<span class="d-block text-right">wajib bayar : <span class="badge badge-success">' + b.wajib_bayar + "</span></span>";
 		"undefined" != typeof b.terbayar && (x = '<span class="d-block text-right">dibayar : <span class="badge badge-danger">' + b.terbayar + "</span></span>");
-		var d = '<div class="mn" id="buttoncollect" data-statustransfer="' + b.status_transfer + '" data-kurang="0" data-statuskirim="'+ b.status_kirim +'" data-faktur="' + b.seri_faktur + '" data-id="' + b.id_faktur + '">';
+		var d = '<div class="mn" id="buttoncollect-' + b.id_faktur + '" data-statustransfer="' + b.status_transfer + '" data-kurang="0" data-statuskirim="'+ b.status_kirim +'" data-faktur="' + b.seri_faktur + '" data-id="' + b.id_faktur + '">';
 		switch(b.status_transfer) {
 		case "3":
 			var g = "text-success";
@@ -901,6 +901,25 @@ $(document).on("click", ".hapusKirim", function(c) {
 		createToast(a.title, a.alert);
 	});
 });
+
+// delete pesanan
+$(document).on("click", ".hapus_pesanan", function(c) {
+	c.preventDefault();
+
+	c = $(this).closest(".mn");
+	var seri_faktur = c.attr('data-faktur'),
+		id_faktur = c.attr('data-id');
+	console.log(c);
+	if (confirm("Hapus data pesanan "+c+"?" )) {
+		// your deletion code
+		$.post(uri + "faktur/delete_faktur", {id_faktur:id_faktur}, function(a) {
+			if(a.status) {
+				location.reload();
+			}
+		});
+	}
+	return false;
+})
 
 $(document).on("keyup change", '[name="cari[cek_tanggal]"]',function(){
     if(this.checked) {

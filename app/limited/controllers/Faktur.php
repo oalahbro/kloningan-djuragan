@@ -310,6 +310,18 @@ class Faktur extends CI_Controller {
 		}
 	}
 
+	public function delete_faktur() {
+		$id_faktur = $this->input->post('id_faktur');
+		$this->faktur->del_all($id_faktur);
+
+		$this->output
+			->set_status_header(200)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode(array('status' => TRUE, 'id' => $id_faktur), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+			->_display();
+		exit;
+	}
+
 	// ambil data juragan
 	public function get_juragan() {
 		$jur = $this->juragan->_semua()->result();
