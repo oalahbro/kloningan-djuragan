@@ -97,8 +97,35 @@ class Faktur_model extends CI_Model
                     $query_q .= "DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_dibuat, '%Y-%m-%d %H:%i:%s'), '+00:00', '+00:00'))='".$cari['tanggal']."' AND ";
                 }
 
-                $query_q .= "p.kode LIKE '%".$cari['q']."%' ";
+                if (preg_match('/"([^"]+)"/', trim($cari['q']), $m)) {
+                    $query_q .= "f.nama LIKE '%".str_replace('"', "", $m[1])."%' ";
+                    
+                } else {
+                    //preg_match returns the number of matches found, 
+                    //so if here didn't match pattern
+                
 
+                    $query_q .= "p.kode LIKE '%".$cari['q']."%' ";
+
+                    preg_match_all('/%22(?:\\\\.|(?!%22).)*%22|\S+/', $cari['q'], $matches);
+                    // preg_match_all('/"(?:\\\\.|[^\\\\"])*"|\S+/', $cari['q'], $matches);
+
+                    foreach ($matches[0] as $term) {
+                        $term = trim($term);
+                        if ( ! empty($term)) {
+                            $term = str_replace('"', "", $term);
+                            $query_q .= "OR f.id_faktur LIKE '%".$term."%' ";
+                            $query_q .= "OR f.seri_faktur LIKE '%".$term."%' ";
+                            $query_q .= "OR f.nama LIKE '%".$term."%' ";
+                            $query_q .= "OR f.hp1 LIKE '%".$term."%' ";
+                            $query_q .= "OR f.hp2 LIKE '%".$term."%' ";
+                            $query_q .= "OR f.alamat LIKE '%".$term."%' ";
+                            $query_q .= "OR f.keterangan LIKE '%".$term."%' ";
+                        }
+                    }
+                }
+
+                /*
                 $searchTerms = explode(' ', $cari['q']);
                 $searchTermBits = array();
                 foreach ($searchTerms as $term) {
@@ -113,6 +140,7 @@ class Faktur_model extends CI_Model
                         $query_q .= "OR f.keterangan LIKE '%".$term."%' ";
                     }
                 }
+                */
 
                 $query_q .= ") ";
             }
