@@ -74,9 +74,9 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost;dbname=db_juragan',
+	'dsn'	=> 'mysql:host=localhost;dbname=db_djuragan',
 	'hostname' => 'localhost',
-	'username' => 'root',
+	'username' => 'toto',
 	'password' => 'root',
 	//'database' => 'db_juragan',
 	'dbdriver' => 'pdo',
