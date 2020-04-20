@@ -5,28 +5,27 @@ use App\Models\UserModel;
 class Auth extends BaseController
 {
 	protected $user;
+	protected $validation;
 	public function __construct()
 	{
 		$this->user = new UserModel();
+		$this->validation = \Config\Services::validation();
 	}
 
 	public function index()
 	{
-		$validation = \Config\Services::validation();
-
 		if ($this->isAuthorized())
 		{
 			return redirect()->to('/faktur');
 		}
 
 		if($this->request->getPost()) {
-			$validation->setRuleGroup('signin');
+			$this->validation->setRuleGroup('signin');
 		}
-
 		
-		if (! $validation->withRequest($this->request)->run()) {
+		if (! $this->validation->withRequest($this->request)->run()) {
 			echo view('publicview/header', ['title' => 'Masuk']);
-			echo view('publicview/masuk', ['validation' => $validation]);
+			echo view('publicview/masuk', ['validation' => $this->validation]);
 			echo view('publicview/footer');
 		}
 		else
@@ -41,21 +40,18 @@ class Auth extends BaseController
 
 	public function daftar()
 	{
-		$validation = \Config\Services::validation();
-
 		if ($this->isAuthorized())
 		{
 			return redirect()->to('/faktur');
 		}
 
 		if($this->request->getPost()) {
-			$validation->setRuleGroup('signup');
+			$this->validation->setRuleGroup('signup');
 		}
 
-		
-		if (! $validation->withRequest($this->request)->run()) {
+		if (! $this->validation->withRequest($this->request)->run()) {
 			echo view('publicview/header', ['title' => 'Daftar']);
-			echo view('publicview/daftar', ['validation' => $validation]);
+			echo view('publicview/daftar', ['validation' => $this->validation]);
 			echo view('publicview/footer');
 		}
 		else
