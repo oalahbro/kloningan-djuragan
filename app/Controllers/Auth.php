@@ -5,7 +5,6 @@ use App\Models\UserModel;
 class Auth extends BaseController
 {
 	protected $user;
-
 	public function __construct()
 	{
 		$this->user = new UserModel();
@@ -13,24 +12,21 @@ class Auth extends BaseController
 
 	public function index()
 	{
+		$validation = \Config\Services::validation();
 
 		if ($this->isAuthorized())
 		{
 			return redirect()->to('/faktur');
 		}
 
-		$validate = [
-			'username' => 'required',
-			'password' => 'required'
-		];
-		
-		if (! $this->validate($validate))
-		{
+		if($this->request->getPost()) {
+			$validation->setRuleGroup('signin');
+		}
 
+		
+		if (! $validation->withRequest($this->request)->run()) {
 			echo view('publicview/header', ['title' => 'Masuk']);
-			echo view('publicview/masuk', [
-				'validation' => $this->validator
-			]);
+			echo view('publicview/masuk', ['validation' => $validation]);
 			echo view('publicview/footer');
 		}
 		else
@@ -45,24 +41,21 @@ class Auth extends BaseController
 
 	public function daftar()
 	{
+		$validation = \Config\Services::validation();
+
 		if ($this->isAuthorized())
 		{
 			return redirect()->to('/faktur');
 		}
 
-		$validate = [
-			'username' 	=> 'required|min_length[3]|max_length[255]|is_unique[user.username]',
-			'password' 	=> 'required',
-			'nama' 		=> 'required|min_length[3]|max_length[50]',
-			'email'		=> 'required|valid_email|max_length[100]|is_unique[user.email]',
-		];
+		if($this->request->getPost()) {
+			$validation->setRuleGroup('signup');
+		}
+
 		
-		if (! $this->validate($validate))
-		{
+		if (! $validation->withRequest($this->request)->run()) {
 			echo view('publicview/header', ['title' => 'Daftar']);
-			echo view('publicview/daftar', [
-				'validation' => $this->validator
-			]);
+			echo view('publicview/daftar', ['validation' => $validation]);
 			echo view('publicview/footer');
 		}
 		else
@@ -77,25 +70,4 @@ class Auth extends BaseController
 			return redirect()->to('/auth');
 		}
 	}
-
-	public function uji()
-	{
-		$userModel = new UserModel();
-		try {
-
-			$users = $userModel->where('username', 'adminweb')->findAll();
-			// $user = $this->user->->where('username', 'adminweb')->findAll();
-
-			var_dump($users);
-		}
-		catch (\Exception $e)
-		{
-			die($e->getMessage());
-		}
-
-	
-		
-		# code...
-	}
-
 }

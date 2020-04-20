@@ -12,15 +12,35 @@
 					<?= form_open(); ?>
 					<div class="form-group">
 						<?php 
+						$class_username = 'form-control';
+						if ($validation->hasError('username')) {
+							$class_username .= ' is-invalid';
+						}
+
 						echo form_label('Pengguna', 'username');
-						echo form_input('username', '', ['class' => 'form-control', 'id' => 'username', 'placeholder' => 'username', 'required' => '']);
+						echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'username', 'required' => '']);
 						?>
+						<?php if ($validation->hasError('username')) { ?>
+							<div class="invalid-feedback">
+								<?php echo $validation->getError('username'); ?>
+							</div>
+						<?php } ?>
 					</div>
 					<div class="form-group">
 						<?php 
+						$class_password = 'form-control';
+						if ($validation->hasError('password')) {
+							$class_password .= ' is-invalid';
+						}
+
 						echo form_label('Kata sandi', 'password');
-						echo form_input('password', '', ['class' => 'form-control', 'id' => 'password', 'placeholder' => 'kata sandi', 'required' => ''], 'password');
-						?>
+						echo form_input('password', '', ['class' => $class_password, 'id' => 'password', 'placeholder' => 'kata sandi', 'required' => ''], 'password');
+						
+						if ($validation->hasError('password')) { ?>
+							<div class="invalid-feedback">
+								<?php echo $validation->getError('password'); ?>
+							</div>
+						<?php } ?>
 					</div>
 					<?php 
 					echo form_button(['content' => 'Masuk', 'class' => 'btn btn-primary', 'type' => 'submit']);

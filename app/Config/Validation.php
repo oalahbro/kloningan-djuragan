@@ -33,4 +33,16 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+
+	public $signin = [
+		'username'     => 'required',
+		'password'     => 'required'
+	];
+
+	public $signup = [
+		'username' 	=> 'required|min_length[3]|max_length[100]|is_unique[user.username]|alpha_dash',
+		'password' 	=> 'required|min_length[6]',
+		'nama' 		=> 'required|min_length[3]|max_length[50]',
+		'email'		=> 'required|valid_email|max_length[100]|is_unique[user.email]',
+	];
 }
