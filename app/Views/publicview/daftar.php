@@ -9,6 +9,7 @@
 		<div class="col-md-4 d-flex justify-content-start align-items-center">
 			<div class="w-100 my-5 my-md-2">
 				<div>
+					<?= $_SESSION['status']; ?>
 					<?= form_open(); ?>
 					<div class="form-group">
 						<?php 

@@ -6,6 +6,7 @@ class Auth extends BaseController
 {
 	protected $user;
 	protected $validation;
+
 	public function __construct()
 	{
 		$this->user = new UserModel();
@@ -30,11 +31,66 @@ class Auth extends BaseController
 		}
 		else
 		{
-			$dt = $this->user->addNew([
-				'username' => $this->request->getPost('username'),
-				'password' => $this->request->getPost('password')
-			]);
-			var_dump( $dt );
+			$get = $this->user->where('username', $this->request->getPost('username'))->first();
+
+			if ($get === NULL or empty($get)) {
+				$sesi = [
+					'logged'	=> FALSE
+				];
+				$redirect = '/auth/index';
+				$status = '<div class="alert alert-danger"><strong class="d-block">Nay!</strong>Kamu siapa? daftar aja dulu.</div>';				
+			}
+			else {
+				if (password_verify($this->request->getPost('password'), $get['password'])) {
+					switch ($get['status']) {
+						case 'pending':
+							$sesi = [
+								'logged'	=> FALSE
+							];
+							$redirect = '/auth/index';
+							$status = '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Kamu sudah terdaftar kok, tapi cek email dulu ya.</div>';
+							break;
+
+						case 'blocked':
+							$sesi = [
+								'logged'	=> FALSE
+							];
+							$redirect = '/auth/index';
+							$status = '<div class="alert alert-danger"><strong class="d-block">Grrrr!</strong>Kamu dilarang masuk.</div>';
+							break;
+
+						case 'inactive':
+							$sesi = [
+								'logged'	=> FALSE
+							];
+							$redirect = '/auth/index';
+							$status = '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Tunggu validasi dari admin ya, atau hubungi admin segera.</div>';
+							break;
+						default:
+							$sesi = [
+								'id'  		=> $get['id'],
+								'username'  => $get['username'],
+								'email'  	=> $get['email'],
+								'level'  	=> $get['level'],
+								'logged'	=> TRUE
+							];
+
+							$redirect = '/faktur';
+							$status = '<div class="alert alert-sucess"><strong class="d-block">Hay!</strong>Jangan lupa bahagia ya.</div>';
+							break;
+					}
+				}
+				else {
+					$sesi = [
+						'logged'	=> FALSE
+					];
+					$redirect = '/auth/index';
+					$status = '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Kalo sudah nyerah mengingat kata sandi, bilang ya?</div>';
+				}
+			}
+
+			$this->session->set($sesi);
+			return redirect()->to($redirect)->with('status', $status);
 		}
 	}
 
@@ -63,7 +119,12 @@ class Auth extends BaseController
 				'email' => $this->request->getPost('email')
 			]);
 			
-			return redirect()->to('/auth');
+			return redirect()->to('/auth/daftar')->with('status', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Kamu sudah terdaftar, cek email dulu ya.</div>');
 		}
 	}
+
+	public function lupa()
+	{
+	}
+
 }

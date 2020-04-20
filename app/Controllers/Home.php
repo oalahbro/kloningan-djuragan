@@ -9,7 +9,7 @@ class Home extends BaseController
 			return redirect()->to('/auth');
 		}
 
-		return view('welcome_message');
+		return redirect()->to('/faktur');
 	}
 
 	//--------------------------------------------------------------------

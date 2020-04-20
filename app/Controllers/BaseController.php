@@ -46,11 +46,14 @@ class BaseController extends Controller
 
 	protected function isAuthorized()
 	{
-		if(isset($_SESSION['logged'])) {
-			return TRUE; // redirect()->to('/faktur');
+		if($this->session->has('logged')) {
+			if (! $this->session->get('logged')) {
+				return FALSE;
+			}
+			return TRUE;
 		}
 		else {
-			return FALSE; //redirect()->to('/auth/masuk');
+			return FALSE;
 		}
 	}
 

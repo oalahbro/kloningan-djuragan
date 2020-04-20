@@ -16,6 +16,8 @@ class UserModel extends Model
     protected $updatedField  = 'updated_at';
     // protected $deletedField  = 'deleted_at';
 
+    protected $dateFormat = 'int';
+
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;

@@ -17,7 +17,7 @@ class AddUser extends \CodeIgniter\Database\Migration {
 			],
 			'password' => [
 				'type'           => 'VARCHAR',
-				'constraint'     => '72',
+				'constraint'     => '60',
 			],
 			'name' => [
 				'type' 			 => 'VARCHAR',
@@ -27,12 +27,25 @@ class AddUser extends \CodeIgniter\Database\Migration {
 				'type'           => 'VARCHAR',
 				'constraint'     => '100',
 			],
+			'level' => [
+				'type'           => 'ENUM',
+				'constraint'     => ['superadmin', 'admin', 'cs', 'viewer', 'reseller'],
+				'default'        => 'viewer',
+			],
+			'status' => [
+				'type'           => 'ENUM',
+				'constraint'     => ['pending', 'inactive', 'active', 'blocked'],
+				'default'        => 'pending',
+			],
 			'created_at' => [
-				'type'           => 'DATETIME',
+				'type'           => 'INT',
+				'constraint' 	 => '10',
+				'unsigned' 		 => TRUE
 			],
 			'updated_at' => [
-				'type'           => 'DATETIME',
-				'null'			 => TRUE
+				'type'           => 'INT',
+				'constraint' 	 => '10',
+				'unsigned' 		 => TRUE
 			],
 		]);
 		$this->forge->addKey('id', TRUE);
