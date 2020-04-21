@@ -1,10 +1,30 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php namespace App\Controllers;
 
-class Faktur extends CI_Controller {
+// use App\Models\UserModel;
 
-    private $template;
+class Faktur extends BaseController
+{
+	public function __construct()
+	{
+		// $this->user = new UserModel();
+		$this->validation = \Config\Services::validation();
+	}
 
+	public function index()
+	{
+		if (! $this->isAuthorized())
+		{
+			return redirect()->to('/auth');
+		}
+
+		echo view('publicview/header', ['title' => 'Lupa sandi']);
+		echo view('publicview/lupa', ['validation' => $this->validation]);
+		echo view('publicview/footer');
+	}
+
+    // private $template;
+
+	/*
 	public function __construct() {
         parent::__construct();
         if( ! $this->session->logged) {
@@ -31,8 +51,9 @@ class Faktur extends CI_Controller {
             }
         }
     }
+    */
 
-    public function index() {
+    public function indexes() {
         switch ($this->session->level) {
             case 'superadmin':
 			case 'admin':
