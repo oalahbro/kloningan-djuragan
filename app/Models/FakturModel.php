@@ -1,18 +1,15 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Faktur_model extends CI_Model
+<?php namespace App\Models;
+use CodeIgniter\Model;
+ 
+class FakturModel extends Model
 {
+    /*
 	private $tabel;
 	public function __construct() {
 		parent::__construct();
 		$this->tabel = 'faktur';
     }
     
-    /**
-	 * Ambil semua faktur
-	 *
-	 */
     public function get_all($juragan_id = FALSE, $by = FALSE, $limit = FALSE, $offset = FALSE, $cari = NULL) {
         $this->db->select("
         fak.*
@@ -302,10 +299,6 @@ class Faktur_model extends CI_Model
         return TRUE;
     }
 
-    /**
-	 * biaya_diskon, biaya_ongkir, biaya_unik
-	 *
-	 */
     public function get_biaya($faktur_id, $tabel) {
         $table = 'biaya_' . $tabel;
         $q = $this->db->get_where($table, array('faktur_id' => $faktur_id));
@@ -318,10 +311,6 @@ class Faktur_model extends CI_Model
         }
     }
 
-    /**
-	 * update, insert, delete : biaya_
-	 *
-	 */
     public function upset_biaya($tabel, $faktur_id, $nominal) {
         $table = 'biaya_' . $tabel;
         if($nominal > 0) {    
@@ -354,10 +343,6 @@ class Faktur_model extends CI_Model
     }
 
 
-    /**
-	 * produk dipesan
-	 *
-	 */
     public function get_orders($faktur_id) {
         return $this->db->get_where('pesanan_produk', array('faktur_id' => $faktur_id));
     }
@@ -386,10 +371,6 @@ class Faktur_model extends CI_Model
         return TRUE;
     }
 
-    /**
-	 * pembayaran
-	 *
-	 */
     public function get_pays($faktur_id) {
         $this->db->order_by('tanggal_bayar ASC');
         return $this->db->get_where('pembayaran', array('faktur_id' => $faktur_id));
@@ -517,10 +498,6 @@ class Faktur_model extends CI_Model
         $this->edit_invoice($faktur_id, $data_tr);
     }
 
-    /**
-	 * pengiriman
-	 *
-	 */
     public function get_carry($faktur_id) {
         return $this->db->order_by('tanggal_kirim asc')->get_where('pengiriman', array('faktur_id' => $faktur_id));
     }
@@ -594,10 +571,6 @@ class Faktur_model extends CI_Model
         $this->edit_invoice($faktur_id, $data_update);
     }
 
-    /**
-	 * Atur status paket
-	 *
-	 */
     public function set_package($faktur_id, $status) {
         switch ($status) {
             case '1':
@@ -630,27 +603,6 @@ class Faktur_model extends CI_Model
                 $this->calc_carry($faktur_id);
                 break;
         }
-
-
-        /*
-        if($status === 'diproses') {
-            $data_update = array(
-                'status_paket' => '1',
-                'tanggal_paket' => now()
-            );
-        }
-        else {
-            $data_update = array(
-                'status_paket' => '0',
-                'tanggal_paket' => '0',
-                'status_kirim' => '0',
-                'status_kiriman' => NULL,
-                'tanggal_kirim' => '0'
-            );
-            $this->del_carry($faktur_id);
-            $this->calc_carry($faktur_id);
-        }
-        */
 
         $this->edit_invoice($faktur_id, $data_update);
         return TRUE;
@@ -792,4 +744,5 @@ class Faktur_model extends CI_Model
 
 		return $q;
     }
+    */
 }
