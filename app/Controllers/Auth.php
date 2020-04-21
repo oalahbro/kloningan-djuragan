@@ -125,6 +125,23 @@ class Auth extends BaseController
 
 	public function lupa()
 	{
+		if ($this->isAuthorized())
+		{
+			return redirect()->to('/faktur');
+		}
+
+		if($this->request->getPost()) {
+			$this->validation->setRuleGroup('forgot');
+		}
+
+		if (! $this->validation->withRequest($this->request)->run()) {
+			echo view('publicview/header', ['title' => 'Lupa sandi']);
+			echo view('publicview/lupa', ['validation' => $this->validation]);
+			echo view('publicview/footer');
+		}
+		else
+		{
+		}
 	}
 
 }
