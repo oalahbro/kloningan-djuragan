@@ -1,25 +1,82 @@
 <?php namespace App\Controllers;
 
-// use App\Models\UserModel;
+use App\Models\FakturModel;
 
 class Faktur extends BaseController
 {
 	public function __construct()
 	{
-		// $this->user = new UserModel();
+		$this->faktur = new FakturModel();
 		$this->validation = \Config\Services::validation();
 	}
 
 	public function index()
 	{
+		/*
 		if (! $this->isAuthorized())
 		{
 			return redirect()->to('/auth');
 		}
+		*/
 
-		echo view('publicview/header', ['title' => 'Lupa sandi']);
-		echo view('publicview/lupa', ['validation' => $this->validation]);
-		echo view('publicview/footer');
+		echo view('adminview/header', ['title' => 'Faktur']);
+		echo view('adminview/faktur', ['pesanan' => $this->faktur->get()->getResult()]);
+		echo view('adminview/footer');
+	}
+
+	public function test()
+	{
+
+		print('<pre>');
+		print_r($this->faktur->get()->getResult());
+		print('</pre>');
+
+		
+		foreach ($this->faktur->get()->getResult() as $key ) {
+			$barang = html_entity_decode($key->barang, ENT_QUOTES);
+			
+
+			echo '<h3>DATA = ' . $key->id_fktr . '</h3>';
+			print('<hr/>');
+
+			print('<pre>');
+				$wajib_bayar = 0;
+				$wajib_kirim = 0;
+				$sudah_bayar = 0;
+				$sudah_kirim = 0;
+
+				foreach (json_decode($barang) as $brg) {
+
+					$wajib_bayar += ($brg->harga * $brg->qty);
+					$wajib_kirim += $brg->qty;
+				}
+
+				if (! empty($key->bayar)) {
+					$bayar = html_entity_decode($key->bayar, ENT_QUOTES);
+					foreach (json_decode($bayar) as $byr) {
+						if ($byr->status === 1) {
+							$sudah_bayar += $byr->total;
+						}
+					}
+				}
+
+				if (! empty($key->kirim)) {
+					$kirim = html_entity_decode($key->kirim, ENT_QUOTES);
+					foreach (json_decode($kirim) as $krm) {
+
+						$sudah_kirim += $krm->qty;
+					}
+				}
+
+				print_r('wajib bayar: ' . $wajib_bayar . '<br/>');
+				print_r('wajib kirim: ' . $wajib_kirim . '<br/>');
+				print_r('sudah bayar: ' . $sudah_bayar . '<br/>');
+				print_r('sudah kirim: ' . $sudah_kirim . '<hr/>');
+
+			print('</pre>');
+
+		}		
+
 	}
 
     // private $template;
@@ -52,6 +109,8 @@ class Faktur extends BaseController
         }
     }
     */
+
+    /*
 
     public function indexes() {
         switch ($this->session->level) {
@@ -1336,4 +1395,5 @@ class Faktur extends BaseController
 			->_display();
 		exit;
 	}
+	*/
 }
