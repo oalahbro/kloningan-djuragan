@@ -1,3 +1,4 @@
+	</div>
 	
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -7,7 +8,16 @@
     <script defer src="https://kit.fontawesome.com/859e035253.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
-		
+		var popOverSettings = {
+			trigger: 'focus',
+		    placement: 'right',
+		    container: 'body',
+			html: true,
+		    selector: '[data-toggle="popHarga"]',
+			template: '<div class="popover shadow" role="tooltip"><div class="arrow"></div><div class="popover-body"></div></div>'
+		}
+
+		$('body').popover(popOverSettings);
 	</script>
 
   </body>
