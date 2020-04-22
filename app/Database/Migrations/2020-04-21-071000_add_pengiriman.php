@@ -25,6 +25,10 @@ class AddPengiriman extends \CodeIgniter\Database\Migration {
 				'constraint' 	 => 5,
 				'unsigned' 		 => TRUE
 			],
+			'resi' => [
+				'type' 			 => 'VARCHAR',
+				'constraint'     => 15,
+			],
 			'qty_krm' => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 3,
