@@ -13,6 +13,7 @@ class FakturModel extends Model
 	{
 		$builder = $this->db->table('faktur f');
 		$builder->select('f.*,p.*, j.*');
+		$builder->select('d.diskon, u.unik, o.ongkir');
 		$builder->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","&quot;id&quot;:",b.id_beli,",","&quot;stok_id&quot;:","&quot;",IFNULL(b.stok_id, "null"),"&quot;,","&quot;kode&quot;:&quot;",b.kode_beli,"&quot;,","&quot;size&quot;:&quot;",b.size_beli,"&quot;,","&quot;harga&quot;:",b.harga_beli, ",","&quot;qty&quot;:",b.qty_beli,"}")),"]") as barang');
 		
 		$builder->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","&quot;id&quot;:",by.id_byr,",","&quot;tipe&quot;:&quot;",by.tipe_byr,"&quot;,","&quot;bank&quot;:&quot;",by.bank,"&quot;,","&quot;total&quot;:",by.total_byr, ",","&quot;status&quot;:",by.status,",","&quot;tanggal&quot;:",by.tanggal_byr,"}")),"]") as bayar');
@@ -22,6 +23,9 @@ class FakturModel extends Model
 		$builder->join('juragan j', 'j.id_jrgn = f.juragan_id');
 		$builder->join('pelanggan p', 'p.id_plgn = f.pelanggan_id');
 		$builder->join('dibeli b', 'b.faktur_id = f.id_fktr', 'left');
+		$builder->join('diskon d', 'd.faktur_id = f.id_fktr', 'left');
+		$builder->join('unik u', 'u.faktur_id = f.id_fktr', 'left');
+		$builder->join('ongkir o', 'o.faktur_id = f.id_fktr', 'left');
 		$builder->join('pembayaran by', 'by.faktur_id = f.id_fktr', 'left');
 		$builder->join('pengiriman k', 'k.faktur_id = f.id_fktr', 'left');
 		$builder->groupBy("f.id_fktr");
