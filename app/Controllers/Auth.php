@@ -85,7 +85,7 @@ class Auth extends BaseController
 						'logged'	=> FALSE
 					];
 					$redirect = '/auth/index';
-					$status = '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Kalo sudah nyerah mengingat kata sandi, bilang ya?</div>';
+					$status = '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Ingat lagi apa kata sandimu, ku tungguin deh.</div>';
 				}
 			}
 
@@ -141,7 +141,38 @@ class Auth extends BaseController
 		}
 		else
 		{
+			$this->user->insert([
+				'username' => $this->request->getPost('username'),
+				'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
+				'name' => $this->request->getPost('nama'),
+				'email' => $this->request->getPost('email')
+			]);
+			
+			return redirect()->to('/auth/daftar')->with('status', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Kamu sudah terdaftar, cek email dulu ya.</div>');
 		}
 	}
 
+	public function uji()
+	{
+		// $userModel = new UserModel();
+		// try {
+
+		// 	$users = $userModel->where('username', 'adminweb')->findAll();
+		// 	// $user = $this->user->->where('username', 'adminweb')->findAll();
+
+		// 	var_dump($users);
+		// }
+		// catch (\Exception $e)
+		// {
+		// 	die($e->getMessage());
+		// }
+
+		var_dump($_SESSION);
+
+		var_dump($this->isAuthorized());
+
+	
+		
+		# code...
+	}
 }
