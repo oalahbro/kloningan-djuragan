@@ -1,8 +1,8 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php namespace App\Controllers;
 
-class Juragan extends CI_Controller {
-
+class Faktur extends BaseController
+{
+    /*
     private $template;
 
 	public function __construct() {
@@ -72,4 +72,5 @@ class Juragan extends CI_Controller {
 			->_display();
 		exit;
 	}
+    */
 }
