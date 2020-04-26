@@ -20,7 +20,22 @@ class Faktur extends BaseController
 		*/
 
 		echo view('adminview/header', ['title' => 'Faktur']);
-		echo view('adminview/faktur', ['pesanan' => $this->faktur->get()->getResult()]);
+		echo view('adminview/faktur/lihat', ['pesanan' => $this->faktur->get()->getResult()]);
+		echo view('adminview/footer');
+	}
+
+	// create new faktur
+	public function baru() 
+	{
+		/*
+		if (! $this->isAuthorized())
+		{
+			return redirect()->to('/auth');
+		}
+		*/
+
+		echo view('adminview/header', ['title' => 'Tulis Faktur Baru']);
+		echo view('adminview/faktur/baru', ['pesanan' => $this->faktur->get()->getResult()]);
 		echo view('adminview/footer');
 	}
 

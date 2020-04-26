@@ -11,6 +11,10 @@ class AddFaktur extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE,
 				'auto_increment' => TRUE
 			],
+			'no' => [
+				'type'           => 'VARCHAR',
+				'constraint' 	 => 14, // LS3457648767 LS202204224900
+			],
 			'pelanggan_id' => [
 				'type'           => 'INT',
 				'constraint' 	 => 11,
