@@ -83,4 +83,13 @@ class Ongkir extends BaseController
 
 		return $this->response->setJSON($kecamatan);
 	}
+
+	public function get()
+	{
+		$subdistrict = $this->request->getGet('kec');
+		$weight = $this->request->getGet('berat');
+
+		$cost = $this->rajaongkir->cost(['city' => 501], ['subdistrict' => $subdistrict], $weight, 'jne:pos:jnt')->data;
+		return $this->response->setJSON($cost);
+	}
 }
