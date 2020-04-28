@@ -12,7 +12,7 @@ class FakturModel extends Model
 	public function get()
 	{
 		$builder = $this->db->table('faktur f');
-		$builder->select('f.*,p.*, j.*');
+		$builder->select('f.*,p.*, j.juragan, j.nama_jrgn');
 		$builder->select('d.diskon, u.unik, o.ongkir');
 		$builder->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","&quot;id&quot;:",b.id_beli,",","&quot;stok_id&quot;:","&quot;",IFNULL(b.stok_id, "null"),"&quot;,","&quot;kode&quot;:&quot;",b.kode_beli,"&quot;,","&quot;size&quot;:&quot;",b.size_beli,"&quot;,","&quot;harga&quot;:",b.harga_beli, ",","&quot;qty&quot;:",b.qty_beli,"}")),"]") as barang');
 		
