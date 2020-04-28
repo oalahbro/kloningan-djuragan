@@ -1,21 +1,7 @@
 <?php namespace App\Controllers;
 
-use App\Libraries\Login;
-use App\Models\UserModel;
-
 class Auth extends BaseController
 {
-	protected $login;
-	protected $user;
-	protected $validation;
-
-	public function __construct()
-	{
-		$this->login = new Login();
-		$this->user = new UserModel();
-		$this->validation = \Config\Services::validation();
-	}
-
 	public function index()
 	{
 		if ($this->login->isAuthorized()) 
@@ -155,27 +141,9 @@ class Auth extends BaseController
 		}
 	}
 
-	public function uji()
+	public function keluar()
 	{
-		// $userModel = new UserModel();
-		// try {
-
-		// 	$users = $userModel->where('username', 'adminweb')->findAll();
-		// 	// $user = $this->user->->where('username', 'adminweb')->findAll();
-
-		// 	var_dump($users);
-		// }
-		// catch (\Exception $e)
-		// {
-		// 	die($e->getMessage());
-		// }
-
-		var_dump($_SESSION);
-
-		var_dump($this->isAuthorized());
-
-	
-		
-		# code...
+		$this->session->destroy();
+		return redirect()->to('/');
 	}
 }

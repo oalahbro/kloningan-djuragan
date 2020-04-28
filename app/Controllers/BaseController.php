@@ -15,7 +15,12 @@ namespace App\Controllers;
  */
 
 use CodeIgniter\Controller;
+
+use App\Libraries\Login;
+use App\Models\FakturModel;
 use App\Models\UserModel;
+
+use Ncaneldiee\Rajaongkir;
 
 class BaseController extends Controller
 {
@@ -42,5 +47,12 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// E.g.:
 		$this->session = \Config\Services::session();
+		$this->validation = \Config\Services::validation();
+
+		$this->faktur = new FakturModel();
+		$this->login = new Login();
+		$this->user = new UserModel();
+
+		$this->rajaongkir = new Rajaongkir\Domestic('75f538ed88e26297a2fabed240ed8bf0', Rajaongkir\Domestic::ACCOUNT_PRO);
 	}
 }

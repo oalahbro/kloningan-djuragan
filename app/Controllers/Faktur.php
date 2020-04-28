@@ -1,19 +1,7 @@
 <?php namespace App\Controllers;
 
-use App\Libraries\Login;
-use App\Models\FakturModel;
-
 class Faktur extends BaseController
 {
-	protected $login;
-
-	public function __construct()
-	{
-		$this->login = new Login();
-		$this->faktur = new FakturModel();
-		$this->validation = \Config\Services::validation();
-	}
-
 	public function index()
 	{
 		if (! $this->login->isAuthorized())
