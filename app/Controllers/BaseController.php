@@ -43,18 +43,4 @@ class BaseController extends Controller
 		// E.g.:
 		$this->session = \Config\Services::session();
 	}
-
-	protected function isAuthorized()
-	{
-		if($this->session->has('logged')) {
-			if (! $this->session->get('logged')) {
-				return FALSE;
-			}
-			return TRUE;
-		}
-		else {
-			return FALSE;
-		}
-	}
-
 }
