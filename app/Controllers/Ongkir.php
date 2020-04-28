@@ -4,20 +4,11 @@ class Ongkir extends BaseController
 {
 	public function index()
 	{
-		if ( ! $this->login->isAuthorized()) {
-			return redirect()->to('/auth');
-		}
+		$data = array(
+			'data' => 'not valid'
+		);
 
-		$nama_cache = 'prov';
-		if ( ! $provinsi = cache($nama_cache)) {
-
-			$provinsi = $this->rajaongkir->province()->data;
-
-			// simpan cache selama 365 hari
-			cache()->save($nama_cache, $provinsi, 60*60*24*365);
-		}
-
-		return $this->response->setJSON($provinsi);
+		return $this->response->setJSON($data);
 	}
 
 	public function provinsi()
