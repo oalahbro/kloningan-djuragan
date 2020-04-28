@@ -1,23 +1,25 @@
 <?php namespace App\Controllers;
 
+use App\Libraries\Login;
 use App\Models\FakturModel;
 
 class Faktur extends BaseController
 {
+	protected $login;
+
 	public function __construct()
 	{
+		$this->login = new Login();
 		$this->faktur = new FakturModel();
 		$this->validation = \Config\Services::validation();
 	}
 
 	public function index()
 	{
-		/*
-		if (! $this->isAuthorized())
+		if (! $this->login->isAuthorized())
 		{
 			return redirect()->to('/auth');
 		}
-		*/
 
 		echo view('adminview/header', ['title' => 'Faktur']);
 		echo view('adminview/faktur/lihat', ['pesanan' => $this->faktur->get()->getResult()]);
@@ -27,12 +29,10 @@ class Faktur extends BaseController
 	// create new faktur
 	public function baru() 
 	{
-		/*
-		if (! $this->isAuthorized())
+		if (! $this->login->isAuthorized())
 		{
 			return redirect()->to('/auth');
 		}
-		*/
 
 		echo view('adminview/header', ['title' => 'Tulis Faktur Baru']);
 		echo view('adminview/faktur/baru', ['pesanan' => $this->faktur->get()->getResult()]);
