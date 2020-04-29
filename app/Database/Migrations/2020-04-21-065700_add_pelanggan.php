@@ -11,6 +11,11 @@ class AddPelanggan extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE,
 				'auto_increment' => TRUE
 			],
+			'juragan_id' => [
+				'type'           => 'INT',
+				'constraint' 	 => 11,
+				'unsigned' 		 => TRUE,
+			],
 			'nama_plgn' => [
 				'type' 			 => 'VARCHAR',
 				'constraint' 	 => '60',

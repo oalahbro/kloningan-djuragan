@@ -20,8 +20,8 @@ class FakturModel extends Model
 
 		$builder->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","&quot;id&quot;:",k.id_krm,",","&quot;resi&quot;:&quot;",k.resi,"&quot;,","&quot;kurir&quot;:&quot;",k.kurir,"&quot;,","&quot;ongkos&quot;:",k.ongkir_krm,",","&quot;qty&quot;:",k.qty_krm, ",","&quot;tanggal&quot;:",k.tanggal_krm,"}")),"]") as kirim');
 
-		$builder->join('juragan j', 'j.id_jrgn = f.juragan_id');
 		$builder->join('pelanggan p', 'p.id_plgn = f.pelanggan_id');
+		$builder->join('juragan j', 'j.id_jrgn = p.juragan_id');
 		$builder->join('dibeli b', 'b.faktur_id = f.id_fktr', 'left');
 		$builder->join('diskon d', 'd.faktur_id = f.id_fktr', 'left');
 		$builder->join('unik u', 'u.faktur_id = f.id_fktr', 'left');

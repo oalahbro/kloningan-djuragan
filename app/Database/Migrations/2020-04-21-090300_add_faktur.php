@@ -20,11 +20,6 @@ class AddFaktur extends \CodeIgniter\Database\Migration {
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE,
 			],
-			'juragan_id' => [
-				'type'           => 'INT',
-				'constraint' 	 => 11,
-				'unsigned' 		 => TRUE,
-			],
 			'marketplace' => [
 				'type'           => 'ENUM',
 				'constraint'     => ['0', '1'],
