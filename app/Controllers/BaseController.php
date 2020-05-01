@@ -13,11 +13,11 @@ namespace App\Controllers;
  *
  * @package CodeIgniter
  */
-
 use CodeIgniter\Controller;
 
 use App\Libraries\Login;
 use App\Models\FakturModel;
+use App\Models\JuraganModel;
 use App\Models\UserModel;
 
 use Ncaneldiee\Rajaongkir;
@@ -32,7 +32,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['form', 'url', 'number'];
+	protected $helpers = ['form', 'url', 'number', 'date'];
 
 	/**
 	 * Constructor.
@@ -52,6 +52,7 @@ class BaseController extends Controller
 
 		$this->faktur = new FakturModel();
 		$this->login = new Login();
+		$this->juragan = new JuraganModel();
 		$this->user = new UserModel();
 
 		$this->rajaongkir = new Rajaongkir\Domestic('75f538ed88e26297a2fabed240ed8bf0', Rajaongkir\Domestic::ACCOUNT_PRO);

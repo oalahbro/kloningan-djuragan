@@ -45,4 +45,8 @@ class Validation
 		'nama' 		=> 'required|min_length[3]|max_length[50]',
 		'email'		=> 'required|valid_email|max_length[100]|is_unique[user.email]',
 	];
+
+	public $addJuragan = [
+		'nama' 		=> 'required|min_length[3]|max_length[50]'
+	];
 }
