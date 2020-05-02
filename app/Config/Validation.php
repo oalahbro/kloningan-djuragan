@@ -49,4 +49,9 @@ class Validation
 	public $addJuragan = [
 		'nama' 		=> 'required|min_length[3]|max_length[50]'
 	];
+
+	public $editJuragan = [
+		'id' 		=> 'required|integer',
+		'nama' 		=> 'required|min_length[3]|max_length[50]'
+	];
 }

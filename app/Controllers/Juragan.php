@@ -7,7 +7,7 @@ class Juragan extends BaseController
         if ( ! $this->login->isAuthorized()) {
             return redirect()->to('/auth');
         }
-        $limit = 5;
+        $limit = 20;
         $offset = (int) $this->request->getGet('page_juragan');
         if( $offset === 0 or $offset === 1) {
             $page = 0;
@@ -18,7 +18,7 @@ class Juragan extends BaseController
         }
 
         $data = [
-            'jrgn' => $this->juragan->orderBy('jrgn_diubah', 'desc')->findAll($limit, $page),
+            'jrgn' => $this->juragan->asObject()->orderBy('jrgn_diubah', 'desc')->findAll($limit, $page),
             'users' => $this->juragan->paginate($limit, 'juragan'),
             'pager' => $this->juragan->pager,
         ];
@@ -43,6 +43,28 @@ class Juragan extends BaseController
 
             $this->juragan->insert([
                 'juragan' => url_title($nama, '-', TRUE), 
+                'nama_jrgn' => $nama,
+            ]);
+            
+            return redirect()->to('/juragan');
+        }
+    }
+
+    public function sunting()
+    {
+        if($this->request->getPost()) {
+            $this->validation->setRuleGroup('editJuragan');
+        }
+        
+        if (! $this->validation->withRequest($this->request)->run()) {
+            return redirect()->to('/juragan');
+        }
+        else
+        {
+            $nama = $this->request->getPost('nama');
+            $id = $this->request->getPost('id');
+
+            $this->juragan->update($id, [
                 'nama_jrgn' => $nama,
             ]);
             
