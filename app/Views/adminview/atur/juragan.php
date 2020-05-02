@@ -16,10 +16,15 @@ use CodeIgniter\I18n\Time;
 						<thead>
 							<tr>
 								<th>Juragan</th>
+								<th>Dibuat</th>
+								<th>Diubah</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($jrgn as $juragan) { ?>
+							<?php foreach ($jrgn as $juragan) {
+							$dibuat = Time::createFromTimestamp($juragan->jrgn_dibuat);
+							$diubah = Time::createFromTimestamp($juragan->jrgn_diubah);
+							?>
 							<tr>
 								<td>
 									<?= $juragan->nama_jrgn; ?><br/>
@@ -29,6 +34,8 @@ use CodeIgniter\I18n\Time;
 										<li class="list-inline-item"><a class="text-danger" href="">Hapus</a></li>
 									</ul>
 								</td>
+								<td><?= $dibuat->toDateTimeString(); ?></td>
+								<td><?= $diubah->toDateTimeString(); ?></td>
 							</tr>	
 							<?php } ?>
 
@@ -61,7 +68,7 @@ use CodeIgniter\I18n\Time;
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-link" data-dismiss="modal">Tutup</button>
-							<button type="button" class="btn btn-primary">Simpan</button>
+							<button type="submit" class="btn btn-primary">Simpan</button>
 						</div>
 					</div>
 				</div>
