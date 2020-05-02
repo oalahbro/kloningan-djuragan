@@ -30,6 +30,10 @@ class Juragan extends BaseController
 
     public function baru()
     {
+        if ( ! $this->login->isAuthorized()) {
+            return redirect()->to('/auth');
+        }
+        
         if($this->request->getPost()) {
             $this->validation->setRuleGroup('addJuragan');
         }
@@ -52,6 +56,10 @@ class Juragan extends BaseController
 
     public function sunting()
     {
+        if ( ! $this->login->isAuthorized()) {
+            return redirect()->to('/auth');
+        }
+
         if($this->request->getPost()) {
             $this->validation->setRuleGroup('editJuragan');
         }
