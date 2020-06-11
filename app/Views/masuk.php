@@ -1,3 +1,7 @@
+<?= $this->extend('template/main') ?>
+
+<?= $this->section('content') ?>
+
 <div class="container-fluid min-vh-100">
 	<div class="row min-vh-100">
 		<div class="col-md-4 bg-dark d-flex justify-content-center justify-content-md-end align-items-center text-white">
@@ -53,3 +57,5 @@
 		</div>
 	</div>
 </div>
+
+<?= $this->endSection() ?>

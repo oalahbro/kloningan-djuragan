@@ -14,9 +14,11 @@ class Auth extends BaseController
 		}
 		
 		if (! $this->validation->withRequest($this->request)->run()) {
-			echo view('publicview/header', ['title' => 'Masuk']);
-			echo view('publicview/masuk', ['validation' => $this->validation]);
-			echo view('publicview/footer');
+			$data = [
+				'title' => 'Masuk',
+				'validation' => $this->validation
+            ];
+			echo view('masuk', $data);
 		}
 		else
 		{
@@ -95,9 +97,11 @@ class Auth extends BaseController
 		}
 
 		if (! $this->validation->withRequest($this->request)->run()) {
-			echo view('publicview/header', ['title' => 'Daftar']);
-			echo view('publicview/daftar', ['validation' => $this->validation]);
-			echo view('publicview/footer');
+			$data = [
+				'title' => 'Daftar',
+				'validation' => $this->validation
+			];
+			echo view('daftar', $data);
 		}
 		else
 		{
@@ -124,9 +128,11 @@ class Auth extends BaseController
 		}
 
 		if (! $this->validation->withRequest($this->request)->run()) {
-			echo view('publicview/header', ['title' => 'Lupa sandi']);
-			echo view('publicview/lupa', ['validation' => $this->validation]);
-			echo view('publicview/footer');
+			$data = [
+				'title' => 'Lupa Sandi',
+				'validation' => $this->validation
+			];
+			echo view('lupa', $data);
 		}
 		else
 		{
