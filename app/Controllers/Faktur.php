@@ -9,9 +9,11 @@ class Faktur extends BaseController
 			return redirect()->to('/auth');
 		}
 
-		echo view('adminview/header', ['title' => 'Faktur']);
-		echo view('adminview/faktur/lihat', ['pesanan' => $this->faktur->get()->getResult()]);
-		echo view('adminview/footer');
+		$data = [
+			'title' => 'Faktur',
+			'pesanan' => $this->faktur->get()->getResult()
+		];
+		echo view('admin/faktur/lihat', $data);
 	}
 
 	// create new faktur

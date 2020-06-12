@@ -1,13 +1,7 @@
-<?php
-use CodeIgniter\I18n\Time;
-?>
+<?= $this->extend('template/logged') ?>
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container-fluid">
-        <h3>Pesanan Semua Juragan</h3>
+<?= $this->section('content') ?>
 
-    </div>
-</div>
 <div class="px-sm-3">
     <form action="https://djuragan.com/new/index.php/faktur/data/s_juragan" class="form-inline px-3 px-sm-0" method="get" accept-charset="utf-8">
         <select name="cari[pembayaran]" class="custom-select mb-2 mr-sm-2">
@@ -70,9 +64,9 @@ use CodeIgniter\I18n\Time;
                     <tr id="pesanan-<?= $key->id_fktr; ?>">
                         <td><?php echo strtoupper($key->no); ?>
                             <span class="d-block"><?php
-                            $time = Time::createFromTimestamp($key->fktr_dibuat);
+                            // $time = Time::createFromTimestamp($key->fktr_dibuat);
                             echo '<abbr title="'.$time.'">';
-                            echo $time->toLocalizedString('d-MMM-yyyy');
+                            // echo $time->toLocalizedString('d-MMM-yyyy');
                             echo '</abbr>';
                              ?></span> </td>
                         <td class="juragan">
@@ -237,3 +231,6 @@ use CodeIgniter\I18n\Time;
         </ul>
     </nav>
 </div>
+
+
+<?= $this->endSection() ?>
