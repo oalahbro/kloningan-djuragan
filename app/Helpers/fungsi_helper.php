@@ -32,31 +32,6 @@ if( ! function_exists('isAuthorized')) {
 	}
 }
 
-if( ! function_exists('alert_info')) {
-	function alert_info($alert) {
-		if($alert === 1) {
-			$msg = '<strong>Error!</strong> Akun belum aktif, silakan hubungi admin.';
-		}
-		elseif ($alert === 2) {
-			$msg = '<strong>Error!</strong> Kamu dilarang masuk.';
-		}
-		elseif ($alert === 3) {
-			$msg = '<strong>Error!</strong> Sandi salah!';
-		}
-		elseif ($alert === 4) {
-			$msg = '<strong>Error!</strong> Akun tidak terdaftar';
-		}
-		elseif ($alert === 5) {
-			$msg = '<strong>Info!</strong> Harap validasi email.';
-		}
-		elseif ($alert === 6) {
-			$msg = '<strong>Info!</strong> Email sudah divalidasi, tunggu admin mengaktifkan akun mu ya.';
-		}
-		elseif ($alert === 7) {
-			$msg = '<strong>Info!</strong> Helooo, akun mu sudah pernah divalidasi.';
-		}
-		elseif ($alert === 8) {
-			$msg = '<strong>Error!</strong> Link validasi tidak dikenal.';
 if( ! function_exists('base_user')) {
 	function base_user() {
 		$session = \Config\Services::session();
