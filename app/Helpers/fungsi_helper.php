@@ -57,9 +57,22 @@ if( ! function_exists('alert_info')) {
 		}
 		elseif ($alert === 8) {
 			$msg = '<strong>Error!</strong> Link validasi tidak dikenal.';
+if( ! function_exists('base_user')) {
+	function base_user() {
+		$session = \Config\Services::session();
+
+		switch ($session->get('level')) {
+			case 'superadmin':
+			case 'admin':
+				$base = 'admin';
+				break;
+			
+			default:
+				$base = $session->get('level');
+				break;
 		}
-		return $msg;
 		
+		return $base;
 	}
 }
 

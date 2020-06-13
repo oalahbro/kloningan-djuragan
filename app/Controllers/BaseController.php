@@ -15,7 +15,6 @@ namespace App\Controllers;
  */
 use CodeIgniter\Controller;
 
-use App\Libraries\Login;
 use App\Models\FakturModel;
 use App\Models\JuraganModel;
 use App\Models\UserModel;
@@ -32,7 +31,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['form', 'url', 'number', 'date'];
+	protected $helpers = ['form', 'url', 'number', 'date', 'fungsi'];
 
 	/**
 	 * Constructor.
@@ -52,7 +51,7 @@ class BaseController extends Controller
 		$this->validation = \Config\Services::validation();
 
 		$this->faktur = new FakturModel();
-		$this->login = new Login();
+
 		$this->juragan = new JuraganModel();
 		$this->user = new UserModel();
 

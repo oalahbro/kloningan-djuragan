@@ -13,7 +13,7 @@ class Faktur extends BaseController
 			'title' => 'Faktur',
 			'pesanan' => $this->faktur->get()->getResult()
 		];
-		echo view('admin/faktur/lihat', $data);
+		echo view(base_user() . '/faktur/lihat', $data);
 	}
 
 	// create new faktur
