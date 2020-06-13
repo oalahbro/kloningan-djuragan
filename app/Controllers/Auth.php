@@ -4,7 +4,7 @@ class Auth extends BaseController
 {
 	public function index()
 	{
-		if ($this->login->isAuthorized()) 
+		if (isAuthorized()) 
 		{
 			return redirect()->to('/faktur');
 		}
@@ -87,7 +87,7 @@ class Auth extends BaseController
 
 	public function daftar()
 	{
-		if ($this->login->isAuthorized()) 
+		if (isAuthorized()) 
 		{
 			return redirect()->to('/faktur');
 		}
@@ -118,7 +118,7 @@ class Auth extends BaseController
 
 	public function lupa()
 	{
-		if ($this->login->isAuthorized()) 
+		if (isAuthorized()) 
 		{
 			return redirect()->to('/faktur');
 		}

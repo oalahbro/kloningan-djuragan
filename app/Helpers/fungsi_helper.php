@@ -16,6 +16,22 @@ if( ! function_exists('save_url_decode')) {
 	}
 }
 
+if( ! function_exists('isAuthorized')) {
+	function isAuthorized() {
+		$session = \Config\Services::session();
+		
+		if($session->has('logged')) {
+			if (! $session->get('logged')) {
+				return FALSE;
+			}
+			return TRUE;
+		}
+		else {
+			return FALSE;
+		}
+	}
+}
+
 if( ! function_exists('alert_info')) {
 	function alert_info($alert) {
 		if($alert === 1) {
