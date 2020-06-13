@@ -42,6 +42,7 @@ class BaseController extends Controller
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
 
+		$config = config('JuraganConfig');
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
@@ -55,6 +56,6 @@ class BaseController extends Controller
 		$this->juragan = new JuraganModel();
 		$this->user = new UserModel();
 
-		$this->rajaongkir = new Rajaongkir\Domestic('75f538ed88e26297a2fabed240ed8bf0', Rajaongkir\Domestic::ACCOUNT_PRO);
+		$this->rajaongkir = new Rajaongkir\Domestic($config->rajaongkir, Rajaongkir\Domestic::ACCOUNT_PRO);
 	}
 }
