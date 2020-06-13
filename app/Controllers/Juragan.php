@@ -4,7 +4,7 @@ class Juragan extends BaseController
 {
     public function index()
     {
-        if ( ! $this->login->isAuthorized()) {
+        if ( ! isAuthorized()) {
             return redirect()->to('/auth');
         }
         $limit = 20;
@@ -30,7 +30,7 @@ class Juragan extends BaseController
 
     public function baru()
     {
-        if ( ! $this->login->isAuthorized()) {
+        if ( ! isAuthorized()) {
             return redirect()->to('/auth');
         }
         
@@ -56,7 +56,7 @@ class Juragan extends BaseController
 
     public function sunting()
     {
-        if ( ! $this->login->isAuthorized()) {
+        if ( ! isAuthorized()) {
             return redirect()->to('/auth');
         }
 

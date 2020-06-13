@@ -4,7 +4,7 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		if ( ! $this->login->isAuthorized()) 
+		if ( ! isAuthorized()) 
 		{
 			return redirect()->to('/auth');
 		}
