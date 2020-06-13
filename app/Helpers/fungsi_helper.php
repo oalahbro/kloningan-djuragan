@@ -59,15 +59,7 @@ if( ! function_exists('alert_info')) {
 			$msg = '<strong>Error!</strong> Link validasi tidak dikenal.';
 		}
 		return $msg;
-	}
-}
-
-if( ! function_exists('harga')) {
-	function harga($data_harga) {
-		$data_harga = str_replace(' ', '', (int) $data_harga);
-		$format = "Rp " . number_format((int) $data_harga , 0 , '', '.' ) . ",-";
-
-		return $format;
+		
 	}
 }
 
