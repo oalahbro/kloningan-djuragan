@@ -1,3 +1,6 @@
+<?php 
+use CodeIgniter\I18n\Time;
+?>
 <?= $this->extend('template/logged') ?>
 
 <?= $this->section('content') ?>
@@ -63,10 +66,10 @@
                     ?>
                     <tr id="pesanan-<?= $key->id_fktr; ?>">
                         <td><?php echo strtoupper($key->no); ?>
-                            <span class="d-block"><?php
-                            // $time = Time::createFromTimestamp($key->fktr_dibuat);
+                            <span class="d-block"><i class="far fa-calendar"></i> <?php
+                            $time = Time::createFromTimestamp($key->fktr_dibuat);
                             echo '<abbr title="'.$time.'">';
-                            // echo $time->toLocalizedString('d-MMM-yyyy');
+                            echo $time->toLocalizedString('d-MMM-yyyy');
                             echo '</abbr>';
                              ?></span> </td>
                         <td class="juragan">
@@ -196,15 +199,43 @@
                             <span class="d-block text-right">wajib bayar : <span class="badge badge-success"><?= number_to_currency($total_bayar, 'IDR'); ?></span></span>
                         </td>
                         <td class="keterangan">
-                        <?php if ($key->keterangan !== NULL) { ?>
+                            <?php $shw = "show"; if ($key->keterangan !== NULL) { ?>
+                                <button class="btn btn-outline-info dropdown-toggle btn-sm mb-1 mr-1" type="button" data-toggle="collapse" data-target="#collapseKeterangan-<?= $key->id_fktr; ?>" aria-expanded="false" aria-controls="collapseKeterangan-<?= $key->id_fktr; ?>">
+                                    <i class="fas fa-scroll"></i> Keterangan
+                                </button>
+                            <?php } ?>
 
-                            <button class="btn btn-outline-info dropdown-toggle btn-sm mb-1 mr-1" type="button" data-toggle="collapse" data-target="#collapseKeterangan-<?= $key->id_fktr; ?>" aria-expanded="false" aria-controls="collapseKeterangan-<?= $key->id_fktr; ?>">
-                                <i class="fas fa-scroll"></i> Keterangan
-                            </button>
-                            <div class="collapse show" id="collapseKeterangan-<?= $key->id_fktr; ?>">
+                            <?php if ($key->kirim !== NULL) { $shw = '';?>
+                                <button class="btn btn-outline-dark btn-sm dropdown-toggle mb-1" type="button" data-toggle="collapse" data-target="#collapseResi-<?= $key->id_fktr ?>" aria-expanded="false" aria-controls="collapseResi-<?= $key->id_fktr ?>"><i class="fas fa-receipt"></i> Resi Kirim</button>
+                                
+                                <div class="collapse show mb-1" id="collapseResi-<?= $key->id_fktr ?>">
+                                    <div class="bg-light border border-dark p-1 mt-2 rounded amplop">
+                                        <h6>Pengiriman : </h6>
+                                        <ul class="ml-0 pl-3">
+                                            <?php 
+                                            $kirim = html_entity_decode($key->kirim, ENT_QUOTES);
+                                            foreach (json_decode($kirim) as $krm) {
+                                            ?>
+                                                <li>
+                                                    <span class="font-weight-bold"><?= $krm->kurir ?></span><br/>
+                                                    <?= $krm->resi ?><br/>
+                                                    ongkir: <span class="badge badge-secondary"><?= number_to_currency($krm->ongkos, 'IDR') ?>
+                                                    </span><br/>
+                                                    <small class="text-muted"><?php 
+                                                    $tglkrm = Time::createFromTimestamp($key->fktr_dibuat);
+                                                    echo $tglkrm->toLocalizedString('d-MMM-yyyy');
+                                                    ?></small>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <?php } ?>
+
+                        <?php if ($key->keterangan !== NULL) { ?>
+                            <div class="collapse <?= $shw ?>" id="collapseKeterangan-<?= $key->id_fktr; ?>">
                                 <p class="text-break" style="max-width:200px;"><?= nl2br($key->keterangan); ?></p>
                             </div>
-
                         <?php } ?>
                         </td>
                     </tr>

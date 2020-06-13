@@ -1,4 +1,3 @@
-<?php // use CodeIgniter\I18n\Time; ?>
 <!doctype html>
 <html lang="en">
 
@@ -96,6 +95,27 @@
 }
 .sidebarcollapse.show {
   left: 0;
+}
+
+.amplop::before, .amplop::after {
+    content: '';
+    height: 10px;
+    display: block;
+    margin-top: -4px;
+    margin-left: -4px;
+    margin-right: -4px;
+    margin-bottom: 5px;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    background-image: repeating-linear-gradient(135deg, #F29B91 0px, #F09290 15px, transparent 15px, transparent 25px, #83B3DB 25px, #84ADCB 40px, transparent 40px, transparent 50px);
+}
+.amplop::after {
+    margin-top: 5px;
+    margin-bottom: -4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
 }
 
     </style>
