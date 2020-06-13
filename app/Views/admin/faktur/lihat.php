@@ -73,7 +73,7 @@ use CodeIgniter\I18n\Time;
                             echo '</abbr>';
                              ?></span> </td>
                         <td class="juragan">
-                            <?= anchor($key->juragan, $key->nama_jrgn); ?>
+                            <?= anchor( 'faktur/index/' . $key->juragan, $key->nama_jrgn); ?>
                             <hr><span class="text-muted small">CS: Sandra</span></td>
                         <td class="status">
                             <div class="mn" id="buttoncollect-<?= $key->id_fktr; ?>" data-statustransfer="0" data-kurang="0" data-statuskirim="0" data-faktur="JK191212135012" data-id="<?= $key->id_fktr; ?>">

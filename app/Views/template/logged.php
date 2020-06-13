@@ -1,3 +1,6 @@
+<?php 
+$juragan = new \App\Models\JuraganModel();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -78,7 +81,6 @@
 }
 
 .sidebarcollapse {
-  position: absolute;
   top: 0;
   height: 100vh;
   left: -250px;
@@ -211,7 +213,7 @@
         </div>
     </nav>
     
-    <nav id="sidebar" class="bg-dark collapse sidebarcollapse" style="">
+    <nav id="sidebar" class="position-fixed bg-dark collapse sidebarcollapse" style="">
         <div class="d-block border-bottom border-secondary shadow">
           <h6 class="dropdown-header py-3">Pilih Juragan</h6>
         </div>
@@ -219,91 +221,16 @@
         <div class="sidebar position-relative" id="listJuragan">
             
             <ul class="list-unstyled " id="listLi">
+              <li>
+                <?= anchor('faktur/index', '<i class="fas fa-users"></i> Semua Juragan', ['class' => 'p-2 d-block text-light']); ?>
+              </li>
+              <?php 
+              foreach ($juragan->orderBy('nama_jrgn', 'asc')->findAll() as $j) { ?>
                 <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/s_juragan">
-                        <i class="fas fa-users"></i> Semua Juragan
-                    </a>
+                  <?= anchor('faktur/index/' . $j['juragan'], '<i class="fas fa-user-circle"></i> ' . $j['nama_jrgn'], ['class' => 'p-2 d-block text-light']); ?>
                 </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
-                <li>
-                    <a class="p-2 d-block text-light" href="https://djuragan.com/new/index.php/faktur/data/f4acdd10d99ae0db5dc7d84e87967f52cc028f9b">
-                        <i class="fas fa-user-circle"></i> Blazer Jaket
-                    </a>
-                </li>
+              <?php }
+              ?>
             </ul>
         </div>
     </nav>

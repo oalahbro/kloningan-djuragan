@@ -2,15 +2,26 @@
 
 class Faktur extends BaseController
 {
-	public function index()
+	public function index($juragan = 'semua')
 	{
 		if (! isAuthorized())
 		{
 			return redirect()->to('/auth');
 		}
 
+		$title = 'Semua Juragan';
+		if ($juragan !== 'semua') {
+			$debe = $this->juragan->where('juragan', $juragan)->findAll();
+			if (count($debe) < 1) {
+				return redirect()->to('/faktur?juragan_notfound=' . $juragan);
+			}
+
+			$title = $debe[0]['nama_jrgn'];
+		}
+		
+
 		$data = [
-			'title' => 'Faktur',
+			'title' => 'Faktur ' . $title,
 			'pesanan' => $this->faktur->get()->getResult()
 		];
 		echo view(base_user() . '/faktur/lihat', $data);
