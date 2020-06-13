@@ -22,7 +22,7 @@ class Faktur extends BaseController
 
 		$data = [
 			'title' => 'Faktur ' . $title,
-			'pesanan' => $this->faktur->get()->getResult()
+			'pesanan' => $this->faktur->get($juragan)->getResult()
 		];
 		echo view(base_user() . '/faktur/lihat', $data);
 	}

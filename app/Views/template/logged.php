@@ -16,56 +16,15 @@ $juragan = new \App\Models\JuraganModel();
       
 .dropdown-menu.notify-drop {
   min-width: 330px;
-  /*background-color: #fff;*/
   min-height: 360px;
   max-height: 360px;
 }
-/*.dropdown-menu.notify-drop .notify-drop-title {
-  border-bottom: 1px solid #e2e2e2;
-  padding: 5px 15px 10px 15px;
-}*/
+
 .dropdown-menu.notify-drop .drop-content {
   min-height: 280px;
   max-height: 280px;
   overflow-y: scroll;
 }
-/*
-.dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-track
-{
-  background-color: #F5F5F5;
-}
-
-.dropdown-menu.notify-drop .drop-content::-webkit-scrollbar
-{
-  width: 8px;
-  background-color: #F5F5F5;
-}
-
-.dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-thumb
-{
-  background-color: #ccc;
-}
-*/
-#sidebar {
-    /*left: -250px;*/
-    /*width: 250px;*/
-    /*height: 100%;*/
-    /*z-index: 10000;*/
-    /*transition: .5s;*/
-}
-/*
-#sidebar.active {
-    left: 0 !important;
-}
-#sidebar.active:before {
-  content: "";
-  background: rgba(0,0,0,.5);
-  width: 100vw;
-  /*height: 100vh;
-  position: absolute;
-  z-index: 9999;
-}
-*/
 
 #listJuragan {
   z-index: 10000;

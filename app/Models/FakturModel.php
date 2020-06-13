@@ -9,7 +9,7 @@ class FakturModel extends Model
 		// $builder = $db->table('users');
 	}
 
-	public function get()
+	public function get($juragan = 'semua')
 	{
 		$builder = $this->db->table('faktur f');
 		$builder->select('f.*,p.*, j.juragan, j.nama_jrgn');
@@ -28,6 +28,11 @@ class FakturModel extends Model
 		$builder->join('ongkir o', 'o.faktur_id = f.id_fktr', 'left');
 		$builder->join('pembayaran by', 'by.faktur_id = f.id_fktr', 'left');
 		$builder->join('pengiriman k', 'k.faktur_id = f.id_fktr', 'left');
+
+		if ($juragan !== 'semua') {
+			$builder->where('j.juragan', $juragan);
+		}
+
 		$builder->groupBy("f.id_fktr");
 		$query = $builder->get();
 
