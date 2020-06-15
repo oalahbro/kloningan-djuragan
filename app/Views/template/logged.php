@@ -162,10 +162,10 @@ $juragan = new \App\Models\JuraganModel();
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php // echo $_SESSION['nama']; ?>
+                        <?= $_SESSION['name']; ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <?php // echo anchor('keluar', 'Keluar', array('class' => 'dropdown-item')); ?>
+                      <?= anchor('auth/keluar', 'Keluar', array('class' => 'dropdown-item')); ?>
                     </div>
                 </li>
             </ul>

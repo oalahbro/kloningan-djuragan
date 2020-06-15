@@ -61,6 +61,7 @@ class Auth extends BaseController
 							$sesi = [
 								'id'  		=> $get['id'],
 								'username'  => $get['username'],
+								'name'  	=> $get['name'],
 								'email'  	=> $get['email'],
 								'level'  	=> $get['level'],
 								'logged'	=> TRUE
