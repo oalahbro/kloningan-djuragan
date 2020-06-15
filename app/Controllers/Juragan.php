@@ -84,11 +84,10 @@ class Juragan extends BaseController
     {
         $nama_cache = 'juragan_admin';
         if ( ! $listJuragan = $this->cache->get($nama_cache)) {
-
             $listJuragan = $this->juragan->orderBy('nama_jrgn', 'asc')->findAll();
 
-            // simpan cache 
-            $this->cache->save($nama_cache, $listJuragan, 60*60*24);
+            // simpan cache selama 12 jam
+            $this->cache->save($nama_cache, $listJuragan, 60*60*12);
         }
 
         return $this->response->setJSON($listJuragan);
