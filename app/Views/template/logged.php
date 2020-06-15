@@ -1,6 +1,3 @@
-<?php 
-$juragan = new \App\Models\JuraganModel();
-?>
 <!doctype html>
 <html lang="en">
 
@@ -179,18 +176,7 @@ $juragan = new \App\Models\JuraganModel();
 
         <div class="sidebar position-relative" id="listJuragan">
             
-            <ul class="list-unstyled " id="listLi">
-              <li>
-                <?= anchor('faktur/index', '<i class="fas fa-users"></i> Semua Juragan', ['class' => 'p-2 d-block text-light']); ?>
-              </li>
-              <?php 
-              foreach ($juragan->orderBy('nama_jrgn', 'asc')->findAll() as $j) { ?>
-                <li>
-                  <?= anchor('faktur/index/' . $j['juragan'], '<i class="fas fa-user-circle"></i> ' . $j['nama_jrgn'], ['class' => 'p-2 d-block text-light']); ?>
-                </li>
-              <?php }
-              ?>
-            </ul>
+            <ul class="list-unstyled " id="listLi"></ul>
         </div>
     </nav>
 
@@ -204,9 +190,9 @@ $juragan = new \App\Models\JuraganModel();
     <?= $this->renderSection('content') ?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="<?= base_url('assets/js/bootstrap.bundle.min.js'); ?>"></script>
-    <script type="text/javascript">
+    <script>
       var popOverSettings = {
         trigger: 'focus',
           placement: 'right',
@@ -243,12 +229,24 @@ $juragan = new \App\Models\JuraganModel();
           $div.remove();
           $("body").toggleClass('modal-open');
         });
-      })
+      });
 
 
-
-
-
+      $( document ).ready(function() {
+        // juragan 
+        $("#sidebarCollapse").click(function(){
+          $('#listLi').html('');
+        $.getJSON( "<?= site_url('juragan/get'); ?>", function( data ) {
+          var items = [];
+          items.push('<li><?= anchor('faktur/index', '<i class="fas fa-users"></i> Semua Juragan', ['class' => 'p-2 d-block text-light']); ?></li>');
+          $.each( data, function( i, list ) {
+            items.push( '<li><a class="p-2 d-block text-light" href="<?= site_url('faktur/index/') ?>'+list.juragan+'"><i class="fas fa-user-circle"></i> '+list.nama_jrgn+'</li>' );
+          });
+         
+          $( items.join( "" ) ).appendTo( "#listLi" );
+        })
+        })
+      });
 
 
 

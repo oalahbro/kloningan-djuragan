@@ -79,4 +79,18 @@ class Juragan extends BaseController
             return redirect()->to('/juragan');
         }
     }
+
+    public function get()
+    {
+        $nama_cache = 'juragan_admin';
+        if ( ! $listJuragan = $this->cache->get($nama_cache)) {
+
+            $listJuragan = $this->juragan->orderBy('nama_jrgn', 'asc')->findAll();
+
+            // simpan cache 
+            $this->cache->save($nama_cache, $listJuragan, 60*60*24);
+        }
+
+        return $this->response->setJSON($listJuragan);
+    }
 }
