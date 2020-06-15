@@ -35,9 +35,11 @@ class Faktur extends BaseController
 			return redirect()->to('/auth');
 		}
 
-		echo view('adminview/header', ['title' => 'Tulis Faktur Baru']);
-		echo view('adminview/faktur/baru', ['pesanan' => $this->faktur->get()->getResult()]);
-		echo view('adminview/footer');
+		$data = [
+			'title' => 'Tulis Faktur Baru',
+			'pesanan' => $this->faktur->get($juragan)->getResult()
+		];
+		echo view(base_user() . '/faktur/baru', $data);
 	}
 
 	public function test()
