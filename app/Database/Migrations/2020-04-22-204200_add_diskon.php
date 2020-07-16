@@ -23,7 +23,7 @@ class AddDiskon extends \CodeIgniter\Database\Migration {
 			]
 		]);
 		$this->forge->addKey('id_disc', TRUE);
-		$this->forge->createTable('diskon');
+		$this->forge->createTable('diskon', TRUE);
 	}
 
 	public function down()

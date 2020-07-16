@@ -22,8 +22,9 @@ class AddOngkir extends \CodeIgniter\Database\Migration {
 				'unsigned' => TRUE
 			]
 		]);
+
 		$this->forge->addKey('id_ongkir', TRUE);
-		$this->forge->createTable('ongkir');
+		$this->forge->createTable('ongkir', TRUE);
 	}
 
 	public function down()

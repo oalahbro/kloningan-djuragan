@@ -22,8 +22,9 @@ class AddUserJuragan extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE,
 			]
 		]);
+		
 		$this->forge->addKey('id_reluser', TRUE);
-		$this->forge->createTable('usrjrgn');
+		$this->forge->createTable('usrjrgn', TRUE);
 	}
 
 	public function down()

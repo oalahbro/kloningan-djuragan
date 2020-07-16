@@ -40,8 +40,9 @@ class AddPengiriman extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE
 			]
 		]);
+		
 		$this->forge->addKey('id_krm', TRUE);
-		$this->forge->createTable('pengiriman');
+		$this->forge->createTable('pengiriman', TRUE);
 	}
 
 	public function down()

@@ -46,10 +46,10 @@ class AddPembayaran extends \CodeIgniter\Database\Migration {
 				'null'  		 => TRUE,
 				'default' 		 => NULL
 			]
-
 		]);
+		
 		$this->forge->addKey('id_byr', TRUE);
-		$this->forge->createTable('pembayaran');
+		$this->forge->createTable('pembayaran', TRUE);
 	}
 
 	public function down()

@@ -1,5 +1,6 @@
 <?php 
 use CodeIgniter\I18n\Time;
+$pager = \Config\Services::pager();
 ?>
 <?= $this->extend('template/logged') ?>
 
@@ -119,7 +120,9 @@ use CodeIgniter\I18n\Time;
                                         <button class="set_paket dropdown-item" data-status="belumproses">Status Paket</button>
                                         <button class="cant_kirim dropdown-item">Pengiriman</button>
                                         <div class="dropdown-divider"></div>
-                                        <h6 class="dropdown-header">Lainnya</h6><a class="dropdown-item" href="https://djuragan.com/new/index.php/faktur/pdf/JK191212135012">Unduh PDF</a><a href="https://djuragan.com/new/index.php/faktur/sunting/JK191212135012" class="dropdown-item">Sunting</a>
+                                        <h6 class="dropdown-header">Lainnya</h6>
+                                        <a class="dropdown-item" href="https://djuragan.com/new/index.php/faktur/pdf/JK191212135012">Unduh PDF</a>
+                                        <?= anchor('faktur/sunting/' . $key->id_fktr, 'Sunting', ['class' => 'dropdown-item']); ?>
                                         <button class="dropdown-item text-danger hapus_pesanan">Hapus</button>
                                     </div>
                                 </div>
@@ -244,24 +247,8 @@ use CodeIgniter\I18n\Time;
             </table>
         </div>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item active"><a class="page-link" href="#!"><span class="sr-only">(current)</span>1</a></li>
-            <li class="page-item"><a href="https://djuragan.com/new/index.php/faktur/data/s_juragan?halaman=25" class="page-link" data-ci-pagination-page="2">2</a></li>
-            <li class="page-item"><a href="https://djuragan.com/new/index.php/faktur/data/s_juragan?halaman=50" class="page-link" data-ci-pagination-page="3">3</a></li>
-            <li class="page-item">
-                <a href="https://djuragan.com/new/index.php/faktur/data/s_juragan?halaman=25" class="page-link" data-ci-pagination-page="2" rel="next">
-                    <i class="fas fa-angle-right"></i>    
-                </a>
-            </li>
-            <li class="page-item">
-                <a href="https://djuragan.com/new/index.php/faktur/data/s_juragan?halaman=37350" class="page-link" data-ci-pagination-page="1495">
-                    <i class="fas fa-angle-double-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
 
+    <?= $pager->makeLinks(7, 10, 500, 'front_full') ?>
+</div>
 
 <?= $this->endSection() ?>

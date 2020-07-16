@@ -22,8 +22,9 @@ class AddUnik extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE
 			]
 		]);
+		
 		$this->forge->addKey('id_unik', TRUE);
-		$this->forge->createTable('unik');
+		$this->forge->createTable('unik', TRUE);
 	}
 
 	public function down()

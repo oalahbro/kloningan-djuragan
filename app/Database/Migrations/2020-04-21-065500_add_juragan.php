@@ -19,20 +19,6 @@ class AddJuragan extends \CodeIgniter\Database\Migration {
 				'type' 			 => 'VARCHAR',
 				'constraint' 	 => '60',
 			],
-			/*
-			'web_jrgn' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '60',
-			],
-			'no_jrgn' => [
-				'type' 			 => 'VARCHAR',
-				'constraint' 	 => '50',
-			],
-			'logo' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '50',
-			],
-			*/
 			'jrgn_dibuat' => [
 				'type'           => 'INT',
 				'constraint' 	 => '10',
@@ -45,7 +31,7 @@ class AddJuragan extends \CodeIgniter\Database\Migration {
 			],
 		]);
 		$this->forge->addKey('id_jrgn', TRUE);
-		$this->forge->createTable('juragan');
+		$this->forge->createTable('juragan', TRUE);
 	}
 
 	public function down()

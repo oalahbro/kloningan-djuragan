@@ -32,7 +32,7 @@ class AddFaktur extends \CodeIgniter\Database\Migration {
 			],
 			'status_bayar' => [
 				'type'           => 'ENUM',
-				'constraint'     => ['tunggu', 'belum', 'kredit', 'lunas', 'lebih'],
+				'constraint'     => ['belum', 'ditunggu', 'hutang', 'kelebihan', 'lunas'],
 				'default' 		 => 'belum'
 			],
 			'status_kirim' => [
@@ -55,8 +55,9 @@ class AddFaktur extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE
 			],
 		]);
+		
 		$this->forge->addKey('id_fktr', TRUE);
-		$this->forge->createTable('faktur');
+		$this->forge->createTable('faktur', TRUE);
 	}
 
 	public function down()

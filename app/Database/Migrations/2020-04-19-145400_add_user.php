@@ -37,6 +37,11 @@ class AddUser extends \CodeIgniter\Database\Migration {
 				'constraint'     => ['pending', 'inactive', 'active', 'blocked'],
 				'default'        => 'pending',
 			],
+			'login_terakhir' => [
+				'type'           => 'INT',
+				'constraint' 	 => '10',
+				'unsigned' 		 => TRUE
+			],
 			'created_at' => [
 				'type'           => 'INT',
 				'constraint' 	 => '10',
@@ -48,8 +53,9 @@ class AddUser extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE
 			],
 		]);
+
 		$this->forge->addKey('id', TRUE);
-		$this->forge->createTable('user');
+		$this->forge->createTable('user', TRUE);
 	}
 
 	public function down()

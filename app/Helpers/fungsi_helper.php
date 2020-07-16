@@ -1,21 +1,5 @@
 <?php
 
-if( ! function_exists('save_url_encode')) {
-	function save_url_encode($input) {
-        $encrypter = \Config\Services::encrypter();
-
-		return strtr(base64_encode( $encrypter->encrypt($input) ), '+/=', '._-');
-	}
-}
-
-if( ! function_exists('save_url_decode')) {
-	function save_url_decode($input) {
-		$encrypter = \Config\Services::encrypter();
-
-		return $encrypter->decrypt(base64_decode( strtr($input, '._-', '+/=') ));
-	}
-}
-
 if( ! function_exists('isAuthorized')) {
 	function isAuthorized() {
 		$session = \Config\Services::session();
@@ -43,7 +27,7 @@ if( ! function_exists('base_user')) {
 				break;
 			
 			default:
-				$base = $session->get('level');
+				$base = 'user';//$session->get('level');
 				break;
 		}
 		

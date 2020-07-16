@@ -3,13 +3,27 @@ use CodeIgniter\Model;
  
 class FakturModel extends Model
 {
-	protected $db;
-	public function __construct() {
-		$this->db      = \Config\Database::connect();
-		// $builder = $db->table('users');
-	}
+	protected $table = 'faktur';
+	protected $primaryKey = 'id_fktr';
+	
+	protected $returnType = 'array';
+    protected $useSoftDeletes = false;
 
-	public function get($juragan = 'semua')
+    protected $allowedFields = ['no', 'pelanggan_id', 'marketplace', 'status_fktr', 'status_kirim', 'keterangan'];
+
+    protected $useTimestamps = true;
+    protected $createdField  = 'fktr_dibuat';
+    protected $updatedField  = 'fktr_diubah';
+    // protected $deletedField  = 'deleted_at';
+
+    protected $dateFormat = 'int';
+
+    protected $validationRules    = [];
+    protected $validationMessages = [];
+    protected $skipValidation     = false;
+
+    // get all
+	public function get($juragan = NULL, $id_fktr = NULL)
 	{
 		$builder = $this->db->table('faktur f');
 		$builder->select('f.*,p.*, j.juragan, j.nama_jrgn');
@@ -29,8 +43,14 @@ class FakturModel extends Model
 		$builder->join('pembayaran by', 'by.faktur_id = f.id_fktr', 'left');
 		$builder->join('pengiriman k', 'k.faktur_id = f.id_fktr', 'left');
 
-		if ($juragan !== 'semua') {
-			$builder->where('j.juragan', $juragan);
+		if ($id_fktr !== NULL) {
+			$builder->where('f.id_fktr', $id_fktr);
+		}
+
+		if ($juragan !== NULL) {
+			if ($juragan !== 'semua') {
+				$builder->where('j.juragan', $juragan);
+			}
 		}
 
 		$builder->groupBy("f.id_fktr");

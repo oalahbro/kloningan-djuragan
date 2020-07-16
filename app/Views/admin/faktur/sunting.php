@@ -64,25 +64,32 @@ $sekarang = new Time('now');
 	    </div>
 	    <hr/>
 
+	    <?php 
+	    print('<pre>');
+	    print_r($pesanan);
+	    print('</pre>');
+	    ?>
+
 	    <div class="form-row">
 	        <div class="form-group col-md-4">
 	        	<?php 
 	        	echo form_label('Nama', 'nama');
-	        	echo form_input('nama', set_value('nama'), ['class' => 'form-control', 'id' => 'nama', 'placeholder' => 'nama pelanggan', 'required' => '']);
+	        	echo form_input('nama', set_value('nama', $pesanan->nama_plgn), ['class' => 'form-control', 'id' => 'nama', 'placeholder' => 'nama pelanggan', 'required' => '']);
 	        	?>
 	        </div>
 	    </div>
 	    <div class="form-row">
 	        <div class="form-group col-sm-4">
 	        	<?php 
+	        	$hp = json_decode($pesanan->hp);
 	        	echo form_label('Hp1', 'hp1');
-	        	echo form_input('hp[]', set_value('hp[]'), ['class' => 'form-control', 'id' => 'hp1', 'placeholder' => '08xxxxxxxxx', 'pattern' => '^(0[2-9])[0-9]{8,}$', 'required' => '']);
+	        	echo form_input('hp[]', set_value('hp[]', $hp[0]), ['class' => 'form-control', 'id' => 'hp1', 'placeholder' => '08xxxxxxxxx', 'pattern' => '^(0[2-9])[0-9]{8,}$', 'required' => '']);
 	        	?>
 	        </div>
 	        <div class="form-group col-sm-4">
 	        	<?php 
 	        	echo form_label('Hp2', 'hp2');
-	        	echo form_input('hp[]', set_value('hp[]'), ['class' => 'form-control', 'id' => 'hp2', 'placeholder' => '08xxxxxxxxx (opsional)', 'pattern' => '^(0[2-9])[0-9]{8,}$']);
+	        	echo form_input('hp[]', set_value('hp[]',$hp[1]), ['class' => 'form-control', 'id' => 'hp2', 'placeholder' => '08xxxxxxxxx (opsional)', 'pattern' => '^(0[2-9])[0-9]{8,}$']);
 	        	?>
 	        </div>
 	    </div>
@@ -213,13 +220,22 @@ $sekarang = new Time('now');
 	                <div class="card-body">
 	                    <div class="form-row">
 	                        <div class="form-group col-sm-4">
-	                            <label for="diskon">Diskon</label><input type="number" name="diskon" value="0" id="diskon" class="form-control diskon calc" min="0" required="">
+	                        	<?php 
+	                        	echo form_label('Diskon', 'diskon');
+	                        	echo form_input('diskon', set_value('diskon', $pesanan->diskon), ['class' => 'form-control', 'id' => 'diskon', 'placeholder' => '25000', 'required' => '', 'min' => '0'], 'number');
+	                        	?>
 	                        </div>
 	                        <div class="form-group col-sm-4">
-	                            <label for="ongkir">Tarif Ongkir</label><input type="number" name="ongkir" value="0" id="ongkir" class="form-control ongkir calc" min="0" required="">
+	                        	<?php 
+	                        	echo form_label('Ongkir', 'ongkir');
+	                        	echo form_input('ongkir', set_value('ongkir', $pesanan->ongkir), ['class' => 'form-control', 'id' => 'ongkir', 'placeholder' => '20000', 'required' => '', 'min' => '0'], 'number');
+	                        	?>
 	                        </div>
 	                        <div class="form-group col-sm-4">
-	                            <label for="unik">3 digit angka unik</label><input type="number" name="unik" value="0" id="unik" class="form-control unik calc" min="0" required="">
+	                        	<?php 
+	                        	echo form_label('3 digit angka unik', 'unik');
+	                        	echo form_input('unik', set_value('unik', $pesanan->unik), ['class' => 'form-control', 'id' => 'unik', 'placeholder' => '123', 'required' => '', 'min' => '0'], 'number');
+	                        	?>
 	                        </div>
 	                    </div>
 	                    <small class="text-muted">3 digit angka unik diisi otomatis, dambil dari 3 digit angka hp terakhir, beri angka 0 jika tidak dibutuhkan</small>

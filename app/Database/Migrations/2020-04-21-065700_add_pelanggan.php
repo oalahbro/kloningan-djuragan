@@ -74,8 +74,9 @@ class AddPelanggan extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE
 			],
 		]);
+		
 		$this->forge->addKey('id_plgn', TRUE);
-		$this->forge->createTable('pelanggan');
+		$this->forge->createTable('pelanggan', TRUE);
 	}
 
 	public function down()

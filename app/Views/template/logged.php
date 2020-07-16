@@ -80,7 +80,7 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <div>
             <?php echo anchor('', 'Pesanan Juragan', ['class' => 'navbar-brand']); ?>
             <?php echo form_button(array('class' => 'btn-juragan btn btn-outline-light', 'data-toggle' => "collapse", 'data-target' => "#sidebar", 'id' => 'sidebarCollapse', 'content' => '<i class="fas fa-user-circle"></i>')); ?>
@@ -162,6 +162,7 @@
                         <?= $_SESSION['name']; ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <?= anchor('user/sunting', 'Ubah Profil', array('class' => 'dropdown-item')); ?>
                       <?= anchor('auth/keluar', 'Keluar', array('class' => 'dropdown-item')); ?>
                     </div>
                 </li>
@@ -232,7 +233,7 @@
       });
 
 
-      $( document ).ready(function() {
+      $(function() {
         // juragan 
         $("#sidebarCollapse").click(function(){
           $('#listLi').html('');
@@ -252,6 +253,10 @@
 
     </script>
     <script defer src="https://kit.fontawesome.com/859e035253.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>
-</body>
 
+    <!--
+    Page rendered in {elapsed_time} seconds
+    Environment: <?= ENVIRONMENT ?> 
+    -->
+</body>
 </html>

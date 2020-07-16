@@ -113,7 +113,7 @@
 	</style>
    
 </head>
-<body class="mt-5">
+<body class="my-5">
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 		<div>
@@ -152,7 +152,7 @@
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 						<?php 
 						echo anchor('juragan', 'Juragan', ['class' => 'dropdown-item']);
-						// echo anchor('pengaturan/pengguna', 'Pengguna', array('class' => 'dropdown-item'));
+						echo anchor('pengguna', 'Pengguna', ['class' => 'dropdown-item']);
 						// echo anchor('pengaturan/index', 'Sistem', array('class' => 'dropdown-item'));
 						?>
 					</div>

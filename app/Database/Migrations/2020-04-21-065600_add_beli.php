@@ -42,8 +42,9 @@ class AddBeli extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE
 			]
 		]);
+		
 		$this->forge->addKey('id_beli', TRUE);
-		$this->forge->createTable('dibeli');
+		$this->forge->createTable('dibeli', TRUE);
 	}
 
 	public function down()
