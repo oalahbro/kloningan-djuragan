@@ -2,8 +2,8 @@
 
 <?= $this->section('content') ?>
 
-<div class="container-fluid min-vh-100">
-	<div class="row min-vh-100">
+<div class="container-xxl min-vh-100 px-0">
+	<div class="row min-vh-100 gx-0">
 		<div class="col-md-4 bg-dark d-flex justify-content-center justify-content-md-end align-items-center text-white">
 			<div class="text-center text-md-right m-3">
 				<h1 class="h2">Masuk <span class="font-weight-light">dulu</span></h1>
@@ -11,11 +11,11 @@
 			</div>
 		</div>
 		<div class="col-md-4 d-flex justify-content-start align-items-center">
-			<div class="w-100 my-5 my-md-2">
+			<div class="w-100 my-5 my-md-2 px-3">
 				<div>
 					<?= (isset($_SESSION['status'])? $_SESSION['status'] : ''); ?>
 					<?= form_open(); ?>
-					<div class="form-group">
+					<div class="form-group mb-2">
 						<?php 
 						$class_username = 'form-control';
 						if ($validation->hasError('username')) {
@@ -31,7 +31,7 @@
 							</div>
 						<?php } ?>
 					</div>
-					<div class="form-group">
+					<div class="form-group mb-2">
 						<?php 
 						$class_password = 'form-control';
 						if ($validation->hasError('password')) {
