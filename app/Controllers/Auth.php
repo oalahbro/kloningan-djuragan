@@ -68,6 +68,14 @@ class Auth extends BaseController
 							];
 
 							$redirect = '/faktur';
+							// save for update `login_terakhir`
+							$data = [
+								'id' => $get['id'],
+							    'login_terakhir' => now('Asia/Jakarta')
+							];
+
+							$this->user->save($data);
+
 							$status = '<div class="alert alert-sucess"><strong class="d-block">Hay!</strong>Jangan lupa bahagia ya.</div>';
 							break;
 					}
