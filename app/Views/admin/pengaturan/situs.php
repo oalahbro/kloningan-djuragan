@@ -51,7 +51,7 @@ $pager = \Config\Services::pager();
             </div>
         </div>
         <div class="col-sm-4 mb-3">
-            <div class="card">
+            <div class="card sticky-top" style="top: 60px">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
