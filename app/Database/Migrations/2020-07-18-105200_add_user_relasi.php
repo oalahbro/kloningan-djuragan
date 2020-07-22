@@ -1,34 +1,34 @@
 <?php namespace App\Database\Migrations;
 
-class AddUnik extends \CodeIgniter\Database\Migration {
+class AddUserRelasi extends \CodeIgniter\Database\Migration {
 
 	public function up()
 	{
 		$this->forge->addField([
-			'id_unik'  => [
+			'id_relasi'  => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 5,
 				'unsigned' 		 => TRUE,
 				'auto_increment' => TRUE
 			],
-			'faktur_id' => [
+			'juragan_id' => [
 				'type' 			 => 'INT',
-				'constraint' 	 => 11,
+				'constraint' 	 => 5,
 				'unsigned' 		 => TRUE,
 			],
-			'unik' => [
+			'user_id' => [
 				'type' 			 => 'INT',
-				'constraint' 	 => 3,
-				'unsigned' 		 => TRUE
+				'constraint' 	 => 5,
+				'unsigned' 		 => TRUE,
 			]
 		]);
 		
-		$this->forge->addKey('id_unik', TRUE);
-		$this->forge->createTable('unik', TRUE);
+		$this->forge->addKey('id_relasi', TRUE);
+		$this->forge->createTable('user_relasi', TRUE);
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable('unik');
+		$this->forge->dropTable('user_relasi');
 	}
 }

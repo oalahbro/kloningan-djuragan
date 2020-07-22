@@ -5,7 +5,7 @@ class AddJuragan extends \CodeIgniter\Database\Migration {
 	public function up()
 	{
 		$this->forge->addField([
-			'id_jrgn'  => [
+			'id_juragan'  => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 5,
 				'unsigned' 		 => TRUE,
@@ -15,22 +15,22 @@ class AddJuragan extends \CodeIgniter\Database\Migration {
 				'type' 			 => 'VARCHAR',
 				'constraint' 	 => '60',
 			],
-			'nama_jrgn' => [
+			'nama_juragan' => [
 				'type' 			 => 'VARCHAR',
 				'constraint' 	 => '60',
 			],
-			'jrgn_dibuat' => [
+			'created_at' => [
 				'type'           => 'INT',
 				'constraint' 	 => '10',
 				'unsigned' 		 => TRUE
 			],
-			'jrgn_diubah' => [
+			'updated_at' => [
 				'type'           => 'INT',
 				'constraint' 	 => '10',
 				'unsigned' 		 => TRUE
 			],
 		]);
-		$this->forge->addKey('id_jrgn', TRUE);
+		$this->forge->addKey('id_juragan', TRUE);
 		$this->forge->createTable('juragan', TRUE);
 	}
 

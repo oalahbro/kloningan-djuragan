@@ -5,43 +5,44 @@ class AddPengiriman extends \CodeIgniter\Database\Migration {
 	public function up()
 	{
 		$this->forge->addField([
-			'id_krm'  => [
+			'id_pengiriman'  => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE,
 				'auto_increment' => TRUE
 			],
-			'faktur_id' => [
+			'invoice_id' => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 11,
-				'unsigned' 		 => TRUE,
+				'unsigned' 		 => TRUE
 			],
-			'kurir' => [
-				'type' 			 => 'VARCHAR',
-				'constraint'     => 10,
+			'kurir_id' => [
+				'type' 			 => 'INT',
+				'constraint'     => 5,
+				'unsigned' 		 => TRUE
 			],
-			'ongkir_krm' => [
+			'ongkir_kirim' => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 5,
 				'unsigned' 		 => TRUE
 			],
 			'resi' => [
 				'type' 			 => 'VARCHAR',
-				'constraint'     => 15,
+				'constraint'     => 20,
 			],
-			'qty_krm' => [
+			'qty_kirim' => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 3,
 				'unsigned' 		 => TRUE
 			],
-			'tanggal_krm' => [
+			'tanggal_kirim' => [
 				'type'           => 'INT',
 				'constraint'     => 10,
 				'unsigned' 		 => TRUE
 			]
 		]);
 		
-		$this->forge->addKey('id_krm', TRUE);
+		$this->forge->addKey('id_pengiriman', TRUE);
 		$this->forge->createTable('pengiriman', TRUE);
 	}
 

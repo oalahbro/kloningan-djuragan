@@ -5,7 +5,7 @@ class AddPelanggan extends \CodeIgniter\Database\Migration {
 	public function up()
 	{
 		$this->forge->addField([
-			'id_plgn'  => [
+			'id_pelanggan'  => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE,
@@ -16,23 +16,13 @@ class AddPelanggan extends \CodeIgniter\Database\Migration {
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE,
 			],
-			'nama_plgn' => [
+			'nama_pelanggan' => [
 				'type' 			 => 'VARCHAR',
-				'constraint' 	 => '60',
-			],
-			'COD' => [
-				'type' 			 => 'ENUM',
-				'constraint'     => ['0', '1'], // tidak ada, ada
-				'default' 		 => '0'
-			],
-			'alamat' => [
-				'type'           => 'TEXT',
-				'null' 			 => TRUE,
-				'default' 		 => NULL
+				'constraint' 	 => 60,
 			],
 			'hp' => [
 				'type' 			 => 'VARCHAR',
-				'constraint' 	 => '50',
+				'constraint' 	 => 50,
 				'null' 			 => TRUE,
 				'default' 		 => NULL
 			],
@@ -43,17 +33,8 @@ class AddPelanggan extends \CodeIgniter\Database\Migration {
 				'null' 			 => TRUE,
 				'default' 		 => NULL
 			],
-			'kabupaten_kota' => [
-				'type'           => 'INT',
-				'constraint'     => 5,
-				'unsigned' 		 => TRUE,
-				'null' 			 => TRUE,
-				'default' 		 => NULL
-			],
-			'provinsi' => [
-				'type'           => 'INT',
-				'constraint'     => 5,
-				'unsigned' 		 => TRUE,
+			'alamat' => [
+				'type'           => 'TEXT',
 				'null' 			 => TRUE,
 				'default' 		 => NULL
 			],
@@ -63,19 +44,19 @@ class AddPelanggan extends \CodeIgniter\Database\Migration {
 				'null' 			 => true,
 				'unsigned' 		 => TRUE
 			],
-			'plgn_dibuat' => [
+			'created_at' => [
 				'type'           => 'INT',
-				'constraint' 	 => '10',
+				'constraint' 	 => 10,
 				'unsigned' 		 => TRUE
 			],
-			'plgn_diubah' => [
+			'updated_at' => [
 				'type'           => 'INT',
-				'constraint' 	 => '10',
+				'constraint' 	 => 10,
 				'unsigned' 		 => TRUE
 			],
 		]);
 		
-		$this->forge->addKey('id_plgn', TRUE);
+		$this->forge->addKey('id_pelanggan', TRUE);
 		$this->forge->createTable('pelanggan', TRUE);
 	}
 

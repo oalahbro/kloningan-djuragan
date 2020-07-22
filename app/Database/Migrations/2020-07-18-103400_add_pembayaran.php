@@ -5,36 +5,37 @@ class AddPembayaran extends \CodeIgniter\Database\Migration {
 	public function up()
 	{
 		$this->forge->addField([
-			'id_byr'  => [
+			'id_pembayaran'  => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE,
 				'auto_increment' => TRUE
 			],
-			'faktur_id' => [
+			'invoice_id' => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE,
 			],
-			'tipe_byr' => [
+			'tipe_pembayaran' => [
 				'type' 			 => 'ENUM',
-				'constraint'     => ['transfer', 'cash'],
+				'constraint' 	 => ["1","2"], //  1: cash, 2: transfer
+				'default' 		 => '1'
 			],
-			'bank' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 5, // cod, bca, bri, bni, mandiri
+			'sumber_dana' => [
+				'type'           => 'ENUM',
+				'constraint'     => ["1","2","3","4","5"], // 1: cod, 2: bca, 3: bri, 4: bni, 5:mandiri
 			],
-			'total_byr' => [
+			'total_pembayaran' => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 7,
 				'unsigned' 		 => TRUE
 			],
 			'status' => [
 				'type' 			 => 'ENUM',
-				'constraint'     => ['0', '1'], // tidak ada, ada
-				'default' 		 => '0'
+				'constraint'     => ["1","2","3"], // 1: belum dicek, 2: dana tidak ada, 3: dana ada
+				'default' 		 => '1'
 			],
-			'tanggal_byr' => [
+			'tanggal_pembayaran' => [
 				'type'           => 'INT',
 				'constraint'     => 10,
 				'unsigned' 		 => TRUE
@@ -48,7 +49,7 @@ class AddPembayaran extends \CodeIgniter\Database\Migration {
 			]
 		]);
 		
-		$this->forge->addKey('id_byr', TRUE);
+		$this->forge->addKey('id_pembayaran', TRUE);
 		$this->forge->createTable('pembayaran', TRUE);
 	}
 
