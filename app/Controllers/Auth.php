@@ -6,7 +6,7 @@ class Auth extends BaseController
 	{
 		if (isAuthorized()) 
 		{
-			return redirect()->to('/faktur');
+			return redirect()->to('/invoices');
 		}
 
 		if($this->request->getPost()) {
@@ -67,7 +67,6 @@ class Auth extends BaseController
 								'logged'	=> TRUE
 							];
 
-							$redirect = '/faktur';
 							// save for update `login_terakhir`
 							$data = [
 								'id' => $get['id'],
@@ -76,6 +75,7 @@ class Auth extends BaseController
 
 							$this->user->save($data);
 
+							$redirect = '/invoices';
 							$status = '<div class="alert alert-sucess"><strong class="d-block">Hay!</strong>Jangan lupa bahagia ya.</div>';
 							break;
 					}
@@ -98,7 +98,7 @@ class Auth extends BaseController
 	{
 		if (isAuthorized()) 
 		{
-			return redirect()->to('/faktur');
+			return redirect()->to('/invoices');
 		}
 
 		if($this->request->getPost()) {
@@ -129,7 +129,7 @@ class Auth extends BaseController
 	{
 		if (isAuthorized()) 
 		{
-			return redirect()->to('/faktur');
+			return redirect()->to('/invoices');
 		}
 
 		if($this->request->getPost()) {

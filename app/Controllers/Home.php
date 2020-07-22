@@ -9,6 +9,6 @@ class Home extends BaseController
 			return redirect()->to('/auth');
 		}
 
-		return redirect()->to('/faktur');
+		return redirect()->to('/invoices');
 	}
 }

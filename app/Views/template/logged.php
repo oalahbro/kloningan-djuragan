@@ -10,7 +10,91 @@
     <title><?= $title; ?></title>
 
     <style type="text/css">
-      
+body, .breadcrumb {
+  background-color: #eee;
+}
+.bg-paid {
+  background: rgba(52,180,113,.1)
+}
+.bg-unpaid {
+  background: rgba(249,103,108,.1)
+}
+.bg-credit {
+  background: rgba(240,173,78,.1)
+}
+.mainnav {
+  z-index: 1030 !important;
+}
+
+.logo svg {
+  width: 50px;
+  height: auto
+}
+
+.timeline {
+  font-size: 0;
+}
+
+.timeline li {
+  display: inline-flex;
+  position: relative;
+  text-align: center;
+  height: 60px;
+  width: 40px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  color: #ddd
+}
+.timeline li:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #ddd;
+}
+.timeline li.start:before {
+    width: 50%;
+    left: 50%;
+}
+.timeline li.end:before {
+    width: 50%;
+    right: 50%;
+}
+.timeline li:after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #ddd;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 25px;
+}
+
+.timeline li.full {
+  color: #28a745 !important;
+}
+.timeline li.full:before, .timeline li.full:after {
+  background-color: #28a745 !important;
+}
+.timeline li.half {
+  color: #ffc107 !important;
+}
+.timeline li.half:before, .timeline li.half:after {
+  background-color: #ffc107 !important;
+}
+
+.timeline li > .icon {
+  position: relative;
+  top: -15px;
+  font-size: 22px !important;
+}
+
+.timeline li > span {
+  font-size: 10px !important;
+}
+
+
 .dropdown-menu.notify-drop {
   min-width: 330px;
   min-height: 360px;
@@ -76,98 +160,68 @@
     border-bottom-right-radius: 0.25rem;
 }
 
+@media (max-width: 767.98px) {
+  .navbar-nav-scroll {
+    width:100%
+  }
+}
+
+.mt-n5 {
+    margin-top: -3.60em;
+}
+
     </style>
 </head>
 
 <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-        <div>
-            <?php echo anchor('', 'Pesanan Juragan', ['class' => 'navbar-brand']); ?>
-            <?php echo form_button(array('class' => 'btn-juragan btn btn-outline-light', 'data-toggle' => "collapse", 'data-target' => "#sidebar", 'id' => 'sidebarCollapse', 'content' => '<i class="fas fa-user-circle"></i>')); ?>
+    <nav class="sticky-top mainnav navbar navbar-expand navbar-dark bg-dark bg-gradient">
+      <div class="container-xxl d-flex flex-wrap flex-md-nowrap align-items-center justify-content-between">
+        <div class="d-flex align-items-center mr-3" id="logo">
+            <?php echo form_button(array('class' => 'btn-juragan btn btn-outline-light', 'data-toggle' => "collapse", 'data-target' => "#sidebar", 'id' => 'sidebarCollapse', 'content' => '<i class="fad fa-align-left fa-flip-vertical"></i>')); ?>
+            <?php echo anchor('', 'Pesanan Juragan', ['class' => 'navbar-brand ml-3']); ?>
         </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <?= anchor('faktur/baru', 'Tulis Pesanan', ['class'=>'nav-link']) ?>
-                </li>
-                <li class="nav-item">
-                    <?php // echo anchor('chart', 'Chart', array('class'=>'nav-link')) ?>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item dropdown" id="notif">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="badge badge-danger counter" id="count">0</span> Notifikasi
-                    </a>
- 
-                    <div class="dropdown-menu dropdown-menu-right notify-drop" aria-labelledby="navbarDropdown">
-                        <div class="notify-drop-title border-bottom">
-                          <div class="d-flex justify-content-between px-3 pb-2">
-                            <div>Notifikasi</div>
-                            <div>
-                              <!-- action -->
-                            </div>
-                          </div>
-                        </div>
-                        <!-- end notify title -->
-                        <!-- notify content -->
-                        <div class="drop-content">
-                          <div class="list-group list-group-flush">
-                            
-                            <a href="#" class="list-group-item list-group-item-action px-3">
-                              <div class="d-flex w-100 justify-content-start">
-                                <i class="fas fa-plus-square fa-2x"></i>
-                                <div class="ml-sm-2 small">
-                                  <div>JS090956895869<br/>oleh Doni</div>
-                                  <small class="text-muted">22/12/2019 12:12:12</small>
-                                </div>
-                              </div>
-                              
-                            </a>
 
-                            <a href="#" class="list-group-item list-group-item-action px-3">
-                              <div class="d-flex w-100 justify-content-start">
-                                <i class="fas fa-pen-square fa-2x"></i>
-                                 <div class="ml-sm-2 small">
-                                  <div>JS090956895869<br/>oleh Doni</div>
-                                  <small class="text-muted">22/12/2019 12:12:12</small>
-                                </div>
-                              </div>
-                              
-                            </a>
-                          </div>
-                        </div>
-                        <div class="notify-drop-footer border-top pt-2 text-center">
-                            <a href=""><i class="far fa-eye"></i> Lihat semua</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Pengaturan
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <?php 
-                        echo anchor('juragan', 'Juragan', ['class' => 'dropdown-item']);
-                        echo anchor('pengguna', 'Pengguna', ['class' => 'dropdown-item']);
-                        // echo anchor('pengaturan/index', 'Sistem', array('class' => 'dropdown-item'));
-                        ?>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?= $_SESSION['name']; ?>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                      <?= anchor('user/sunting', 'Ubah Profil', array('class' => 'dropdown-item')); ?>
-                      <?= anchor('auth/keluar', 'Keluar', array('class' => 'dropdown-item')); ?>
-                    </div>
-                </li>
-            </ul>
+        <div id="menu" class="order-3 order-md-0 navbar-nav-scroll d-flex justify-content-center">
+          <ul class="navbar-nav bd-navbar-nav flex-row py-2 py-md-0">
+            <li class="nav-item">
+              <?= anchor('invoices/baru', 'Tulis Pesanan', ['class'=>'nav-link']) ?>
+            </li>
+
+            <li class="nav-item">
+              <?= anchor('pelanggan', 'Customer', ['class'=>'nav-link']) ?>
+            </li>
+
+            <li class="nav-item">
+              <?= anchor('produk', 'Produk', ['class'=>'nav-link']) ?>
+            </li>
+
+          </ul>
         </div>
+
+        <div id="topmenu" class="ml-sm-auto">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link" id="dropSetting" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fad fa-cogs d-block d-md-none"></i> <span class="d-none d-md-inline-block">Pengaturan</span></a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
+                <?= anchor('settings', '<i class="fad fa-globe"></i> Situs', array('class' => 'dropdown-item')); ?>
+                <hr class="dropdown-divider"/>
+                <?= anchor('settings/juragan', '<i class="fad fa-user-circle"></i> Juragan', array('class' => 'dropdown-item')); ?>
+                <?= anchor('pengguna', '<i class="fad fa-users"></i> Pengguna', array('class' => 'dropdown-item')); ?>
+              </div>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="#" id="dropUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fad fa-user d-block d-md-none"></i> <span class="d-none d-md-inline-block"><?= $_SESSION['name']; ?></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
+                <?= anchor('user/sunting', 'Ubah Profil', array('class' => 'dropdown-item')); ?>
+                <?= anchor('auth/keluar', 'Keluar', array('class' => 'dropdown-item')); ?>
+              </div>
+            </li>
+          </ul>
+        </div>        
+      </div>
     </nav>
     
     <nav id="sidebar" class="position-fixed bg-dark collapse sidebarcollapse" style="">
@@ -176,17 +230,9 @@
         </div>
 
         <div class="sidebar position-relative" id="listJuragan">
-            
-            <ul class="list-unstyled " id="listLi"></ul>
+          <ul class="list-unstyled " id="listLi"></ul>
         </div>
     </nav>
-
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container-fluid">
-            <h3><?= $title ?></h3>
-
-        </div>
-    </div>
 
     <?= $this->renderSection('content') ?>
     <!-- Optional JavaScript -->
@@ -200,7 +246,7 @@
           container: 'body',
         html: true,
           selector: '[data-toggle="popHarga"]',
-        template: '<div class="popover shadow" role="tooltip"><div class="arrow"></div><div class="popover-body"></div></div>'
+        template: '<div class="popover shadow" role="tooltip"><div class="popover-arrow"></div><div class="popover-body"></div></div>'
       }
 
       $('#editJuragan').on('show.bs.modal', function (event) {
@@ -234,14 +280,19 @@
 
 
       $(function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+
         // juragan 
         $("#sidebarCollapse").click(function(){
           $('#listLi').html('');
         $.getJSON( "<?= site_url('juragan/get'); ?>", function( data ) {
           var items = [];
-          items.push('<li><?= anchor('faktur/index', '<i class="fas fa-users"></i> Semua Juragan', ['class' => 'p-2 d-block text-light']); ?></li>');
+          items.push('<li><?= anchor('faktur/index', '<i class="fad fa-users"></i> Semua Juragan', ['class' => 'p-2 d-block text-light text-decoration-none']); ?></li>');
           $.each( data, function( i, list ) {
-            items.push( '<li><a class="p-2 d-block text-light" href="<?= site_url('faktur/index/') ?>'+list.juragan+'"><i class="fas fa-user-circle"></i> '+list.nama_jrgn+'</li>' );
+            items.push( '<li><a class="p-2 d-block text-light text-decoration-none" href="<?= site_url('faktur/index/') ?>'+list.juragan+'"><i class="fad fa-user-circle"></i> '+list.nama_jrgn+'</li>' );
           });
          
           $( items.join( "" ) ).appendTo( "#listLi" );
@@ -251,8 +302,14 @@
 
 
 
+
     </script>
-    <script defer src="https://kit.fontawesome.com/859e035253.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>
+    <?php /*
+    // source fontawesome: https://github.com/carlosproductions/Portfolio-Home-Page2
+    // or can use https://kit.fontawesome.com/22a9d93fa2.js
+    */
+    ?>
+    <script defer src="https://kit.fontawesome.com/9bdc906322.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>
 
     <!--
     Page rendered in {elapsed_time} seconds

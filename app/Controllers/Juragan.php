@@ -2,31 +2,7 @@
 
 class Juragan extends BaseController
 {
-    public function index()
-    {
-        if ( ! isAuthorized()) {
-            return redirect()->to('/auth');
-        }
-        $limit = 20;
-        $offset = (int) $this->request->getGet('page_juragan');
-        if( $offset === 0 or $offset === 1) {
-            $page = 0;
-        }
-
-        if($offset > 1) {
-            $page = ($offset * $limit) - $limit; 
-        }
-
-        $data = [
-            'jrgn' => $this->juragan->asObject()->orderBy('jrgn_diubah', 'desc')->findAll($limit, $page),
-            'users' => $this->juragan->paginate($limit, 'juragan'),
-            'pager' => $this->juragan->pager,
-        ];
-
-        echo view('adminview/header', ['title' => 'Juragan']);
-        echo view('adminview/atur/juragan', $data);
-        echo view('adminview/footer');
-    }
+    
 
     public function baru()
     {
