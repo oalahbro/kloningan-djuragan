@@ -46,8 +46,10 @@ class Validation
 		'email'		=> 'required|valid_email|max_length[100]|is_unique[user.email]',
 	];
 
-	public $addJuragan = [
-		'nama' 		=> 'required|min_length[3]|max_length[50]'
+	public $addBank = [
+		'nama_bank'	=> 'required|in_list[bri,bni,bca,mandiri]',
+		'nomor_rekening' => 'required|max_length[50]|alpha_dash',
+		'atas_nama'	=> 'required|max_length[50]|alpha_space'
 	];
 
 	public $editJuragan = [

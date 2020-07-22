@@ -18,6 +18,7 @@ use CodeIgniter\Controller;
 use App\Models\FakturModel;
 use App\Models\JuraganModel;
 use App\Models\UserModel;
+use App\Models\BankModel;
 
 use Ncaneldiee\Rajaongkir;
 
@@ -54,6 +55,7 @@ class BaseController extends Controller
 
 		$this->juragan = new JuraganModel();
 		$this->user = new UserModel();
+		$this->bank = new BankModel();
 
 		$this->rajaongkir = new Rajaongkir\Domestic($config->rajaongkir, Rajaongkir\Domestic::ACCOUNT_PRO);
 	}
