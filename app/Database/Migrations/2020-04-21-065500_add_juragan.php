@@ -20,7 +20,7 @@ class AddJuragan extends \CodeIgniter\Database\Migration {
 				'constraint' 	 => '60',
 			],
 			'created_at' => [
-				'type'           => 'INT',
+				'type' 			 => 'INT',
 				'constraint' 	 => '10',
 				'unsigned' 		 => TRUE
 			],
@@ -29,9 +29,17 @@ class AddJuragan extends \CodeIgniter\Database\Migration {
 				'constraint' 	 => '10',
 				'unsigned' 		 => TRUE
 			],
+			'deleted_at' => [
+				'type'           => 'INT',
+				'constraint' 	 => '10',
+				'unsigned' 		 => TRUE,
+				'null' 			 => TRUE,
+				'default' 		 => NULL
+			]
 		]);
 		$this->forge->addKey('id_juragan', TRUE);
 		$this->forge->createTable('juragan', TRUE);
+		$this->forge->addUniqueKey(['juragan']);
 	}
 
 	public function down()

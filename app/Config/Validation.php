@@ -52,8 +52,14 @@ class Validation
 		'atas_nama'	=> 'required|max_length[50]|alpha_space'
 	];
 
+	public $addJuragan = [
+		'nama_juragan' => 'required|min_length[3]|max_length[60]|is_unique[juragan.nama_juragan]',
+		'bank' 	=> 'required'
+	];
+
 	public $editJuragan = [
 		'id' 		=> 'required|integer',
-		'nama' 		=> 'required|min_length[3]|max_length[50]'
+		'nama_juragan' => 'required|min_length[3]|max_length[60]',
+		'bank' 	=> 'required'
 	];
 }

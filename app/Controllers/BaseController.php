@@ -15,10 +15,11 @@ namespace App\Controllers;
  */
 use CodeIgniter\Controller;
 
+use App\Models\BankModel;
 use App\Models\FakturModel;
 use App\Models\JuraganModel;
+use App\Models\RelasiModel;
 use App\Models\UserModel;
-use App\Models\BankModel;
 
 use Ncaneldiee\Rajaongkir;
 
@@ -32,7 +33,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['form', 'url', 'number', 'date', 'fungsi'];
+	protected $helpers = ['date','form','fungsi','number','text','url'];
 
 	/**
 	 * Constructor.
@@ -51,11 +52,11 @@ class BaseController extends Controller
 		$this->session = \Config\Services::session();
 		$this->validation = \Config\Services::validation();
 
-		$this->faktur = new FakturModel();
-
-		$this->juragan = new JuraganModel();
-		$this->user = new UserModel();
-		$this->bank = new BankModel();
+		$this->bank 	= new BankModel();
+		$this->faktur 	= new FakturModel();
+		$this->juragan 	= new JuraganModel();
+		$this->relasi 	= new RelasiModel();
+		$this->user 	= new UserModel();
 
 		$this->rajaongkir = new Rajaongkir\Domestic($config->rajaongkir, Rajaongkir\Domestic::ACCOUNT_PRO);
 	}
