@@ -256,7 +256,7 @@
 		container: 'body',
 		html: true,
 		selector: '[data-toggle="popHarga"]',
-		template: '<div class="popover shadow" role="tooltip"> <div class = "popover-arrow" > < /div> <div class = "popover-body" > < /div> </div>'
+		template: '<div class="popover shadow" role="tooltip"><div class="popover-arrow"></div><div class="popover-body"></div></div>'
 	}
 	$('#editJuragan').on('show.bs.modal', function(event) {
 		var button = $(event.relatedTarget) // Button that triggered the modal
