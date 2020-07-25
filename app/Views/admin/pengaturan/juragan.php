@@ -77,7 +77,7 @@ $pager = \Config\Services::pager();
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs">
 						<li class="nav-item">
-							<span class="nav-link active" aria-current="true">Tambah</span>
+							<span class="nav-link active" aria-current="true">Tambah Juragan</span>
 						</li>
 					</ul>
 				</div>
@@ -112,7 +112,7 @@ $pager = \Config\Services::pager();
 </div>
 
 
-<div class="modal fade" id="modalSuntingJuragan" tabindex="-1" aria-labelledby="modalSuntingJuraganLabel" aria-hidden="true">
+<div class="modal fade" id="modalSuntingJuragan" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalSuntingJuraganLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<?= form_open('settings/update_juragan', '', ['id' => '']); ?>

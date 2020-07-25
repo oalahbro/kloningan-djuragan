@@ -13,25 +13,25 @@ class AddJuragan extends \CodeIgniter\Database\Migration {
 			],
 			'juragan' => [
 				'type' 			 => 'VARCHAR',
-				'constraint' 	 => '60',
+				'constraint' 	 => 40,
 			],
 			'nama_juragan' => [
 				'type' 			 => 'VARCHAR',
-				'constraint' 	 => '60',
+				'constraint' 	 => 60,
 			],
 			'created_at' => [
 				'type' 			 => 'INT',
-				'constraint' 	 => '10',
+				'constraint' 	 => 10,
 				'unsigned' 		 => TRUE
 			],
 			'updated_at' => [
 				'type'           => 'INT',
-				'constraint' 	 => '10',
+				'constraint' 	 => 10,
 				'unsigned' 		 => TRUE
 			],
 			'deleted_at' => [
 				'type'           => 'INT',
-				'constraint' 	 => '10',
+				'constraint' 	 => 10,
 				'unsigned' 		 => TRUE,
 				'null' 			 => TRUE,
 				'default' 		 => NULL

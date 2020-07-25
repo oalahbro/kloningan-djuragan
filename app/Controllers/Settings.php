@@ -90,7 +90,7 @@ class Settings extends BaseController
 			$banks = $this->request->getPost('bank');
 
 			$this->juragan->save([
-				'juragan' => url_title( $nama_juragan, '-', TRUE ),
+				'juragan' => random_string('sha1', 40), // url_title( $nama_juragan, '-', TRUE ),
 				'nama_juragan' => $nama_juragan
 			]);
 			$id = $db->insertID();
@@ -139,6 +139,20 @@ class Settings extends BaseController
 				// 'juragan' => url_title( $nama_juragan, '-', TRUE ),
 				'nama_juragan' => $nama_juragan
 			]);
+
+			// hapus semua tabel relasi
+			$this->relasi->where(['table' => '2', 'juragan_id' => $id_juragan])->delete();
+
+			// simpan ulang semua data relasi
+			if ($db->affectedRows() > -1) {
+				foreach ($banks as $bank) {
+					$this->relasi->insert([
+						'table' => 2,
+						'juragan_id' => $id_juragan,
+						'val_id' => $bank
+					]);
+				}
+			}
 
 			// return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
 		}
