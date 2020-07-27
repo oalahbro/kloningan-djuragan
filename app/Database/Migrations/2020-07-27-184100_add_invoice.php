@@ -11,6 +11,11 @@ class AddInvoice extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE,
 				'auto_increment' => TRUE
 			],
+			'tanggal_pesan' => [
+				'type'           => 'DATE'
+				// 'constraint' 	 => 10,
+				// 'unsigned' 		 => TRUE
+			],
 			'seri' => [
 				'type'           => 'VARCHAR',
 				'constraint' 	 => 14, // LS3457648767 LS202204224900
