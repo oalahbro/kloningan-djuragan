@@ -43,7 +43,7 @@ class Validation
 		'username' 	=> 'required|min_length[3]|max_length[100]|is_unique[user.username]|alpha_dash',
 		'password' 	=> 'required|min_length[6]',
 		'nama' 		=> 'required|min_length[3]|max_length[50]',
-		'email'		=> 'required|valid_email|max_length[100]|is_unique[user.email]',
+		'email'		=> 'required|valid_email|max_length[100]|is_unique[user.email]'
 	];
 
 	public $addBank = [
@@ -61,5 +61,25 @@ class Validation
 		'id' 		=> 'required|integer',
 		'nama_juragan' => 'required|min_length[3]|max_length[60]',
 		'bank' 	=> 'required'
+	];
+
+	public $addPengguna = [
+		'username' 	=> 'required|min_length[3]|max_length[100]|is_unique[user.username]|alpha_dash',
+		'password' 	=> 'required|min_length[6]',
+		'nama' 		=> 'required|min_length[3]|max_length[50]',
+		'email'		=> 'required|valid_email|max_length[100]|is_unique[user.email]',
+		'level' 	=> 'required|in_list[superadmin,admin,cs,viewer,reseller]',
+		'status' 	=> 'required|in_list[pending,inactive,active,blocked]',
+		// 'juragan' 	=> 'required',
+	];
+
+	public $editPengguna = [
+		// 'username' 	=> 'required|min_length[3]|max_length[100]|is_unique[user.username,id,{id}]|alpha_dash',
+		// 'password' 	=> 'min_length[6]',
+		'nama' 		=> 'required|min_length[3]|max_length[50]',
+		'email'		=> 'required|valid_email|max_length[100]|is_unique[user.email,id,{id}]',
+		'level' 	=> 'required|in_list[superadmin,admin,cs,viewer,reseller]',
+		'status' 	=> 'required|in_list[pending,inactive,active,blocked]',
+		// 'juragan' 	=> 'required',
 	];
 }

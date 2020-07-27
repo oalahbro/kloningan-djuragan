@@ -8,11 +8,12 @@ $pager = \Config\Services::pager();
 
 <div class="container-xxl">
 
-	<h1 class="h3 mt-5">Semua Juragan</h1>
+	<h1 class="h3 mt-5">Pengaturan Juragan</h1>
 
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb p-0">
 			<li class="breadcrumb-item"><?= anchor('', 'Dasbor'); ?></li>
+			<li class="breadcrumb-item"><?= anchor('settings', 'Pengaturan'); ?></li>
 			<li class="breadcrumb-item active" aria-current="page">Juragan</li>
 		</ol>
 	</nav>

@@ -39,18 +39,27 @@ class AddUser extends \CodeIgniter\Database\Migration {
 			],
 			'login_terakhir' => [
 				'type'           => 'INT',
-				'constraint' 	 => '10',
-				'unsigned' 		 => TRUE
+				'constraint' 	 => 10,
+				'unsigned' 		 => TRUE,
+				'null' 			 => TRUE,
+				'default' 		 => NULL
 			],
 			'created_at' => [
 				'type'           => 'INT',
-				'constraint' 	 => '10',
+				'constraint' 	 => 10,
 				'unsigned' 		 => TRUE
 			],
 			'updated_at' => [
 				'type'           => 'INT',
-				'constraint' 	 => '10',
+				'constraint' 	 => 10,
 				'unsigned' 		 => TRUE
+			],
+			'deleted_at' => [
+				'type'           => 'INT',
+				'constraint' 	 => 10,
+				'unsigned' 		 => TRUE,
+				'null' 			 => TRUE,
+				'default' 		 => NULL
 			],
 		]);
 

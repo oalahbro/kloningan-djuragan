@@ -219,7 +219,7 @@
 							<?= anchor('settings', '<i class="fad fa-globe"></i> Situs', array('class' => 'dropdown-item')); ?>
 							<hr class="dropdown-divider" />
 							<?= anchor('settings/juragan', '<i class="fad fa-user-circle"></i> Juragan', array('class' => 'dropdown-item')); ?>
-							<?= anchor('pengguna', '<i class="fad fa-users"></i> Pengguna', array('class' => 'dropdown-item')); ?>
+							<?= anchor('settings/pengguna', '<i class="fad fa-users"></i> Pengguna', array('class' => 'dropdown-item')); ?>
 						</div>
 					</li>
 					<li class="nav-item dropdown">
@@ -296,8 +296,10 @@
 				})
 		});
 
-		var suntingModal = document.getElementById('modalSuntingJuragan')
-		suntingModal.addEventListener('show.bs.modal', function (event) {
+		<?php if (uri_string(current_url()) === 'settings/juragan') { ?>
+
+		var suntingModalJuragan = document.getElementById('modalSuntingJuragan')
+		suntingModalJuragan.addEventListener('show.bs.modal', function (event) {
 			// Button that triggered the modal
 			var button = event.relatedTarget
 			// Extract info from data-* attributes
@@ -308,9 +310,9 @@
 			// and then do the updating in a callback.
 			//
 			// Update the modal's content.
-			var modalTitle = suntingModal.querySelector('.modal-title')
-			var inputNamaJuragan = suntingModal.querySelector('#modalSuntingJuragan input#nama_juragan')
-			var inputIdJuragan = suntingModal.querySelector('#modalSuntingJuragan input[name="id"]')
+			var modalTitle = suntingModalJuragan.querySelector('.modal-title')
+			var inputNamaJuragan = suntingModalJuragan.querySelector('#modalSuntingJuragan input#nama_juragan')
+			var inputIdJuragan = suntingModalJuragan.querySelector('#modalSuntingJuragan input[name="id"]')
 			modalTitle.textContent = 'Perbarui ' + nama_juragan
 			inputNamaJuragan.value = nama_juragan
 			inputIdJuragan.value = id_juragan
@@ -322,7 +324,56 @@
 				$("select.mybanks").find("option[value="+optionVal+"]").prop("selected", "selected");
 			}
 			$("select.mybanks").multiselect('refresh');
-		})
+		});
+		<?php } ?>
+		<?php if (uri_string(current_url()) === 'settings/pengguna') { ?>
+
+		var suntingModalPengguna = document.getElementById('modalSuntingPengguna')
+		suntingModalPengguna.addEventListener('show.bs.modal', function (event) {
+			// Button that triggered the modal
+			var button = event.relatedTarget
+			// Extract info from data-* attributes
+			var id_pengguna = button.getAttribute('data-id')
+			var nama = button.getAttribute('data-nama')
+			var username = button.getAttribute('data-username')
+			var email = button.getAttribute('data-email')
+			var level = button.getAttribute('data-level')
+			var status = button.getAttribute('data-status')
+			// If necessary, you could initiate an AJAX request here
+			// and then do the updating in a callback.
+			//
+			// Update the modal's content.
+			var modalTitle = suntingModalPengguna.querySelector('.modal-title')
+			var inputId = suntingModalPengguna.querySelector('#modalSuntingPengguna input[name="id"]') 
+			var inputNama = suntingModalPengguna.querySelector('#modalSuntingPengguna input[name="nama"]') 
+			var inputUsername = suntingModalPengguna.querySelector('#modalSuntingPengguna input[name="username"]') 
+			var inputEmail = suntingModalPengguna.querySelector('#modalSuntingPengguna input[name="email"]') 
+			var inputLevel = suntingModalPengguna.querySelector('#modalSuntingPengguna select[name="level"]') 
+			var inputStatus = suntingModalPengguna.querySelector('#modalSuntingPengguna select[name="status"]') 
+
+			modalTitle.textContent = 'Perbarui ' + nama
+			inputId.value = id_pengguna
+			inputNama.value = nama
+			inputUsername.value = username
+			inputEmail.value = email
+			inputLevel.value = level
+			inputStatus.value = status
+
+			// relasi
+			$.ajax({
+				method: "GET",
+				// headers: {'X-Requested-With': 'XMLHttpRequest'},
+				url: "<?= site_url('settings/pengguna_relasi'); ?>",
+				data: { id: id_pengguna }
+			})
+			.done(function( msg ) {
+				$.each(msg, function(i,val) {
+					$("select#juragan_").find("option[value="+val+"]").prop("selected", "selected");
+				})
+			});			
+		});
+		<?php } ?>
+
 	});
 	</script>
 	<?php /*
