@@ -260,24 +260,34 @@ class Settings extends BaseController
 			$data['id'] = $this->request->getPost('id');
 			$data['name'] = $this->request->getPost('nama');
 			$data['email'] = strtolower( $this->request->getPost('email') );
-			$data['level'] = strtolower( $this->request->getPost('level') );
+			$level = $this->request->getPost('level');
+			$data['level'] = strtolower( $level );
 			$data['status'] = strtolower( $this->request->getPost('status') );
 
 			$this->user->save($data);
 
 			// simpan ulang semua data relasi
 			if ($db->affectedRows() > -1) {
-				// hapus semua tabel relasi
+				// hapus semua relasi 
 				$this->relasi->where(['table' => '1', 'val_id' => $id])->delete();
 
-				foreach ($juragans as $juragan) {
-					$this->relasi->insert([
-						'table' => 1,
-						'juragan_id' => $juragan,
-						'val_id' => $id
-					]);
+				if ($level === 'superadmin' OR $level === 'admin') {
+					// tidak ada yang disimpan untuk superadmin / admin
+				}
+				else {
+					$juragans = $this->request->getPost('juragan');
+				
+					foreach ($juragans as $juragan) {
+						$this->relasi->insert([
+							'table' => 1,
+							'juragan_id' => $juragan,
+							'val_id' => $id
+						]);
+					}
+					
 				}
 			}
+
 
 			// return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
 		}

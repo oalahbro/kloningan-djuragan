@@ -150,7 +150,7 @@ $pager = \Config\Services::pager();
 								$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
 							}
 
-							echo form_multiselect('juragan[]', $options_juragan, [], ['class'=> 'form-select', 'id' => 'juragan', 'required' => '']);
+							echo form_multiselect('juragan[]', $options_juragan, [], ['class'=> 'form-select', 'id' => 'juragan']);
 							?>
 							<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 						</div>
@@ -234,7 +234,7 @@ $pager = \Config\Services::pager();
 						$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
 					}
 
-					echo form_multiselect('juragan[]', $options_juragan, [], ['class'=> 'form-select', 'id' => 'juragan_', 'required' => '']);
+					echo form_multiselect('juragan[]', $options_juragan, [], ['class'=> 'form-select', 'id' => 'juragan_']);
 					?>
 					<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 				</div>
