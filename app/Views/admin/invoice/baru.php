@@ -53,6 +53,32 @@ $sekarang = new Time('now');
 				</div>
 			</div>
 
+			<div class="card mb-3">
+				<div class="card-header">
+					<ul class="nav nav-tabs card-header-tabs">
+						<li class="nav-item">
+							<span class="nav-link active" aria-current="true">Asal Orderan</span>
+						</li>
+					</ul>
+				</div>
+				<div class="card-body">
+					<div class="mb-3">
+						<?= form_label('Asal Orderan', 'asal_orderan', ['class' => 'form-label']); ?>
+						<?php 
+						$options_label = array('' => 'Pilih satu');
+						foreach (config('JuraganConfig')->label as $key => $label) {
+							$options_label[$key] = $label;
+						}
+						?>
+						<?= form_dropdown('asal_orderan', $options_label, '', ['class'=> 'form-select', 'id' => 'asal_orderan', 'required' => '']); ?>
+					</div>
+					<div class="mb-3">
+						<?= form_label('Label', 'label', ['class' => 'form-label']); ?>
+						<?= form_input('label', '', ['class' => 'form-control', 'id' => 'label', 'placeholder' => 'label - opsional, max: 50 karakter']); ?>
+					</div>
+				</div>
+			</div>
+
 			<div class="sticky-top" style="top: 60px">
 				<div class="card mb-3">
 					<div class="card-body">
@@ -64,14 +90,14 @@ $sekarang = new Time('now');
 							<?= form_label('Pemesan', 'pemesan', ['class' => 'form-label']); ?>
 							<div class="input-group">
 								<?= form_input('pemesan', '', ['class' => 'form-control', 'id' => 'pemesan', 'required' => '', 'placeholder' => 'Pemesan']); ?>
-								<button class="btn btn-primary" type="button"><i class="fad fa-plus"></i></button>
+								<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalTambahPelanggan"><i class="fad fa-plus"></i></button>
 							</div>
 						</div>
 						<div class="mb-3">
 							<?= form_label('Dikirm kepada', 'dikirim', ['class' => 'form-label']); ?>
 							<div class="input-group">
 								<?= form_input('dikirim', '', ['class' => 'form-control', 'id' => 'dikirim', 'required' => '', 'placeholder' => 'Dikirim kepada']); ?>
-								<button class="btn btn-primary" type="button"><i class="fad fa-plus"></i></button>
+								<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalTambahPelanggan"><i class="fad fa-plus"></i></button>
 							</div>
 						</div>
 						<div class="mb-3">
@@ -81,38 +107,7 @@ $sekarang = new Time('now');
 					</div>
 				</div>
 
-				<div class="card mb-3">
-					<div class="card-header">
-						<ul class="nav nav-tabs card-header-tabs">
-							<li class="nav-item">
-								<span class="nav-link active" aria-current="true">Asal Orderan</span>
-							</li>
-						</ul>
-					</div>
-					<div class="card-body">
-						<div class="mb-3">
-							<label for="juragan_id" class="form-label">Asal Orderan</label>
-							<select name="juragan_id" id="juragan_id" class="form-select" required="">
-								<option value="" disabled="" selected="selected">Pilih Salah Satu</option>
-								<option value="">Tokopedia</option>
-								<option value="">Bukalapak</option>
-								<option value="">Shopee</option>
-								<option value="">Lazada</option>
-								<option value="">Blibli</option>
-								<option value="">Zalora</option>
-								<option value="">Instagram</option>
-								<option value="">WhatsApp</option>
-								<option value="">Facebook</option>
-								<option value="">Web/App lain</option>
-								<option value="">Offline Store/COD</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<?= form_label('Label/Catatan', 'label', ['class' => 'form-label']); ?>
-							<?= form_input('label', '', ['class' => 'form-control', 'id' => 'label', 'placeholder' => 'label - opsional, max: 50 karakter']); ?>
-						</div>
-					</div>
-				</div>
+
 			</div>
 
 		</div>
@@ -166,16 +161,43 @@ $sekarang = new Time('now');
 							</tbody>
 							<tfoot>
 								<tr>
-									<td colspan="3">Subtotal</td>
+									<td colspan="3" class="text-right">Subtotal</td>
 									<td class="text-right">Rp30000</td>
+								</tr>
+								<tr>
+									<td colspan="3" class="text-right">
+										<button type="button" class="close" aria-label="Close">
+											<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>
+										</button>
+										Diskon Order 
+									</td>
+									<td class="text-right text-danger">Rp30000</td>
+								</tr>
+								<tr>
+									<td colspan="3" class="text-right">
+										<button type="button" class="close" aria-label="Close">
+											<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>
+										</button>
+										Angka Unik
+									</td>
+									<td class="text-right text-success">Rp123</td>
+								</tr>
+								<tr>
+									<td colspan="3" class="text-right">
+										<button type="button" class="close" aria-label="Close">
+											<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>
+										</button>
+										Ongkir
+									</td>
+									<td class="text-right text-success">Rp123000</td>
 								</tr>
 							</tfoot>
 						</table>
 					</div>
 
-					<button class="btn btn-sm btn-outline-primary"><i class="fad fa-plus"></i> Diskon Order</button>
-					<button class="btn btn-sm btn-outline-primary"><i class="fad fa-plus"></i> Ongkir</button>
-					<button class="btn btn-sm btn-outline-primary"><i class="fad fa-plus"></i> Biaya Lain</button>
+					<button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder"><i class="fad fa-plus"></i> Diskon Order</button>
+					<button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder"><i class="fad fa-plus"></i> Ongkir</button>
+					<button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder"><i class="fad fa-plus"></i> Biaya Lain</button>
 					<hr/>
 					<div class="d-flex justify-content-between align-items-center">
 						<h6 class="font-weight-bold">TOTAL</h6>
@@ -343,6 +365,120 @@ $sekarang = new Time('now');
 		</div>
 	</div>
 
+</div>
+
+<!-- Modal tambah pelanggan -->
+<div class="modal fade" id="modalTambahPelanggan" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalTambahPelangganLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<?= form_open('pelanggan/simpan', ['class' => 'modal-content']); ?>
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalTambahPelangganLabel">Tambah</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="mb-3">
+					<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
+					<?= form_dropdown('juragan', ['' => 'Pilih Juragan'], '', ['class'=> 'form-select', 'id' => 'juragan', 'required' => '']);
+					?>
+				</div>
+				<div class="mb-3">
+					<?= form_label('Nama Pelanggan', 'nama_pelanggan', ['class' => 'form-label']); ?>
+					<?= form_input('nama_pelanggan', '', ['class' => 'form-control', 'id' => 'nama_pelanggan', 'required' => '', 'placeholder' => 'nama pelanggan']); ?>
+				</div>
+				<div class="row gx-2 mb-3">
+					<div class="col-6">
+						<?= form_label('HP 1', 'hp1', ['class' => 'form-label']); ?>
+						<?= form_input('hp1', '', ['class' => 'form-control', 'id' => 'hp1', 'required' => '', 'placeholder' => 'HP']); ?>
+					</div>
+					<div class="col-6">
+						<?= form_label('HP 2', 'hp2', ['class' => 'form-label']); ?>
+						<?= form_input('hp2', '', ['class' => 'form-control', 'id' => 'hp2', 'placeholder' => 'HP 2 - opsional']); ?>
+					</div>
+				</div>
+				<div class="mb-3">
+					<?= form_label('Alamat', 'alamat', ['class' => 'form-label']); ?>
+					<?= form_textarea(['name' => 'alamat', 'class' => 'form-control',  'id' => 'alamat', 'required' => '', 'placeholder' => 'alamat lengkap', 'rows' => '3']); ?>
+				</div>
+				<div class="row gx-2 mb-3">
+					<div class="col">
+						<?= form_label('Provinsi', 'provinsi', ['class' => 'form-label']); ?>
+						<?= form_dropdown('provinsi', ['' => 'Pilih provinsi'], '', ['class'=> 'form-select', 'id' => 'provinsi', 'required' => '']); ?>
+					</div>
+					<div class="col">
+						<?= form_label('Kab/Kota', 'kabupaten', ['class' => 'form-label']); ?>
+						<?= form_dropdown('kabupaten', ['' => 'Pilih Kab/Kota'], '', ['class'=> 'form-select', 'id' => 'kabupaten', 'required' => '']); ?>
+					</div>
+					<div class="col">
+						<?= form_label('Kecamatan', 'kecamatan', ['class' => 'form-label']); ?>
+						<?= form_dropdown('kecamatan', ['' => 'Pilih Kecamatan'], '', ['class'=> 'form-select', 'id' => 'kecamatan', 'required' => '']);
+						?>
+					</div>
+				</div>
+
+				<div class="row gx-2 mb-3">
+					
+					<div class="col-4">
+						<?= form_label('Kode Pos', 'kodepos', ['class' => 'form-label']); ?>
+						<?= form_input('kodepos', '', ['class' => 'form-control', 'id' => 'kodepos', 'placeholder' => 'xxxxx']); ?>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Batal</button>
+				<button type="button" class="btn btn-primary"><i class="fad fa-save"></i> Simpan</button>
+			</div>
+		<?= form_close(); ?>
+	</div>
+</div>
+
+<!-- Modal tambah biaya -->
+<div class="modal fade" id="biayaOrder" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="biayaOrderLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="biayaOrderLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                    	<?= form_radio([
+                    		'name' 	=> 'plusminus',
+                    		'id' 	=> 'pm-plus',
+                    		'value' => '1',
+                    		'class' => 'form-check-input'
+                    	]); ?>
+                    	<?= form_label('<i class="fad fa-plus-circle text-primary"></i> Menambahkan', 'pm-plus', ['class' => 'form-check-label']); ?>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <?= form_radio([
+                    		'name' 	=> 'plusminus',
+                    		'id' 	=> 'pm-minus',
+                    		'value' => '2',
+                    		'class' => 'form-check-input'
+                    	]); ?>
+                    	<?= form_label('<i class="fad fa-minus-circle text-primary"></i> Mengurangkan', 'pm-minus', ['class' => 'form-check-label']); ?>
+                    </div>
+                </div>
+                <div class=" mb-3">
+                	<?= form_label('Nominal', 'nominalBiaya', ['class' => 'form-label']); ?>
+                    <?= form_input(['name' => 'nominal_biaya', 'id' => 'nominalBiaya', 'class' => 'form-control', 'required' => '', 'placeholder' => 'nominal biaya']); ?>
+                </div>
+                <div class=" mb-3">
+                	<?= form_label('Lebel', 'labelBiaya', ['class' => 'form-label']); ?>
+                    <?= form_input(['name' => 'label_biaya', 'id' => 'labelBiaya', 'class' => 'form-control', 'required' => '', 'placeholder' => 'label biaya']); ?>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?= $this->endSection() ?>

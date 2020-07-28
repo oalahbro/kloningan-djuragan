@@ -68,7 +68,7 @@ class Ongkir extends BaseController
 				}
 
 				// simpan cache selama 365 hari
-				$this->cache->save($nama_cache, $kota, 60*60*24*365);
+				$this->cache->save($nama_cache, $kecamatan, 60*60*24*365);
 			}
 		}
 

@@ -46,4 +46,11 @@ class Api extends BaseController
 
 		return $this->response->setJSON($listJuragan);
 	}
+
+	public function get_kecamatan()
+	{
+		$kecamatan = $this->rajaongkir->getSubdistricts();
+
+		return $this->response->setJSON($kecamatan);
+	}
 }

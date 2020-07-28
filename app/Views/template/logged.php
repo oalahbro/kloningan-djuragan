@@ -249,6 +249,7 @@
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="<?= base_url('assets/js/bootstrap.bundle.min.js'); ?>"></script>
+
 	<script>
 	var popOverSettings = {
 		trigger: 'focus',
@@ -399,6 +400,69 @@
 					$('<option />', {value: val.id, text: val.name}).appendTo(p);
 				})
 			});
+
+			var tambahPengguna = document.getElementById('modalTambahPelanggan')
+			tambahPengguna.addEventListener('show.bs.modal', function (e) {
+				var p = tambahPengguna.querySelector('#modalTambahPelanggan [name="provinsi"]')
+				$.ajax({
+					method: "GET",
+					// headers: {'X-Requested-With': 'XMLHttpRequest'},
+					url: "<?= site_url('ongkir/provinsi'); ?>"
+				})
+				.done(function( msg ) {
+					$.each(msg, function(i,val) {
+						$('<option />', {value: val.province_id, text: val.province}).appendTo(p);
+					})
+				});
+			})
+
+			var kab = tambahPengguna.querySelector('#modalTambahPelanggan [name="kabupaten"]');
+			var kec = tambahPengguna.querySelector('#modalTambahPelanggan [name="kecamatan"]');
+
+			// 
+			$('select[name="provinsi"]').on('change', function() {
+				$.ajax({
+					method: "GET",
+					// headers: {'X-Requested-With': 'XMLHttpRequest'},
+					url: "<?= site_url('ongkir/kota'); ?>",
+					data: {prov: this.value}
+				})
+				.done(function( msg ) {
+					$('[name="kabupaten"]').empty();
+					$('[name="kecamatan"]').empty();
+					// $('[name="kodepos"]').val('');
+					$('<option />', {value: '', text: 'Pilih Kab/Kota'}).appendTo(kab);
+					$('<option />', {value: '', text: 'Pilih Kecamatan'}).appendTo(kec);
+					$.each(msg, function(i,val) {
+						var nama_kab = val.city_name;
+						if (val.type == 'Kota') {
+							nama_kab = val.type + ' ' + val.city_name;
+						}
+						$('<option />', {value: val.city_id, text: nama_kab}).attr('data-kodepos', val.postal_code).appendTo(kab);
+					})
+				});
+			});
+
+			// 
+			$('select[name="kabupaten"]').on('change', function() {
+				// var kodepos = $(this).find(':selected').data('kodepos');
+				$.ajax({
+					method: "GET",
+					// headers: {'X-Requested-With': 'XMLHttpRequest'},
+					url: "<?= site_url('ongkir/kecamatan'); ?>",
+					data: {kota: this.value}
+				})
+				.done(function( msg ) {
+					// $('[name="kodepos"]').val(kodepos);
+					
+					$('[name="kecamatan"]').empty();
+					$('<option />', {value: '', text: 'Pilih Kecamatan'}).appendTo(kec);
+					$.each(msg, function(i,val) {
+						$('<option />', {value: val.subdistrict_id, text: val.subdistrict_name}).appendTo(kec);
+					})
+				});
+			});
+
 
 		<?php } ?>
 
