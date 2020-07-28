@@ -367,6 +367,7 @@
 				data: { id: id_pengguna }
 			})
 			.done(function( msg ) {
+				$("select#juragan_").val([]);
 				$.each(msg, function(i,val) {
 					$("select#juragan_").find("option[value="+val+"]").prop("selected", "selected");
 				})
