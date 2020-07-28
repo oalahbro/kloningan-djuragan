@@ -54,6 +54,13 @@ class AddPelanggan extends \CodeIgniter\Database\Migration {
 				'constraint' 	 => 10,
 				'unsigned' 		 => TRUE
 			],
+			'deleted_at' => [
+				'type'           => 'INT',
+				'constraint' 	 => 10,
+				'unsigned' 		 => TRUE,
+				'null' 			 => TRUE,
+				'default' 		 => NULL
+			]
 		]);
 		
 		$this->forge->addKey('id_pelanggan', TRUE);
