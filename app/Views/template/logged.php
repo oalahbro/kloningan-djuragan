@@ -287,11 +287,10 @@
 		// juragan
 		$("#sidebarCollapse").click(function() {
 			$('#listLi').html('');
-			$.getJSON("<?= site_url('juragan/get'); ?>", function( data ) {
+			$.getJSON("<?= site_url('api/get_juragan'); ?>", function( data ) {
 				var items = []; items.push('<li><?= anchor('faktur/index', '<i class="fad fa-users"></i> Semua Juragan', ['class' => 'p-2 d-block text-light text-decoration-none']); ?> </li>');
 					$.each(data, function(i, list) {
-						items.push('<li><a class="p-2 d-block text-light text-decoration-none" href="<?= site_url('
-							faktur / index / ') ?>' + list.juragan + '"><i class="fad fa-user-circle"></i> ' + list.nama_jrgn + '</li>');
+						items.push('<li><a class="p-2 d-block text-light text-decoration-none" href="<?= site_url('faktur/index/') ?>' + list.juragan + '"><i class="fad fa-user-circle"></i> ' + list.nama_juragan + '</li>');
 					}); $(items.join("")).appendTo("#listLi");
 				})
 		});
@@ -372,6 +371,35 @@
 				})
 			});			
 		});
+		<?php } ?>
+		<?php if (uri_string(current_url()) === 'invoices/baru') { ?>
+			
+			// load juragan
+			var j = $('select[name="juragan"]');
+			$.ajax({
+				method: "GET",
+				// headers: {'X-Requested-With': 'XMLHttpRequest'},
+				url: "<?= site_url('api/get_juragan'); ?>"
+			})
+			.done(function( msg ) {
+				$.each(msg, function(i,val) {
+					$('<option />', {value: val.id_juragan, text: val.nama_juragan}).appendTo(j);
+				})
+			});
+
+			// load admin/cs
+			var p = $('select[name="pengguna"]');
+			$.ajax({
+				method: "GET",
+				// headers: {'X-Requested-With': 'XMLHttpRequest'},
+				url: "<?= site_url('api/get_pengguna'); ?>"
+			})
+			.done(function( msg ) {
+				$.each(msg, function(i,val) {
+					$('<option />', {value: val.id, text: val.name}).appendTo(p);
+				})
+			});
+
 		<?php } ?>
 
 	});

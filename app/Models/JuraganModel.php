@@ -7,7 +7,7 @@ class JuraganModel extends Model
 	protected $primaryKey = 'id_juragan';
 	
 	protected $returnType = 'object';
-	protected $useSoftDeletes = false;
+	protected $useSoftDeletes = true;
 
 	protected $allowedFields = ['juragan', 'nama_juragan'];
 

@@ -37,60 +37,16 @@ $sekarang = new Time('now');
 				</div>
 				<div class="card-body">
 					<div class="mb-3">
-						<div class="row g-3">
-							<div class="col">
-								<label for="juragan_id" class="form-label">Juragan</label>
-								<select name="juragan_id" id="juragan_id" class="form-select" required="">
-									<option value="" selected="selected">Pilih Juragan</option>
-									<option value="3">Blazer Jaket</option>
-									<option value="29">Custom Juragan</option>
-									<option value="32">Dayat</option>
-									<option value="21">DistroKorea.com</option>
-									<option value="10">Fashion Cowok</option>
-									<option value="2">Fashion Lelaki</option>
-									<option value="13">Indonesia Shop</option>
-									<option value="23">Jaket Anime</option>
-									<option value="4">Jaket Korean</option>
-									<option value="18">Joker</option>
-									<option value="11">Juragan Jaket</option>
-									<option value="27">Juragan Jaket 2</option>
-									<option value="8">Korea Hunter</option>
-									<option value="9">Limited Shoping</option>
-									<option value="15">No Rules</option>
-									<option value="1">RA</option>
-									<option value="30">Reseller</option>
-									<option value="24">Reseller Nine</option>
-									<option value="19">SayCleo</option>
-									<option value="12">Seven Domu</option>
-									<option value="33">Suit Men tailor</option>
-								</select>
+						<div class="row g-2">
+							<div class="col">	
+								<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
+								<?= form_dropdown('juragan', ['' => 'Pilih Juragan'], '', ['class'=> 'form-select', 'id' => 'juragan', 'required' => '']);
+								?>
 							</div>
 							<div class="col">
-								<label for="juragan_id" class="form-label">Admin/CS</label>
-								<select name="juragan_id" id="juragan_id" class="form-select" required="">
-									<option value="" selected="selected">Pilih Juragan</option>
-									<option value="3">Blazer Jaket</option>
-									<option value="29">Custom Juragan</option>
-									<option value="32">Dayat</option>
-									<option value="21">DistroKorea.com</option>
-									<option value="10">Fashion Cowok</option>
-									<option value="2">Fashion Lelaki</option>
-									<option value="13">Indonesia Shop</option>
-									<option value="23">Jaket Anime</option>
-									<option value="4">Jaket Korean</option>
-									<option value="18">Joker</option>
-									<option value="11">Juragan Jaket</option>
-									<option value="27">Juragan Jaket 2</option>
-									<option value="8">Korea Hunter</option>
-									<option value="9">Limited Shoping</option>
-									<option value="15">No Rules</option>
-									<option value="1">RA</option>
-									<option value="30">Reseller</option>
-									<option value="24">Reseller Nine</option>
-									<option value="19">SayCleo</option>
-									<option value="12">Seven Domu</option>
-									<option value="33">Suit Men tailor</option>
-								</select>
+								<?= form_label('Admin/CS', 'pengguna', ['class' => 'form-label']); ?>
+								<?= form_dropdown('pengguna', ['' => 'Pilih Admin/CS'], '', ['class'=> 'form-select', 'id' => 'pengguna', 'required' => '']);
+								?>
 							</div>
 						</div>
 					</div>
@@ -105,12 +61,18 @@ $sekarang = new Time('now');
 							<?= form_input('tanggal_order', set_value('tanggal_order',  $sekarang->toDateString()), ['class' => 'form-control', 'id' => 'tanggal_order', 'required' => ''], 'date'); ?>
 						</div>
 						<div class="mb-3">
-							<label for="exampleFormControlInput1" class="form-label">Pemesan</label>
-							<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+							<?= form_label('Pemesan', 'pemesan', ['class' => 'form-label']); ?>
+							<div class="input-group">
+								<?= form_input('pemesan', '', ['class' => 'form-control', 'id' => 'pemesan', 'required' => '', 'placeholder' => 'Pemesan']); ?>
+								<button class="btn btn-primary" type="button"><i class="fad fa-plus"></i></button>
+							</div>
 						</div>
 						<div class="mb-3">
-							<label for="exampleFormControlInput1" class="form-label">Dikirim Kepada</label>
-							<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+							<?= form_label('Dikirm kepada', 'dikirim', ['class' => 'form-label']); ?>
+							<div class="input-group">
+								<?= form_input('dikirim', '', ['class' => 'form-control', 'id' => 'dikirim', 'required' => '', 'placeholder' => 'Dikirim kepada']); ?>
+								<button class="btn btn-primary" type="button"><i class="fad fa-plus"></i></button>
+							</div>
 						</div>
 						<div class="mb-3">
 							<label for="exampleFormControlTextarea1" class="form-label">Note / Keterangan</label>
@@ -144,6 +106,10 @@ $sekarang = new Time('now');
 								<option value="">Web/App lain</option>
 								<option value="">Offline Store/COD</option>
 							</select>
+						</div>
+						<div class="mb-3">
+							<?= form_label('Label/Catatan', 'label', ['class' => 'form-label']); ?>
+							<?= form_input('label', '', ['class' => 'form-control', 'id' => 'label', 'placeholder' => 'label - opsional, max: 50 karakter']); ?>
 						</div>
 					</div>
 				</div>
