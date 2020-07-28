@@ -32,8 +32,8 @@ class Auth extends BaseController
 				$status = '<div class="alert alert-danger"><strong class="d-block">Nay!</strong>Kamu siapa? daftar aja dulu.</div>';				
 			}
 			else {
-				if (password_verify($this->request->getPost('password'), $get['password'])) {
-					switch ($get['status']) {
+				if (password_verify($this->request->getPost('password'), $get->password)) {
+					switch ($get->status) {
 						case 'pending':
 							$sesi = [
 								'logged'	=> FALSE
@@ -59,17 +59,17 @@ class Auth extends BaseController
 							break;
 						default:
 							$sesi = [
-								'id'  		=> $get['id'],
-								'username'  => $get['username'],
-								'name'  	=> $get['name'],
-								'email'  	=> $get['email'],
-								'level'  	=> $get['level'],
+								'id'  		=> $get->id,
+								'username'  => $get->username,
+								'name'  	=> $get->name,
+								'email'  	=> $get->email,
+								'level'  	=> $get->level,
 								'logged'	=> TRUE
 							];
 
 							// save for update `login_terakhir`
 							$data = [
-								'id' => $get['id'],
+								'id' => $get->id,
 							    'login_terakhir' => now('Asia/Jakarta')
 							];
 
