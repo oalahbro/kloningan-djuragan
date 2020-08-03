@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css'); ?>" />
+	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-grid.min.css'); ?>" />
 	<title>
 		<?= $title; ?>
 	</title>
@@ -188,6 +189,33 @@
 	.mt-n5 {
 		margin-top: -3.60em;
 	}
+
+	.switch {
+	  height: 50px;
+	  background: #28a745;
+	  transition: all 0.2s ease;
+	}
+	.toggle-radio input[type="radio"] {
+	  display: none;
+	}
+	.switch label {
+	  cursor: pointer;
+	  color: rgba(0, 0, 0, 0.2) !important;
+	  width: 45%;
+	  line-height: 50px;
+	  transition: all 0.2s ease;
+	  position: relative;
+	}
+	#no:checked ~ .switch {
+	  background: #fd7e14;
+	}
+	
+	#yes:checked ~ .switch label.text-left,
+	#no:checked ~ .switch label.text-right {
+	  color: #fff !important;
+	}
+
+
 	</style>
 </head>
 
@@ -281,6 +309,8 @@
 		});
 	});
 	$(function() {
+		'use strict'
+
 		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
 		var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
 			return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -455,6 +485,7 @@
 				})
 				.done(function( msg ) {
 					// $('[name="kodepos"]').val(kodepos);
+
 					
 					$('[name="kecamatan"]').empty();
 					$('<option />', {value: '', text: 'Pilih Kecamatan'}).appendTo(kec);
@@ -462,8 +493,86 @@
 						$('<option />', {value: val.subdistrict_id, text: val.subdistrict_name}).appendTo(kec);
 					})
 				});
+			}); 
+
+			//
+			var biayaOrder = document.getElementById('biayaOrder')
+			biayaOrder.addEventListener('show.bs.modal', function (event) {
+			// Button that triggered the modal
+				var button = event.relatedTarget
+				// Extract info from data-* attributes
+				var operasi = button.getAttribute('data-operasi')
+				var judul = button.getAttribute('data-judul')
+				var id = button.getAttribute('data-biayaID')
+
+				// var tipeBiaya = 3
+				// If necessary, you could initiate an AJAX request here
+				// and then do the updating in a callback.
+				//
+				// Update the modal's content.
+				var modalTitle = biayaOrder.querySelector('.modal-title')
+				var fID = biayaOrder.querySelector('.modal-content [name="biayaId"]')
+				// var pm = biayaOrder.querySelector('.modal-body [name="plusminus"]')
+				modalTitle.textContent = 'Biaya ' + judul
+				// modalBodyInput.value = recipient
+				if(operasi == '1') {
+					$('input:radio[name=plusminus]').filter('[value=1]').prop('checked', true)
+				}
+				else {
+					$('input:radio[name=plusminus]').filter('[value=2]').prop('checked', true)
+				}
+
+				fID.value = id
+			})
+
+			biayaOrder.addEventListener('hidden.bs.modal', function (e) {
+				var blanko = $("#tambahBiaya")
+				blanko.removeClass('was-validated')[0].reset();
+			})
+
+			var forme = $('#tambahBiaya');
+			forme.on('submit', function (event) {
+				event.preventDefault()
+				event.stopPropagation()
+
+				// do ajax request
+				var blanko = $("#tambahBiaya")
+				var operasi = blanko.find('[name="plusminus"]:checked').val()
+				var nominal = blanko.find('[name="nominal_biaya"]').val()
+				var label = blanko.find('[name="label_biaya"]').val()
+				var biayaId = blanko.find('[name="biayaId"]').val()
+
+				var labeli = ''
+				if (label != '') {
+					labeli = '<span class="text-muted ml-1">'+label+'</span>'
+				}
+
+				var mText = ''
+				switch(parseInt(biayaId)) {
+					case 1:
+						// diskon
+						mText = 'Diskon Order'
+
+					break;
+					case 2:
+						// ongkir
+						mText = 'Ongkir'
+					break;
+					default:
+						// lain-lain
+						mText = 'Lain-lain'
+				}
+
+				var nominal_ = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', unitDisplay: 'narrow', minimumFractionDigits: 0}).format(nominal);
+				
+				$('<tr><td colspan="3" class="text-right"><button type="button" class="close mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>'+mText+labeli+'</td><td class="text-right text-danger">'+nominal_+'</td></tr>').appendTo('.customBiaya'); 
+				$('#biayaOrder').modal('hide');
+
 			});
 
+			$('#submit-form').on('click', function (event) {
+				$('#real-submit').click();
+			})
 
 		<?php } ?>
 

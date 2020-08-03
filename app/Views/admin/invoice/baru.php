@@ -113,15 +113,6 @@ $sekarang = new Time('now');
 		</div>
 		<div class="col-sm-8 mb-3">
 			<div class="card mb-3">
-				<div class="card-body">
-					<div class="">
-						<label for="exampleFormControlInput1" class="form-label">Produk</label>
-						<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="cari produk">
-					</div>
-				</div>
-			</div>
-
-			<div class="card mb-3">
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs">
 						<li class="nav-item">
@@ -159,45 +150,37 @@ $sekarang = new Time('now');
 									<td class="text-right">@twitter</td>
 								</tr>
 							</tbody>
-							<tfoot>
+							<tfoot id="tabelx" class="customBiaya">
 								<tr>
 									<td colspan="3" class="text-right">Subtotal</td>
 									<td class="text-right">Rp30000</td>
 								</tr>
-								<tr>
-									<td colspan="3" class="text-right">
-										<button type="button" class="close" aria-label="Close">
-											<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>
-										</button>
-										Diskon Order 
-									</td>
-									<td class="text-right text-danger">Rp30000</td>
-								</tr>
-								<tr>
-									<td colspan="3" class="text-right">
-										<button type="button" class="close" aria-label="Close">
-											<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>
-										</button>
-										Angka Unik
-									</td>
-									<td class="text-right text-success">Rp123</td>
-								</tr>
-								<tr>
-									<td colspan="3" class="text-right">
-										<button type="button" class="close" aria-label="Close">
-											<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>
-										</button>
-										Ongkir
-									</td>
-									<td class="text-right text-success">Rp123000</td>
-								</tr>
+								
 							</tfoot>
 						</table>
 					</div>
 
-					<button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder"><i class="fad fa-plus"></i> Diskon Order</button>
-					<button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder"><i class="fad fa-plus"></i> Ongkir</button>
-					<button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder"><i class="fad fa-plus"></i> Biaya Lain</button>
+					<button class="btn btn-sm btn-outline-primary" 
+						data-toggle="modal" 
+						data-target="#biayaOrder" 
+						data-biayaID="1"
+						data-judul="Diskon" 
+						data-operasi="2" 
+						><i class="fad fa-plus"></i> Diskon Order</button>
+					<button class="btn btn-sm btn-outline-primary" 
+						data-toggle="modal" 
+						data-target="#biayaOrder" 
+						data-biayaID="2"
+						data-judul="Ongkir" 
+						data-operasi="1" 
+						><i class="fad fa-plus"></i> Ongkir</button>
+					<button class="btn btn-sm btn-outline-primary" 
+						data-target="#biayaOrder" 
+						data-toggle="modal" 
+						data-biayaID="3"
+						data-judul="Lain-lain" 
+						data-operasi="1" 
+						><i class="fad fa-plus"></i> Biaya Lain</button>
 					<hr/>
 					<div class="d-flex justify-content-between align-items-center">
 						<h6 class="font-weight-bold">TOTAL</h6>
@@ -206,156 +189,123 @@ $sekarang = new Time('now');
 				</div>
 			</div>
 
-
-			<div class="card mb-3">
-				<div class="card-header">
-					<ul class="nav nav-tabs card-header-tabs">
-						<li class="nav-item">
-							<span class="nav-link active" aria-current="true">Pembayaran</span>
-						</li>
-					</ul>
-				</div>
-				<div class="card-body">
-					<div class="row g-3">
-						<div class="col">
-							<div class="mb-3">
-								<label for="juragan_id" class="form-label">Pilih Bank</label>	
-								<select class="form-select" aria-label="Default select example">
-									<option selected>Open this select menu</option>
-									<option value="1" data-img="https://app.ngorder.id/assets/img/bank/bca.svg" data-sub='text'>BCA</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
-								</select>
-							</div>
-							<div class="mb-3 row gx-2">
-								<div class="col col-sm-6">
-									<label for="juragan_id" class="form-label">Tanggal Pembayaran</label>
-									<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="cari produk">
-								</div>
-								<div class="col col-sm-6">
-									<label for="juragan_id" class="form-label">Tanggal Cek</label>
-									<div class="input-group">
-										<div class="input-group-text">
-											<input class="form-check-input" type="checkbox" value="" aria-label="Checkbox for following text input">
-										</div>
-										<input type="text" class="form-control" aria-label="Text input with checkbox">
-									</div>
-								</div>
-							</div>
-							<div class="mb-3">
-								<label for="juragan_id" class="form-label">Nominal</label>	
-								<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="cari produk">
-							</div>
-							<div class="mb-3 text-right">
-								<button class="btn btn-primary">Tambahkan</button>
-							</div>
-							
+			<div class="mb-3 row">
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-header">
+							<ul class="nav nav-tabs card-header-tabs">
+								<li class="nav-item">
+									<span class="nav-link active" aria-current="true">Pembayaran</span>
+								</li>
+								<li class="nav-item">
+									<a href="#!" class="nav-link" aria-current="false"><i class="fad fa-plus"></i></a>
+								</li>
+							</ul>
 						</div>
-						<div class="col">
-
-							<div class="mb-3">
-								<div class="list-group list-group-flush">
-									<div class="list-group-item d-flex justify-content-between">
-										<div class="d-flex align-items-center">
-											<div class="mr-2">
-												<i class="fad fa-times-circle text-danger fa-2x"></i>
-											</div>
-											<div>
-												<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
-												<small class="text-muted">BCA - 490853549</small>
-											</div>
+						<div class="card-body">
+							<div class="list-group list-group-flush">
+								<div class="list-group-item d-flex justify-content-between">
+									<div class="d-flex align-items-center">
+										<div class="mr-2">
+											<i class="fad fa-times-circle text-danger fa-2x"></i>
 										</div>
 										<div>
-											<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-												<i class="fad fa-ellipsis-h"></i>
-											</button>
-											<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-												<li><a class="dropdown-item" href="#">Action</a></li>
-												<li><a class="dropdown-item" href="#">Another action</a></li>
-												<li><a class="dropdown-item" href="#">Something else here</a></li>
-											</ul>
+											<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
+											<small class="text-muted">BCA - 490853549</small>
 										</div>
 									</div>
+									<div>
+										<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+											<i class="fad fa-ellipsis-h"></i>
+										</button>
+										<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">Action</a></li>
+											<li><a class="dropdown-item" href="#">Another action</a></li>
+											<li><a class="dropdown-item" href="#">Something else here</a></li>
+										</ul>
+									</div>
+								</div>
 
-									<div class="list-group-item d-flex justify-content-between">
-										<div class="d-flex align-items-center">
-											<div class="mr-2">
-												<i class="fad fa-check-circle text-success fa-2x"></i>
-											</div>
-											<div>
-												<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
-												<small class="text-muted">BCA - 490853549</small>
-											</div>
+								<div class="list-group-item d-flex justify-content-between">
+									<div class="d-flex align-items-center">
+										<div class="mr-2">
+											<i class="fad fa-check-circle text-success fa-2x"></i>
 										</div>
 										<div>
-											<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-												<i class="fad fa-ellipsis-h"></i>
-											</button>
-											<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-												<li><a class="dropdown-item" href="#">Action</a></li>
-												<li><a class="dropdown-item" href="#">Another action</a></li>
-												<li><a class="dropdown-item" href="#">Something else here</a></li>
-											</ul>
+											<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
+											<small class="text-muted">BCA - 490853549</small>
 										</div>
 									</div>
+									<div>
+										<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+											<i class="fad fa-ellipsis-h"></i>
+										</button>
+										<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">Action</a></li>
+											<li><a class="dropdown-item" href="#">Another action</a></li>
+											<li><a class="dropdown-item" href="#">Something else here</a></li>
+										</ul>
+									</div>
+								</div>
 
-									<div class="list-group-item d-flex justify-content-between">
-										<div class="d-flex align-items-center">
-											<div class="mr-2">
-												<i class="fad fa-circle fa-2x"></i>
-											</div>
-											<div>
-												<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
-												<small class="text-muted">BCA - 490853549</small>
-											</div>
+								<div class="list-group-item d-flex justify-content-between">
+									<div class="d-flex align-items-center">
+										<div class="mr-2">
+											<i class="fad fa-circle fa-2x"></i>
 										</div>
 										<div>
-											<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-												<i class="fad fa-ellipsis-h"></i>
-											</button>
-											<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-												<li><a class="dropdown-item" href="#">Action</a></li>
-												<li><a class="dropdown-item" href="#">Another action</a></li>
-												<li><a class="dropdown-item" href="#">Something else here</a></li>
-											</ul>
+											<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
+											<small class="text-muted">BCA - 490853549</small>
 										</div>
+									</div>
+									<div>
+										<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+											<i class="fad fa-ellipsis-h"></i>
+										</button>
+										<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">Action</a></li>
+											<li><a class="dropdown-item" href="#">Another action</a></li>
+											<li><a class="dropdown-item" href="#">Something else here</a></li>
+										</ul>
 									</div>
 								</div>
 							</div>
-							
 						</div>
-						
 					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-header">
+							<ul class="nav nav-tabs card-header-tabs">
+								<li class="nav-item">
+									<span class="nav-link active" aria-current="true">Pengiriman</span>
+								</li>
+								<li class="nav-item">
+									<a href="#!" class="nav-link" aria-current="false"><i class="fad fa-plus"></i></a>
+								</li>
+							</ul>
+						</div>
+						<div class="card-body">
+							<div class="row g-3">
+								<div class="col">
+									<label for="juragan_id" class="form-label">Status Pengiriman</label>
+									<select name="juragan_id" id="juragan_id" class="form-select" required="">
+										<option selected="selected" value="1">Belum Dikirim</option>
+										<option value="2">Sebagian Dikirim</option>
+										<option value="3">Sudah Dikirim Semua</option>
+									</select>
+								</div>
+								<div class="col">
+									
+								</div>
+							</div>
 
+						</div>
+					</div>
 				</div>
 			</div>
 
-
-			<div class="card mb-3">
-				<div class="card-header">
-					<ul class="nav nav-tabs card-header-tabs">
-						<li class="nav-item">
-							<span class="nav-link active" aria-current="true">Pengiriman</span>
-						</li>
-					</ul>
-				</div>
-				<div class="card-body">
-					<div class="row g-3">
-						<div class="col">
-							<label for="juragan_id" class="form-label">Status Pengiriman</label>
-							<select name="juragan_id" id="juragan_id" class="form-select" required="">
-								<option selected="selected" value="1">Belum Dikirim</option>
-								<option value="2">Sebagian Dikirim</option>
-								<option value="3">Sudah Dikirim Semua</option>
-							</select>
-						</div>
-						<div class="col">
-							
-						</div>
-					</div>
-
-				</div>
-			</div>
+			
 
 			<hr/>
 			<button class="btn btn-primary btn-block text-uppercase">
@@ -435,50 +385,47 @@ $sekarang = new Time('now');
 
 <!-- Modal tambah biaya -->
 <div class="modal fade" id="biayaOrder" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="biayaOrderLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="biayaOrderLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <div class="form-check form-check-inline">
-                    	<?= form_radio([
-                    		'name' 	=> 'plusminus',
-                    		'id' 	=> 'pm-plus',
-                    		'value' => '1',
-                    		'class' => 'form-check-input'
-                    	]); ?>
-                    	<?= form_label('<i class="fad fa-plus-circle text-primary"></i> Menambahkan', 'pm-plus', ['class' => 'form-check-label']); ?>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <?= form_radio([
-                    		'name' 	=> 'plusminus',
-                    		'id' 	=> 'pm-minus',
-                    		'value' => '2',
-                    		'class' => 'form-check-input'
-                    	]); ?>
-                    	<?= form_label('<i class="fad fa-minus-circle text-primary"></i> Mengurangkan', 'pm-minus', ['class' => 'form-check-label']); ?>
-                    </div>
-                </div>
-                <div class=" mb-3">
-                	<?= form_label('Nominal', 'nominalBiaya', ['class' => 'form-label']); ?>
-                    <?= form_input(['name' => 'nominal_biaya', 'id' => 'nominalBiaya', 'class' => 'form-control', 'required' => '', 'placeholder' => 'nominal biaya']); ?>
-                </div>
-                <div class=" mb-3">
-                	<?= form_label('Lebel', 'labelBiaya', ['class' => 'form-label']); ?>
-                    <?= form_input(['name' => 'label_biaya', 'id' => 'labelBiaya', 'class' => 'form-control', 'required' => '', 'placeholder' => 'label biaya']); ?>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-        </div>
-    </div>
+	<div class="modal-dialog modal-dialog-centered modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="biayaOrderLabel">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<?= form_open('', ['id' => 'tambahBiaya'], ['biayaId' => '']); ?>
+				<div class="mb-3">
+					<div class="toggle-radio">
+						<?= form_radio(['name' => 'plusminus','id' => 'yes','value' => '1']); ?>
+						<?= form_radio(['name' => 'plusminus','id' => 'no','value' => '2']); ?>
+						<div class="switch position-relative d-flex justify-content-center align-items-center rounded-pill">
+							<?= form_label('<i class="fad fa-plus-circle"></i> tambahi', 'yes', ['class' => 'text-left text-uppercase']); ?>
+							<?= form_label('kurangi <i class="fad fa-minus-circle"></i>', 'no', ['class' => 'text-right text-uppercase']); ?>
+							<span></span>
+						</div>
+					</div>
+				</div>
+
+				<div class=" mb-3">
+					<?= form_label('Nominal', 'nominalBiaya', ['class' => 'form-label']); ?>
+					<?= form_input(['name' => 'nominal_biaya', 'id' => 'nominalBiaya', 'class' => 'form-control', 'required' => '', 'placeholder' => 'nominal biaya']); ?>
+				</div>
+				
+				<div class=" mb-3">
+					<?= form_label('Lebel', 'labelBiaya', ['class' => 'form-label']); ?>
+					<?= form_input(['name' => 'label_biaya', 'id' => 'labelBiaya', 'class' => 'form-control', 'placeholder' => 'label biaya - opsional']); ?>
+				</div>
+
+				<input type="submit" id="real-submit" style="visibility: hidden" />
+				<?= form_close(); ?>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Batal</button>
+				<button type="button" id="submit-form" class="btn btn-primary addBiaya">Tambahkan</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <?= $this->endSection() ?>
