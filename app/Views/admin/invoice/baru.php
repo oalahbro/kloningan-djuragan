@@ -163,13 +163,6 @@ $sekarang = new Time('now');
 					<button class="btn btn-sm btn-outline-primary" 
 						data-toggle="modal" 
 						data-target="#biayaOrder" 
-						data-biayaID="1"
-						data-judul="Diskon" 
-						data-operasi="2" 
-						><i class="fad fa-plus"></i> Diskon Order</button>
-					<button class="btn btn-sm btn-outline-primary" 
-						data-toggle="modal" 
-						data-target="#biayaOrder" 
 						data-biayaID="2"
 						data-judul="Ongkir" 
 						data-operasi="1" 
@@ -395,26 +388,14 @@ $sekarang = new Time('now');
 			</div>
 			<div class="modal-body">
 				<?= form_open('', ['id' => 'tambahBiaya'], ['biayaId' => '']); ?>
-				<div class="mb-3">
-					<div class="toggle-radio">
-						<?= form_radio(['name' => 'plusminus','id' => 'yes','value' => '1']); ?>
-						<?= form_radio(['name' => 'plusminus','id' => 'no','value' => '2']); ?>
-						<div class="switch position-relative d-flex justify-content-center align-items-center rounded-pill">
-							<?= form_label('<i class="fad fa-plus-circle"></i> tambahi', 'yes', ['class' => 'text-left text-uppercase']); ?>
-							<?= form_label('kurangi <i class="fad fa-minus-circle"></i>', 'no', ['class' => 'text-right text-uppercase']); ?>
-							<span></span>
-						</div>
-					</div>
-				</div>
-
 				<div class=" mb-3">
 					<?= form_label('Nominal', 'nominalBiaya', ['class' => 'form-label']); ?>
-					<?= form_input(['name' => 'nominal_biaya', 'id' => 'nominalBiaya', 'class' => 'form-control', 'required' => '', 'placeholder' => 'nominal biaya']); ?>
+					<?= form_input(['name' => 'nominal_biaya', 'id' => 'nominalBiaya', 'class' => 'form-control', 'required' => '', 'placeholder' => 'nominal biaya', 'type' => 'number', 'step' => '1000']); ?>
 				</div>
 				
 				<div class=" mb-3">
-					<?= form_label('Lebel', 'labelBiaya', ['class' => 'form-label']); ?>
-					<?= form_input(['name' => 'label_biaya', 'id' => 'labelBiaya', 'class' => 'form-control', 'placeholder' => 'label biaya - opsional']); ?>
+					<?= form_label('Label', 'labelBiaya', ['class' => 'form-label']); ?>
+					<?= form_input(['name' => 'label_biaya', 'id' => 'labelBiaya', 'class' => 'form-control', 'placeholder' => 'label biaya - opsional', 'maxlength' => '20']); ?>
 				</div>
 
 				<input type="submit" id="real-submit" style="visibility: hidden" />
