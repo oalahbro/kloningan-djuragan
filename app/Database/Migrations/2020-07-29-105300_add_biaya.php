@@ -16,14 +16,24 @@ class AddBiaya extends \CodeIgniter\Database\Migration {
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE,
 			],
-			'label_id' => [
+			'operasi' => [
 				'type' 			 => 'ENUM',
-				'constraint' 	 => ["1","2","3", "4"] // 1: ongkir, 2: diskon, 3: unik, 4: lain-lain
+				'constraint' 	 => ["1","2"] // 1: plus, 2: minus
+			],
+			'biaya_id' => [
+				'type' 			 => 'ENUM',
+				'constraint' 	 => ["1","2","3"] // 1: diskon order, 2: ongkir, 3: biaya lain
 			],
 			'nominal' => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 7,
 				'unsigned' 		 => TRUE
+			],
+			'label' => [
+				'type' 			 => 'VARCHAR',
+				'constraint' 	 => 20, // angka unik
+				'null' 			 => TRUE,
+				'default' 		 => NULL,
 			]
 		]);
 		$this->forge->addKey('id_biaya', TRUE);
