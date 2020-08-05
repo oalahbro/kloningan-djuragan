@@ -2,6 +2,10 @@
 
 class Home extends BaseController
 {
+	/*
+	 * halaman default index
+	 * 
+	 */
 	public function index()
 	{
 		if ( ! isAuthorized()) 

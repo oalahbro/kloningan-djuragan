@@ -2,6 +2,10 @@
 
 class Invoices extends BaseController
 {
+	/*
+	 * halaman untuk menampilkan semua invoice 
+	 * 
+	 */
 	public function index($juragan = 'semua')
 	{
 		if (! isAuthorized())
@@ -31,10 +35,15 @@ class Invoices extends BaseController
 		echo view(base_user() . '/invoice/lihat', $data);
 	}
 
+	/*
+	 * halaman pembuatan invoice baru
+	 * 
+	 */
 	public function baru()
 	{
 		if (! isAuthorized())
 		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 

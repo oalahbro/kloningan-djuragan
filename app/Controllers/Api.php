@@ -2,6 +2,10 @@
 
 class Api extends BaseController
 {
+	/*
+	 * ambil semua juragan
+	 * 
+	 */
 	public function get_juragan()
 	{
 		if ( ! isAuthorized()) {
@@ -30,6 +34,10 @@ class Api extends BaseController
 		return $this->response->setJSON($ngelist);
 	}
 
+	/*
+	 * ambil semua pengguna
+	 * 
+	 */
 	public function get_pengguna()
 	{
 		if ( ! isAuthorized()) {
@@ -47,6 +55,7 @@ class Api extends BaseController
 		return $this->response->setJSON($listJuragan);
 	}
 
+	
 	public function get_kecamatan()
 	{
 		$kecamatan = $this->rajaongkir->getSubdistricts();
