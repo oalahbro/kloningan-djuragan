@@ -6,6 +6,7 @@ class Invoices extends BaseController
 	{
 		if (! isAuthorized())
 		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 

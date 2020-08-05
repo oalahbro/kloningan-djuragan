@@ -3,7 +3,6 @@ use CodeIgniter\Controller;
 
 class Migrate extends \CodeIgniter\Controller
 {
-
 	public function index()
 	{
 		$migrate = \Config\Services::migrations();
@@ -14,9 +13,8 @@ class Migrate extends \CodeIgniter\Controller
 		}
 		catch (\Exception $e)
 		{
-		  // Do something with the error here...
+			// Do something with the error here...
 			echo 'Error';
 		}
 	}
-
 }

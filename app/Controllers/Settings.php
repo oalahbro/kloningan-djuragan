@@ -6,6 +6,7 @@ class Settings extends BaseController
 	{
 		if (! isAuthorized())
 		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 
@@ -21,6 +22,7 @@ class Settings extends BaseController
 	{
 		if (! isAuthorized()) 
 		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 
@@ -52,7 +54,9 @@ class Settings extends BaseController
 
 	public function juragan()
 	{
-		if ( ! isAuthorized()) {
+		if ( ! isAuthorized())
+		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 
@@ -71,6 +75,7 @@ class Settings extends BaseController
 	{
 		if (! isAuthorized()) 
 		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 
@@ -115,6 +120,7 @@ class Settings extends BaseController
 	{
 		if (! isAuthorized()) 
 		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 
@@ -161,7 +167,9 @@ class Settings extends BaseController
 
 	public function pengguna()
 	{
-		if ( ! isAuthorized()) {
+		if ( ! isAuthorized()) 
+		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 
@@ -180,6 +188,7 @@ class Settings extends BaseController
 	{
 		if (! isAuthorized()) 
 		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 
@@ -233,6 +242,7 @@ class Settings extends BaseController
 	{
 		if (! isAuthorized()) 
 		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 
@@ -296,7 +306,9 @@ class Settings extends BaseController
 
 	public function pengguna_relasi()
 	{
-		if ( ! isAuthorized()) {
+		if ( ! isAuthorized()) 
+		{
+			// tidak login, redirect ke halaman auth
 			return redirect()->to('/auth');
 		}
 
