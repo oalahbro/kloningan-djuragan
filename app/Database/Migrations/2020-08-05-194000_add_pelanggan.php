@@ -11,22 +11,31 @@ class AddPelanggan extends \CodeIgniter\Database\Migration {
 				'unsigned' 		 => TRUE,
 				'auto_increment' => TRUE
 			],
-			'juragan_id' => [
-				'type'           => 'INT',
-				'constraint' 	 => 11,
-				'unsigned' 		 => TRUE,
-			],
 			'nama_pelanggan' => [
 				'type' 			 => 'VARCHAR',
 				'constraint' 	 => 60,
 			],
 			'hp' => [
-				'type' 			 => 'VARCHAR',
+				'type' 			 => 'VARCHAR', // ["0812345789","0812345789"]
 				'constraint' 	 => 50,
 				'null' 			 => TRUE,
 				'default' 		 => NULL
 			],
 			'kecamatan' => [
+				'type'           => 'INT',
+				'constraint'     => 5,
+				'unsigned' 		 => TRUE,
+				'null' 			 => TRUE,
+				'default' 		 => NULL
+			],
+			'kabupaten' => [
+				'type'           => 'INT',
+				'constraint'     => 5,
+				'unsigned' 		 => TRUE,
+				'null' 			 => TRUE,
+				'default' 		 => NULL
+			],
+			'provinsi' => [
 				'type'           => 'INT',
 				'constraint'     => 5,
 				'unsigned' 		 => TRUE,
