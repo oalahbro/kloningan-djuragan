@@ -21,8 +21,6 @@ use App\Models\JuraganModel;
 use App\Models\RelasiModel;
 use App\Models\UserModel;
 
-use Ncaneldiee\Rajaongkir;
-
 class BaseController extends Controller
 {
 
@@ -57,7 +55,5 @@ class BaseController extends Controller
 		$this->juragan 	= new JuraganModel();
 		$this->relasi 	= new RelasiModel();
 		$this->user 	= new UserModel();
-
-		$this->rajaongkir = new Rajaongkir\Domestic($config->rajaongkir, Rajaongkir\Domestic::ACCOUNT_PRO);
 	}
 }
