@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+ini_set('session.cookie_samesite', 'None');
+ini_set('session.cookie_secure', TRUE);
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -23,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://juragan.onlinesukses.com/new/';
+$config['base_url'] = 'https://djuragan.com/new/';
 
 /*
 |--------------------------------------------------------------------------
@@ -377,13 +380,13 @@ $config['encryption_key'] = hex2bin('dbe8322f515961eee84f37786e635e66');
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'juragan';
+$config['sess_driver'] = 'database';
+$config['sess_cookie_name'] = 'djuragan_sessions';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
+$config['sess_save_path'] = 'dj_sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
-$config['sess_regenerate_destroy'] = FALSE;
+$config['sess_regenerate_destroy'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

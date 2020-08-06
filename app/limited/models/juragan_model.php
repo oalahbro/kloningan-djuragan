@@ -14,10 +14,21 @@ class Juragan_model extends CI_Model
 	 * ambil semua data juragan
 	 *
 	 */
-	public function _semua() {
+	public function _semua($limit = FALSE, $offset = FALSE) {
+		
+		if ($limit !== FALSE && $offset !== FALSE) {
+			$this->db->limit($limit);
+			$this->db->offset($offset);
+		}
+		
 		$this->db->order_by('nama', 'asc');
 		$q = $this->db->get($this->tabel);
 		return $q;
+	}
+
+	public function _new($data) {
+		$this->db->insert('juragan', $data);
+		return TRUE;
 	}
 
 	

@@ -2,7 +2,7 @@
     "require": {
         "picqer/php-barcode-generator": "^0.2.1",
         "dompdf/dompdf": "^0.8.0",
-        "php-curl-class/php-curl-class": "^7.3",
-        "box/spout": "^2.7"
+        "box/spout": "^2.7",
+        "lcobucci/jwt": "^3.2"
     }
 }

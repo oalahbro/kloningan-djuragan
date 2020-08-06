@@ -74,12 +74,12 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
+	'dsn'	=> 'mysql:host=localhost;dbname=db_juragan',
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => 'root',
-	'database' => 'crows_juragan_1',
-	'dbdriver' => 'mysqli',
+	//'database' => 'db_juragan',
+	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

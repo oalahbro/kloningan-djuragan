@@ -1,7 +1,7 @@
 // The Browser API key obtained from the Google Developers Console.
-var developerKey = 'AIzaSyCfnZmPoebdILCa491wJs5Tn6zL6MRu8X4';
+var developerKey = 'AIzaSyDOHnZiJhpvGPMIAJhKV_8cVLS5TiZcqgQ';
         // The Client ID obtained from the Google Developers Console. Replace with your own Client ID.
-        var clientId = "663338430944-fd7qipeq8u705hhhgfeq3haobj5bpig0.apps.googleusercontent.com";
+        var clientId = "1042338067390-39cqtc0f9dcqb073n4iu2gbbsivod8rg.apps.googleusercontent.com";
         // Scope to use to access user's photos.
         var scope = ['https://www.googleapis.com/auth/drive'];
         var authApiLoaded = false;

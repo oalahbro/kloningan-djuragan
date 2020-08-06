@@ -74,12 +74,12 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost;dbname=dnzwygdo_juragan1',
+	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'dnzwygdo_jura94n',
 	'password' => 'v[,S+a7zlZd0',
-	'database' => '',
-	'dbdriver' => 'pdo',
+	'database' => 'dnzwygdo_juragan1',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

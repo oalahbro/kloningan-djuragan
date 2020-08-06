@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-date_default_timezone_set('Asia/Jakarta');
-
 class Upgrade extends CI_Controller {
 
 	public function __construct() {
@@ -11,118 +9,133 @@ class Upgrade extends CI_Controller {
 	}
 
 	public function index() {
-		echo anchor('upgrade/insert_pelanggan', 'Step 1');
+		echo anchor('upgrade/migrating', 'Step 1');
 	}
 
+	public function migrating() { ?>
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>Upgrade</title>
+			<script src="<?php echo base_url('berkas/js/jquery-3.3.1.min.js') ?>"></script>
+			<style>
+			.com code {font-size:87.5%;color:#e83e8c;word-break:break-word}
+			.com:after { content: ", "}
+			</style>
+		</head>
+		<body>
+			<div id="message">
+				
+			</div>
+			<div id="fetch-snowfall-data">
+				<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
+			</div>
 
-	public function insert_pelanggan() { 
-		?>
-	<!DOCTYPE html>
-	<html>
-	<head>
-		<title>Upgrade</title>
-		<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
-	</head>
-	<body>
-		<div id="message">
-			
-		</div>
-		<div id="fetch-snowfall-data">
-			<?php echo form_button(array('content' => 'update', 'id' => 'execute')) ?>
-		</div>
+			<div id="response_container2">
+				
+			</div>
 
-		<div id="response_container2">
-			
-		</div>
+			<script>
+				jQuery(document).ready(function($) {
+					// setTimeout(getProgress,1000);
+					$('#execute').click(function(){
+						// $('#message').hide();
+					/*
+						call the updateStatus() function every 3 second to update progress bar value.
+						*/
+						updateStatus();
+						//alert('klik');
+						/*
+						*/
+					});
 
-	
-	</body>
-		
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-	            // setTimeout(getProgress,1000);
-	            $('#execute').click(function(){
-	            	// $('#message').hide();
-                /*
-                    call the updateStatus() function every 3 second to update progress bar value.
-                    */
-                    updateStatus();
-					alert('klik');
-                    /*
-                    */
-                });
-
-	            function updateStatus(){
-	            	$.ajax({
-	            		method: "GET",
-	            		url: "<?php echo site_url('upgrade/progress') ?>",
-	            		// data: { name: "John", location: "Boston" }
-						success: function(data) {
-							if (data.updated < data.total) {
-								// 
-								updateStatus();
-								$( "#message" ).html( data.updated + ' / ' + data.total + '( ' + data.done +'% )' );
+					function updateStatus(){
+						$.ajax({
+							method: "GET",
+							url: "<?php echo site_url('upgrade/progress_satu') ?>",
+							// data: { name: "John", location: "Boston" }
+							success: function(data) {
+								if (data.yet !== 0) {
+									// 
+									updateStatus();
+									// $( "#message" ).html( data.updated + ' diupdate dan menunggu ' + data.yet +' data lagi' );
+									$('<span class="com"><code>'+data.id+'</code></span>, ').appendTo( "#message" );
+								}
+								else {
+									//
+									alert('all data updated');
+									$( "#message" ).html( 'all data updated <?php echo anchor("upgrade/status_kiriman_2", "next"); ?>' );
+								}
 							}
-							else {
-								//
-								alert('done');
-								$( "#message" ).html( 'all data updated' );
-							}
-						}
-	            	})
-
-
-	            } 
-	        });
-		</script>
-	</html>
-
-
+						})
+					} 
+				});
+			</script>
+			</body>
+		</html>
 	<?php 
 	}
 
-	public function progress() {
+	public function progress_satu() {
+		$migrasi = $this->db->where(array('status_transfer' => '2', 'status_kirim' => '2') )->get('faktur')->row();
+
+
+		// hitung ulang 
+		// ambil total yang wajib dibayar
+		$bayar_db = $this->faktur->get_pays($migrasi->id_faktur);
+
+		$wajib_bayar = 0;
+		$dibayar = 0;
+
+		if ($bayar_db->num_rows() > 0) {
+			foreach ($bayar_db->result() as $ter) {
+				if($ter->tanggal_cek !== NULL) {
+					// yang sudah dicek
+					$dibayar += $ter->jumlah;
+					$id_pembayaran = $ter->id_pembayaran;
+				}
+			}
+		}
 		
-		$q = $this->db->get('pesanan');
-		$terupdate = $this->db->get_where('pesanan', array(	'status_upgrade' =>'DONE'));
-		$pending = $this->db->get_where('pesanan', array('status_upgrade' => NULL));
+		$produk_db = $this->faktur->get_orders($migrasi->id_faktur);
+		$jumlah_produk = 0;
+		$harga_total = 0;
+		$hproduk = '';
 
-		$qr = $this->db->limit(40)->where('status_upgrade', NULL)->get('pesanan');
+		$arr_produk = array();
+		$dipesan = array();
 
-		$r = array();
-		foreach ($qr->result() as $key) {
-			$pelanggan_ = json_decode($key->pemesan);
-            $pelanggan = array(
-                'nama' => $pelanggan_->n
-			);
-
-			$data = array(
-				'status_upgrade' => 'DONE'
-			);
-
-			$this->db->where('id_pesanan', $key->id_pesanan);
-			$this->db->update('pesanan', $data);
-	
-			$this->db->insert('pelanggan', $pelanggan);
-			$id_pelanggan = $this->db->insert_id();
-			
-			$alamate = array(
-				'pelanggan_id' => $id_pelanggan,
-				'hp1' => $pelanggan_->p[0],
-				'hp2' => (!empty($pelanggan_->p[1])? $pelanggan_->p[1]: NULL),
-				'alamat' => $pelanggan_->a
-			);
-			$this->db->insert('pelanggan_alamat', $alamate);
+		foreach ($produk_db->result() as $produk) {
+			$jumlah_produk += $produk->jumlah;
+			$harga_total += ($produk->harga * $produk->jumlah); // kalkulasi harga
+			$hproduk .= '<div>' . strtoupper($produk->kode . ' (' . $produk->ukuran . ') = ') . $produk->jumlah . 'pcs</div>';
 		}
 
-		$up = $terupdate->num_rows();
-		$to = $q->num_rows();
-		$yet = $pending->num_rows();
+		$diskonku = $this->faktur->get_biaya($migrasi->id_faktur, 'diskon');
+		$ongkirku = $this->faktur->get_biaya($migrasi->id_faktur, 'ongkir');
+		$unikku = $this->faktur->get_biaya($migrasi->id_faktur, 'unik');
 
-		$response['total'] = $to;
-		$response['updated'] = $up;
-		$response['yet'] = $yet;
-		$response['done'] = round(($up/$to)*100);
+		// cal
+		$wajib_bayar += $harga_total;
+		$wajib_bayar += $ongkirku;
+		$wajib_bayar += $unikku;
+		$wajib_bayar -= $diskonku;
+
+		$kekurangan = $wajib_bayar - $dibayar;
+
+		if($wajib_bayar > $dibayar) {
+			$this->faktur->update_pay($id_pembayaran, array('jumlah' => $wajib_bayar));
+			$this->faktur->calc_pembayaran($migrasi->id_faktur);
+		}
+
+
+	
+		$response = array(
+			'id' => $migrasi->id_faktur,
+			//'data' => $data,
+			'yet' => $migrasi = $this->db->where(array('status_transfer' => '2', 'status_kirim' => '2') )->get('faktur')->num_rows()
+		);
+	
 
 		$this->output
 	        ->set_status_header(200)
@@ -132,180 +145,4 @@ class Upgrade extends CI_Controller {
 	    exit;
 	}
 
-	public function upup()
-	{
-		// $q = $this->db->get('pesanan');
-		// $terupdate = $this->db->get_where('pesanan', array(	'status_upgrade' =>'DONE'));
-		// $pending = $this->db->get_where('pesanan', array('status_upgrade' => NULL));
-
-		$qr = $this->db->limit(43)->where('status_upgrade', NULL)->order_by('id_pesanan DESC')->get('pesanan');
-
-		$r = array();
-		$i=0;
-		foreach ($qr->result() as $key) {
-			$pelanggan_ = json_decode($key->pemesan);
-            $pelanggan = array(
-				'id_pelanggan' => '',
-                'nama' => $pelanggan_->n
-			);
-
-			/*
-			$data = array(
-				'status_upgrade' => 'DONE'
-			);
-			*/
-
-			// $this->db->where('id_pesanan', $key->id_pesanan);
-			// $this->db->update('pesanan', $data);
-	
-			// $this->db->insert('pelanggan', $pelanggan);
-			// $id_pelanggan = $this->db->insert_id();
-			
-			$alamate = array(
-				'pelanggan_id' => '',//$id_pelanggan,
-				'hp1' => $pelanggan_->p[0],
-				'hp2' => (!empty($pelanggan_->p[1])? $pelanggan_->p[1]: NULL),
-				'alamat' => $pelanggan_->a
-			);
-
-
-
-			// faktur
-			$faktur = array(
-				'id_faktur' => $key->id_pesanan,
-				'seri_faktur' => '',
-				'tanggal_dibuat' => $key->tanggal_submit,
-				'juragan_id' => $key->juragan,
-				'pelanggan_id' => '',
-				'keterangan_id' => ''
-			);
-
-			// pembelian
-			$beli = json_decode($key->detail);
-			$biaya = json_decode($key->biaya);
-			$pembelian = array();
-			$bought = 0;
-			foreach ($beli->p as $buy) {
-				$pembelian[$bought] = array(
-					'id_pembelian' => '',
-					'faktur_id' => $key->id_pesanan,
-					'kode_produk' => $buy->c,
-					'ukuran' => $buy->s,
-					'jumlah' => $buy->q,
-					'harga' => (isset($buy->h)? $buy->h: ($biaya->m->h/$key->count)  )
-				);
-				$bought++;
-			}
-
-			// pembayaran
-			$pembayaran = array();
-			$paid = 0;
-			//foreach ($biaya->m as $paid) {
-				$pembayaran[] = array(
-					'id_keterangan' => '',
-					'faktur_id' => $key->id_pesanan,
-					'kunci' => 'transfer',
-					'isi' => $biaya->m->t,
-				);
-				if(isset($biaya->m->o)) {
-					$pembayaran[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'ongkir',
-						'isi' => $biaya->m->o,
-					);
-				}
-				if(isset($biaya->m->d)) {
-					$pembayaran[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'diskon',
-						'isi' => $biaya->m->d,
-					);
-				}
-				
-				/*
-				$pembayaran[] = array(
-					'id_keterangan' => '',
-					'faktur_id' => $key->id_pesanan,
-					'kunci' => 'status_transfer',
-					'isi' => $biaya->s,
-				);
-				*/
-
-				$pembayaran[] = array(
-					'id_keterangan' => '',
-					'faktur_id' => $key->id_pesanan,
-					'kunci' => 'rekening',
-					'isi' => $biaya->b,
-				);
-
-				if($key->tanggal_cek_transfer !== NULL) {
-					$pembayaran[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'tanggal_cek_transfer',
-						'isi' => $key->tanggal_cek_transfer,
-					);
-				}
-				//$paid++;
-			//}
-
-			// pengiriman
-			
-			$pengiriman = array();
-			//foreach ($beli->s as $sent) {
-				if(isset($beli->s)) {
-					$pengiriman[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'kurir',
-						'isi' => $beli->s->k,
-					);
-					$pengiriman[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'tanggal_kirim',
-						'isi' => $beli->s->d,
-					);
-					$pengiriman[] = array(
-						'id_keterangan' => '',
-						'faktur_id' => $key->id_pesanan,
-						'kunci' => 'resi',
-						'isi' => $beli->s->n,
-					);
-				}
-			//}
-
-			$r[$i]['faktur'] = $faktur;
-			$r[$i]['pelanggan'] = $pelanggan;
-			$r[$i]['alamat'] = $alamate;
-			$r[$i]['pembelian'] = $pembelian;
-			$r[$i]['pembayaran'] = $pembayaran;
-			$r[$i]['pengiriman'] = $pengiriman;
-			// $this->db->insert('pelanggan_alamat', $alamate);
-			$i++;
-		}
-
-		$this->output
-	        ->set_status_header(200)
-	        ->set_content_type('application/json', 'utf-8')
-	        ->set_output(json_encode($r, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
-	        ->_display();
-	    exit;
-	}
-
-	public function get_user()
-	{
-		$q = $this->pengguna->_semua($aktif = FALSE, $blokir = FALSE);
-
-		$this->output
-	        ->set_status_header(200)
-	        ->set_content_type('application/json', 'utf-8')
-	        ->set_output(json_encode($q->result(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
-	        ->_display();
-	    exit;
-	}
-
 }
-// 10029590307b552f1b

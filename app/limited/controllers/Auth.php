@@ -1,16 +1,42 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends public_controller
-{
+/**
+ * Auth
+ *
+ * Semua yang berkaitan dengan `auth` ada disini
+ * daftar, masuk, lupa sandi, validasi dan reset
+ *
+ * halaman baku akan dikirim ke `auth/masuk`
+ */
+
+class Auth extends CI_Controller {
+
 	public function __construct() {
 		parent::__construct();
+		if($this->session->logged) {
+			redirect('faktur');
+		}
 	}
 
+	/**
+	 * Halaman Index auth
+	 *
+	 */
 	public function index() {
 		redirect('auth/masuk');
 	}
 
+	/**
+	 * Halaman pendaftaran akun baru
+	 *
+	 * @param 	string 	$username 	Input String
+	 * @param 	string 	$password 	Input String
+	 * @param 	string 	$nama 		Input String
+	 * @param 	string 	$email 		Input string
+	 * 
+	 * @return 	mixed 	redirect to `auth/masuk`
+	 */
 	public function daftar() {
 		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[pengguna.username]|alpha_dash');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -18,11 +44,11 @@ class Auth extends public_controller
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[pengguna.email]');
 
 		if ($this->form_validation->run() === FALSE) {
-			$this->data = array();
+			$this->data = array(
+				'judul' => 'Daftar'
+			);
 
-			$this->load->view('publik/header', $this->data);
-			$this->load->view('publik/daftar', $this->data);
-			$this->load->view('publik/footer', $this->data);
+			$this->load->view('auth-daftar', $this->data);
 		}
 		else {
 			// simpan ke database
@@ -31,15 +57,24 @@ class Auth extends public_controller
 			$password = $this->input->post('password');
 			$username = $this->input->post('username');
 
-			$data = array(
+			$data_id = array();
+			$id_pengguna = $this->faktur->_primary('pengguna', 'id');
+			if ((int) $id_pengguna !== 0) {
+				$data_id = array('id' => $id_pengguna);
+			}
+
+			$data_ = array(
 				'nama' => $nama,
 				'email' => strtolower( $email ),
 				'sandi' => password_hash($password, PASSWORD_BCRYPT),
 				'username' => strtolower( $username )
 				);
 
-			$save = $this->pengguna->simpan($data);
-			$id_pengguna = $this->db->insert_id();
+			$save = $this->pengguna->simpan(array_merge($data_id,$data_));
+
+			if ((int) $id_pengguna === 0) {
+				$id_pengguna = $this->db->insert_id();
+			}
 
 			if($save) {
 				// kirim email validasi
@@ -51,17 +86,24 @@ class Auth extends public_controller
 		}
 	}
 
+	/**
+	 * Halaman masuk
+	 *
+	 * @param 	string 	$username 	Input String
+	 * @param 	string 	$password 	Input String
+	 * 
+	 * @return 	mixed 	redirect to `auth/masuk`
+	 */
 	public function masuk() {
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		
 		if ($this->form_validation->run() === FALSE) {
 
-			$this->data = array();
-
-			$this->load->view('publik/header', $this->data);
-			$this->load->view('publik/masuk', $this->data);
-			$this->load->view('publik/footer', $this->data);
+			$this->data = array(
+				'judul' => 'Masuk'
+			);
+			$this->load->view('auth-masuk', $this->data);
 		}
 		else {
 			$username = $this->input->post('username');

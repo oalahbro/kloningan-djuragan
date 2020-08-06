@@ -15,7 +15,7 @@ class Pengguna_model extends CI_Model
 	 *
 	 * @return      array
 	 */
-	public function _semua($aktif = FALSE, $blokir = FALSE) {
+	public function _semua($aktif = FALSE, $blokir = FALSE, $limit = FALSE, $offset = FALSE) {
 		$this->db->select('p.*');
 		$this->db->from('pengguna p');		
 		if($aktif !== FALSE && in_array($aktif, array('ya', 'tidak'))) {
@@ -29,27 +29,40 @@ class Pengguna_model extends CI_Model
 		// kecuali superadmin 
 		$this->db->where_not_in('p.level', array('superadmin'));
 
+		if ($limit !== FALSE && $offset !== FALSE) {
+			$this->db->limit($limit);
+			$this->db->offset($offset);
+		}
+
+		$this->db->order_by('blokir desc, valid desc, aktif asc, login_terakhir asc');
+
 		$q = $this->db->get();
 		return $q;
 	}
 
-	public function simpan_relation($pengguna_id, $juragan_id) {
-		$this->db->where(array('pengguna_id' => $pengguna_id, 'juragan_id' => $juragan_id));
-		$q = $this->db->get();
+	public function get_admin() {
+		$this->db->where(array('aktif' => 'ya', 'blokir' => 'tidak', 'valid' => 'ya'));
+		$this->db->where_in('level', array('admin', 'superadmin'));
+		$q = $this->db->get('pengguna');
 
-		if($q->num_rows() > 0) {
-			// SKIP
-		}
-		else {
-			// insert
-		}
-
+		return $q;
 	}
 
 	public function get_juragan($pengguna_id) {
 		$q = $this->db->get_where('pengguna_relation', array('pengguna_id' => $pengguna_id));
 
 		return $q;
+	}
+
+	public function insert_juragan($data_batch) {
+		$this->db->insert_batch('pengguna_relation', $data_batch);
+		return TRUE;
+	}
+
+	public function delete_juragan($pengguna_id) {
+		$this->db->where('pengguna_id', $pengguna_id)
+				 ->delete('pengguna_relation');
+		return TRUE;
 	}
 
 	public function cek_baru() {
@@ -130,20 +143,43 @@ class Pengguna_model extends CI_Model
 		return ($gp->num_rows() > 0 ? $t->juragan_id : $jur[0]);
 	}
 
+	public function _cs_juragan($id_juragan) {
+		
+		$this->db->from('pengguna_relation r');
+		$this->db->join('pengguna p', 'p.id=r.pengguna_id');
+		$this->db->where(array('aktif' => 'ya', 'blokir' => 'tidak', 'valid' => 'ya'));
+		$this->db->where_in('r.juragan_id', array($id_juragan));
+		$q = $this->db->get();
+
+		return $q;
+	}
+
 	public function _juragan_cs($username) {
-		$id_pengguna = $this->_id($username);
+		// ambil data juragan per pengguna sesuai level		
+		$p = $this->db->get_where('pengguna', array('username' => $username))->row();
 
-		$this->db->where('pengguna_id', $id_pengguna);
-		$q = $this->db->get('pengguna_relation');
+		switch ($p->level) {
+			case 'admin':
+			case 'superadmin':
+			case 'viewer':
+				$t = $this->juragan->_semua();
+				break;
+			
+			case 'cs':
+			case 'reseller':
+				$id_pengguna = $this->_id($username);
+				$this->db->where('pengguna_id', $id_pengguna);
+				$q = $this->db->get('pengguna_relation');
 
-		foreach ($q->result() as $key) {
-			$jur[] = $key->juragan_id;
+				foreach ($q->result() as $key) {
+					$jur[] = $key->juragan_id;
+				}
+		
+				$t = $this->db->where_in('id', $jur)
+							->order_by('nama', 'asc')
+							->get('juragan');
+				break;
 		}
-
-		$t = $this->db->where_in('id', $jur)
-					->order_by('nama', 'asc')
-					->get('juragan');
-
 		return $t;
 	}
 
@@ -198,6 +234,7 @@ class Pengguna_model extends CI_Model
 				// jika sandi benar
 				$data['nama'] = $ru->nama;
 				$data['username'] = $ru->username;
+				$data['userid'] = $ru->id;
 				$data['level'] = $ru->level;
 				$data['email'] = $ru->email;
 
