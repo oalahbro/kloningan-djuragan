@@ -140,7 +140,7 @@ $pager = \Config\Services::pager();
 			
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Batal</button>
+				<button type="button" class="btn btn-link text-decoration-none" data-dismiss="modal">Batal</button>
 				<button type="submit" class="btn btn-primary"><i class="fad fa-save"></i> Simpan</button>
 			</div>
 			<?= form_close(); ?>
