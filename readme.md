@@ -4,4 +4,4 @@ Atur database dan pengaturan lainnya di folder `system/juragan/config`
 
 ## Thanks to
 - codeigniter.com
-- bootstrap.com
+- getbootstrap.com
