@@ -16,18 +16,39 @@ class Pengguna_model extends CI_Model
 	 * @return      array
 	 */
 	public function _semua($aktif = FALSE, $blokir = FALSE) {
+		$this->db->select('p.*');
+		$this->db->from('pengguna p');		
 		if($aktif !== FALSE && in_array($aktif, array('ya', 'tidak'))) {
-			$this->db->where('aktif',$aktif);
+			$this->db->where('p.aktif',$aktif);
 		}
 
 		if($blokir !== FALSE && in_array($blokir, array('ya', 'tidak'))) {
-			$this->db->where('blokir',$blokir);
+			$this->db->where('p.blokir',$blokir);
 		}
 
 		// kecuali superadmin 
-		$this->db->where_not_in('level', array('superadmin'));
+		$this->db->where_not_in('p.level', array('superadmin'));
 
-		$q = $this->db->get($this->tabel);
+		$q = $this->db->get();
+		return $q;
+	}
+
+	public function simpan_relation($pengguna_id, $juragan_id) {
+		$this->db->where(array('pengguna_id' => $pengguna_id, 'juragan_id' => $juragan_id));
+		$q = $this->db->get();
+
+		if($q->num_rows() > 0) {
+			// SKIP
+		}
+		else {
+			// insert
+		}
+
+	}
+
+	public function get_juragan($pengguna_id) {
+		$q = $this->db->get_where('pengguna_relation', array('pengguna_id' => $pengguna_id));
+
 		return $q;
 	}
 
@@ -87,33 +108,37 @@ class Pengguna_model extends CI_Model
 
 	public function _juragan_terakhir($username) {
 		$id_pengguna = $this->_id($username);
-		$q =  $this->_detail($id_pengguna);
 
-		$r = $q->row();
+		$this->db->where('pengguna_id', $id_pengguna);
+		$q = $this->db->get('pengguna_relation');
 
-		$jur = (array) json_decode($r->juragan);
+		foreach ($q->result() as $key) {
+			$jur[] = $key->juragan_id;
+		}
 
-		$this->db->where('juragan', $jur[0]);
+		$this->db->where('juragan_id', $jur[0]);
 
 		for ($i=1; $i < count($jur) ; $i++) { 
-			$this->db->or_where('juragan', $jur[$i]);
+			$this->db->or_where('juragan_id', $jur[$i]);
 		}
-		$this->db->order_by('id_pesanan', 'desc');
+		$this->db->order_by('id_faktur', 'desc');
 		$this->db->limit(1);
-		$gp = $this->db->get('pesanan');
+		$gp = $this->db->get('faktur');
 
 		$t = $gp->row();
 		
-		return ($gp->num_rows() > 0 ? $t->juragan : $jur[0]);
+		return ($gp->num_rows() > 0 ? $t->juragan_id : $jur[0]);
 	}
 
 	public function _juragan_cs($username) {
 		$id_pengguna = $this->_id($username);
-		$q =  $this->_detail($id_pengguna);
 
-		$r = $q->row();
-		$jur = (array) json_decode($r->juragan);
+		$this->db->where('pengguna_id', $id_pengguna);
+		$q = $this->db->get('pengguna_relation');
 
+		foreach ($q->result() as $key) {
+			$jur[] = $key->juragan_id;
+		}
 
 		$t = $this->db->where_in('id', $jur)
 					->order_by('nama', 'asc')
@@ -124,24 +149,19 @@ class Pengguna_model extends CI_Model
 
 	public function juragan($username, $juragan) {
 		$id_pengguna = $this->_id($username);
-		$q =  $this->_detail($id_pengguna);
+		$this->db->where('pengguna_id', $id_pengguna);
+		$q = $this->db->get('pengguna_relation');
 
-		$r = $q->row();
+		foreach ($q->result() as $key) {
+			$jur[] = $key->juragan_id;
+		}
 
-		$jur = (array) json_decode($r->juragan);
 		$jid = $this->juragan->_id($juragan);
 
 		if(in_array($jid, $jur)) {
 			return TRUE;
 		}
 	}
-
-	/**
-	 * Simpan data pengguna ke database
-	 *
-	 * @param       array  $data    Input array
-	 * @return      bool
-	 */
 	public function simpan($data) {
 		$this->db->insert($this->tabel, $data); 
 
@@ -159,11 +179,6 @@ class Pengguna_model extends CI_Model
 		}
 	}
 
-	public function _juragan($username)
-	{
-		# code...
-	}
-
 	/**
 	 * Masuk sistem, simpan ke session
 	 *
@@ -177,7 +192,6 @@ class Pengguna_model extends CI_Model
 		if($q->num_rows() > 0) {
 			// jika pengguna ada
 			$ru = $q->row();
-
 			$valid = password_verify($sandi, $ru->sandi);
 
 			if($valid) {
@@ -192,31 +206,37 @@ class Pengguna_model extends CI_Model
 						// jika aktif dan tidak diblokir
 						$data['logged'] = TRUE;
 						$data['error'] = 0;
+						$this->session->set_flashdata('notifikasi', '<div class="alert alert-success">Halo selamat datang kembali '.$ru->nama.'</div>');
 					}
 					elseif ($ru->aktif === 'tidak' && $ru->blokir === 'tidak') {
 						$data['error'] = 1; //'Akun belum diaktifkan, silakan hubungi admin';
+						$this->session->set_flashdata('notifikasi', '<div class="alert alert-warning">Silakan hubungi Admin</div>');
 					}
 					else {
 						// jika aktif dan diblokir
 						$data['logged'] = FALSE;
 						$data['error'] = 2; //'Kamu tidak diijinkan masuk!';
+						$this->session->set_flashdata('notifikasi', '<div class="alert alert-danger">Dilarang Masuk!</div>');
 					}
 				}
 				else {
 					// belum validasi email
 					$data['logged'] = FALSE;
 					$data['error'] = 5; // harap validasi email
+					$this->session->set_flashdata('notifikasi', '<div class="alert alert-info">Harap cek email terlebih dahulu.</div>');
 				}
 			}
 			else {
 				// jika sandi salah
 				$data['logged'] = FALSE;
 				$data['error'] = 3; // 'Sandi salah.';
+				$this->session->set_flashdata('notifikasi', '<div class="alert alert-warning">Sandi salah bos.</div>');
 			}
 		}
 		else {
 			$data['logged'] = FALSE;
 			$data['error'] = 4; // 'Tidak terdaftar';
+			$this->session->set_flashdata('notifikasi', '<div class="alert alert-info">Kamu siapa? daftar aja dulu.</div>');
 		}
 
 		return $data;

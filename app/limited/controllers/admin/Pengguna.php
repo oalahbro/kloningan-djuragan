@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pengguna extends admin_controller
 {
-
 	public function __construct() {
 		parent::__construct();
 	}
@@ -96,6 +95,7 @@ class Pengguna extends admin_controller
 	public function simpan() {
 		$this->form_validation->set_rules('id', 'id', 'required');
 		$this->form_validation->set_rules('nama', 'nama', 'required');
+		$this->form_validation->set_rules('pass', 'password');
 		$this->form_validation->set_rules('email', 'email', 'required|valid_email');
 		$this->form_validation->set_rules('level', 'role', 'required|in_list[admin,cs,reseller]');
 		// $this->form_validation->set_rules('juragan', 'juragan', '');
@@ -104,6 +104,7 @@ class Pengguna extends admin_controller
 
 		$id = $this->input->post('id');
 		$nama = $this->input->post('nama');
+		$pass = $this->input->post('pass');
 		$email = $this->input->post('email');
 		$level = $this->input->post('level');
 		$juragan = $this->input->post('juragan[]');
@@ -114,7 +115,38 @@ class Pengguna extends admin_controller
 			redirect('admin/pengguna/sunting?id=' . $id);
 		}
 		else {
+			// juragan 
 			$jur = NULL;
+
+			// cek didatabase sudah ada atau belum, 
+			// jika sudah ada maka skip 
+			// jika belum maka ditambah
+			// jika berkurang maka hapus
+			$usr = save_url_decode($id);
+			$usr_id = $this->pengguna->_id($usr);
+
+			$jcs = $this->pengguna->get_juragan($usr_id);
+
+			$simp = array();
+			$sbm = array();
+
+			foreach ($jcs->result() as $smpj) {
+				$simp[] = $smpj->juragan_id;
+			}
+
+			$simpan = array_diff($juragan, $simp);
+			$hapus = array_diff($simp, $juragan);
+
+			$prnt = array('simpan' => $simpan, 'hapus' => $hapus);
+
+			print('<pre>');
+			print_r($prnt);
+			print('</pre>');
+
+
+			/*
+
+
 
 			if($level === 'cs') {
 				$jur = json_encode($juragan);
@@ -130,6 +162,12 @@ class Pengguna extends admin_controller
 					$jur = json_encode(array($id_jur));
 				}
 			}
+			if($pass !== '') {
+			    $pasw = array('sandi' => password_hash($pass, PASSWORD_BCRYPT));
+			}
+			else {
+			    $pasw = array();
+			}
 
 			$data = array(
 				'nama' => $nama,
@@ -142,7 +180,7 @@ class Pengguna extends admin_controller
 
 			// print_r($data);
 			$username = save_url_decode($id);
-			$ok = $this->pengguna->update($username, $data);
+			$ok = $this->pengguna->update($username, array_merge($data, $pasw));
 
 			if($ok) {
 				$redirect = 1;
@@ -151,7 +189,8 @@ class Pengguna extends admin_controller
 				$redirect = 0;
 			}
 
-			redirect('admin/pengguna/lihat?ok=' . save_url_encode( $redirect ) );
+			// redirect('admin/pengguna/lihat?ok=' . save_url_encode( $redirect ) );
+			*/
 		}
 	}
 

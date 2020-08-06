@@ -11,261 +11,17 @@ class Upgrade extends CI_Controller {
 	}
 
 	public function index() {
-		echo anchor('upgrade/rename_config_db', 'Step 1');
+		echo anchor('upgrade/insert_pelanggan', 'Step 1');
 	}
 
-	public function rename_config_db() {
-		if ( ! $this->db->table_exists('pengaturan')) {
-			$fields = array(
-				'kunci' => array(
-					'type' => 'VARCHAR',
-					'constraint' => 100,
-					'unique' => TRUE,
-					),
-				'gembok' => array(
-					'type' => 'TEXT'
-					)
-				);
-			$this->dbforge->add_field($fields);
-			// $this->dbforge->add_key('id', TRUE);
-			$c = $this->dbforge->create_table('pengaturan');
 
-			if($c) {
-				$q = $this->db->get('config_data');
-
-				foreach ($q->result() as $key) {
-					$this->db->insert('pengaturan', array('kunci' => $key->key, 'gembok' => $key->value));
-				}
-
-				$this->insert_size();
-				$this->insert_kurir();
-			}
-		}
-		//else {
-			echo anchor('upgrade/create_table_juragan', 'Step 2');
-		//}
-	}
-
-	function insert_size() {
-		$kunci = 'list_size';
-		$gembok = array('XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'Custom');
-		$this->db->insert('pengaturan', array('kunci' => $kunci, 'gembok' => json_encode($gembok)));
-	}
-
-	function insert_kurir() {
-		$kunci_kurir = 'list_kurir';
-		$gembok_kurir = array();
-		$kr = $this->db->get('kurir');
-
-		foreach ($kr->result() as $kurir) {
-			$gembok_kurir[] = $kurir->nama;
-		}
-
-		$this->db->insert('pengaturan', array('kunci' => $kunci_kurir, 'gembok' => json_encode($gembok_kurir)));
-	}
-
-	public function create_table_juragan() {
-		// membuat tabel `juragan`
-		if ( ! $this->db->table_exists('juragan')) {
-			$fields = array(
-				'id' => array(
-					'type' => 'INT',
-					'constraint' => 5,
-					'unsigned' => TRUE,
-					'auto_increment' => TRUE
-					),
-				'nama' => array(
-					'type' => 'VARCHAR',
-					'constraint' => '100',
-					// 'unique' => TRUE,
-					),
-				'membership' => array(
-					'type' => 'ENUM("ya","tidak")',
-					// 'constraint' => '100',
-					'default' => "tidak"
-					),
-				'short' => array(
-					'type' =>'VARCHAR',
-					'constraint' => '5',
-					'unique' => TRUE,
-					),
-				'slug' => array(
-					'type' =>'VARCHAR',
-					'constraint' => '100',
-					'unique' => TRUE,
-					),
-				);
-
-			$this->dbforge->add_field($fields);
-			$this->dbforge->add_key('id', TRUE);
-			$this->dbforge->create_table('juragan');
-
-			$this->db->where('level', 'user');
-			$q = $this->db->get('user');
-
-			foreach ($q->result() as $user) {
-				$data_jrg = array(
-					'id' => $user->id,
-					'nama' => $user->nama,
-					'membership' => ($user->membership === '0' ? 'tidak' : 'ya'),
-					'short' => strtolower( $user->short ),
-					'slug' => url_title($user->username, '-', TRUE)
-					);
-
-				$this->db->insert('juragan', $data_jrg);
-			}
-
-		}
-
-		echo anchor('upgrade/create_table_pengguna', 'Step 3');
-	}
-
-	public function create_table_pengguna()	{
-		if ( ! $this->db->table_exists('pengguna')) {
-			$fields = array(
-				'id' => array(
-					'type' => 'INT',
-					'constraint' => 11,
-					'unsigned' => TRUE,
-					'auto_increment' => TRUE
-					),
-				'nama' => array(
-					'type' => 'VARCHAR',
-					'constraint' => '100',
-					// 'unique' => TRUE,
-					),
-				'username' => array(
-					'type' =>'VARCHAR',
-					'constraint' => '100',
-					'unique' => TRUE,
-					),
-				'sandi' => array(
-					'type' => 'VARCHAR',
-					'constraint' => '255',
-					),
-				'email' => array(
-					'type' => 'VARCHAR',
-					'constraint' => '255',
-					),
-				'level' => array(
-					'type' => 'ENUM("superadmin","admin","cs","reseller")',
-					'default' => "cs"
-					),
-				'aktif' => array(
-					'type' => 'ENUM("ya","tidak")',
-					'default' => "tidak"
-					),
-				'blokir' => array(
-					'type' => 'ENUM("ya","tidak")',
-					'default' => "tidak"
-					),
-				'valid' => array(
-					'type' => 'ENUM("ya","tidak")',
-					'default' => "tidak"
-					),
-				'login_terakhir' => array(
-					'type' => 'VARCHAR',
-					'constraint' => '10',
-					),
-				'juragan' => array(
-					'type' => 'TEXT',
-					'default' => NULL,
-					),
-				
-				);
-
-			$this->dbforge->add_field($fields);
-			$this->dbforge->add_key('id', TRUE);
-			$this->dbforge->create_table('pengguna');
-		}
-
-		echo anchor('upgrade/create_table_pesanan', 'Step 4');
-	}
-
-	public function create_table_pesanan() {
-		if ( ! $this->db->table_exists('pesanan')) {
-			$fields = array(
-				'id_pesanan' => array(
-					'type' => 'INT',
-					'constraint' => 11,
-					'unsigned' => TRUE,
-					'auto_increment' => TRUE
-					),
-				'juragan' => array(
-					'type' => 'INT',
-					'constraint' => 11,
-					),
-				'oleh' => array(
-					'type' => 'INT',
-					'constraint' => 11,
-					'default' => NULL
-					),
-				'tanggal_submit' => array(
-					'type' =>'VARCHAR',
-					'constraint' => 10,
-					),
-				'tanggal_cek_transfer' => array(
-					'type' =>'VARCHAR',
-					'constraint' => 10,
-					'default' => NULL
-					),
-				'tanggal_cek_kirim' => array(
-					'type' =>'VARCHAR',
-					'constraint' => 10,
-					'default' => NULL
-					),
-				'pemesan' => array(
-					'type' => 'TEXT',
-					),
-				'biaya' => array(
-					'type' => 'TEXT',
-					),
-				'status_transfer' => array(
-					'type' => 'ENUM("ada","tidak")',
-					'default' => "tidak"
-					),
-				'status_kirim' => array(
-					'type' => 'ENUM("terkirim","pending")',
-					'default' => "pending"
-					),
-				'detail' => array(
-					'type' => 'TEXT',
-					'default' => NULL,
-					),
-				'count' => array(
-					'type' => 'INT',
-					'constraint' => 5,
-					'default' => 0,
-					'null' => FALSE
-					),
-				'slug' => array(
-					'type' => 'VARCHAR',
-					'constraint' => 18,
-					'unique' => TRUE
-					)
-				
-				);
-
-			$this->dbforge->add_field($fields);
-			$this->dbforge->add_key('id_pesanan', TRUE);
-			$this->dbforge->create_table('pesanan');
-
-			$update = array(
-				'migrate' => array('type' => 'VARCHAR', 'constraint' => 40, 'default' => 'belum')
-				);
-
-			$this->dbforge->add_column('order', $update);
-
-		}
-		echo anchor('upgrade/insert_table_pesanan', 'Step 5');
-	}
-
-	public function insert_table_pesanan() { 
+	public function insert_pelanggan() { 
 		?>
 	<!DOCTYPE html>
 	<html>
 	<head>
 		<title>Upgrade</title>
+		<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
 	</head>
 	<body>
 		<div id="message">
@@ -281,7 +37,7 @@ class Upgrade extends CI_Controller {
 
 	
 	</body>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 	            // setTimeout(getProgress,1000);
@@ -291,31 +47,29 @@ class Upgrade extends CI_Controller {
                     call the updateStatus() function every 3 second to update progress bar value.
                     */
                     updateStatus();
+					alert('klik');
                     /*
                     */
                 });
-
-
 
 	            function updateStatus(){
 	            	$.ajax({
 	            		method: "GET",
 	            		url: "<?php echo site_url('upgrade/progress') ?>",
 	            		// data: { name: "John", location: "Boston" }
+						success: function(data) {
+							if (data.updated < data.total) {
+								// 
+								updateStatus();
+								$( "#message" ).html( data.updated + ' / ' + data.total + '( ' + data.done +'% )' );
+							}
+							else {
+								//
+								alert('done');
+								$( "#message" ).html( 'all data updated' );
+							}
+						}
 	            	})
-	            	.success(function( data ) {
-	            		//
-	            		if (data.updated < data.total) {
-	            			// 
-	            			updateStatus();
-	            			$( "#message" ).html( data.updated + ' / ' + data.total + '( ' + data.done +'% )' );
-	            		}
-	            		else {
-	            			//
-	            			alert('done');
-	            			$( "#message" ).html( 'all data updated' );
-	            		}
-	            	});
 
 
 	            } 
@@ -328,118 +82,42 @@ class Upgrade extends CI_Controller {
 	}
 
 	public function progress() {
+		
+		$q = $this->db->get('pesanan');
+		$terupdate = $this->db->get_where('pesanan', array(	'status_upgrade' =>'DONE'));
+		$pending = $this->db->get_where('pesanan', array('status_upgrade' => NULL));
 
-		$qs = $this->db->where('migrate', 'belum')->where('barang', 'Terkirim')->get('order');
-		$qa = $this->db->get('order');
-		$q_u = $this->db->where('migrate !=', 'belum')->where('barang', 'Terkirim')->get('order');
-		//$this->session->set_userdata('total', $qs->num_rows());
-		//$get_t = $this->input->get('total');
-		//$pg = $this->input->get('page');
-	
-		$q = $this->db->limit(55)->where('migrate', 'belum')->get('order');
+		$qr = $this->db->limit(40)->where('status_upgrade', NULL)->get('pesanan');
 
-		foreach ($q->result() as $p) {
-			$pemesan = array(
-				'n' => $p->nama,
-				'p' => array($p->hp),
-				'a' => str_replace('<br />', '', $p->alamat)
-				);
-
-			$biaya['m']['h'] = (int) $p->harga;
-
-			$o = (int) $p->ongkir;
-			if($o > 1000) {
-				$biaya['m']['o'] = (int) $p->ongkir;
-			}
-			$biaya['m']['t'] = (int) $p->transfer;
-
-			if($p->ongkir_fix !== NULL) {
-				$biaya['m']['of'] = (int) $p->ongkir_fix;
-			}
-
-			$biaya['b'] = $p->bank;
-			$biaya['s'] = strtolower($p->status);
-
-			$ps = explode('#', $p->pesanan);
-			$count = 0;
-			foreach ($ps as $key) {
-				$k = explode(',', $key);
-
-				$keterangan['p'][] = array(
-					'c' => $k[0],
-					's' => $k[1],
-					'q' => (int) $k[2]
-					);
-
-				$count = $count + (int) $k[2];
-			}
-
-
-			if( $p->keterangan !== '') {
-				$keterangan['n'] = str_replace('<br />', '', $p->keterangan);
-			}
-
-			if($p->resi !== NULL && $p->kurir !== NULL) {
-				$keterangan['s'] = array(
-					'k' => $p->kurir,
-					'n' => $p->resi,
-					'd' => ($p->cek_kirim !== NULL ? human_to_unix($p->cek_kirim) : NULL)
-					);
-			}
-
-			$m_id = (int) $p->member_id;
-			if( $m_id > 0) {
-				$keterangan['m'] = $m_id;
-			}
-			
-			$gmb = explode(',', $p->customgambar);
-
-			// if( ! empty($gmb)) {
-			if($p->customgambar !== NULL) {
-
-				$gmbbb = array();
-				for ($i=0; $i < count($gmb) ; $i++) { 
-					if( $gmb[$i] !== ""){
-						$keterangan['i'][] = $gmb[$i];
-					}
-				}
-				//unset($keterangan['i']);
-			}
+		$r = array();
+		foreach ($qr->result() as $key) {
+			$pelanggan_ = json_decode($key->pemesan);
+            $pelanggan = array(
+                'nama' => $pelanggan_->n
+			);
 
 			$data = array(
-				'id_pesanan' => (int) $p->id,
-				'juragan' => (int) $p->user_id,
-				'tanggal_submit' => human_to_unix($p->tanggal_order),
-				'tanggal_cek_kirim' => ($p->cek_kirim !== NULL ? human_to_unix($p->cek_kirim) : NULL),
-				'tanggal_cek_transfer' => ($p->cek_transfer !== NULL ? human_to_unix($p->cek_transfer) : NULL),
-				'pemesan' => json_encode($pemesan),
-				// 'pesanan' => json_encode($pesanan),
-				'biaya' =>  json_encode($biaya),
-				'detail' => json_encode($keterangan),
-				'status_transfer' => ($p->status_transfer === 'Belum' ? 'tidak' : 'ada'),
-				'status_kirim' => ($p->barang === 'Pending' ? 'pending' : 'terkirim'),
-				'count' => $count,
-				'slug' => (mdate('%Y', time()) + (int) $p->user_id) . uniqid()
-				);
+				'status_upgrade' => 'DONE'
+			);
 
-			$this->db->insert('pesanan', $data);
-
-			$this->db->where('id', $p->id)
-					->update('order', array('migrate' => 'ya'));
-
-			unset($pemesan);
-			unset($pesanan);
-			unset($biaya);
-			unset($keterangan);
-
-		    //$this->session->set_userdata('progress', $count++);
-		    // 101015908395b0614d
-		    // sleep(1);
+			$this->db->where('id_pesanan', $key->id_pesanan);
+			$this->db->update('pesanan', $data);
+	
+			$this->db->insert('pelanggan', $pelanggan);
+			$id_pelanggan = $this->db->insert_id();
+			
+			$alamate = array(
+				'pelanggan_id' => $id_pelanggan,
+				'hp1' => $pelanggan_->p[0],
+				'hp2' => (!empty($pelanggan_->p[1])? $pelanggan_->p[1]: NULL),
+				'alamat' => $pelanggan_->a
+			);
+			$this->db->insert('pelanggan_alamat', $alamate);
 		}
 
-		$up = $q_u->num_rows();
-		$to = $qa->num_rows();
-		$yet = $qs->num_rows();
+		$up = $terupdate->num_rows();
+		$to = $q->num_rows();
+		$yet = $pending->num_rows();
 
 		$response['total'] = $to;
 		$response['updated'] = $up;
@@ -450,6 +128,181 @@ class Upgrade extends CI_Controller {
 	        ->set_status_header(200)
 	        ->set_content_type('application/json', 'utf-8')
 	        ->set_output(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+	        ->_display();
+	    exit;
+	}
+
+	public function upup()
+	{
+		// $q = $this->db->get('pesanan');
+		// $terupdate = $this->db->get_where('pesanan', array(	'status_upgrade' =>'DONE'));
+		// $pending = $this->db->get_where('pesanan', array('status_upgrade' => NULL));
+
+		$qr = $this->db->limit(43)->where('status_upgrade', NULL)->order_by('id_pesanan DESC')->get('pesanan');
+
+		$r = array();
+		$i=0;
+		foreach ($qr->result() as $key) {
+			$pelanggan_ = json_decode($key->pemesan);
+            $pelanggan = array(
+				'id_pelanggan' => '',
+                'nama' => $pelanggan_->n
+			);
+
+			/*
+			$data = array(
+				'status_upgrade' => 'DONE'
+			);
+			*/
+
+			// $this->db->where('id_pesanan', $key->id_pesanan);
+			// $this->db->update('pesanan', $data);
+	
+			// $this->db->insert('pelanggan', $pelanggan);
+			// $id_pelanggan = $this->db->insert_id();
+			
+			$alamate = array(
+				'pelanggan_id' => '',//$id_pelanggan,
+				'hp1' => $pelanggan_->p[0],
+				'hp2' => (!empty($pelanggan_->p[1])? $pelanggan_->p[1]: NULL),
+				'alamat' => $pelanggan_->a
+			);
+
+
+
+			// faktur
+			$faktur = array(
+				'id_faktur' => $key->id_pesanan,
+				'seri_faktur' => '',
+				'tanggal_dibuat' => $key->tanggal_submit,
+				'juragan_id' => $key->juragan,
+				'pelanggan_id' => '',
+				'keterangan_id' => ''
+			);
+
+			// pembelian
+			$beli = json_decode($key->detail);
+			$biaya = json_decode($key->biaya);
+			$pembelian = array();
+			$bought = 0;
+			foreach ($beli->p as $buy) {
+				$pembelian[$bought] = array(
+					'id_pembelian' => '',
+					'faktur_id' => $key->id_pesanan,
+					'kode_produk' => $buy->c,
+					'ukuran' => $buy->s,
+					'jumlah' => $buy->q,
+					'harga' => (isset($buy->h)? $buy->h: ($biaya->m->h/$key->count)  )
+				);
+				$bought++;
+			}
+
+			// pembayaran
+			$pembayaran = array();
+			$paid = 0;
+			//foreach ($biaya->m as $paid) {
+				$pembayaran[] = array(
+					'id_keterangan' => '',
+					'faktur_id' => $key->id_pesanan,
+					'kunci' => 'transfer',
+					'isi' => $biaya->m->t,
+				);
+				if(isset($biaya->m->o)) {
+					$pembayaran[] = array(
+						'id_keterangan' => '',
+						'faktur_id' => $key->id_pesanan,
+						'kunci' => 'ongkir',
+						'isi' => $biaya->m->o,
+					);
+				}
+				if(isset($biaya->m->d)) {
+					$pembayaran[] = array(
+						'id_keterangan' => '',
+						'faktur_id' => $key->id_pesanan,
+						'kunci' => 'diskon',
+						'isi' => $biaya->m->d,
+					);
+				}
+				
+				/*
+				$pembayaran[] = array(
+					'id_keterangan' => '',
+					'faktur_id' => $key->id_pesanan,
+					'kunci' => 'status_transfer',
+					'isi' => $biaya->s,
+				);
+				*/
+
+				$pembayaran[] = array(
+					'id_keterangan' => '',
+					'faktur_id' => $key->id_pesanan,
+					'kunci' => 'rekening',
+					'isi' => $biaya->b,
+				);
+
+				if($key->tanggal_cek_transfer !== NULL) {
+					$pembayaran[] = array(
+						'id_keterangan' => '',
+						'faktur_id' => $key->id_pesanan,
+						'kunci' => 'tanggal_cek_transfer',
+						'isi' => $key->tanggal_cek_transfer,
+					);
+				}
+				//$paid++;
+			//}
+
+			// pengiriman
+			
+			$pengiriman = array();
+			//foreach ($beli->s as $sent) {
+				if(isset($beli->s)) {
+					$pengiriman[] = array(
+						'id_keterangan' => '',
+						'faktur_id' => $key->id_pesanan,
+						'kunci' => 'kurir',
+						'isi' => $beli->s->k,
+					);
+					$pengiriman[] = array(
+						'id_keterangan' => '',
+						'faktur_id' => $key->id_pesanan,
+						'kunci' => 'tanggal_kirim',
+						'isi' => $beli->s->d,
+					);
+					$pengiriman[] = array(
+						'id_keterangan' => '',
+						'faktur_id' => $key->id_pesanan,
+						'kunci' => 'resi',
+						'isi' => $beli->s->n,
+					);
+				}
+			//}
+
+			$r[$i]['faktur'] = $faktur;
+			$r[$i]['pelanggan'] = $pelanggan;
+			$r[$i]['alamat'] = $alamate;
+			$r[$i]['pembelian'] = $pembelian;
+			$r[$i]['pembayaran'] = $pembayaran;
+			$r[$i]['pengiriman'] = $pengiriman;
+			// $this->db->insert('pelanggan_alamat', $alamate);
+			$i++;
+		}
+
+		$this->output
+	        ->set_status_header(200)
+	        ->set_content_type('application/json', 'utf-8')
+	        ->set_output(json_encode($r, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+	        ->_display();
+	    exit;
+	}
+
+	public function get_user()
+	{
+		$q = $this->pengguna->_semua($aktif = FALSE, $blokir = FALSE);
+
+		$this->output
+	        ->set_status_header(200)
+	        ->set_content_type('application/json', 'utf-8')
+	        ->set_output(json_encode($q->result(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 	        ->_display();
 	    exit;
 	}

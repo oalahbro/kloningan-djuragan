@@ -324,7 +324,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = hex2bin('859e92d8937a8551f06909c225f16371637720e483f26a50aede9b01f893331c');
+$config['encryption_key'] = hex2bin('a57d71fbf950bc48647b1b93e3207915');
 
 /*
 |--------------------------------------------------------------------------
@@ -378,7 +378,7 @@ $config['encryption_key'] = hex2bin('859e92d8937a8551f06909c225f16371637720e483f
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'juragan_new';
+$config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;

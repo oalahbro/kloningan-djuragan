@@ -10,18 +10,17 @@ class Juragan_model extends CI_Model
 		$this->tabel = 'juragan';
 	}
 
+	/**
+	 * ambil semua data juragan
+	 *
+	 */
 	public function _semua() {
 		$this->db->order_by('nama', 'asc');
 		$q = $this->db->get($this->tabel);
-
 		return $q;
 	}
 
-	/**
-	 * Cek Juragan berdasarkan `$slug`
-	 *
-	 * @return      bool
-	 */
+	
 	public function cek($slug) {
 		$q = $this->db->where('slug', $slug)->get($this->tabel);
 

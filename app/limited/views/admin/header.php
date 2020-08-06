@@ -1,15 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 echo doctype('html5'); ?>
-<html lang="en">
+<html>
 <head>
 	<meta charset="utf-8"/>
 	<?php
 	$meta = array(
-		array(
-			'name' => 'X-UA-Compatible',
-			'content' => 'IE=edge', 'type' => 'equiv'
-			),
 		array(
 			'name' => 'viewport',
 			'content' => 'width=device-width, initial-scale=1'
@@ -28,12 +24,11 @@ echo doctype('html5'); ?>
 
 	echo meta($meta);
 	// 
-	echo link_tag('assets/css/bootstrap.min.css');
-	echo link_tag('assets/css/backend.css');
-	echo link_tag('https://cdn.rawgit.com/t4t5/sweetalert/32bd141c/dist/sweetalert.css');
+	echo link_tag('berkas/css/bootstrap.min.css');
+	echo link_tag('berkas/css/backend.css');
 	?>
 	<title><?php echo judul('full'); ?></title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
 </head>
 
 <body><?php 

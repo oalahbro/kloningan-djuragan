@@ -14,17 +14,18 @@ class public_controller extends MY_Controller {
     	parent::__construct();
     	if($this->session->logged) {
     		if($this->session->level === 'admin' OR $this->session->level === 'superadmin') {
-				redirect('admin');
+				redirect('pesanan');
 			}
 			elseif($this->session->level === 'reseller') {
-				redirect('pesanan');
+				//redirect('pesanan');
+				show_404();
 			}
 			else {
 				// ambil juragan yg diijinkan berdasarkan slug
 				$user_slug = $this->session->username;
 				$juragan = $this->pengguna->_juragan_terakhir($user_slug);
 				$juragan = $this->juragan->_slug($juragan);
-				redirect($juragan);
+				redirect('myorder/' . $juragan);
 			}
 		}
     }
@@ -43,7 +44,7 @@ class admin_controller extends MY_Controller {
 				redirect($juragan);
 			}
 			else if($this->session->level === 'reseller') {
-				redirect('pesanan');
+				//redirect('pesanan');
 			}
 		}
 		else {

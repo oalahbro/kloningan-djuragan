@@ -54,7 +54,8 @@ class Pesanan_model extends CI_Model
 					$this->db->like('id_pesanan',  $term, 'both');
 					if (($timestamp = strtotime($term)) !== false) {
 						// set timezone cause mysql server in -04:00
-						$this->db->or_like("DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_submit, '%Y-%m-%d %H:%i:%s'), '-4:00', '+07:00'))",  date('Y-m-d', $timestamp), 'after');
+						$this->db->or_like("DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_submit, '%Y-%m-%d %H:%i:%s'), '+00:00', '+00:00'))",  date('Y-m-d', $timestamp), 'after');
+						// $this->db->or_like("DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_submit, '%Y-%m-%d %H:%i:%s'), '-4:00', '+07:00'))",  date('Y-m-d', $timestamp), 'after');
 					}
 					else {
 						$this->db->or_like('pemesan',  $term, 'both');

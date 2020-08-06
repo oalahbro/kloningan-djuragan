@@ -32,6 +32,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						echo form_input(array('name' => 'username', 'id' => 'username', 'class' => 'form-control', 'readonly' => ''), $q->username);
 						?>
 					</div>
+					<?php
+					if($this->session->level === 'superadmin') {?>
+					    <div class="form-group">
+        					<?php
+        					echo form_label('Password', 'password');
+        					echo form_input(array('name' => 'pass', 'id' => 'password', 'class' => 'form-control', 'placeholder' => 'ganti'));
+        					?>
+        				</div>
+					<?php }
+					?>
 					<div class="form-group">
 						<?php
 						echo form_label('Email', 'email');
@@ -69,14 +79,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						}
 
 						$selected = array();
-						if($q->juragan !== NULL) {
-							$selected = json_decode($q->juragan);
+						$qr = $this->pengguna->get_juragan($q->id)->result();
+						foreach ($qr as $key) {
+							$selected[] = $key->juragan_id;
 						}
 
 						echo form_multiselect('juragan[]', $option, $selected, array('class' => 'form-control') );
 						?>
 						<p class="help-block">tekan tombol CTRL untuk memilih lebih dari satu (hanya untuk role CS)</p>
 					</div>
+
+					<?php
+					$array1 = array("a" => "green", "red", "blue", "red");
+					$array2 = array("b" => "green", "yellow", "red");
+					$result = array_diff($array1, $array2);
+					
+					print_r($result);
+
+					?>
 
 					<div class="form-group">
 						<?php

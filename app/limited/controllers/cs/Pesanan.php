@@ -5,9 +5,17 @@ date_default_timezone_set('Asia/Jakarta');
 
 class Pesanan extends user_controller
 {
+	public $juragan_terakhir;
 
 	public function __construct() {
 		parent::__construct();
+		$user_slug = $this->session->username;
+		$s = $this->pengguna->_juragan_terakhir($user_slug);
+		$this->juragan_terakhir = $this->juragan->_slug($s);
+	}
+
+	public function index() {
+		redirect('j_' . $this->juragan_terakhir);
 	}
 
 	public function lihat($juragan = 'semua', $status = 'all') {
@@ -63,7 +71,7 @@ class Pesanan extends user_controller
 
 			$query = $this->pesanan->ambil_semua($id_juragan, FALSE, $status, $limit, $per_page, $cari);
 
-			$config['base_url'] = site_url($juragan .'/pesanan/' . $status);
+			$config['base_url'] = site_url('kardusin/' . $juragan .'/' . $status);
 			$config['total_rows'] = $this->pesanan->ambil_semua($id_juragan, FALSE, $status, FALSE, FALSE, $cari)->num_rows();
 			$config['per_page'] = $limit;
 			$config['page_query_string'] = TRUE;
@@ -81,12 +89,13 @@ class Pesanan extends user_controller
 				'limit' => $limit,
 				'juragan' => $juragan,
 				'status' => $status,
-				'cari' => $cari
+				'cari' => $cari,
+				'judul' => 'Arsip Pesanan '
 				);
 
-			$this->load->view('cs/header', $this->data);
+			$this->load->view('user/header', $this->data);
 			$this->load->view('cs/pesanan/lihat', $this->data);
-			$this->load->view('cs/footer', $this->data);
+			$this->load->view('user/footer', $this->data);
 		}
 		else {
 			show_404();
