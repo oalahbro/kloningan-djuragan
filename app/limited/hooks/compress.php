@@ -1,7 +1,9 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-function compress()
-{
-    ini_set("pcre.recursion_limit", "16777");
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+// http://stackoverflow.com/questions/5312349/minifying-final-html-output-using-regular-expressions-with-codeigniter
+function compress() {
+    ini_set("pcre.recursion_limit", "16777");  // 8MB stack. *nix
     $CI =& get_instance();
     $buffer = $CI->output->get_output();
 
@@ -25,17 +27,13 @@ function compress()
         )  # If we made it here, we are not in a blacklist tag.
         %Six';
 
-    $new_buffer = preg_replace($re, "", $buffer);
+    $new_buffer = preg_replace($re, " ", $buffer);
 
     // We are going to check if processing has working
-    if ($new_buffer === null)
-    {
+    if ($new_buffer === null) {
         $new_buffer = $buffer;
     }
 
     $CI->output->set_output($new_buffer);
     $CI->output->_display();
 }
-
-/* End of file compress.php */
-/* Location: ./system/application/hooks/compress.php */

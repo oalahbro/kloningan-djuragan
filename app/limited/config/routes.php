@@ -1,4 +1,6 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -17,13 +19,13 @@
 |
 | Please see the user guide for complete details:
 |
-|	http://codeigniter.com/user_guide/general/routing.html
+|	https://codeigniter.com/user_guide/general/routing.html
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
 | -------------------------------------------------------------------------
 |
-| There area two reserved routes:
+| There are three reserved routes:
 |
 |	$route['default_controller'] = 'welcome';
 |
@@ -33,20 +35,48 @@
 |
 |	$route['404_override'] = 'errors/page_missing';
 |
-| This route will tell the Router what URI segments to use if those provided
-| in the URL cannot be matched to a valid route.
+| This route will tell the Router which controller/method to use if those
+| provided in the URL cannot be matched to a valid route.
 |
+|	$route['translate_uri_dashes'] = FALSE;
+|
+| This is not exactly a route, but allows you to automatically route
+| controller and method names that contain dashes. '-' isn't a valid
+| class or method name character, so it requires translation.
+| When you set this option to TRUE, it will replace ALL dashes in the
+| controller and method URI segments.
+|
+| Examples:	my-controller/index	-> my_controller/index
+|		my-controller/my-method	-> my_controller/my_method
 */
-
-$route['default_controller'] = "beranda";
+$route['default_controller'] = 'auth/masuk';
 $route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
 
-$route['administrator'] = 'admin/default_c';
-$route['administrator/(:any)'] = "admin/default_c/$1";
+$route['download'] = 'download';
 
-$route['user'] = 'user/default_c';
-$route['user/(:any)'] = "user/default_c/$1";
+$route['login'] = 'auth/masuk';
+$route['logout'] = 'keluar';
+$route['valid'] = 'auth/valid';
+$route['forgot'] = 'auth/lupa';
+$route['register'] = 'auth/daftar';
 
+$route['admin'] = 'admin/pesanan/lihat';
+$route['admin/pesanan'] = 'admin/pesanan/lihat';
+$route['admin/pesanan/sunting'] = 'admin/pesanan/sunting';
+$route['admin/pesanan/tambah'] = 'admin/pesanan/tambah';
+$route['admin/pesanan/hapus'] = 'admin/pesanan/hapus';
+$route['admin/chart'] = 'admin/chart';
 
-/* End of file routes.php */
-/* Location: ./application/config/routes.php */
+$route['pesanan'] = 'reseller/pesanan/lihat';
+$route['pesanan/tambah'] = 'reseller/pesanan/tambah';
+$route['pesanan/sunting'] = 'reseller/pesanan/sunting';
+$route['pesanan/(:any)'] = 'reseller/pesanan/lihat/$1';
+
+$route['(:any)'] = 'cs/pesanan/lihat/$1';
+$route['(:any)/tambah'] = 'cs/pesanan/tambah/$1';
+$route['(:any)/sunting'] = 'cs/pesanan/sunting';
+$route['(:any)/pesanan'] = 'cs/pesanan/lihat/$1';
+$route['(:any)/pesanan/(:any)'] = 'cs/pesanan/lihat/$1/$2';
+
+$route['(:any)/chart'] = 'cs/chart';
