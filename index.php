@@ -72,7 +72,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'system/juragan';
+	$application_folder = 'app/limited';
 
 /*
  * --------------------------------------------------------------------
