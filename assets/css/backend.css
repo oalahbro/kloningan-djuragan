@@ -1,0 +1,83 @@
+body {
+	padding-top: 90px;
+	background: #eee;
+}
+.limited {
+  margin-bottom: 20px;
+}
+
+.utama {
+	background: #fff;
+	padding-top: 20px;
+}
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #29d;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}
+
+.btn-bank, .btn-status {
+  background: transparent;
+  cursor: default;
+}
+.btn-bank {
+  border: 1px solid #333;
+}
+.btn-status.lunas {
+  border: 1px solid #5cb85c;
+}
+.btn-status.dp {
+  border: 1px solid #d9534f;
+}
+/* https://codepen.io/dimbslmh/full/mKfCc */
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.flyover {
+  overflow: hidden;
+  position: fixed;
+  width: 50%;
+  z-index: 1050;
+  right: 0;
+  bottom: 0;
+  margin: 20px;
+  left: 50%;
+}
+
+.berijarakbawah {
+  margin-bottom: 10px;
+}

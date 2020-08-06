@@ -11,16 +11,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |	https://codeigniter.com/user_guide/general/hooks.html
 |
 */
-$hook['post_controller_constructor'] = array(
-     'class'    => '',
-     'function' => 'load_config',
-     'filename' => 'pengaturan.php',
-     'filepath' => 'hooks'
+$hook['post_controller_constructor'][] = array(
+	'class'    => '',
+	'function' => 'load_config',
+	'filename' => 'pengaturan.php',
+	'filepath' => 'hooks'
+);
+
+$hook['post_controller_constructor'][] = array(
+	'function' => 'redirect_ssl',
+	'filename' => 'ssl.php',
+	'filepath' => 'hooks'
 );
 
 $hook['display_override'][] = array(
-    'class' => '',
-    'function' => 'compress',
-    'filename' => 'compress.php',
-    'filepath' => 'hooks'
+	'class' => '',
+	'function' => 'compress',
+	'filename' => 'compress.php',
+	'filepath' => 'hooks'
 );

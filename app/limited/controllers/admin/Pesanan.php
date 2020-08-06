@@ -134,6 +134,8 @@ class Pesanan extends admin_controller
 					$ongkir = $this->input->post('ongkir');
 					$kurir = $this->input->post('kurir');
 
+					$tanggal_unix = strtotime($tanggal);
+
 					$slug = save_url_decode($slug_enc);
 					
 					if($kirim === 'pending') {
@@ -142,14 +144,14 @@ class Pesanan extends admin_controller
 					}
 					else {
 						// set kiri dengan input resi
-						$set_kirim = $this->pesanan->set_kirim($slug, 'terkirim');
+						$set_kirim = $this->pesanan->set_kirim($slug, 'terkirim', $tanggal_unix);
 
 						if($set_kirim) {
 							$response['status'] = ($set_kirim ? 'sukses' : 'gagal');
 							$data = array(
 								'k' => $kurir,
 								'n' => $resi,
-								'd' => strtotime($tanggal)
+								'd' => $tanggal_unix
 								);
 
 							$this->pesanan->submit_resi($slug, $data);
@@ -259,14 +261,15 @@ class Pesanan extends admin_controller
 				$count = $count + (int) $jumlah[$i];
 			}
 
-			
 			// $keterangan['p'] = $dp;
 			if( ! empty($keterangan)) {
 				$ket_data['n'] = $keterangan;
 			}
 
-			if( ! empty($image) OR $image !== '[]') {
-				$ket_data['i'] = json_decode($image);
+			$gmb = json_decode($image);
+
+			if( ! empty($gmb)) {
+				$ket_data['i'] = $gmb;
 			}
 
 			$data = array(
@@ -403,8 +406,10 @@ class Pesanan extends admin_controller
 					$ket_data['n'] = $keterangan;
 				}
 
-				if( ! empty($image) && $image !== '[]') {
-					$ket_data['i'] = json_decode($image);
+				$gmb = json_decode($image);
+
+				if( ! empty($gmb)) {
+					$ket_data['i'] = $gmb;
 				}
 
 				$data = array(

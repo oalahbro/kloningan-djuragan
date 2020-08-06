@@ -75,6 +75,7 @@ echo doctype('html5'); ?>
 					</li>
 					<li><?php echo anchor('admin/pesanan/tambah', 'Tambah Pesanan'); ?></li>
 					<li><?php echo anchor('admin/chart', 'Chart'); ?></li>
+					<li><?php echo anchor('excel', 'Export Data'); ?></li>
 				</ul>
 				
 				<ul class="nav navbar-nav navbar-right">

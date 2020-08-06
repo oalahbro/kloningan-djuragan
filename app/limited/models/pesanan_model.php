@@ -26,7 +26,7 @@ class Pesanan_model extends CI_Model
 	 *
 	 * @return      array
 	 */
-	public function ambil_semua($juragan = FALSE, $oleh = FALSE, $status = 'all', $limit = FALSE, $offset = FALSE, $cari = FALSE, $by = FALSE) {
+	public function ambil_semua($juragan = FALSE, $oleh = FALSE, $status = 'all', $limit = FALSE, $offset = FALSE, $cari = FALSE, $by = FALSE, $mulai = FALSE, $akhir = FALSE) {
 		if($juragan !== FALSE) {
 			$this->db->having('juragan', $juragan);
 		}
@@ -37,6 +37,11 @@ class Pesanan_model extends CI_Model
 		if($limit !== FALSE && $offset !== FALSE) {
 			$this->db->limit($limit);
 			$this->db->offset($offset);
+		}
+
+		if($mulai !== FALSE && $akhir !== FALSE) {
+			$this->db->where( 'tanggal_cek_kirim >=', strtotime($mulai) );
+			$this->db->where( 'tanggal_cek_kirim <=', strtotime($akhir) );
 		}
 
 		// pencarian data
@@ -67,7 +72,12 @@ class Pesanan_model extends CI_Model
 		}
 		else if($status === 'terkirim') {
 			$this->db->having(array('status_kirim' => 'terkirim'));
-			$this->db->order_by('status_kirim asc, tanggal_cek_kirim desc, tanggal_submit desc');
+			if($mulai !== FALSE && $akhir !== FALSE) {
+				$this->db->order_by('status_kirim asc, tanggal_cek_kirim asc, tanggal_submit asc');
+			}
+			else {
+				$this->db->order_by('status_kirim asc, tanggal_cek_kirim desc, tanggal_submit desc');
+			}
 		}
 		else {
 			$this->db->order_by('status_transfer desc, status_kirim desc, tanggal_submit desc');
@@ -103,8 +113,8 @@ class Pesanan_model extends CI_Model
 		}
 	}
 
-	public function set_kirim($slug, $status) {
-		$this->db->where('slug', $slug)->update($this->tabel, array('status_kirim' => $status, 'tanggal_cek_kirim' => ($status === 'pending' ? NULL : time()) ));
+	public function set_kirim($slug, $status, $tanggal ='') {
+		$this->db->where('slug', $slug)->update($this->tabel, array('status_kirim' => $status, 'tanggal_cek_kirim' => ($status === 'pending' ? NULL : $tanggal )));
 
 		if ($this->db->affected_rows() > -1) {
 			$this->unset_resi($slug);
@@ -326,6 +336,18 @@ class Pesanan_model extends CI_Model
 			else {
 				return 0;
 			}
+		}
+		elseif ($stat === 'semua') {
+			$this->db->select('SUM(count) as jumlah');
+			$this->db->where('juragan', $id_juragan);
+			$this->db->where('status_transfer', 'ada');
+
+			$q = $this->db->get($this->tabel);
+
+			$r = $q->row();
+
+			return (int) $r->jumlah;
+
 		}
 	}
 }

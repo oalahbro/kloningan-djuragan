@@ -78,8 +78,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									?></td>
 								</tr>
 
-							<?php }
+							<?php 
 							$i++;
+							}
 						}
 						else {
 							echo '<tr><td colspan="7" class="warning text-center">Tidak ada data</td></tr>';

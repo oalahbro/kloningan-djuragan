@@ -180,8 +180,10 @@ class Pesanan extends user_controller
 				$ket_data['n'] = $keterangan;
 			}
 
-			if( ! empty($image) OR $image !== '[]') {
-				$ket_data['i'] = json_decode($image);
+			$gmb = json_decode($image);
+
+			if( ! empty($gmb)) {
+				$ket_data['i'] = $gmb;
 			}
 
 			$username = $this->session->username;
@@ -324,8 +326,10 @@ class Pesanan extends user_controller
 					$ket_data['n'] = $keterangan;
 				}
 
-				if( ! empty($image) && $image !== '[]') {
-					$ket_data['i'] = json_decode($image);
+				$gmb = json_decode($image);
+
+				if( ! empty($gmb)) {
+					$ket_data['i'] = $gmb;
 				}
 
 				$data = array(

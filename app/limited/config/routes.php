@@ -60,13 +60,15 @@ $route['logout'] = 'keluar';
 $route['valid'] = 'auth/valid';
 $route['forgot'] = 'auth/lupa';
 $route['register'] = 'auth/daftar';
+$route['excel'] = 'excel';
 
 $route['admin'] = 'admin/pesanan/lihat';
 $route['admin/pesanan'] = 'admin/pesanan/lihat';
 $route['admin/pesanan/sunting'] = 'admin/pesanan/sunting';
 $route['admin/pesanan/tambah'] = 'admin/pesanan/tambah';
 $route['admin/pesanan/hapus'] = 'admin/pesanan/hapus';
-$route['admin/chart'] = 'admin/chart';
+$route['admin/chart'] = 'admin/another/chart';
+$route['admin/export'] = 'admin/another/export';
 
 $route['pesanan'] = 'reseller/pesanan/lihat';
 $route['pesanan/tambah'] = 'reseller/pesanan/tambah';

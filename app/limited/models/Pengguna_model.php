@@ -103,8 +103,8 @@ class Pengguna_model extends CI_Model
 		$gp = $this->db->get('pesanan');
 
 		$t = $gp->row();
-
-		return $t->juragan;
+		
+		return ($gp->num_rows() > 0 ? $t->juragan : $jur[0]);
 	}
 
 	public function _juragan_cs($username) {
