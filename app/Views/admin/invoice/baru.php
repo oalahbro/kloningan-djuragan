@@ -821,9 +821,6 @@ $(function() {
 	emef.on('submit',function(f){
 		f.preventDefault(),
 		f.stopPropagation();
-
-		
-		
 		
 		// Abort any pending request
 		if (request) {
@@ -860,7 +857,6 @@ $(function() {
 		request.fail(function (jqXHR, textStatus, errorThrown){
 			// 
 			// console.log( Object.keys(jqXHR['responseJSON']).length);
-
 			$( Object.entries(jqXHR['responseJSON']) ).each(function( i,v ) {
 				var Tid = 't-'+uniqId();
 

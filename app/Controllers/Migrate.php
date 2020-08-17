@@ -9,7 +9,7 @@ class Migrate extends \CodeIgniter\Controller
 
 		try
 		{
-		  $migrate->latest();
+			$migrate->latest();
 		}
 		catch (\Exception $e)
 		{

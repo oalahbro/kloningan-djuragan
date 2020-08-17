@@ -37,12 +37,23 @@ $pager = \Config\Services::pager();
     <div class="card rounded-lg shadow-sm mb-3">
         <div class="card-body">
             <div class="d-flex flex-column flex-sm-row justify-content-between">
-                <div>
-                    <h5 class="card-title mb-0">#<?= $pesanan->seri; ?></h5>
-                    <p class="text-muted small mb-1">(<?php 
-                    $time = Time::createFromFormat('Y-m-d', $pesanan->tanggal_pesan);
-                    echo $time->toLocalizedString('EEEE, d MMMM yyyy');
-                    ?>)</p>
+                <div class="d-flex align-items-center">
+                    <div class="mr-3">
+                        <h5 class="card-title mb-0">#<?= $pesanan->seri; ?></h5>
+                        <p class="text-muted small mb-1">(<?php 
+                        $time = Time::createFromFormat('Y-m-d', $pesanan->tanggal_pesan);
+                        echo $time->toLocalizedString('EEEE, d MMMM yyyy');
+                        ?>)</p>
+                    </div>
+
+                    <div class="border-left pl-3">
+                        <?php 
+                        $juragan = json_decode($pesanan->juragan);
+                        $pengguna = json_decode($pesanan->pengguna);
+                        ?>
+                        <span class="text-muted text-lowercase">Juragan:</span> <?= anchor('invoices/index/'.$juragan->slug, $juragan->nama); ?><br/>
+                        <span class="text-muted text-lowercase">Admin/CS:</span> <?= $pengguna->nama; ?>
+                    </div>
                 </div>
 
                 <div>
@@ -106,20 +117,10 @@ $pager = \Config\Services::pager();
                         </div>
                     </div>
 
-                    <div class="mb-3 border-bottom pb-2">
+                    <div>
                         <div class="card-subtitle text-muted text-uppercase small">Asal Orderan</div>
                         <div><?= label_asal($pesanan->source_id, $pesanan->label_asal); ?></div>
                     </div>
-
-                    <div class="small">
-                        <?php 
-                        $juragan = json_decode($pesanan->juragan);
-                        $pengguna = json_decode($pesanan->pengguna);
-                        ?>
-                        <span class="text-muted text-lowercase">Juragan:</span> <?= anchor('invoices/index/'.$juragan->slug, $juragan->nama); ?><br/>
-                        <span class="text-muted text-lowercase">Admin/CS:</span> <?= $pengguna->nama; ?>
-                    </div>
-
                 </div>
                 
                 <div class="col-12 col-sm-2 mb-3">
@@ -163,16 +164,21 @@ $pager = \Config\Services::pager();
                 <div class="col-12 col-sm-3 mb-3">
                     <div class="mb-3">
                         <div class="card-subtitle text-muted text-uppercase small">Info Biaya</div>
-
+                        <?php 
+                        $sudah_bayar = 0;
+                        $kekurangan = 0;
+                        if ($pesanan->pembayaran !== NULL) {
+                            foreach (json_decode($pesanan->pembayaran) as $pay) {
+                                if($pay->status === 3) {
+                                    $sudah_bayar += $pay->nominal;
+                                }
+                            }
+                        }
+                        ?>
                         <div class="d-flex flex-column-reverse">
                             <div class="p-2 mx-1 list-group-item-secondary">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="small d-flex text-muted text-uppercase">Kekurangan</div>
-                                    <div class="font-weight-bold">Rp 20.000</div>
-                                </div>
-                                
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="small d-flex text-muted text-uppercase">Harga Barang</div>
+                                    <div class="small d-flex text-muted text-uppercase">Harga Produk</div>
                                     <div class="font-weight-bold"><?= number_to_currency( $harga_barang, 'IDR'); ?></div>
                                 </div>
 
@@ -190,6 +196,15 @@ $pager = \Config\Services::pager();
                                 }
                                 ?>
 
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">Sudah</span>&nbsp;Bayar</div>
+                                    <div class="font-weight-bold"><?= number_to_currency( $sudah_bayar, 'IDR'); ?></div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">Kurang</span>&nbsp;Bayar</div>
+                                    <div class="font-weight-bold"><?= number_to_currency( $wajib_bayar-$sudah_bayar, 'IDR'); ?></div>
+                                </div>
                             </div>
                             <div class="p-2 list-group-item-danger shadow rounded rounded-sm">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -198,10 +213,6 @@ $pager = \Config\Services::pager();
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <div class="card-subtitle text-muted text-uppercase small">Pembayaran</div>
                     </div>
                 </div>
 
@@ -234,7 +245,7 @@ $pager = \Config\Services::pager();
 
             <!-- Example split danger button -->
             <div class="btn-group">
-                <button type="button" class="btn btn-outline-secondary">Action</button>
+                <?= anchor('invoices/sunting/' . $pesanan->seri , '<i class="fad fa-pencil"></i> Sunting', ['class' => 'btn btn-outline-secondary', 'role' => 'button']); ?>
                 <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
@@ -247,13 +258,39 @@ $pager = \Config\Services::pager();
                 </ul>
             </div>
 
-            <button class="btn btn-dark ml-1"><i class="fad fa-comment-alt-plus"></i> Status Orderan</button>
-
-
+            <button data-toggle="modal" data-target="#modalProgress" class="btn btn-dark ml-1"><i class="fad fa-comment-alt-plus"></i> Proses Orderan</button>
         </div>
     </div>
     <?php } ?>
     
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalProgress" tabindex="-1" aria-labelledby="modalProgressLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <?= form_open('', ['class' => 'modal-content']); ?>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalProgressLabel">Status Proses Orderan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <?= form_label('Pilih Status', 'status', ['class' => 'form-label']); ?>
+                    <?= form_dropdown('juragan', ['' => 'Pilih Juragan'], '', ['class'=> 'form-select', 'id' => 'juragan', 'required' => '']); ?>
+                </div>
+                <div class="mb-3">
+                    <?= form_label('Note / Keterangan', 'keterangan', ['class' => 'form-label']); ?>
+                    <?= form_input(['name' => 'keterangan', 'id' => 'keterangan', 'class' => 'form-control', 'placeholder' => 'opsional']); ?>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link text-decoration-none" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        <?= form_close(); ?>
+    </div>
 </div>
 
 <?= $this->endSection() ?>
