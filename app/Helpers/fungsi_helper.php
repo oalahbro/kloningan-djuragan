@@ -144,12 +144,12 @@ if( ! function_exists('status_orderan')) {
 				$ico = 'layer-group';
 				if ($mulai !== NULL && $selesai !== NULL) {
 					$class = 'full';
-					$title = 'Bahan belum ada';
+					$title = 'Bahan sudah ada';
 					$time = Time::createFromTimestamp($selesai);
 					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
 				}
 				else if ($mulai !== NULL && $selesai === NULL) {
-					$title = 'Bahan sudah ada';
+					$title = 'Bahan belum ada';
 					$time = Time::createFromTimestamp($mulai);
 					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
 				}
@@ -164,7 +164,7 @@ if( ! function_exists('status_orderan')) {
 					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
 				}
 				else if ($mulai !== NULL && $selesai === NULL) {
-					$title = 'Belum selesai sablon';
+					$title = 'Mulai di-sablon';
 					$time = Time::createFromTimestamp($mulai);
 					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
 				}
@@ -179,7 +179,7 @@ if( ! function_exists('status_orderan')) {
 					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
 				}
 				else if ($mulai !== NULL && $selesai === NULL) {
-					$title = 'Belum selesai bordir';
+					$title = 'Mulai di-bordir';
 					$time = Time::createFromTimestamp($mulai);
 					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
 				}
@@ -189,19 +189,19 @@ if( ! function_exists('status_orderan')) {
 				$ico = 'cut fa-rotate-270';
 				if ($mulai !== NULL && $selesai !== NULL) {
 					$class = 'full';
-					$title = 'Sudah selesai dipenjahit';
+					$title = 'Selesai dari penjahit';
 					$time = Time::createFromTimestamp($selesai);
 					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
 				}
 				else if ($mulai !== NULL && $selesai === NULL) {
-					$title = 'Belum selesai dipenjahit';
+					$title = 'Masuk ke penjahit';
 					$time = Time::createFromTimestamp($mulai);
 					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
 				}
 				break;
 			
 			case 6:
-				$ico = 'file-tasks';
+				$ico = 'tasks';
 				if ($mulai !== NULL && $selesai !== NULL) {
 					$class = 'full';
 					$title = 'QC selesai';
@@ -219,21 +219,21 @@ if( ! function_exists('status_orderan')) {
 				$ico = 'box-alt';
 				if ($mulai !== NULL && $selesai !== NULL) {
 					$class = 'full';
-					$title = 'Orderan sudah dipacking';
+					$title = 'Selesai dipacking';
 					$time = Time::createFromTimestamp($selesai);
 					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
 				}
 				else if ($mulai !== NULL && $selesai === NULL) {
-					$title = 'Orderan belum dipacking';
+					$title = 'Sedang dipacking';
 					$time = Time::createFromTimestamp($mulai);
 					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
 				}
 				break;
 		}
 
-		$html = '<li class="'. $class .'" data-toggle="tooltip" data-placement="top" title="'. $title .'">';
-			$html .= '<i class="fad fa-'. $ico .' icon"></i>';
-			$html .= '<span><abbr title="'. $time->humanize() .'">'. $time->day .'/'. $time->month .'</abbr></span>';
+		$html = '<li class="list-inline-item mr-0 position-relative '. $class .'" data-toggle="tooltip" data-placement="top" title="'. $title .'"><div class="d-flex justify-content-center">';
+			$html .= '<div class="text-center"><i class="fad fa-'. $ico .' icon d-block"></i>';
+			$html .= '<span><abbr title="'. $time->humanize() .'">'. $time->day .'/'. $time->month .'</abbr></span></div></div>';
 		$html .= '</li>';
 
 		return $html;

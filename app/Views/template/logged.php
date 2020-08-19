@@ -43,78 +43,66 @@ $JSmin = new Minify\JS();
 		height: auto
 	}
 
-	.timeline {
+	.timeliner {
 		font-size: 0;
 	}
-
-	.timeline li {
-		display: inline-flex;
-		position: relative;
-		text-align: center;
-		height: 60px;
+	.timeliner li {
 		width: 40px;
-		align-items: center;
-		flex-direction: column;
-		justify-content: center;
-		color: #ddd
 	}
-
-	.timeline li:before {
+	.timeliner li:before {
 		content: "";
 		position: absolute;
 		width: 100%;
 		height: 2px;
 		background: #ddd;
+		bottom: 19px;
 	}
-
-	.timeline li.start:before {
+	.timeliner li.start:before {
 		width: 50%;
 		left: 50%;
 	}
-
-	.timeline li.end:before {
+	.timeliner li.end:before {
 		width: 50%;
 		right: 50%;
 	}
-
-	.timeline li:after {
+	.timeliner li:after {
 		content: "";
 		width: 10px;
 		height: 10px;
 		background: #ddd;
 		border-radius: 50%;
 		position: absolute;
-		bottom: 25px;
+		bottom: 15px;
+		left: calc(50% - (5px));
 	}
-
-	.timeline li.full {
+	.timeliner .icon {
+		font-size: 25px !important;
+		margin-bottom: 5px;
+		color: #ddd;
+	}
+	.timeliner span {
+		font-size: 13px !important;
+	}
+	.timeliner li.full {
 		color: #28a745 !important;
 	}
-
-	.timeline li.full:before,
-	.timeline li.full:after {
+	.timeliner li.full:before,
+	.timeliner li.full:after {
 		background-color: #28a745 !important;
 	}
-
-	.timeline li.half {
+	.timeliner li.full .icon {
+		color: #28a745 !important;
+	}
+	.timeliner li.half {
 		color: #ffc107 !important;
 	}
-
-	.timeline li.half:before,
-	.timeline li.half:after {
+	.timeliner li.half:before,
+	.timeliner li.half:after {
 		background-color: #ffc107 !important;
 	}
-
-	.timeline li>.icon {
-		position: relative;
-		top: -15px;
-		font-size: 22px !important;
+	.timeliner li.half .icon {
+		color: #ffc107 !important;
 	}
-
-	.timeline li>span {
-		font-size: 10px !important;
-	}
-
 
 	.dropdown-menu.notify-drop {
 		min-width: 330px;

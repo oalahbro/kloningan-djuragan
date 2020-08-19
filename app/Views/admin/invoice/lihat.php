@@ -56,23 +56,83 @@ $pager = \Config\Services::pager();
                     </div>
                 </div>
 
+                <?php 
+                $sudah_bayar = 0;
+                if ($pesanan->pembayaran !== NULL) {
+                    foreach (json_decode($pesanan->pembayaran) as $pay) {
+                        if($pay->status === 3) {
+                            $sudah_bayar += $pay->nominal;
+                        }
+                    }
+                }
+
+                switch ($pesanan->status_pembayaran) {
+                    case 2: // tunggu konfirmasi
+                        $c_status_bayar = 'warning';
+                        $t_status_bayar = 'Sebagian sudah dibayar';
+                        break;
+                    case 3: // kredit
+                        $c_status_bayar = 'warning';
+                        $t_status_bayar = 'Sebagian sudah dibayar';
+                        break;
+                    case 4: // kelebihan
+                        $c_status_bayar = 'primary';
+                        $t_status_bayar = 'Pembayaran lunas, ada kelebihan';
+                        break;
+                    case 5: // lunas
+                        $c_status_bayar = 'success';
+                        $t_status_bayar = 'Pembayaran sudah Lunas';
+                        break;
+                    default: // belum bayar
+                        $c_status_bayar = 'danger';
+                        $t_status_bayar = 'Belum ada pembayaran';
+                        break;
+                }
+                ?>
+
                 <div>
-                    <ul class="timeline p-0 m-0 position-relative">
-                        <li class="start full" data-toggle="tooltip" data-placement="top" title="Pesanan Ditambahkan">
-                            <i class="fad fa-plus-circle icon"></i>
-                            <?= '<span><abbr title="'. $time->humanize() .'">'. $time->day .'/'. $time->month .'</abbr></span>'; ?>
+                    <ul class="list-inline mb-0 timeliner">
+                        <li class="list-inline-item mr-0 position-relative start full" data-toggle="tooltip" data-placement="top" title="Pesanan Ditambahkan">
+                            <div class="d-flex justify-content-center">
+                                <div class="text-center">
+                                    <i class="fad fa-plus-circle icon d-block"></i>
+                                    <?= '<span><abbr title="'. $time->humanize() .'">'. $time->day .'/'. $time->month .'</abbr></span>'; ?>
+                                </div>
+                            </div>
                         </li>
-                        <li class="half" data-toggle="tooltip" data-placement="top" title="Dibayar Lunas">
-                            <i class="fad fa-wallet icon"></i>
-                            <span>16/7</span>
+                        
+                        <li class="list-inline-item mr-0 position-relative <?= ($sudah_bayar > 0?'half':'');?>" data-toggle="tooltip" data-placement="top" title="Dibayar Lunas">
+                            <div class="d-flex justify-content-center">
+                                <div class="text-center">
+                                    <i class="fad fa-wallet icon d-block"></i>
+                                    <span>??/??</span>
+                                </div>
+                            </div>
                         </li>
+                        
                         <?php 
                         $statuss = json_decode($pesanan->status);
+                        $dipacking = FALSE;
                         if ($statuss !== NULL) {
                             foreach ($statuss as $status) {
                                 echo status_orderan($status->status, $status->tanggal_masuk, $status->tanggal_selesai, $status->keterangan_masuk, $status->keterangan_selesai);
+
+                                if(isset($status->status) && $status->status == 7) {
+                                    $dipacking = TRUE;
+                                }
                             }
                         }
+                        ?>
+                        <?php if ($dipacking) { ?>
+                            <li class="list-inline-item mr-0 position-relative end" data-toggle="tooltip" data-placement="top" title="Belum dikirim">
+                                <div class="d-flex justify-content-center">
+                                    <div class="text-center">
+                                        <i class="fad fa-truck icon d-block"></i>
+                                        <span>??/??</span>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php }
                         ?>
                     </ul>
                 </div>
@@ -164,17 +224,6 @@ $pager = \Config\Services::pager();
                 <div class="col-12 col-sm-3 mb-3">
                     <div class="mb-3">
                         <div class="card-subtitle text-muted text-uppercase small">Info Biaya</div>
-                        <?php 
-                        $sudah_bayar = 0;
-                        $kekurangan = 0;
-                        if ($pesanan->pembayaran !== NULL) {
-                            foreach (json_decode($pesanan->pembayaran) as $pay) {
-                                if($pay->status === 3) {
-                                    $sudah_bayar += $pay->nominal;
-                                }
-                            }
-                        }
-                        ?>
                         <div class="d-flex flex-column-reverse">
                             <div class="p-2 mx-1 list-group-item-secondary">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -189,24 +238,43 @@ $pager = \Config\Services::pager();
                                     ?>
                                 
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold"><?= ($c->biaya_id === 1? 'Ongkir': 'Lainnya'); ?></span>&nbsp;<?= ($c->label !== "null"?$c->label:''); ?></div>
-                                    <div class="font-weight-bold <?= ($c->nominal < 0? 'text-danger':''); ?>"><?= number_to_currency( $c->nominal, 'IDR'); ?></div>
+                                    <div class="small d-flex text-muted text-uppercase text-truncate"><span class="font-weight-bold"><?php 
+                                    $biaya = 'Lainnya';
+                                    if ($c->biaya_id === 1) {
+                                        $biaya = 'Ongkir';
+                                    }
+                                    $label = $c->label;
+                                    if($c->label !== "null" && $c->biaya_id !== 1) {
+                                        $biaya = $c->label;
+                                        $label = '';
+                                    }
+                                    elseif ($c->label === 'null' && $c->biaya_id !== 1) {
+                                        $label = '';
+                                    }                                    
+                                    ?><?= $biaya; ?></span>&nbsp;<?= $label; ?></div>
+                                    <div class="font-weight-bold text-nowrap pl-2 <?= ($c->nominal < 0? 'text-danger':''); ?>"><?= number_to_currency( $c->nominal, 'IDR'); ?></div>
                                 </div>
                                     <?php }
                                 }
+                                echo '<hr/>';
+                                if ($sudah_bayar > 0) {
                                 ?>
 
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">Sudah</span>&nbsp;Bayar</div>
                                     <div class="font-weight-bold"><?= number_to_currency( $sudah_bayar, 'IDR'); ?></div>
                                 </div>
-
+                                <?php }
+                                if (($wajib_bayar-$sudah_bayar) > 0 ) {
+                                ?>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">Kurang</span>&nbsp;Bayar</div>
-                                    <div class="font-weight-bold"><?= number_to_currency( $wajib_bayar-$sudah_bayar, 'IDR'); ?></div>
+                                    <div class="font-weight-bold text-danger"><?= number_to_currency(-($wajib_bayar-$sudah_bayar), 'IDR'); ?></div>
                                 </div>
+                                <?php }
+                                ?>
                             </div>
-                            <div class="p-2 list-group-item-danger shadow rounded rounded-sm">
+                            <div class="p-2 list-group-item-<?= $c_status_bayar; ?> shadow rounded rounded-sm">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="small text-uppercase">Wajib Bayar</div>
                                     <div class="h3 mb-0"><?= number_to_currency( $wajib_bayar, 'IDR'); ?></div>
@@ -258,7 +326,7 @@ $pager = \Config\Services::pager();
                 </ul>
             </div>
 
-            <button data-toggle="modal" data-target="#modalProgress" class="btn btn-dark ml-1"><i class="fad fa-comment-alt-plus"></i> Proses Orderan</button>
+            <button data-status='<?= $pesanan->status; ?>' data-toggle="modal" data-target="#modalProgress" class="btn btn-dark ml-1 pesanStatus"><i class="fad fa-comment-alt-plus"></i> Proses Orderan</button>
         </div>
     </div>
     <?php } ?>
@@ -280,6 +348,22 @@ $pager = \Config\Services::pager();
                     <?= form_label('Pilih Status', 'status', ['class' => 'form-label']); ?>
                     <?= form_dropdown('juragan', ['' => 'Pilih Juragan'], '', ['class'=> 'form-select', 'id' => 'juragan', 'required' => '']); ?>
                 </div>
+
+                <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Default radio
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Default checked radio
+                        </label>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <?= form_label('Note / Keterangan', 'keterangan', ['class' => 'form-label']); ?>
                     <?= form_input(['name' => 'keterangan', 'id' => 'keterangan', 'class' => 'form-control', 'placeholder' => 'opsional']); ?>
@@ -344,6 +428,13 @@ $(function() {
 			$(a.join('')).appendTo('#listLi');
 		});
 	});
+
+    //
+    $('.pesanStatus').on('click',function(){
+        let status = $(this).data('status');
+        console.log(status[0].status);
+    });
+
 });
 JS;
 
