@@ -39,18 +39,6 @@ class Invoices extends BaseController
 		
 	}
 
-	public function tes()
-	{
-		$t = $this->user->find('1');
-
-		$words = 'abang punya duid';
-		// $r = array_slice(explode('-', url_title($words)), 0, 2);
-		print('<pre>');
-		// print_r($t->name);
-		print_r(first_letter('a', $length = 2));
-		print('</pre>');
-	}
-
 	/*
 	 * halaman pembuatan invoice baru
 	 * 
@@ -161,4 +149,121 @@ class Invoices extends BaseController
 			}
 		}
 	}
+
+	public function save_progress()
+	{
+		if (! isAuthorized())
+		{
+			// tidak login, redirect ke halaman auth
+			return redirect()->to('/auth');
+		}
+
+		if($this->request->getPost()) {
+			$this->validation->setRuleGroup('simpanProgress');
+		}
+
+		if ($this->request->isAJAX())
+		{
+			if (! $this->validation->withRequest($this->request)->run()) {
+
+				$this->response->setStatusCode(406);
+				$errors = $this->validation->getErrors();
+				
+				return $this->response->setJSON($errors);
+			}
+			else
+			{
+				$db = \Config\Database::connect();
+				$builder = $db->table('invoice_status');
+
+				$invoice_id = $this->request->getPost('id_invoice');
+				$status = $this->request->getPost('status');
+				$stat = $this->request->getPost('stat');
+				$keterangan = $this->request->getPost('keterangan');
+
+				// 
+				$builder->where([
+					'invoice_id' 	=> $invoice_id,
+					'status' 		=> $status
+				]);
+
+				$obj = $builder->get()->getResult();
+
+				if(empty( $obj)) {
+					// create new status
+					$data = [
+						'invoice_id' => $invoice_id,
+						'status' => $status,
+						'tanggal_masuk' => time(),
+						'keterangan_masuk' => ($keterangan !== ''? $keterangan:NULL)
+					];
+										
+					$builder->set($data);
+					$builder->insert();
+				}
+				else {
+					// edit if not complete, or create new if complete
+					// get array of status
+					$item = [];
+					foreach($obj as $struct) {
+						if ($status == $struct->status) {
+							$item[] = $struct;
+							// break;
+						}
+					}
+
+					$last_array = end($item);
+
+					switch ($stat) {
+						case '1':
+							if ($last_array->tanggal_selesai === NULL) {
+								// edit for current
+								// add `tanggal selesai`
+								$data = [
+									'invoice_id' => $invoice_id,
+									'status' => $status,
+									'tanggal_selesai' => time(),
+									'keterangan_selesai' => ($keterangan !== ''? $keterangan:NULL)
+								];
+													
+								$builder->set($data);
+								$builder->where('id_status', $last_array->id_status);
+								$builder->update();
+								
+							}
+							else {
+								// new status with start-end
+								$data = [
+									'invoice_id' => $invoice_id,
+									'status' => $status,
+									'tanggal_masuk' => time(),
+									'tanggal_selesai' => time(),
+									'keterangan_selesai' => ($keterangan !== ''? $keterangan:NULL)
+								];
+													
+								$builder->set($data);
+								$builder->insert();
+							}
+							break;
+						
+						default:
+								// create new status
+								$data = [
+									'invoice_id' => $invoice_id,
+									'status' => $status,
+									'tanggal_masuk' => time(),
+									'keterangan_masuk' => ($keterangan !== ''? $keterangan:NULL)
+								];
+													
+								$builder->set($data);
+								$builder->insert();
+							break;
+					}
+
+				}
+				return $this->response->setJSON($obj);
+			}
+		}
+	}
+
 }

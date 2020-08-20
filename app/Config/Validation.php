@@ -90,4 +90,11 @@ class Validation
 		'produk' 		=> 'required'
 		// 'biaya' 		=> 'required'
 	];
+
+	public $simpanProgress = [
+		'id_invoice' 	=> 'required',
+		'status'		=> 'required',
+		'stat' 			=> 'required'
+		// 'keterangan' 	=> 'required'
+	];
 }
