@@ -1,5 +1,4 @@
 <?php
-use CodeIgniter\I18n\Time;
 $pager = \Config\Services::pager();
 ?>
 <?= $this->extend('template/logged') ?>
@@ -141,7 +140,7 @@ $pager = \Config\Services::pager();
 					<div class="mb-3">
 							<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
 							<?php 
-							foreach ($juragans as $juragan) {
+							foreach ($juragans->getResult() as $juragan) {
 								$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
 							}
 
@@ -225,7 +224,7 @@ $pager = \Config\Services::pager();
 				<div class="mb-3">
 					<?= form_label('Juragan', 'juragan_', ['class' => 'form-label']); ?>
 					<?php 
-					foreach ($juragans as $juragan) {
+					foreach ($juragans->getResult() as $juragan) {
 						$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
 					}
 

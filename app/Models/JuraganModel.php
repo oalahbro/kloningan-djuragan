@@ -34,7 +34,7 @@ class JuraganModel extends Model
 		$builder->where('r.table', '2');
 
 		$builder->groupBy("j.id_juragan");
-		return $builder->get();
+		return $builder;
 	}
 
 }

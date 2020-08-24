@@ -25,14 +25,30 @@ class Invoices extends BaseController
 		
 		$data = [
 			'title' 	=> 'Invoice ' . $title,
-			'pesanans' 	=> $this->invoice->ambil_data()->getResult()
+			'pesanans' 	=> $this->invoice->ambil_data()->get()->getResult()
 		];
 		echo view(base_user() . '/invoice/lihat', $data);
 	}
 
+	public function sunting($seri)
+	{
+		if (! isAuthorized())
+		{
+			// tidak login, redirect ke halaman auth
+			return redirect()->to('/auth');
+		}
+
+		$data = [
+			'title' 	=> 'Sunting Invoice ' . $seri,
+			'pesanans' 	=> $this->invoice->ambil_data()->getResult()
+		];
+		echo view(base_user() . '/invoice/lihat', $data);
+
+	}
+
 	public function ambil()
 	{
-		$q = $this->invoice->ambil_data()->getResult();
+		$q = $this->invoice->ambil_data()->get()->getResult();
 		return $this->response->setJSON($q);
 		// gunakan
 		// $bayar = html_entity_decode($key->bayar, ENT_QUOTES);
@@ -266,4 +282,49 @@ class Invoices extends BaseController
 		}
 	}
 
+	public function tespr($invoice_id, $status, $stat)
+	{
+		$db = \Config\Database::connect();
+		$builder = $db->table('invoice_status');
+
+		$query = $builder->where([
+			'invoice_id' 	=> $invoice_id,
+			'status' 		=> $status
+		]);
+
+		// $get = $builder->getResults();
+		// $r = ;
+
+		/*
+
+		if ($r === NULL) {
+			$res = ['insert status'];
+		}
+		else {
+			if ($stat === "1") {
+				// jika; lengkap, ada, selesai
+				if ($r->tanggal_selesai === NULL) {
+					$res = ['insert selesai'];
+				}
+				else {
+					$res = ['insert new mulai'];
+				}
+			}
+			else {
+				$res = ['insert mulai'];
+			}
+		}
+		*/
+
+		$obj = $builder->get()->getResultArray();
+
+	
+
+		// return $this->response->setJSON($obj);
+
+		print('<pre>');
+		var_dump($obj);
+		var_dump( ( empty( $obj) ) );
+		print('</pre>');
+	}
 }

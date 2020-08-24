@@ -34,6 +34,6 @@ class UserModel extends Model
         $builder->where('r.table', '1');
 
         $builder->groupBy("u.id");
-        return $builder->get();
+        return $builder;
     }
 }

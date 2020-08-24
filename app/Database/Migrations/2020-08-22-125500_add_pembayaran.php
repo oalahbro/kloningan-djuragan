@@ -16,14 +16,12 @@ class AddPembayaran extends \CodeIgniter\Database\Migration {
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE,
 			],
-			'tipe_pembayaran' => [
-				'type' 			 => 'ENUM',
-				'constraint' 	 => ["1","2"], //  1: cash, 2: transfer
-				'default' 		 => '1'
-			],
-			'sumber_dana' => [
-				'type'           => 'ENUM',
-				'constraint'     => ["1","2","3","4","5"], // 1: cod, 2: bca, 3: bri, 4: bni, 5:mandiri
+			'sumber_dana' => [ // dana dari tabel bank
+				'type' 			 => 'INT',
+				'constraint' 	 => 5,
+				'unsigned' 		 => TRUE,
+				'null' 			 => TRUE,
+				'default' 		 => NULL
 			],
 			'total_pembayaran' => [
 				'type' 			 => 'INT',

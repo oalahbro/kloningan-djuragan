@@ -15,7 +15,7 @@ class Api extends BaseController
 		$nama_cache = 'list_juragan';
 		$i = 0;
 		if ( ! $ngelist = $this->cache->get($nama_cache)) {
-			$listJuragan_ = $this->juragan->ambil()->getResult();
+			$listJuragan_ = $this->juragan->ambil()->get()->getResult();
 
 			$ngelist = array();
 			foreach ($listJuragan_ as $juragan) {

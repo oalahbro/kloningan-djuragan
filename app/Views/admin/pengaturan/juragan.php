@@ -1,5 +1,4 @@
 <?php
-use CodeIgniter\I18n\Time;
 $pager = \Config\Services::pager();
 ?>
 <?= $this->extend('template/logged') ?>
@@ -33,33 +32,43 @@ $pager = \Config\Services::pager();
 							</thead>
 							<tbody>
 								<?php 
-								foreach ($juragans as $juragan) { 
+								if ($juragans->resultID->num_rows > 0) { 
+									
+									foreach ($juragans->getResult() as $juragan) { 
 
-	                            $jbanks = html_entity_decode($juragan->bank, ENT_QUOTES);
-	                            $jjb = '';
-	                            foreach (json_decode($jbanks) as $bank) {
-	                            	$jjb .= $bank->id .",";
-	                            }
+									$jbanks = html_entity_decode($juragan->bank, ENT_QUOTES);
+									$jjb = '';
+									if ($jbanks !== '') {
+										foreach (json_decode($jbanks) as $bank) {
+											$jjb .= $bank->id .",";
+										}
 
-								?>
+										$jjb = reduce_multiples($jjb, ", ", TRUE);
+									}
+									?>
 
-								<tr>
-									<td>
-										<div class="d-flex justify-content-between">
-											<div class="lead"><?= $juragan->nama_juragan; ?></div>
-											<div class="">
-												<?= anchor('invoices/' . $juragan->juragan, '<i class="fad fa-file-search"></i> lihat orderan'); ?>
+									<tr>
+										<td>
+											<div class="d-flex justify-content-between">
+												<div class="lead"><?= $juragan->nama_juragan; ?></div>
+												<div class="">
+													<?= anchor('invoices/' . $juragan->juragan, '<i class="fad fa-file-search"></i> lihat orderan'); ?>
 
-												<button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSuntingJuragan" data-selected="<?= reduce_multiples($jjb, ", ", TRUE); ?>" data-id="<?= $juragan->id_juragan; ?>" data-nama="<?= $juragan->nama_juragan; ?>"><i class="fad fa-pencil"></i> sunting</button>
+													<button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSuntingJuragan" data-selected="<?= $jjb; ?>" data-id="<?= $juragan->id_juragan; ?>" data-nama="<?= $juragan->nama_juragan; ?>"><i class="fad fa-pencil"></i> sunting</button>
 
-												<a href="" class="text-decoration-none"><i class="fad fa-trash"></i> hapus</a>
-											</div>
-										</div>    									
-									</td>
-								</tr>
+													<a href="" class="text-decoration-none"><i class="fad fa-trash"></i> hapus</a>
+												</div>
+											</div>    									
+										</td>
+									</tr>
 
 								<?php 
+									}
 								}
+								else {
+									echo '<tr><td class="text-center"><i class="fad fa-user-circle fa-5x"></i><br/>Juragan masih kosong</td></tr>';
+								}
+								
 								?>
 							</tbody>
 							
@@ -78,14 +87,13 @@ $pager = \Config\Services::pager();
 					</ul>
 				</div>
 				<div class="card-body">
-
 					<?= form_open('settings/save_juragan'); ?>
 					<div class="mb-3">
 						<?= form_label('Nama Juragan', 'nama_juragan', ['class' => 'form-label']); ?>
 						<?= form_input('nama_juragan', '', ['class' => 'form-control', 'id' => 'nama_juragan', 'required' => '', 'placeholder' => 'nama juragan']); ?>
 					</div>
 					<div class="mb-3">
-						<?= form_label('Rekening Bank', 'bank', ['class' => 'form-label']); ?>
+						<?= form_label('Rekening Bank / EDC', 'bank', ['class' => 'form-label']); ?>
 						<?php 
 						foreach ($banks as $bank) {
 							$options[$bank->id_bank] = strtoupper( $bank->nama_bank ) . ' - ' . $bank->atas_nama;

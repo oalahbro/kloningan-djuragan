@@ -1,5 +1,4 @@
 <?php
-use CodeIgniter\I18n\Time;
 $pager = \Config\Services::pager();
 ?>
 <?= $this->extend('template/logged') ?>
@@ -39,7 +38,9 @@ $pager = \Config\Services::pager();
                                         <div class="text-muted"><?= $bank->atas_nama; ?></div>
                                     </td>
                                     <td>
-                                        <button class="btn btn-outline-secondary"><i class="fad fa-pencil"></i></button>
+                                        <?php if ($bank->id_bank > 2) { // COD not editable?>
+                                            <button class="btn btn-outline-secondary"><i class="fad fa-pencil"></i></button>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php 
@@ -55,20 +56,21 @@ $pager = \Config\Services::pager();
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <span class="nav-link active" aria-current="true">Tambah Bank</span>
+                            <span class="nav-link active" aria-current="true">Tambah Bank / EDC</span>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <?= form_open('settings/save_bank'); ?>
                     <div class="mb-3">
-                        <?= form_label('Nama Bank', 'nama_bank', ['class' => 'form-label']); ?>
+                        <?= form_label('Tipe Akun', 'nama_bank', ['class' => 'form-label']); ?>
                         <select name="nama_bank" id="nama_bank" class="form-select" required="">
-                            <option value="" selected="selected" disabled="">Pilih bank</option>
+                            <option value="" selected="selected" disabled="">Pilih tipe</option>
                             <option value="bca">BCA</option>
                             <option value="bni">BNI</option>
                             <option value="bri">BRI</option>
                             <option value="mandiri">Mandiri</option>
+                            <option value="edc">EDC</option>
                         </select>
                     </div>
                     <div class="mb-3">

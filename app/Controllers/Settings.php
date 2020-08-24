@@ -34,16 +34,25 @@ class Settings extends BaseController
 		if ( ! $this->validation->withRequest($this->request)->run()) {
 			$errors = $this->validation->getErrors();
 
-			// var_dump($errors);
+			var_dump($errors);
 		}
 		else {
+			$tipe = $this->request->getPost('nama_bank');
+			$tipe_bank = NULL;
+			if (in_array($tipe, ['bca','bni','mandiri','bri'])) {
+				$tipe_bank = '1';
+			}
+			else if (in_array($tipe, ['edc'])) {
+				$tipe_bank = '2';
+			}
 			$this->bank->insert([
-				'nama_bank' => $this->request->getPost('nama_bank'),
+				'nama_bank' => $tipe,
+				'tipe_bank' => $tipe_bank,
 				'rekening' => $this->request->getPost('nomor_rekening'),
 				'atas_nama' => $this->request->getPost('atas_nama')
 			]);
 
-			return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
+			// return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
 		}
 
 
@@ -64,7 +73,7 @@ class Settings extends BaseController
 
 		$data = [
 			'title' 	=> 'Pengaturan Juragan',
-			'juragans' 	=> $this->juragan->ambil()->getResult(),
+			'juragans' 	=> $this->juragan->ambil()->get(),
 			'banks' 	=> $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll()
 		];
 
@@ -177,7 +186,7 @@ class Settings extends BaseController
 
 		$data = [
 			'title' 	=> 'Pengaturan Pengguna',
-			'juragans' 	=> $this->juragan->ambil()->getResult(),
+			'juragans' 	=> $this->juragan->ambil()->get(),
 			'penggunas' => $this->user->orderBy('status DESC')->findAll()
 		];
 

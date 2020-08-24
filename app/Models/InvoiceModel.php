@@ -40,7 +40,7 @@ class InvoiceModel extends Model
 
 		$inv->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","\"id\":",s.id_status,",","\"status\":",s.status,",","\"tanggal_selesai\":",IFNULL(s.tanggal_selesai, "null"),",","\"tanggal_masuk\":",IFNULL(s.tanggal_masuk, "null"),",","\"keterangan_selesai\":","\"",IFNULL(s.keterangan_selesai, "null"),"\"",",","\"keterangan_masuk\":","\"",IFNULL(s.keterangan_masuk, "null"),"\"}")),"]") as status');
 
-		$inv->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","\"id\":",x.id_pembayaran,",","\"tipe\":",x.tipe_pembayaran,",","\"sumber\":",x.sumber_dana,",","\"nama\":","\"",bn.nama_bank,"\"",",","\"nominal\":",x.total_pembayaran,",","\"status\":",x.status,",","\"tanggal_bayar\":",x.tanggal_pembayaran,",","\"tanggal_cek\":",IFNULL(x.tanggal_cek, "null"),"}")),"]") as pembayaran');
+		$inv->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","\"id\":",x.id_pembayaran,",","\"sumber\":",x.sumber_dana,",","\"nama\":","\"",bn.nama_bank,"\"",",","\"nominal\":",x.total_pembayaran,",","\"status\":",x.status,",","\"tanggal_bayar\":",x.tanggal_pembayaran,",","\"tanggal_cek\":",IFNULL(x.tanggal_cek, "null"),"}")),"]") as pembayaran');
 
 		$inv->join('juragan j', 'j.id_juragan = i.juragan_id');
 		$inv->join('user u', 'u.id = i.user_id');
@@ -56,7 +56,7 @@ class InvoiceModel extends Model
 
 		$inv->orderBy('i.created_at', 'DESC');
 		$inv->groupBy("i.id_invoice");
-		$query = $inv->get();
-		return $query;
+		// $query = $inv->get();
+		return $inv;
 	}
 }

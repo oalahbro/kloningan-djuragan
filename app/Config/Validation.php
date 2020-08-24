@@ -47,7 +47,7 @@ class Validation
 	];
 
 	public $addBank = [
-		'nama_bank'	=> 'required|in_list[bri,bni,bca,mandiri]',
+		'nama_bank'	=> 'required|in_list[bri,bni,bca,mandiri,edc]',
 		'nomor_rekening' => 'required|max_length[50]|alpha_dash',
 		'atas_nama'	=> 'required|max_length[50]|alpha_space'
 	];

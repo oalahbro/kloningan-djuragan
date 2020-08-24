@@ -40,5 +40,5 @@ class JuraganConfig extends BaseConfig
 			'34' => '34'
 		)
 		// custom
-	); 
+	);
 }

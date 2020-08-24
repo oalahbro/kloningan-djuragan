@@ -9,7 +9,7 @@ class BankModel extends Model
 	protected $returnType = 'object';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['nama_bank', 'rekening', 'atas_nama'];
+    protected $allowedFields = ['nama_bank', 'tipe_bank', 'rekening', 'atas_nama'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
