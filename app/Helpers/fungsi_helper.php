@@ -2,22 +2,6 @@
 
 use CodeIgniter\I18n\Time;
 
-if( ! function_exists('isAuthorized')) {
-	function isAuthorized() {
-		$session = \Config\Services::session();
-		
-		if($session->has('logged')) {
-			if (! $session->get('logged')) {
-				return FALSE;
-			}
-			return TRUE;
-		}
-		else {
-			return FALSE;
-		}
-	}
-}
-
 // ------------------------------------------------------------------------
 
 if( ! function_exists('base_user')) {

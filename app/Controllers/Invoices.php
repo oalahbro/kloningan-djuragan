@@ -2,18 +2,26 @@
 
 class Invoices extends BaseController
 {
+	public function __construct()
+	{
+		$session = \Config\Services::session();
+		
+		if($session->has('logged')) {
+			if (! $session->get('logged')) {
+				return redirect()->to('/auth');
+			}
+		}
+		else {
+			return redirect()->to('/auth');
+		}
+	}
+	
 	/*
 	 * halaman untuk menampilkan semua invoice 
 	 * 
 	 */
 	public function index($juragan = 'semua')
 	{
-		if (! isAuthorized())
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
 		$title = 'Semua Juragan';
 		if ($juragan !== 'semua') {
 			$juragans = $this->juragan->where('juragan', $juragan)->findAll();
@@ -32,12 +40,6 @@ class Invoices extends BaseController
 
 	public function sunting($seri)
 	{
-		if (! isAuthorized())
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
 		$data = [
 			'title' 	=> 'Sunting Invoice ' . $seri,
 			'pesanans' 	=> $this->invoice->ambil_data()->getResult()
@@ -61,12 +63,6 @@ class Invoices extends BaseController
 	 */
 	public function baru()
 	{
-		if (! isAuthorized())
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
 		$data = [
 			'title' => 'Tulis Baru'
 		];
@@ -79,12 +75,6 @@ class Invoices extends BaseController
 	 */
 	public function save()
 	{
-		if (! isAuthorized())
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
 		if($this->request->getPost()) {
 			$this->validation->setRuleGroup('addInvoice');
 		}
@@ -168,12 +158,6 @@ class Invoices extends BaseController
 
 	public function save_progress()
 	{
-		if (! isAuthorized())
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
 		if($this->request->getPost()) {
 			$this->validation->setRuleGroup('simpanProgress');
 		}

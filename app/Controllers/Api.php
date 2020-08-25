@@ -2,15 +2,26 @@
 
 class Api extends BaseController
 {
+	public function __construct()
+	{
+		$session = \Config\Services::session();
+		
+		if($session->has('logged')) {
+			if (! $session->get('logged')) {
+				throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+			}
+		}
+		else {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
+	}
+
 	/*
 	 * ambil semua juragan
 	 * 
 	 */
 	public function get_juragan()
 	{
-		if ( ! isAuthorized()) {
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
 
 		$nama_cache = 'list_juragan';
 		$i = 0;
@@ -40,9 +51,6 @@ class Api extends BaseController
 	 */
 	public function get_pengguna()
 	{
-		if ( ! isAuthorized()) {
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
 
 		$nama_cache = 'list_admincs';
 		if ( ! $listJuragan = $this->cache->get($nama_cache)) {

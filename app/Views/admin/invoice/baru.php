@@ -9,7 +9,11 @@ $sekarang = new Time('now');
 
 <div class="container-xxl mb-3">
 
-	<h1 class="h3 mt-5">Tulis Orderan</h1>
+	<h1 class="h3 mt-5">Tulis Orderan
+	<?= var_dump(md5('akucintaindonesia')); ?>
+	<!-- 0cc175b9c0f1b6a831c399e269772661 -->
+	<!-- 7c63955010c6150d7afe96c366fd9a6e -->
+	</h1>
 
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb p-0">
