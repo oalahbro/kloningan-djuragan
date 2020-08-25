@@ -2,10 +2,25 @@
 
 class Auth extends BaseController
 {
+	private function isLogged() {
+		$session = \Config\Services::session();
+		
+		if($session->has('logged')) {
+			if (! $session->get('logged')) {
+				return FALSE;
+			}
+			return TRUE;
+		}
+		else {
+			return FALSE;
+		}
+	}
+
 	public function index()
 	{
-		if (isAuthorized()) 
+		if ($this->isLogged()) 
 		{
+			// redirect jika logged
 			return redirect()->to('/invoices');
 		}
 
@@ -25,79 +40,122 @@ class Auth extends BaseController
 			$get = $this->user->where('username', $this->request->getPost('username'))->first();
 
 			if ($get === NULL or empty($get)) {
-				$sesi = [
-					'logged'	=> FALSE
-				];
-				$redirect = '/auth/index';
-				$status = '<div class="alert alert-danger"><strong class="d-block">Nay!</strong>Kamu siapa? daftar aja dulu.</div>';				
+				$arr = [
+					'sesi' => [
+						'logged' => FALSE
+					],
+					'redirect' => '/auth/index',
+					'status' => '<div class="alert alert-danger"><strong class="d-block">Nay!</strong>Kamu siapa? daftar aja dulu.</div>'
+				];		
 			}
 			else {
-				if (password_verify($this->request->getPost('password'), $get->password)) {
-					switch ($get->status) {
-						case 'pending':
-							$sesi = [
-								'logged'	=> FALSE
-							];
-							$redirect = '/auth/index';
-							$status = '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Kamu sudah terdaftar kok, tapi cek email dulu ya.</div>';
-							break;
+				$post_pswd = $this->request->getPost('password');
+				// cek length password in db
+				if (strlen($get->password) === 32) {
+					// jika password gunakan md5()
+					// ini berguna untuk edit password lewat phpmyadmin
 
-						case 'blocked':
-							$sesi = [
-								'logged'	=> FALSE
-							];
-							$redirect = '/auth/index';
-							$status = '<div class="alert alert-danger"><strong class="d-block">Grrrr!</strong>Kamu dilarang masuk.</div>';
-							break;
-
-						case 'inactive':
-							$sesi = [
-								'logged'	=> FALSE
-							];
-							$redirect = '/auth/index';
-							$status = '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Tunggu validasi dari admin ya, atau hubungi admin segera.</div>';
-							break;
-						default:
-							$sesi = [
-								'id'  		=> $get->id,
-								'username'  => $get->username,
-								'name'  	=> $get->name,
-								'email'  	=> $get->email,
-								'level'  	=> $get->level,
-								'logged'	=> TRUE
-							];
-
-							// save for update `login_terakhir`
-							$data = [
-								'id' => $get->id,
-							    'login_terakhir' => now('Asia/Jakarta')
-							];
-
-							$this->user->save($data);
-
-							$redirect = '/invoices';
-							$status = '<div class="alert alert-sucess"><strong class="d-block">Hay!</strong>Jangan lupa bahagia ya.</div>';
-							break;
-					}
+					if ( md5( $post_pswd ) === $get->password) {
+						// jika password sama
+						$arr = $this->pass($get, $post_pswd);
+					}					
 				}
 				else {
-					$sesi = [
-						'logged'	=> FALSE
-					];
-					$redirect = '/auth/index';
-					$status = '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Ingat lagi apa kata sandimu, ku tungguin deh.</div>';
+					if (password_verify($this->request->getPost('password'), $get->password)) {
+						// jika password menggunakan password_hash()
+						$arr = $this->pass($get);
+					}
+					else {
+						$arr = [
+							'sesi' => [
+								'logged' => FALSE
+							],
+							'redirect' => '/auth/index',
+							'status' => '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Ingat lagi apa kata sandimu, ku tungguin deh.</div>'
+						];
+					}
 				}
 			}
 
-			$this->session->set($sesi);
-			return redirect()->to($redirect)->with('status', $status);
+			$this->session->set($arr['sesi']);
+			return redirect()->to($arr['redirect'])->with('status', $arr['status']);
 		}
+	}
+
+	private function pass($db, $password_to_update = FALSE)
+	{
+		switch ($db->status) {
+			case 'pending':
+				$arr = [
+					'sesi' => [
+						'logged' => FALSE
+					],
+					'redirect' => '/auth/index',
+					'status' => '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Kamu sudah terdaftar kok, tapi cek email dulu ya.</div>'
+				];
+				break;
+
+			case 'blocked':
+				$arr = [
+					'sesi' => [
+						'logged' => FALSE
+					],
+					'redirect' => '/auth/index',
+					'status' => '<div class="alert alert-danger"><strong class="d-block">Grrrr!</strong>Kamu dilarang masuk.</div>'
+				];
+				break;
+
+			case 'inactive':
+				$arr = [
+					'sesi' => [
+						'logged' => FALSE
+					],
+					'redirect' => '/auth/index',
+					'status' => '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Tunggu validasi dari admin ya, atau hubungi admin segera.</div>'
+				];
+
+				break;
+			default:
+				// save for update `login_terakhir`
+				if ($password_to_update !== FALSE) {
+					$data = [
+						'id' => $db->id,
+						'password' => password_hash($password_to_update, PASSWORD_BCRYPT),
+						'login_terakhir' => now('Asia/Jakarta')
+					];
+				}
+				else {
+					$data = [
+						'id' => $db->id,
+						'login_terakhir' => now('Asia/Jakarta')
+					];
+				}
+
+				$this->user->save($data);
+				
+				$arr = [
+					'sesi' => [
+						'id'  		=> $db->id,
+						'username'  => $db->username,
+						'name'  	=> $db->name,
+						'email'  	=> $db->email,
+						'level'  	=> $db->level,
+						'logged'	=> TRUE
+					],
+					'redirect' => '/invoices',
+					'status' => '<div class="alert alert-sucess"><strong class="d-block">Hay!</strong>Jangan lupa bahagia ya.</div>'
+				];
+				break;
+		}
+
+		return $arr;
 	}
 
 	public function daftar()
 	{
-		if (isAuthorized()) 
+		if ($this->isLogged()) 
 		{
+			// redirect jika logged
 			return redirect()->to('/invoices');
 		}
 
@@ -127,8 +185,9 @@ class Auth extends BaseController
 
 	public function lupa()
 	{
-		if (isAuthorized()) 
+		if ($this->isLogged()) 
 		{
+			// redirect jika logged
 			return redirect()->to('/invoices');
 		}
 
