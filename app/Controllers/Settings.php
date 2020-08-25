@@ -1,15 +1,26 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 class Settings extends BaseController
 {
-	public function index()
+	public function __construct()
 	{
-		if (! isAuthorized())
-		{
-			// tidak login, redirect ke halaman auth
+		$session = \Config\Services::session();
+
+		if ($session->has('logged')) {
+			if (!$session->get('logged')) {
+				return redirect()->to('/auth');
+			}
+		} else {
 			return redirect()->to('/auth');
 		}
+	}
 
+	// ------------------------------------------------------------------------
+
+	public function index()
+	{
 		$data = [
 			'title'     => 'Pengaturan Situs',
 			'banks'     => $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll()
@@ -18,31 +29,24 @@ class Settings extends BaseController
 		echo view(base_user() . '/pengaturan/situs', $data);
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function save_bank()
 	{
-		if (! isAuthorized()) 
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
-		if($this->request->getPost()) {
+		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('addBank');
 		}
 
-
-		if ( ! $this->validation->withRequest($this->request)->run()) {
+		if (!$this->validation->withRequest($this->request)->run()) {
 			$errors = $this->validation->getErrors();
 
 			var_dump($errors);
-		}
-		else {
+		} else {
 			$tipe = $this->request->getPost('nama_bank');
 			$tipe_bank = NULL;
-			if (in_array($tipe, ['bca','bni','mandiri','bri'])) {
+			if (in_array($tipe, ['bca', 'bni', 'mandiri', 'bri'])) {
 				$tipe_bank = '1';
-			}
-			else if (in_array($tipe, ['edc'])) {
+			} else if (in_array($tipe, ['edc'])) {
 				$tipe_bank = '2';
 			}
 			$this->bank->insert([
@@ -55,20 +59,13 @@ class Settings extends BaseController
 			// return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
 		}
 
-
-		// var_dump($this->request->getPost());
-
 		return redirect()->to('/settings');
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function juragan()
 	{
-		if ( ! isAuthorized())
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
 		$builder = $this->juragan->builder();
 
 		$data = [
@@ -80,24 +77,19 @@ class Settings extends BaseController
 		echo view(base_user() . '/pengaturan/juragan', $data);
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function save_juragan() // new insert
 	{
-		if (! isAuthorized()) 
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
-		if($this->request->getPost()) {
+		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('addJuragan');
 		}
 
-		if ( ! $this->validation->withRequest($this->request)->run()) {
+		if (!$this->validation->withRequest($this->request)->run()) {
 			$errors = $this->validation->getErrors();
 
 			// var_dump($errors);
-		}
-		else {
+		} else {
 			$db = \Config\Database::connect();
 
 			$nama_juragan = $this->request->getPost('nama_juragan');
@@ -119,30 +111,23 @@ class Settings extends BaseController
 					]);
 				}
 			}
-
-			// return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
 		}
 		return redirect()->to('/settings/juragan');
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function update_juragan() // update if exist
 	{
-		if (! isAuthorized()) 
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
-		if($this->request->getPost()) {
+		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('editJuragan');
 		}
 
-		if ( ! $this->validation->withRequest($this->request)->run()) {
+		if (!$this->validation->withRequest($this->request)->run()) {
 			$errors = $this->validation->getErrors();
 
-			// var_dump($errors);
-		}
-		else {
+			var_dump($errors);
+		} else {
 			$db = \Config\Database::connect();
 
 			$banks = $this->request->getPost('bank');
@@ -168,20 +153,14 @@ class Settings extends BaseController
 					]);
 				}
 			}
-
-			// return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
 		}
 		return redirect()->to('/settings/juragan');
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function pengguna()
 	{
-		if ( ! isAuthorized()) 
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
 		$builder = $this->juragan->builder();
 
 		$data = [
@@ -193,42 +172,36 @@ class Settings extends BaseController
 		echo view(base_user() . '/pengaturan/pengguna', $data);
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function save_pengguna() // new insert
 	{
-		if (! isAuthorized()) 
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
-		if($this->request->getPost()) {
+		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('addPengguna');
 		}
 
-		if ( ! $this->validation->withRequest($this->request)->run()) {
+		if (!$this->validation->withRequest($this->request)->run()) {
 			$errors = $this->validation->getErrors();
 
-			// var_dump($errors);
-		}
-		else {
+			var_dump($errors);
+		} else {
 			$db = \Config\Database::connect();
 
 			$level = $this->request->getPost('level');
 
 			$this->user->save([
-				'username' 	=> strtolower( $this->request->getPost('username') ),
+				'username' 	=> strtolower($this->request->getPost('username')),
 				'password' 	=> password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
 				'name' 		=> $this->request->getPost('nama'),
-				'email' 	=> strtolower( $this->request->getPost('email') ),
+				'email' 	=> strtolower($this->request->getPost('email')),
 				'level' 	=> $level,
 				'status' 	=> $this->request->getPost('status')
 			]);
 			$id = $db->insertID();
 
 			// simpan ke tabel relasi, selain admin/superadmin
-			if ($level === 'superadmin' OR $level === 'admin') {
-			}
-			else {
+			if ($level === 'superadmin' or $level === 'admin') {
+			} else {
 				$juragans = $this->request->getPost('juragan');
 
 				if ($db->affectedRows() > 0) {
@@ -241,30 +214,23 @@ class Settings extends BaseController
 					}
 				}
 			}
-			
-			// return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
 		}
 		return redirect()->to('/settings/pengguna');
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function update_pengguna() // update if exist
 	{
-		if (! isAuthorized()) 
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
-		if($this->request->getPost()) {
+		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('editPengguna');
 		}
 
-		if ( ! $this->validation->withRequest($this->request)->run()) {
+		if (!$this->validation->withRequest($this->request)->run()) {
 			$errors = $this->validation->getErrors();
 
 			var_dump($errors);
-		}
-		else {
+		} else {
 			$db = \Config\Database::connect();
 
 			$juragans = $this->request->getPost('juragan');
@@ -278,10 +244,10 @@ class Settings extends BaseController
 
 			$data['id'] = $this->request->getPost('id');
 			$data['name'] = $this->request->getPost('nama');
-			$data['email'] = strtolower( $this->request->getPost('email') );
+			$data['email'] = strtolower($this->request->getPost('email'));
 			$level = $this->request->getPost('level');
-			$data['level'] = strtolower( $level );
-			$data['status'] = strtolower( $this->request->getPost('status') );
+			$data['level'] = strtolower($level);
+			$data['status'] = strtolower($this->request->getPost('status'));
 
 			$this->user->save($data);
 
@@ -290,12 +256,11 @@ class Settings extends BaseController
 				// hapus semua relasi 
 				$this->relasi->where(['table' => '1', 'val_id' => $id])->delete();
 
-				if ($level === 'superadmin' OR $level === 'admin') {
+				if ($level === 'superadmin' or $level === 'admin') {
 					// tidak ada yang disimpan untuk superadmin / admin
-				}
-				else {
+				} else {
 					$juragans = $this->request->getPost('juragan');
-				
+
 					foreach ($juragans as $juragan) {
 						$this->relasi->insert([
 							'table' => 1,
@@ -303,27 +268,19 @@ class Settings extends BaseController
 							'val_id' => $id
 						]);
 					}
-					
 				}
 			}
-
-
-			// return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
 		}
 		return redirect()->to('/settings/pengguna');
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function pengguna_relasi()
 	{
-		if ( ! isAuthorized()) 
-		{
-			// tidak login, redirect ke halaman auth
-			return redirect()->to('/auth');
-		}
-
 		$id = $this->request->getGet('id');
 
-		if ( ! isset($id) OR empty($id) OR ! is_numeric($id)) {
+		if (!isset($id) or empty($id) or !is_numeric($id)) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
 
@@ -333,7 +290,7 @@ class Settings extends BaseController
 		$data = array();
 		foreach ($relasi_pengguna as $rel) {
 			$data[$rel->id_relasi] = (int) $rel->juragan_id;
-		}		
+		}
 
 		return $this->response->setJSON($data);
 	}

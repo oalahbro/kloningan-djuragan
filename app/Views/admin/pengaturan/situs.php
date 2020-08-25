@@ -27,7 +27,7 @@ $pager = \Config\Services::pager();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
+                            <?php
                             foreach ($banks as $bank) { ?>
                                 <tr>
                                     <td>
@@ -38,12 +38,13 @@ $pager = \Config\Services::pager();
                                         <div class="text-muted"><?= $bank->atas_nama; ?></div>
                                     </td>
                                     <td>
-                                        <?php if ($bank->id_bank > 2) { // COD not editable?>
+                                        <?php if ($bank->id_bank > 2) { // COD not editable
+                                        ?>
                                             <button class="btn btn-outline-secondary"><i class="fad fa-pencil"></i></button>
                                         <?php } ?>
                                     </td>
                                 </tr>
-                            <?php 
+                            <?php
                             }
                             ?>
                         </tbody>
@@ -93,7 +94,7 @@ $pager = \Config\Services::pager();
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
-<?php 
+<?php
 $link_api_juragan = site_url("api/get_juragan");
 $link_invoice = site_url('invoices/index/');
 

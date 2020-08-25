@@ -1,31 +1,29 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 class Api extends BaseController
 {
 	public function __construct()
 	{
 		$session = \Config\Services::session();
-		
-		if($session->has('logged')) {
-			if (! $session->get('logged')) {
+
+		if ($session->has('logged')) {
+			if (!$session->get('logged')) {
 				throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 			}
-		}
-		else {
+		} else {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
 	}
 
-	/*
-	 * ambil semua juragan
-	 * 
-	 */
+	// ------------------------------------------------------------------------
+
 	public function get_juragan()
 	{
-
 		$nama_cache = 'list_juragan';
 		$i = 0;
-		if ( ! $ngelist = $this->cache->get($nama_cache)) {
+		if (!$ngelist = $this->cache->get($nama_cache)) {
 			$listJuragan_ = $this->juragan->ambil()->get()->getResult();
 
 			$ngelist = array();
@@ -39,31 +37,29 @@ class Api extends BaseController
 			}
 
 			// simpan cache selama 5 menit
-			$this->cache->save($nama_cache, $ngelist, 60*5);
+			$this->cache->save($nama_cache, $ngelist, 60 * 5);
 		}
 
 		return $this->response->setJSON($ngelist);
 	}
 
-	/*
-	 * ambil semua pengguna
-	 * 
-	 */
+	// ------------------------------------------------------------------------
+
 	public function get_pengguna()
 	{
-
 		$nama_cache = 'list_admincs';
-		if ( ! $listJuragan = $this->cache->get($nama_cache)) {
-			$listJuragan = $this->user->orderBy('name','ASC')->findAll();
+		if (!$listJuragan = $this->cache->get($nama_cache)) {
+			$listJuragan = $this->user->orderBy('name', 'ASC')->findAll();
 
 			// simpan cache selama 5 menit
-			$this->cache->save($nama_cache, $listJuragan, 60*5);
+			$this->cache->save($nama_cache, $listJuragan, 60 * 5);
 		}
 
 		return $this->response->setJSON($listJuragan);
 	}
 
-	
+	// ------------------------------------------------------------------------
+
 	public function get_kecamatan()
 	{
 		$kecamatan = $this->rajaongkir->getSubdistricts();

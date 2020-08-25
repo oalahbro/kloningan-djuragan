@@ -1,42 +1,43 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 class Auth extends BaseController
 {
-	private function isLogged() {
+	private function isLogged()
+	{
 		$session = \Config\Services::session();
-		
-		if($session->has('logged')) {
-			if (! $session->get('logged')) {
+
+		if ($session->has('logged')) {
+			if (!$session->get('logged')) {
 				return FALSE;
 			}
 			return TRUE;
-		}
-		else {
+		} else {
 			return FALSE;
 		}
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function index()
 	{
-		if ($this->isLogged()) 
-		{
+		if ($this->isLogged()) {
 			// redirect jika logged
 			return redirect()->to('/invoices');
 		}
 
-		if($this->request->getPost()) {
+		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('signin');
 		}
-		
-		if (! $this->validation->withRequest($this->request)->run()) {
+
+		if (!$this->validation->withRequest($this->request)->run()) {
 			$data = [
 				'title' => 'Masuk',
 				'validation' => $this->validation
-            ];
+			];
 			echo view('masuk', $data);
-		}
-		else
-		{
+		} else {
 			$get = $this->user->where('username', $this->request->getPost('username'))->first();
 
 			if ($get === NULL or empty($get)) {
@@ -46,26 +47,23 @@ class Auth extends BaseController
 					],
 					'redirect' => '/auth/index',
 					'status' => '<div class="alert alert-danger"><strong class="d-block">Nay!</strong>Kamu siapa? daftar aja dulu.</div>'
-				];		
-			}
-			else {
+				];
+			} else {
 				$post_pswd = $this->request->getPost('password');
 				// cek length password in db
 				if (strlen($get->password) === 32) {
 					// jika password gunakan md5()
 					// ini berguna untuk edit password lewat phpmyadmin
 
-					if ( md5( $post_pswd ) === $get->password) {
+					if (md5($post_pswd) === $get->password) {
 						// jika password sama
 						$arr = $this->pass($get, $post_pswd);
-					}					
-				}
-				else {
+					}
+				} else {
 					if (password_verify($this->request->getPost('password'), $get->password)) {
 						// jika password menggunakan password_hash()
 						$arr = $this->pass($get);
-					}
-					else {
+					} else {
 						$arr = [
 							'sesi' => [
 								'logged' => FALSE
@@ -81,6 +79,8 @@ class Auth extends BaseController
 			return redirect()->to($arr['redirect'])->with('status', $arr['status']);
 		}
 	}
+
+	// ------------------------------------------------------------------------
 
 	private function pass($db, $password_to_update = FALSE)
 	{
@@ -123,8 +123,7 @@ class Auth extends BaseController
 						'password' => password_hash($password_to_update, PASSWORD_BCRYPT),
 						'login_terakhir' => now('Asia/Jakarta')
 					];
-				}
-				else {
+				} else {
 					$data = [
 						'id' => $db->id,
 						'login_terakhir' => now('Asia/Jakarta')
@@ -132,7 +131,7 @@ class Auth extends BaseController
 				}
 
 				$this->user->save($data);
-				
+
 				$arr = [
 					'sesi' => [
 						'id'  		=> $db->id,
@@ -151,69 +150,69 @@ class Auth extends BaseController
 		return $arr;
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function daftar()
 	{
-		if ($this->isLogged()) 
-		{
+		if ($this->isLogged()) {
 			// redirect jika logged
 			return redirect()->to('/invoices');
 		}
 
-		if($this->request->getPost()) {
+		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('signup');
 		}
 
-		if (! $this->validation->withRequest($this->request)->run()) {
+		if (!$this->validation->withRequest($this->request)->run()) {
 			$data = [
 				'title' => 'Daftar',
 				'validation' => $this->validation
 			];
 			echo view('daftar', $data);
-		}
-		else
-		{
+		} else {
 			$this->user->insert([
 				'username' => $this->request->getPost('username'),
 				'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
 				'name' => $this->request->getPost('nama'),
 				'email' => $this->request->getPost('email')
 			]);
-			
+
 			return redirect()->to('/auth/daftar')->with('status', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Kamu sudah terdaftar, cek email dulu ya.</div>');
 		}
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function lupa()
 	{
-		if ($this->isLogged()) 
-		{
+		if ($this->isLogged()) {
 			// redirect jika logged
 			return redirect()->to('/invoices');
 		}
 
-		if($this->request->getPost()) {
+		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('forgot');
 		}
 
-		if (! $this->validation->withRequest($this->request)->run()) {
+		if (!$this->validation->withRequest($this->request)->run()) {
 			$data = [
 				'title' => 'Lupa Sandi',
 				'validation' => $this->validation
 			];
 			echo view('lupa', $data);
-		}
-		else
-		{
+		} else {
 			$this->user->insert([
 				'username' => $this->request->getPost('username'),
 				'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
 				'name' => $this->request->getPost('nama'),
 				'email' => $this->request->getPost('email')
 			]);
-			
+
 			return redirect()->to('/auth/daftar')->with('status', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Kamu sudah terdaftar, cek email dulu ya.</div>');
 		}
 	}
+
+	// ------------------------------------------------------------------------
 
 	public function keluar()
 	{

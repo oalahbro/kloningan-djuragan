@@ -1,11 +1,14 @@
-<?php namespace App\Models;
+<?php
+
+namespace App\Models;
+
 use CodeIgniter\Model;
- 
+
 class JuraganModel extends Model
 {
 	protected $table = 'juragan';
 	protected $primaryKey = 'id_juragan';
-	
+
 	protected $returnType = 'object';
 	protected $useSoftDeletes = true;
 
@@ -36,5 +39,4 @@ class JuraganModel extends Model
 		$builder->groupBy("j.id_juragan");
 		return $builder;
 	}
-
 }

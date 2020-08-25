@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 use CodeIgniter\I18n\Time;
+
 $sekarang = new Time('now');
 ?>
 
@@ -9,11 +11,7 @@ $sekarang = new Time('now');
 
 <div class="container-xxl mb-3">
 
-	<h1 class="h3 mt-5">Tulis Orderan
-	<?= var_dump(md5('akucintaindonesia')); ?>
-	<!-- 0cc175b9c0f1b6a831c399e269772661 -->
-	<!-- 7c63955010c6150d7afe96c366fd9a6e -->
-	</h1>
+	<h1 class="h3 mt-5">Tulis Orderan</h1>
 
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb p-0">
@@ -27,260 +25,249 @@ $sekarang = new Time('now');
 
 <div class="container mb-5">
 
-	<?= form_open('invoices/save',['class' => 'row', 'id'=>'iForm']); ?>
-		<div class="col-sm-4 mb-3">
+	<?= form_open('invoices/save', ['class' => 'row', 'id' => 'iForm']); ?>
+	<div class="col-sm-4 mb-3">
 
-			<div class="sticky-top" style="top: 60px">
-				<div class="card mb-3">
-					<div class="card-body">
-						<div class="mb-3">
-							<?= form_label('Tanggal Order', 'tanggal_order', ['class' => 'form-label']); ?>
-							<?= form_input('tanggal_order', set_value('tanggal_order', $sekarang->toDateString()), ['class' => 'form-control', 'id' => 'tanggal_order', 'required' => '', 'max' => $sekarang->toDateString()], 'date'); ?>
+		<div class="sticky-top" style="top: 60px">
+			<div class="card mb-3">
+				<div class="card-body">
+					<div class="mb-3">
+						<?= form_label('Tanggal Order', 'tanggal_order', ['class' => 'form-label']); ?>
+						<?= form_input('tanggal_order', set_value('tanggal_order', $sekarang->toDateString()), ['class' => 'form-control', 'id' => 'tanggal_order', 'required' => '', 'max' => $sekarang->toDateString()], 'date'); ?>
+					</div>
+					<div class="mb-3">
+						<div class="">
+							<?= form_label('Pelanggan', 'pelanggan', ['class' => 'form-label']); ?>
+							<?= form_hidden('pelanggan', ''); ?>
 						</div>
-						<div class="mb-3">
-							<div class="">
-								<?= form_label('Pelanggan', 'pelanggan', ['class' => 'form-label']); ?>
-								<?= form_hidden('pelanggan', ''); ?>
-							</div>
-							<div class="mb-3 btn-nambahPelanggan">
-								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modalTambahPelanggan" data-action="1" data-judul="Tambah Pelanggan"><i class="fad fa-plus"></i> Tambah Pelanggan</button>
-							</div>
+						<div class="mb-3 btn-nambahPelanggan">
+							<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modalTambahPelanggan" data-action="1" data-judul="Tambah Pelanggan"><i class="fad fa-plus"></i> Tambah Pelanggan</button>
+						</div>
 
-							<div class="mb-3">
-								<button class="btn btn-link text-decoration-none btn-sm float-right btn-sunting" type="button" data-toggle="modal" data-target="#modalTambahPelanggan" data-action="2" data-judul="Sunting Pelanggan" style="display:none">
-									<i class="fad fa-pencil"></i>
-								</button>
-								<span id="alamat_pemesan"></span>
-							</div>
-						</div>						
 						<div class="mb-3">
-							<?= form_label('Note / Keterangan', 'keterangan', ['class' => 'form-label']); ?>
-							<?= form_textarea(['name' => 'keterangan', 'id' => 'keterangan', 'class' => 'form-control', 'rows' => '3', 'placeholder' => 'opsional']); ?>
+							<button class="btn btn-link text-decoration-none btn-sm float-right btn-sunting" type="button" data-toggle="modal" data-target="#modalTambahPelanggan" data-action="2" data-judul="Sunting Pelanggan" style="display:none">
+								<i class="fad fa-pencil"></i>
+							</button>
+							<span id="alamat_pemesan"></span>
 						</div>
 					</div>
+					<div class="mb-3">
+						<?= form_label('Note / Keterangan', 'keterangan', ['class' => 'form-label']); ?>
+						<?= form_textarea(['name' => 'keterangan', 'id' => 'keterangan', 'class' => 'form-control', 'rows' => '3', 'placeholder' => 'opsional']); ?>
+					</div>
 				</div>
+			</div>
 
-				<div class="card mb-3">
-					<div class="card-body">
-						<div class="mb-3">
-							<div class="row gx-2 mb-3">
-								<div class="col">	
-									<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
-									<?= form_dropdown('juragan', ['' => 'Pilih Juragan'], '', ['class'=> 'form-select', 'id' => 'juragan', 'required' => '']); ?>
-								</div>
-								<div class="col">
-									<?= form_label('Admin/CS', 'pengguna', ['class' => 'form-label']); ?>
-									<?= form_dropdown('pengguna', ['' => 'Pilih Admin/CS'], '', ['class'=> 'form-select', 'id' => 'pengguna', 'required' => '']); ?>
-								</div>
+			<div class="card mb-3">
+				<div class="card-body">
+					<div class="mb-3">
+						<div class="row gx-2 mb-3">
+							<div class="col">
+								<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
+								<?= form_dropdown('juragan', ['' => 'Pilih Juragan'], '', ['class' => 'form-select', 'id' => 'juragan', 'required' => '']); ?>
 							</div>
-							<div class="row gx-2">
+							<div class="col">
+								<?= form_label('Admin/CS', 'pengguna', ['class' => 'form-label']); ?>
+								<?= form_dropdown('pengguna', ['' => 'Pilih Admin/CS'], '', ['class' => 'form-select', 'id' => 'pengguna', 'required' => '']); ?>
+							</div>
+						</div>
+						<div class="row gx-2">
 							<div class="col-sm-5">
 								<?= form_label('Asal Orderan', 'asal_orderan', ['class' => 'form-label']); ?>
-								<?php 
+								<?php
 								$options_label = array('' => 'Pilih asal');
 								foreach (config('JuraganConfig')->label as $key => $label) {
 									$options_label[$key] = $label;
 								}
 								?>
-								<?= form_dropdown('asal_orderan', $options_label, '', ['class'=> 'form-select', 'id' => 'asal_orderan', 'required' => '']); ?>
+								<?= form_dropdown('asal_orderan', $options_label, '', ['class' => 'form-select', 'id' => 'asal_orderan', 'required' => '']); ?>
 							</div>
 							<div class="col-sm-7">
 								<?= form_label('Label', 'label', ['class' => 'form-label']); ?>
 								<?= form_input('label', '', ['class' => 'form-control', 'id' => 'label', 'placeholder' => 'label - opsional, max: 50 karakter']); ?>
 							</div>
 						</div>
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-8 mb-3">
-			<div class="card mb-3">
-				<div class="card-header">
-					<ul class="nav nav-tabs card-header-tabs">
-						<li class="nav-item">
-							<span class="nav-link active" aria-current="true">Orderan</span>
-						</li>
-						<li class="nav-item">
-							<a href="#!" 
-								class="nav-link" 
-								data-toggle="modal" 
-								data-target="#tambahProduk">
-								<i class="fad fa-plus"></i>
-							</a>
-						</li>
-					</ul>
+	</div>
+	<div class="col-sm-8 mb-3">
+		<div class="card mb-3">
+			<div class="card-header">
+				<ul class="nav nav-tabs card-header-tabs">
+					<li class="nav-item">
+						<span class="nav-link active" aria-current="true">Orderan</span>
+					</li>
+					<li class="nav-item">
+						<a href="#!" class="nav-link" data-toggle="modal" data-target="#tambahProduk">
+							<i class="fad fa-plus"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Produk</th>
+								<th scope="col">Harga</th>
+								<th scope="col">QTY</th>
+								<th scope="col" class="text-right">Subtotal</th>
+							</tr>
+						</thead>
+						<tbody class="list-orderan" data-length="1">
+							<tr class="orderan-kosong">
+								<td class="text-center" colspan="4">
+									<div class="py-5"><i class="fad text-warning fa-<?= random_element(['shopping-cart', 'shopping-bag', 'shopping-basket', 'bags-shopping', 'dolly-flatbed-empty', 'dolly-empty']) ?> fa-4x"></i>
+										<p class="mb-0"><?= random_element(['orderan kosong?', 'isi dulu orderannya ya?', 'jangan lupa isi orderannya ya?']) ?></p>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+						<tfoot class="customBiaya d-none listBiaya">
+							<tr>
+								<td colspan="3" class="text-right">Subtotal</td>
+								<td class="text-right" data-totalbiaya="0" data-subtotal="0" id="subTotal"></td>
+							</tr>
+						</tfoot>
+					</table>
 				</div>
-				<div class="card-body">
-					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th scope="col">Produk</th>
-									<th scope="col">Harga</th>
-									<th scope="col">QTY</th>
-									<th scope="col" class="text-right">Subtotal</th>
-								</tr>
-							</thead>
-							<tbody class="list-orderan" data-length="1">
-								<tr class="orderan-kosong">
-									<td class="text-center" colspan="4"><div class="py-5"><i class="fad text-warning fa-<?= random_element(['shopping-cart','shopping-bag','shopping-basket','bags-shopping','dolly-flatbed-empty','dolly-empty']) ?> fa-4x"></i><p class="mb-0"><?= random_element(['orderan kosong?','isi dulu orderannya ya?','jangan lupa isi orderannya ya?']) ?></p></div></td>
-								</tr>
-							</tbody>
-							<tfoot class="customBiaya d-none listBiaya">
-								<tr>
-									<td colspan="3" class="text-right">Subtotal</td>
-									<td class="text-right" data-totalbiaya="0" data-subtotal="0" id="subTotal"></td>
-								</tr>
-							</tfoot>
-						</table>
-					</div>
 
-					<div class="border-bottom pb-3 customBiaya d-none">
-						<button type="button" 
-							class="btn btn-sm btn-outline-primary" 
-							data-toggle="modal" 
-							data-target="#biayaOrder" 
-							data-biayaID="1"
-							data-judul="Ongkir" 
-							data-operasi="1" ><i class="fad fa-plus"></i> Ongkir</button>
-						<button type="button" 
-							class="btn btn-sm btn-outline-primary" 
-							data-target="#biayaOrder" 
-							data-toggle="modal" 
-							data-biayaID="2"
-							data-judul="Lain-lain" 
-							data-operasi="1" ><i class="fad fa-plus"></i> Biaya Lain</button>
-					</div>
-					<div class="customBiaya d-none">
-						<div class="d-flex justify-content-between align-items-center">
-							<h6 class="font-weight-bold">TOTAL</h6>
-							<div class="h2 text-primary" id="grandTotal"></div>
-						</div>
+				<div class="border-bottom pb-3 customBiaya d-none">
+					<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder" data-biayaID="1" data-judul="Ongkir" data-operasi="1"><i class="fad fa-plus"></i> Ongkir</button>
+					<button type="button" class="btn btn-sm btn-outline-primary" data-target="#biayaOrder" data-toggle="modal" data-biayaID="2" data-judul="Lain-lain" data-operasi="1"><i class="fad fa-plus"></i> Biaya Lain</button>
+				</div>
+				<div class="customBiaya d-none">
+					<div class="d-flex justify-content-between align-items-center">
+						<h6 class="font-weight-bold">TOTAL</h6>
+						<div class="h2 text-primary" id="grandTotal"></div>
 					</div>
 				</div>
 			</div>
+		</div>
 
-			<div class="mb-3 row">
-				<div class="col-sm-6">
-					<div class="card">
-						<div class="card-header">
-							<ul class="nav nav-tabs card-header-tabs">
-								<li class="nav-item">
-									<span class="nav-link active" aria-current="true">Pembayaran</span>
-								</li>
-								<li class="nav-item">
-									<a href="#!" class="nav-link" aria-current="false"><i class="fad fa-plus"></i></a>
-								</li>
-							</ul>
-						</div>
-						<div class="card-body">
-							<div class="list-group list-group-flush">
-								<div class="list-group-item d-flex justify-content-between">
-									<div class="d-flex align-items-center">
-										<div class="mr-2">
-											<i class="fad fa-times-circle text-danger fa-2x"></i>
-										</div>
-										<div>
-											<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
-											<small class="text-muted">BCA - 490853549</small>
-										</div>
+		<div class="mb-3 row">
+			<div class="col-sm-6">
+				<div class="card">
+					<div class="card-header">
+						<ul class="nav nav-tabs card-header-tabs">
+							<li class="nav-item">
+								<span class="nav-link active" aria-current="true">Pembayaran</span>
+							</li>
+							<li class="nav-item">
+								<a href="#!" class="nav-link" aria-current="false"><i class="fad fa-plus"></i></a>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="list-group list-group-flush">
+							<div class="list-group-item d-flex justify-content-between">
+								<div class="d-flex align-items-center">
+									<div class="mr-2">
+										<i class="fad fa-times-circle text-danger fa-2x"></i>
 									</div>
 									<div>
-										<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-											<i class="fad fa-ellipsis-h"></i>
-										</button>
-										<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-											<li><a class="dropdown-item" href="#">Action</a></li>
-											<li><a class="dropdown-item" href="#">Another action</a></li>
-											<li><a class="dropdown-item" href="#">Something else here</a></li>
-										</ul>
+										<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
+										<small class="text-muted">BCA - 490853549</small>
 									</div>
 								</div>
-
-								<div class="list-group-item d-flex justify-content-between">
-									<div class="d-flex align-items-center">
-										<div class="mr-2">
-											<i class="fad fa-check-circle text-success fa-2x"></i>
-										</div>
-										<div>
-											<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
-											<small class="text-muted">BCA - 490853549</small>
-										</div>
-									</div>
-									<div>
-										<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-											<i class="fad fa-ellipsis-h"></i>
-										</button>
-										<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-											<li><a class="dropdown-item" href="#">Action</a></li>
-											<li><a class="dropdown-item" href="#">Another action</a></li>
-											<li><a class="dropdown-item" href="#">Something else here</a></li>
-										</ul>
-									</div>
-								</div>
-
-								<div class="list-group-item d-flex justify-content-between">
-									<div class="d-flex align-items-center">
-										<div class="mr-2">
-											<i class="fad fa-circle fa-2x"></i>
-										</div>
-										<div>
-											<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
-											<small class="text-muted">BCA - 490853549</small>
-										</div>
-									</div>
-									<div>
-										<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-											<i class="fad fa-ellipsis-h"></i>
-										</button>
-										<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-											<li><a class="dropdown-item" href="#">Action</a></li>
-											<li><a class="dropdown-item" href="#">Another action</a></li>
-											<li><a class="dropdown-item" href="#">Something else here</a></li>
-										</ul>
-									</div>
+								<div>
+									<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+										<i class="fad fa-ellipsis-h"></i>
+									</button>
+									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+										<li><a class="dropdown-item" href="#">Action</a></li>
+										<li><a class="dropdown-item" href="#">Another action</a></li>
+										<li><a class="dropdown-item" href="#">Something else here</a></li>
+									</ul>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="card">
-						<div class="card-header">
-							<ul class="nav nav-tabs card-header-tabs">
-								<li class="nav-item">
-									<span class="nav-link active" aria-current="true">Pengiriman</span>
-								</li>
-								<li class="nav-item">
-									<a href="#!" class="nav-link" aria-current="false"><i class="fad fa-plus"></i></a>
-								</li>
-							</ul>
-						</div>
-						<div class="card-body">
-							<div class="row g-3">
-								<div class="col">
-									<label for="juragan_id" class="form-label">Status Pengiriman</label>
-									<select name="juragan_id" id="juragan_id" class="form-select" required="">
-										<option selected="selected" value="1">Belum Dikirim</option>
-										<option value="2">Sebagian Dikirim</option>
-										<option value="3">Sudah Dikirim Semua</option>
-									</select>
+
+							<div class="list-group-item d-flex justify-content-between">
+								<div class="d-flex align-items-center">
+									<div class="mr-2">
+										<i class="fad fa-check-circle text-success fa-2x"></i>
+									</div>
+									<div>
+										<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
+										<small class="text-muted">BCA - 490853549</small>
+									</div>
 								</div>
-								<div class="col">
-									
+								<div>
+									<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+										<i class="fad fa-ellipsis-h"></i>
+									</button>
+									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+										<li><a class="dropdown-item" href="#">Action</a></li>
+										<li><a class="dropdown-item" href="#">Another action</a></li>
+										<li><a class="dropdown-item" href="#">Something else here</a></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="list-group-item d-flex justify-content-between">
+								<div class="d-flex align-items-center">
+									<div class="mr-2">
+										<i class="fad fa-circle fa-2x"></i>
+									</div>
+									<div>
+										<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
+										<small class="text-muted">BCA - 490853549</small>
+									</div>
+								</div>
+								<div>
+									<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+										<i class="fad fa-ellipsis-h"></i>
+									</button>
+									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+										<li><a class="dropdown-item" href="#">Action</a></li>
+										<li><a class="dropdown-item" href="#">Another action</a></li>
+										<li><a class="dropdown-item" href="#">Something else here</a></li>
+									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="col-sm-6">
+				<div class="card">
+					<div class="card-header">
+						<ul class="nav nav-tabs card-header-tabs">
+							<li class="nav-item">
+								<span class="nav-link active" aria-current="true">Pengiriman</span>
+							</li>
+							<li class="nav-item">
+								<a href="#!" class="nav-link" aria-current="false"><i class="fad fa-plus"></i></a>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="row g-3">
+							<div class="col">
+								<label for="juragan_id" class="form-label">Status Pengiriman</label>
+								<select name="juragan_id" id="juragan_id" class="form-select" required="">
+									<option selected="selected" value="1">Belum Dikirim</option>
+									<option value="2">Sebagian Dikirim</option>
+									<option value="3">Sudah Dikirim Semua</option>
+								</select>
+							</div>
+							<div class="col">
 
-			<hr/>
-			<button type="submit" class="btn btn-primary btn-block text-uppercase">
-				<i class="fad fa-save"></i> Simpan				
-			</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
+		<hr />
+		<button type="submit" class="btn btn-primary btn-block text-uppercase">
+			<i class="fad fa-save"></i> Simpan
+		</button>
+	</div>
 	<?= form_close(); ?>
 
 </div>
@@ -289,74 +276,74 @@ $sekarang = new Time('now');
 <div class="modal fade" id="modalTambahPelanggan" data-backdrop="static" tabindex="-1" aria-labelledby="modalTambahPelangganLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<?= form_open('', ['id' => 'tambahPelanggan', 'class' => 'modal-content']); ?>
-			<div class="modal-header">
-				<h5 class="modal-title" id="modalTambahPelangganLabel"></h5>
-				<button type="button" data-reset="false" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+		<div class="modal-header">
+			<h5 class="modal-title" id="modalTambahPelangganLabel"></h5>
+			<button type="button" data-reset="false" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="mb-3">
+				<?= form_label('Nama Pelanggan', 'nama_pelanggan', ['class' => 'form-label']); ?>
+				<?= form_input('nama_pelanggan', '', ['class' => 'form-control input', 'id' => 'nama_pelanggan', 'required' => '', 'placeholder' => 'nama pelanggan', 'autocomplete' => 'off']); ?>
 			</div>
-			<div class="modal-body">
-				<div class="mb-3">
-					<?= form_label('Nama Pelanggan', 'nama_pelanggan', ['class' => 'form-label']); ?>
-					<?= form_input('nama_pelanggan', '', ['class' => 'form-control input', 'id' => 'nama_pelanggan', 'required' => '', 'placeholder' => 'nama pelanggan', 'autocomplete' => 'off']); ?>
+			<div class="row gx-2 mb-3">
+				<div class="col-6">
+					<?= form_label('HP 1', 'hp1', ['class' => 'form-label']); ?>
+					<?= form_input('hp[0]', '', ['class' => 'form-control input', 'id' => 'hp1', 'required' => '', 'placeholder' => 'HP', 'autocomplete' => 'off']); ?>
 				</div>
+				<div class="col-6">
+					<?= form_label('HP 2', 'hp2', ['class' => 'form-label']); ?>
+					<?= form_input('hp[1]', '', ['class' => 'form-control input', 'id' => 'hp2', 'placeholder' => 'HP 2 - opsional', 'autocomplete' => 'off']); ?>
+				</div>
+			</div>
+			<div class="mb-3">
+				<div class="form-check form-switch">
+					<?= form_label('COD', 'cod', ['class' => 'form-check-label']); ?>
+					<?= form_checkbox('cod', 'ya', TRUE, ['class' => 'form-check-input swictCOD', 'id' => 'cod']); ?>
+				</div>
+			</div>
+
+			<div class="collapse" id="nonCOD">
+				<div class="mb-3">
+					<?= form_label('Alamat', 'alamat', ['class' => 'form-label']); ?>
+					<?= form_textarea(['name' => 'alamat', 'class' => 'form-control input',  'id' => 'alamat', 'required' => '', 'placeholder' => 'RT/RW, Nama Kampung/Perumahan, No Rumah, Desa/Kelurahan', 'rows' => '3', 'disabled' => '']); ?>
+				</div>
+
 				<div class="row gx-2 mb-3">
-					<div class="col-6">
-						<?= form_label('HP 1', 'hp1', ['class' => 'form-label']); ?>
-						<?= form_input('hp[0]', '', ['class' => 'form-control input', 'id' => 'hp1', 'required' => '', 'placeholder' => 'HP', 'autocomplete' => 'off']); ?>
+					<div class="col">
+						<?= form_label('Provinsi', 'provinsi', ['class' => 'form-label']); ?>
+						<?= form_dropdown('provinsi', ['' => 'Pilih Provinsi'], '', ['class' => 'form-select input', 'id' => 'provinsi', 'required' => '', 'disabled' => '']); ?>
 					</div>
-					<div class="col-6">
-						<?= form_label('HP 2', 'hp2', ['class' => 'form-label']); ?>
-						<?= form_input('hp[1]', '', ['class' => 'form-control input', 'id' => 'hp2', 'placeholder' => 'HP 2 - opsional', 'autocomplete' => 'off']); ?>
+					<div class="col">
+						<?= form_label('Kab/Kota', 'kabupaten', ['class' => 'form-label']); ?>
+						<?= form_dropdown('kabupaten', ['' => 'Pilih Kab/Kota'], '', ['class' => 'form-select input', 'id' => 'kabupaten', 'required' => '', 'disabled' => '']); ?>
+					</div>
+					<div class="col">
+						<?= form_label('Kecamatan', 'kecamatan', ['class' => 'form-label']); ?>
+						<?= form_dropdown('kecamatan', ['' => 'Pilih Kecamatan'], '', ['class' => 'form-select input', 'id' => 'kecamatan', 'required' => '', 'disabled' => '']);
+						?>
 					</div>
 				</div>
-				<div class="mb-3">
-					<div class="form-check form-switch">
-						<?= form_label('COD', 'cod', ['class' => 'form-check-label']); ?>
-						<?= form_checkbox('cod', 'ya', TRUE, ['class' => 'form-check-input swictCOD', 'id' => 'cod']); ?>
-					</div>
-				</div>
-				
-				<div class="collapse" id="nonCOD">
-					<div class="mb-3">
-						<?= form_label('Alamat', 'alamat', ['class' => 'form-label']); ?>
-						<?= form_textarea(['name' => 'alamat', 'class' => 'form-control input',  'id' => 'alamat', 'required' => '', 'placeholder' => 'RT/RW, Nama Kampung/Perumahan, No Rumah, Desa/Kelurahan', 'rows' => '3', 'disabled'=> '']); ?>
-					</div>
 
-					<div class="row gx-2 mb-3">
-						<div class="col">
-							<?= form_label('Provinsi', 'provinsi', ['class' => 'form-label']); ?>
-							<?= form_dropdown('provinsi', ['' => 'Pilih Provinsi'], '', ['class'=> 'form-select input', 'id' => 'provinsi', 'required' => '', 'disabled'=> '']); ?>
-						</div>
-						<div class="col">
-							<?= form_label('Kab/Kota', 'kabupaten', ['class' => 'form-label']); ?>
-							<?= form_dropdown('kabupaten', ['' => 'Pilih Kab/Kota'], '', ['class'=> 'form-select input', 'id' => 'kabupaten', 'required' => '', 'disabled'=> '']); ?>
-						</div>
-						<div class="col">
-							<?= form_label('Kecamatan', 'kecamatan', ['class' => 'form-label']); ?>
-							<?= form_dropdown('kecamatan', ['' => 'Pilih Kecamatan'], '', ['class'=> 'form-select input', 'id' => 'kecamatan', 'required' => '', 'disabled'=> '']);
-							?>
-						</div>
-					</div>
-
-					<div class="row gx-2 mb-3">
-						<div class="col-4">
-							<?= form_label('Kode Pos', 'kodepos', ['class' => 'form-label']); ?>
-							<?= form_input('kodepos', '', ['class' => 'form-control input', 'id' => 'kodepos', 'placeholder' => 'xxxxx', 'autocomplete' => 'off', 'disabled'=> '']); ?>
-						</div>
+				<div class="row gx-2 mb-3">
+					<div class="col-4">
+						<?= form_label('Kode Pos', 'kodepos', ['class' => 'form-label']); ?>
+						<?= form_input('kodepos', '', ['class' => 'form-control input', 'id' => 'kodepos', 'placeholder' => 'xxxxx', 'autocomplete' => 'off', 'disabled' => '']); ?>
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" data-reset="false" class="btn btn-link text-decoration-none" data-dismiss="modal">Batal</button>
+		</div>
+		<div class="modal-footer">
+			<button type="button" data-reset="false" class="btn btn-link text-decoration-none" data-dismiss="modal">Batal</button>
 
-				<button type="button" disabled class="btn loading btn-primary" style="display:none">
-					<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Simpan
-				</button>
-				<button type="submit" class="btn submit btn-primary">
-					<i class="fad fa-save"></i> Simpan
-				</button>
-			</div>
+			<button type="button" disabled class="btn loading btn-primary" style="display:none">
+				<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Simpan
+			</button>
+			<button type="submit" class="btn submit btn-primary">
+				<i class="fad fa-save"></i> Simpan
+			</button>
+		</div>
 		<?= form_close(); ?>
 	</div>
 </div>
@@ -378,11 +365,11 @@ $sekarang = new Time('now');
 					<?= form_input(['name' => 'nominal_biaya', 'id' => 'nominalBiaya', 'class' => 'form-control', 'required' => '', 'placeholder' => 'cth: ' . random_element(['10000', '20000', '25000', '30000']), 'type' => 'number']); ?>
 					<div class="form-text" id="biayaHelp">Gunakan tanda ( <b>-</b> ) untuk mengurangi. misal untuk diskon: <b>-2000</b></div>
 				</div>
-				
+
 				<div class="mb-3">
 					<?= form_label('Label', 'labelBiaya', ['class' => 'form-label']); ?>
 					<?= form_input(['name' => 'label_biaya', 'id' => 'labelBiaya', 'class' => 'form-control', 'placeholder' => 'label biaya - opsional, max: 20 karakter', 'maxlength' => '20']); ?>
-				</div>				
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-link text-decoration-none" data-dismiss="modal">Batal</button>
@@ -416,14 +403,14 @@ $sekarang = new Time('now');
 					</div>
 					<div class="col col-sm-6 col-md-3">
 						<?= form_label('Ukuran', 'ukuran', ['class' => 'form-label']); ?>
-						<?php 
+						<?php
 						echo '<select name="ukuran" class="form-select" id="ukuran" required="">';
 						echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
 						foreach (config('JuraganConfig')->size as $k => $v) {
 
 							echo '<optgroup label="' . $k . '">';
 							foreach ($v as $k2 => $v2) {
-								echo '<option value="' . $k2. '">' . $v2 . '</option>';
+								echo '<option value="' . $k2 . '">' . $v2 . '</option>';
 							}
 							echo '</optgroup>';
 						}
@@ -433,7 +420,7 @@ $sekarang = new Time('now');
 					</div>
 					<div class="col col-sm-6 col-md-3">
 						<?= form_label('QTY', 'QTY', ['class' => 'form-label']); ?>
-						<?= form_input(['name' => 'QTY', 'id' => 'QTY', 'class' => 'form-control', 'required' => '', 'placeholder' => 'cth: ' . rand(1,20), 'type' => 'number', 'min' => '1']); ?>
+						<?= form_input(['name' => 'QTY', 'id' => 'QTY', 'class' => 'form-control', 'required' => '', 'placeholder' => 'cth: ' . rand(1, 20), 'type' => 'number', 'min' => '1']); ?>
 					</div>
 				</div>
 			</div>
@@ -451,7 +438,7 @@ $sekarang = new Time('now');
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
-<?php 
+<?php
 
 $link_api_juragan = site_url("api/get_juragan");
 $link_api_pengguna = site_url('api/get_pengguna');

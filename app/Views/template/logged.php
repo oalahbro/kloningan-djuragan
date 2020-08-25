@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 use MatthiasMullie\Minify;
+
 $CSSmin = new Minify\CSS();
 $JSmin = new Minify\JS();
 ?>
@@ -16,7 +18,8 @@ $JSmin = new Minify\JS();
 	<title>
 		<?= $title; ?>
 	</title>
-	<style type="text/css"><?php $css = '
+	<style type="text/css">
+		<?php $css = '
 	body,
 	.breadcrumb {
 		background-color: #eee;
@@ -182,10 +185,11 @@ $JSmin = new Minify\JS();
 	.mt-n5 {
 		margin-top: -3.60em;
 	}
-	'; 
-	$CSSmin->add($css);
-	echo $CSSmin->minify();
-	?></style>
+	';
+		$CSSmin->add($css);
+		echo $CSSmin->minify();
+		?>
+	</style>
 </head>
 
 <body>
@@ -198,13 +202,13 @@ $JSmin = new Minify\JS();
 			<div id="menu" class="order-3 order-md-0 navbar-nav-scroll d-flex justify-content-center">
 				<ul class="navbar-nav bd-navbar-nav flex-row py-2 py-md-0">
 					<li class="nav-item">
-						<?= anchor('invoices/baru', 'Tulis Pesanan', ['class'=>'nav-link']) ?>
+						<?= anchor('invoices/baru', 'Tulis Pesanan', ['class' => 'nav-link']) ?>
 					</li>
 					<li class="nav-item">
-						<?= anchor('pelanggan', 'Customer', ['class'=>'nav-link']) ?>
+						<?= anchor('pelanggan', 'Customer', ['class' => 'nav-link']) ?>
 					</li>
 					<li class="nav-item">
-						<?= anchor('produk', 'Produk', ['class'=>'nav-link']) ?>
+						<?= anchor('produk', 'Produk', ['class' => 'nav-link']) ?>
 					</li>
 				</ul>
 			</div>
@@ -256,7 +260,7 @@ $JSmin = new Minify\JS();
 	*/
 	?><script defer src="https://kit.fontawesome.com/9bdc906322.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>
 	<?= $this->renderSection('js'); ?>
-	
+
 	<!--
 		Page rendered in {elapsed_time} seconds
 		Environment: <?= ENVIRONMENT ?> 

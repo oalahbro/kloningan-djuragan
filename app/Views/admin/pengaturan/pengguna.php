@@ -33,45 +33,38 @@ $pager = \Config\Services::pager();
 								</tr>
 							</thead>
 							<tbody>
-								<?php 
-								foreach ($penggunas as $pengguna) { 
+								<?php
+								foreach ($penggunas as $pengguna) {
 								?>
 
-								<tr>
-									<td>
-										<div>
-											<div class="lead"><?= $pengguna->name; ?><span class="ml-2 badge rounded-pill bg-secondary font-weight-normal"><?= $pengguna->username; ?></span></div>
-											<div><?= $pengguna->email; ?></div>
-										</div>    									
-									</td>
-									<td><?= ucwords($pengguna->level); ?></td>
-									<td><?= ucwords($pengguna->status); ?></td>
-									<td class="text-right"><!-- Example split danger button -->
-										<div class="btn-group">
-											<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" 
-											data-target="#modalSuntingPengguna" 
-											data-id="<?= $pengguna->id; ?>" 
-											data-nama="<?= $pengguna->name; ?>" 
-											data-email="<?= $pengguna->email; ?>" 
-											data-username="<?= $pengguna->username; ?>" 
-											data-level="<?= strtolower($pengguna->level); ?>" 
-											data-status="<?= strtolower($pengguna->status); ?>"
-											>Sunting</button>
-											<button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
-												<span class="sr-only">Toggle Dropdown</span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><button class="dropdown-item" href="#">Hapus</button></li>
-											</ul>
-										</div>
-									</td>
-								</tr>
+									<tr>
+										<td>
+											<div>
+												<div class="lead"><?= $pengguna->name; ?><span class="ml-2 badge rounded-pill bg-secondary font-weight-normal"><?= $pengguna->username; ?></span></div>
+												<div><?= $pengguna->email; ?></div>
+											</div>
+										</td>
+										<td><?= ucwords($pengguna->level); ?></td>
+										<td><?= ucwords($pengguna->status); ?></td>
+										<td class="text-right">
+											<!-- Example split danger button -->
+											<div class="btn-group">
+												<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modalSuntingPengguna" data-id="<?= $pengguna->id; ?>" data-nama="<?= $pengguna->name; ?>" data-email="<?= $pengguna->email; ?>" data-username="<?= $pengguna->username; ?>" data-level="<?= strtolower($pengguna->level); ?>" data-status="<?= strtolower($pengguna->status); ?>">Sunting</button>
+												<button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
+													<span class="sr-only">Toggle Dropdown</span>
+												</button>
+												<ul class="dropdown-menu">
+													<li><button class="dropdown-item" href="#">Hapus</button></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
 
-								<?php 
+								<?php
 								}
 								?>
 							</tbody>
-							
+
 						</table>
 					</div>
 				</div>
@@ -110,7 +103,7 @@ $pager = \Config\Services::pager();
 					<div class="mb-3 row gx-2">
 						<div class="col-6">
 							<?= form_label('Level', 'level', ['class' => 'form-label']); ?>
-							<?php 
+							<?php
 							$options_level = array(
 								'superadmin' => 'Superadmin',
 								'admin' => 'Admin',
@@ -119,13 +112,13 @@ $pager = \Config\Services::pager();
 								'reseller' => 'Reseller'
 							);
 
-							echo form_dropdown('level', $options_level, 'cs', ['class'=> 'form-select', 'id' => 'level', 'required' => '']);
+							echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level', 'required' => '']);
 							?>
 
 						</div>
 						<div class="col-6">
 							<?= form_label('Status', 'status', ['class' => 'form-label']); ?>
-							<?php 
+							<?php
 							$options_status = array(
 								'pending' => 'Pending',
 								'inactive' => 'Tidak Aktif',
@@ -133,22 +126,22 @@ $pager = \Config\Services::pager();
 								'blocked' => 'Blokir'
 							);
 
-							echo form_dropdown('status', $options_status, 'active', ['class'=> 'form-select', 'id' => 'status', 'required' => '']);
+							echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status', 'required' => '']);
 							?>
 						</div>
 					</div>
 					<div class="mb-3">
-							<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
-							<?php 
-							foreach ($juragans->getResult() as $juragan) {
-								$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
-							}
+						<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
+						<?php
+						foreach ($juragans->getResult() as $juragan) {
+							$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
+						}
 
-							echo form_multiselect('juragan[]', $options_juragan, [], ['class'=> 'form-select', 'id' => 'juragan']);
-							?>
-							<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
-						</div>
-					<hr/>
+						echo form_multiselect('juragan[]', $options_juragan, [], ['class' => 'form-select', 'id' => 'juragan']);
+						?>
+						<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
+					</div>
+					<hr />
 					<div class="mb-3">
 						<button class="btn btn-primary btn-block" type="submit"><i class="fad fa-save"></i> Tambahkan</button>
 					</div>
@@ -172,7 +165,7 @@ $pager = \Config\Services::pager();
 				</button>
 			</div>
 			<div class="modal-body">
-			
+
 				<div class="mb-3 row gx-2 bg-warning rounded pb-1">
 					<div class="col-6">
 						<?= form_label('Username', 'username_', ['class' => 'form-label']); ?>
@@ -194,7 +187,7 @@ $pager = \Config\Services::pager();
 				<div class="mb-3 row gx-2">
 					<div class="col-6">
 						<?= form_label('Level', 'level_', ['class' => 'form-label']); ?>
-						<?php 
+						<?php
 						$options_level = array(
 							'superadmin' => 'Superadmin',
 							'admin' => 'Admin',
@@ -203,13 +196,13 @@ $pager = \Config\Services::pager();
 							'reseller' => 'Reseller'
 						);
 
-						echo form_dropdown('level', $options_level, 'cs', ['class'=> 'form-select', 'id' => 'level_', 'required' => '']);
+						echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level_', 'required' => '']);
 						?>
 
 					</div>
 					<div class="col-6">
 						<?= form_label('Status', 'status_', ['class' => 'form-label']); ?>
-						<?php 
+						<?php
 						$options_status = array(
 							'pending' => 'Pending',
 							'inactive' => 'Tidak Aktif',
@@ -217,22 +210,22 @@ $pager = \Config\Services::pager();
 							'blocked' => 'Blokir'
 						);
 
-						echo form_dropdown('status', $options_status, 'active', ['class'=> 'form-select', 'id' => 'status_', 'required' => '']);
+						echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status_', 'required' => '']);
 						?>
 					</div>
 				</div>
 				<div class="mb-3">
 					<?= form_label('Juragan', 'juragan_', ['class' => 'form-label']); ?>
-					<?php 
+					<?php
 					foreach ($juragans->getResult() as $juragan) {
 						$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
 					}
 
-					echo form_multiselect('juragan[]', $options_juragan, [], ['class'=> 'form-select', 'id' => 'juragan_']);
+					echo form_multiselect('juragan[]', $options_juragan, [], ['class' => 'form-select', 'id' => 'juragan_']);
 					?>
 					<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 				</div>
-			
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-link text-decoration-none" data-dismiss="modal">Batal</button>
@@ -246,7 +239,7 @@ $pager = \Config\Services::pager();
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
-<?php 
+<?php
 $link_api_juragan = site_url("api/get_juragan");
 $link_invoice = site_url('invoices/index/');
 $link_api_relasi = site_url('settings/pengguna_relasi');

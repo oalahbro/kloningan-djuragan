@@ -1,12 +1,15 @@
-<?php namespace App\Models;
+<?php
+
+namespace App\Models;
+
 use CodeIgniter\Model;
- 
+
 class RelasiModel extends Model
 {
-	protected $table = 'relasi';
-	protected $primaryKey = 'id_bank';
-	
-	protected $returnType = 'object';
+    protected $table = 'relasi';
+    protected $primaryKey = 'id_bank';
+
+    protected $returnType = 'object';
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['table', 'juragan_id', 'val_id'];
@@ -21,5 +24,4 @@ class RelasiModel extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
-
 }

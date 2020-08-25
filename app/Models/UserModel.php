@@ -1,15 +1,18 @@
-<?php namespace App\Models;
+<?php
+
+namespace App\Models;
+
 use CodeIgniter\Model;
- 
+
 class UserModel extends Model
 {
-	protected $table = 'user';
-	protected $primaryKey = 'id';
-	
-	protected $returnType = 'object';
+    protected $table = 'user';
+    protected $primaryKey = 'id';
+
+    protected $returnType = 'object';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['username','password','name','email','level','status','login_terakhir'];
+    protected $allowedFields = ['username', 'password', 'name', 'email', 'level', 'status', 'login_terakhir'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

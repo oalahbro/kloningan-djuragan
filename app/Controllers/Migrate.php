@@ -1,5 +1,8 @@
-<?php namespace App\Controllers;
-use CodeIgniter\Controller; 
+<?php
+
+namespace App\Controllers;
+
+use CodeIgniter\Controller;
 
 class Migrate extends \CodeIgniter\Controller
 {
@@ -7,12 +10,9 @@ class Migrate extends \CodeIgniter\Controller
 	{
 		$migrate = \Config\Services::migrations();
 
-		try
-		{
+		try {
 			$migrate->latest();
-		}
-		catch (\Exception $e)
-		{
+		} catch (\Exception $e) {
 			// Do something with the error here...
 			echo 'Error';
 		}

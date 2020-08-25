@@ -1,6 +1,9 @@
-<?php namespace App\Models;
+<?php
+
+namespace App\Models;
+
 use CodeIgniter\Model;
- 
+
 class InvoiceModel extends Model
 {
 	protected $table = 'invoice';
@@ -33,7 +36,7 @@ class InvoiceModel extends Model
 		$inv->select('CONCAT("{","\"id\":",i.user_id,",","\"nama\":\"",u.name,"\"",",","\"username\":\"",u.username,"\"",,"}") as pengguna');
 
 		$inv->select('CONCAT("{","\"id\":",i.pelanggan_id,",","\"nama\":\"",p.nama_pelanggan,"\"",",","\"hp\":",p.hp,",","\"cod\":",p.cod,",","\"alamat\":\"",IFNULL(p.alamat, "null"),"\"",",","\"kecamatan\":",IFNULL(p.kecamatan,"null"),",","\"kabupaten\":",IFNULL(p.kabupaten,"null"),",","\"provinsi\":",IFNULL(p.provinsi,"null"),",","\"kodepos\":\"",IFNULL(p.kodepos,"null"),"\"","}") as pelanggan');
-		
+
 		$inv->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","\"id\":",b.id_beli,",","\"stok_id\":","\"",IFNULL(b.stok_id, "null"),"\",","\"kode\":\"",b.kode,"\",","\"ukuran\":\"",b.ukuran,"\",","\"harga\":",b.harga, ",","\"qty\":",b.qty,"}")),"]") as barang');
 
 		$inv->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","\"id\":",c.id_biaya,",","\"biaya_id\":",c.biaya_id,",","\"nominal\":\"",c.nominal,"\",","\"label\":","\"",IFNULL(c.label, "null"),"\"}")),"]") as biaya');
