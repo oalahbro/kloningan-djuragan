@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -15,6 +16,46 @@
  */
 
 // ------------------------------------------------------------------------
+=======
+<?php
+/**
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ * @since	Version 1.3.0
+ * @filesource
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
+>>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * SQLite Result Class
@@ -23,19 +64,33 @@
  *
  * @category	Database
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
+=======
+ * @link		https://codeigniter.com/user_guide/database/
+>>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 class CI_DB_sqlite_result extends CI_DB_result {
 
 	/**
 	 * Number of rows in the result set
 	 *
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
 	 */
 	function num_rows()
 	{
 		return @sqlite_num_rows($this->result_id);
+=======
+	 * @return	int
+	 */
+	public function num_rows()
+	{
+		return is_int($this->num_rows)
+			? $this->num_rows
+			: $this->num_rows = @sqlite_num_rows($this->result_id);
+>>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -43,10 +98,16 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	/**
 	 * Number of fields in the result set
 	 *
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
 	 */
 	function num_fields()
+=======
+	 * @return	int
+	 */
+	public function num_fields()
+>>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		return @sqlite_num_fields($this->result_id);
 	}
@@ -58,6 +119,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 *
 	 * Generates an array of column names
 	 *
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	array
 	 */
@@ -67,6 +129,16 @@ class CI_DB_sqlite_result extends CI_DB_result {
 		for ($i = 0; $i < $this->num_fields(); $i++)
 		{
 			$field_names[] = sqlite_field_name($this->result_id, $i);
+=======
+	 * @return	array
+	 */
+	public function list_fields()
+	{
+		$field_names = array();
+		for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
+		{
+			$field_names[$i] = sqlite_field_name($this->result_id, $i);
+>>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 
 		return $field_names;
@@ -79,6 +151,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	array
 	 */
@@ -95,6 +168,19 @@ class CI_DB_sqlite_result extends CI_DB_result {
 			$F->default		= '';
 
 			$retval[] = $F;
+=======
+	 * @return	array
+	 */
+	public function field_data()
+	{
+		$retval = array();
+		for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
+		{
+			$retval[$i]			= new stdClass();
+			$retval[$i]->name		= sqlite_field_name($this->result_id, $i);
+			$retval[$i]->type		= NULL;
+			$retval[$i]->max_length		= NULL;
+>>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 
 		return $retval;
@@ -103,6 +189,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Free the result
 	 *
 	 * @return	null
@@ -125,6 +212,18 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 * @return	array
 	 */
 	function _data_seek($n = 0)
+=======
+	 * Data Seek
+	 *
+	 * Moves the internal pointer to the desired offset. We call
+	 * this internally before fetching results to make sure the
+	 * result set starts at zero.
+	 *
+	 * @param	int	$n
+	 * @return	bool
+	 */
+	public function data_seek($n = 0)
+>>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		return sqlite_seek($this->result_id, $n);
 	}
@@ -136,10 +235,16 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an array
 	 *
+<<<<<<< HEAD
 	 * @access	private
 	 * @return	array
 	 */
 	function _fetch_assoc()
+=======
+	 * @return	array
+	 */
+	protected function _fetch_assoc()
+>>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		return sqlite_fetch_array($this->result_id);
 	}
@@ -151,6 +256,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
+<<<<<<< HEAD
 	 * @access	private
 	 * @return	object
 	 */
@@ -178,3 +284,14 @@ class CI_DB_sqlite_result extends CI_DB_result {
 
 /* End of file sqlite_result.php */
 /* Location: ./system/database/drivers/sqlite/sqlite_result.php */
+=======
+	 * @param	string	$class_name
+	 * @return	object
+	 */
+	protected function _fetch_object($class_name = 'stdClass')
+	{
+		return sqlite_fetch_object($this->result_id, $class_name);
+	}
+
+}
+>>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
 	background: #f8f8f8;
 	margin-top: 90px;
@@ -387,4 +388,29 @@ footer .credit {
 .bg-white {
 	background: white !important;
 	cursor: default !important;
+=======
+@import url(bootstrap.min.css);
+
+#scrolll {
+	transition: all 2s ease;
+	-webkit-transition: all 2s ease;
+	-moz-transition: all 2s ease;
+	-o-transition: all 2s ease;
+}
+
+.nav-up {
+	top: -45px;
+}
+.navbar-light .navbar-toggler, .btn-light, .btn-light:hover {
+	color: #333;
+}
+.navbar-dark .navbar-toggler, .btn-dark, .btn-dark:hover {
+	color: #fff;
+}
+.dropdown-toggle:hover {
+	cursor: pointer;
+}
+.isi_page {
+	margin-top: 90px;
+>>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 }

@@ -1,0 +1,3 @@
+ALTER TABLE `order` ADD `unik` VARCHAR(40) NOT NULL AFTER `data`;
+
+UPDATE `order` SET `order`.`unik` = `order`.`id`;
