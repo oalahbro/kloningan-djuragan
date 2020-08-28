@@ -43,10 +43,11 @@ $pager = \Config\Services::pager();
 						<div class="d-flex align-items-center">
 							<div class="mr-3">
 								<h5 class="card-title mb-0">#<?= $pesanan->seri; ?></h5>
-								<p class="text-muted small mb-1">(<?php
-																	$time = Time::createFromFormat('Y-m-d', $pesanan->tanggal_pesan);
-																	echo $time->toLocalizedString('EEEE, d MMMM yyyy');
-																	?>)</p>
+								<p class="text-muted small mb-1">(
+									<?php
+									$time = Time::createFromFormat('Y-m-d', $pesanan->tanggal_pesan);
+									echo $time->toLocalizedString('EEEE, d MMMM yyyy');
+									?>)</p>
 							</div>
 
 							<div class="border-left pl-3">
@@ -151,33 +152,37 @@ $pager = \Config\Services::pager();
 								<div class="border-bottom pb-2">
 									<?php $pelanggan = json_decode($pesanan->pelanggan); ?>
 									<span class="d-block font-weight-bold"><?= strtoupper($pelanggan->nama); ?></span>
-									<span class="d-block lead"><?php
-																for ($i = 0; $i < count($pelanggan->hp); $i++) {
-																	if ($i === 1) {
-																		echo '<span class="sr-only">/</span>';
-																	}
-																	echo '<span class="badge bg-secondary mr-1 font-weight-light">' . $pelanggan->hp[$i] . '</span>';
-																}
-																?></span>
-									<span class="d-block"><?php
-															if ($pelanggan->cod === 1) {
-																echo 'C.O.D';
-															} else {
-																//
-																$ongkir = new Ongkir();
+									<span class="d-block lead">
+										<?php
+										for ($i = 0; $i < count($pelanggan->hp); $i++) {
+											if ($i === 1) {
+												echo '<span class="sr-only">/</span>';
+											}
+											echo '<span class="badge bg-secondary mr-1 font-weight-light">' . $pelanggan->hp[$i] . '</span>';
+										}
+										?>
+									</span>
+									<span class="d-block">
+										<?php
+										if ($pelanggan->cod === 1) {
+											echo 'C.O.D';
+										} else {
+											//
+											$ongkir = new Ongkir();
 
-																$PPro = $pelanggan->provinsi;
-																$PKab = $pelanggan->kabupaten;
-																$PKec = $pelanggan->kecamatan;
-																$kota = $ongkir->kota($PPro, $PKab);
+											$PPro = $pelanggan->provinsi;
+											$PKab = $pelanggan->kabupaten;
+											$PKec = $pelanggan->kecamatan;
+											$kota = $ongkir->kota($PPro, $PKab);
 
-																$kec = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
-																$kab = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
-																$prov = strtoupper($ongkir->provinsi($PPro)['province']);
+											$kec = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
+											$kab = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
+											$prov = strtoupper($ongkir->provinsi($PPro)['province']);
 
-																echo $pelanggan->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $pelanggan->kodepos;
-															}
-															?></span>
+											echo $pelanggan->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $pelanggan->kodepos;
+										}
+										?>
+									</span>
 								</div>
 							</div>
 
@@ -242,19 +247,25 @@ $pager = \Config\Services::pager();
 										?>
 
 												<div class="d-flex justify-content-between align-items-center">
-													<div class="small d-flex text-muted text-uppercase text-truncate"><span class="font-weight-bold"><?php
-																																						$biaya = 'Lainnya';
-																																						if ($c->biaya_id === 1) {
-																																							$biaya = 'Ongkir';
-																																						}
-																																						$label = $c->label;
-																																						if ($c->label !== "null" && $c->biaya_id !== 1) {
-																																							$biaya = $c->label;
-																																							$label = '';
-																																						} elseif ($c->label === 'null' && $c->biaya_id !== 1) {
-																																							$label = '';
-																																						}
-																																						?><?= $biaya; ?></span>&nbsp;<?= $label; ?></div>
+													<div class="small d-flex text-muted text-uppercase text-truncate">
+														<span class="font-weight-bold">
+															<?php
+															$biaya = 'Lainnya';
+															if ($c->biaya_id === 1) {
+																$biaya = 'Ongkir';
+															}
+															$label = $c->label;
+															if ($c->label !== "null" && $c->biaya_id !== 1) {
+																$biaya = $c->label;
+																$label = '';
+															} elseif ($c->label === 'null' && $c->biaya_id !== 1) {
+																$label = '';
+															}
+															?>
+															<?= $biaya; ?>
+														</span>&nbsp;
+														<?= $label; ?>
+													</div>
 													<div class="font-weight-bold text-nowrap pl-2 <?= ($c->nominal < 0 ? 'text-danger' : ''); ?>"><?= number_to_currency($c->nominal, 'IDR'); ?></div>
 												</div>
 											<?php }
