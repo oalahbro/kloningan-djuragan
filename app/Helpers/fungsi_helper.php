@@ -104,3 +104,124 @@ if (!function_exists('first_letter')) {
 }
 
 // ------------------------------------------------------------------------
+
+if( ! function_exists('status_orderan')) {
+	function status_orderan($status, $mulai, $selesai, $keterangan_mulai, $keterangan_selesai) {
+		$class = '';
+		switch ($status) {
+			case 1:
+				$ico = 'file-alt';
+				if ($mulai !== NULL && $selesai !== NULL) {
+					$class = 'full';
+					$title = 'Data orderan sudah lengkap';
+					$time = Time::createFromTimestamp($selesai);
+					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
+				}
+				else if ($mulai !== NULL && $selesai === NULL) {
+					$title = 'Data orderan belum lengkap';
+					$time = Time::createFromTimestamp($mulai);
+					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+				}
+				break;
+			
+			case 2:
+				$ico = 'layer-group';
+				if ($mulai !== NULL && $selesai !== NULL) {
+					$class = 'full';
+					$title = 'Bahan sudah ada';
+					$time = Time::createFromTimestamp($selesai);
+					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
+				}
+				else if ($mulai !== NULL && $selesai === NULL) {
+					$title = 'Bahan belum ada';
+					$time = Time::createFromTimestamp($mulai);
+					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+				}
+				break;
+			
+			case 3:
+				$ico = 'print';
+				if ($mulai !== NULL && $selesai !== NULL) {
+					$class = 'full';
+					$title = 'Sudah selesai sablon';
+					$time = Time::createFromTimestamp($selesai);
+					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
+				}
+				else if ($mulai !== NULL && $selesai === NULL) {
+					$title = 'Mulai di-sablon';
+					$time = Time::createFromTimestamp($mulai);
+					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+				}
+				break;
+			
+			case 4:
+				$ico = 'waveform-path fa-rotate-90';
+				if ($mulai !== NULL && $selesai !== NULL) {
+					$class = 'full';
+					$title = 'Sudah selesai bordir';
+					$time = Time::createFromTimestamp($selesai);
+					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
+				}
+				else if ($mulai !== NULL && $selesai === NULL) {
+					$title = 'Mulai di-bordir';
+					$time = Time::createFromTimestamp($mulai);
+					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+				}
+				break;
+			
+			case 5:
+				$ico = 'cut fa-rotate-270';
+				if ($mulai !== NULL && $selesai !== NULL) {
+					$class = 'full';
+					$title = 'Selesai dari penjahit';
+					$time = Time::createFromTimestamp($selesai);
+					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
+				}
+				else if ($mulai !== NULL && $selesai === NULL) {
+					$title = 'Masuk ke penjahit';
+					$time = Time::createFromTimestamp($mulai);
+					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+				}
+				break;
+			
+			case 6:
+				$ico = 'tasks';
+				if ($mulai !== NULL && $selesai !== NULL) {
+					$class = 'full';
+					$title = 'QC selesai';
+					$time = Time::createFromTimestamp($selesai);
+					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
+				}
+				else if ($mulai !== NULL && $selesai === NULL) {
+					$title = 'Masuk QC';
+					$time = Time::createFromTimestamp($mulai);
+					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+				}
+				break;
+			
+			case 7:
+				$ico = 'box-alt';
+				if ($mulai !== NULL && $selesai !== NULL) {
+					$class = 'full';
+					$title = 'Selesai dipacking';
+					$time = Time::createFromTimestamp($selesai);
+					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
+				}
+				else if ($mulai !== NULL && $selesai === NULL) {
+					$title = 'Sedang dipacking';
+					$time = Time::createFromTimestamp($mulai);
+					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+				}
+				break;
+		}
+
+		$html = '<li class="list-inline-item mr-0 position-relative '. $class .'" data-toggle="tooltip" data-placement="top" title="'. $title .'"><div class="d-flex justify-content-center">';
+			$html .= '<div class="text-center"><i class="fad fa-'. $ico .' icon d-block"></i>';
+			$html .= '<span><abbr title="'. $time->humanize() .'">'. $time->day .'/'. $time->month .'</abbr></span></div></div>';
+		$html .= '</li>';
+
+		return $html;
+	}
+}
+
+// ------------------------------------------------------------------------
