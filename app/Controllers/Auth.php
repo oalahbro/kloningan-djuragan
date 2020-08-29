@@ -57,12 +57,12 @@ class Auth extends BaseController
 
 					if (md5($post_pswd) === $get->password) {
 						// jika password sama
-						$arr = $this->pass($get, $post_pswd);
+						$arr = $this->_pass($get, $post_pswd);
 					}
 				} else {
 					if (password_verify($this->request->getPost('password'), $get->password)) {
 						// jika password menggunakan password_hash()
-						$arr = $this->pass($get);
+						$arr = $this->_pass($get);
 					} else {
 						$arr = [
 							'sesi' => [
@@ -82,7 +82,7 @@ class Auth extends BaseController
 
 	// ------------------------------------------------------------------------
 
-	private function pass($db, $password_to_update = FALSE)
+	private function _pass($db, $password_to_update = FALSE)
 	{
 		switch ($db->status) {
 			case 'pending':
@@ -117,17 +117,12 @@ class Auth extends BaseController
 				break;
 			default:
 				// save for update `login_terakhir`
+				$data['id'] 			= $db->id;
+				$data['login_terakhir'] = now();
+
+				// jika password dari md5() perlu diupdate
 				if ($password_to_update !== FALSE) {
-					$data = [
-						'id' => $db->id,
-						'password' => password_hash($password_to_update, PASSWORD_BCRYPT),
-						'login_terakhir' => now()
-					];
-				} else {
-					$data = [
-						'id' => $db->id,
-						'login_terakhir' => now()
-					];
+					$data['password'] 	= password_hash($password_to_update, PASSWORD_BCRYPT);
 				}
 
 				$this->user->save($data);
