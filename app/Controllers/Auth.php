@@ -121,12 +121,12 @@ class Auth extends BaseController
 					$data = [
 						'id' => $db->id,
 						'password' => password_hash($password_to_update, PASSWORD_BCRYPT),
-						'login_terakhir' => now('Asia/Jakarta')
+						'login_terakhir' => now()
 					];
 				} else {
 					$data = [
 						'id' => $db->id,
-						'login_terakhir' => now('Asia/Jakarta')
+						'login_terakhir' => now()
 					];
 				}
 
