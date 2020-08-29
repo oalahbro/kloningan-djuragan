@@ -6,8 +6,11 @@ use App\Controllers\BaseController;
 
 class Invoices extends BaseController
 {
-    public function index()
+    // 
+    public function lihat($juragan = 'semua')
     {
         // 
     }
+
+    // ------------------------------------------------------------------------
 }

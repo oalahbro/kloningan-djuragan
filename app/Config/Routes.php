@@ -32,7 +32,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Auth::index');
 
-$routes->get('admin', 'admin/Invoices::index');
+$routes->get('admin', 'admin/Invoices::lihat');
 $routes->get('user', 'user/Invoices::index');
 
 /**
