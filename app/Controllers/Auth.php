@@ -4,27 +4,23 @@ namespace App\Controllers;
 
 class Auth extends BaseController
 {
-	private function isLogged()
-	{
-		$session = \Config\Services::session();
-
-		if ($session->has('logged')) {
-			if (!$session->get('logged')) {
-				return FALSE;
-			}
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
 
 	// ------------------------------------------------------------------------
 
 	public function index()
 	{
+		// cek sudah login atau belum
+		// kalo sudah redirect
 		if ($this->isLogged()) {
-			// redirect jika logged
-			return redirect()->to('/invoices');
+			// redirect 
+			if ($this->isAdmin()) {
+				$redirect = 'admin';
+			}
+			else {
+				$redirect = 'user';
+			}
+
+			return redirect()->to($redirect);
 		}
 
 		if ($this->request->getPost()) {
@@ -82,7 +78,7 @@ class Auth extends BaseController
 
 	// ------------------------------------------------------------------------
 
-	private function _pass($db, $password_to_update = FALSE)
+	protected function _pass($db, $password_to_update = FALSE)
 	{
 		switch ($db->status) {
 			case 'pending':
@@ -149,9 +145,18 @@ class Auth extends BaseController
 
 	public function daftar()
 	{
+		// cek sudah login atau belum
+		// kalo sudah redirect
 		if ($this->isLogged()) {
-			// redirect jika logged
-			return redirect()->to('/invoices');
+			// redirect 
+			if ($this->isAdmin()) {
+				$redirect = 'admin';
+			}
+			else {
+				$redirect = 'user';
+			}
+
+			return redirect()->to($redirect);
 		}
 
 		if ($this->request->getPost()) {
@@ -180,9 +185,18 @@ class Auth extends BaseController
 
 	public function lupa()
 	{
+		// cek sudah login atau belum
+		// kalo sudah redirect
 		if ($this->isLogged()) {
-			// redirect jika logged
-			return redirect()->to('/invoices');
+			// redirect 
+			if ($this->isAdmin()) {
+				$redirect = 'admin';
+			}
+			else {
+				$redirect = 'user';
+			}
+
+			return redirect()->to($redirect);
 		}
 
 		if ($this->request->getPost()) {
@@ -211,7 +225,11 @@ class Auth extends BaseController
 
 	public function keluar()
 	{
+		// hapus sesion
 		$this->session->destroy();
 		return redirect()->to('/');
 	}
+
+	// ------------------------------------------------------------------------
+	
 }

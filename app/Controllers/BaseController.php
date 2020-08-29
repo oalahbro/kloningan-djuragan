@@ -33,6 +33,16 @@ class BaseController extends Controller
 	 */
 	protected $helpers = ['date','form','fungsi','number','text','url'];
 
+	public $cache;
+	public $session;
+	public $validation;
+
+	public $bank;
+	public $invoice;
+	public $juragan;
+	public $relasi;
+	public $user;
+
 	/**
 	 * Constructor.
 	 */
@@ -41,7 +51,6 @@ class BaseController extends Controller
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
 
-		$config = config('JuraganConfig');
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
@@ -56,4 +65,42 @@ class BaseController extends Controller
 		$this->relasi 	= new RelasiModel();
 		$this->user 	= new UserModel();
 	}
+
+	// ------------------------------------------------------------------------
+
+	public function isLogged()
+	{
+		if ($this->session->has('logged')) {
+			if (!$this->session->get('logged')) {
+				return FALSE;
+			}
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	// ------------------------------------------------------------------------
+
+	public function isAdmin($superadmin = FALSE)
+	{
+		$return = FALSE;
+		if ($superadmin === TRUE) {
+			// jika $superadmin === TRUE, maka yang diambil hanya superadmin
+			if ($this->session->get('level') === 'superadmin') {
+				$return = TRUE;
+			}
+		}
+		else {
+			// levelnya admin dan superadmin
+			if ($this->session->get('level') === 'admin' or $this->session->get('level') === 'superadmin') {
+				$return = TRUE;
+			}
+		}
+
+		return $return;
+	}
+
+	// ------------------------------------------------------------------------
+	
 }
