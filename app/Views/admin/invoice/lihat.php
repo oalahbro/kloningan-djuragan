@@ -354,7 +354,7 @@ $pager = \Config\Services::pager();
 
 					<!-- Example split danger button -->
 					<div class="btn-group">
-						<?= anchor('invoices/sunting/' . $pesanan->seri, '<i class="fad fa-pencil"></i> Sunting', ['class' => 'btn btn-outline-secondary', 'role' => 'button']); ?>
+						<?= anchor('admin/invoices/sunting/' . $pesanan->seri, '<i class="fad fa-pencil"></i> Sunting', ['class' => 'btn btn-outline-secondary', 'role' => 'button']); ?>
 						<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>

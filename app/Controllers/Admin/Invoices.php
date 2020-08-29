@@ -6,16 +6,23 @@ use App\Controllers\BaseController;
 
 class Invoices extends BaseController
 {
+	// tampilkan detail berdasarkan nomor seri
+	public function baca($seri = '')
+	{
+	}
+
+	// ------------------------------------------------------------------------
+	// halaman untuk membuat invoice baru
 	public function tulis()
 	{
 		$data = [
-			'title' => 'Tulis Baru'
+			'title' => 'Tulis Orderan Baru'
 		];
 		return view('admin/invoice/tulis', $data);
 	}
 
 	// ------------------------------------------------------------------------
-
+	// menampilkan semua invoice
     public function lihat($juragan = 'semua')
     {
         // 
@@ -36,14 +43,31 @@ class Invoices extends BaseController
     }
 
 	// ------------------------------------------------------------------------
-	
-	public function sunting()
+	// halaman untuk menyunting invoice verdasarkan $seri
+	public function sunting($seri = '')
 	{
-		# code...
+		if ($seri === '' or empty($seri)) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
+		else {
+			// cek di database
+			$pesanan = $this->invoice->ambil_data()->get()->getResult();
+			if (count($pesanan) > 0) {
+			
+				$data = [
+					'title' 	=> 'Sunting Invoice #' . $seri,
+					'pesanans' 	=> $pesanan
+				];
+				return view('admin/invoice/lihat', $data);
+			}
+			else {
+				throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+			}
+		}
 	}
 
 	// ------------------------------------------------------------------------
-
+	// hapus invoice
 	public function hapus()
 	{
 		# code...
