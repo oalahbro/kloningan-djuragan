@@ -33,7 +33,7 @@
 						}
 
 						echo form_label('Pengguna', 'username');
-						echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'username', 'required' => '']);
+						echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'username', 'required' => '', 'tabindex' => '1']);
 						?>
 						<?php if ($validation->hasError('username')) { ?>
 							<div class="invalid-feedback">
@@ -49,7 +49,7 @@
 						}
 
 						echo form_label('Kata sandi', 'password');
-						echo form_input('password', '', ['class' => $class_password, 'id' => 'password', 'placeholder' => 'kata sandi', 'required' => ''], 'password');
+						echo form_input('password', '', ['class' => $class_password, 'id' => 'password', 'placeholder' => 'kata sandi', 'required' => '', 'tabindex' => '2'], 'password');
 
 						if ($validation->hasError('password')) { ?>
 							<div class="invalid-feedback">
@@ -58,7 +58,7 @@
 						<?php } ?>
 					</div>
 					<?php
-					echo form_button(['content' => 'Masuk', 'class' => 'btn btn-primary', 'type' => 'submit']);
+					echo form_button(['content' => 'Masuk', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '3']);
 					echo anchor('auth/lupa', 'Lupa sandi?', ['title' => 'Reset kata sandi', 'class' => 'ml-2 text-muted']);
 					?>
 					<?= form_close(); ?>

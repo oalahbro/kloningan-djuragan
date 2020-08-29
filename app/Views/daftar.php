@@ -33,7 +33,7 @@
 						}
 
 						echo form_label('Pengguna', 'username');
-						echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'username', 'required' => '']);
+						echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'username', 'required' => '', 'tabindex' => '1']);
 
 						if ($validation->hasError('username')) { ?>
 							<div class="invalid-feedback">
@@ -49,7 +49,7 @@
 						}
 
 						echo form_label('Kata sandi', 'password');
-						echo form_input('password', '', ['class' => $class_password, 'id' => 'password', 'placeholder' => 'kata sandi', 'required' => ''], 'password');
+						echo form_input('password', '', ['class' => $class_password, 'id' => 'password', 'placeholder' => 'kata sandi', 'required' => '', 'tabindex' => '2'], 'password');
 
 						if ($validation->hasError('password')) { ?>
 							<div class="invalid-feedback">
@@ -65,7 +65,7 @@
 						}
 
 						echo form_label('Nama', 'nama');
-						echo form_input('nama', set_value('nama'), ['class' => $class_nama, 'id' => 'nama', 'placeholder' => 'nama pengguna', 'required' => '']);
+						echo form_input('nama', set_value('nama'), ['class' => $class_nama, 'id' => 'nama', 'placeholder' => 'nama pengguna', 'required' => '', 'tabindex' => '3']);
 
 						if ($validation->hasError('nama')) { ?>
 							<div class="invalid-feedback">
@@ -81,7 +81,7 @@
 						}
 
 						echo form_label('Email', 'email');
-						echo form_input('email', set_value('email'), ['class' => $class_email, 'id' => 'email', 'placeholder' => 'email', 'required' => ''], 'email');
+						echo form_input('email', set_value('email'), ['class' => $class_email, 'id' => 'email', 'placeholder' => 'email', 'required' => '', 'tabindex' => '4'], 'email');
 
 						if ($validation->hasError('email')) { ?>
 							<div class="invalid-feedback">
@@ -90,7 +90,7 @@
 						<?php } ?>
 					</div>
 					<?php
-					echo form_button(['content' => 'Daftar', 'class' => 'btn btn-primary', 'type' => 'submit']);
+					echo form_button(['content' => 'Daftar', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '5']);
 					?>
 					<?= form_close(); ?>
 				</div>

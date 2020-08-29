@@ -33,7 +33,7 @@
 						}
 
 						echo form_label('Email atau Nama pengguna', 'username');
-						echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'email / username', 'required' => '']);
+						echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'email / username', 'required' => '', 'tabindex' => '1']);
 						?>
 						<?php if ($validation->hasError('username')) { ?>
 							<div class="invalid-feedback">
@@ -42,7 +42,7 @@
 						<?php } ?>
 					</div>
 					<?php
-					echo form_button(['content' => 'Atur ulang', 'class' => 'btn btn-primary', 'type' => 'submit']);
+					echo form_button(['content' => 'Atur ulang', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '2']);
 					?>
 					<?= form_close(); ?>
 				</div>
