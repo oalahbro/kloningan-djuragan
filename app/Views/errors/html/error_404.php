@@ -13,7 +13,7 @@
 	
 </head>
 
-<body>
+<body class="bg-light">
 	<div class="page-wrap d-flex flex-row align-items-center" style="min-height: 100vh">
 		<div class="container">
 			<div class="row justify-content-center">
