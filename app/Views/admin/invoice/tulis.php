@@ -5,7 +5,7 @@ use CodeIgniter\I18n\Time;
 $sekarang = new Time('now');
 ?>
 
-<?= $this->extend('template/logged') ?>
+<?= $this->extend('template/default_admin') ?>
 
 <?= $this->section('content') ?>
 
@@ -25,7 +25,7 @@ $sekarang = new Time('now');
 
 <div class="container mb-5">
 
-	<?= form_open('invoices/save', ['class' => 'row', 'id' => 'iForm']); ?>
+	<?= form_open('admin/invoices/save', ['class' => 'row', 'id' => 'iForm']); ?>
 	<div class="col-sm-4 mb-3">
 
 		<div class="sticky-top" style="top: 60px">

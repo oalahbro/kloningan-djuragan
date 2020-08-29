@@ -5,7 +5,7 @@ use App\Libraries\Ongkir;
 
 $pager = \Config\Services::pager();
 ?>
-<?= $this->extend('template/logged') ?>
+<?= $this->extend('template/default_admin') ?>
 
 <?= $this->section('content') ?>
 
@@ -16,7 +16,7 @@ $pager = \Config\Services::pager();
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb p-0">
 			<li class="breadcrumb-item"><?= anchor('', 'Dasbor'); ?></li>
-			<li class="breadcrumb-item"><?= anchor('invoices', 'Orderan'); ?></li>
+			<li class="breadcrumb-item"><?= anchor('admin/invoices', 'Orderan'); ?></li>
 			<li class="breadcrumb-item active" aria-current="page">Semua Orderan</li>
 		</ol>
 	</nav>
@@ -43,11 +43,14 @@ $pager = \Config\Services::pager();
 						<div class="d-flex align-items-center">
 							<div class="mr-3">
 								<h5 class="card-title mb-0">#<?= $pesanan->seri; ?></h5>
-								<p class="text-muted small mb-1">(
+								<p class="text-muted small mb-1">
+									(
 									<?php
 									$time = Time::createFromFormat('Y-m-d', $pesanan->tanggal_pesan);
 									echo $time->toLocalizedString('EEEE, d MMMM yyyy');
-									?>)</p>
+									?>
+									)
+								</p>
 							</div>
 
 							<div class="border-left pl-3">
@@ -492,8 +495,8 @@ $pager = \Config\Services::pager();
 <?php
 
 $link_api_juragan = site_url("api/get_juragan");
-$link_invoice = site_url('invoices/index/');
-$link_save_progress = site_url('invoices/save_progress');
+$link_invoice = site_url('admin/invoices/lihat/');
+$link_save_progress = site_url('admin/invoices/save_progress');
 
 $js = <<< JS
 $(function() { 
@@ -531,7 +534,7 @@ $(function() {
 	$('#sidebarCollapse').on('click',function(){
 		$('#listLi').html(''),
 		$.getJSON('$link_api_juragan',function(b){
-			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice"><i class="fad fa-user-circle"></i> Semua Juragan</li></li>'),
+			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+'semua'+'"><i class="fad fa-user-circle"></i> Semua Juragan</li></li>'),
 			$.each(b,function(c,b){
 				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.juragan+'"><i class="fad fa-user-circle"></i> '+b.nama_juragan+'</li>');
 			}),
@@ -690,7 +693,49 @@ $(function() {
 		}
 		else {
 			// console.log('data bayar kosong');
-			$('#modalBayar #cek').empty().append('<div class="text-center my-5"><i class="fad fa-wallet fa-4x"></i><br/>data kosong</div>');
+			// $('#modalBayar #cek').empty().append('<div class="text-center my-5"><i class="fad fa-wallet fa-4x"></i><br/>data kosong</div>');
+
+			$('#modalBayar #cek').empty().append(`
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<div class="d-flex justify-content-start">
+						<input class="form-check-input mr-1" type="checkbox" value="" aria-label="...">
+						<div>
+							BCA&nbsp;-&nbsp;Rp 200.000&nbsp;(28/08/2020)
+							<div class="text-muted small">dana ada,&nbsp;dicek pada:&nbsp;28/08/2020</div>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="d-flex justify-content-start">
+						<input class="form-check-input mr-1" type="checkbox" value="" aria-label="...">
+						<div>
+							BCA&nbsp;-&nbsp;Rp 200.000&nbsp;(28/08/2020)
+							<div class="text-muted small">dana ada,&nbsp;dicek pada:&nbsp;28/08/2020</div>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="d-flex justify-content-start">
+						<input class="form-check-input mr-1" type="checkbox" value="" aria-label="...">
+						<div>
+							BCA&nbsp;-&nbsp;Rp 200.000&nbsp;(28/08/2020)
+							<div class="text-muted small">dana ada,&nbsp;dicek pada:&nbsp;28/08/2020</div>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="d-flex justify-content-start">
+						<input class="form-check-input mr-1" type="checkbox" value="" aria-label="...">
+						<div>
+							BCA&nbsp;-&nbsp;Rp 200.000&nbsp;(28/08/2020)
+							<div class="text-muted small">dana ada,&nbsp;dicek pada:&nbsp;28/08/2020</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			`);
+
 
 		}
 	});

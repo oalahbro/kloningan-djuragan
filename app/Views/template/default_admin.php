@@ -202,7 +202,7 @@ $JSmin = new Minify\JS();
 			<div id="menu" class="order-3 order-md-0 navbar-nav-scroll d-flex justify-content-center">
 				<ul class="navbar-nav bd-navbar-nav flex-row py-2 py-md-0">
 					<li class="nav-item">
-						<?= anchor('invoices/baru', 'Tulis Pesanan', ['class' => 'nav-link']) ?>
+						<?= anchor('admin/invoices/tulis', 'Tulis Orderan', ['class' => 'nav-link']) ?>
 					</li>
 					<li class="nav-item">
 						<?= anchor('pelanggan', 'Customer', ['class' => 'nav-link']) ?>
