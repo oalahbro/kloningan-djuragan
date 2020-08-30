@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -58,50 +36,23 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * ODBC Result Class
  *
  * This class extends the parent result class: CI_DB_result
  *
-<<<<<<< HEAD
-<<<<<<< HEAD
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/database/
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/database/
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_odbc_result extends CI_DB_result {
 
 	/**
 	 * Number of rows in the result set
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	integer
-	 */
-	function num_rows()
-	{
-		return @odbc_num_rows($this->result_id);
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_rows()
@@ -126,10 +77,6 @@ class CI_DB_odbc_result extends CI_DB_result {
 		}
 
 		return $this->num_rows = count($this->result_array());
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -137,26 +84,11 @@ class CI_DB_odbc_result extends CI_DB_result {
 	/**
 	 * Number of fields in the result set
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	integer
-	 */
-	function num_fields()
-	{
-		return @odbc_num_fields($this->result_id);
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_fields()
 	{
 		return odbc_num_fields($this->result_id);
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -166,20 +98,6 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 *
 	 * Generates an array of column names
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	array
-	 */
-	function list_fields()
-	{
-		$field_names = array();
-		for ($i = 0; $i < $this->num_fields(); $i++)
-		{
-			$field_names[]	= odbc_field_name($this->result_id, $i);
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function list_fields()
@@ -193,10 +111,6 @@ class CI_DB_odbc_result extends CI_DB_result {
 			{
 				$field_names[] = odbc_field_name($this->result_id, $i);
 			}
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $field_names;
@@ -209,27 +123,6 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	array
-	 */
-	function field_data()
-	{
-		$retval = array();
-		for ($i = 0; $i < $this->num_fields(); $i++)
-		{
-			$F				= new stdClass();
-			$F->name		= odbc_field_name($this->result_id, $i);
-			$F->type		= odbc_field_type($this->result_id, $i);
-			$F->max_length	= odbc_field_len($this->result_id, $i);
-			$F->primary_key = 0;
-			$F->default		= '';
-
-			$retval[] = $F;
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function field_data()
@@ -243,10 +136,6 @@ class CI_DB_odbc_result extends CI_DB_result {
 			$retval[$i]->max_length		= odbc_field_len($this->result_id, $odbc_index);
 			$retval[$i]->primary_key	= 0;
 			$retval[$i]->default		= '';
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $retval;
@@ -257,21 +146,9 @@ class CI_DB_odbc_result extends CI_DB_result {
 	/**
 	 * Free the result
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @return	null
-	 */
-	function free_result()
-=======
 	 * @return	void
 	 */
 	public function free_result()
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-	 * @return	void
-	 */
-	public function free_result()
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if (is_resource($this->result_id))
 		{
@@ -283,23 +160,6 @@ class CI_DB_odbc_result extends CI_DB_result {
 	// --------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * Data Seek
-	 *
-	 * Moves the internal pointer to the desired offset.  We call
-	 * this internally before fetching results to make sure the
-	 * result set starts at zero
-	 *
-	 * @access	private
-	 * @return	array
-	 */
-	function _data_seek($n = 0)
-	{
-		return FALSE;
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Result - associative array
 	 *
 	 * Returns the result set as an array
@@ -309,33 +169,6 @@ class CI_DB_odbc_result extends CI_DB_result {
 	protected function _fetch_assoc()
 	{
 		return odbc_fetch_array($this->result_id);
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-<<<<<<< HEAD
-	 * Result - associative array
-	 *
-	 * Returns the result set as an array
-	 *
-	 * @access	private
-	 * @return	array
-	 */
-	function _fetch_assoc()
-	{
-		if (function_exists('odbc_fetch_object'))
-		{
-			return odbc_fetch_array($this->result_id);
-		}
-		else
-		{
-			return $this->_odbc_fetch_array($this->result_id);
-		}
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -345,79 +178,6 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
-<<<<<<< HEAD
-	 * @access	private
-	 * @return	object
-	 */
-	function _fetch_object()
-	{
-		if (function_exists('odbc_fetch_object'))
-		{
-			return odbc_fetch_object($this->result_id);
-		}
-		else
-		{
-			return $this->_odbc_fetch_object($this->result_id);
-		}
-	}
-
-
-	/**
-	 * Result - object
-	 *
-	 * subsititutes the odbc_fetch_object function when
-	 * not available (odbc_fetch_object requires unixODBC)
-	 *
-	 * @access	private
-	 * @return	object
-	 */
-	function _odbc_fetch_object(& $odbc_result) {
-		$rs = array();
-		$rs_obj = FALSE;
-		if (odbc_fetch_into($odbc_result, $rs)) {
-			foreach ($rs as $k=>$v) {
-				$field_name= odbc_field_name($odbc_result, $k+1);
-				$rs_obj->$field_name = $v;
-			}
-		}
-		return $rs_obj;
-	}
-
-
-	/**
-	 * Result - array
-	 *
-	 * subsititutes the odbc_fetch_array function when
-	 * not available (odbc_fetch_array requires unixODBC)
-	 *
-	 * @access	private
-	 * @return	array
-	 */
-	function _odbc_fetch_array(& $odbc_result) {
-		$rs = array();
-		$rs_assoc = FALSE;
-		if (odbc_fetch_into($odbc_result, $rs)) {
-			$rs_assoc=array();
-			foreach ($rs as $k=>$v) {
-				$field_name= odbc_field_name($odbc_result, $k+1);
-				$rs_assoc[$field_name] = $v;
-			}
-		}
-		return $rs_assoc;
-	}
-
-}
-
-
-/* End of file odbc_result.php */
-/* Location: ./system/database/drivers/odbc/odbc_result.php */
-=======
-	 * Result - object
-	 *
-	 * Returns the result set as an object
-	 *
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$class_name
 	 * @return	object
 	 */
@@ -506,7 +266,3 @@ if ( ! function_exists('odbc_fetch_object'))
 		return $rs_object;
 	}
 }
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -260,8 +260,6 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 		return preg_replace('`SELECT`i', 'SELECT '.$select, $sql);
 	}
 
-<<<<<<< HEAD
-=======
 	// --------------------------------------------------------------------
 
 	/**
@@ -278,5 +276,4 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 	{
 		return ($this->db->db_debug) ? $this->db->display_error('db_unsupported_feature') : FALSE;
 	}
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 }

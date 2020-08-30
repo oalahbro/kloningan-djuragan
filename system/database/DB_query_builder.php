@@ -679,11 +679,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 				// value appears not to have been set, assign the test to IS NULL
 				$k .= ' IS NULL';
 			}
-<<<<<<< HEAD
-			elseif (preg_match('/\s*(!?=|<>|IS(?:\s+NOT)?)\s*$/i', $k, $match, PREG_OFFSET_CAPTURE))
-=======
 			elseif (preg_match('/\s*(!?=|<>|\sIS(?:\s+NOT)?\s)\s*$/i', $k, $match, PREG_OFFSET_CAPTURE))
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$k = substr($k, 0, $match[0][1]).($match[1][0] === '=' ? ' IS NULL' : ' IS NOT NULL');
 			}
@@ -1275,11 +1271,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	 */
 	protected function _limit($sql)
 	{
-<<<<<<< HEAD
-		return $sql.' LIMIT '.($this->qb_offset ? $this->qb_offset.', ' : '').$this->qb_limit;
-=======
 		return $sql.' LIMIT '.($this->qb_offset ? $this->qb_offset.', ' : '').(int) $this->qb_limit;
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -1923,11 +1915,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		$affected_rows = 0;
 		for ($i = 0, $total = count($this->qb_set); $i < $total; $i += $batch_size)
 		{
-<<<<<<< HEAD
-			if ($this->query($this->_update_batch($this->protect_identifiers($table, TRUE, NULL, FALSE), array_slice($this->qb_set, $i, $batch_size), $this->protect_identifiers($index))))
-=======
 			if ($this->query($this->_update_batch($this->protect_identifiers($table, TRUE, NULL, FALSE), array_slice($this->qb_set, $i, $batch_size), $index)))
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$affected_rows += $this->affected_rows();
 			}
@@ -1953,11 +1941,8 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	 */
 	protected function _update_batch($table, $values, $index)
 	{
-<<<<<<< HEAD
-=======
 		$index_escaped = $this->protect_identifiers($index);
 
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$ids = array();
 		foreach ($values as $key => $val)
 		{
@@ -1967,11 +1952,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			{
 				if ($field !== $index)
 				{
-<<<<<<< HEAD
-					$final[$field][] = 'WHEN '.$index.' = '.$val[$index].' THEN '.$val[$field];
-=======
 					$final[$field][] = 'WHEN '.$index_escaped.' = '.$val[$index].' THEN '.$val[$field];
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 			}
 		}
@@ -1984,11 +1965,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 				.'ELSE '.$k.' END, ';
 		}
 
-<<<<<<< HEAD
-		$this->where($index.' IN('.implode(',', $ids).')', NULL, FALSE);
-=======
 		$this->where($index_escaped.' IN('.implode(',', $ids).')', NULL, FALSE);
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		return 'UPDATE '.$table.' SET '.substr($cases, 0, -2).$this->_compile_wh('qb_where');
 	}
@@ -2365,11 +2342,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			.$this->_compile_order_by(); // ORDER BY
 
 		// LIMIT
-<<<<<<< HEAD
-		if ($this->qb_limit)
-=======
 		if ($this->qb_limit OR $this->qb_offset)
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return $this->_limit($sql."\n");
 		}

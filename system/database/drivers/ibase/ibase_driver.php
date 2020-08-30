@@ -384,8 +384,6 @@ class CI_DB_ibase_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-=======
 	 * Insert batch statement
 	 *
 	 * Generates a platform-specific insert string from the supplied data.
@@ -403,7 +401,6 @@ class CI_DB_ibase_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Close DB Connection
 	 *
 	 * @return	void

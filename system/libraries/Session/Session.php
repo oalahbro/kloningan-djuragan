@@ -57,10 +57,7 @@ class CI_Session {
 
 	protected $_driver = 'files';
 	protected $_config;
-<<<<<<< HEAD
-=======
 	protected $_sid_regexp;
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// ------------------------------------------------------------------------
 
@@ -103,10 +100,7 @@ class CI_Session {
 
 		// Configuration ...
 		$this->_configure($params);
-<<<<<<< HEAD
-=======
 		$this->_config['_sid_regexp'] = $this->_sid_regexp;
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		$class = new $class($this->_config);
 		if ($class instanceof SessionHandlerInterface)
@@ -139,11 +133,7 @@ class CI_Session {
 		if (isset($_COOKIE[$this->_config['cookie_name']])
 			&& (
 				! is_string($_COOKIE[$this->_config['cookie_name']])
-<<<<<<< HEAD
-				OR ! preg_match('/^[0-9a-f]{40}$/', $_COOKIE[$this->_config['cookie_name']])
-=======
 				OR ! preg_match('#\A'.$this->_sid_regexp.'\z#', $_COOKIE[$this->_config['cookie_name']])
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			)
 		)
 		{
@@ -327,10 +317,6 @@ class CI_Session {
 		ini_set('session.use_strict_mode', 1);
 		ini_set('session.use_cookies', 1);
 		ini_set('session.use_only_cookies', 1);
-<<<<<<< HEAD
-		ini_set('session.hash_function', 1);
-		ini_set('session.hash_bits_per_character', 4);
-=======
 
 		$this->_configure_sid_length();
 	}
@@ -407,7 +393,6 @@ class CI_Session {
 		}
 
 		$this->_sid_regexp .= '{'.$sid_length.'}';
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------

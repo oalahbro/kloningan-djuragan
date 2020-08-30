@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -58,10 +36,6 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Number Helpers
@@ -70,33 +44,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Helpers
  * @category	Helpers
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/helpers/number_helper.html
-=======
  * @link		https://codeigniter.com/user_guide/helpers/number_helper.html
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
- * @link		https://codeigniter.com/user_guide/helpers/number_helper.html
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Formats a numbers as bytes, based on size, and adds the appropriate suffix
- *
- * @access	public
- * @param	mixed	// will be cast as int
- * @return	string
- */
-if ( ! function_exists('byte_format'))
-{
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('byte_format'))
 {
 	/**
@@ -106,10 +58,6 @@ if ( ! function_exists('byte_format'))
 	 * @param	int
 	 * @return	string
 	 */
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function byte_format($num, $precision = 1)
 	{
 		$CI =& get_instance();
@@ -144,13 +92,3 @@ if ( ! function_exists('byte_format'))
 		return number_format($num, $precision).' '.$unit;
 	}
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-/* End of file number_helper.php */
-/* Location: ./system/helpers/number_helper.php */
-=======
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

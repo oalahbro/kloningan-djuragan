@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -58,81 +36,19 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * MySQLi Utility Class
  *
-<<<<<<< HEAD
-<<<<<<< HEAD
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/database/
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/database/
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_mysqli_utility extends CI_DB_utility {
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * List databases
-	 *
-	 * @access	private
-	 * @return	bool
-	 */
-	function _list_databases()
-	{
-		return "SHOW DATABASES";
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Optimize table query
-	 *
-	 * Generates a platform-specific query so that a table can be optimized
-	 *
-	 * @access	private
-	 * @param	string	the table name
-	 * @return	object
-	 */
-	function _optimize_table($table)
-	{
-		return "OPTIMIZE TABLE ".$this->db->_escape_identifiers($table);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Repair table query
-	 *
-	 * Generates a platform-specific query so that a table can be repaired
-	 *
-	 * @access	private
-	 * @param	string	the table name
-	 * @return	object
-	 */
-	function _repair_table($table)
-	{
-		return "REPAIR TABLE ".$this->db->_escape_identifiers($table);
-	}
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * List databases statement
 	 *
 	 * @var	string
@@ -152,34 +68,10 @@ class CI_DB_mysqli_utility extends CI_DB_utility {
 	 * @var	string
 	 */
 	protected $_repair_table	= 'REPAIR TABLE %s';
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * MySQLi Export
-	 *
-	 * @access	private
-	 * @param	array	Preferences
-	 * @return	mixed
-	 */
-	function _backup($params = array())
-	{
-		// Currently unsupported
-		return $this->db->display_error('db_unsuported_feature');
-	}
-}
-
-/* End of file mysqli_utility.php */
-/* Location: ./system/database/drivers/mysqli/mysqli_utility.php */
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Export
 	 *
 	 * @param	array	$params	Preferences
@@ -319,7 +211,3 @@ class CI_DB_mysqli_utility extends CI_DB_utility {
 	}
 
 }
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

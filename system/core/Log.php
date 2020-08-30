@@ -104,8 +104,6 @@ class CI_Log {
 	 */
 	protected $_levels = array('ERROR' => 1, 'DEBUG' => 2, 'INFO' => 3, 'ALL' => 4);
 
-<<<<<<< HEAD
-=======
 	/**
 	 * mbstring.func_override flag
 	 *
@@ -113,7 +111,6 @@ class CI_Log {
 	 */
 	protected static $func_override;
 
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// --------------------------------------------------------------------
 
 	/**
@@ -125,11 +122,8 @@ class CI_Log {
 	{
 		$config =& get_config();
 
-<<<<<<< HEAD
-=======
 		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
 
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$this->_log_path = ($config['log_path'] !== '') ? $config['log_path'] : APPPATH.'logs/';
 		$this->_file_ext = (isset($config['log_file_extension']) && $config['log_file_extension'] !== '')
 			? ltrim($config['log_file_extension'], '.') : 'php';
@@ -223,15 +217,9 @@ class CI_Log {
 
 		$message .= $this->_format_line($level, $date, $msg);
 
-<<<<<<< HEAD
-		for ($written = 0, $length = strlen($message); $written < $length; $written += $result)
-		{
-			if (($result = fwrite($fp, substr($message, $written))) === FALSE)
-=======
 		for ($written = 0, $length = self::strlen($message); $written < $length; $written += $result)
 		{
 			if (($result = fwrite($fp, self::substr($message, $written))) === FALSE)
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				break;
 			}
@@ -265,8 +253,6 @@ class CI_Log {
 	{
 		return $level.' - '.$date.' --> '.$message."\n";
 	}
-<<<<<<< HEAD
-=======
 
 	// --------------------------------------------------------------------
 
@@ -307,5 +293,4 @@ class CI_Log {
 			? substr($str, $start, $length)
 			: substr($str, $start);
 	}
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 }

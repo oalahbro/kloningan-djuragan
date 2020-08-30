@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2006 - 2014 EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 2.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -58,10 +36,6 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Memcached Caching Class
@@ -74,20 +48,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class CI_Cache_memcached extends CI_Driver {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	private $_memcached;	// Holds the memcached object
-
-	protected $_memcache_conf 	= array(
-					'default' => array(
-						'default_host'		=> '127.0.0.1',
-						'default_port'		=> 11211,
-						'default_weight'	=> 1
-					)
-				);
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	/**
 	 * Holds the memcached object
 	 *
@@ -168,42 +128,20 @@ class CI_Cache_memcached extends CI_Driver {
 			}
 		}
 	}
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// ------------------------------------------------------------------------
 
 	/**
 	 * Fetch from cache
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @param 	mixed		unique key id
-	 * @return 	mixed		data on success/false on failure
-=======
 	 * @param	string	$id	Cache ID
 	 * @return	mixed	Data on success, FALSE on failure
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-	 * @param	string	$id	Cache ID
-	 * @return	mixed	Data on success, FALSE on failure
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function get($id)
 	{
 		$data = $this->_memcached->get($id);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-		return (is_array($data)) ? $data[0] : FALSE;
-=======
 		return is_array($data) ? $data[0] : $data;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-		return is_array($data) ? $data[0] : $data;
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
@@ -211,25 +149,6 @@ class CI_Cache_memcached extends CI_Driver {
 	/**
 	 * Save
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @param 	string		unique identifier
-	 * @param 	mixed		data being cached
-	 * @param 	int			time to live
-	 * @return 	boolean 	true on success, false on failure
-	 */
-	public function save($id, $data, $ttl = 60)
-	{
-		if (get_class($this->_memcached) == 'Memcached')
-		{
-			return $this->_memcached->set($id, array($data, time(), $ttl), $ttl);
-		}
-		else if (get_class($this->_memcached) == 'Memcache')
-		{
-			return $this->_memcached->set($id, array($data, time(), $ttl), 0, $ttl);
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$id	Cache ID
 	 * @param	mixed	$data	Data being cached
 	 * @param	int	$ttl	Time to live
@@ -250,10 +169,6 @@ class CI_Cache_memcached extends CI_Driver {
 		elseif ($this->_memcached instanceof Memcache)
 		{
 			return $this->_memcached->set($id, $data, 0, $ttl);
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return FALSE;
@@ -264,18 +179,8 @@ class CI_Cache_memcached extends CI_Driver {
 	/**
 	 * Delete from Cache
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @param 	mixed		key to be deleted.
-	 * @return 	boolean 	true on success, false on failure
-=======
 	 * @param	mixed	$id	key to be deleted.
 	 * @return	bool	true on success, false on failure
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-	 * @param	mixed	$id	key to be deleted.
-	 * @return	bool	true on success, false on failure
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function delete($id)
 	{
@@ -285,14 +190,6 @@ class CI_Cache_memcached extends CI_Driver {
 	// ------------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * Clean the Cache
-	 *
-	 * @return 	boolean		false on failure/true on success
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Increment a raw value
 	 *
 	 * @param	string	$id	Cache ID
@@ -324,10 +221,6 @@ class CI_Cache_memcached extends CI_Driver {
 	 * Clean the Cache
 	 *
 	 * @return	bool	false on failure/true on success
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function clean()
 	{
@@ -339,22 +232,9 @@ class CI_Cache_memcached extends CI_Driver {
 	/**
 	 * Cache Info
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @param 	null		type not supported in memcached
-	 * @return 	mixed 		array on success, false on failure
-	 */
-	public function cache_info($type = NULL)
-=======
 	 * @return	mixed	array on success, false on failure
 	 */
 	public function cache_info()
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-	 * @return	mixed	array on success, false on failure
-	 */
-	public function cache_info()
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->_memcached->getStats();
 	}
@@ -364,18 +244,8 @@ class CI_Cache_memcached extends CI_Driver {
 	/**
 	 * Get Cache Metadata
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @param 	mixed		key to get cache metadata on
-	 * @return 	mixed		FALSE on failure, array on success.
-=======
 	 * @param	mixed	$id	key to get cache metadata on
 	 * @return	mixed	FALSE on failure, array on success.
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-	 * @param	mixed	$id	key to get cache metadata on
-	 * @return	mixed	FALSE on failure, array on success.
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function get_metadata($id)
 	{
@@ -398,53 +268,6 @@ class CI_Cache_memcached extends CI_Driver {
 	// ------------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * Setup memcached.
-	 */
-	private function _setup_memcached()
-	{
-		// Try to load memcached server info from the config file.
-		$CI =& get_instance();
-		if ($CI->config->load('memcached', TRUE, TRUE))
-		{
-			if (is_array($CI->config->config['memcached']))
-			{
-				$this->_memcache_conf = NULL;
-
-				foreach ($CI->config->config['memcached'] as $name => $conf)
-				{
-					$this->_memcache_conf[$name] = $conf;
-				}
-			}
-		}
-
-		$this->_memcached = new Memcached();
-
-		foreach ($this->_memcache_conf as $name => $cache_server)
-		{
-			if ( ! array_key_exists('hostname', $cache_server))
-			{
-				$cache_server['hostname'] = $this->_default_options['default_host'];
-			}
-
-			if ( ! array_key_exists('port', $cache_server))
-			{
-				$cache_server['port'] = $this->_default_options['default_port'];
-			}
-	
-			if ( ! array_key_exists('weight', $cache_server))
-			{
-				$cache_server['weight'] = $this->_default_options['default_weight'];
-			}
-	
-			$this->_memcached->addServer(
-					$cache_server['hostname'], $cache_server['port'], $cache_server['weight']
-			);
-		}
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Is supported
 	 *
 	 * Returns FALSE if memcached is not supported on the system.
@@ -455,42 +278,10 @@ class CI_Cache_memcached extends CI_Driver {
 	public function is_supported()
 	{
 		return (extension_loaded('memcached') OR extension_loaded('memcache'));
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-	/**
-	 * Is supported
-	 *
-	 * Returns FALSE if memcached is not supported on the system.
-	 * If it is, we setup the memcached object & return TRUE
-	 */
-	public function is_supported()
-	{
-		if ( ! extension_loaded('memcached'))
-		{
-			log_message('error', 'The Memcached Extension must be loaded to use Memcached Cache.');
-			return FALSE;
-		}
-
-		$this->_setup_memcached();
-		return TRUE;
-	}
-
-}
-
-/* End of file Cache_memcached.php */
-/* Location: ./system/libraries/Cache/drivers/Cache_memcached.php */
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	/**
 	 * Class destructor
 	 *
@@ -510,7 +301,3 @@ class CI_Cache_memcached extends CI_Driver {
 		}
 	}
 }
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

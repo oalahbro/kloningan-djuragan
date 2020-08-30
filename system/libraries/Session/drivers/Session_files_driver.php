@@ -76,8 +76,6 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 */
 	protected $_file_new;
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Validate SID regular expression
 	 *
@@ -92,7 +90,6 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 */
 	protected static $func_override;
 
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// ------------------------------------------------------------------------
 
 	/**
@@ -115,13 +112,10 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 			log_message('debug', 'Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.');
 			$this->_config['save_path'] = rtrim(ini_get('session.save_path'), '/\\');
 		}
-<<<<<<< HEAD
-=======
 
 		$this->_sid_regexp = $this->_config['_sid_regexp'];
 
 		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
@@ -173,24 +167,9 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 		// which re-reads session data
 		if ($this->_file_handle === NULL)
 		{
-<<<<<<< HEAD
-			// Just using fopen() with 'c+b' mode would be perfect, but it is only
-			// available since PHP 5.2.6 and we have to set permissions for new files,
-			// so we'd have to hack around this ...
-			if (($this->_file_new = ! file_exists($this->_file_path.$session_id)) === TRUE)
-			{
-				if (($this->_file_handle = fopen($this->_file_path.$session_id, 'w+b')) === FALSE)
-				{
-					log_message('error', "Session: File '".$this->_file_path.$session_id."' doesn't exist and cannot be created.");
-					return $this->_failure;
-				}
-			}
-			elseif (($this->_file_handle = fopen($this->_file_path.$session_id, 'r+b')) === FALSE)
-=======
 			$this->_file_new = ! file_exists($this->_file_path.$session_id);
 
 			if (($this->_file_handle = fopen($this->_file_path.$session_id, 'c+b')) === FALSE)
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				log_message('error', "Session: Unable to open file '".$this->_file_path.$session_id."'.");
 				return $this->_failure;
@@ -226,11 +205,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 		}
 
 		$session_data = '';
-<<<<<<< HEAD
-		for ($read = 0, $length = filesize($this->_file_path.$session_id); $read < $length; $read += strlen($buffer))
-=======
 		for ($read = 0, $length = filesize($this->_file_path.$session_id); $read < $length; $read += self::strlen($buffer))
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			if (($buffer = fread($this->_file_handle, $length - $read)) === FALSE)
 			{
@@ -386,12 +361,6 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 
 		$ts = time() - $maxlifetime;
 
-<<<<<<< HEAD
-		$pattern = sprintf(
-			'/^%s[0-9a-f]{%d}$/',
-			preg_quote($this->_config['cookie_name'], '/'),
-			($this->_config['match_ip'] === TRUE ? 72 : 40)
-=======
 		$pattern = ($this->_config['match_ip'] === TRUE)
 			? '[0-9a-f]{32}'
 			: '';
@@ -399,7 +368,6 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 		$pattern = sprintf(
 			'#\A%s'.$pattern.$this->_sid_regexp.'\z#',
 			preg_quote($this->_config['cookie_name'])
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		);
 
 		while (($file = readdir($directory)) !== FALSE)
@@ -421,9 +389,6 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 		return $this->_success;
 	}
 
-<<<<<<< HEAD
-}
-=======
 	// --------------------------------------------------------------------
 
 	/**
@@ -439,4 +404,3 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 			: strlen($str);
 	}
 }
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

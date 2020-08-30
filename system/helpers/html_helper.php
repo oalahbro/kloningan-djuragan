@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -58,10 +36,6 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter HTML Helpers
@@ -70,41 +44,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Helpers
  * @category	Helpers
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/helpers/html_helper.html
-=======
  * @link		https://codeigniter.com/user_guide/helpers/html_helper.html
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
- * @link		https://codeigniter.com/user_guide/helpers/html_helper.html
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Heading
- *
- * Generates an HTML heading tag.  First param is the data.
- * Second param is the size of the heading tag.
- *
- * @access	public
- * @param	string
- * @param	integer
- * @return	string
- */
-if ( ! function_exists('heading'))
-{
-	function heading($data = '', $h = '1', $attributes = '')
-	{
-		$attributes = ($attributes != '') ? ' '.$attributes : $attributes;
-		return "<h".$h.$attributes.">".$data."</h".$h.">";
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('heading'))
 {
 	/**
@@ -120,32 +64,11 @@ if ( ! function_exists('heading'))
 	function heading($data = '', $h = '1', $attributes = '')
 	{
 		return '<h'.$h._stringify_attributes($attributes).'>'.$data.'</h'.$h.'>';
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Unordered List
- *
- * Generates an HTML unordered list from an single or multi-dimensional array.
- *
- * @access	public
- * @param	array
- * @param	mixed
- * @return	string
- */
-if ( ! function_exists('ul'))
-{
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('ul'))
 {
 	/**
@@ -157,10 +80,6 @@ if ( ! function_exists('ul'))
 	 * @param	mixed
 	 * @return	string
 	 */
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function ul($list, $attributes = '')
 	{
 		return _list('ul', $list, $attributes);
@@ -169,23 +88,6 @@ if ( ! function_exists('ul'))
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Ordered List
- *
- * Generates an HTML ordered list from an single or multi-dimensional array.
- *
- * @access	public
- * @param	array
- * @param	mixed
- * @return	string
- */
-if ( ! function_exists('ol'))
-{
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('ol'))
 {
 	/**
@@ -197,10 +99,6 @@ if ( ! function_exists('ol'))
 	 * @param	mixed
 	 * @return	string
 	 */
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function ol($list, $attributes = '')
 	{
 		return _list('ol', $list, $attributes);
@@ -209,26 +107,6 @@ if ( ! function_exists('ol'))
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Generates the list
- *
- * Generates an HTML ordered list from an single or multi-dimensional array.
- *
- * @access	private
- * @param	string
- * @param	mixed
- * @param	mixed
- * @param	integer
- * @return	string
- */
-if ( ! function_exists('_list'))
-{
-	function _list($type = 'ul', $list, $attributes = '', $depth = 0)
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('_list'))
 {
 	/**
@@ -243,10 +121,6 @@ if ( ! function_exists('_list'))
 	 * @return	string
 	 */
 	function _list($type = 'ul', $list = array(), $attributes = '', $depth = 0)
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		// If an array wasn't submitted there's nothing to do...
 		if ( ! is_array($list))
@@ -255,38 +129,10 @@ if ( ! function_exists('_list'))
 		}
 
 		// Set the indentation based on the depth
-<<<<<<< HEAD
-<<<<<<< HEAD
-		$out = str_repeat(" ", $depth);
-
-		// Were any attributes submitted?  If so generate a string
-		if (is_array($attributes))
-		{
-			$atts = '';
-			foreach ($attributes as $key => $val)
-			{
-				$atts .= ' ' . $key . '="' . $val . '"';
-			}
-			$attributes = $atts;
-		}
-		elseif (is_string($attributes) AND strlen($attributes) > 0)
-		{
-			$attributes = ' '. $attributes;
-		}
-
-		// Write the opening list tag
-		$out .= "<".$type.$attributes.">\n";
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$out = str_repeat(' ', $depth)
 			// Write the opening list tag
 			.'<'.$type._stringify_attributes($attributes).">\n";
 
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Cycle through the list elements.  If an array is
 		// encountered we will recursively call _list()
@@ -296,16 +142,7 @@ if ( ! function_exists('_list'))
 		{
 			$_last_list_item = $key;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-			$out .= str_repeat(" ", $depth + 2);
-			$out .= "<li>";
-=======
 			$out .= str_repeat(' ', $depth + 2).'<li>';
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-			$out .= str_repeat(' ', $depth + 2).'<li>';
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 			if ( ! is_array($val))
 			{
@@ -313,78 +150,19 @@ if ( ! function_exists('_list'))
 			}
 			else
 			{
-<<<<<<< HEAD
-<<<<<<< HEAD
-				$out .= $_last_list_item."\n";
-				$out .= _list($type, $val, '', $depth + 4);
-				$out .= str_repeat(" ", $depth + 2);
-=======
 				$out .= $_last_list_item."\n"._list($type, $val, '', $depth + 4).str_repeat(' ', $depth + 2);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-				$out .= $_last_list_item."\n"._list($type, $val, '', $depth + 4).str_repeat(' ', $depth + 2);
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$out .= "</li>\n";
 		}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-		// Set the indentation for the closing tag
-		$out .= str_repeat(" ", $depth);
-
-		// Write the closing list tag
-		$out .= "</".$type.">\n";
-
-		return $out;
+		// Set the indentation for the closing tag and apply it
+		return $out.str_repeat(' ', $depth).'</'.$type.">\n";
 	}
 }
 
 // ------------------------------------------------------------------------
 
-/**
- * Generates HTML BR tags based on number supplied
- *
- * @access	public
- * @param	integer
- * @return	string
- */
-if ( ! function_exists('br'))
-{
-	function br($num = 1)
-	{
-		return str_repeat("<br />", $num);
-=======
-		// Set the indentation for the closing tag and apply it
-		return $out.str_repeat(' ', $depth).'</'.$type.">\n";
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-		// Set the indentation for the closing tag and apply it
-		return $out.str_repeat(' ', $depth).'</'.$type.">\n";
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
-	}
-}
-
-// ------------------------------------------------------------------------
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Image
- *
- * Generates an <img /> element
- *
- * @access	public
- * @param	mixed
- * @return	string
- */
-if ( ! function_exists('img'))
-{
-	function img($src = '', $index_page = FALSE)
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('img'))
 {
 	/**
@@ -398,10 +176,6 @@ if ( ! function_exists('img'))
 	 * @return	string
 	 */
 	function img($src = '', $index_page = FALSE, $attributes = '')
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if ( ! is_array($src) )
 		{
@@ -416,25 +190,6 @@ if ( ! function_exists('img'))
 
 		$img = '<img';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-		foreach ($src as $k=>$v)
-		{
-
-			if ($k == 'src' AND strpos($v, '://') === FALSE)
-			{
-				$CI =& get_instance();
-
-				if ($index_page === TRUE)
-				{
-					$img .= ' src="'.$CI->config->site_url($v).'"';
-				}
-				else
-				{
-					$img .= ' src="'.$CI->config->slash_item('base_url').$v.'"';
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		foreach ($src as $k => $v)
 		{
 			if ($k === 'src' && ! preg_match('#^([a-z]+:)?//#i', $v))
@@ -446,89 +201,20 @@ if ( ! function_exists('img'))
 				else
 				{
 					$img .= ' src="'.get_instance()->config->slash_item('base_url').$v.'"';
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 			}
 			else
 			{
-<<<<<<< HEAD
-<<<<<<< HEAD
-				$img .= " $k=\"$v\"";
-			}
-		}
-
-		$img .= '/>';
-
-		return $img;
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$img .= ' '.$k.'="'.$v.'"';
 			}
 		}
 
 		return $img._stringify_attributes($attributes).' />';
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Doctype
- *
- * Generates a page document type declaration
- *
- * Valid options are xhtml-11, xhtml-strict, xhtml-trans, xhtml-frame,
- * html4-strict, html4-trans, and html4-frame.  Values are saved in the
- * doctypes config file.
- *
- * @access	public
- * @param	string	type	The doctype to be generated
- * @return	string
- */
-if ( ! function_exists('doctype'))
-{
-	function doctype($type = 'xhtml1-strict')
-	{
-		global $_doctypes;
-
-		if ( ! is_array($_doctypes))
-		{
-			if (defined('ENVIRONMENT') AND is_file(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php'))
-			{
-				include(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php');
-			}
-			elseif (is_file(APPPATH.'config/doctypes.php'))
-			{
-				include(APPPATH.'config/doctypes.php');
-			}
-
-			if ( ! is_array($_doctypes))
-			{
-				return FALSE;
-			}
-		}
-
-		if (isset($_doctypes[$type]))
-		{
-			return $_doctypes[$type];
-		}
-		else
-		{
-			return FALSE;
-		}
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('doctype'))
 {
 	/**
@@ -569,40 +255,11 @@ if ( ! function_exists('doctype'))
 		}
 
 		return isset($doctypes[$type]) ? $doctypes[$type] : FALSE;
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Link
- *
- * Generates link to a CSS file
- *
- * @access	public
- * @param	mixed	stylesheet hrefs or an array
- * @param	string	rel
- * @param	string	type
- * @param	string	title
- * @param	string	media
- * @param	boolean	should index_page be added to the css path
- * @return	string
- */
-if ( ! function_exists('link_tag'))
-{
-	function link_tag($href = '', $rel = 'stylesheet', $type = 'text/css', $title = '', $media = '', $index_page = FALSE)
-	{
-		$CI =& get_instance();
-
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('link_tag'))
 {
 	/**
@@ -621,29 +278,13 @@ if ( ! function_exists('link_tag'))
 	function link_tag($href = '', $rel = 'stylesheet', $type = 'text/css', $title = '', $media = '', $index_page = FALSE)
 	{
 		$CI =& get_instance();
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$link = '<link ';
 
 		if (is_array($href))
 		{
-<<<<<<< HEAD
-<<<<<<< HEAD
-			foreach ($href as $k=>$v)
-			{
-				if ($k == 'href' AND strpos($v, '://') === FALSE)
-=======
 			foreach ($href as $k => $v)
 			{
 				if ($k === 'href' && ! preg_match('#^([a-z]+:)?//#i', $v))
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-			foreach ($href as $k => $v)
-			{
-				if ($k === 'href' && ! preg_match('#^([a-z]+:)?//#i', $v))
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				{
 					if ($index_page === TRUE)
 					{
@@ -656,20 +297,6 @@ if ( ! function_exists('link_tag'))
 				}
 				else
 				{
-<<<<<<< HEAD
-<<<<<<< HEAD
-					$link .= "$k=\"$v\" ";
-				}
-			}
-
-			$link .= "/>";
-		}
-		else
-		{
-			if ( strpos($href, '://') !== FALSE)
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					$link .= $k.'="'.$v.'" ';
 				}
 			}
@@ -677,10 +304,6 @@ if ( ! function_exists('link_tag'))
 		else
 		{
 			if (preg_match('#^([a-z]+:)?//#i', $href))
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$link .= 'href="'.$href.'" ';
 			}
@@ -695,34 +318,11 @@ if ( ! function_exists('link_tag'))
 
 			$link .= 'rel="'.$rel.'" type="'.$type.'" ';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-			if ($media	!= '')
-=======
 			if ($media !== '')
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
-			if ($media !== '')
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$link .= 'media="'.$media.'" ';
 			}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-			if ($title	!= '')
-			{
-				$link .= 'title="'.$title.'" ';
-			}
-
-			$link .= '/>';
-		}
-
-
-		return $link;
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			if ($title !== '')
 			{
 				$link .= 'title="'.$title.'" ';
@@ -730,29 +330,11 @@ if ( ! function_exists('link_tag'))
 		}
 
 		return $link."/>\n";
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Generates meta tags from an array of key/values
- *
- * @access	public
- * @param	array
- * @return	string
- */
-if ( ! function_exists('meta'))
-{
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('meta'))
 {
 	/**
@@ -764,10 +346,6 @@ if ( ! function_exists('meta'))
 	 * @param	string
 	 * @return	string
 	 */
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function meta($name = '', $content = '', $type = 'name', $newline = "\n")
 	{
 		// Since we allow the data to be passes as a string, a simple array
@@ -776,48 +354,19 @@ if ( ! function_exists('meta'))
 		{
 			$name = array(array('name' => $name, 'content' => $content, 'type' => $type, 'newline' => $newline));
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
-		else
-		{
-			// Turn single array into multidimensional
-			if (isset($name['name']))
-			{
-				$name = array($name);
-			}
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		elseif (isset($name['name']))
 		{
 			// Turn single array into multidimensional
 			$name = array($name);
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		$str = '';
 		foreach ($name as $meta)
 		{
-<<<<<<< HEAD
-<<<<<<< HEAD
-			$type		= ( ! isset($meta['type']) OR $meta['type'] == 'name') ? 'name' : 'http-equiv';
-			$name		= ( ! isset($meta['name']))		? ''	: $meta['name'];
-			$content	= ( ! isset($meta['content']))	? ''	: $meta['content'];
-			$newline	= ( ! isset($meta['newline']))	? "\n"	: $meta['newline'];
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$type		= (isset($meta['type']) && $meta['type'] !== 'name')	? 'http-equiv' : 'name';
 			$name		= isset($meta['name'])					? $meta['name'] : '';
 			$content	= isset($meta['content'])				? $meta['content'] : '';
 			$newline	= isset($meta['newline'])				? $meta['newline'] : "\n";
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 			$str .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />'.$newline;
 		}
@@ -828,29 +377,6 @@ if ( ! function_exists('meta'))
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Generates non-breaking space entities based on number supplied
- *
- * @access	public
- * @param	integer
- * @return	string
- */
-if ( ! function_exists('nbs'))
-{
-	function nbs($num = 1)
-	{
-		return str_repeat("&nbsp;", $num);
-	}
-}
-
-
-/* End of file html_helper.php */
-/* Location: ./system/helpers/html_helper.php */
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('br'))
 {
 	/**
@@ -882,7 +408,3 @@ if ( ! function_exists('nbs'))
 		return str_repeat('&nbsp;', $num);
 	}
 }
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

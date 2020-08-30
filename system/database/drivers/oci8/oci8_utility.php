@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -58,94 +36,17 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Oracle Utility Class
  *
  * @category	Database
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/database/
-=======
  * @link		https://codeigniter.com/user_guide/database/
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
- * @link		https://codeigniter.com/user_guide/database/
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_oci8_utility extends CI_DB_utility {
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * List databases
-	 *
-	 * @access	private
-	 * @return	bool
-	 */
-	function _list_databases()
-	{
-		return FALSE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Optimize table query
-	 *
-	 * Generates a platform-specific query so that a table can be optimized
-	 *
-	 * @access	private
-	 * @param	string	the table name
-	 * @return	object
-	 */
-	function _optimize_table($table)
-	{
-		return FALSE; // Is this supported in Oracle?
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Repair table query
-	 *
-	 * Generates a platform-specific query so that a table can be repaired
-	 *
-	 * @access	private
-	 * @param	string	the table name
-	 * @return	object
-	 */
-	function _repair_table($table)
-	{
-		return FALSE; // Is this supported in Oracle?
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Oracle Export
-	 *
-	 * @access	private
-	 * @param	array	Preferences
-	 * @return	mixed
-	 */
-	function _backup($params = array())
-	{
-		// Currently unsupported
-		return $this->db->display_error('db_unsuported_feature');
-	}
-}
-
-/* End of file oci8_utility.php */
-/* Location: ./system/database/drivers/oci8/oci8_utility.php */
-=======
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * List databases statement
 	 *
 	 * @var	string
@@ -165,7 +66,3 @@ class CI_DB_oci8_utility extends CI_DB_utility {
 	}
 
 }
-<<<<<<< HEAD
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-=======
->>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
