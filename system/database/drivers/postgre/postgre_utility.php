@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,26 +58,36 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Postgre Utility Class
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/database/
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_postgre_utility extends CI_DB_utility {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * List databases
 	 *
@@ -102,6 +115,8 @@ class CI_DB_postgre_utility extends CI_DB_utility {
 		return FALSE;
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * List databases statement
 	 *
 	 * @var	string
@@ -114,11 +129,15 @@ class CI_DB_postgre_utility extends CI_DB_utility {
 	 * @var	string
 	 */
 	protected $_optimize_table	= 'REINDEX TABLE %s';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Repair table query
 	 *
@@ -153,6 +172,8 @@ class CI_DB_postgre_utility extends CI_DB_utility {
 /* End of file postgre_utility.php */
 /* Location: ./system/database/drivers/postgre/postgre_utility.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Export
 	 *
 	 * @param	array	$params	Preferences
@@ -164,4 +185,7 @@ class CI_DB_postgre_utility extends CI_DB_utility {
 		return $this->db->display_error('db_unsupported_feature');
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

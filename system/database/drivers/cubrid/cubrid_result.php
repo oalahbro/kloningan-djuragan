@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // --------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CUBRID Result Class
@@ -65,16 +71,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Database
  * @author		Esen Sagynov
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
 =======
  * @link		https://codeigniter.com/user_guide/database/
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/database/
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_cubrid_result extends CI_DB_result {
 
 	/**
 	 * Number of rows in the result set
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
@@ -83,6 +94,8 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	{
 		return @cubrid_num_rows($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_rows()
@@ -90,7 +103,10 @@ class CI_DB_cubrid_result extends CI_DB_result {
 		return is_int($this->num_rows)
 			? $this->num_rows
 			: $this->num_rows = cubrid_num_rows($this->result_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -99,6 +115,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 * Number of fields in the result set
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
 	 */
@@ -106,12 +123,17 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	{
 		return @cubrid_num_fields($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_fields()
 	{
 		return cubrid_num_fields($this->result_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -122,6 +144,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 * Generates an array of column names
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	array
 	 */
@@ -131,6 +154,11 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 */
 	public function list_fields()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	array
+	 */
+	public function list_fields()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return cubrid_column_names($this->result_id);
 	}
@@ -142,6 +170,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	array
@@ -197,6 +226,8 @@ class CI_DB_cubrid_result extends CI_DB_result {
 
 			$retval[] = $F;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function field_data()
@@ -210,7 +241,10 @@ class CI_DB_cubrid_result extends CI_DB_result {
 			$retval[$i]->type		= cubrid_field_type($this->result_id, $i);
 			$retval[$i]->max_length		= cubrid_field_len($this->result_id, $i);
 			$retval[$i]->primary_key	= (int) (strpos(cubrid_field_flags($this->result_id, $i), 'primary_key') !== FALSE);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $retval;
@@ -222,6 +256,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 * Free the result
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @return	null
 	 */
 	function free_result()
@@ -230,13 +265,18 @@ class CI_DB_cubrid_result extends CI_DB_result {
 			get_resource_type($this->result_id) == "Unknown" &&
 			preg_match('/Resource id #/', strval($this->result_id)))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	void
 	 */
 	public function free_result()
 	{
 		if (is_resource($this->result_id) OR
 			(get_resource_type($this->result_id) === 'Unknown' && preg_match('/Resource id #/', strval($this->result_id))))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			cubrid_close_request($this->result_id);
 			$this->result_id = FALSE;
@@ -251,6 +291,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 * Moves the internal pointer to the desired offset. We call
 	 * this internally before fetching results to make sure the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * result set starts at zero
 	 *
 	 * @access	private
@@ -258,13 +299,18 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 */
 	function _data_seek($n = 0)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * result set starts at zero.
 	 *
 	 * @param	int	$n
 	 * @return	bool
 	 */
 	public function data_seek($n = 0)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return cubrid_data_seek($this->result_id, $n);
 	}
@@ -277,6 +323,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 * Returns the result set as an array
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	private
 	 * @return	array
 	 */
@@ -286,6 +333,11 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	array
+	 */
+	protected function _fetch_assoc()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return cubrid_fetch_assoc($this->result_id);
 	}
@@ -297,6 +349,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	object
@@ -312,6 +365,8 @@ class CI_DB_cubrid_result extends CI_DB_result {
 /* End of file cubrid_result.php */
 /* Location: ./system/database/drivers/cubrid/cubrid_result.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$class_name
 	 * @return	object
 	 */
@@ -321,4 +376,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

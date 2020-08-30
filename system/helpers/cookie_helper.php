@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Cookie Helpers
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/cookie_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/cookie_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/cookie_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Set cookie
@@ -97,6 +108,8 @@ if ( ! function_exists('set_cookie'))
 		$CI =& get_instance();
 		$CI->input->set_cookie($name, $value, $expire, $domain, $path, $prefix, $secure);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('set_cookie'))
 {
 	/**
@@ -119,12 +132,16 @@ if ( ! function_exists('set_cookie'))
 	{
 		// Set the config file options
 		get_instance()->input->set_cookie($name, $value, $expire, $domain, $path, $prefix, $secure, $httponly);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Fetch an item from the COOKIE array
@@ -149,6 +166,8 @@ if ( ! function_exists('get_cookie'))
 
 		return $CI->input->cookie($prefix.$index, $xss_clean);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('get_cookie'))
 {
 	/**
@@ -163,12 +182,16 @@ if ( ! function_exists('get_cookie'))
 		is_bool($xss_clean) OR $xss_clean = (config_item('global_xss_filtering') === TRUE);
 		$prefix = isset($_COOKIE[$index]) ? '' : config_item('cookie_prefix');
 		return get_instance()->input->cookie($prefix.$index, $xss_clean);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Delete a COOKIE
@@ -183,6 +206,8 @@ if ( ! function_exists('delete_cookie'))
 {
 	function delete_cookie($name = '', $domain = '', $path = '/', $prefix = '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('delete_cookie'))
 {
 	/**
@@ -195,11 +220,15 @@ if ( ! function_exists('delete_cookie'))
 	 * @return	void
 	 */
 	function delete_cookie($name, $domain = '', $path = '/', $prefix = '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		set_cookie($name, '', '', $domain, $path, $prefix);
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -207,3 +236,5 @@ if ( ! function_exists('delete_cookie'))
 /* Location: ./system/helpers/cookie_helper.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

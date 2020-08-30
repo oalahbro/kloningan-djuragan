@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,12 +58,16 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Initialize the database
  *
  * @category	Database
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
@@ -80,6 +87,8 @@ function &DB($params = '', $active_record_override = NULL)
 				show_error('The configuration file database.php does not exist.');
 			}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @author	EllisLab Dev Team
  * @link	https://codeigniter.com/user_guide/database/
  *
@@ -97,14 +106,20 @@ function &DB($params = '', $query_builder_override = NULL)
 			&& ! file_exists($file_path = APPPATH.'config/database.php'))
 		{
 			show_error('The configuration file database.php does not exist.');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		include($file_path);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ( ! isset($db) OR count($db) == 0)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Make packages contain database config files,
 		// given that the controller instance already exists
 		if (class_exists('CI_Controller', FALSE))
@@ -126,25 +141,35 @@ function &DB($params = '', $query_builder_override = NULL)
 		}
 
 		if ( ! isset($db) OR count($db) === 0)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			show_error('No database connection settings were found in the database config file.');
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($params != '')
 =======
 		if ($params !== '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($params !== '')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$active_group = $params;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ( ! isset($active_group) OR ! isset($db[$active_group]))
 		{
 			show_error('You have specified an invalid database connection group.');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ( ! isset($active_group))
 		{
 			show_error('You have not specified a database connection group via $active_group in your config/database.php file.');
@@ -152,13 +177,17 @@ function &DB($params = '', $query_builder_override = NULL)
 		elseif ( ! isset($db[$active_group]))
 		{
 			show_error('You have specified an invalid database connection group ('.$active_group.') in your config/database.php file.');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		$params = $db[$active_group];
 	}
 	elseif (is_string($params))
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		/* parse the URL from the DSN string
@@ -170,6 +199,8 @@ function &DB($params = '', $query_builder_override = NULL)
 
 		if (($dns = @parse_url($params)) === FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		/**
 		 * Parse the URL from the DSN string
 		 * Database settings can be passed as discreet
@@ -178,12 +209,16 @@ function &DB($params = '', $query_builder_override = NULL)
 		 * $dsn = 'driver://username:password@hostname/database';
 		 */
 		if (($dsn = @parse_url($params)) === FALSE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			show_error('Invalid DB Connection String');
 		}
 
 		$params = array(
+<<<<<<< HEAD
 <<<<<<< HEAD
 							'dbdriver'	=> $dns['scheme'],
 							'hostname'	=> (isset($dns['host'])) ? rawurldecode($dns['host']) : '',
@@ -208,6 +243,8 @@ function &DB($params = '', $query_builder_override = NULL)
 				{
 					$val = FALSE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			'dbdriver'	=> $dsn['scheme'],
 			'hostname'	=> isset($dsn['host']) ? rawurldecode($dsn['host']) : '',
 			'port'		=> isset($dsn['port']) ? rawurldecode($dsn['port']) : '',
@@ -226,7 +263,10 @@ function &DB($params = '', $query_builder_override = NULL)
 				if (is_string($val) && in_array(strtoupper($val), array('TRUE', 'FALSE', 'NULL')))
 				{
 					$val = var_export($val, TRUE);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 
 				$params[$key] = $val;
@@ -235,16 +275,22 @@ function &DB($params = '', $query_builder_override = NULL)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// No DB specified yet?  Beat them senseless...
 	if ( ! isset($params['dbdriver']) OR $params['dbdriver'] == '')
 =======
 	// No DB specified yet? Beat them senseless...
 	if (empty($params['dbdriver']))
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	// No DB specified yet? Beat them senseless...
+	if (empty($params['dbdriver']))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		show_error('You have not selected a database type to connect to.');
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// Load the DB classes.  Note: Since the active record class is optional
 	// we need to dynamically create a class that extends proper parent class
@@ -255,6 +301,8 @@ function &DB($params = '', $query_builder_override = NULL)
 	{
 		$active_record = $active_record_override;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// Load the DB classes. Note: Since the query builder class is optional
 	// we need to dynamically create a class that extends proper parent class
 	// based on whether we're using the query builder class or not.
@@ -268,11 +316,15 @@ function &DB($params = '', $query_builder_override = NULL)
 	elseif ( ! isset($query_builder) && isset($active_record))
 	{
 		$query_builder = $active_record;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	require_once(BASEPATH.'database/DB_driver.php');
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ( ! isset($active_record) OR $active_record == TRUE)
 	{
@@ -293,6 +345,8 @@ function &DB($params = '', $query_builder_override = NULL)
 
 	require_once(BASEPATH.'database/drivers/'.$params['dbdriver'].'/'.$params['dbdriver'].'_driver.php');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	if ( ! isset($query_builder) OR $query_builder === TRUE)
 	{
 		require_once(BASEPATH.'database/DB_query_builder.php');
@@ -322,12 +376,16 @@ function &DB($params = '', $query_builder_override = NULL)
 
 	file_exists($driver_file) OR show_error('Invalid DB driver');
 	require_once($driver_file);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// Instantiate the DB adapter
 	$driver = 'CI_DB_'.$params['dbdriver'].'_driver';
 	$DB = new $driver($params);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ($DB->autoinit == TRUE)
 	{
@@ -347,6 +405,8 @@ function &DB($params = '', $query_builder_override = NULL)
 /* End of file DB.php */
 /* Location: ./system/database/DB.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// Check for a subdriver
 	if ( ! empty($DB->subdriver))
 	{
@@ -363,4 +423,7 @@ function &DB($params = '', $query_builder_override = NULL)
 	$DB->initialize();
 	return $DB;
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['required']			= "The %s field is required.";
 $lang['isset']				= "The %s field must have a value.";
@@ -29,6 +30,8 @@ $lang['greater_than']		= "The %s field must contain a number greater than %s.";
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/english/form_validation_lang.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -96,4 +99,7 @@ $lang['form_validation_greater_than']		= 'The {field} field must contain a numbe
 $lang['form_validation_greater_than_equal_to']	= 'The {field} field must contain a number greater than or equal to {param}.';
 $lang['form_validation_error_message_not_set']	= 'Unable to access an error message corresponding to your field name {field}.';
 $lang['form_validation_in_list']		= 'The {field} field must be one of: {param}.';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,13 +58,17 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * PDO Result Class
  *
  * This class extends the parent result class: CI_DB_result
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @category	Database
  * @author		EllisLab Dev Team
@@ -72,6 +79,8 @@ class CI_DB_pdo_result extends CI_DB_result {
 	public $num_rows;
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
@@ -80,7 +89,10 @@ class CI_DB_pdo_result extends CI_DB_result {
  */
 class CI_DB_pdo_result extends CI_DB_result {
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	/**
 	 * Number of rows in the result set
 	 *
@@ -93,6 +105,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 			return $this->num_rows;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		elseif (($this->num_rows = $this->result_id->rowCount()) > 0)
 		{
 			return $this->num_rows;
@@ -102,6 +115,8 @@ class CI_DB_pdo_result extends CI_DB_result {
 		$this->result_id->execute();
 		return $this->num_rows;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		elseif (count($this->result_array) > 0)
 		{
 			return $this->num_rows = count($this->result_array);
@@ -116,7 +131,10 @@ class CI_DB_pdo_result extends CI_DB_result {
 		}
 
 		return $this->num_rows = count($this->result_array());
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -124,6 +142,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	/**
 	 * Number of fields in the result set
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
@@ -134,6 +153,11 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 */
 	public function num_fields()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	int
+	 */
+	public function num_fields()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->result_id->columnCount();
 	}
@@ -146,6 +170,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 * Generates an array of column names
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	array
 	 */
@@ -157,6 +182,8 @@ class CI_DB_pdo_result extends CI_DB_result {
 		}
 		return FALSE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	bool
 	 */
 	public function list_fields()
@@ -171,7 +198,10 @@ class CI_DB_pdo_result extends CI_DB_result {
 		}
 
 		return $field_names;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -181,6 +211,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	array
@@ -198,6 +229,8 @@ class CI_DB_pdo_result extends CI_DB_result {
 			
 			return $data;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function field_data()
@@ -218,12 +251,16 @@ class CI_DB_pdo_result extends CI_DB_result {
 			}
 
 			return $retval;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 		catch (Exception $e)
 		{
 			if ($this->db->db_debug)
 			{
+<<<<<<< HEAD
 <<<<<<< HEAD
 				return $this->db->display_error('db_unsuported_feature');
 			}
@@ -232,6 +269,11 @@ class CI_DB_pdo_result extends CI_DB_result {
 			}
 
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				return $this->db->display_error('db_unsupported_feature');
+			}
+
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			return FALSE;
 		}
 	}
@@ -242,6 +284,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 * Free the result
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @return	null
 	 */
 	function free_result()
@@ -250,6 +293,11 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 */
 	public function free_result()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	void
+	 */
+	public function free_result()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if (is_object($this->result_id))
 		{
@@ -260,6 +308,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Data Seek
 	 *
@@ -280,10 +329,13 @@ class CI_DB_pdo_result extends CI_DB_result {
 	/**
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Result - associative array
 	 *
 	 * Returns the result set as an array
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	array
@@ -294,6 +346,11 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	array
+	 */
+	protected function _fetch_assoc()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->result_id->fetch(PDO::FETCH_ASSOC);
 	}
@@ -305,6 +362,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	object
@@ -320,6 +378,8 @@ class CI_DB_pdo_result extends CI_DB_result {
 /* End of file pdo_result.php */
 /* Location: ./system/database/drivers/pdo/pdo_result.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$class_name
 	 * @return	object
 	 */
@@ -329,4 +389,7 @@ class CI_DB_pdo_result extends CI_DB_result {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

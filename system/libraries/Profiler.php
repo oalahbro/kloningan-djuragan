@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Profiler Class
@@ -70,6 +76,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Libraries
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/general/profiling.html
  */
@@ -91,6 +98,8 @@ class CI_Profiler {
 	protected $_query_toggle_count = 25;
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/general/profiling.html
  */
 class CI_Profiler {
@@ -125,13 +134,19 @@ class CI_Profiler {
 	 *
 	 * @var object
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	protected $CI;
 
 	// --------------------------------------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	/**
 	 * Class constructor
 	 *
@@ -139,12 +154,16 @@ class CI_Profiler {
 	 *
 	 * @param	array	$config	Parameters
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	public function __construct($config = array())
 	{
 		$this->CI =& get_instance();
 		$this->CI->load->language('profiler');
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (isset($config['query_toggle_count']))
 		{
@@ -154,6 +173,8 @@ class CI_Profiler {
 
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// default all sections to display
 		foreach ($this->_available_sections as $section)
 		{
@@ -165,9 +186,13 @@ class CI_Profiler {
 
 		$this->set_sections($config);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		log_message('info', 'Profiler Class Initialized');
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		log_message('info', 'Profiler Class Initialized');
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -178,32 +203,46 @@ class CI_Profiler {
 	 * Sets the private _compile_* properties to enable/disable Profiler sections
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	mixed
 =======
 	 * @param	mixed	$config
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @param	mixed	$config
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	void
 	 */
 	public function set_sections($config)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (isset($config['query_toggle_count']))
 		{
 			$this->_query_toggle_count = (int) $config['query_toggle_count'];
 			unset($config['query_toggle_count']);
 		}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		foreach ($config as $method => $enable)
 		{
 			if (in_array($method, $this->_available_sections))
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$this->_compile_{$method} = ($enable !== FALSE) ? TRUE : FALSE;
 =======
 				$this->_compile_{$method} = ($enable !== FALSE);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				$this->_compile_{$method} = ($enable !== FALSE);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 		}
 	}
@@ -228,6 +267,7 @@ class CI_Profiler {
 			// We match the "end" marker so that the list ends
 			// up in the order that it was defined
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (preg_match("/(.+?)_end/i", $key, $match))
 			{
 				if (isset($this->CI->benchmark->marker[$match[1].'_end']) AND isset($this->CI->benchmark->marker[$match[1].'_start']))
@@ -235,16 +275,22 @@ class CI_Profiler {
 					$profile[$match[1]] = $this->CI->benchmark->elapsed_time($match[1].'_start', $key);
 				}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			if (preg_match('/(.+?)_end$/i', $key, $match)
 				&& isset($this->CI->benchmark->marker[$match[1].'_end'], $this->CI->benchmark->marker[$match[1].'_start']))
 			{
 				$profile[$match[1]] = $this->CI->benchmark->elapsed_time($match[1].'_start', $key);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 		}
 
 		// Build a table containing the profile data.
 		// Note: At some point we should turn this into a template that can
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// be modified.  We also might want to make this data available to be logged
 
@@ -255,6 +301,8 @@ class CI_Profiler {
 		$output .= "\n";
 		$output .= "\n\n<table style='width:100%'>\n";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// be modified. We also might want to make this data available to be logged
 
 		$output = "\n\n"
@@ -262,11 +310,15 @@ class CI_Profiler {
 			."\n"
 			.'<legend style="color:#900;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_benchmarks')."&nbsp;&nbsp;</legend>"
 			."\n\n\n<table style=\"width:100%;\">\n";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		foreach ($profile as $key => $val)
 		{
 			$key = ucwords(str_replace(array('_', '-'), ' ', $key));
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$output .= "<tr><td style='padding:5px;width:50%;color:#000;font-weight:bold;background-color:#ddd;'>".$key."&nbsp;&nbsp;</td><td style='padding:5px;width:50%;color:#900;font-weight:normal;background-color:#ddd;'>".$val."</td></tr>\n";
 		}
@@ -276,13 +328,18 @@ class CI_Profiler {
 
 		return $output;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$output .= '<tr><td style="padding:5px;width:50%;color:#000;font-weight:bold;background-color:#ddd;">'
 					.$key.'&nbsp;&nbsp;</td><td style="padding:5px;width:50%;color:#900;font-weight:normal;background-color:#ddd;">'
 					.$val."</td></tr>\n";
 		}
 
 		return $output."</table>\n</fieldset>";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -297,6 +354,7 @@ class CI_Profiler {
 		$dbs = array();
 
 		// Let's determine which databases are currently connected to
+<<<<<<< HEAD
 <<<<<<< HEAD
 		foreach (get_object_vars($this->CI) as $CI_object)
 		{
@@ -320,6 +378,8 @@ class CI_Profiler {
 
 			return $output;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		foreach (get_object_vars($this->CI) as $name => $cobject)
 		{
 			if (is_object($cobject))
@@ -351,7 +411,10 @@ class CI_Profiler {
 				.'<tr><td style="width:100%;color:#0000FF;font-weight:normal;background-color:#eee;padding:5px;">'
 				.$this->CI->lang->line('profiler_no_db')
 				."</td></tr>\n</table>\n</fieldset>";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// Load the text helper so we can highlight the SQL
@@ -361,6 +424,7 @@ class CI_Profiler {
 		$highlight = array('SELECT', 'DISTINCT', 'FROM', 'WHERE', 'AND', 'LEFT&nbsp;JOIN', 'ORDER&nbsp;BY', 'GROUP&nbsp;BY', 'LIMIT', 'INSERT', 'INTO', 'VALUES', 'UPDATE', 'OR&nbsp;', 'HAVING', 'OFFSET', 'NOT&nbsp;IN', 'IN', 'LIKE', 'NOT&nbsp;LIKE', 'COUNT', 'MAX', 'MIN', 'ON', 'AS', 'AVG', 'SUM', '(', ')');
 
 		$output  = "\n\n";
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		$count = 0;
@@ -375,6 +439,8 @@ class CI_Profiler {
 
 			if ($hide_queries != '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$count = 0;
 
 		foreach ($dbs as $name => $db)
@@ -385,11 +451,15 @@ class CI_Profiler {
 			$show_hide_js = '(<span style="cursor: pointer;" onclick="var s=document.getElementById(\'ci_profiler_queries_db_'.$count.'\').style;s.display=s.display==\'none\'?\'\':\'none\';this.innerHTML=this.innerHTML==\''.$this->CI->lang->line('profiler_section_hide').'\'?\''.$this->CI->lang->line('profiler_section_show').'\':\''.$this->CI->lang->line('profiler_section_hide').'\';">'.$this->CI->lang->line('profiler_section_hide').'</span>)';
 
 			if ($hide_queries !== '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$show_hide_js = '(<span style="cursor: pointer;" onclick="var s=document.getElementById(\'ci_profiler_queries_db_'.$count.'\').style;s.display=s.display==\'none\'?\'\':\'none\';this.innerHTML=this.innerHTML==\''.$this->CI->lang->line('profiler_section_show').'\'?\''.$this->CI->lang->line('profiler_section_hide').'\':\''.$this->CI->lang->line('profiler_section_show').'\';">'.$this->CI->lang->line('profiler_section_show').'</span>)';
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$output .= '<fieldset style="border:1px solid #0000FF;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee">';
 			$output .= "\n";
@@ -401,6 +471,8 @@ class CI_Profiler {
 			{
 				$output .= "<tr><td style='width:100%;color:#0000FF;font-weight:normal;background-color:#eee;padding:5px;'>".$this->CI->lang->line('profiler_no_queries')."</td></tr>\n";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$output .= '<fieldset style="border:1px solid #0000FF;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 				."\n"
 				.'<legend style="color:#0000FF;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_database')
@@ -412,7 +484,10 @@ class CI_Profiler {
 			{
 				$output .= '<tr><td style="width:100%;color:#0000FF;font-weight:normal;background-color:#eee;padding:5px;">'
 						.$this->CI->lang->line('profiler_no_queries')."</td></tr>\n";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 			else
 			{
@@ -420,17 +495,22 @@ class CI_Profiler {
 				{
 					$time = number_format($db->query_times[$key], 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 					$val = highlight_code($val, ENT_QUOTES);
 =======
 					$val = highlight_code($val);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+					$val = highlight_code($val);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 					foreach ($highlight as $bold)
 					{
 						$val = str_replace($bold, '<strong>'.$bold.'</strong>', $val);
 					}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 					$output .= "<tr><td style='padding:5px; vertical-align: top;width:1%;color:#900;font-weight:normal;background-color:#ddd;'>".$time."&nbsp;&nbsp;</td><td style='padding:5px; color:#000;font-weight:normal;background-color:#ddd;'>".$val."</td></tr>\n";
 				}
@@ -440,6 +520,8 @@ class CI_Profiler {
 			$output .= "</fieldset>";
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					$output .= '<tr><td style="padding:5px;vertical-align:top;width:1%;color:#900;font-weight:normal;background-color:#ddd;">'
 							.$time.'&nbsp;&nbsp;</td><td style="padding:5px;color:#000;font-weight:normal;background-color:#ddd;">'
 							.$val."</td></tr>\n";
@@ -448,16 +530,22 @@ class CI_Profiler {
 
 			$output .= "</table>\n</fieldset>";
 			$count++;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $output;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// --------------------------------------------------------------------
 
 	/**
@@ -467,6 +555,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_get()
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$output  = "\n\n";
 		$output .= '<fieldset id="ci_profiler_get" style="border:1px solid #cd6e00;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee">';
@@ -500,6 +589,8 @@ class CI_Profiler {
 				}
 				$output .= "</td></tr>\n";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$output = "\n\n"
 			.'<fieldset id="ci_profiler_get" style="border:1px solid #cd6e00;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -523,11 +614,15 @@ class CI_Profiler {
 				$output .= '<tr><td style="width:50%;color:#000;background-color:#ddd;padding:5px;">&#36;_GET['
 					.$key.']&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#cd6e00;font-weight:normal;background-color:#ddd;">'
 					.$val."</td></tr>\n";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$output .= "</table>\n";
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$output .= "</fieldset>";
 
@@ -536,6 +631,10 @@ class CI_Profiler {
 
 		return $output.'</fieldset>';
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+
+		return $output.'</fieldset>';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -547,6 +646,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_post()
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$output  = "\n\n";
 		$output .= '<fieldset id="ci_profiler_post" style="border:1px solid #009900;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee">';
@@ -580,6 +680,8 @@ class CI_Profiler {
 				}
 				$output .= "</td></tr>\n";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$output = "\n\n"
 			.'<fieldset id="ci_profiler_post" style="border:1px solid #009900;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -615,11 +717,15 @@ class CI_Profiler {
 				$output .= '<tr><td style="width:50%;padding:5px;color:#000;background-color:#ddd;">&#36;_FILES['
 					.$key.']&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#009900;font-weight:normal;background-color:#ddd;">'
 					.$val."</td></tr>\n";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$output .= "</table>\n";
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$output .= "</fieldset>";
 
@@ -628,6 +734,10 @@ class CI_Profiler {
 
 		return $output.'</fieldset>';
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+
+		return $output.'</fieldset>';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -639,6 +749,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_uri_string()
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$output  = "\n\n";
 		$output .= '<fieldset id="ci_profiler_uri_string" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee">';
@@ -659,6 +770,8 @@ class CI_Profiler {
 
 		return $output;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return "\n\n"
 			.'<fieldset id="ci_profiler_uri_string" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -666,7 +779,10 @@ class CI_Profiler {
 			.'<div style="color:#000;font-weight:normal;padding:4px 0 4px 0;">'
 			.($this->CI->uri->uri_string === '' ? $this->CI->lang->line('profiler_no_uri') : $this->CI->uri->uri_string)
 			.'</div></fieldset>';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -678,6 +794,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_controller_info()
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$output  = "\n\n";
 		$output .= '<fieldset id="ci_profiler_controller_info" style="border:1px solid #995300;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee">';
@@ -691,13 +808,18 @@ class CI_Profiler {
 
 		return $output;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return "\n\n"
 			.'<fieldset id="ci_profiler_controller_info" style="border:1px solid #995300;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
 			.'<legend style="color:#995300;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_controller_info')."&nbsp;&nbsp;</legend>\n"
 			.'<div style="color:#995300;font-weight:normal;padding:4px 0 4px 0;">'.$this->CI->router->class.'/'.$this->CI->router->method
 			.'</div></fieldset>';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -711,6 +833,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_memory_usage()
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$output  = "\n\n";
 		$output .= '<fieldset id="ci_profiler_memory_usage" style="border:1px solid #5a0099;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee">';
@@ -731,6 +854,8 @@ class CI_Profiler {
 
 		return $output;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return "\n\n"
 			.'<fieldset id="ci_profiler_memory_usage" style="border:1px solid #5a0099;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -738,7 +863,10 @@ class CI_Profiler {
 			.'<div style="color:#5a0099;font-weight:normal;padding:4px 0 4px 0;">'
 			.(($usage = memory_get_usage()) != '' ? number_format($usage).' bytes' : $this->CI->lang->line('profiler_no_memory'))
 			.'</div></fieldset>';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -752,6 +880,7 @@ class CI_Profiler {
 	 */
 	protected function _compile_http_headers()
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$output  = "\n\n";
 		$output .= '<fieldset id="ci_profiler_http_headers" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee">';
@@ -772,6 +901,8 @@ class CI_Profiler {
 
 		return $output;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$output = "\n\n"
 			.'<fieldset id="ci_profiler_http_headers" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -787,7 +918,10 @@ class CI_Profiler {
 		}
 
 		return $output."</table>\n</fieldset>";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -802,6 +936,7 @@ class CI_Profiler {
 	protected function _compile_config()
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$output  = "\n\n";
 		$output .= '<fieldset id="ci_profiler_config" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee">';
 		$output .= "\n";
@@ -814,6 +949,8 @@ class CI_Profiler {
 		{
 			if (is_array($val))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$output = "\n\n"
 			.'<fieldset id="ci_profiler_config" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
@@ -823,11 +960,15 @@ class CI_Profiler {
 		foreach ($this->CI->config->config as $config => $val)
 		{
 			if (is_array($val) OR is_object($val))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$val = print_r($val, TRUE);
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$output .= "<tr><td style='padding:5px; vertical-align: top;color:#900;background-color:#ddd;'>".$config."&nbsp;&nbsp;</td><td style='padding:5px; color:#000;background-color:#ddd;'>".htmlspecialchars($val)."</td></tr>\n";
 		}
@@ -837,12 +978,17 @@ class CI_Profiler {
 
 		return $output;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$output .= '<tr><td style="padding:5px;vertical-align:top;color:#900;background-color:#ddd;">'
 				.$config.'&nbsp;&nbsp;</td><td style="padding:5px;color:#000;background-color:#ddd;">'.htmlspecialchars($val)."</td></tr>\n";
 		}
 
 		return $output."</table>\n</fieldset>";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -853,10 +999,14 @@ class CI_Profiler {
 	 * @return 	string
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private function _compile_session_data()
 =======
 	protected function _compile_session_data()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	protected function _compile_session_data()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if ( ! isset($this->CI->session))
 		{
@@ -864,24 +1014,31 @@ class CI_Profiler {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$output = '<fieldset id="ci_profiler_csession" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee">';
 		$output .= '<legend style="color:#000;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_session_data').'&nbsp;&nbsp;(<span style="cursor: pointer;" onclick="var s=document.getElementById(\'ci_profiler_session_data\').style;s.display=s.display==\'none\'?\'\':\'none\';this.innerHTML=this.innerHTML==\''.$this->CI->lang->line('profiler_section_show').'\'?\''.$this->CI->lang->line('profiler_section_hide').'\':\''.$this->CI->lang->line('profiler_section_show').'\';">'.$this->CI->lang->line('profiler_section_show').'</span>)</legend>';
 		$output .= "<table style='width:100%;display:none' id='ci_profiler_session_data'>";
 
 		foreach ($this->CI->session->all_userdata() as $key => $val)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$output = '<fieldset id="ci_profiler_csession" style="border:1px solid #000;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			.'<legend style="color:#000;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_session_data').'&nbsp;&nbsp;(<span style="cursor: pointer;" onclick="var s=document.getElementById(\'ci_profiler_session_data\').style;s.display=s.display==\'none\'?\'\':\'none\';this.innerHTML=this.innerHTML==\''.$this->CI->lang->line('profiler_section_show').'\'?\''.$this->CI->lang->line('profiler_section_hide').'\':\''.$this->CI->lang->line('profiler_section_show').'\';">'.$this->CI->lang->line('profiler_section_show').'</span>)</legend>'
 			.'<table style="width:100%;display:none;" id="ci_profiler_session_data">';
 
 		foreach ($this->CI->session->userdata() as $key => $val)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			if (is_array($val) OR is_object($val))
 			{
 				$val = print_r($val, TRUE);
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$output .= "<tr><td style='padding:5px; vertical-align: top;color:#900;background-color:#ddd;'>".$key."&nbsp;&nbsp;</td><td style='padding:5px; color:#000;background-color:#ddd;'>".htmlspecialchars($val)."</td></tr>\n";
 		}
@@ -890,12 +1047,17 @@ class CI_Profiler {
 		$output .= "</fieldset>";
 		return $output;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$output .= '<tr><td style="padding:5px;vertical-align:top;color:#900;background-color:#ddd;">'
 				.$key.'&nbsp;&nbsp;</td><td style="padding:5px;color:#000;background-color:#ddd;">'.htmlspecialchars($val)."</td></tr>\n";
 		}
 
 		return $output."</table>\n</fieldset>";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -908,10 +1070,14 @@ class CI_Profiler {
 	public function run()
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$output = "<div id='codeigniter_profiler' style='clear:both;background-color:#fff;padding:10px;'>";
 =======
 		$output = '<div id="codeigniter_profiler" style="clear:both;background-color:#fff;padding:10px;">';
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$output = '<div id="codeigniter_profiler" style="clear:both;background-color:#fff;padding:10px;">';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$fields_displayed = 0;
 
 		foreach ($this->_available_sections as $section)
@@ -919,15 +1085,20 @@ class CI_Profiler {
 			if ($this->_compile_{$section} !== FALSE)
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$func = "_compile_{$section}";
 =======
 				$func = '_compile_'.$section;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				$func = '_compile_'.$section;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$output .= $this->{$func}();
 				$fields_displayed++;
 			}
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($fields_displayed == 0)
 		{
@@ -945,6 +1116,8 @@ class CI_Profiler {
 /* End of file Profiler.php */
 /* Location: ./system/libraries/Profiler.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ($fields_displayed === 0)
 		{
 			$output .= '<p style="border:1px solid #5a0099;padding:10px;margin:20px 0;background-color:#eee;">'
@@ -955,4 +1128,7 @@ class CI_Profiler {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

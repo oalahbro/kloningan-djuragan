@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['date_year'] = "Year";
 $lang['date_years'] = "Years";
@@ -19,6 +20,8 @@ $lang['date_seconds'] = "Seconds";
 $lang['UM12']	= '(UTC -12:00) Baker/Howland Island';
 $lang['UM11']	= '(UTC -11:00) Samoa Time Zone, Niue';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -74,7 +77,10 @@ $lang['date_seconds'] = 'Seconds';
 
 $lang['UM12']	= '(UTC -12:00) Baker/Howland Island';
 $lang['UM11']	= '(UTC -11:00) Niue';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 $lang['UM10']	= '(UTC -10:00) Hawaii-Aleutian Standard Time, Cook Islands, Tahiti';
 $lang['UM95']	= '(UTC -9:30) Marquesas Islands';
 $lang['UM9']	= '(UTC -9:00) Alaska Standard Time, Gambier Islands';
@@ -92,10 +98,14 @@ $lang['UTC']	= '(UTC) Greenwich Mean Time, Western European Time';
 $lang['UP1']	= '(UTC +1:00) Central European Time, West Africa Time';
 $lang['UP2']	= '(UTC +2:00) Central Africa Time, Eastern European Time, Kaliningrad Time';
 <<<<<<< HEAD
+<<<<<<< HEAD
 $lang['UP3']	= '(UTC +3:00) Moscow Time, East Africa Time';
 =======
 $lang['UP3']	= '(UTC +3:00) Moscow Time, East Africa Time, Arabia Standard Time';
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+$lang['UP3']	= '(UTC +3:00) Moscow Time, East Africa Time, Arabia Standard Time';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 $lang['UP35']	= '(UTC +3:30) Iran Standard Time';
 $lang['UP4']	= '(UTC +4:00) Azerbaijan Standard Time, Samara Time';
 $lang['UP45']	= '(UTC +4:30) Afghanistan';
@@ -116,6 +126,7 @@ $lang['UP115']	= '(UTC +11:30) Norfolk Island';
 $lang['UP12']	= '(UTC +12:00) Fiji, Gilbert Islands, Kamchatka Time, New Zealand Standard Time';
 $lang['UP1275']	= '(UTC +12:45) Chatham Islands Standard Time';
 <<<<<<< HEAD
+<<<<<<< HEAD
 $lang['UP13']	= '(UTC +13:00) Phoenix Islands Time, Tonga';
 $lang['UP14']	= '(UTC +14:00) Line Islands';
 
@@ -126,3 +137,7 @@ $lang['UP14']	= '(UTC +14:00) Line Islands';
 $lang['UP13']	= '(UTC +13:00) Samoa Time Zone, Phoenix Islands Time, Tonga';
 $lang['UP14']	= '(UTC +14:00) Line Islands';
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+$lang['UP13']	= '(UTC +13:00) Samoa Time Zone, Phoenix Islands Time, Tonga';
+$lang['UP14']	= '(UTC +14:00) Line Islands';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

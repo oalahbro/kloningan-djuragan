@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -20,6 +21,8 @@
 /**
  * CodeIgniter Hooks Class
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -61,7 +64,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Hooks Class
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  *
  * Provides a mechanism to extend the base system without hacking.
  *
@@ -70,14 +76,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Libraries
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/encryption.html
 =======
  * @link		https://codeigniter.com/user_guide/general/hooks.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/general/hooks.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_Hooks {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Determines wether hooks are enabled
 	 *
@@ -124,6 +135,8 @@ class CI_Hooks {
 
 		if ($CFG->item('enable_hooks') == FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Determines whether hooks are enabled
 	 *
 	 * @var	bool
@@ -166,12 +179,16 @@ class CI_Hooks {
 		// If hooks are not enabled in the config file
 		// there is nothing else to do
 		if ($CFG->item('enable_hooks') === FALSE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return;
 		}
 
 		// Grab the "hooks" definition file.
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// If there are no hooks, we're done.
 
@@ -183,20 +200,29 @@ class CI_Hooks {
 =======
 		if (file_exists(APPPATH.'config/hooks.php'))
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if (file_exists(APPPATH.'config/hooks.php'))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			include(APPPATH.'config/hooks.php');
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/hooks.php'))
 		{
 			include(APPPATH.'config/'.ENVIRONMENT.'/hooks.php');
 		}
 
 		// If there are no hooks, we're done.
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ( ! isset($hook) OR ! is_array($hook))
 		{
 			return;
@@ -212,6 +238,7 @@ class CI_Hooks {
 	 * Call Hook
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Calls a particular hook
 	 *
 	 * @access	private
@@ -220,6 +247,8 @@ class CI_Hooks {
 	 */
 	function _call_hook($which = '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Calls a particular hook. Called by CodeIgniter.php.
 	 *
 	 * @uses	CI_Hooks::_run_hook()
@@ -228,7 +257,10 @@ class CI_Hooks {
 	 * @return	bool	TRUE on success or FALSE on failure
 	 */
 	public function call_hook($which = '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if ( ! $this->enabled OR ! isset($this->hooks[$which]))
 		{
@@ -236,10 +268,14 @@ class CI_Hooks {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (isset($this->hooks[$which][0]) AND is_array($this->hooks[$which][0]))
 =======
 		if (is_array($this->hooks[$which]) && ! isset($this->hooks[$which]['function']))
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if (is_array($this->hooks[$which]) && ! isset($this->hooks[$which]['function']))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			foreach ($this->hooks[$which] as $val)
 			{
@@ -262,6 +298,7 @@ class CI_Hooks {
 	 * Runs a particular hook
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	private
 	 * @param	array	the hook details
 	 * @return	bool
@@ -270,6 +307,8 @@ class CI_Hooks {
 	{
 		if ( ! is_array($data))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array	$data	Hook details
 	 * @return	bool	TRUE on success or FALSE on failure
 	 */
@@ -285,7 +324,10 @@ class CI_Hooks {
 			return TRUE;
 		}
 		elseif ( ! is_array($data))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
@@ -297,11 +339,15 @@ class CI_Hooks {
 		// If the script being called happens to have the same
 		// hook call within it a loop can happen
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if ($this->in_progress == TRUE)
 =======
 		if ($this->_in_progress === TRUE)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($this->_in_progress === TRUE)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return;
 		}
@@ -311,10 +357,14 @@ class CI_Hooks {
 		// -----------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ( ! isset($data['filepath']) OR ! isset($data['filename']))
 =======
 		if ( ! isset($data['filepath'], $data['filename']))
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ( ! isset($data['filepath'], $data['filename']))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
@@ -326,6 +376,7 @@ class CI_Hooks {
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// -----------------------------------
 		// Set class/function name
@@ -352,17 +403,23 @@ class CI_Hooks {
 
 		if ($class === FALSE AND $function === FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Determine and class and/or function names
 		$class		= empty($data['class']) ? FALSE : $data['class'];
 		$function	= empty($data['function']) ? FALSE : $data['function'];
 		$params		= isset($data['params']) ? $data['params'] : '';
 
 		if (empty($function))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// -----------------------------------
 		// Set the in_progress flag
@@ -390,6 +447,8 @@ class CI_Hooks {
 			{
 				require($filepath);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Set the _in_progress flag
 		$this->_in_progress = TRUE;
 
@@ -429,21 +488,29 @@ class CI_Hooks {
 			if ( ! function_exists($function))
 			{
 				return $this->_in_progress = FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$function($params);
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$this->in_progress = FALSE;
 =======
 		$this->_in_progress = FALSE;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$this->_in_progress = FALSE;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return TRUE;
 	}
 
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 // END CI_Hooks class
@@ -452,3 +519,5 @@ class CI_Hooks {
 /* Location: ./system/core/Hooks.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -260,4 +260,23 @@ class CI_DB_pdo_firebird_driver extends CI_DB_pdo_driver {
 		return preg_replace('`SELECT`i', 'SELECT '.$select, $sql);
 	}
 
+<<<<<<< HEAD
+=======
+	// --------------------------------------------------------------------
+
+	/**
+	 * Insert batch statement
+	 *
+	 * Generates a platform-specific insert string from the supplied data.
+	 *
+	 * @param	string	$table	Table name
+	 * @param	array	$keys	INSERT keys
+	 * @param	array	$values	INSERT values
+	 * @return	string|bool
+	 */
+	protected function _insert_batch($table, $keys, $values)
+	{
+		return ($this->db->db_debug) ? $this->db->display_error('db_unsupported_feature') : FALSE;
+	}
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 }

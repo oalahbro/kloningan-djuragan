@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * SQLite Forge Class
@@ -63,14 +69,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Database
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
 =======
  * @link		https://codeigniter.com/user_guide/database/
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/database/
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_sqlite_forge extends CI_DB_forge {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Create database
 	 *
@@ -80,6 +91,8 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 	 */
 	function _create_database()
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CREATE TABLE IF statement
 	 *
 	 * @var	string
@@ -108,8 +121,12 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 	 * @param	string	$db_name	(ignored)
 	 * @return	bool
 	 */
+<<<<<<< HEAD
 	public function create_database($db_name = '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	public function create_database($db_name)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		// In SQLite, a database is created when you connect to the database.
 		// We'll return TRUE so that an error isn't generated
@@ -121,6 +138,7 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 	/**
 	 * Drop database
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @param	string	the database name
@@ -249,6 +267,12 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 	 * @return	bool
 	 */
 	public function drop_database($db_name = '')
+=======
+	 * @param	string	$db_name	(ignored)
+	 * @return	bool
+	 */
+	public function drop_database($db_name)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if ( ! file_exists($this->db->database) OR ! @unlink($this->db->database))
 		{
@@ -295,12 +319,16 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 		}
 
 		return parent::_alter_table($alter_type, $table, $field);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Drop Table
 	 *
@@ -317,6 +345,8 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 		}
 		return array();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Process column
 	 *
 	 * @param	array	$field
@@ -330,12 +360,16 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 			.$field['null']
 			.$field['unique']
 			.$field['default'];
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Alter table query
 	 *
@@ -389,6 +423,8 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 		return $sql;
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Field attribute TYPE
 	 *
 	 * Performs a data type mapping between different databases.
@@ -406,12 +442,16 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 				return;
 			default: return;
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Rename a table
 	 *
@@ -432,6 +472,8 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 /* End of file sqlite_forge.php */
 /* Location: ./system/database/drivers/sqlite/sqlite_forge.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Field attribute AUTO_INCREMENT
 	 *
 	 * @param	array	&$attributes
@@ -453,4 +495,7 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

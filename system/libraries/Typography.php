@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,11 +58,15 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Typography Class
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @category	Helpers
  * @author		EllisLab Dev Team
@@ -85,6 +92,8 @@ class CI_Typography {
 	// whether or not to protect quotes within { curly braces }
 	var $protect_braced_quotes = FALSE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @package		CodeIgniter
  * @subpackage	Libraries
  * @category	Helpers
@@ -134,7 +143,10 @@ class CI_Typography {
 	 * @var bool
 	 */
 	public $protect_braced_quotes = FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	/**
 	 * Auto Typography
@@ -148,13 +160,17 @@ class CI_Typography {
 	 *  - Converts two spaces into entities
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	bool	whether to reduce more then two consecutive newlines to two
 	 * @return	string
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	function auto_typography($str, $reduce_linebreaks = FALSE)
 	{
@@ -164,6 +180,11 @@ class CI_Typography {
 	{
 		if ($str === '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	public function auto_typography($str, $reduce_linebreaks = FALSE)
+	{
+		if ($str === '')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return '';
 		}
@@ -184,6 +205,7 @@ class CI_Typography {
 		// HTML comment tags don't conform to patterns of normal tags, so pull them out separately, only if needed
 		$html_comments = array();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strpos($str, '<!--') !== FALSE)
 		{
 			if (preg_match_all("#(<!\-\-.*?\-\->)#s", $str, $matches))
@@ -194,13 +216,18 @@ class CI_Typography {
 					$str = str_replace($matches[0][$i], '{@HC'.$i.'}', $str);
 				}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (strpos($str, '<!--') !== FALSE && preg_match_all('#(<!\-\-.*?\-\->)#s', $str, $matches))
 		{
 			for ($i = 0, $total = count($matches[0]); $i < $total; $i++)
 			{
 				$html_comments[] = $matches[0][$i];
 				$str = str_replace($matches[0][$i], '{@HC'.$i.'}', $str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 		}
 
@@ -209,32 +236,43 @@ class CI_Typography {
 		if (strpos($str, '<pre') !== FALSE)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$str = preg_replace_callback("#<pre.*?>.*?</pre>#si", array($this, '_protect_characters'), $str);
 		}
 
 		// Convert quotes within tags to temporary markers.
 		$str = preg_replace_callback("#<.+?>#si", array($this, '_protect_characters'), $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$str = preg_replace_callback('#<pre.*?>.*?</pre>#si', array($this, '_protect_characters'), $str);
 		}
 
 		// Convert quotes within tags to temporary markers.
 		$str = preg_replace_callback('#<.+?>#si', array($this, '_protect_characters'), $str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Do the same with braces if necessary
 		if ($this->protect_braced_quotes === TRUE)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$str = preg_replace_callback("#\{.+?\}#si", array($this, '_protect_characters'), $str);
 =======
 			$str = preg_replace_callback('#\{.+?\}#si', array($this, '_protect_characters'), $str);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$str = preg_replace_callback('#\{.+?\}#si', array($this, '_protect_characters'), $str);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// Convert "ignore" tags to temporary marker.  The parser splits out the string at every tag
 		// it encounters.  Certain inline tags, like image tags, links, span tags, etc. will be
 		// adversely affected if they are split out so we'll convert the opening bracket < temporarily to: {@TAG}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$str = preg_replace("#<(/*)(".$this->inline_elements.")([ >])#i", "{@TAG}\\1\\2\\3", $str);
 
@@ -248,6 +286,8 @@ class CI_Typography {
 		//		Etc...
 		//	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$str = preg_replace('#<(/*)('.$this->inline_elements.')([ >])#i', '{@TAG}\\1\\2\\3', $str);
 
 		/* Split the string at every tag. This expression creates an array with this prototype:
@@ -260,12 +300,16 @@ class CI_Typography {
 		 *		Etc...
 		 *	}
 		 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$chunks = preg_split('/(<(?:[^<>]+(?:"[^"]*"|\'[^\']*\')?)+>)/', $str, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
 		// Build our finalized string.  We cycle through the array, skipping tags, and processing the contained text
 		$str = '';
 		$process = TRUE;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$paragraph = FALSE;
 		$current_chunk = 0;
@@ -286,6 +330,8 @@ class CI_Typography {
 
 				if ($match[1] == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		for ($i = 0, $c = count($chunks) - 1; $i <= $c; $i++)
 		{
@@ -299,11 +345,15 @@ class CI_Typography {
 				}
 
 				if ($match[1] === '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				{
 					$this->last_block_element = $match[2];
 				}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				$str .= $chunk;
 				continue;
@@ -313,6 +363,8 @@ class CI_Typography {
 			{
 				$str .= $chunk;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$str .= $chunks[$i];
 				continue;
 			}
@@ -320,11 +372,15 @@ class CI_Typography {
 			if ($process === FALSE)
 			{
 				$str .= $chunks[$i];
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				continue;
 			}
 
 			//  Force a newline to make sure end tags get processed by _format_newlines()
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if ($current_chunk == $total_chunks)
 			{
@@ -340,6 +396,8 @@ class CI_Typography {
 		{
 			$str = preg_replace("/^(.*?)<(".$this->block_elements.")/i", '<p>$1</p><$2', $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			if ($i === $c)
 			{
 				$chunks[$i] .= "\n";
@@ -353,7 +411,10 @@ class CI_Typography {
 		if ( ! preg_match('/^\s*<(?:'.$this->block_elements.')/i', $str))
 		{
 			$str = preg_replace('/^(.*?)<('.$this->block_elements.')/i', '<p>$1</p><$2', $str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// Convert quotes, elipsis, em-dashes, non-breaking spaces, and ampersands
@@ -401,10 +462,14 @@ class CI_Typography {
 						// Similarly, there might be cases where a closing </block> will follow
 						// a closing </p> tag, so we'll correct it by adding a newline in between
 <<<<<<< HEAD
+<<<<<<< HEAD
 						"#</p></#"			=> "</p>\n</"
 =======
 						'#</p></#'			=> "</p>\n</"
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+						'#</p></#'			=> "</p>\n</"
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 						);
 
 		// Do we need to reduce empty lines?
@@ -433,17 +498,23 @@ class CI_Typography {
 	 * double spaces, and ampersands
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
 	function format_characters($str)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @return	string
 	 */
 	public function format_characters($str)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		static $table;
 
@@ -504,6 +575,7 @@ class CI_Typography {
 	 * Converts newline characters into either <p> tags or <br />
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	string
 	 * @return	string
@@ -517,13 +589,18 @@ class CI_Typography {
 
 		if (strpos($str, "\n") === FALSE  && ! in_array($this->last_block_element, $this->inner_block_required))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @return	string
 	 */
 	protected function _format_newlines($str)
 	{
 		if ($str === '' OR (strpos($str, "\n") === FALSE && ! in_array($this->last_block_element, $this->inner_block_required)))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return $str;
 		}
@@ -533,16 +610,22 @@ class CI_Typography {
 
 		// Convert single spaces to <br /> tags
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$str = preg_replace("/([^\n])(\n)([^\n])/", "\\1<br />\\2\\3", $str);
 
 		// Wrap the whole enchilada in enclosing paragraphs
 		if ($str != "\n")
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$str = preg_replace("/([^\n])(\n)([^\n])/", '\\1<br />\\2\\3', $str);
 
 		// Wrap the whole enchilada in enclosing paragraphs
 		if ($str !== "\n")
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			// We trim off the right-side new line so that the closing </p> tag
 			// will be positioned immediately following the string, matching
@@ -553,12 +636,16 @@ class CI_Typography {
 		// Remove empty paragraphs if they are on the first line, as this
 		// is a potential unintended consequence of the previous code
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$str = preg_replace("/<p><\/p>(.*)/", "\\1", $str, 1);
 
 		return $str;
 =======
 		return preg_replace('/<p><\/p>(.*)/', '\\1', $str, 1);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return preg_replace('/<p><\/p>(.*)/', '\\1', $str, 1);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
@@ -572,17 +659,23 @@ class CI_Typography {
 	 * likewise double spaces are converted to {@NBS} to prevent entity conversion
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	array
 	 * @return	string
 	 */
 	function _protect_characters($match)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array
 	 * @return	string
 	 */
 	protected function _protect_characters($match)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return str_replace(array("'",'"','--','  '), array('{@SQ}', '{@DQ}', '{@DD}', '{@NBS}'), $match[0]);
 	}
@@ -592,6 +685,7 @@ class CI_Typography {
 	/**
 	 * Convert newlines to HTML line breaks except within PRE tags
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string
@@ -617,6 +711,8 @@ class CI_Typography {
 			if ($ct - 1 != $i)
 				$newstr .= "pre>";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @return	string
 	 */
@@ -630,7 +726,10 @@ class CI_Typography {
 			{
 				$newstr .= 'pre>';
 			}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $newstr;
@@ -638,9 +737,12 @@ class CI_Typography {
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 // END Typography Class
 
 /* End of file Typography.php */
 /* Location: ./system/libraries/Typography.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

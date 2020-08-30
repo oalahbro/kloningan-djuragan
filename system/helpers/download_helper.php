@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Download Helpers
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/download_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/download_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/download_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Force Download
@@ -152,6 +163,8 @@ if ( ! function_exists('force_download'))
 /* End of file download_helper.php */
 /* Location: ./system/helpers/download_helper.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('force_download'))
 {
 	/**
@@ -259,4 +272,7 @@ if ( ! function_exists('force_download'))
 		exit;
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

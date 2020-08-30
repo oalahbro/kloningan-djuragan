@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter HTML Helpers
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/html_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/html_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/html_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Heading
@@ -92,6 +103,8 @@ if ( ! function_exists('heading'))
 		$attributes = ($attributes != '') ? ' '.$attributes : $attributes;
 		return "<h".$h.$attributes.">".$data."</h".$h.">";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('heading'))
 {
 	/**
@@ -107,12 +120,16 @@ if ( ! function_exists('heading'))
 	function heading($data = '', $h = '1', $attributes = '')
 	{
 		return '<h'.$h._stringify_attributes($attributes).'>'.$data.'</h'.$h.'>';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Unordered List
@@ -127,6 +144,8 @@ if ( ! function_exists('heading'))
 if ( ! function_exists('ul'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('ul'))
 {
 	/**
@@ -138,7 +157,10 @@ if ( ! function_exists('ul'))
 	 * @param	mixed
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function ul($list, $attributes = '')
 	{
 		return _list('ul', $list, $attributes);
@@ -147,6 +169,7 @@ if ( ! function_exists('ul'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Ordered List
@@ -161,6 +184,8 @@ if ( ! function_exists('ul'))
 if ( ! function_exists('ol'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('ol'))
 {
 	/**
@@ -172,7 +197,10 @@ if ( ! function_exists('ol'))
 	 * @param	mixed
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function ol($list, $attributes = '')
 	{
 		return _list('ol', $list, $attributes);
@@ -181,6 +209,7 @@ if ( ! function_exists('ol'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Generates the list
@@ -198,6 +227,8 @@ if ( ! function_exists('_list'))
 {
 	function _list($type = 'ul', $list, $attributes = '', $depth = 0)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('_list'))
 {
 	/**
@@ -212,7 +243,10 @@ if ( ! function_exists('_list'))
 	 * @return	string
 	 */
 	function _list($type = 'ul', $list = array(), $attributes = '', $depth = 0)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		// If an array wasn't submitted there's nothing to do...
 		if ( ! is_array($list))
@@ -221,6 +255,7 @@ if ( ! function_exists('_list'))
 		}
 
 		// Set the indentation based on the depth
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$out = str_repeat(" ", $depth);
 
@@ -242,11 +277,16 @@ if ( ! function_exists('_list'))
 		// Write the opening list tag
 		$out .= "<".$type.$attributes.">\n";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$out = str_repeat(' ', $depth)
 			// Write the opening list tag
 			.'<'.$type._stringify_attributes($attributes).">\n";
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Cycle through the list elements.  If an array is
 		// encountered we will recursively call _list()
@@ -257,11 +297,15 @@ if ( ! function_exists('_list'))
 			$_last_list_item = $key;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$out .= str_repeat(" ", $depth + 2);
 			$out .= "<li>";
 =======
 			$out .= str_repeat(' ', $depth + 2).'<li>';
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$out .= str_repeat(' ', $depth + 2).'<li>';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 			if ( ! is_array($val))
 			{
@@ -270,17 +314,22 @@ if ( ! function_exists('_list'))
 			else
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$out .= $_last_list_item."\n";
 				$out .= _list($type, $val, '', $depth + 4);
 				$out .= str_repeat(" ", $depth + 2);
 =======
 				$out .= $_last_list_item."\n"._list($type, $val, '', $depth + 4).str_repeat(' ', $depth + 2);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				$out .= $_last_list_item."\n"._list($type, $val, '', $depth + 4).str_repeat(' ', $depth + 2);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$out .= "</li>\n";
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Set the indentation for the closing tag
 		$out .= str_repeat(" ", $depth);
@@ -310,11 +359,16 @@ if ( ! function_exists('br'))
 		// Set the indentation for the closing tag and apply it
 		return $out.str_repeat(' ', $depth).'</'.$type.">\n";
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		// Set the indentation for the closing tag and apply it
+		return $out.str_repeat(' ', $depth).'</'.$type.">\n";
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Image
@@ -329,6 +383,8 @@ if ( ! function_exists('img'))
 {
 	function img($src = '', $index_page = FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('img'))
 {
 	/**
@@ -342,7 +398,10 @@ if ( ! function_exists('img'))
 	 * @return	string
 	 */
 	function img($src = '', $index_page = FALSE, $attributes = '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if ( ! is_array($src) )
 		{
@@ -357,6 +416,7 @@ if ( ! function_exists('img'))
 
 		$img = '<img';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		foreach ($src as $k=>$v)
 		{
@@ -373,6 +433,8 @@ if ( ! function_exists('img'))
 				{
 					$img .= ' src="'.$CI->config->slash_item('base_url').$v.'"';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		foreach ($src as $k => $v)
 		{
 			if ($k === 'src' && ! preg_match('#^([a-z]+:)?//#i', $v))
@@ -384,11 +446,15 @@ if ( ! function_exists('img'))
 				else
 				{
 					$img .= ' src="'.get_instance()->config->slash_item('base_url').$v.'"';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 			}
 			else
 			{
+<<<<<<< HEAD
 <<<<<<< HEAD
 				$img .= " $k=\"$v\"";
 			}
@@ -398,17 +464,23 @@ if ( ! function_exists('img'))
 
 		return $img;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$img .= ' '.$k.'="'.$v.'"';
 			}
 		}
 
 		return $img._stringify_attributes($attributes).' />';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Doctype
@@ -455,6 +527,8 @@ if ( ! function_exists('doctype'))
 			return FALSE;
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('doctype'))
 {
 	/**
@@ -495,12 +569,16 @@ if ( ! function_exists('doctype'))
 		}
 
 		return isset($doctypes[$type]) ? $doctypes[$type] : FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Link
@@ -523,6 +601,8 @@ if ( ! function_exists('link_tag'))
 		$CI =& get_instance();
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('link_tag'))
 {
 	/**
@@ -541,11 +621,15 @@ if ( ! function_exists('link_tag'))
 	function link_tag($href = '', $rel = 'stylesheet', $type = 'text/css', $title = '', $media = '', $index_page = FALSE)
 	{
 		$CI =& get_instance();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$link = '<link ';
 
 		if (is_array($href))
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			foreach ($href as $k=>$v)
 			{
@@ -555,6 +639,11 @@ if ( ! function_exists('link_tag'))
 			{
 				if ($k === 'href' && ! preg_match('#^([a-z]+:)?//#i', $v))
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			foreach ($href as $k => $v)
+			{
+				if ($k === 'href' && ! preg_match('#^([a-z]+:)?//#i', $v))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				{
 					if ($index_page === TRUE)
 					{
@@ -568,6 +657,7 @@ if ( ! function_exists('link_tag'))
 				else
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					$link .= "$k=\"$v\" ";
 				}
 			}
@@ -578,6 +668,8 @@ if ( ! function_exists('link_tag'))
 		{
 			if ( strpos($href, '://') !== FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					$link .= $k.'="'.$v.'" ';
 				}
 			}
@@ -585,7 +677,10 @@ if ( ! function_exists('link_tag'))
 		else
 		{
 			if (preg_match('#^([a-z]+:)?//#i', $href))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$link .= 'href="'.$href.'" ';
 			}
@@ -601,14 +696,19 @@ if ( ! function_exists('link_tag'))
 			$link .= 'rel="'.$rel.'" type="'.$type.'" ';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ($media	!= '')
 =======
 			if ($media !== '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			if ($media !== '')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$link .= 'media="'.$media.'" ';
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if ($title	!= '')
 			{
@@ -621,6 +721,8 @@ if ( ! function_exists('link_tag'))
 
 		return $link;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			if ($title !== '')
 			{
 				$link .= 'title="'.$title.'" ';
@@ -628,12 +730,16 @@ if ( ! function_exists('link_tag'))
 		}
 
 		return $link."/>\n";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Generates meta tags from an array of key/values
@@ -645,6 +751,8 @@ if ( ! function_exists('link_tag'))
 if ( ! function_exists('meta'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('meta'))
 {
 	/**
@@ -656,7 +764,10 @@ if ( ! function_exists('meta'))
 	 * @param	string
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function meta($name = '', $content = '', $type = 'name', $newline = "\n")
 	{
 		// Since we allow the data to be passes as a string, a simple array
@@ -666,6 +777,7 @@ if ( ! function_exists('meta'))
 			$name = array(array('name' => $name, 'content' => $content, 'type' => $type, 'newline' => $newline));
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 		{
 			// Turn single array into multidimensional
@@ -674,27 +786,38 @@ if ( ! function_exists('meta'))
 				$name = array($name);
 			}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		elseif (isset($name['name']))
 		{
 			// Turn single array into multidimensional
 			$name = array($name);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		$str = '';
 		foreach ($name as $meta)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$type		= ( ! isset($meta['type']) OR $meta['type'] == 'name') ? 'name' : 'http-equiv';
 			$name		= ( ! isset($meta['name']))		? ''	: $meta['name'];
 			$content	= ( ! isset($meta['content']))	? ''	: $meta['content'];
 			$newline	= ( ! isset($meta['newline']))	? "\n"	: $meta['newline'];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$type		= (isset($meta['type']) && $meta['type'] !== 'name')	? 'http-equiv' : 'name';
 			$name		= isset($meta['name'])					? $meta['name'] : '';
 			$content	= isset($meta['content'])				? $meta['content'] : '';
 			$newline	= isset($meta['newline'])				? $meta['newline'] : "\n";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 			$str .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />'.$newline;
 		}
@@ -705,6 +828,7 @@ if ( ! function_exists('meta'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Generates non-breaking space entities based on number supplied
@@ -725,6 +849,8 @@ if ( ! function_exists('nbs'))
 /* End of file html_helper.php */
 /* Location: ./system/helpers/html_helper.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('br'))
 {
 	/**
@@ -756,4 +882,7 @@ if ( ! function_exists('nbs'))
 		return str_repeat('&nbsp;', $num);
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -49,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+<<<<<<< HEAD
 $route['default_controller'] = 'login';
 
 $route['admin'] = 'admin/pesanan/read';
@@ -60,3 +61,17 @@ $route['user'] = 'juragan/pesanan';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
+=======
+$route['default_controller'] = 'authentic/login';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = TRUE;
+
+$route['masuk'] = 'authentic/login';
+$route['lupa'] = 'authentic/forgot';
+$route['set/(:any)'] = 'authentic/reset-password/$1';
+$route['daftar'] = 'authentic/register';
+$route['keluar'] = 'authentic/logout';
+
+$route['admin'] = 'admin/pesanan/lihat';
+$route['admin/pesanan'] = 'admin/pesanan/lihat';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

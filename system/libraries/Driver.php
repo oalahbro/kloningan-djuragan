@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Driver Library Class
@@ -71,6 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class CI_Driver_Library {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	protected $valid_drivers	= array();
 	protected $lib_name;
@@ -137,6 +144,8 @@ class CI_Driver_Library {
 // END CI_Driver_Library CLASS
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	/**
 	 * Array of drivers that are available to use with the driver class
 	 *
@@ -278,7 +287,10 @@ class CI_Driver_Library {
 }
 
 // --------------------------------------------------------------------------
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Driver Class
@@ -294,6 +306,7 @@ class CI_Driver_Library {
  */
 class CI_Driver {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	protected $parent;
 
 	private $methods = array();
@@ -301,6 +314,8 @@ class CI_Driver {
 
 	private static $reflections = array();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	/**
 	 * Instance of the parent class
@@ -330,7 +345,10 @@ class CI_Driver {
 	 * @var	array
 	 */
 	protected static $_reflections = array();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	/**
 	 * Decorate
@@ -343,10 +361,14 @@ class CI_Driver {
 	public function decorate($parent)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$this->parent = $parent;
 =======
 		$this->_parent = $parent;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$this->_parent = $parent;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Lock down attributes to what is defined in the class
 		// and speed up references in magic methods
@@ -354,10 +376,14 @@ class CI_Driver {
 		$class_name = get_class($parent);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ( ! isset(self::$reflections[$class_name]))
 =======
 		if ( ! isset(self::$_reflections[$class_name]))
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ( ! isset(self::$_reflections[$class_name]))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$r = new ReflectionObject($parent);
 
@@ -366,10 +392,14 @@ class CI_Driver {
 				if ($method->isPublic())
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					$this->methods[] = $method->getName();
 =======
 					$this->_methods[] = $method->getName();
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+					$this->_methods[] = $method->getName();
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 			}
 
@@ -377,6 +407,7 @@ class CI_Driver {
 			{
 				if ($prop->isPublic())
 				{
+<<<<<<< HEAD
 <<<<<<< HEAD
 					$this->properties[] = $prop->getName();
 				}
@@ -388,6 +419,8 @@ class CI_Driver {
 		{
 			list($this->methods, $this->properties) = self::$reflections[$class_name];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					$this->_properties[] = $prop->getName();
 				}
 			}
@@ -397,7 +430,10 @@ class CI_Driver {
 		else
 		{
 			list($this->_methods, $this->_properties) = self::$_reflections[$class_name];
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 	}
 
@@ -409,15 +445,19 @@ class CI_Driver {
 	 * Handles access to the parent driver library's methods
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	array
 	 * @return	mixed
 	 */
 	public function __call($method, $args = array())
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (in_array($method, $this->methods))
 		{
@@ -428,13 +468,18 @@ class CI_Driver {
 		_exception_handler(E_ERROR, "No such method '{$method}'", $trace[1]['file'], $trace[1]['line']);
 		exit;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (in_array($method, $this->_methods))
 		{
 			return call_user_func_array(array($this->_parent, $method), $args);
 		}
 
 		throw new BadMethodCallException('No such method: '.$method.'()');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -450,6 +495,7 @@ class CI_Driver {
 	public function __get($var)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (in_array($var, $this->properties))
 		{
 			return $this->parent->$var;
@@ -458,6 +504,11 @@ class CI_Driver {
 		{
 			return $this->_parent->$var;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if (in_array($var, $this->_properties))
+		{
+			return $this->_parent->$var;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 	}
 
@@ -475,6 +526,7 @@ class CI_Driver {
 	public function __set($var, $val)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (in_array($var, $this->properties))
 		{
 			$this->parent->$var = $val;
@@ -483,10 +535,16 @@ class CI_Driver {
 		{
 			$this->_parent->$var = $val;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if (in_array($var, $this->_properties))
+		{
+			$this->_parent->$var = $val;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 	}
 
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 // END CI_Driver CLASS
 
@@ -494,3 +552,5 @@ class CI_Driver {
 /* Location: ./system/libraries/Driver.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

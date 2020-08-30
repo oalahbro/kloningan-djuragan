@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * SQLSRV Forge Class
@@ -63,14 +69,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Database
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
 =======
  * @link		https://codeigniter.com/user_guide/database/
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/database/
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_sqlsrv_forge extends CI_DB_forge {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Create database
 	 *
@@ -111,6 +122,8 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 			.$table."')) DROP TABLE [dbo].[".$table."]";
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CREATE TABLE IF statement
 	 *
 	 * @var	string
@@ -135,11 +148,15 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 		'INT'		=> 'BIGINT',
 		'REAL'		=> 'FLOAT'
 	);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Create Table
 	 *
@@ -242,6 +259,8 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 
 		return $sql;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * ALTER TABLE
 	 *
 	 * @param	string	$alter_type	ALTER type
@@ -264,12 +283,16 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 		}
 
 		return $sqls;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Alter table query
 	 *
@@ -320,6 +343,8 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 		return $sql;
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Field attribute TYPE
 	 *
 	 * Performs a data type mapping between different databases.
@@ -345,12 +370,16 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 				return;
 			default: return;
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Rename a table
 	 *
@@ -371,6 +400,8 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 /* End of file sqlsrv_forge.php */
 /* Location: ./system/database/drivers/sqlsrv/sqlsrv_forge.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Field attribute AUTO_INCREMENT
 	 *
 	 * @param	array	&$attributes
@@ -386,4 +417,7 @@ class CI_DB_sqlsrv_forge extends CI_DB_forge {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

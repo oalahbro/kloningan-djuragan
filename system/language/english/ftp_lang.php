@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['ftp_no_connection']			= "Unable to locate a valid connection ID. Please make sure you are connected before peforming any file routines.";
 $lang['ftp_unable_to_connect']		= "Unable to connect to your FTP server using the supplied hostname.";
@@ -18,6 +19,8 @@ $lang['ftp_unable_to_move']			= "Unable to move the file. Please make sure the d
 /* End of file ftp_lang.php */
 /* Location: ./system/language/english/ftp_lang.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -68,4 +71,7 @@ $lang['ftp_no_source_file']		= 'Unable to locate the source file. Please check y
 $lang['ftp_unable_to_rename']		= 'Unable to rename the file.';
 $lang['ftp_unable_to_delete']		= 'Unable to delete the file.';
 $lang['ftp_unable_to_move']		= 'Unable to move the file. Please make sure the destination directory exists.';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

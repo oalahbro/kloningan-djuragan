@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['terabyte_abbr'] = "TB";
 $lang['gigabyte_abbr'] = "GB";
@@ -10,6 +11,8 @@ $lang['bytes'] = "Bytes";
 /* End of file number_lang.php */
 /* Location: ./system/language/english/number_lang.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -53,4 +56,7 @@ $lang['gigabyte_abbr'] = 'GB';
 $lang['megabyte_abbr'] = 'MB';
 $lang['kilobyte_abbr'] = 'KB';
 $lang['bytes'] = 'Bytes';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

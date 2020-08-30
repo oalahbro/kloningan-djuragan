@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,23 +58,31 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * MySQL Database Adapter Class
  *
  * Note: _DB is an extender class that the app controller
 <<<<<<< HEAD
+<<<<<<< HEAD
  * creates dynamically based on whether the active record
 =======
  * creates dynamically based on whether the query builder
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * creates dynamically based on whether the query builder
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * class is being used or not.
  *
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
  */
@@ -119,6 +130,8 @@ class CI_DB_mysql_driver extends CI_DB {
 
 		return @mysql_connect($this->hostname, $this->username, $this->password, TRUE);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/database/
  */
 class CI_DB_mysql_driver extends CI_DB {
@@ -182,12 +195,16 @@ class CI_DB_mysql_driver extends CI_DB {
 		{
 			$this->hostname .= ':'.$this->port;
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Persistent database connection
 	 *
@@ -203,6 +220,8 @@ class CI_DB_mysql_driver extends CI_DB {
 
 		return @mysql_pconnect($this->hostname, $this->username, $this->password);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Non-persistent database connection
 	 *
 	 * @param	bool	$persistent
@@ -257,7 +276,10 @@ class CI_DB_mysql_driver extends CI_DB {
 		}
 
 		return $this->conn_id;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -269,6 +291,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * sent for a length of time exceeding the server's idle timeout
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	void
 	 */
@@ -278,6 +301,11 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	public function reconnect()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	void
+	 */
+	public function reconnect()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if (mysql_ping($this->conn_id) === FALSE)
 		{
@@ -291,6 +319,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * Select the database
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	private called by the base class
 	 * @return	resource
 	 */
@@ -298,6 +327,8 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		return @mysql_select_db($this->database, $this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$database
 	 * @return	bool
 	 */
@@ -316,7 +347,10 @@ class CI_DB_mysql_driver extends CI_DB {
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -324,6 +358,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	/**
 	 * Set client character set
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string
@@ -347,18 +382,24 @@ class CI_DB_mysql_driver extends CI_DB {
 			return @mysql_set_charset($charset, $this->conn_id);
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$charset
 	 * @return	bool
 	 */
 	protected function _db_set_charset($charset)
 	{
 		return mysql_set_charset($charset, $this->conn_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Version number query string
 	 *
@@ -369,6 +410,8 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		return "SELECT version() AS ver";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Database version number
 	 *
 	 * @return	string
@@ -386,7 +429,10 @@ class CI_DB_mysql_driver extends CI_DB {
 		}
 
 		return $this->data_cache['version'] = $version;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -394,6 +440,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	/**
 	 * Execute the query
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private called by the base class
 	 * @param	string	an SQL query
@@ -404,13 +451,18 @@ class CI_DB_mysql_driver extends CI_DB {
 		$sql = $this->_prep_query($sql);
 		return @mysql_query($sql, $this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$sql	an SQL query
 	 * @return	mixed
 	 */
 	protected function _execute($sql)
 	{
 		return mysql_query($this->_prep_query($sql), $this->conn_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -420,6 +472,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 *
 	 * If needed, each database adapter can prep the query string
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private called by execute()
 	 * @param	string	an SQL query
@@ -436,6 +489,8 @@ class CI_DB_mysql_driver extends CI_DB {
 				$sql = preg_replace("/^\s*DELETE\s+FROM\s+(\S+)\s*$/", "DELETE FROM \\1 WHERE 1=1", $sql);
 			}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$sql	an SQL query
 	 * @return	string
 	 */
@@ -446,7 +501,10 @@ class CI_DB_mysql_driver extends CI_DB {
 		if ($this->delete_hack === TRUE && preg_match('/^\s*DELETE\s+FROM\s+(\S+)\s*$/i', $sql))
 		{
 			return trim($sql).' WHERE 1=1';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $sql;
@@ -457,6 +515,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	/**
 	 * Begin Transaction
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	bool
@@ -483,13 +542,18 @@ class CI_DB_mysql_driver extends CI_DB {
 		$this->simple_query('START TRANSACTION'); // can also be BEGIN or BEGIN WORK
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	bool
 	 */
 	protected function _trans_begin()
 	{
 		$this->simple_query('SET AUTOCOMMIT=0');
 		return $this->simple_query('START TRANSACTION'); // can also be BEGIN or BEGIN WORK
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -497,6 +561,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	/**
 	 * Commit Transaction
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	bool
@@ -518,6 +583,8 @@ class CI_DB_mysql_driver extends CI_DB {
 		$this->simple_query('SET AUTOCOMMIT=1');
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	bool
 	 */
 	protected function _trans_commit()
@@ -529,7 +596,10 @@ class CI_DB_mysql_driver extends CI_DB {
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -537,6 +607,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	/**
 	 * Rollback Transaction
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	bool
@@ -558,6 +629,8 @@ class CI_DB_mysql_driver extends CI_DB {
 		$this->simple_query('SET AUTOCOMMIT=1');
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	bool
 	 */
 	protected function _trans_rollback()
@@ -569,12 +642,16 @@ class CI_DB_mysql_driver extends CI_DB {
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Escape String
 	 *
@@ -605,6 +682,8 @@ class CI_DB_mysql_driver extends CI_DB {
 
 		return $str;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Platform-dependant string escape
 	 *
 	 * @param	string
@@ -613,7 +692,10 @@ class CI_DB_mysql_driver extends CI_DB {
 	protected function _escape_str($str)
 	{
 		return mysql_real_escape_string($str, $this->conn_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -622,6 +704,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * Affected Rows
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
 	 */
@@ -629,12 +712,17 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		return @mysql_affected_rows($this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function affected_rows()
 	{
 		return mysql_affected_rows($this->conn_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -642,6 +730,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	/**
 	 * Insert ID
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
@@ -681,12 +770,17 @@ class CI_DB_mysql_driver extends CI_DB {
 		$this->_reset_select();
 		return (int) $row->numrows;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function insert_id()
 	{
 		return mysql_insert_id($this->conn_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -696,6 +790,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 *
 	 * Generates a platform-specific query string so that the table names can be fetched
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @param	boolean
@@ -709,6 +804,8 @@ class CI_DB_mysql_driver extends CI_DB {
 		{
 			$sql .= " LIKE '".$this->escape_like_str($this->dbprefix)."%'";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
@@ -719,7 +816,10 @@ class CI_DB_mysql_driver extends CI_DB {
 		if ($prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
 			return $sql." LIKE '".$this->escape_like_str($this->dbprefix)."%'";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $sql;
@@ -733,6 +833,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * Generates a platform-specific query string so that the column names can be fetched
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the table name
 	 * @return	string
@@ -741,12 +842,15 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		return "SHOW COLUMNS FROM ".$this->_protect_identifiers($table, TRUE, NULL, FALSE);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$table
 	 * @return	string
 	 */
 	protected function _list_columns($table = '')
 	{
 		return 'SHOW COLUMNS FROM '.$this->protect_identifiers($table, TRUE, NULL, FALSE);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -765,11 +869,14 @@ class CI_DB_mysql_driver extends CI_DB {
 	function _field_data($table)
 	{
 		return "DESCRIBE ".$table;
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * The error message string
 	 *
 	 * @access	private
@@ -1000,6 +1107,8 @@ class CI_DB_mysql_driver extends CI_DB {
 
 		return $sql;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Returns an object with field data
 	 *
 	 * @param	string	$table
@@ -1029,11 +1138,15 @@ class CI_DB_mysql_driver extends CI_DB {
 		}
 
 		return $retval;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/**
@@ -1051,6 +1164,8 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		return "TRUNCATE ".$table;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	/**
 	 * Error
 	 *
@@ -1062,12 +1177,16 @@ class CI_DB_mysql_driver extends CI_DB {
 	public function error()
 	{
 		return array('code' => mysql_errno($this->conn_id), 'message' => mysql_error($this->conn_id));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Delete statement
 	 *
@@ -1126,6 +1245,8 @@ class CI_DB_mysql_driver extends CI_DB {
 
 		return $sql."LIMIT ".$offset.$limit;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * FROM tables
 	 *
 	 * Groups tables in FROM clauses if needed, so there is no confusion
@@ -1141,7 +1262,10 @@ class CI_DB_mysql_driver extends CI_DB {
 		}
 
 		return implode(', ', $this->qb_from);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -1149,6 +1273,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	/**
 	 * Close DB Connection
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	resource
@@ -1165,6 +1290,8 @@ class CI_DB_mysql_driver extends CI_DB {
 /* End of file mysql_driver.php */
 /* Location: ./system/database/drivers/mysql/mysql_driver.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	void
 	 */
 	protected function _close()
@@ -1175,4 +1302,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

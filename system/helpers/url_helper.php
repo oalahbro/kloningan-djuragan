@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter URL Helpers
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/url_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/url_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/url_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Site URL
@@ -91,6 +102,8 @@ if ( ! function_exists('site_url'))
 		$CI =& get_instance();
 		return $CI->config->site_url($uri);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('site_url'))
 {
 	/**
@@ -106,12 +119,16 @@ if ( ! function_exists('site_url'))
 	function site_url($uri = '', $protocol = NULL)
 	{
 		return get_instance()->config->site_url($uri, $protocol);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Base URL
@@ -131,6 +148,8 @@ if ( ! function_exists('base_url'))
 		$CI =& get_instance();
 		return $CI->config->base_url($uri);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('base_url'))
 {
 	/**
@@ -147,12 +166,16 @@ if ( ! function_exists('base_url'))
 	function base_url($uri = '', $protocol = NULL)
 	{
 		return get_instance()->config->base_url($uri, $protocol);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Current URL
@@ -166,6 +189,8 @@ if ( ! function_exists('base_url'))
 if ( ! function_exists('current_url'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('current_url'))
 {
 	/**
@@ -176,7 +201,10 @@ if ( ! function_exists('current_url'))
 	 *
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function current_url()
 	{
 		$CI =& get_instance();
@@ -185,6 +213,7 @@ if ( ! function_exists('current_url'))
 }
 
 // ------------------------------------------------------------------------
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * URL String
@@ -201,6 +230,8 @@ if ( ! function_exists('uri_string'))
 		$CI =& get_instance();
 		return $CI->uri->uri_string();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 if ( ! function_exists('uri_string'))
 {
@@ -214,12 +245,16 @@ if ( ! function_exists('uri_string'))
 	function uri_string()
 	{
 		return get_instance()->uri->uri_string();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Index page
@@ -236,6 +271,8 @@ if ( ! function_exists('index_page'))
 		$CI =& get_instance();
 		return $CI->config->item('index_page');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('index_page'))
 {
 	/**
@@ -248,12 +285,16 @@ if ( ! function_exists('index_page'))
 	function index_page()
 	{
 		return get_instance()->config->item('index_page');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Anchor Link
@@ -269,6 +310,8 @@ if ( ! function_exists('index_page'))
 if ( ! function_exists('anchor'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('anchor'))
 {
 	/**
@@ -281,11 +324,15 @@ if ( ! function_exists('anchor'))
 	 * @param	mixed	any attributes
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function anchor($uri = '', $title = '', $attributes = '')
 	{
 		$title = (string) $title;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ( ! is_array($uri))
 		{
@@ -298,16 +345,22 @@ if ( ! function_exists('anchor'))
 
 		if ($title == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$site_url = is_array($uri)
 			? site_url($uri)
 			: (preg_match('#^(\w+:)?//#i', $uri) ? $uri : site_url($uri));
 
 		if ($title === '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$title = $site_url;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($attributes != '')
 		{
@@ -317,6 +370,11 @@ if ( ! function_exists('anchor'))
 		{
 			$attributes = _stringify_attributes($attributes);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($attributes !== '')
+		{
+			$attributes = _stringify_attributes($attributes);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return '<a href="'.$site_url.'"'.$attributes.'>'.$title.'</a>';
@@ -325,6 +383,7 @@ if ( ! function_exists('anchor'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Anchor Link - Pop-up version
@@ -348,6 +407,8 @@ if ( ! function_exists('anchor_popup'))
 
 		if ($title == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('anchor_popup'))
 {
 	/**
@@ -367,7 +428,10 @@ if ( ! function_exists('anchor_popup'))
 		$site_url = preg_match('#^(\w+:)?//#i', $uri) ? $uri : site_url($uri);
 
 		if ($title === '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$title = $site_url;
 		}
@@ -375,14 +439,19 @@ if ( ! function_exists('anchor_popup'))
 		if ($attributes === FALSE)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return "<a href='javascript:void(0);' onclick=\"window.open('".$site_url."', '_blank');\">".$title."</a>";
 =======
 			return '<a href="'.$site_url.'" onclick="window.open(\''.$site_url."', '_blank'); return false;\">".$title.'</a>';
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			return '<a href="'.$site_url.'" onclick="window.open(\''.$site_url."', '_blank'); return false;\">".$title.'</a>';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		if ( ! is_array($attributes))
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$attributes = array();
 		}
@@ -400,6 +469,8 @@ if ( ! function_exists('anchor_popup'))
 
 		return "<a href='javascript:void(0);' onclick=\"window.open('".$site_url."', '_blank', '"._parse_attributes($atts, TRUE)."');\"$attributes>".$title."</a>";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$attributes = array($attributes);
 
 			// Ref: http://www.w3schools.com/jsref/met_win_open.asp
@@ -426,12 +497,16 @@ if ( ! function_exists('anchor_popup'))
 		return '<a href="'.$site_url
 			.'" onclick="window.open(\''.$site_url."', '".$window_name."', '"._stringify_attributes($atts, TRUE)."'); return false;\""
 			.$attributes.'>'.$title.'</a>';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Mailto Link
@@ -445,6 +520,8 @@ if ( ! function_exists('anchor_popup'))
 if ( ! function_exists('mailto'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('mailto'))
 {
 	/**
@@ -455,20 +532,28 @@ if ( ! function_exists('mailto'))
 	 * @param	mixed	any attributes
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function mailto($email, $title = '', $attributes = '')
 	{
 		$title = (string) $title;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($title == "")
 =======
 		if ($title === '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($title === '')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$title = $email;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$attributes = _parse_attributes($attributes);
 
@@ -476,11 +561,15 @@ if ( ! function_exists('mailto'))
 =======
 		return '<a href="mailto:'.$email.'"'._stringify_attributes($attributes).'>'.$title.'</a>';
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return '<a href="mailto:'.$email.'"'._stringify_attributes($attributes).'>'.$title.'</a>';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Encoded Mailto Link
@@ -496,6 +585,8 @@ if ( ! function_exists('mailto'))
 if ( ! function_exists('safe_mailto'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('safe_mailto'))
 {
 	/**
@@ -508,20 +599,28 @@ if ( ! function_exists('safe_mailto'))
 	 * @param	mixed	any attributes
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function safe_mailto($email, $title = '', $attributes = '')
 	{
 		$title = (string) $title;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($title == "")
 =======
 		if ($title === '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($title === '')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$title = $email;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for ($i = 0; $i < 16; $i++)
 		{
@@ -532,43 +631,59 @@ if ( ! function_exists('safe_mailto'))
 		{
 			$x[] = "|".ord(substr($email, $i, 1));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$x = str_split('<a href="mailto:', 1);
 
 		for ($i = 0, $l = strlen($email); $i < $l; $i++)
 		{
 			$x[] = '|'.ord($email[$i]);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		$x[] = '"';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($attributes != '')
 =======
 		if ($attributes !== '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($attributes !== '')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			if (is_array($attributes))
 			{
 				foreach ($attributes as $key => $val)
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					$x[] =  ' '.$key.'="';
 					for ($i = 0; $i < strlen($val); $i++)
 					{
 						$x[] = "|".ord(substr($val, $i, 1));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					$x[] = ' '.$key.'="';
 					for ($i = 0, $l = strlen($val); $i < $l; $i++)
 					{
 						$x[] = '|'.ord($val[$i]);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					}
 					$x[] = '"';
 				}
 			}
 			else
 			{
+<<<<<<< HEAD
 <<<<<<< HEAD
 				for ($i = 0; $i < strlen($attributes); $i++)
 				{
@@ -578,6 +693,11 @@ if ( ! function_exists('safe_mailto'))
 				{
 					$x[] = $attributes[$i];
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				for ($i = 0, $l = strlen($attributes); $i < $l; $i++)
+				{
+					$x[] = $attributes[$i];
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 			}
 		}
@@ -586,15 +706,20 @@ if ( ! function_exists('safe_mailto'))
 
 		$temp = array();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ($i = 0; $i < strlen($title); $i++)
 =======
 		for ($i = 0, $l = strlen($title); $i < $l; $i++)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		for ($i = 0, $l = strlen($title); $i < $l; $i++)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$ordinal = ord($title[$i]);
 
 			if ($ordinal < 128)
 			{
+<<<<<<< HEAD
 <<<<<<< HEAD
 				$x[] = "|".$ordinal;
 			}
@@ -602,30 +727,41 @@ if ( ! function_exists('safe_mailto'))
 			{
 				if (count($temp) == 0)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$x[] = '|'.$ordinal;
 			}
 			else
 			{
 				if (count($temp) === 0)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				{
 					$count = ($ordinal < 224) ? 2 : 3;
 				}
 
 				$temp[] = $ordinal;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (count($temp) == $count)
 				{
 					$number = ($count == 3) ? (($temp['0'] % 16) * 4096) + (($temp['1'] % 64) * 64) + ($temp['2'] % 64) : (($temp['0'] % 32) * 64) + ($temp['1'] % 64);
 					$x[] = "|".$number;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				if (count($temp) === $count)
 				{
 					$number = ($count === 3)
 							? (($temp[0] % 16) * 4096) + (($temp[1] % 64) * 64) + ($temp[2] % 64)
 							: (($temp[0] % 32) * 64) + ($temp[1] % 64);
 					$x[] = '|'.$number;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					$count = 1;
 					$temp = array();
 				}
@@ -635,6 +771,7 @@ if ( ! function_exists('safe_mailto'))
 		$x[] = '<'; $x[] = '/'; $x[] = 'a'; $x[] = '>';
 
 		$x = array_reverse($x);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ob_start();
 
@@ -655,6 +792,8 @@ if ( ! function_exists('safe_mailto'))
 		ob_end_clean();
 		return $buffer;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		$output = "<script type=\"text/javascript\">\n"
 			."\t//<![CDATA[\n"
@@ -673,12 +812,16 @@ if ( ! function_exists('safe_mailto'))
 			.'</script>';
 
 		return $output;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Auto-linker
@@ -741,6 +884,8 @@ if ( ! function_exists('auto_link'))
 
 					$str = str_replace($matches['0'][$i], safe_mailto($matches['1'][$i].'@'.$matches['2'][$i].'.'.$matches['3'][$i]).$period, $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('auto_link'))
 {
 	/**
@@ -787,7 +932,10 @@ if ( ! function_exists('auto_link'))
 				if (filter_var($match[0], FILTER_VALIDATE_EMAIL) !== FALSE)
 				{
 					$str = substr_replace($str, safe_mailto($match[0]), $match[1], strlen($match[0]));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 			}
 		}
@@ -798,6 +946,7 @@ if ( ! function_exists('auto_link'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Prep URL
@@ -814,6 +963,8 @@ if ( ! function_exists('prep_url'))
 	{
 		if ($str == 'http://' OR $str == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('prep_url'))
 {
 	/**
@@ -827,7 +978,10 @@ if ( ! function_exists('prep_url'))
 	function prep_url($str = '')
 	{
 		if ($str === 'http://' OR $str === '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return '';
 		}
@@ -837,10 +991,14 @@ if ( ! function_exists('prep_url'))
 		if ( ! $url OR ! isset($url['scheme']))
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$str = 'http://'.$str;
 =======
 			return 'http://'.$str;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			return 'http://'.$str;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $str;
@@ -849,6 +1007,7 @@ if ( ! function_exists('prep_url'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Create URL Title
@@ -890,6 +1049,8 @@ if ( ! function_exists('url_title'))
 		{
 			$str = preg_replace("#".$key."#i", $val, $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('url_title'))
 {
 	/**
@@ -930,7 +1091,10 @@ if ( ! function_exists('url_title'))
 		foreach ($trans as $key => $val)
 		{
 			$str = preg_replace('#'.$key.'#i'.(UTF8_ENABLED ? 'u' : ''), $val, $str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		if ($lowercase === TRUE)
@@ -939,15 +1103,20 @@ if ( ! function_exists('url_title'))
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return trim($str, $separator);
 =======
 		return trim(trim($str, $separator));
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return trim(trim($str, $separator));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Header Redirect
@@ -967,6 +1136,8 @@ if ( ! function_exists('redirect'))
 	{
 		if ( ! preg_match('#^https?://#i', $uri))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('redirect'))
 {
 	/**
@@ -985,11 +1156,15 @@ if ( ! function_exists('redirect'))
 	function redirect($uri = '', $method = 'auto', $code = NULL)
 	{
 		if ( ! preg_match('#^(\w+:)?//#i', $uri))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$uri = site_url($uri);
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		switch($method)
 		{
@@ -1049,6 +1224,8 @@ if ( ! function_exists('_parse_attributes'))
 /* End of file url_helper.php */
 /* Location: ./system/helpers/url_helper.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// IIS environment likely? Use 'refresh' for better compatibility
 		if ($method === 'auto' && isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== FALSE)
 		{
@@ -1080,4 +1257,7 @@ if ( ! function_exists('_parse_attributes'))
 		exit;
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

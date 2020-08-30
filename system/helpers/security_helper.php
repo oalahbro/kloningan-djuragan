@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Security Helpers
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/security_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/security_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/security_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * XSS Filtering
@@ -89,6 +100,8 @@ if ( ! function_exists('xss_clean'))
 		$CI =& get_instance();
 		return $CI->security->xss_clean($str, $is_image);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('xss_clean'))
 {
 	/**
@@ -101,12 +114,16 @@ if ( ! function_exists('xss_clean'))
 	function xss_clean($str, $is_image = FALSE)
 	{
 		return get_instance()->security->xss_clean($str, $is_image);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Sanitize Filename
@@ -122,6 +139,8 @@ if ( ! function_exists('sanitize_filename'))
 		$CI =& get_instance();
 		return $CI->security->sanitize_filename($filename);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('sanitize_filename'))
 {
 	/**
@@ -133,12 +152,16 @@ if ( ! function_exists('sanitize_filename'))
 	function sanitize_filename($filename)
 	{
 		return get_instance()->security->sanitize_filename($filename);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Hash encode a string
@@ -160,6 +183,8 @@ if ( ! function_exists('do_hash'))
 			return md5($str);
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('do_hash'))
 {
 	/**
@@ -179,12 +204,16 @@ if ( ! function_exists('do_hash'))
 		}
 
 		return hash($type, $str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Strip Image Tags
@@ -202,6 +231,8 @@ if ( ! function_exists('strip_image_tags'))
 
 		return $str;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('strip_image_tags'))
 {
 	/**
@@ -213,12 +244,16 @@ if ( ! function_exists('strip_image_tags'))
 	function strip_image_tags($str)
 	{
 		return get_instance()->security->strip_image_tags($str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Convert PHP tags to entities
@@ -239,6 +274,8 @@ if ( ! function_exists('encode_php_tags'))
 /* End of file security_helper.php */
 /* Location: ./system/helpers/security_helper.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('encode_php_tags'))
 {
 	/**
@@ -252,4 +289,7 @@ if ( ! function_exists('encode_php_tags'))
 		return str_replace(array('<?', '?>'), array('&lt;?', '?&gt;'), $str);
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

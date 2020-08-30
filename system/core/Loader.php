@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,11 +58,15 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Loader Class
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Loads views and files
  *
@@ -69,6 +76,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Loader
  * @link		http://codeigniter.com/user_guide/libraries/loader.html
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * Loads framework components.
  *
  * @package		CodeIgniter
@@ -76,7 +85,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Loader
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/libraries/loader.html
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_Loader {
 
@@ -84,6 +96,7 @@ class CI_Loader {
 	/**
 	 * Nesting level of the output buffering mechanism
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @var int
 	 * @access protected
@@ -184,6 +197,8 @@ class CI_Loader {
 
 		log_message('debug', "Loader Class Initialized");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @var	int
 	 */
 	protected $_ci_ob_level;
@@ -269,12 +284,16 @@ class CI_Loader {
 		$this->_ci_classes =& is_loaded();
 
 		log_message('info', 'Loader Class Initialized');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Initialize the Loader
 	 *
@@ -294,6 +313,8 @@ class CI_Loader {
 
 		return $this;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Initializer
 	 *
 	 * @todo	Figure out a way to move this to the constructor
@@ -305,7 +326,10 @@ class CI_Loader {
 	public function initialize()
 	{
 		$this->_ci_autoloader();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -313,6 +337,7 @@ class CI_Loader {
 	/**
 	 * Is Loaded
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * A utility function to test if a class is in the self::$_ci_classes array.
 	 * This function returns the object name if the class tested for is loaded,
@@ -332,6 +357,8 @@ class CI_Loader {
 
 		return FALSE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * A utility method to test if a class is in the self::$_ci_classes array.
 	 *
 	 * @used-by	Mainly used by Form Helper function _get_validation_object().
@@ -342,12 +369,16 @@ class CI_Loader {
 	public function is_loaded($class)
 	{
 		return array_search(ucfirst($class), $this->_ci_classes, TRUE);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Class Loader
 	 *
@@ -378,6 +409,8 @@ class CI_Loader {
 
 		if ( ! is_null($params) && ! is_array($params))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Library Loader
 	 *
 	 * Loads and instantiates libraries.
@@ -412,17 +445,25 @@ class CI_Loader {
 		}
 
 		if ($params !== NULL && ! is_array($params))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$params = NULL;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$this->_ci_load_class($library, $params, $object_name);
 =======
 		$this->_ci_load_library($library, $params, $object_name);
 		return $this;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$this->_ci_load_library($library, $params, $object_name);
+		return $this;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -430,6 +471,7 @@ class CI_Loader {
 	/**
 	 * Model Loader
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This function lets users load and instantiate models.
 	 *
@@ -453,6 +495,8 @@ class CI_Loader {
 		{
 			return;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Loads and instantiates models.
 	 *
 	 * @param	string	$model		Model name
@@ -474,7 +518,10 @@ class CI_Loader {
 			}
 
 			return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		$path = '';
@@ -484,6 +531,7 @@ class CI_Loader {
 		{
 			// The path is in front of the last slash
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$path = substr($model, 0, $last_slash + 1);
 
 			// And the model name behind it
@@ -492,6 +540,8 @@ class CI_Loader {
 
 		if ($name == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$path = substr($model, 0, ++$last_slash);
 
 			// And the model name behind it
@@ -499,7 +549,10 @@ class CI_Loader {
 		}
 
 		if (empty($name))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$name = $model;
 		}
@@ -507,15 +560,20 @@ class CI_Loader {
 		if (in_array($name, $this->_ci_models, TRUE))
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return;
 =======
 			return $this;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			return $this;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		$CI =& get_instance();
 		if (isset($CI->$name))
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			show_error('The model name you are loading is the name of a resource that is already being used: '.$name);
 		}
@@ -557,6 +615,8 @@ class CI_Loader {
 		// couldn't find the model
 		show_error('Unable to locate the model you have specified: '.$model);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			throw new RuntimeException('The model name you are loading is the name of a resource that is already being used: '.$name);
 		}
 
@@ -637,7 +697,10 @@ class CI_Loader {
 		$this->_ci_models[] = $name;
 		$CI->$name = new $model();
 		return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -646,6 +709,7 @@ class CI_Loader {
 	 * Database Loader
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	string	the DB credentials
 	 * @param	bool	whether to return the DB object
 	 * @param	bool	whether to enable active record (this allows us to override the config setting)
@@ -653,6 +717,8 @@ class CI_Loader {
 	 */
 	public function database($params = '', $return = FALSE, $active_record = NULL)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	mixed	$params		Database configuration options
 	 * @param	bool	$return 	Whether to return the database object
 	 * @param	bool	$query_builder	Whether to enable Query Builder
@@ -662,17 +728,24 @@ class CI_Loader {
 	 *					FALSE on failure, CI_Loader instance in any other case
 	 */
 	public function database($params = '', $return = FALSE, $query_builder = NULL)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		// Grab the super object
 		$CI =& get_instance();
 
 		// Do we even need to load the database class?
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (class_exists('CI_DB') AND $return == FALSE AND $active_record == NULL AND isset($CI->db) AND is_object($CI->db))
 =======
 		if ($return === FALSE && $query_builder === NULL && isset($CI->db) && is_object($CI->db) && ! empty($CI->db->conn_id))
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($return === FALSE && $query_builder === NULL && isset($CI->db) && is_object($CI->db) && ! empty($CI->db->conn_id))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
@@ -682,31 +755,43 @@ class CI_Loader {
 		if ($return === TRUE)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return DB($params, $active_record);
 		}
 
 		// Initialize the db variable.  Needed to prevent
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			return DB($params, $query_builder);
 		}
 
 		// Initialize the db variable. Needed to prevent
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// reference errors with some configurations
 		$CI->db = '';
 
 		// Load the DB class
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$CI->db =& DB($params, $active_record);
 =======
 		$CI->db =& DB($params, $query_builder);
 		return $this;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$CI->db =& DB($params, $query_builder);
+		return $this;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Load the Utilities Class
 	 *
@@ -731,6 +816,8 @@ class CI_Loader {
 
 		$CI->dbutil = new $class();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Load the Database Utilities Class
 	 *
 	 * @param	object	$db	Database object
@@ -758,7 +845,10 @@ class CI_Loader {
 
 		$CI->dbutil = new $class($db);
 		return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -766,6 +856,7 @@ class CI_Loader {
 	/**
 	 * Load the Database Forge Class
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @return	string
 	 */
@@ -784,6 +875,8 @@ class CI_Loader {
 
 		$CI->dbforge = new $class();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	object	$db	Database object
 	 * @param	bool	$return	Whether to return the DB Forge class object or not
 	 * @return	object
@@ -821,12 +914,16 @@ class CI_Loader {
 
 		$CI->dbforge = new $class($db);
 		return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Load View
 	 *
@@ -843,6 +940,8 @@ class CI_Loader {
 	 * @param	bool
 	 * @return	void
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * View Loader
 	 *
 	 * Loads "view" files.
@@ -853,7 +952,10 @@ class CI_Loader {
 	 * @param	bool	$return	Whether to return the view output
 	 *				or leave it to the Output class
 	 * @return	object|string
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function view($view, $vars = array(), $return = FALSE)
 	{
@@ -864,6 +966,7 @@ class CI_Loader {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Load File
 	 *
 	 * This is a generic file loader
@@ -872,12 +975,17 @@ class CI_Loader {
 	 * @param	bool
 	 * @return	string
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Generic File Loader
 	 *
 	 * @param	string	$path	File path
 	 * @param	bool	$return	Whether to return the file output
 	 * @return	object|string
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function file($path, $return = FALSE)
 	{
@@ -893,6 +1001,7 @@ class CI_Loader {
 	 * the controller class and its "view" files.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	array
 	 * @param 	string
 	 * @return	void
@@ -901,6 +1010,8 @@ class CI_Loader {
 	{
 		if ($val != '' AND is_string($vars))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array|object|string	$vars
 	 *					An associative array or object containing values
 	 *					to be set, or a value's name if string
@@ -910,7 +1021,10 @@ class CI_Loader {
 	public function vars($vars, $val = '')
 	{
 		if (is_string($vars))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$vars = array($vars => $val);
 		}
@@ -918,10 +1032,14 @@ class CI_Loader {
 		$vars = $this->_ci_object_to_array($vars);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (is_array($vars) AND count($vars) > 0)
 =======
 		if (is_array($vars) && count($vars) > 0)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if (is_array($vars) && count($vars) > 0)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			foreach ($vars as $key => $val)
 			{
@@ -929,7 +1047,10 @@ class CI_Loader {
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		return $this;
 	}
@@ -947,7 +1068,10 @@ class CI_Loader {
 	{
 		$this->_ci_cached_vars = array();
 		return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -958,12 +1082,17 @@ class CI_Loader {
 	 * Check if a variable is set and retrieve it.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	array
 	 * @return	void
 =======
 	 * @param	string	$key	Variable name
 	 * @return	mixed	The variable or NULL if not found
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @param	string	$key	Variable name
+	 * @return	mixed	The variable or NULL if not found
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function get_var($key)
 	{
@@ -974,6 +1103,7 @@ class CI_Loader {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Load Helper
 	 *
 	 * This function loads the specified helper file.
@@ -981,6 +1111,8 @@ class CI_Loader {
 	 * @param	mixed
 	 * @return	void
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Get Variables
 	 *
 	 * Retrieves all loaded variables.
@@ -999,7 +1131,10 @@ class CI_Loader {
 	 *
 	 * @param	string|string[]	$helpers	Helper name(s)
 	 * @return	object
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function helper($helpers = array())
 	{
@@ -1011,6 +1146,7 @@ class CI_Loader {
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$ext_helper = APPPATH.'helpers/'.config_item('subclass_prefix').$helper.'.php';
 
 			// Is this a helper extension request?
@@ -1019,6 +1155,8 @@ class CI_Loader {
 				$base_helper = BASEPATH.'helpers/'.$helper.'.php';
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			// Is this a helper extension request?
 			$ext_helper = config_item('subclass_prefix').$helper;
 			$ext_loaded = FALSE;
@@ -1035,12 +1173,16 @@ class CI_Loader {
 			if ($ext_loaded === TRUE)
 			{
 				$base_helper = BASEPATH.'helpers/'.$helper.'.php';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				if ( ! file_exists($base_helper))
 				{
 					show_error('Unable to load the requested file: helpers/'.$helper.'.php');
 				}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				include_once($ext_helper);
 				include_once($base_helper);
@@ -1052,6 +1194,8 @@ class CI_Loader {
 
 			// Try to load the helper
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				include_once($base_helper);
 				$this->_ci_helpers[$helper] = TRUE;
 				log_message('info', 'Helper loaded: '.$helper);
@@ -1059,7 +1203,10 @@ class CI_Loader {
 			}
 
 			// No extensions found ... try loading regular helpers and/or overrides
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			foreach ($this->_ci_helper_paths as $path)
 			{
 				if (file_exists($path.'helpers/'.$helper.'.php'))
@@ -1068,10 +1215,14 @@ class CI_Loader {
 
 					$this->_ci_helpers[$helper] = TRUE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					log_message('debug', 'Helper loaded: '.$helper);
 =======
 					log_message('info', 'Helper loaded: '.$helper);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+					log_message('info', 'Helper loaded: '.$helper);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					break;
 				}
 			}
@@ -1083,10 +1234,15 @@ class CI_Loader {
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 		return $this;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+
+		return $this;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -1094,6 +1250,7 @@ class CI_Loader {
 	/**
 	 * Load Helpers
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This is simply an alias to the above function in case the
 	 * user has written the plural form of this function.
@@ -1105,6 +1262,8 @@ class CI_Loader {
 	{
 		$this->helper($helpers);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * An alias for the helper() method in case the developer has
 	 * written the plural form of it.
 	 *
@@ -1115,12 +1274,16 @@ class CI_Loader {
 	public function helpers($helpers = array())
 	{
 		return $this->helper($helpers);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Loads a language file
 	 *
@@ -1142,6 +1305,8 @@ class CI_Loader {
 			$CI->lang->load($langfile, $lang);
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Language Loader
 	 *
 	 * Loads language files.
@@ -1154,12 +1319,16 @@ class CI_Loader {
 	{
 		get_instance()->lang->load($files, $lang);
 		return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Loads a config file
 	 *
@@ -1173,6 +1342,8 @@ class CI_Loader {
 		$CI =& get_instance();
 		$CI->config->load($file, $use_sections, $fail_gracefully);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Config Loader
 	 *
 	 * Loads a config file (an alias for CI_Config::load()).
@@ -1186,12 +1357,16 @@ class CI_Loader {
 	public function config($file, $use_sections = FALSE, $fail_gracefully = FALSE)
 	{
 		return get_instance()->config->load($file, $use_sections, $fail_gracefully);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Driver
 	 *
@@ -1212,6 +1387,8 @@ class CI_Loader {
 
 		if ($library == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Driver Loader
 	 *
 	 * Loads a driver library.
@@ -1242,20 +1419,29 @@ class CI_Loader {
 			return $this;
 		}
 		elseif (empty($library))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ( ! class_exists('CI_Driver_Library', FALSE))
 		{
 			// We aren't instantiating an object here, just making the base class available
 			require BASEPATH.'libraries/Driver.php';
 		}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// We can save the loader some time since Drivers will *always* be in a subfolder,
 		// and typically identically named to the library
 		if ( ! strpos($library, '/'))
@@ -1272,6 +1458,7 @@ class CI_Loader {
 	 * Add Package Path
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Prepends a parent path to the library, model, helper, and config path arrays
 	 *
 	 * @param	string
@@ -1280,6 +1467,8 @@ class CI_Loader {
 	 */
 	public function add_package_path($path, $view_cascade=TRUE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Prepends a parent path to the library, model, helper and config
 	 * path arrays.
 	 *
@@ -1293,7 +1482,10 @@ class CI_Loader {
 	 * @return	object
 	 */
 	public function add_package_path($path, $view_cascade = TRUE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$path = rtrim($path, '/').'/';
 
@@ -1306,12 +1498,18 @@ class CI_Loader {
 		// Add config file path
 		$config =& $this->_ci_get_component('config');
 <<<<<<< HEAD
+<<<<<<< HEAD
 		array_unshift($config->_config_paths, $path);
 =======
 		$config->_config_paths[] = $path;
 
 		return $this;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$config->_config_paths[] = $path;
+
+		return $this;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -1319,6 +1517,7 @@ class CI_Loader {
 	/**
 	 * Get Package Paths
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Return a list of all package paths, by default it will ignore BASEPATH.
 	 *
@@ -1329,6 +1528,8 @@ class CI_Loader {
 	{
 		return $include_base === TRUE ? $this->_ci_library_paths : $this->_ci_model_paths;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Return a list of all package paths.
 	 *
 	 * @param	bool	$include_base	Whether to include BASEPATH (default: FALSE)
@@ -1337,7 +1538,10 @@ class CI_Loader {
 	public function get_package_paths($include_base = FALSE)
 	{
 		return ($include_base === TRUE) ? $this->_ci_library_paths : $this->_ci_model_paths;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -1345,6 +1549,7 @@ class CI_Loader {
 	/**
 	 * Remove Package Path
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Remove a path from the library, model, and helper path arrays if it exists
 	 * If no path is provided, the most recently added path is removed.
@@ -1365,6 +1570,8 @@ class CI_Loader {
 			$void = array_shift($this->_ci_view_paths);
 			$void = array_shift($config->_config_paths);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Remove a path from the library, model, helper and/or config
 	 * path arrays if it exists. If no path is provided, the most recently
 	 * added path will be removed removed.
@@ -1383,7 +1590,10 @@ class CI_Loader {
 			array_shift($this->_ci_helper_paths);
 			array_shift($this->_ci_view_paths);
 			array_pop($config->_config_paths);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 		else
 		{
@@ -1414,15 +1624,21 @@ class CI_Loader {
 		$this->_ci_view_paths = array_merge($this->_ci_view_paths, array(APPPATH.'views/' => TRUE));
 		$config->_config_paths = array_unique(array_merge($config->_config_paths, array(APPPATH)));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 		return $this;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+
+		return $this;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Loader
 	 *
@@ -1433,6 +1649,8 @@ class CI_Loader {
 	 * @param	array
 	 * @return	void
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Internal CI Data Loader
 	 *
 	 * Used to load views and files.
@@ -1444,7 +1662,10 @@ class CI_Loader {
 	 * @used-by	CI_Loader::file()
 	 * @param	array	$_ci_data	Data to load
 	 * @return	object
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	protected function _ci_load($_ci_data)
 	{
@@ -1452,20 +1673,28 @@ class CI_Loader {
 		foreach (array('_ci_view', '_ci_vars', '_ci_path', '_ci_return') as $_ci_val)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$$_ci_val = ( ! isset($_ci_data[$_ci_val])) ? FALSE : $_ci_data[$_ci_val];
 =======
 			$$_ci_val = isset($_ci_data[$_ci_val]) ? $_ci_data[$_ci_val] : FALSE;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$$_ci_val = isset($_ci_data[$_ci_val]) ? $_ci_data[$_ci_val] : FALSE;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		$file_exists = FALSE;
 
 		// Set the path to the requested file
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($_ci_path != '')
 =======
 		if (is_string($_ci_path) && $_ci_path !== '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if (is_string($_ci_path) && $_ci_path !== '')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$_ci_x = explode('/', $_ci_path);
 			$_ci_file = end($_ci_x);
@@ -1473,6 +1702,7 @@ class CI_Loader {
 		else
 		{
 			$_ci_ext = pathinfo($_ci_view, PATHINFO_EXTENSION);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$_ci_file = ($_ci_ext == '') ? $_ci_view.'.php' : $_ci_view;
 
@@ -1482,6 +1712,8 @@ class CI_Loader {
 				{
 					$_ci_path = $view_file.$_ci_file;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$_ci_file = ($_ci_ext === '') ? $_ci_view.'.php' : $_ci_view;
 
 			foreach ($this->_ci_view_paths as $_ci_view_file => $cascade)
@@ -1489,7 +1721,10 @@ class CI_Loader {
 				if (file_exists($_ci_view_file.$_ci_file))
 				{
 					$_ci_path = $_ci_view_file.$_ci_file;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					$file_exists = TRUE;
 					break;
 				}
@@ -1509,9 +1744,12 @@ class CI_Loader {
 		// This allows anything loaded using $this->load (views, files, etc.)
 		// to become accessible from within the Controller and Model functions.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$_ci_CI =& get_instance();
 		foreach (get_object_vars($_ci_CI) as $_ci_key => $_ci_var)
 		{
@@ -1525,10 +1763,14 @@ class CI_Loader {
 		 * Extract and cache variables
 		 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * You can either set variables using the dedicated $this->load_vars()
 =======
 		 * You can either set variables using the dedicated $this->load->vars()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		 * You can either set variables using the dedicated $this->load->vars()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		 * function or via the second parameter of this function. We'll merge
 		 * the two types and cache them so that views that are embedded within
 		 * other views can have access to these variables.
@@ -1536,7 +1778,10 @@ class CI_Loader {
 		if (is_array($_ci_vars))
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			foreach (array_keys($_ci_vars) as $key)
 			{
 				if (strncmp($key, '_ci_', 4) === 0)
@@ -1545,7 +1790,10 @@ class CI_Loader {
 				}
 			}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$this->_ci_cached_vars = array_merge($this->_ci_cached_vars, $_ci_vars);
 		}
 		extract($this->_ci_cached_vars);
@@ -1556,6 +1804,7 @@ class CI_Loader {
 		 * We buffer the output for two reasons:
 		 * 1. Speed. You get a significant speed boost.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * 2. So that the final rendered template can be
 		 * post-processed by the output class.  Why do we
 		 * need post processing?  For one thing, in order to
@@ -1563,18 +1812,24 @@ class CI_Loader {
 		 * can intercept the content right before it's sent to
 		 * the browser and then stop the timer it won't be accurate.
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		 * 2. So that the final rendered template can be post-processed by
 		 *	the output class. Why do we need post processing? For one thing,
 		 *	in order to show the elapsed page load time. Unless we can
 		 *	intercept the content right before it's sent to the browser and
 		 *	then stop the timer it won't be accurate.
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		 */
 		ob_start();
 
 		// If the PHP installation does not support short tags we'll
 		// do a little string replacement, changing the short tags
 		// to standard PHP echo statements.
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if ((bool) @ini_get('short_open_tag') === FALSE AND config_item('rewrite_short_tags') == TRUE)
@@ -1585,6 +1840,11 @@ class CI_Loader {
 		{
 			echo eval('?>'.preg_replace('/;*\s*\?>/', '; ?>', str_replace('<?=', '<?php echo ', file_get_contents($_ci_path))));
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ( ! is_php('5.4') && ! ini_get('short_open_tag') && config_item('rewrite_short_tags') === TRUE)
+		{
+			echo eval('?>'.preg_replace('/;*\s*\?>/', '; ?>', str_replace('<?=', '<?php echo ', file_get_contents($_ci_path))));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 		else
 		{
@@ -1592,10 +1852,14 @@ class CI_Loader {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_message('debug', 'File loaded: '.$_ci_path);
 =======
 		log_message('info', 'File loaded: '.$_ci_path);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		log_message('info', 'File loaded: '.$_ci_path);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Return the file data if requested
 		if ($_ci_return === TRUE)
@@ -1614,9 +1878,12 @@ class CI_Loader {
 		 * it can be seen and included properly by the first included
 		 * template and any subsequent ones. Oy!
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 *
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		 */
 		if (ob_get_level() > $this->_ci_ob_level + 1)
 		{
@@ -1628,15 +1895,21 @@ class CI_Loader {
 			@ob_end_clean();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 		return $this;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+
+		return $this;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Load class
 	 *
@@ -1649,6 +1922,8 @@ class CI_Loader {
 	 */
 	protected function _ci_load_class($class, $params = NULL, $object_name = NULL)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Internal CI Library Loader
 	 *
 	 * @used-by	CI_Loader::library()
@@ -1660,7 +1935,10 @@ class CI_Loader {
 	 * @return	void
 	 */
 	protected function _ci_load_library($class, $params = NULL, $object_name = NULL)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		// Get the class name, and while we're at it trim any slashes.
 		// The directory path can be included as part of the class name,
@@ -1669,6 +1947,7 @@ class CI_Loader {
 
 		// Was the path included with the class name?
 		// We look for a slash to determine this
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$subdir = '';
 		if (($last_slash = strrpos($class, '/')) !== FALSE)
@@ -1777,6 +2056,8 @@ class CI_Loader {
 			show_error("Unable to load the requested class: ".$class);
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (($last_slash = strrpos($class, '/')) !== FALSE)
 		{
 			// Extract the path
@@ -1933,12 +2214,16 @@ class CI_Loader {
 		}
 
 		return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Instantiates a class
 	 *
@@ -1952,6 +2237,8 @@ class CI_Loader {
 	{
 		// Is there an associated config file for this class?  Note: these should always be lowercase
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Internal CI Library Instantiator
 	 *
 	 * @used-by	CI_Loader::_ci_load_stock_library()
@@ -1969,7 +2256,10 @@ class CI_Loader {
 	protected function _ci_init_library($class, $prefix, $config = FALSE, $object_name = NULL)
 	{
 		// Is there an associated config file for this class? Note: these should always be lowercase
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ($config === NULL)
 		{
 			// Fetch the config paths containing any package paths
@@ -1977,6 +2267,7 @@ class CI_Loader {
 
 			if (is_array($config_component->_config_paths))
 			{
+<<<<<<< HEAD
 <<<<<<< HEAD
 				// Break on the first found file, thus package files
 				// are not overridden by default paths
@@ -2004,6 +2295,8 @@ class CI_Loader {
 					{
 						include($path .'config/'.ucfirst(strtolower($class)).'.php');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$found = FALSE;
 				foreach ($config_component->_config_paths as $path)
 				{
@@ -2036,13 +2329,17 @@ class CI_Loader {
 					// files are not overridden by default paths
 					if ($found === TRUE)
 					{
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 						break;
 					}
 				}
 			}
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($prefix == '')
 		{
@@ -2098,6 +2395,8 @@ class CI_Loader {
 			$CI->$classvar = new $name;
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$class_name = $prefix.$class;
 
 		// Is the class name valid?
@@ -2138,12 +2437,16 @@ class CI_Loader {
 		$CI->$object_name = isset($config)
 			? new $class_name($config)
 			: new $class_name();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Autoloader
 	 *
@@ -2163,6 +2466,8 @@ class CI_Loader {
 		{
 			include(APPPATH.'config/autoload.php');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CI Autoloader
 	 *
 	 * Loads component listed in the config/autoload.php file.
@@ -2180,16 +2485,23 @@ class CI_Loader {
 		if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/autoload.php'))
 		{
 			include(APPPATH.'config/'.ENVIRONMENT.'/autoload.php');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		if ( ! isset($autoload))
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return FALSE;
 =======
 			return;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			return;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// Autoload packages
@@ -2205,6 +2517,7 @@ class CI_Loader {
 		if (count($autoload['config']) > 0)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$CI =& get_instance();
 			foreach ($autoload['config'] as $key => $val)
 			{
@@ -2214,6 +2527,11 @@ class CI_Loader {
 			{
 				$this->config($val);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			foreach ($autoload['config'] as $val)
+			{
+				$this->config($val);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 		}
 
@@ -2221,15 +2539,20 @@ class CI_Loader {
 		foreach (array('helper', 'language') as $type)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (isset($autoload[$type]) AND count($autoload[$type]) > 0)
 =======
 			if (isset($autoload[$type]) && count($autoload[$type]) > 0)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			if (isset($autoload[$type]) && count($autoload[$type]) > 0)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$this->$type($autoload[$type]);
 			}
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// A little tweak to remain backward compatible
 		// The $autoload['core'] item was deprecated
@@ -2241,6 +2564,8 @@ class CI_Loader {
 		// Load libraries
 		if (isset($autoload['libraries']) AND count($autoload['libraries']) > 0)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Autoload drivers
 		if (isset($autoload['drivers']))
 		{
@@ -2249,7 +2574,10 @@ class CI_Loader {
 
 		// Load libraries
 		if (isset($autoload['libraries']) && count($autoload['libraries']) > 0)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			// Load the database driver.
 			if (in_array('database', $autoload['libraries']))
@@ -2260,6 +2588,7 @@ class CI_Loader {
 
 			// Load all other libraries
 <<<<<<< HEAD
+<<<<<<< HEAD
 			foreach ($autoload['libraries'] as $item)
 			{
 				$this->library($item);
@@ -2267,6 +2596,9 @@ class CI_Loader {
 =======
 			$this->library($autoload['libraries']);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$this->library($autoload['libraries']);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// Autoload models
@@ -2280,44 +2612,60 @@ class CI_Loader {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Object to Array
 	 *
 	 * Takes an object as input and converts the class variables to array key/vals
 	 *
 	 * @param	object
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CI Object to Array translator
 	 *
 	 * Takes an object as input and converts the class variables to
 	 * an associative array with key/value pairs.
 	 *
 	 * @param	object	$object	Object data to translate
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	protected function _ci_object_to_array($object)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (is_object($object)) ? get_object_vars($object) : $object;
 =======
 		return is_object($object) ? get_object_vars($object) : $object;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return is_object($object) ? get_object_vars($object) : $object;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Get a reference to a specific library or model
 	 *
 	 * @param 	string
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CI Component getter
 	 *
 	 * Get a reference to a specific library or model.
 	 *
 	 * @param 	string	$component	Component name
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	bool
 	 */
 	protected function &_ci_get_component($component)
@@ -2332,17 +2680,23 @@ class CI_Loader {
 	 * Prep filename
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * This function preps the name of various items to make loading them more reliable.
 	 *
 	 * @param	mixed
 	 * @param 	string
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * This function prepares filenames of various items to
 	 * make their loading more reliable.
 	 *
 	 * @param	string|string[]	$filename	Filename(s)
 	 * @param 	string		$extension	Filename extension
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	protected function _ci_prep_filename($filename, $extension)
@@ -2350,25 +2704,34 @@ class CI_Loader {
 		if ( ! is_array($filename))
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return array(strtolower(str_replace('.php', '', str_replace($extension, '', $filename)).$extension));
 =======
 			return array(strtolower(str_replace(array($extension, '.php'), '', $filename).$extension));
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			return array(strtolower(str_replace(array($extension, '.php'), '', $filename).$extension));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 		else
 		{
 			foreach ($filename as $key => $val)
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$filename[$key] = strtolower(str_replace('.php', '', str_replace($extension, '', $val)).$extension);
 =======
 				$filename[$key] = strtolower(str_replace(array($extension, '.php'), '', $val).$extension);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				$filename[$key] = strtolower(str_replace(array($extension, '.php'), '', $val).$extension);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			return $filename;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -2378,3 +2741,7 @@ class CI_Loader {
 
 }
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+
+}
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

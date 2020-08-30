@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -20,6 +21,8 @@
 /**
  * CodeIgniter Config Class
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -61,7 +64,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Config Class
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  *
  * This class contains functions that enable config files to be managed
  *
@@ -70,16 +76,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Libraries
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/config.html
 =======
  * @link		https://codeigniter.com/user_guide/libraries/config.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/libraries/config.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_Config {
 
 	/**
 	 * List of all loaded config values
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @var array
 	 */
@@ -126,6 +137,8 @@ class CI_Config {
 			}
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @var	array
 	 */
 	public $config = array();
@@ -175,7 +188,10 @@ class CI_Config {
 				$base_url = (is_https() ? 'https' : 'http').'://'.$server_addr
 					.substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
 			}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			else
 			{
 				$base_url = 'http://localhost/';
@@ -184,10 +200,15 @@ class CI_Config {
 			$this->set_item('base_url', $base_url);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 		log_message('info', 'Config Class Initialized');
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+
+		log_message('info', 'Config Class Initialized');
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -195,6 +216,7 @@ class CI_Config {
 	/**
 	 * Load Config File
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the config file name
@@ -282,6 +304,8 @@ class CI_Config {
 
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$file			Configuration file name
 	 * @param	bool	$use_sections		Whether configuration values should be loaded into their own section
 	 * @param	bool	$fail_gracefully	Whether to just return FALSE or display an error message
@@ -347,7 +371,10 @@ class CI_Config {
 		}
 
 		show_error('The configuration file '.$file.'.php does not exist.');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -355,6 +382,7 @@ class CI_Config {
 	/**
 	 * Fetch a config file item
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *
 	 * @access	public
@@ -391,6 +419,8 @@ class CI_Config {
 
 		return $pref;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$item	Config item name
 	 * @param	string	$index	Index name
 	 * @return	string|null	The configuration item or NULL if the item doesn't exist
@@ -403,12 +433,16 @@ class CI_Config {
 		}
 
 		return isset($this->config[$index], $this->config[$index][$item]) ? $this->config[$index][$item] : NULL;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Fetch a config file item - adds slash after item (if item is not empty)
 	 *
@@ -425,6 +459,8 @@ class CI_Config {
 		}
 		if( trim($this->config[$item]) == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Fetch a config file item with slash appended (if not empty)
 	 *
 	 * @param	string		$item	Config item name
@@ -437,7 +473,10 @@ class CI_Config {
 			return NULL;
 		}
 		elseif (trim($this->config[$item]) === '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return '';
 		}
@@ -449,6 +488,7 @@ class CI_Config {
 
 	/**
 	 * Site URL
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Returns base_url . index_page [. uri_string]
 	 *
@@ -473,6 +513,8 @@ class CI_Config {
 			return $this->slash_item('base_url').$this->item('index_page').'?'.$this->_uri_string($uri);
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 *
 	 * Returns base_url . index_page [. uri_string]
 	 *
@@ -530,13 +572,17 @@ class CI_Config {
 		}
 
 		return $base_url.$this->item('index_page').$uri;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// -------------------------------------------------------------
 
 	/**
 	 * Base URL
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Returns base_url [. uri_string]
 	 *
@@ -548,6 +594,8 @@ class CI_Config {
 	{
 		return $this->slash_item('base_url').ltrim($this->_uri_string($uri), '/');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 *
 	 * Returns base_url [. uri_string]
 	 *
@@ -575,12 +623,16 @@ class CI_Config {
 		}
 
 		return $base_url.$this->_uri_string($uri);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// -------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Build URI string for use in Config::site_url() and Config::base_url()
 	 *
@@ -615,6 +667,8 @@ class CI_Config {
 		}
 	    return $uri;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Build URI string
 	 *
 	 * @used-by	CI_Config::site_url()
@@ -636,7 +690,10 @@ class CI_Config {
 		}
 
 		return $uri;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -645,6 +702,7 @@ class CI_Config {
 	 * System URL
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	string
 	 */
@@ -652,13 +710,18 @@ class CI_Config {
 	{
 		$x = explode("/", preg_replace("|/*(.+?)/*$|", "\\1", BASEPATH));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @deprecated	3.0.0	Encourages insecure practices
 	 * @return	string
 	 */
 	public function system_url()
 	{
 		$x = explode('/', preg_replace('|/*(.+?)/*$|', '\\1', BASEPATH));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $this->slash_item('base_url').end($x).'/';
 	}
 
@@ -668,6 +731,7 @@ class CI_Config {
 	 * Set a config file item
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the config item key
 	 * @param	string	the config item value
@@ -675,16 +739,22 @@ class CI_Config {
 	 */
 	function set_item($item, $value)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$item	Config item key
 	 * @param	string	$value	Config item value
 	 * @return	void
 	 */
 	public function set_item($item, $value)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$this->config[$item] = $value;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// --------------------------------------------------------------------
 
@@ -718,3 +788,6 @@ class CI_Config {
 =======
 }
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+}
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Date Helpers
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/date_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/date_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/date_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Get "now" time
@@ -106,6 +117,8 @@ if ( ! function_exists('now'))
 			return time();
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('now'))
 {
 	/**
@@ -133,12 +146,16 @@ if ( ! function_exists('now'))
 		sscanf($datetime->format('j-n-Y G:i:s'), '%d-%d-%d %d:%d:%d', $day, $month, $year, $hour, $minute, $second);
 
 		return mktime($hour, $minute, $second, $month, $day, $year);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Convert MySQL Style Datecodes
@@ -169,6 +186,8 @@ if ( ! function_exists('mdate'))
 
 		$datestr = str_replace('%\\', '', preg_replace("/([a-z]+?){1}/i", "\\\\\\1", $datestr));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('mdate'))
 {
 	/**
@@ -204,13 +223,17 @@ if ( ! function_exists('mdate'))
 			preg_replace('/([a-z]+?){1}/i', '\\\\\\1', $datestr)
 		);
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return date($datestr, $time);
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Standard Date
@@ -240,6 +263,8 @@ if ( ! function_exists('standard_date'))
 
 		if ( ! isset($formats[$fmt]))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('standard_date'))
 {
 	/**
@@ -270,21 +295,29 @@ if ( ! function_exists('standard_date'))
 
 		// Procedural style pre-defined constants from the DateTime extension
 		if (strpos($fmt, 'DATE_') !== 0 OR defined($fmt) === FALSE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return mdate($formats[$fmt], $time);
 =======
 		return date(constant($fmt), $time);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return date(constant($fmt), $time);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Timespan
@@ -301,6 +334,8 @@ if ( ! function_exists('timespan'))
 {
 	function timespan($seconds = 1, $time = '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('timespan'))
 {
 	/**
@@ -315,11 +350,15 @@ if ( ! function_exists('timespan'))
 	 * @return	string
 	 */
 	function timespan($seconds = 1, $time = '', $units = 7)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$CI =& get_instance();
 		$CI->lang->load('date');
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ( ! is_numeric($seconds))
 		{
@@ -360,6 +399,8 @@ if ( ! function_exists('timespan'))
 
 			$seconds -= $months * 2628000;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		is_numeric($seconds) OR $seconds = 1;
 		is_numeric($time) OR $time = time();
 		is_numeric($units) OR $units = 7;
@@ -385,11 +426,15 @@ if ( ! function_exists('timespan'))
 			}
 
 			$seconds -= $months * 2629743;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		$weeks = floor($seconds / 604800);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($years > 0 OR $months > 0 OR $weeks > 0)
 		{
@@ -397,12 +442,17 @@ if ( ! function_exists('timespan'))
 			{
 				$str .= $weeks.' '.$CI->lang->line((($weeks	> 1) ? 'date_weeks' : 'date_week')).', ';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (count($str) < $units && ($years > 0 OR $months > 0 OR $weeks > 0))
 		{
 			if ($weeks > 0)
 			{
 				$str[] = $weeks.' '.$CI->lang->line($weeks > 1 ? 'date_weeks' : 'date_week');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$seconds -= $weeks * 604800;
@@ -411,18 +461,24 @@ if ( ! function_exists('timespan'))
 		$days = floor($seconds / 86400);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($months > 0 OR $weeks > 0 OR $days > 0)
 		{
 			if ($days > 0)
 			{
 				$str .= $days.' '.$CI->lang->line((($days	> 1) ? 'date_days' : 'date_day')).', ';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (count($str) < $units && ($months > 0 OR $weeks > 0 OR $days > 0))
 		{
 			if ($days > 0)
 			{
 				$str[] = $days.' '.$CI->lang->line($days > 1 ? 'date_days' : 'date_day');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$seconds -= $days * 86400;
@@ -431,18 +487,24 @@ if ( ! function_exists('timespan'))
 		$hours = floor($seconds / 3600);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($days > 0 OR $hours > 0)
 		{
 			if ($hours > 0)
 			{
 				$str .= $hours.' '.$CI->lang->line((($hours	> 1) ? 'date_hours' : 'date_hour')).', ';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (count($str) < $units && ($days > 0 OR $hours > 0))
 		{
 			if ($hours > 0)
 			{
 				$str[] = $hours.' '.$CI->lang->line($hours > 1 ? 'date_hours' : 'date_hour');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$seconds -= $hours * 3600;
@@ -451,23 +513,30 @@ if ( ! function_exists('timespan'))
 		$minutes = floor($seconds / 60);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($days > 0 OR $hours > 0 OR $minutes > 0)
 		{
 			if ($minutes > 0)
 			{
 				$str .= $minutes.' '.$CI->lang->line((($minutes	> 1) ? 'date_minutes' : 'date_minute')).', ';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (count($str) < $units && ($days > 0 OR $hours > 0 OR $minutes > 0))
 		{
 			if ($minutes > 0)
 			{
 				$str[] = $minutes.' '.$CI->lang->line($minutes > 1 ? 'date_minutes' : 'date_minute');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$seconds -= $minutes * 60;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($str == '')
 		{
@@ -476,18 +545,24 @@ if ( ! function_exists('timespan'))
 
 		return substr(trim($str), 0, -1);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (count($str) === 0)
 		{
 			$str[] = $seconds.' '.$CI->lang->line($seconds > 1 ? 'date_seconds' : 'date_second');
 		}
 
 		return implode(', ', $str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Number of days in a month
@@ -503,6 +578,8 @@ if ( ! function_exists('timespan'))
 if ( ! function_exists('days_in_month'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('days_in_month'))
 {
 	/**
@@ -515,7 +592,10 @@ if ( ! function_exists('days_in_month'))
 	 * @param	int	a numeric year
 	 * @return	int
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function days_in_month($month = 0, $year = '')
 	{
 		if ($month < 1 OR $month > 12)
@@ -523,20 +603,27 @@ if ( ! function_exists('days_in_month'))
 			return 0;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if ( ! is_numeric($year) OR strlen($year) != 4)
 =======
 		elseif ( ! is_numeric($year) OR strlen($year) !== 4)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		elseif ( ! is_numeric($year) OR strlen($year) !== 4)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$year = date('Y');
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($month == 2)
 		{
 			if ($year % 400 == 0 OR ($year % 4 == 0 AND $year % 100 != 0))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (defined('CAL_GREGORIAN'))
 		{
 			return cal_days_in_month(CAL_GREGORIAN, $month, $year);
@@ -550,7 +637,10 @@ if ( ! function_exists('days_in_month'))
 		if ($month == 2)
 		{
 			if ($year % 400 === 0 OR ($year % 4 === 0 && $year % 100 !== 0))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				return 29;
 			}
@@ -563,6 +653,7 @@ if ( ! function_exists('days_in_month'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Converts a local Unix timestamp to GMT
@@ -580,6 +671,8 @@ if ( ! function_exists('local_to_gmt'))
 
 		return mktime( gmdate("H", $time), gmdate("i", $time), gmdate("s", $time), gmdate("m", $time), gmdate("d", $time), gmdate("Y", $time));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('local_to_gmt'))
 {
 	/**
@@ -603,12 +696,16 @@ if ( ! function_exists('local_to_gmt'))
 			gmdate('j', $time),
 			gmdate('Y', $time)
 		);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Converts GMT time to a localized value
@@ -629,6 +726,8 @@ if ( ! function_exists('gmt_to_local'))
 	{
 		if ($time == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('gmt_to_local'))
 {
 	/**
@@ -646,13 +745,17 @@ if ( ! function_exists('gmt_to_local'))
 	function gmt_to_local($time = '', $timezone = 'UTC', $dst = FALSE)
 	{
 		if ($time === '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return now();
 		}
 
 		$time += timezones($timezone) * 3600;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($dst == TRUE)
 		{
@@ -663,11 +766,15 @@ if ( ! function_exists('gmt_to_local'))
 =======
 		return ($dst === TRUE) ? $time + 3600 : $time;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return ($dst === TRUE) ? $time + 3600 : $time;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Converts a MySQL Timestamp to Unix
@@ -679,6 +786,8 @@ if ( ! function_exists('gmt_to_local'))
 if ( ! function_exists('mysql_to_unix'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('mysql_to_unix'))
 {
 	/**
@@ -687,13 +796,17 @@ if ( ! function_exists('mysql_to_unix'))
 	 * @param	int	MySQL timestamp YYYY-MM-DD HH:MM:SS
 	 * @return	int	Unix timstamp
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function mysql_to_unix($time = '')
 	{
 		// We'll remove certain characters for backward compatibility
 		// since the formatting changed with MySQL 4.1
 		// YYYY-MM-DD HH:MM:SS
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$time = str_replace('-', '', $time);
 		$time = str_replace(':', '', $time);
@@ -709,6 +822,8 @@ if ( ! function_exists('mysql_to_unix'))
 						substr($time, 0, 4)
 						);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$time = str_replace(array('-', ':', ' '), '', $time);
 
 		// YYYYMMDDHHMMSS
@@ -720,12 +835,16 @@ if ( ! function_exists('mysql_to_unix'))
 			substr($time, 6, 2),
 			substr($time, 0, 4)
 		);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Unix to "Human"
@@ -746,6 +865,8 @@ if ( ! function_exists('unix_to_human'))
 
 		if ($fmt == 'us')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('unix_to_human'))
 {
 	/**
@@ -763,7 +884,10 @@ if ( ! function_exists('unix_to_human'))
 		$r = date('Y', $time).'-'.date('m', $time).'-'.date('d', $time).' ';
 
 		if ($fmt === 'us')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$r .= date('h', $time).':'.date('i', $time);
 		}
@@ -778,6 +902,7 @@ if ( ! function_exists('unix_to_human'))
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($fmt == 'us')
 		{
 			$r .= ' '.date('A', $time);
@@ -786,6 +911,11 @@ if ( ! function_exists('unix_to_human'))
 		{
 			return $r.' '.date('A', $time);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($fmt === 'us')
+		{
+			return $r.' '.date('A', $time);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $r;
@@ -794,6 +924,7 @@ if ( ! function_exists('unix_to_human'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Convert "human" date to GMT
@@ -810,6 +941,8 @@ if ( ! function_exists('human_to_unix'))
 	{
 		if ($datestr == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('human_to_unix'))
 {
 	/**
@@ -823,11 +956,15 @@ if ( ! function_exists('human_to_unix'))
 	function human_to_unix($datestr = '')
 	{
 		if ($datestr === '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$datestr = trim($datestr);
 		$datestr = preg_replace("/\040+/", ' ', $datestr);
@@ -838,10 +975,16 @@ if ( ! function_exists('human_to_unix'))
 
 		if ( ! preg_match('/^(\d{2}|\d{4})\-[0-9]{1,2}\-[0-9]{1,2}\s[0-9]{1,2}:[0-9]{1,2}(?::[0-9]{1,2})?(?:\s[AP]M)?$/i', $datestr))
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$datestr = preg_replace('/\040+/', ' ', trim($datestr));
+
+		if ( ! preg_match('/^(\d{2}|\d{4})\-[0-9]{1,2}\-[0-9]{1,2}\s[0-9]{1,2}:[0-9]{1,2}(?::[0-9]{1,2})?(?:\s[AP]M)?$/i', $datestr))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$split = explode(' ', $datestr);
 
@@ -882,6 +1025,8 @@ if ( ! function_exists('human_to_unix'))
 
 		return mktime($hour, $min, $sec, $month, $day, $year);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		sscanf($datestr, '%d-%d-%d %s %s', $year, $month, $day, $time, $ampm);
 		sscanf($time, '%d:%d:%d', $hour, $min, $sec);
 		isset($sec) OR $sec = 0;
@@ -966,12 +1111,16 @@ if ( ! function_exists('nice_date'))
 
 		// It's probably a valid-ish date format already
 		return date($format, strtotime($bad_date));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Timezone Menu
@@ -988,6 +1137,8 @@ if ( ! function_exists('timezone_menu'))
 {
 	function timezone_menu($default = 'UTC', $class = "", $name = 'timezones')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('timezone_menu'))
 {
 	/**
@@ -1002,11 +1153,15 @@ if ( ! function_exists('timezone_menu'))
 	 * @return	string
 	 */
 	function timezone_menu($default = 'UTC', $class = '', $name = 'timezones', $attributes = '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$CI =& get_instance();
 		$CI->lang->load('date');
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($default == 'GMT')
 			$default = 'UTC';
@@ -1015,16 +1170,22 @@ if ( ! function_exists('timezone_menu'))
 
 		if ($class != '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$default = ($default === 'GMT') ? 'UTC' : $default;
 
 		$menu = '<select name="'.$name.'"';
 
 		if ($class !== '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$menu .= ' class="'.$class.'"';
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$menu .= ">\n";
 
@@ -1038,6 +1199,8 @@ if ( ! function_exists('timezone_menu'))
 
 		return $menu;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$menu .= _stringify_attributes($attributes).">\n";
 
 		foreach (timezones() as $key => $val)
@@ -1047,12 +1210,16 @@ if ( ! function_exists('timezone_menu'))
 		}
 
 		return $menu.'</select>';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Timezones
@@ -1067,6 +1234,8 @@ if ( ! function_exists('timezone_menu'))
 if ( ! function_exists('timezones'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('timezones'))
 {
 	/**
@@ -1078,13 +1247,17 @@ if ( ! function_exists('timezones'))
 	 * @param	string	timezone
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function timezones($tz = '')
 	{
 		// Note: Don't change the order of these even though
 		// some items appear to be in the wrong order
 
 		$zones = array(
+<<<<<<< HEAD
 <<<<<<< HEAD
 						'UM12'		=> -12,
 						'UM11'		=> -11,
@@ -1130,6 +1303,8 @@ if ( ! function_exists('timezones'))
 
 		if ($tz == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			'UM12'		=> -12,
 			'UM11'		=> -11,
 			'UM10'		=> -10,
@@ -1173,11 +1348,15 @@ if ( ! function_exists('timezones'))
 		);
 
 		if ($tz === '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return $zones;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($tz == 'GMT')
 			$tz = 'UTC';
@@ -1190,6 +1369,8 @@ if ( ! function_exists('timezones'))
 /* End of file date_helper.php */
 /* Location: ./system/helpers/date_helper.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return isset($zones[$tz]) ? $zones[$tz] : 0;
 	}
 }
@@ -1237,6 +1418,7 @@ if ( ! function_exists('date_range'))
 
 		$range = array();
 
+<<<<<<< HEAD
 		/* NOTE: Even though the DateTime object has many useful features, it appears that
 		 *	 it doesn't always handle properly timezones, when timestamps are passed
 		 *	 directly to its constructor. Neither of the following gave proper results:
@@ -1294,11 +1476,21 @@ if ( ! function_exists('date_range'))
 			$arg = new DateTime();
 			$arg->setDate(date('Y', $mixed), date('n', $mixed), date('j', $mixed));
 			$arg->setTime(date('G', $mixed), date('i', $mixed), date('s', $mixed));
+=======
+		$from = new DateTime();
+		$from->setTimestamp($unix_start);
+
+		if ($is_unix)
+		{
+			$arg = new DateTime();
+			$arg->setTimestamp($mixed);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 		else
 		{
 			$arg = (int) $mixed;
 		}
+<<<<<<< HEAD
 		$range[] = $from->format($format);
 
 		if (is_int($arg)) // Day intervals
@@ -1318,10 +1510,29 @@ if ( ! function_exists('date_range'))
 			}
 
 			// Our loop only appended dates prior to our end date
+=======
+
+		$period = new DatePeriod($from, new DateInterval('P1D'), $arg);
+		foreach ($period as $date)
+		{
+			$range[] = $date->format($format);
+		}
+
+		/* If a period end date was passed to the DatePeriod constructor, it might not
+		 * be in our results. Not sure if this is a bug or it's just possible because
+		 * the end date might actually be less than 24 hours away from the previously
+		 * generated DateTime object, but either way - we have to append it manually.
+		 */
+		if ( ! is_int($arg) && $range[count($range) - 1] !== $arg->format($format))
+		{
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$range[] = $arg->format($format);
 		}
 
 		return $range;
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

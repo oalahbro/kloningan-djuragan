@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Oracle Forge Class
@@ -63,14 +69,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Database
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
 =======
  * @link		https://codeigniter.com/user_guide/database/
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/database/
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_oci8_forge extends CI_DB_forge {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Create database
 	 *
@@ -97,6 +108,8 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 		return FALSE;
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CREATE DATABASE statement
 	 *
 	 * @var	string
@@ -130,11 +143,15 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 	 * @var	bool|array
 	 */
 	protected $_unsigned		= FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Create Table
 	 *
@@ -238,6 +255,8 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 		$sql .= "\n)";
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * ALTER TABLE
 	 *
 	 * @param	string	$alter_type	ALTER type
@@ -290,13 +309,17 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 
 		// RENAME COLUMN must be executed after MODIFY
 		array_unshift($sqls, $sql);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $sql;
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Drop Table
 	 *
@@ -307,6 +330,8 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 	{
 		return FALSE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Field attribute AUTO_INCREMENT
 	 *
 	 * @param	array	&$attributes
@@ -316,6 +341,7 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 	protected function _attr_auto_increment(&$attributes, &$field)
 	{
 		// Not supported - sequences and triggers must be used instead
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -371,11 +397,14 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 
 		return $sql;
 
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Rename a table
 	 *
 	 * Generates a platform-specific query so that a table can be renamed
@@ -397,6 +426,8 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 /* End of file oci8_forge.php */
 /* Location: ./system/database/drivers/oci8/oci8_forge.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Field attribute TYPE
 	 *
 	 * Performs a data type mapping between different databases.
@@ -424,4 +455,7 @@ class CI_DB_oci8_forge extends CI_DB_forge {
 		}
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

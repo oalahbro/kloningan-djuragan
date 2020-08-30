@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Exceptions Class
@@ -64,6 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Exceptions
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/exceptions.html
  */
@@ -78,10 +85,16 @@ class CI_Exceptions {
  */
 class CI_Exceptions {
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/libraries/exceptions.html
+ */
+class CI_Exceptions {
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	/**
 	 * Nesting level of the output buffering mechanism
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @var int
 	 * @access public
@@ -113,6 +126,8 @@ class CI_Exceptions {
 	/**
 	 * Constructor
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @var	int
 	 */
 	public $ob_level;
@@ -141,16 +156,23 @@ class CI_Exceptions {
 	 * Class constructor
 	 *
 	 * @return	void
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function __construct()
 	{
 		$this->ob_level = ob_get_level();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Note:  Do not log messages from this constructor.
 =======
 		// Note: Do not log messages from this constructor.
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		// Note: Do not log messages from this constructor.
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -158,6 +180,7 @@ class CI_Exceptions {
 	/**
 	 * Exception Logger
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This function logs PHP generated error messages
 	 *
@@ -174,6 +197,8 @@ class CI_Exceptions {
 
 		log_message('error', 'Severity: '.$severity.'  --> '.$message. ' '.$filepath.' '.$line, TRUE);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Logs PHP generated error messages
 	 *
 	 * @param	int	$severity	Log level
@@ -186,12 +211,16 @@ class CI_Exceptions {
 	{
 		$severity = isset($this->levels[$severity]) ? $this->levels[$severity] : $severity;
 		log_message('error', 'Severity: '.$severity.' --> '.$message.' '.$filepath.' '.$line);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * 404 Page Not Found Handler
 	 *
@@ -205,6 +234,8 @@ class CI_Exceptions {
 		$heading = "404 Page Not Found";
 		$message = "The page you requested was not found.";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * 404 Error Handler
 	 *
 	 * @uses	CI_Exceptions::show_error()
@@ -225,11 +256,15 @@ class CI_Exceptions {
 			$heading = '404 Page Not Found';
 			$message = 'The page you requested was not found.';
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// By default we log this, but allow a dev to skip it
 		if ($log_error)
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			log_message('error', '404 Page Not Found --> '.$page);
 		}
@@ -237,12 +272,17 @@ class CI_Exceptions {
 		echo $this->show_error($heading, $message, 'error_404', 404);
 		exit;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			log_message('error', $heading.': '.$page);
 		}
 
 		echo $this->show_error($heading, $message, 'error_404', 404);
 		exit(4); // EXIT_UNKNOWN_FILE
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -250,6 +290,7 @@ class CI_Exceptions {
 	/**
 	 * General Error Page
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * This function takes an error message as input
 	 * (either as a string or an array) and displays
@@ -268,6 +309,8 @@ class CI_Exceptions {
 
 		$message = '<p>'.implode('</p><p>', ( ! is_array($message)) ? array($message) : $message).'</p>';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Takes an error message as input (either as a string or an array)
 	 * and displays it using the specified template.
 	 *
@@ -297,7 +340,10 @@ class CI_Exceptions {
 			$message = '<p>'.(is_array($message) ? implode('</p><p>', $message) : $message).'</p>';
 			$template = 'html'.DIRECTORY_SEPARATOR.$template;
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		if (ob_get_level() > $this->ob_level + 1)
 		{
@@ -305,10 +351,14 @@ class CI_Exceptions {
 		}
 		ob_start();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		include(APPPATH.'errors/'.$template.'.php');
 =======
 		include($templates_path.$template.'.php');
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		include($templates_path.$template.'.php');
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		return $buffer;
@@ -316,6 +366,7 @@ class CI_Exceptions {
 
 	// --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/**
 	 * Native PHP error handler
@@ -339,6 +390,8 @@ class CI_Exceptions {
 			$x = explode('/', $filepath);
 			$filepath = $x[count($x)-2].'/'.end($x);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	public function show_exception($exception)
 	{
 		$templates_path = config_item('error_views_path');
@@ -359,7 +412,10 @@ class CI_Exceptions {
 		}
 		else
 		{
+<<<<<<< HEAD
 			set_status_header(500);
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$templates_path .= 'html'.DIRECTORY_SEPARATOR;
 		}
 
@@ -411,7 +467,10 @@ class CI_Exceptions {
 		else
 		{
 			$template = 'cli'.DIRECTORY_SEPARATOR.'error_php';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		if (ob_get_level() > $this->ob_level + 1)
@@ -420,15 +479,20 @@ class CI_Exceptions {
 		}
 		ob_start();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		include(APPPATH.'errors/error_php.php');
 =======
 		include($templates_path.$template.'.php');
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		include($templates_path.$template.'.php');
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		echo $buffer;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 }
@@ -439,3 +503,6 @@ class CI_Exceptions {
 =======
 }
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+}
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Unit Testing Class
@@ -66,6 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	UnitTesting
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/uri.html
  */
@@ -93,6 +100,8 @@ class CI_Unit_test {
 
 		log_message('debug', "Unit Testing Class Initialized");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/libraries/unit_testing.html
  */
 class CI_Unit_test {
@@ -159,7 +168,10 @@ class CI_Unit_test {
 	public function __construct()
 	{
 		log_message('info', 'Unit Testing Class Initialized');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -170,6 +182,7 @@ class CI_Unit_test {
 	 * Runs the supplied tests
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	array
 	 * @return	void
@@ -178,13 +191,18 @@ class CI_Unit_test {
 	{
 		if ( ! empty($items) AND is_array($items))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array	$items
 	 * @return	void
 	 */
 	public function set_test_items($items)
 	{
 		if ( ! empty($items) && is_array($items))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$this->_test_items_visible = $items;
 		}
@@ -198,6 +216,7 @@ class CI_Unit_test {
 	 * Runs the supplied tests
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	mixed
 	 * @param	mixed
@@ -208,6 +227,8 @@ class CI_Unit_test {
 	{
 		if ($this->active == FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	mixed	$test
 	 * @param	mixed	$expected
 	 * @param	string	$test_name
@@ -217,11 +238,15 @@ class CI_Unit_test {
 	public function run($test, $expected = TRUE, $test_name = 'undefined', $notes = '')
 	{
 		if ($this->active === FALSE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (in_array($expected, array('is_object', 'is_string', 'is_bool', 'is_true', 'is_false', 'is_int', 'is_numeric', 'is_float', 'is_double', 'is_array', 'is_null'), TRUE))
 		{
@@ -233,10 +258,16 @@ class CI_Unit_test {
 			$expected = str_replace('is_double', 'is_float', $expected);
 			$result = $expected($test);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if (in_array($expected, array('is_object', 'is_string', 'is_bool', 'is_true', 'is_false', 'is_int', 'is_numeric', 'is_float', 'is_double', 'is_array', 'is_null', 'is_resource'), TRUE))
+		{
+			$result = $expected($test);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$extype = str_replace(array('true', 'false'), 'bool', str_replace('is_', '', $expected));
 		}
 		else
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if ($this->strict == TRUE)
 				$result = ($test === $expected) ? TRUE : FALSE;
@@ -246,11 +277,15 @@ class CI_Unit_test {
 =======
 			$result = ($this->strict === TRUE) ? ($test === $expected) : ($test == $expected);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$result = ($this->strict === TRUE) ? ($test === $expected) : ($test == $expected);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$extype = gettype($expected);
 		}
 
 		$back = $this->_backtrace();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$report[] = array (
 							'test_name'			=> $test_name,
@@ -266,6 +301,8 @@ class CI_Unit_test {
 
 		return($this->report($this->result($report)));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$report = array (
 			'test_name'     => $test_name,
 			'test_datatype' => gettype($test),
@@ -279,7 +316,10 @@ class CI_Unit_test {
 		$this->results[] = $report;
 
 		return $this->report($this->result(array($report)));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -290,6 +330,7 @@ class CI_Unit_test {
 	 * Displays a table with the test data
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	string
 	 */
@@ -297,13 +338,18 @@ class CI_Unit_test {
 	{
 		if (count($result) == 0)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array	 $result
 	 * @return	string
 	 */
 	public function report($result = array())
 	{
 		if (count($result) === 0)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$result = $this->result();
 		}
@@ -321,6 +367,7 @@ class CI_Unit_test {
 			foreach ($res as $key => $val)
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if ($key == $CI->lang->line('ut_result'))
 				{
 					if ($val == $CI->lang->line('ut_passed'))
@@ -329,6 +376,8 @@ class CI_Unit_test {
 					}
 					elseif ($val == $CI->lang->line('ut_failed'))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				if ($key === $CI->lang->line('ut_result'))
 				{
 					if ($val === $CI->lang->line('ut_passed'))
@@ -336,12 +385,16 @@ class CI_Unit_test {
 						$val = '<span style="color: #0C0;">'.$val.'</span>';
 					}
 					elseif ($val === $CI->lang->line('ut_failed'))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					{
 						$val = '<span style="color: #C00;">'.$val.'</span>';
 					}
 				}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				$temp = $this->_template_rows;
 				$temp = str_replace('{item}', $key, $temp);
@@ -350,6 +403,9 @@ class CI_Unit_test {
 =======
 				$table .= str_replace(array('{item}', '{result}'), array($key, $val), $this->_template_rows);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				$table .= str_replace(array('{item}', '{result}'), array($key, $val), $this->_template_rows);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$r .= str_replace('{rows}', $table, $this->_template);
@@ -366,6 +422,7 @@ class CI_Unit_test {
 	 * Causes the evaluation to use === rather than ==
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	bool
 	 * @return	null
@@ -374,13 +431,18 @@ class CI_Unit_test {
 	{
 		$this->strict = ($state == FALSE) ? FALSE : TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	bool	$state
 	 * @return	void
 	 */
 	public function use_strict($state = TRUE)
 	{
 		$this->strict = (bool) $state;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -391,6 +453,7 @@ class CI_Unit_test {
 	 * Enables/disables unit testing
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	bool
 	 * @return	null
@@ -399,13 +462,18 @@ class CI_Unit_test {
 	{
 		$this->active = ($state == FALSE) ? FALSE : TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	bool
 	 * @return	void
 	 */
 	public function active($state = TRUE)
 	{
 		$this->active = (bool) $state;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -416,25 +484,35 @@ class CI_Unit_test {
 	 * Returns the raw result data
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	array
 	 */
 	function result($results = array())
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array	$results
 	 * @return	array
 	 */
 	public function result($results = array())
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$CI =& get_instance();
 		$CI->load->language('unit_test');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (count($results) == 0)
 =======
 		if (count($results) === 0)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if (count($results) === 0)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$results = $this->results;
 		}
@@ -449,6 +527,7 @@ class CI_Unit_test {
 				{
 					continue;
 				}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 				if (is_array($val))
@@ -472,6 +551,9 @@ class CI_Unit_test {
 				}
 =======
 				elseif (in_array($key, array('test_name', 'test_datatype', 'test_res_datatype', 'result'), TRUE))
+=======
+				elseif (in_array($key, array('test_name', 'test_datatype', 'res_datatype', 'result'), TRUE))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				{
 					if (FALSE !== ($line = $CI->lang->line(strtolower('ut_'.$val), FALSE)))
 					{
@@ -480,7 +562,10 @@ class CI_Unit_test {
 				}
 
 				$temp[$CI->lang->line('ut_'.$key, FALSE)] = $val;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$retval[] = $temp;
@@ -497,17 +582,23 @@ class CI_Unit_test {
 	 * This lets us set the template to be used to display results
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
 	function set_template($template)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @return	void
 	 */
 	public function set_template($template)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$this->_template = $template;
 	}
@@ -519,6 +610,7 @@ class CI_Unit_test {
 	 *
 	 * This lets us show file names and line numbers
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	array
@@ -536,6 +628,8 @@ class CI_Unit_test {
 		}
 		return array('file' => 'Unknown', 'line' => 'Unknown');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	protected function _backtrace()
@@ -545,7 +639,10 @@ class CI_Unit_test {
 			'file' => (isset($back[1]['file']) ? $back[1]['file'] : ''),
 			'line' => (isset($back[1]['line']) ? $back[1]['line'] : '')
 		);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -553,6 +650,7 @@ class CI_Unit_test {
 	/**
 	 * Get Default Template
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	string
@@ -568,6 +666,8 @@ class CI_Unit_test {
 		$this->_template_rows .= "\n\t\t".'<td style="border-bottom:1px solid #CCC;">{result}</td>';
 		$this->_template_rows .= "\n\t".'</tr>';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	string
 	 */
 	protected function _default_template()
@@ -576,7 +676,10 @@ class CI_Unit_test {
 
 		$this->_template_rows = "\n\t<tr>\n\t\t".'<th style="text-align: left; border-bottom:1px solid #CCC;">{item}</th>'
 					."\n\t\t".'<td style="border-bottom:1px solid #CCC;">{result}</td>'."\n\t</tr>";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -586,6 +689,7 @@ class CI_Unit_test {
 	 *
 	 * Harvests the data within the template {pseudo-variables}
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	void
@@ -605,6 +709,8 @@ class CI_Unit_test {
 
 		if ( ! preg_match("/\{rows\}(.*?)\{\/rows\}/si", $this->_template, $match))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	void
 	 */
 	protected function _parse_template()
@@ -615,12 +721,16 @@ class CI_Unit_test {
 		}
 
 		if ($this->_template === NULL OR ! preg_match('/\{rows\}(.*?)\{\/rows\}/si', $this->_template, $match))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$this->_default_template();
 			return;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$this->_template_rows = $match['1'];
 		$this->_template = str_replace($match['0'], '{rows}', $this->_template);
@@ -635,6 +745,8 @@ class CI_Unit_test {
  *
  * @access	private
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$this->_template_rows = $match[1];
 		$this->_template = str_replace($match[0], '{rows}', $this->_template);
 	}
@@ -645,11 +757,15 @@ class CI_Unit_test {
  * Helper function to test boolean TRUE
  *
  * @param	mixed	$test
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @return	bool
  */
 function is_true($test)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return (is_bool($test) AND $test === TRUE) ? TRUE : FALSE;
 }
@@ -662,6 +778,8 @@ function is_false($test)
 /* End of file Unit_test.php */
 /* Location: ./system/libraries/Unit_test.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	return ($test === TRUE);
 }
 
@@ -675,4 +793,7 @@ function is_false($test)
 {
 	return ($test === FALSE);
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

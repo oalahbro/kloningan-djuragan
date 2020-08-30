@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Smiley Helpers
@@ -65,15 +71,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/smiley_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/smiley_helper.html
  * @deprecated	3.0.0	This helper is too specific for CI.
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/smiley_helper.html
+ * @deprecated	3.0.0	This helper is too specific for CI.
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Smiley Javascript
@@ -96,6 +108,8 @@ if ( ! function_exists('smiley_js'))
 
 		if ($alias != '' && ! is_array($alias))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('smiley_js'))
 {
 	/**
@@ -115,13 +129,17 @@ if ( ! function_exists('smiley_js'))
 		$r = '';
 
 		if ($alias !== '' && ! is_array($alias))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$alias = array($alias => $field_id);
 		}
 
 		if ($do_setup === TRUE)
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 				$do_setup = FALSE;
 
@@ -187,6 +205,8 @@ EOF;
 			return $r;
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$do_setup = FALSE;
 			$m = array();
 
@@ -241,12 +261,16 @@ EOF;
 		return ($inline)
 			? '<script type="text/javascript" charset="utf-8">/*<![CDATA[ */'.$r.'// ]]></script>'
 			: $r;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Get Clickable Smileys
@@ -265,6 +289,8 @@ if ( ! function_exists('get_clickable_smileys'))
 		// For backward compatibility with js_insert_smiley
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('get_clickable_smileys'))
 {
 	/**
@@ -280,11 +306,15 @@ if ( ! function_exists('get_clickable_smileys'))
 	function get_clickable_smileys($image_url, $alias = '')
 	{
 		// For backward compatibility with js_insert_smiley
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (is_array($alias))
 		{
 			$smileys = $alias;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if ( ! is_array($smileys))
@@ -298,6 +328,11 @@ if ( ! function_exists('get_clickable_smileys'))
 		{
 			return FALSE;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		elseif (FALSE === ($smileys = _get_smiley_array()))
+		{
+			return FALSE;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// Add a trailing slash to the file path if needed
@@ -308,10 +343,14 @@ if ( ! function_exists('get_clickable_smileys'))
 		{
 			// Keep duplicates from being used, which can happen if the
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// mapping array contains multiple identical replacements.  For example:
 =======
 			// mapping array contains multiple identical replacements. For example:
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			// mapping array contains multiple identical replacements. For example:
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			// :-) and :) might be replaced with the same image so both smileys
 			// will be in the array.
 			if (isset($used[$smileys[$key][0]]))
@@ -320,11 +359,15 @@ if ( ! function_exists('get_clickable_smileys'))
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$link[] = "<a href=\"javascript:void(0);\" onclick=\"insert_smiley('".$key."', '".$alias."')\"><img src=\"".$image_url.$smileys[$key][0]."\" width=\"".$smileys[$key][1]."\" height=\"".$smileys[$key][2]."\" alt=\"".$smileys[$key][3]."\" style=\"border:0;\" /></a>";
 
 =======
 			$link[] = '<a href="javascript:void(0);" onclick="insert_smiley(\''.$key.'\', \''.$alias.'\')"><img src="'.$image_url.$smileys[$key][0].'" alt="'.$smileys[$key][3].'" style="width: '.$smileys[$key][1].'; height: '.$smileys[$key][2].'; border: 0;" /></a>';
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$link[] = '<a href="javascript:void(0);" onclick="insert_smiley(\''.$key.'\', \''.$alias.'\')"><img src="'.$image_url.$smileys[$key][0].'" alt="'.$smileys[$key][3].'" style="width: '.$smileys[$key][1].'; height: '.$smileys[$key][2].'; border: 0;" /></a>';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$used[$smileys[$key][0]] = TRUE;
 		}
 
@@ -334,6 +377,7 @@ if ( ! function_exists('get_clickable_smileys'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Parse Smileys
@@ -351,6 +395,8 @@ if ( ! function_exists('parse_smileys'))
 	{
 		if ($image_url == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('parse_smileys'))
 {
 	/**
@@ -366,11 +412,15 @@ if ( ! function_exists('parse_smileys'))
 	function parse_smileys($str = '', $image_url = '', $smileys = NULL)
 	{
 		if ($image_url === '' OR ( ! is_array($smileys) && FALSE === ($smileys = _get_smiley_array())))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return $str;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ( ! is_array($smileys))
 		{
@@ -387,13 +437,18 @@ if ( ! function_exists('parse_smileys'))
 		{
 			$str = str_replace($key, "<img src=\"".$image_url.$smileys[$key][0]."\" width=\"".$smileys[$key][1]."\" height=\"".$smileys[$key][2]."\" alt=\"".$smileys[$key][3]."\" style=\"border:0;\" />", $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Add a trailing slash to the file path if needed
 		$image_url = rtrim($image_url, '/').'/';
 
 		foreach ($smileys as $key => $val)
 		{
 			$str = str_replace($key, '<img src="'.$image_url.$smileys[$key][0].'" alt="'.$smileys[$key][3].'" style="width: '.$smileys[$key][1].'; height: '.$smileys[$key][2].'; border: 0;" />', $str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $str;
@@ -402,6 +457,7 @@ if ( ! function_exists('parse_smileys'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Get Smiley Array
@@ -466,6 +522,8 @@ EOF;
 /* End of file smiley_helper.php */
 /* Location: ./system/helpers/smiley_helper.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('_get_smiley_array'))
 {
 	/**
@@ -503,4 +561,7 @@ if ( ! function_exists('_get_smiley_array'))
 		return $_smileys;
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

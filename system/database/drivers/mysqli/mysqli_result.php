@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * MySQLi Result Class
@@ -63,22 +69,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * This class extends the parent result class: CI_DB_result
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/database/
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_mysqli_result extends CI_DB_result {
 
 	/**
 	 * Number of rows in the result set
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
@@ -87,6 +100,8 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	{
 		return @mysqli_num_rows($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_rows()
@@ -94,7 +109,10 @@ class CI_DB_mysqli_result extends CI_DB_result {
 		return is_int($this->num_rows)
 			? $this->num_rows
 			: $this->num_rows = $this->result_id->num_rows;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -103,6 +121,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 * Number of fields in the result set
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
 	 */
@@ -110,12 +129,17 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	{
 		return @mysqli_num_fields($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_fields()
 	{
 		return $this->result_id->field_count;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -126,6 +150,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 * Generates an array of column names
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	array
 	 */
@@ -134,6 +159,8 @@ class CI_DB_mysqli_result extends CI_DB_result {
 		$field_names = array();
 		while ($field = mysqli_fetch_field($this->result_id))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function list_fields()
@@ -141,7 +168,10 @@ class CI_DB_mysqli_result extends CI_DB_result {
 		$field_names = array();
 		$this->result_id->field_seek(0);
 		while ($field = $this->result_id->fetch_field())
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$field_names[] = $field->name;
 		}
@@ -156,6 +186,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	array
@@ -179,6 +210,8 @@ class CI_DB_mysqli_result extends CI_DB_result {
 
 			$retval[] = $F;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function field_data()
@@ -193,21 +226,29 @@ class CI_DB_mysqli_result extends CI_DB_result {
 			$retval[$i]->max_length		= $field_data[$i]->max_length;
 			$retval[$i]->primary_key	= (int) ($field_data[$i]->flags & 2);
 			$retval[$i]->default		= $field_data[$i]->def;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $retval;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 =======
 
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// --------------------------------------------------------------------
 
 	/**
 	 * Free the result
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @return	null
 	 */
@@ -217,6 +258,8 @@ class CI_DB_mysqli_result extends CI_DB_result {
 		{
 			mysqli_free_result($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	void
 	 */
 	public function free_result()
@@ -224,7 +267,10 @@ class CI_DB_mysqli_result extends CI_DB_result {
 		if (is_object($this->result_id))
 		{
 			$this->result_id->free();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$this->result_id = FALSE;
 		}
 	}
@@ -234,6 +280,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	/**
 	 * Data Seek
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Moves the internal pointer to the desired offset.  We call
 	 * this internally before fetching results to make sure the
@@ -246,6 +293,8 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	{
 		return mysqli_data_seek($this->result_id, $n);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Moves the internal pointer to the desired offset. We call
 	 * this internally before fetching results to make sure the
 	 * result set starts at zero.
@@ -256,7 +305,10 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	public function data_seek($n = 0)
 	{
 		return $this->result_id->data_seek($n);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -267,6 +319,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 * Returns the result set as an array
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	private
 	 * @return	array
 	 */
@@ -274,12 +327,17 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	{
 		return mysqli_fetch_assoc($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	protected function _fetch_assoc()
 	{
 		return $this->result_id->fetch_assoc();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -289,6 +347,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	object
@@ -304,6 +363,8 @@ class CI_DB_mysqli_result extends CI_DB_result {
 /* End of file mysqli_result.php */
 /* Location: ./system/database/drivers/mysqli/mysqli_result.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$class_name
 	 * @return	object
 	 */
@@ -313,4 +374,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['imglib_source_image_required'] = "You must specify a source image in your preferences.";
 $lang['imglib_gd_required'] = "The GD image library is required for this feature.";
@@ -24,6 +25,8 @@ $lang['imglib_save_failed'] = "Unable to save the image.  Please make sure the i
 /* End of file imglib_lang.php */
 /* Location: ./system/language/english/imglib_lang.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -79,4 +82,7 @@ $lang['imglib_invalid_path'] = 'The path to the image is not correct.';
 $lang['imglib_copy_failed'] = 'The image copy routine failed.';
 $lang['imglib_missing_font'] = 'Unable to find a font to use.';
 $lang['imglib_save_failed'] = 'Unable to save the image. Please make sure the image and file directory are writable.';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,23 +58,31 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * PDO Database Adapter Class
  *
  * Note: _DB is an extender class that the app controller
 <<<<<<< HEAD
+<<<<<<< HEAD
  * creates dynamically based on whether the active record
 =======
  * creates dynamically based on whether the query builder
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * creates dynamically based on whether the query builder
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * class is being used or not.
  *
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
  */
@@ -161,6 +172,8 @@ class CI_DB_pdo_driver extends CI_DB {
 		return new PDO($this->hostname, $this->username, $this->password, $this->options);
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/database/
  */
 class CI_DB_pdo_driver extends CI_DB {
@@ -178,6 +191,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 * @var	array
 	 */
 	public $options = array();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 	// --------------------------------------------------------------------
@@ -322,10 +336,13 @@ class CI_DB_pdo_driver extends CI_DB {
 
 		return $this->conn_id->beginTransaction();
 	}
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Commit Transaction
 	 *
 	 * @access	public
@@ -347,6 +364,8 @@ class CI_DB_pdo_driver extends CI_DB {
 		$ret = $this->conn->commit();
 		return $ret;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Class constructor
 	 *
 	 * Validates the DSN string and/or detects the subdriver.
@@ -392,6 +411,7 @@ class CI_DB_pdo_driver extends CI_DB {
 		}
 
 		$this->dsn = NULL;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -461,11 +481,14 @@ class CI_DB_pdo_driver extends CI_DB {
 		}
 
 		return $str;
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Affected Rows
 	 *
 	 * @access	public
@@ -505,6 +528,8 @@ class CI_DB_pdo_driver extends CI_DB {
 		{
 			return $this->conn_id->lastInsertId($name);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Database connection
 	 *
 	 * @param	bool	$persistent
@@ -529,6 +554,7 @@ class CI_DB_pdo_driver extends CI_DB {
 			}
 
 			return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 	}
@@ -563,11 +589,15 @@ class CI_DB_pdo_driver extends CI_DB {
 		$row = $query->row();
 		$this->_reset_select();
 		return (int) $row->numrows;
+=======
+		}
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Show table query
 	 *
 	 * Generates a platform-specific query string so that the table names can be fetched
@@ -588,6 +618,8 @@ class CI_DB_pdo_driver extends CI_DB {
 
 		return $sql;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Database version number
 	 *
 	 * @return	string
@@ -608,12 +640,16 @@ class CI_DB_pdo_driver extends CI_DB {
 		{
 			return parent::version();
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Show column query
 	 *
@@ -627,6 +663,8 @@ class CI_DB_pdo_driver extends CI_DB {
 	{
 		return "SHOW COLUMNS FROM ".$table;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Execute the query
 	 *
 	 * @param	string	$sql	SQL query
@@ -635,12 +673,16 @@ class CI_DB_pdo_driver extends CI_DB {
 	protected function _execute($sql)
 	{
 		return $this->conn_id->query($sql);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Field data query
 	 *
@@ -654,6 +696,8 @@ class CI_DB_pdo_driver extends CI_DB {
 	{
 		return "SELECT TOP 1 FROM ".$table;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Begin Transaction
 	 *
 	 * @return	bool
@@ -661,12 +705,16 @@ class CI_DB_pdo_driver extends CI_DB {
 	protected function _trans_begin()
 	{
 		return $this->conn_id->beginTransaction();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * The error message string
 	 *
@@ -678,6 +726,8 @@ class CI_DB_pdo_driver extends CI_DB {
 		$error_array = $this->conn_id->errorInfo();
 		return $error_array[2];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Commit Transaction
 	 *
 	 * @return	bool
@@ -685,12 +735,16 @@ class CI_DB_pdo_driver extends CI_DB {
 	protected function _trans_commit()
 	{
 		return $this->conn_id->commit();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * The error message number
 	 *
@@ -701,6 +755,8 @@ class CI_DB_pdo_driver extends CI_DB {
 	{
 		return $this->conn_id->errorCode();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Rollback Transaction
 	 *
 	 * @return	bool
@@ -708,12 +764,16 @@ class CI_DB_pdo_driver extends CI_DB {
 	protected function _trans_rollback()
 	{
 		return $this->conn_id->rollBack();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Escape the SQL Identifiers
 	 *
@@ -754,6 +814,8 @@ class CI_DB_pdo_driver extends CI_DB {
 		// remove duplicates if the user already included the escape
 		return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Platform-dependant string escape
 	 *
 	 * @param	string
@@ -768,12 +830,16 @@ class CI_DB_pdo_driver extends CI_DB {
 		return ($str[0] === "'")
 			? substr($str, 1, -1)
 			: $str;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * From Tables
 	 *
@@ -793,6 +859,8 @@ class CI_DB_pdo_driver extends CI_DB {
 
 		return (count($tables) == 1) ? $tables[0] : '('.implode(', ', $tables).')';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Affected Rows
 	 *
 	 * @return	int
@@ -800,12 +868,16 @@ class CI_DB_pdo_driver extends CI_DB {
 	public function affected_rows()
 	{
 		return is_object($this->result_id) ? $this->result_id->rowCount() : 0;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Insert statement
 	 *
@@ -839,6 +911,8 @@ class CI_DB_pdo_driver extends CI_DB {
 	{
 		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES ".implode(', ', $values);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Insert ID
 	 *
 	 * @param	string	$name
@@ -862,12 +936,16 @@ class CI_DB_pdo_driver extends CI_DB {
 	protected function _field_data($table)
 	{
 		return 'SELECT TOP 1 * FROM '.$this->protect_identifiers($table);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Update statement
 	 *
@@ -902,6 +980,8 @@ class CI_DB_pdo_driver extends CI_DB {
 	}
 	
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Error
 	 *
 	 * Returns an array containing code and message of the last
@@ -928,7 +1008,10 @@ class CI_DB_pdo_driver extends CI_DB {
 		return $error;
 	}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// --------------------------------------------------------------------
 
 	/**
@@ -936,6 +1019,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 *
 	 * Generates a platform-specific batch update string from the supplied data
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the table name
@@ -949,6 +1033,8 @@ class CI_DB_pdo_driver extends CI_DB {
 		$where = ($where != '' AND count($where) >=1) ? implode(" ", $where).' AND ' : '';
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$table	Table name
 	 * @param	array	$values	Update data
 	 * @param	string	$index	WHERE key
@@ -957,13 +1043,17 @@ class CI_DB_pdo_driver extends CI_DB {
 	protected function _update_batch($table, $values, $index)
 	{
 		$ids = array();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		foreach ($values as $key => $val)
 		{
 			$ids[] = $val[$index];
 
 			foreach (array_keys($val) as $field)
 			{
+<<<<<<< HEAD
 <<<<<<< HEAD
 				if ($field != $index)
 				{
@@ -973,10 +1063,16 @@ class CI_DB_pdo_driver extends CI_DB {
 				{
 					$final[$field][] = 'WHEN '.$index.' = '.$val[$index].' THEN '.$val[$field];
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				if ($field !== $index)
+				{
+					$final[$field][] = 'WHEN '.$index.' = '.$val[$index].' THEN '.$val[$field];
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 			}
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$sql = "UPDATE ".$table." SET ";
 		$cases = '';
@@ -985,12 +1081,17 @@ class CI_DB_pdo_driver extends CI_DB {
 		{
 			$cases .= $k.' = CASE '."\n";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$cases = '';
 		foreach ($final as $k => $v)
 		{
 			$cases .= $k.' = CASE '."\n";
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			foreach ($v as $row)
 			{
 				$cases .= $row."\n";
@@ -999,6 +1100,7 @@ class CI_DB_pdo_driver extends CI_DB {
 			$cases .= 'ELSE '.$k.' END, ';
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$sql .= substr($cases, 0, -2);
 
@@ -1009,18 +1111,24 @@ class CI_DB_pdo_driver extends CI_DB {
 
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$this->where($index.' IN('.implode(',', $ids).')', NULL, FALSE);
 
 		return 'UPDATE '.$table.' SET '.substr($cases, 0, -2).$this->_compile_wh('qb_where');
 	}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// --------------------------------------------------------------------
 
 	/**
 	 * Truncate statement
 	 *
 	 * Generates a platform-specific truncate string from the supplied data
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * If the database does not support the truncate() command
 	 * This function maps to "DELETE FROM table"
@@ -1131,6 +1239,8 @@ class CI_DB_pdo_driver extends CI_DB {
 /* End of file pdo_driver.php */
 /* Location: ./system/database/drivers/pdo/pdo_driver.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 *
 	 * If the database does not support the TRUNCATE statement,
 	 * then this method maps to 'DELETE FROM table'
@@ -1144,4 +1254,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

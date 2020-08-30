@@ -23,7 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+<<<<<<< HEAD
 $config['base_url'] = 'http://localhost/webjuragan/order-juragan';
+=======
+$config['base_url'] = 'http://localhost/order-juragan/';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /*
 |--------------------------------------------------------------------------
@@ -100,7 +104,11 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
+<<<<<<< HEAD
 $config['enable_hooks'] = TRUE;
+=======
+$config['enable_hooks'] = FALSE;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /*
 |--------------------------------------------------------------------------
@@ -367,6 +375,7 @@ $config['encryption_key'] = '';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
+<<<<<<< HEAD
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'juragan_session';
 $config['sess_expiration'] = 7200;
@@ -374,6 +383,15 @@ $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
+=======
+$config['sess_driver'] = 'database';
+$config['sess_cookie_name'] = 'juragan_sessions';
+$config['sess_expiration'] = 7200;
+$config['sess_save_path'] = 'juragan_sessions';
+$config['sess_match_ip'] = FALSE;
+$config['sess_time_to_update'] = 300;
+$config['sess_regenerate_destroy'] = TRUE;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /*
 |--------------------------------------------------------------------------
@@ -438,9 +456,15 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
+<<<<<<< HEAD
 $config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
+=======
+$config['csrf_protection'] = TRUE;
+$config['csrf_token_name'] = 'token';
+$config['csrf_cookie_name'] = 'tokens';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array();

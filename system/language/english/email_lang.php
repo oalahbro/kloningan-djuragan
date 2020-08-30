@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['email_must_be_array'] = "The email validation method must be passed an array.";
 $lang['email_invalid_address'] = "Invalid email address: %s";
@@ -24,6 +25,8 @@ $lang['email_exit_status'] = "Exit status code: %s";
 /* End of file email_lang.php */
 /* Location: ./system/language/english/email_lang.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -81,4 +84,7 @@ $lang['email_smtp_auth_un'] = 'Failed to authenticate username. Error: %s';
 $lang['email_smtp_auth_pw'] = 'Failed to authenticate password. Error: %s';
 $lang['email_smtp_data_failure'] = 'Unable to send data: %s';
 $lang['email_exit_status'] = 'Exit status code: %s';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

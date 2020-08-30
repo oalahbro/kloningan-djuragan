@@ -153,7 +153,11 @@ if ( ! function_exists('hex2bin'))
 	 */
 	function hex2bin($data)
 	{
+<<<<<<< HEAD
 		if (in_array($type = gettype($data), array('array', 'double', 'object'), TRUE))
+=======
+		if (in_array($type = gettype($data), array('array', 'double', 'object', 'resource'), TRUE))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			if ($type === 'object' && method_exists($data, '__toString'))
 			{
@@ -180,6 +184,7 @@ if ( ! function_exists('hex2bin'))
 		return pack('H*', $data);
 	}
 }
+<<<<<<< HEAD
 
 // ------------------------------------------------------------------------
 
@@ -387,3 +392,5 @@ if ( ! function_exists('quoted_printable_encode'))
 		return $output;
 	}
 }
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

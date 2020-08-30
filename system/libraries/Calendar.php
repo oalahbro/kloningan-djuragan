@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Calendar Class
@@ -66,6 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Libraries
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/calendar.html
  */
@@ -86,6 +93,8 @@ class CI_Calendar {
 	 *
 	 * Loads the calendar language file and sets the default time reference
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/libraries/calendar.html
  */
 class CI_Calendar {
@@ -166,11 +175,15 @@ class CI_Calendar {
 	 *
 	 * @param	array	$config	Calendar options
 	 * @return	void
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function __construct($config = array())
 	{
 		$this->CI =& get_instance();
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if ( ! in_array('calendar_lang.php', $this->CI->lang->is_loaded, TRUE))
@@ -187,12 +200,17 @@ class CI_Calendar {
 
 		log_message('debug', "Calendar Class Initialized");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$this->CI->lang->load('calendar');
 
 		empty($config) OR $this->initialize($config);
 
 		log_message('info', 'Calendar Class Initialized');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -203,17 +221,23 @@ class CI_Calendar {
 	 * Accepts an associative array as input, containing display preferences
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	array	config preferences
 	 * @return	void
 	 */
 	function initialize($config = array())
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array	config preferences
 	 * @return	CI_Calendar
 	 */
 	public function initialize($config = array())
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		foreach ($config as $key => $val)
 		{
@@ -223,7 +247,10 @@ class CI_Calendar {
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Set the next_prev_url to the controller if required but not defined
 		if ($this->show_next_prev === TRUE && empty($this->next_prev_url))
@@ -232,7 +259,10 @@ class CI_Calendar {
 		}
 
 		return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -240,6 +270,7 @@ class CI_Calendar {
 	/**
 	 * Generate the calendar
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	integer	the year
@@ -265,6 +296,8 @@ class CI_Calendar {
 		if (strlen($month) == 1)
 			$month = '0'.$month;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	int	the year
 	 * @param	int	the month
 	 * @param	array	the data to be shown in the calendar cells
@@ -296,7 +329,10 @@ class CI_Calendar {
 		{
 			$month = '0'.$month;
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		$adjusted_date = $this->adjust_date($month, $year);
 
@@ -309,19 +345,27 @@ class CI_Calendar {
 		// Set the starting day of the week
 		$start_days	= array('sunday' => 0, 'monday' => 1, 'tuesday' => 2, 'wednesday' => 3, 'thursday' => 4, 'friday' => 5, 'saturday' => 6);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$start_day = ( ! isset($start_days[$this->start_day])) ? 0 : $start_days[$this->start_day];
 =======
 		$start_day	= isset($start_days[$this->start_day]) ? $start_days[$this->start_day] : 0;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$start_day	= isset($start_days[$this->start_day]) ? $start_days[$this->start_day] : 0;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Set the starting day number
 		$local_date = mktime(12, 0, 0, $month, 1, $year);
 		$date = getdate($local_date);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$day  = $start_day + 1 - $date["wday"];
 =======
 		$day  = $start_day + 1 - $date['wday'];
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$day  = $start_day + 1 - $date['wday'];
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		while ($day > 1)
 		{
@@ -331,23 +375,30 @@ class CI_Calendar {
 		// Set the current month/year/day
 		// We use this to determine the "today" date
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$cur_year	= date("Y", $this->local_time);
 		$cur_month	= date("m", $this->local_time);
 		$cur_day	= date("j", $this->local_time);
 
 		$is_current_month = ($cur_year == $year AND $cur_month == $month) ? TRUE : FALSE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$cur_year	= date('Y', $local_time);
 		$cur_month	= date('m', $local_time);
 		$cur_day	= date('j', $local_time);
 
 		$is_current_month = ($cur_year == $year && $cur_month == $month);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Generate the template data array
 		$this->parse_template();
 
 		// Begin building the calendar output
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$out = $this->temp['table_open'];
 		$out .= "\n";
@@ -392,6 +443,8 @@ class CI_Calendar {
 		$out .= $this->temp['week_row_start'];
 		$out .= "\n";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$out = $this->replacements['table_open']."\n\n".$this->replacements['heading_row_start']."\n";
 
 		// "previous" month link
@@ -422,12 +475,16 @@ class CI_Calendar {
 		$out .= "\n".$this->replacements['heading_row_end']."\n\n"
 			// Write the cells containing the days of the week
 			.$this->replacements['week_row_start']."\n";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		$day_names = $this->get_day_names();
 
 		for ($i = 0; $i < 7; $i ++)
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$out .= str_replace('{week_day}', $day_names[($start_day + $i) %7], $this->temp['week_day_cell']);
 		}
@@ -436,15 +493,21 @@ class CI_Calendar {
 		$out .= $this->temp['week_row_end'];
 		$out .= "\n";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$out .= str_replace('{week_day}', $day_names[($start_day + $i) %7], $this->replacements['week_day_cell']);
 		}
 
 		$out .= "\n".$this->replacements['week_row_end']."\n";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Build the main body of the calendar
 		while ($day <= $total_days)
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$out .= "\n";
 			$out .= $this->temp['cal_row_start'];
@@ -462,6 +525,8 @@ class CI_Calendar {
 						$temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_content_today'] : $this->temp['cal_cell_content'];
 						$out .= str_replace('{day}', $day, str_replace('{content}', $data[$day], $temp));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$out .= "\n".$this->replacements['cal_row_start']."\n";
 
 			for ($i = 0; $i < 7; $i++)
@@ -476,16 +541,22 @@ class CI_Calendar {
 						$temp = ($is_current_month === TRUE && $day == $cur_day) ?
 								$this->replacements['cal_cell_content_today'] : $this->replacements['cal_cell_content'];
 						$out .= str_replace(array('{content}', '{day}'), array($data[$day], $day), $temp);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					}
 					else
 					{
 						// Cells with no content
 <<<<<<< HEAD
+<<<<<<< HEAD
 						$temp = ($is_current_month == TRUE AND $day == $cur_day) ? $this->temp['cal_cell_no_content_today'] : $this->temp['cal_cell_no_content'];
 						$out .= str_replace('{day}', $day, $temp);
 					}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 						$temp = ($is_current_month === TRUE && $day == $cur_day) ?
 								$this->replacements['cal_cell_no_content_today'] : $this->replacements['cal_cell_no_content'];
 						$out .= str_replace('{day}', $day, $temp);
@@ -511,11 +582,15 @@ class CI_Calendar {
 					}
 
 					$out .= $this->replacements['cal_cell_end_other'];
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 				else
 				{
 					// Blank cells
+<<<<<<< HEAD
 <<<<<<< HEAD
 					$out .= $this->temp['cal_cell_blank'];
 				}
@@ -534,6 +609,8 @@ class CI_Calendar {
 
 		return $out;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					$out .= $this->replacements['cal_cell_start'].$this->replacements['cal_cell_blank'].$this->replacements['cal_cell_end'];
 				}
 
@@ -544,7 +621,10 @@ class CI_Calendar {
 		}
 
 		return $out .= "\n".$this->replacements['table_close'];
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -556,6 +636,7 @@ class CI_Calendar {
 	 * month provided.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	integer	the month
 	 * @return	string
@@ -564,13 +645,18 @@ class CI_Calendar {
 	{
 		if ($this->month_type == 'short')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	int	the month
 	 * @return	string
 	 */
 	public function get_month_name($month)
 	{
 		if ($this->month_type === 'short')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$month_names = array('01' => 'cal_jan', '02' => 'cal_feb', '03' => 'cal_mar', '04' => 'cal_apr', '05' => 'cal_may', '06' => 'cal_jun', '07' => 'cal_jul', '08' => 'cal_aug', '09' => 'cal_sep', '10' => 'cal_oct', '11' => 'cal_nov', '12' => 'cal_dec');
 		}
@@ -579,6 +665,7 @@ class CI_Calendar {
 			$month_names = array('01' => 'cal_january', '02' => 'cal_february', '03' => 'cal_march', '04' => 'cal_april', '05' => 'cal_mayl', '06' => 'cal_june', '07' => 'cal_july', '08' => 'cal_august', '09' => 'cal_september', '10' => 'cal_october', '11' => 'cal_november', '12' => 'cal_december');
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$month = $month_names[$month];
 
@@ -593,6 +680,11 @@ class CI_Calendar {
 			? ucfirst(substr($month_names[$month], 4))
 			: $this->CI->lang->line($month_names[$month]);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return ($this->CI->lang->line($month_names[$month]) === FALSE)
+			? ucfirst(substr($month_names[$month], 4))
+			: $this->CI->lang->line($month_names[$month]);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -601,6 +693,7 @@ class CI_Calendar {
 	 * Get Day Names
 	 *
 	 * Returns an array of day names (Sunday, Monday, etc.) based
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * on the type.  Options: long, short, abrev
 	 *
@@ -619,6 +712,8 @@ class CI_Calendar {
 		}
 		elseif ($this->day_type == 'short')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * on the type. Options: long, short, abr
 	 *
 	 * @param	string
@@ -636,7 +731,10 @@ class CI_Calendar {
 			$day_names = array('sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday');
 		}
 		elseif ($this->day_type === 'short')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$day_names = array('sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat');
 		}
@@ -647,6 +745,7 @@ class CI_Calendar {
 
 		$days = array();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		foreach ($day_names as $val)
 		{
 			$days[] = ($this->CI->lang->line('cal_'.$val) === FALSE) ? ucfirst($val) : $this->CI->lang->line('cal_'.$val);
@@ -655,6 +754,11 @@ class CI_Calendar {
 		{
 			$days[] = ($this->CI->lang->line('cal_'.$day_names[$i]) === FALSE) ? ucfirst($day_names[$i]) : $this->CI->lang->line('cal_'.$day_names[$i]);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		for ($i = 0, $c = count($day_names); $i < $c; $i++)
+		{
+			$days[] = ($this->CI->lang->line('cal_'.$day_names[$i]) === FALSE) ? ucfirst($day_names[$i]) : $this->CI->lang->line('cal_'.$day_names[$i]);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $days;
@@ -670,6 +774,7 @@ class CI_Calendar {
 	 * increment and the month will become January.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	integer	the month
 	 * @param	integer	the year
@@ -677,12 +782,17 @@ class CI_Calendar {
 	 */
 	function adjust_date($month, $year)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	int	the month
 	 * @param	int	the year
 	 * @return	array
 	 */
 	public function adjust_date($month, $year)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$date = array();
 
@@ -702,10 +812,14 @@ class CI_Calendar {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strlen($date['month']) == 1)
 =======
 		if (strlen($date['month']) === 1)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if (strlen($date['month']) === 1)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$date['month'] = '0'.$date['month'];
 		}
@@ -718,6 +832,7 @@ class CI_Calendar {
 	/**
 	 * Total days in a given month
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	integer	the month
@@ -744,6 +859,8 @@ class CI_Calendar {
 
 		return $days_in_month[$month - 1];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	int	the month
 	 * @param	int	the year
 	 * @return	int
@@ -752,7 +869,10 @@ class CI_Calendar {
 	{
 		$this->CI->load->helper('date');
 		return days_in_month($month, $year);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -762,6 +882,7 @@ class CI_Calendar {
 	 *
 	 * This is used in the event that the user has not created their own template
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return array
@@ -792,6 +913,8 @@ class CI_Calendar {
 						'table_close'				=> '</table>'
 					);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function default_template()
@@ -822,7 +945,10 @@ class CI_Calendar {
 			'cal_row_end'				=> '</tr>',
 			'table_close'				=> '</table>'
 		);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -833,6 +959,7 @@ class CI_Calendar {
 	 * Harvests the data within the template {pseudo-variables}
 	 * used to display the calendar
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	void
@@ -871,6 +998,8 @@ class CI_Calendar {
 /* End of file Calendar.php */
 /* Location: ./system/libraries/Calendar.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	CI_Calendar
 	 */
 	public function parse_template()
@@ -907,4 +1036,7 @@ class CI_Calendar {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

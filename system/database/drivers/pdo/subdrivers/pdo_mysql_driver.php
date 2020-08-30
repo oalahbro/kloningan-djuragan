@@ -106,7 +106,11 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 			empty($this->database) OR $this->dsn .= ';dbname='.$this->database;
 			empty($this->char_set) OR $this->dsn .= ';charset='.$this->char_set;
 		}
+<<<<<<< HEAD
 		elseif ( ! empty($this->char_set) && strpos($this->dsn, 'charset=', 6) === FALSE && is_php('5.3.6'))
+=======
+		elseif ( ! empty($this->char_set) && strpos($this->dsn, 'charset=', 6) === FALSE)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$this->dsn .= ';charset='.$this->char_set;
 		}
@@ -122,6 +126,7 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 	 */
 	public function db_connect($persistent = FALSE)
 	{
+<<<<<<< HEAD
 		/* Prior to PHP 5.3.6, even if the charset was supplied in the DSN
 		 * on connect - it was ignored. This is a work-around for the issue.
 		 *
@@ -133,6 +138,8 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 				.(empty($this->dbcollat) ? '' : ' COLLATE '.$this->dbcollat);
 		}
 
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (isset($this->stricton))
 		{
 			if ($this->stricton)
@@ -169,8 +176,12 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 			$this->options[PDO::MYSQL_ATTR_COMPRESS] = TRUE;
 		}
 
+<<<<<<< HEAD
 		// SSL support was added to PDO_MYSQL in PHP 5.3.7
 		if (is_array($this->encrypt) && is_php('5.3.7'))
+=======
+		if (is_array($this->encrypt))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$ssl = array();
 			empty($this->encrypt['ssl_key'])    OR $ssl[PDO::MYSQL_ATTR_SSL_KEY]    = $this->encrypt['ssl_key'];
@@ -228,6 +239,58 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Begin Transaction
+	 *
+	 * @return	bool
+	 */
+	protected function _trans_begin()
+	{
+		$this->conn_id->setAttribute(PDO::ATTR_AUTOCOMMIT, FALSE);
+		return $this->conn_id->beginTransaction();
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Commit Transaction
+	 *
+	 * @return	bool
+	 */
+	protected function _trans_commit()
+	{
+		if ($this->conn_id->commit())
+		{
+			$this->conn_id->setAttribute(PDO::ATTR_AUTOCOMMIT, TRUE);
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Rollback Transaction
+	 *
+	 * @return	bool
+	 */
+	protected function _trans_rollback()
+	{
+		if ($this->conn_id->rollBack())
+		{
+			$this->conn_id->setAttribute(PDO::ATTR_AUTOCOMMIT, TRUE);
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Show table query
 	 *
 	 * Generates a platform-specific query string so that the table names can be fetched

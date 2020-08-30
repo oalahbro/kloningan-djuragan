@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['ut_test_name']		= 'Test Name';
 $lang['ut_test_datatype']	= 'Test Datatype';
@@ -25,6 +26,8 @@ $lang['ut_notes']			= 'Notes';
 /* End of file unit_test_lang.php */
 /* Location: ./system/language/english/unit_test_lang.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -82,4 +85,7 @@ $lang['ut_object'] = 'Object';
 $lang['ut_resource'] = 'Resource';
 $lang['ut_null'] = 'Null';
 $lang['ut_notes'] = 'Notes';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

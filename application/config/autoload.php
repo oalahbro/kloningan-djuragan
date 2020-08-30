@@ -58,7 +58,11 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
+<<<<<<< HEAD
 $autoload['libraries'] = array('database', 'session', 'form_validation', 'pagination', 'user_agent');
+=======
+$autoload['libraries'] = array('database', 'session', 'form_validation', 'pagination');
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +93,11 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
+<<<<<<< HEAD
 $autoload['helper'] = array('url', 'form', 'fungsi', 'string', 'date', 'array');
+=======
+$autoload['helper'] = array('url', 'html', 'form', 'fungsi', 'security', 'string', 'date');
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +140,8 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
+<<<<<<< HEAD
 $autoload['model'] = array('Db_config' => 'pengaturan', 'Login_model' => 'login', 'Juragan_model' => 'juragan', 'Pesanan_model' => 'pesanan', 'Kurir_model' => 'kurir');
+=======
+$autoload['model'] = array('login_model' => 'login', 'user_model' => 'user', 'juragan_model' => 'juragan', 'pesanan_model' => 'pesanan');
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

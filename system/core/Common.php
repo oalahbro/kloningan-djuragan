@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Common Functions
@@ -64,20 +70,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @subpackage	codeigniter
  * @category	Common Functions
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @subpackage	CodeIgniter
  * @category	Common Functions
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * Determines if the current version of PHP is greater then the supplied value
@@ -97,6 +110,8 @@ if ( ! function_exists('is_php'))
 		{
 			$_is_php[$version] = (version_compare(PHP_VERSION, $version) < 0) ? FALSE : TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('is_php'))
 {
 	/**
@@ -113,7 +128,10 @@ if ( ! function_exists('is_php'))
 		if ( ! isset($_is_php[$version]))
 		{
 			$_is_php[$version] = version_compare(PHP_VERSION, $version, '>=');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $_is_php[$version];
@@ -122,6 +140,7 @@ if ( ! function_exists('is_php'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Tests for file writability
@@ -140,6 +159,8 @@ if ( ! function_exists('is_really_writable'))
 		// If we're on a Unix server with safe_mode off we call is_writable
 		if (DIRECTORY_SEPARATOR == '/' AND @ini_get("safe_mode") == FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('is_really_writable'))
 {
 	/**
@@ -157,11 +178,15 @@ if ( ! function_exists('is_really_writable'))
 	{
 		// If we're on a Unix server with safe_mode off we call is_writable
 		if (DIRECTORY_SEPARATOR === '/' && (is_php('5.4') OR ! ini_get('safe_mode')))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return is_writable($file);
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// For windows servers and safe_mode "on" installations we'll actually
 		// write a file then read it.  Bah...
@@ -171,6 +196,8 @@ if ( ! function_exists('is_really_writable'))
 
 			if (($fp = @fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		/* For Windows servers and safe_mode "on" installations we'll actually
 		 * write a file then read it. Bah...
 		 */
@@ -178,12 +205,16 @@ if ( ! function_exists('is_really_writable'))
 		{
 			$file = rtrim($file, '/').'/'.md5(mt_rand());
 			if (($fp = @fopen($file, 'ab')) === FALSE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				return FALSE;
 			}
 
 			fclose($fp);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			@chmod($file, DIR_WRITE_MODE);
 			@unlink($file);
@@ -191,12 +222,17 @@ if ( ! function_exists('is_really_writable'))
 		}
 		elseif ( ! is_file($file) OR ($fp = @fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			@chmod($file, 0777);
 			@unlink($file);
 			return TRUE;
 		}
 		elseif ( ! is_file($file) OR ($fp = @fopen($file, 'ab')) === FALSE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
@@ -208,6 +244,7 @@ if ( ! function_exists('is_really_writable'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * Class registry
@@ -230,6 +267,8 @@ if ( ! function_exists('load_class'))
 
 		// Does the class exist?  If so, we're done...
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('load_class'))
 {
 	/**
@@ -249,7 +288,10 @@ if ( ! function_exists('load_class'))
 		static $_classes = array();
 
 		// Does the class exist? If so, we're done...
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (isset($_classes[$class]))
 		{
 			return $_classes[$class];
@@ -264,18 +306,24 @@ if ( ! function_exists('load_class'))
 			if (file_exists($path.$directory.'/'.$class.'.php'))
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$name = $prefix.$class;
 
 				if (class_exists($name) === FALSE)
 				{
 					require($path.$directory.'/'.$class.'.php');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$name = 'CI_'.$class;
 
 				if (class_exists($name, FALSE) === FALSE)
 				{
 					require_once($path.$directory.'/'.$class.'.php');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 
 				break;
@@ -283,14 +331,19 @@ if ( ! function_exists('load_class'))
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Is the request a class extension?  If so we load it too
 =======
 		// Is the request a class extension? If so we load it too
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		// Is the request a class extension? If so we load it too
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (file_exists(APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php'))
 		{
 			$name = config_item('subclass_prefix').$class;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (class_exists($name) === FALSE)
 			{
@@ -300,6 +353,11 @@ if ( ! function_exists('load_class'))
 			{
 				require_once(APPPATH.$directory.'/'.$name.'.php');
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			if (class_exists($name, FALSE) === FALSE)
+			{
+				require_once(APPPATH.$directory.'/'.$name.'.php');
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 		}
 
@@ -307,21 +365,28 @@ if ( ! function_exists('load_class'))
 		if ($name === FALSE)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// Note: We use exit() rather then show_error() in order to avoid a
 			// self-referencing loop with the Excptions class
 			exit('Unable to locate the specified class: '.$class.'.php');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			// Note: We use exit() rather than show_error() in order to avoid a
 			// self-referencing loop with the Exceptions class
 			set_status_header(503);
 			echo 'Unable to locate the specified class: '.$class.'.php';
 			exit(5); // EXIT_UNK_CLASS
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// Keep track of what we just loaded
 		is_loaded($class);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$_classes[$class] = new $name();
 =======
@@ -329,12 +394,18 @@ if ( ! function_exists('load_class'))
 			? new $name($param)
 			: new $name();
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$_classes[$class] = isset($param)
+			? new $name($param)
+			: new $name();
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $_classes[$class];
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * Keeps track of which libraries have been loaded.  This function is
@@ -346,6 +417,8 @@ if ( ! function_exists('load_class'))
 if ( ! function_exists('is_loaded'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('is_loaded'))
 {
 	/**
@@ -355,16 +428,23 @@ if ( ! function_exists('is_loaded'))
 	 * @param	string
 	 * @return	array
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function &is_loaded($class = '')
 	{
 		static $_is_loaded = array();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($class != '')
 =======
 		if ($class !== '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($class !== '')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$_is_loaded[strtolower($class)] = $class;
 		}
@@ -375,6 +455,7 @@ if ( ! function_exists('is_loaded'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * Loads the main config.php file
@@ -431,6 +512,8 @@ if ( ! function_exists('get_config'))
 		$_config[0] =& $config;
 		return $_config[0];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('get_config'))
 {
 	/**
@@ -541,12 +624,16 @@ if ( ! function_exists('get_mimes'))
 		}
 
 		return $_mimes;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * Returns the specified config item
@@ -573,6 +660,8 @@ if ( ! function_exists('config_item'))
 
 		return $_config_item[$item];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('is_https'))
 {
 	/**
@@ -617,12 +706,16 @@ if ( ! function_exists('is_cli'))
 	function is_cli()
 	{
 		return (PHP_SAPI === 'cli' OR defined('STDIN'));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * Error Handler
@@ -644,6 +737,8 @@ if ( ! function_exists('show_error'))
 		echo $_error->show_error($heading, $message, 'error_general', $status_code);
 		exit;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('show_error'))
 {
 	/**
@@ -681,12 +776,16 @@ if ( ! function_exists('show_error'))
 		$_error =& load_class('Exceptions', 'core');
 		echo $_error->show_error($heading, $message, 'error_general', $status_code);
 		exit($exit_status);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * 404 Page Handler
@@ -701,6 +800,8 @@ if ( ! function_exists('show_error'))
 if ( ! function_exists('show_404'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('show_404'))
 {
 	/**
@@ -714,21 +815,29 @@ if ( ! function_exists('show_404'))
 	 * @param	bool
 	 * @return	void
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function show_404($page = '', $log_error = TRUE)
 	{
 		$_error =& load_class('Exceptions', 'core');
 		$_error->show_404($page, $log_error);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		exit;
 =======
 		exit(4); // EXIT_UNKNOWN_FILE
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		exit(4); // EXIT_UNKNOWN_FILE
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * Error Logging Interface
@@ -753,6 +862,8 @@ if ( ! function_exists('log_message'))
 		$_log =& load_class('Log');
 		$_log->write_log($level, $message, $php_error);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('log_message'))
 {
 	/**
@@ -776,12 +887,16 @@ if ( ! function_exists('log_message'))
 		}
 
 		$_log[0]->write_log($level, $message);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Set HTTP Status Header
@@ -866,6 +981,8 @@ if ( ! function_exists('set_status_header'))
 		{
 			header("HTTP/1.1 {$code} {$text}", TRUE, $code);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('set_status_header'))
 {
 	/**
@@ -929,13 +1046,25 @@ if ( ! function_exists('set_status_header'))
 				416	=> 'Requested Range Not Satisfiable',
 				417	=> 'Expectation Failed',
 				422	=> 'Unprocessable Entity',
+<<<<<<< HEAD
+=======
+				426	=> 'Upgrade Required',
+				428	=> 'Precondition Required',
+				429	=> 'Too Many Requests',
+				431	=> 'Request Header Fields Too Large',
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 				500	=> 'Internal Server Error',
 				501	=> 'Not Implemented',
 				502	=> 'Bad Gateway',
 				503	=> 'Service Unavailable',
 				504	=> 'Gateway Timeout',
+<<<<<<< HEAD
 				505	=> 'HTTP Version Not Supported'
+=======
+				505	=> 'HTTP Version Not Supported',
+				511	=> 'Network Authentication Required',
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			);
 
 			if (isset($stati[$code]))
@@ -956,13 +1085,17 @@ if ( ! function_exists('set_status_header'))
 		{
 			$server_protocol = isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
 			header($server_protocol.' '.$code.' '.$text, TRUE, $code);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * Exception Handler
@@ -986,6 +1119,8 @@ if ( ! function_exists('_exception_handler'))
 		 // the log file with excess information that isn't normally very helpful.
 		if ($severity == E_STRICT)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('_error_handler'))
 {
 	/**
@@ -1007,7 +1142,11 @@ if ( ! function_exists('_error_handler'))
 	 */
 	function _error_handler($severity, $message, $filepath, $line)
 	{
+<<<<<<< HEAD
 		$is_error = (((E_ERROR | E_COMPILE_ERROR | E_CORE_ERROR | E_USER_ERROR) & $severity) === $severity);
+=======
+		$is_error = (((E_ERROR | E_PARSE | E_COMPILE_ERROR | E_CORE_ERROR | E_USER_ERROR) & $severity) === $severity);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// When an error occurred, set the status header to '500 Internal Server Error'
 		// to indicate to the client something went wrong.
@@ -1023,27 +1162,37 @@ if ( ! function_exists('_error_handler'))
 		// Should we ignore the error? We'll get the current error_reporting
 		// level and add its bits with the severity bits to find out.
 		if (($severity & error_reporting()) !== $severity)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return;
 		}
 
 		$_error =& load_class('Exceptions', 'core');
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		// Should we display the error? We'll get the current error_reporting
 		// level and add its bits with the severity bits to find out.
 		if (($severity & error_reporting()) == $severity)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$_error->log_exception($severity, $message, $filepath, $line);
 
 		// Should we display the error?
 		if (str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors')))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$_error->show_php_error($severity, $message, $filepath, $line);
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Should we log the error?  No?  We're done...
 		if (config_item('log_threshold') == 0)
@@ -1053,6 +1202,8 @@ if ( ! function_exists('_error_handler'))
 
 		$_error->log_exception($severity, $message, $filepath, $line);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// If the error is fatal, the execution of the script should be stopped because
 		// errors can't be recovered from. Halting the script conforms with PHP's
 		// default error handling. See http://www.php.net/manual/en/errorfunc.constants.php
@@ -1082,6 +1233,10 @@ if ( ! function_exists('_exception_handler'))
 		$_error =& load_class('Exceptions', 'core');
 		$_error->log_exception('error', 'Exception: '.$exception->getMessage(), $exception->getFile(), $exception->getLine());
 
+<<<<<<< HEAD
+=======
+		is_cli() OR set_status_header(500);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Should we display the error?
 		if (str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors')))
 		{
@@ -1117,12 +1272,16 @@ if ( ! function_exists('_shutdown_handler'))
 		{
 			_error_handler($last_error['type'], $last_error['message'], $last_error['file'], $last_error['line']);
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Remove Invisible Characters
@@ -1150,6 +1309,8 @@ if ( ! function_exists('remove_invisible_characters'))
 		}
 		
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('remove_invisible_characters'))
 {
 	/**
@@ -1174,7 +1335,10 @@ if ( ! function_exists('remove_invisible_characters'))
 			$non_displayables[] = '/%1[0-9a-f]/i';	// url encoded 16-31
 		}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';	// 00-08, 11, 12, 14-31, 127
 
 		do
@@ -1189,6 +1353,7 @@ if ( ! function_exists('remove_invisible_characters'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * Returns HTML escaped variable
@@ -1215,6 +1380,8 @@ if ( ! function_exists('html_escape'))
 /* End of file Common.php */
 /* Location: ./system/core/Common.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('html_escape'))
 {
 	/**
@@ -1330,4 +1497,7 @@ if ( ! function_exists('function_usable'))
 		return FALSE;
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

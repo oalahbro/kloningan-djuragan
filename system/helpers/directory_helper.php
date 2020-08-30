@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Directory Helpers
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/directory_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/directory_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/directory_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Create a Directory Map
@@ -89,6 +100,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if ( ! function_exists('directory_map'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('directory_map'))
 {
 	/**
@@ -104,7 +117,10 @@ if ( ! function_exists('directory_map'))
 	 * @param	bool	$hidden			Whether to show hidden files
 	 * @return	array
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function directory_map($source_dir, $directory_depth = 0, $hidden = FALSE)
 	{
 		if ($fp = @opendir($source_dir))
@@ -117,25 +133,35 @@ if ( ! function_exists('directory_map'))
 			{
 				// Remove '.', '..', and hidden files [optional]
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if ( ! trim($file, '.') OR ($hidden == FALSE && $file[0] == '.'))
 =======
 				if ($file === '.' OR $file === '..' OR ($hidden === FALSE && $file[0] === '.'))
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				if ($file === '.' OR $file === '..' OR ($hidden === FALSE && $file[0] === '.'))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				{
 					continue;
 				}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (($directory_depth < 1 OR $new_depth > 0) && @is_dir($source_dir.$file))
 				{
 					$filedata[$file] = directory_map($source_dir.$file.DIRECTORY_SEPARATOR, $new_depth, $hidden);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				is_dir($source_dir.$file) && $file .= DIRECTORY_SEPARATOR;
 
 				if (($directory_depth < 1 OR $new_depth > 0) && is_dir($source_dir.$file))
 				{
 					$filedata[$file] = directory_map($source_dir.$file, $new_depth, $hidden);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 				else
 				{
@@ -151,9 +177,12 @@ if ( ! function_exists('directory_map'))
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 /* End of file directory_helper.php */
 /* Location: ./system/helpers/directory_helper.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['profiler_database']		= 'DATABASE';
 $lang['profiler_controller_info'] = 'CLASS/METHOD';
@@ -25,6 +26,8 @@ $lang['profiler_section_show']	= 'Show';
 /* End of file profiler_lang.php */
 /* Location: ./system/language/english/profiler_lang.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -84,4 +87,7 @@ $lang['profiler_no_profiles'] = 'No Profile data - all Profiler sections have be
 $lang['profiler_section_hide'] = 'Hide';
 $lang['profiler_section_show'] = 'Show';
 $lang['profiler_seconds'] = 'seconds';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

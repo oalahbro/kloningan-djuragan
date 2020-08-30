@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter XML Helpers
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/xml_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/xml_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/xml_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Convert Reserved XML characters to Entities
@@ -84,6 +95,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if ( ! function_exists('xml_convert'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('xml_convert'))
 {
 	/**
@@ -93,13 +106,17 @@ if ( ! function_exists('xml_convert'))
 	 * @param	bool
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function xml_convert($str, $protect_all = FALSE)
 	{
 		$temp = '__TEMP_AMPERSANDS__';
 
 		// Replace entities to temporary markers so that
 		// ampersands won't get messed up
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$str = preg_replace("/&#(\d+);/", "$temp\\1;", $str);
 
@@ -119,6 +136,8 @@ if ( ! function_exists('xml_convert'))
 		{
 			$str = preg_replace("/$temp(\w+);/","&\\1;", $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$str = preg_replace('/&#(\d+);/', $temp.'\\1;', $str);
 
 		if ($protect_all === TRUE)
@@ -138,12 +157,16 @@ if ( ! function_exists('xml_convert'))
 		if ($protect_all === TRUE)
 		{
 			return preg_replace('/'.$temp.'(\w+);/', '&\\1;', $str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $str;
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 // ------------------------------------------------------------------------
@@ -152,3 +175,5 @@ if ( ! function_exists('xml_convert'))
 /* Location: ./system/helpers/xml_helper.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['upload_userfile_not_set'] = "Unable to find a post variable called userfile.";
 $lang['upload_file_exceeds_limit'] = "The uploaded file exceeds the maximum allowed size in your PHP configuration file.";
@@ -22,6 +23,8 @@ $lang['upload_not_writable'] = "The upload destination folder does not appear to
 /* End of file upload_lang.php */
 /* Location: ./system/language/english/upload_lang.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -76,4 +79,7 @@ $lang['upload_no_filepath'] = 'The upload path does not appear to be valid.';
 $lang['upload_no_file_types'] = 'You have not specified any allowed file types.';
 $lang['upload_bad_filename'] = 'The file name you submitted already exists on the server.';
 $lang['upload_not_writable'] = 'The upload destination folder does not appear to be writable.';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -78,7 +78,11 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => 'root',
+<<<<<<< HEAD
 	'database' => 'crows_juragan',
+=======
+	'database' => 'crows_juragan_new',
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

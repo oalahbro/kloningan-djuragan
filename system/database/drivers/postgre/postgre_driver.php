@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,23 +58,31 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Postgre Database Adapter Class
  *
  * Note: _DB is an extender class that the app controller
 <<<<<<< HEAD
+<<<<<<< HEAD
  * creates dynamically based on whether the active record
 =======
  * creates dynamically based on whether the query builder
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * creates dynamically based on whether the query builder
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * class is being used or not.
  *
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
  */
@@ -119,6 +130,8 @@ class CI_DB_postgre_driver extends CI_DB {
 		}
 		return trim($connect_string);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/database/
  */
 class CI_DB_postgre_driver extends CI_DB {
@@ -208,6 +221,7 @@ class CI_DB_postgre_driver extends CI_DB {
 		}
 
 		$this->dsn = rtrim($this->dsn);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -223,11 +237,14 @@ class CI_DB_postgre_driver extends CI_DB {
 	function db_connect()
 	{
 		return @pg_connect($this->_connect_string());
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Persistent database connection
 	 *
 	 * @access	private called by the base class
@@ -237,6 +254,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		return @pg_pconnect($this->_connect_string());
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Database connection
 	 *
 	 * @param	bool	$persistent
@@ -262,7 +281,10 @@ class CI_DB_postgre_driver extends CI_DB {
 		}
 
 		return $this->conn_id;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -274,6 +296,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 * sent for a length of time exceeding the server's idle timeout
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	void
 	 */
@@ -283,6 +306,11 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	public function reconnect()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	void
+	 */
+	public function reconnect()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if (pg_ping($this->conn_id) === FALSE)
 		{
@@ -294,6 +322,7 @@ class CI_DB_postgre_driver extends CI_DB {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Select the database
 	 *
 	 * @access	private called by the base class
@@ -304,6 +333,8 @@ class CI_DB_postgre_driver extends CI_DB {
 		// Not needed for Postgre so we'll return TRUE
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Set client character set
 	 *
 	 * @param	string	$charset
@@ -312,12 +343,16 @@ class CI_DB_postgre_driver extends CI_DB {
 	protected function _db_set_charset($charset)
 	{
 		return (pg_set_client_encoding($this->conn_id, $charset) === 0);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Set client character set
 	 *
@@ -331,6 +366,8 @@ class CI_DB_postgre_driver extends CI_DB {
 		// @todo - add support if needed
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Database version number
 	 *
 	 * @return	string
@@ -355,12 +392,16 @@ class CI_DB_postgre_driver extends CI_DB {
 		return isset($pg_version['server'])
 			? $this->data_cache['version'] = $pg_version['server']
 			: parent::version();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Version number query string
 	 *
@@ -371,6 +412,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		return "SELECT version() AS ver";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Execute the query
 	 *
 	 * @param	string	$sql	an SQL query
@@ -379,12 +422,16 @@ class CI_DB_postgre_driver extends CI_DB {
 	protected function _execute($sql)
 	{
 		return pg_query($this->conn_id, $sql);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Execute the query
 	 *
@@ -397,6 +444,8 @@ class CI_DB_postgre_driver extends CI_DB {
 		$sql = $this->_prep_query($sql);
 		return @pg_query($this->conn_id, $sql);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Begin Transaction
 	 *
 	 * @return	bool
@@ -404,12 +453,16 @@ class CI_DB_postgre_driver extends CI_DB {
 	protected function _trans_begin()
 	{
 		return (bool) pg_query($this->conn_id, 'BEGIN');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Prep the query
 	 *
@@ -423,6 +476,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		return $sql;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Commit Transaction
 	 *
 	 * @return	bool
@@ -430,12 +485,16 @@ class CI_DB_postgre_driver extends CI_DB {
 	protected function _trans_commit()
 	{
 		return (bool) pg_query($this->conn_id, 'COMMIT');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Begin Transaction
 	 *
@@ -462,6 +521,8 @@ class CI_DB_postgre_driver extends CI_DB {
 
 		return @pg_exec($this->conn_id, "begin");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Rollback Transaction
 	 *
 	 * @return	bool
@@ -469,12 +530,16 @@ class CI_DB_postgre_driver extends CI_DB {
 	protected function _trans_rollback()
 	{
 		return (bool) pg_query($this->conn_id, 'ROLLBACK');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Commit Transaction
 	 *
@@ -496,6 +561,8 @@ class CI_DB_postgre_driver extends CI_DB {
 
 		return @pg_exec($this->conn_id, "commit");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Determines if a query is a "write" type.
 	 *
 	 * @param	string	An SQL query string
@@ -503,18 +570,26 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	public function is_write_type($sql)
 	{
+<<<<<<< HEAD
 		if (preg_match('#^(INSERT|UPDATE).*RETURNING\s.+(\,\s?.+)*$#i', $sql))
+=======
+		if (preg_match('#^(INSERT|UPDATE).*RETURNING\s.+(\,\s?.+)*$#is', $sql))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
 		return parent::is_write_type($sql);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Rollback Transaction
 	 *
@@ -536,6 +611,8 @@ class CI_DB_postgre_driver extends CI_DB {
 
 		return @pg_exec($this->conn_id, "rollback");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Platform-dependant string escape
 	 *
 	 * @param	string
@@ -544,12 +621,16 @@ class CI_DB_postgre_driver extends CI_DB {
 	protected function _escape_str($str)
 	{
 		return pg_escape_string($this->conn_id, $str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Escape String
 	 *
@@ -582,6 +663,8 @@ class CI_DB_postgre_driver extends CI_DB {
 
 		return $str;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * "Smart" Escape String
 	 *
 	 * Escapes data based on type
@@ -601,7 +684,10 @@ class CI_DB_postgre_driver extends CI_DB {
 		}
 
 		return parent::escape($str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -610,6 +696,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 * Affected Rows
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
 	 */
@@ -617,12 +704,17 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		return @pg_affected_rows($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function affected_rows()
 	{
 		return pg_affected_rows($this->result_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -630,6 +722,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	/**
 	 * Insert ID
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
@@ -658,6 +751,8 @@ class CI_DB_postgre_driver extends CI_DB {
 			// seq_name passed in table parameter
 			$sql = sprintf("SELECT CURRVAL('%s') as ins_id", $table);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	string
 	 */
 	public function insert_id()
@@ -688,12 +783,16 @@ class CI_DB_postgre_driver extends CI_DB {
 			}
 
 			$sql = 'SELECT CURRVAL(\''.$seq."') AS ins_id";
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 		else
 		{
 			return pg_last_oid($this->result_id);
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$query = $this->query($sql);
 		$row = $query->row();
@@ -730,11 +829,16 @@ class CI_DB_postgre_driver extends CI_DB {
 		$this->_reset_select();
 		return (int) $row->numrows;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		$query = $this->query($sql);
 		$query = $query->row();
 		return (int) $query->ins_id;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -744,6 +848,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 *
 	 * Generates a platform-specific query string so that the table names can be fetched
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @param	boolean
@@ -757,6 +862,8 @@ class CI_DB_postgre_driver extends CI_DB {
 		{
 			$sql .= " AND table_name LIKE '".$this->escape_like_str($this->dbprefix)."%' ".sprintf($this->_like_escape_str, $this->_like_escape_chr);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
@@ -769,7 +876,10 @@ class CI_DB_postgre_driver extends CI_DB {
 			return $sql.' AND "table_name" LIKE \''
 				.$this->escape_like_str($this->dbprefix)."%' "
 				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $sql;
@@ -778,6 +888,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Show column query
 	 *
@@ -791,6 +902,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		return "SELECT column_name FROM information_schema.columns WHERE table_name ='".$table."'";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * List column query
 	 *
 	 * Generates a platform-specific query string so that the column names can be fetched
@@ -803,6 +916,7 @@ class CI_DB_postgre_driver extends CI_DB {
 		return 'SELECT "column_name"
 			FROM "information_schema"."columns"
 			WHERE LOWER("table_name") = '.$this->escape(strtolower($table));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -821,11 +935,14 @@ class CI_DB_postgre_driver extends CI_DB {
 	function _field_data($table)
 	{
 		return "SELECT * FROM ".$table." LIMIT 1";
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * The error message string
 	 *
 	 * @access	private
@@ -835,6 +952,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		return pg_last_error($this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Returns an object with field data
 	 *
 	 * @param	string	$table
@@ -863,12 +982,16 @@ class CI_DB_postgre_driver extends CI_DB {
 		}
 
 		return $retval;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * The error message number
 	 *
@@ -879,6 +1002,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		return '';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Error
 	 *
 	 * Returns an array containing code and message of the last
@@ -889,12 +1014,16 @@ class CI_DB_postgre_driver extends CI_DB {
 	public function error()
 	{
 		return array('code' => '', 'message' => pg_last_error($this->conn_id));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Escape the SQL Identifiers
 	 *
@@ -956,6 +1085,8 @@ class CI_DB_postgre_driver extends CI_DB {
 
 		return implode(', ', $tables);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * ORDER BY
 	 *
 	 * @param	string	$orderby
@@ -986,6 +1117,7 @@ class CI_DB_postgre_driver extends CI_DB {
 		}
 
 		return parent::order_by($orderby, $direction, $escape);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -1006,11 +1138,14 @@ class CI_DB_postgre_driver extends CI_DB {
 	function _insert($table, $keys, $values)
 	{
 		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Insert_batch statement
 	 *
 	 * Generates a platform-specific insert string from the supplied data
@@ -1025,6 +1160,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES ".implode(', ', $values);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Update statement
 	 *
 	 * Generates a platform-specific update string from the supplied data
@@ -1038,6 +1175,7 @@ class CI_DB_postgre_driver extends CI_DB {
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
 		return parent::_update($table, $values);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -1075,11 +1213,14 @@ class CI_DB_postgre_driver extends CI_DB {
 		$sql .= $orderby.$limit;
 
 		return $sql;
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Truncate statement
 	 *
 	 * Generates a platform-specific truncate string from the supplied data
@@ -1094,6 +1235,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	{
 		return "TRUNCATE ".$table;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Update_Batch statement
 	 *
 	 * Generates a platform-specific batch update string from the supplied data
@@ -1130,7 +1273,10 @@ class CI_DB_postgre_driver extends CI_DB {
 		$this->where($index.' IN('.implode(',', $ids).')', NULL, FALSE);
 
 		return 'UPDATE '.$table.' SET '.substr($cases, 0, -2).$this->_compile_wh('qb_where');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -1140,6 +1286,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 *
 	 * Generates a platform-specific delete string from the supplied data
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the table name
@@ -1191,6 +1338,8 @@ class CI_DB_postgre_driver extends CI_DB {
 
 		return $sql;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$table
 	 * @return	string
 	 */
@@ -1213,7 +1362,10 @@ class CI_DB_postgre_driver extends CI_DB {
 	protected function _limit($sql)
 	{
 		return $sql.' LIMIT '.$this->qb_limit.($this->qb_offset ? ' OFFSET '.$this->qb_offset : '');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -1221,6 +1373,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	/**
 	 * Close DB Connection
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	resource
@@ -1238,6 +1391,8 @@ class CI_DB_postgre_driver extends CI_DB {
 /* End of file postgre_driver.php */
 /* Location: ./system/database/drivers/postgre/postgre_driver.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	void
 	 */
 	protected function _close()
@@ -1246,4 +1401,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

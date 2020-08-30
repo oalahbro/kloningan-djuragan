@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * URI Class
@@ -67,14 +73,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	URI
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/uri.html
 =======
  * @link		https://codeigniter.com/user_guide/libraries/uri.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/libraries/uri.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_URI {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * List of cached uri segments
 	 *
@@ -192,6 +203,8 @@ class CI_URI {
 		$path = (isset($_SERVER[$uri])) ? $_SERVER[$uri] : @getenv($uri);
 		$this->_set_uri_string($path);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * List of cached URI segments
 	 *
 	 * @var	array
@@ -279,12 +292,16 @@ class CI_URI {
 		}
 
 		log_message('info', 'URI Class Initialized');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Set the URI String
 	 *
@@ -300,6 +317,8 @@ class CI_URI {
 		// If the URI contains only a slash we'll kill it
 		$this->uri_string = ($str == '/') ? '' : $str;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Set URI String
 	 *
 	 * @param 	string	$str
@@ -339,12 +358,16 @@ class CI_URI {
 
 			unset($this->segments[0]);
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Detects the URI
 	 *
@@ -358,6 +381,8 @@ class CI_URI {
 	{
 		if ( ! isset($_SERVER['REQUEST_URI']) OR ! isset($_SERVER['SCRIPT_NAME']))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Parse REQUEST_URI
 	 *
 	 * Will parse REQUEST_URI and automatically detect the URI from it,
@@ -368,11 +393,15 @@ class CI_URI {
 	protected function _parse_request_uri()
 	{
 		if ( ! isset($_SERVER['REQUEST_URI'], $_SERVER['SCRIPT_NAME']))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return '';
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$uri = $_SERVER['REQUEST_URI'];
 		if (strpos($uri, $_SERVER['SCRIPT_NAME']) === 0)
@@ -383,6 +412,8 @@ class CI_URI {
 		{
 			$uri = substr($uri, strlen(dirname($_SERVER['SCRIPT_NAME'])));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// parse_url() returns false if no host is present, but the path or query string
 		// contains a colon followed by a number
 		$uri = parse_url('http://dummy'.$_SERVER['REQUEST_URI']);
@@ -399,11 +430,15 @@ class CI_URI {
 			{
 				$uri = (string) substr($uri, strlen(dirname($_SERVER['SCRIPT_NAME'])));
 			}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// This section ensures that even on servers that require the URI to be in the query string (Nginx) a correct
 		// URI is found, and also fixes the QUERY_STRING server var and $_GET array.
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (strncmp($uri, '?/', 2) === 0)
 		{
@@ -424,6 +459,8 @@ class CI_URI {
 
 		if ($uri == '/' || empty($uri))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (trim($uri, '/') === '' && strncmp($query, '/', 1) === 0)
 		{
 			$query = explode('?', $query, 2);
@@ -438,11 +475,15 @@ class CI_URI {
 		parse_str($_SERVER['QUERY_STRING'], $_GET);
 
 		if ($uri === '/' OR $uri === '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return '/';
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$uri = parse_url($uri, PHP_URL_PATH);
 
@@ -470,11 +511,16 @@ class CI_URI {
 		$args = array_slice($_SERVER['argv'], 1);
 
 		return $args ? '/' . implode('/', $args) : '';
+=======
+		// Do some final cleaning of the URI and return it
+		return $this->_remove_relative_directory($uri);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Filter segments for malicious characters
 	 *
 	 * @access	private
@@ -499,6 +545,8 @@ class CI_URI {
 
 		return str_replace($bad, $good, $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Parse QUERY_STRING
 	 *
 	 * Will parse QUERY_STRING and automatically detect the URI from it.
@@ -523,12 +571,16 @@ class CI_URI {
 		parse_str($_SERVER['QUERY_STRING'], $_GET);
 
 		return $this->_remove_relative_directory($uri);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Remove the suffix from the URL if needed
 	 *
@@ -542,6 +594,8 @@ class CI_URI {
 			$this->uri_string = preg_replace("|".preg_quote($this->config->item('url_suffix'))."$|", "", $this->uri_string);
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Parse CLI arguments
 	 *
 	 * Take each command line argument and assume it is a URI segment.
@@ -552,12 +606,16 @@ class CI_URI {
 	{
 		$args = array_slice($_SERVER['argv'], 1);
 		return $args ? implode('/', $args) : '';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Explode the URI Segments. The individual segments will
 	 * be stored in the $this->segments array.
@@ -598,6 +656,8 @@ class CI_URI {
 		unset($this->segments[0]);
 		unset($this->rsegments[0]);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Remove relative directory (../) and multi slashes (///)
 	 *
 	 * Do some final cleaning of the URI and return it, currently only used in self::_parse_request_uri()
@@ -637,12 +697,16 @@ class CI_URI {
 		{
 			show_error('The URI you submitted has disallowed characters.', 400);
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Fetch a URI Segment
 	 *
@@ -657,6 +721,8 @@ class CI_URI {
 	{
 		return ( ! isset($this->segments[$n])) ? $no_result : $this->segments[$n];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Fetch URI Segment
 	 *
 	 * @see		CI_URI::$segments
@@ -667,12 +733,16 @@ class CI_URI {
 	public function segment($n, $no_result = NULL)
 	{
 		return isset($this->segments[$n]) ? $this->segments[$n] : $no_result;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Fetch a URI "routed" Segment
 	 *
@@ -689,6 +759,8 @@ class CI_URI {
 	{
 		return ( ! isset($this->rsegments[$n])) ? $no_result : $this->rsegments[$n];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Fetch URI "routed" Segment
 	 *
 	 * Returns the re-routed URI segment (assuming routing rules are used)
@@ -704,12 +776,16 @@ class CI_URI {
 	public function rsegment($n, $no_result = NULL)
 	{
 		return isset($this->rsegments[$n]) ? $this->rsegments[$n] : $no_result;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Generate a key value pair from the URI string
 	 *
@@ -746,6 +822,8 @@ class CI_URI {
 	 */
 	function ruri_to_assoc($n = 3, $default = array())
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * URI to assoc
 	 *
 	 * Generates an associative array of URI data starting at the supplied
@@ -784,7 +862,10 @@ class CI_URI {
 	 * @return 	array
 	 */
 	public function ruri_to_assoc($n = 3, $default = array())
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->_uri_to_assoc($n, $default, 'rsegment');
 	}
@@ -792,6 +873,7 @@ class CI_URI {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Generate a key value pair from the URI string or Re-routed URI string
 	 *
@@ -815,6 +897,8 @@ class CI_URI {
 		}
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Internal URI-to-assoc
 	 *
 	 * Generates a key/value pair from the URI string or re-routed URI string.
@@ -828,12 +912,16 @@ class CI_URI {
 	 */
 	protected function _uri_to_assoc($n = 3, $default = array(), $which = 'segment')
 	{
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ( ! is_numeric($n))
 		{
 			return $default;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (isset($this->keyval[$n]))
 		{
@@ -861,6 +949,8 @@ class CI_URI {
 		$lastval = '';
 		$retval  = array();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (isset($this->keyval[$which], $this->keyval[$which][$n]))
 		{
 			return $this->keyval[$which][$n];
@@ -880,7 +970,10 @@ class CI_URI {
 		$i = 0;
 		$lastval = '';
 		$retval = array();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		foreach ($segments as $seg)
 		{
 			if ($i % 2)
@@ -890,10 +983,14 @@ class CI_URI {
 			else
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$retval[$seg] = FALSE;
 =======
 				$retval[$seg] = NULL;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				$retval[$seg] = NULL;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$lastval = $seg;
 			}
 
@@ -907,27 +1004,37 @@ class CI_URI {
 				if ( ! array_key_exists($val, $retval))
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					$retval[$val] = FALSE;
 =======
 					$retval[$val] = NULL;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+					$retval[$val] = NULL;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 			}
 		}
 
 		// Cache the array for reuse
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$this->keyval[$n] = $retval;
 =======
 		isset($this->keyval[$which]) OR $this->keyval[$which] = array();
 		$this->keyval[$which][$n] = $retval;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		isset($this->keyval[$which]) OR $this->keyval[$which] = array();
+		$this->keyval[$which][$n] = $retval;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $retval;
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Generate a URI string from an associative array
 	 *
@@ -941,6 +1048,8 @@ class CI_URI {
 		$temp = array();
 		foreach ((array)$array as $key => $val)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Assoc to URI
 	 *
 	 * Generates a URI string from an associative array.
@@ -952,7 +1061,10 @@ class CI_URI {
 	{
 		$temp = array();
 		foreach ((array) $array as $key => $val)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$temp[] = $key;
 			$temp[] = $val;
@@ -965,6 +1077,7 @@ class CI_URI {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Fetch a URI Segment and add a trailing slash
 	 *
 	 * @access	public
@@ -974,6 +1087,8 @@ class CI_URI {
 	 */
 	function slash_segment($n, $where = 'trailing')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Slash segment
 	 *
 	 * Fetches an URI segment with a slash.
@@ -983,7 +1098,10 @@ class CI_URI {
 	 * @return	string
 	 */
 	public function slash_segment($n, $where = 'trailing')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->_slash_segment($n, $where, 'segment');
 	}
@@ -991,6 +1109,7 @@ class CI_URI {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Fetch a URI Segment and add a trailing slash
 	 *
@@ -1001,6 +1120,8 @@ class CI_URI {
 	 */
 	function slash_rsegment($n, $where = 'trailing')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Slash routed segment
 	 *
 	 * Fetches an URI routed segment with a slash.
@@ -1010,7 +1131,10 @@ class CI_URI {
 	 * @return	string
 	 */
 	public function slash_rsegment($n, $where = 'trailing')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->_slash_segment($n, $where, 'rsegment');
 	}
@@ -1018,6 +1142,7 @@ class CI_URI {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Fetch a URI Segment and add a trailing slash - helper function
 	 *
@@ -1038,6 +1163,8 @@ class CI_URI {
 		}
 		elseif ($where == 'leading')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Internal Slash segment
 	 *
 	 * Fetches an URI Segment and adds a slash to it.
@@ -1059,7 +1186,10 @@ class CI_URI {
 			$leading	= '';
 		}
 		elseif ($where === 'leading')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$trailing	= '';
 		}
@@ -1073,6 +1203,7 @@ class CI_URI {
 	 * Segment Array
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	array
 	 */
@@ -1082,6 +1213,11 @@ class CI_URI {
 	 */
 	public function segment_array()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	array	CI_URI::$segments
+	 */
+	public function segment_array()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->segments;
 	}
@@ -1092,6 +1228,7 @@ class CI_URI {
 	 * Routed Segment Array
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	array
 	 */
@@ -1101,6 +1238,11 @@ class CI_URI {
 	 */
 	public function rsegment_array()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	array	CI_URI::$rsegments
+	 */
+	public function rsegment_array()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->rsegments;
 	}
@@ -1111,6 +1253,7 @@ class CI_URI {
 	 * Total number of segments
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
 	 */
@@ -1120,6 +1263,11 @@ class CI_URI {
 	 */
 	public function total_segments()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	int
+	 */
+	public function total_segments()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return count($this->segments);
 	}
@@ -1130,6 +1278,7 @@ class CI_URI {
 	 * Total number of routed segments
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
 	 */
@@ -1139,6 +1288,11 @@ class CI_URI {
 	 */
 	public function total_rsegments()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	int
+	 */
+	public function total_rsegments()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return count($this->rsegments);
 	}
@@ -1147,6 +1301,7 @@ class CI_URI {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Fetch the entire URI string
 	 *
 	 * @access	public
@@ -1154,16 +1309,22 @@ class CI_URI {
 	 */
 	function uri_string()
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Fetch URI string
 	 *
 	 * @return	string	CI_URI::$uri_string
 	 */
 	public function uri_string()
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->uri_string;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	// --------------------------------------------------------------------
@@ -1185,6 +1346,8 @@ class CI_URI {
 /* End of file URI.php */
 /* Location: ./system/core/URI.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// --------------------------------------------------------------------
 
 	/**
@@ -1198,4 +1361,7 @@ class CI_URI {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

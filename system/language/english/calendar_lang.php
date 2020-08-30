@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['cal_su']			= "Su";
 $lang['cal_mo']			= "Mo";
@@ -51,6 +52,8 @@ $lang['cal_december']	= "December";
 /* End of file calendar_lang.php */
 /* Location: ./system/language/english/calendar_lang.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -134,4 +137,7 @@ $lang['cal_september'] = 'September';
 $lang['cal_october'] = 'October';
 $lang['cal_november'] = 'November';
 $lang['cal_december'] = 'December';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

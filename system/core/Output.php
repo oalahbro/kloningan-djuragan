@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,30 +58,42 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Output Class
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Responsible for sending final output to browser
 =======
  * Responsible for sending final output to the browser.
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * Responsible for sending final output to the browser.
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
  * @category	Output
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/output.html
 =======
  * @link		https://codeigniter.com/user_guide/libraries/output.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/libraries/output.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_Output {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Current output string
 	 *
@@ -159,6 +174,8 @@ class CI_Output {
 
 		log_message('debug', "Output Class Initialized");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Final output string
 	 *
 	 * @var	string
@@ -231,6 +248,16 @@ class CI_Output {
 	public $parse_exec_vars = TRUE;
 
 	/**
+<<<<<<< HEAD
+=======
+	 * mbstring.func_override flag
+	 *
+	 * @var	bool
+	 */
+	protected static $func_override;
+
+	/**
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Class constructor
 	 *
 	 * Determines whether zLib output compression will be used.
@@ -246,11 +273,19 @@ class CI_Output {
 			&& extension_loaded('zlib')
 		);
 
+<<<<<<< HEAD
+=======
+		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
+
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Get mime types for later
 		$this->mimes =& get_mimes();
 
 		log_message('info', 'Output Class Initialized');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -259,6 +294,7 @@ class CI_Output {
 	 * Get Output
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Returns the current output string
 	 *
 	 * @access	public
@@ -266,12 +302,17 @@ class CI_Output {
 	 */
 	function get_output()
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Returns the current output string.
 	 *
 	 * @return	string
 	 */
 	public function get_output()
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->final_output;
 	}
@@ -281,6 +322,7 @@ class CI_Output {
 	/**
 	 * Set Output
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Sets the output string
 	 *
@@ -293,6 +335,8 @@ class CI_Output {
 		$this->final_output = $output;
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Sets the output string.
 	 *
 	 * @param	string	$output	Output data
@@ -301,7 +345,10 @@ class CI_Output {
 	public function set_output($output)
 	{
 		$this->final_output = $output;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $this;
 	}
 
@@ -310,6 +357,7 @@ class CI_Output {
 	/**
 	 * Append Output
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Appends data onto the output string
 	 *
@@ -329,6 +377,8 @@ class CI_Output {
 		}
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Appends data onto the output string.
 	 *
 	 * @param	string	$output	Data to append
@@ -337,7 +387,10 @@ class CI_Output {
 	public function append_output($output)
 	{
 		$this->final_output .= $output;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $this;
 	}
 
@@ -346,6 +399,7 @@ class CI_Output {
 	/**
 	 * Set Header
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Lets you set a server header which will be outputted with the final display.
 	 *
@@ -359,6 +413,8 @@ class CI_Output {
 	 */
 	function set_header($header, $replace = TRUE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Lets you set a server header which will be sent with the final output.
 	 *
 	 * Note: If a file is cached, headers will not be sent.
@@ -369,12 +425,16 @@ class CI_Output {
 	 * @return	CI_Output
 	 */
 	public function set_header($header, $replace = TRUE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		// If zlib.output_compression is enabled it will compress the output,
 		// but it will not modify the content-length header to compensate for
 		// the reduction, causing the browser to hang waiting for more data.
 		// We'll just skip content-length in those cases.
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if ($this->_zlib_oc && strncasecmp($header, 'content-length', 14) == 0)
@@ -385,19 +445,25 @@ class CI_Output {
 		$this->headers[] = array($header, $replace);
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ($this->_zlib_oc && strncasecmp($header, 'content-length', 14) === 0)
 		{
 			return $this;
 		}
 
 		$this->headers[] = array($header, $replace);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $this;
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Set Content Type Header
 	 *
@@ -407,6 +473,8 @@ class CI_Output {
 	 */
 	function set_content_type($mime_type)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Set Content-Type Header
 	 *
 	 * @param	string	$mime_type	Extension of the file we're outputting
@@ -414,13 +482,17 @@ class CI_Output {
 	 * @return	CI_Output
 	 */
 	public function set_content_type($mime_type, $charset = NULL)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if (strpos($mime_type, '/') === FALSE)
 		{
 			$extension = ltrim($mime_type, '.');
 
 			// Is this extension supported?
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (isset($this->mime_types[$extension]))
 			{
@@ -430,6 +502,11 @@ class CI_Output {
 			{
 				$mime_type =& $this->mimes[$extension];
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			if (isset($this->mimes[$extension]))
+			{
+				$mime_type =& $this->mimes[$extension];
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 				if (is_array($mime_type))
 				{
@@ -439,11 +516,14 @@ class CI_Output {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$header = 'Content-Type: '.$mime_type;
 
 		$this->headers[] = array($header, TRUE);
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$this->mime_type = $mime_type;
 
 		if (empty($charset))
@@ -455,13 +535,17 @@ class CI_Output {
 			.(empty($charset) ? '' : '; charset='.$charset);
 
 		$this->headers[] = array($header, TRUE);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $this;
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Set HTTP Status Header
 	 * moved to Common procedural functions in 1.7.2
@@ -476,6 +560,8 @@ class CI_Output {
 		set_status_header($code, $text);
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Get Current Content-Type Header
 	 *
 	 * @return	string	'text/html', if not already set
@@ -517,9 +603,15 @@ class CI_Output {
 
 		for ($i = 0, $c = count($headers); $i < $c; $i++)
 		{
+<<<<<<< HEAD
 			if (strncasecmp($header, $headers[$i], $l = strlen($header)) === 0)
 			{
 				return trim(substr($headers[$i], $l+1));
+=======
+			if (strncasecmp($header, $headers[$i], $l = self::strlen($header)) === 0)
+			{
+				return trim(self::substr($headers[$i], $l+1));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 		}
 
@@ -541,7 +633,10 @@ class CI_Output {
 	public function set_status_header($code = 200, $text = '')
 	{
 		set_status_header($code, $text);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $this;
 	}
 
@@ -550,6 +645,7 @@ class CI_Output {
 	/**
 	 * Enable/disable Profiler
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	bool
@@ -560,13 +656,18 @@ class CI_Output {
 		$this->enable_profiler = (is_bool($val)) ? $val : TRUE;
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	bool	$val	TRUE to enable or FALSE to disable
 	 * @return	CI_Output
 	 */
 	public function enable_profiler($val = TRUE)
 	{
 		$this->enable_profiler = is_bool($val) ? $val : TRUE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $this;
 	}
 
@@ -575,6 +676,7 @@ class CI_Output {
 	/**
 	 * Set Profiler Sections
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Allows override of default / config settings for Profiler section display
 	 *
@@ -588,6 +690,8 @@ class CI_Output {
 		{
 			$this->_profiler_sections[$section] = ($enable !== FALSE) ? TRUE : FALSE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Allows override of default/config settings for
 	 * Profiler section display.
 	 *
@@ -605,7 +709,10 @@ class CI_Output {
 		foreach ($sections as $section => $enable)
 		{
 			$this->_profiler_sections[$section] = ($enable !== FALSE);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $this;
@@ -617,6 +724,7 @@ class CI_Output {
 	 * Set Cache
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	integer
 	 * @return	void
@@ -626,13 +734,18 @@ class CI_Output {
 		$this->cache_expiration = ( ! is_numeric($time)) ? 0 : $time;
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	int	$time	Cache expiration time in minutes
 	 * @return	CI_Output
 	 */
 	public function cache($time)
 	{
 		$this->cache_expiration = is_numeric($time) ? $time : 0;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $this;
 	}
 
@@ -641,6 +754,7 @@ class CI_Output {
 	/**
 	 * Display Output
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * All "view" data is automatically put into this variable by the controller class:
 	 *
@@ -664,6 +778,8 @@ class CI_Output {
 		// Grab the super object if we can.
 		if (class_exists('CI_Controller'))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Processes and sends finalized output data to the browser along
 	 * with any server headers and profile data. It also stops benchmark
 	 * timers so the page rendering speed and memory usage can be shown.
@@ -685,7 +801,10 @@ class CI_Output {
 
 		// Grab the super object if we can.
 		if (class_exists('CI_Controller', FALSE))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$CI =& get_instance();
 		}
@@ -694,10 +813,14 @@ class CI_Output {
 
 		// Set the output data
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($output == '')
 =======
 		if ($output === '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($output === '')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$output =& $this->final_output;
 		}
@@ -705,10 +828,14 @@ class CI_Output {
 		// --------------------------------------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Do we need to write a cache file?  Only if the controller does not have its
 =======
 		// Do we need to write a cache file? Only if the controller does not have its
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		// Do we need to write a cache file? Only if the controller does not have its
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// own _output() method and we are not dealing with a cache file, which we
 		// can determine by the existence of the $CI object above
 		if ($this->cache_expiration > 0 && isset($CI) && ! method_exists($CI, '_output'))
@@ -726,6 +853,7 @@ class CI_Output {
 		if ($this->parse_exec_vars === TRUE)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$memory	 = ( ! function_exists('memory_get_usage')) ? '0' : round(memory_get_usage()/1024/1024, 2).'MB';
 
 			$output = str_replace('{elapsed_time}', $elapsed, $output);
@@ -734,11 +862,16 @@ class CI_Output {
 			$memory	= round(memory_get_usage() / 1024 / 1024, 2).'MB';
 			$output = str_replace(array('{elapsed_time}', '{memory_usage}'), array($elapsed, $memory), $output);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$memory	= round(memory_get_usage() / 1024 / 1024, 2).'MB';
+			$output = str_replace(array('{elapsed_time}', '{memory_usage}'), array($elapsed, $memory), $output);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// --------------------------------------------------------------------
 
 		// Is compression requested?
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($CFG->item('compress_output') === TRUE && $this->_zlib_oc == FALSE)
 		{
@@ -750,12 +883,17 @@ class CI_Output {
 				}
 			}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (isset($CI) // This means that we're not serving a cache file, if we were, it would already be compressed
 			&& $this->_compress_output === TRUE
 			&& isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE)
 		{
 			ob_start('ob_gzhandler');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// --------------------------------------------------------------------
@@ -777,23 +915,34 @@ class CI_Output {
 		if ( ! isset($CI))
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			echo $output;
 			log_message('debug', "Final output sent to browser");
 			log_message('debug', "Total execution time: ".$elapsed);
 			return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			if ($this->_compress_output === TRUE)
 			{
 				if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE)
 				{
 					header('Content-Encoding: gzip');
+<<<<<<< HEAD
 					header('Content-Length: '.strlen($output));
+=======
+					header('Content-Length: '.self::strlen($output));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 				else
 				{
 					// User agent doesn't support gzip compression,
 					// so we'll have to decompress our cache
+<<<<<<< HEAD
 					$output = gzinflate(substr($output, 10, -8));
+=======
+					$output = gzinflate(self::substr($output, 10, -8));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				}
 			}
 
@@ -801,13 +950,17 @@ class CI_Output {
 			log_message('info', 'Final output sent to browser');
 			log_message('debug', 'Total execution time: '.$elapsed);
 			return;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// --------------------------------------------------------------------
 
 		// Do we need to generate profile data?
 		// If so, load the Profile class and run it.
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($this->enable_profiler == TRUE)
 		{
@@ -818,6 +971,11 @@ class CI_Output {
 		{
 			$CI->load->library('profiler');
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if ($this->enable_profiler === TRUE)
+		{
+			$CI->load->library('profiler');
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			if ( ! empty($this->_profiler_sections))
 			{
 				$CI->profiler->set_sections($this->_profiler_sections);
@@ -825,6 +983,7 @@ class CI_Output {
 
 			// If the output data contains closing </body> and </html> tags
 			// we will remove them and add them back after we insert the profile data
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (preg_match("|</body>.*?</html>|is", $output))
 			{
@@ -841,6 +1000,8 @@ class CI_Output {
 		// --------------------------------------------------------------------
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$output = preg_replace('|</body>.*?</html>|is', '', $output, -1, $count).$CI->profiler->run();
 			if ($count > 0)
 			{
@@ -848,7 +1009,10 @@ class CI_Output {
 			}
 		}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Does the controller contain a function named _output()?
 		// If so send the output there.  Otherwise, echo it.
 		if (method_exists($CI, '_output'))
@@ -858,23 +1022,30 @@ class CI_Output {
 		else
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			echo $output;  // Send it to the browser!
 		}
 
 		log_message('debug', "Final output sent to browser");
 		log_message('debug', "Total execution time: ".$elapsed);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			echo $output; // Send it to the browser!
 		}
 
 		log_message('info', 'Final output sent to browser');
 		log_message('debug', 'Total execution time: '.$elapsed);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Write a Cache File
 	 *
@@ -913,6 +1084,8 @@ class CI_Output {
 		{
 			fwrite($fp, $expire.'TS--->'.$output);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Write Cache
 	 *
 	 * @param	string	$output	Output data to cache
@@ -979,19 +1152,29 @@ class CI_Output {
 
 			$output = $cache_info.'ENDCI--->'.$output;
 
+<<<<<<< HEAD
 			for ($written = 0, $length = strlen($output); $written < $length; $written += $result)
 			{
 				if (($result = fwrite($fp, substr($output, $written))) === FALSE)
+=======
+			for ($written = 0, $length = self::strlen($output); $written < $length; $written += $result)
+			{
+				if (($result = fwrite($fp, self::substr($output, $written))) === FALSE)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				{
 					break;
 				}
 			}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			flock($fp, LOCK_UN);
 		}
 		else
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			log_message('error', "Unable to secure a file lock for file at: ".$cache_path);
 			return;
@@ -1001,6 +1184,8 @@ class CI_Output {
 
 		log_message('debug', "Cache file written: ".$cache_path);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			log_message('error', 'Unable to secure a file lock for file at: '.$cache_path);
 			return;
 		}
@@ -1020,12 +1205,16 @@ class CI_Output {
 			@unlink($cache_path);
 			log_message('error', 'Unable to write the complete cache content at: '.$cache_path);
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Update/serve a cached file
 	 *
@@ -1047,6 +1236,8 @@ class CI_Output {
 
 		if ( ! @file_exists($filepath))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Update/serve cached output
 	 *
 	 * @uses	CI_Config
@@ -1078,14 +1269,20 @@ class CI_Output {
 		$filepath = $cache_path.md5($uri);
 
 		if ( ! file_exists($filepath) OR ! $fp = @fopen($filepath, 'rb'))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ( ! $fp = @fopen($filepath, FOPEN_READ))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		flock($fp, LOCK_SH);
 
 		$cache = (filesize($filepath) > 0) ? fread($fp, filesize($filepath)) : '';
@@ -1095,6 +1292,7 @@ class CI_Output {
 
 		// Look for embedded serialized file info.
 		if ( ! preg_match('/^(.*)ENDCI--->/', $cache, $match))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		{
 			return FALSE;
@@ -1114,10 +1312,13 @@ class CI_Output {
 
 		// Strip out the embedded timestamp
 		if ( ! preg_match("/(\d+TS--->)/", $cache, $match))
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 		// Has the file expired? If so we'll delete it.
 		if (time() >= trim(str_replace('TS--->', '', $match['1'])))
 		{
@@ -1142,6 +1343,8 @@ class CI_Output {
 /* End of file Output.php */
 /* Location: ./system/core/Output.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$cache_info = unserialize($match[1]);
 		$expire = $cache_info['expire'];
 
@@ -1168,7 +1371,11 @@ class CI_Output {
 		}
 
 		// Display the cache
+<<<<<<< HEAD
 		$this->_display(substr($cache, strlen($match[0])));
+=======
+		$this->_display(self::substr($cache, self::strlen($match[0])));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		log_message('debug', 'Cache file is current. Sending it to browser.');
 		return TRUE;
 	}
@@ -1254,5 +1461,48 @@ class CI_Output {
 		}
 	}
 
+<<<<<<< HEAD
 }
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	// --------------------------------------------------------------------
+
+	/**
+	 * Byte-safe strlen()
+	 *
+	 * @param	string	$str
+	 * @return	int
+	 */
+	protected static function strlen($str)
+	{
+		return (self::$func_override)
+			? mb_strlen($str, '8bit')
+			: strlen($str);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Byte-safe substr()
+	 *
+	 * @param	string	$str
+	 * @param	int	$start
+	 * @param	int	$length
+	 * @return	string
+	 */
+	protected static function substr($str, $start, $length = NULL)
+	{
+		if (self::$func_override)
+		{
+			// mb_substr($str, $start, null, '8bit') returns an empty
+			// string on PHP 5.3
+			isset($length) OR $length = ($start >= 0 ? self::strlen($str) - $start : -$start);
+			return mb_substr($str, $start, $length, '8bit');
+		}
+
+		return isset($length)
+			? substr($str, $start, $length)
+			: substr($str, $start);
+	}
+}
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

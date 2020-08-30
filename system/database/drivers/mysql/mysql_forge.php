@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * MySQL Forge Class
@@ -63,14 +69,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Database
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
 =======
  * @link		https://codeigniter.com/user_guide/database/
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/database/
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_mysql_forge extends CI_DB_forge {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Create database
 	 *
@@ -97,6 +108,8 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 		return "DROP DATABASE ".$name;
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CREATE DATABASE statement
 	 *
 	 * @var	string
@@ -139,11 +152,15 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 	 * @var	string
 	 */
 	protected $_null = 'NULL';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Process Fields
 	 *
@@ -232,6 +249,8 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 				$sql .= ',';
 			}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CREATE TABLE attributes
 	 *
 	 * @param	array	$attributes	Associative array of table attributes
@@ -257,7 +276,10 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 		if ( ! empty($this->db->dbcollat) && ! strpos($sql, 'COLLATE'))
 		{
 			$sql .= ' COLLATE = '.$this->db->dbcollat;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $sql;
@@ -266,6 +288,7 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Create Table
 	 *
@@ -320,6 +343,8 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 
 		return $sql;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * ALTER TABLE
 	 *
 	 * @param	string	$alter_type	ALTER type
@@ -359,12 +384,16 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 		}
 
 		return array($sql.implode(',', $field));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Drop Table
 	 *
@@ -375,6 +404,8 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 	{
 		return "DROP TABLE IF EXISTS ".$this->db->_escape_identifiers($table);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Process column
 	 *
 	 * @param	array	$field
@@ -401,6 +432,7 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 			.$field['unique']
 			.(empty($field['comment']) ? '' : ' COMMENT '.$field['comment'])
 			.$extra_clause;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -438,11 +470,14 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 		}
 
 		return $sql;
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Rename a table
 	 *
 	 * Generates a platform-specific query so that a table can be renamed
@@ -456,6 +491,8 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 	{
 		$sql = 'ALTER TABLE '.$this->db->_protect_identifiers($table_name)." RENAME TO ".$this->db->_protect_identifiers($new_table_name);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Process indexes
 	 *
 	 * @param	string	$table	(ignored)
@@ -492,14 +529,20 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 
 		$this->keys = array();
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $sql;
 	}
 
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* End of file mysql_forge.php */
 /* Location: ./system/database/drivers/mysql/mysql_forge.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

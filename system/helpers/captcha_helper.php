@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter CAPTCHA Helper
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/xml_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/captcha_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/captcha_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Create CAPTCHA
@@ -122,6 +133,8 @@ if ( ! function_exists('create_captcha'))
 
 		if ( ! extension_loaded('gd'))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('create_captcha'))
 {
 	/**
@@ -170,7 +183,10 @@ if ( ! function_exists('create_captcha'))
 		if ($img_path === '' OR $img_url === ''
 			OR ! is_dir($img_path) OR ! is_really_writable($img_path)
 			OR ! extension_loaded('gd'))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
@@ -179,6 +195,7 @@ if ( ! function_exists('create_captcha'))
 		// Remove old images
 		// -----------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		list($usec, $sec) = explode(" ", microtime());
 		$now = ((float)$usec + (float)$sec);
@@ -196,15 +213,24 @@ if ( ! function_exists('create_captcha'))
 					@unlink($img_path.$filename);
 				}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$now = microtime(TRUE);
 
 		$current_dir = @opendir($img_path);
 		while ($filename = @readdir($current_dir))
 		{
+<<<<<<< HEAD
 			if (substr($filename, -4) === '.jpg' && (str_replace('.jpg', '', $filename) + $expiration) < $now)
 			{
 				@unlink($img_path.$filename);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			if (in_array(substr($filename, -4), array('.jpg', '.png'))
+				&& (str_replace(array('.jpg', '.png'), '', $filename) + $expiration) < $now)
+			{
+				@unlink($img_path.$filename);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 		}
 
@@ -214,6 +240,7 @@ if ( ! function_exists('create_captcha'))
 		// Do we have a "word" yet?
 		// -----------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	   if ($word == '')
 	   {
@@ -267,6 +294,8 @@ if ( ! function_exists('create_captcha'))
 
 		ImageFilledRectangle($im, 0, 0, $img_width, $img_height, $bg_color);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if (empty($word))
 		{
 			$word = '';
@@ -396,21 +425,28 @@ if ( ! function_exists('create_captcha'))
 
 		// Create the rectangle
 		ImageFilledRectangle($im, 0, 0, $img_width, $img_height, $colors['background']);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// -----------------------------------
 		//  Create the spiral pattern
 		// -----------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$theta		= 1;
 		$thetac		= 7;
 		$radius		= 16;
 		$circles	= 20;
 		$points		= 32;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for ($i = 0; $i < ($circles * $points) - 1; $i++)
 		{
@@ -425,6 +461,8 @@ if ( ! function_exists('create_captcha'))
 			imageline($im, $x, $y, $x1, $y1, $grid_color);
 			$theta = $theta - $thetac;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		for ($i = 0, $cp = ($circles * $points) - 1; $i < $cp; $i++)
 		{
 			$theta += $thetac;
@@ -437,13 +475,17 @@ if ( ! function_exists('create_captcha'))
 			$y1 = ($rad1 * sin($theta)) + $y_axis;
 			imageline($im, $x, $y, $x1, $y1, $colors['grid']);
 			$theta -= $thetac;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		// -----------------------------------
 		//  Write the text
 		// -----------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$use_font = ($font_path != '' AND file_exists($font_path) AND function_exists('imagettftext')) ? TRUE : FALSE;
 
@@ -452,16 +494,22 @@ if ( ! function_exists('create_captcha'))
 			$font_size = 5;
 			$x = rand(0, $img_width/($length/3));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$use_font = ($font_path !== '' && file_exists($font_path) && function_exists('imagettftext'));
 		if ($use_font === FALSE)
 		{
 			($font_size > 5) && $font_size = 5;
 			$x = mt_rand(0, $img_width / ($length / 3));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$y = 0;
 		}
 		else
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$font_size	= 16;
 			$x = rand(0, $img_width/($length/1.5));
@@ -481,6 +529,8 @@ if ( ! function_exists('create_captcha'))
 				$y = rand($img_height/2, $img_height-3);
 				imagettftext($im, $font_size, $angle, $x, $y, $text_color, $font_path, substr($word, $i, 1));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			($font_size > 30) && $font_size = 30;
 			$x = mt_rand(0, $img_width / ($length / 1.5));
 			$y = $font_size + 2;
@@ -498,11 +548,15 @@ if ( ! function_exists('create_captcha'))
 			{
 				$y = mt_rand($img_height / 2, $img_height - 3);
 				imagettftext($im, $font_size, $angle, $x, $y, $colors['text'], $font_path, $word[$i]);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$x += $font_size;
 			}
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		// -----------------------------------
@@ -514,10 +568,15 @@ if ( ! function_exists('create_captcha'))
 		// Create the border
 		imagerectangle($im, 0, 0, $img_width - 1, $img_height - 1, $colors['border']);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		// Create the border
+		imagerectangle($im, 0, 0, $img_width - 1, $img_height - 1, $colors['border']);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// -----------------------------------
 		//  Generate the image
 		// -----------------------------------
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		$img_name = $now.'.jpg';
@@ -537,6 +596,8 @@ if ( ! function_exists('create_captcha'))
 /* End of file captcha_helper.php */
 /* Location: ./system/heleprs/captcha_helper.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$img_url = rtrim($img_url, '/').'/';
 
 		if (function_exists('imagejpeg'))
@@ -560,4 +621,7 @@ if ( ! function_exists('create_captcha'))
 		return array('word' => $word, 'time' => $now, 'image' => $img, 'filename' => $img_filename);
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

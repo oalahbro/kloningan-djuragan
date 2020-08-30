@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,26 +58,36 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * PDO Forge Class
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/database/
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/database/
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_pdo_forge extends CI_DB_forge {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Create database
 	 *
@@ -316,6 +329,8 @@ class CI_DB_pdo_forge extends CI_DB_forge {
 /* End of file pdo_forge.php */
 /* Location: ./system/database/drivers/pdo/pdo_forge.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CREATE TABLE IF statement
 	 *
 	 * @var	string
@@ -330,4 +345,7 @@ class CI_DB_pdo_forge extends CI_DB_forge {
 	protected $_drop_table_if	= FALSE;
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

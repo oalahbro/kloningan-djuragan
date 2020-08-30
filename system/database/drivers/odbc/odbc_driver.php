@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,23 +58,31 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * ODBC Database Adapter Class
  *
  * Note: _DB is an extender class that the app controller
 <<<<<<< HEAD
+<<<<<<< HEAD
  * creates dynamically based on whether the active record
 =======
  * creates dynamically based on whether the query builder
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * creates dynamically based on whether the query builder
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * class is being used or not.
  *
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
  */
@@ -113,6 +124,8 @@ class CI_DB_odbc_driver extends CI_DB {
 		return @odbc_connect($this->hostname, $this->username, $this->password);
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/database/
  */
 class CI_DB_odbc_driver extends CI_DB_driver {
@@ -130,6 +143,7 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	 * @var	string
 	 */
 	public $schema = 'public';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 	// --------------------------------------------------------------------
@@ -145,10 +159,13 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	{
 		return @odbc_pconnect($this->hostname, $this->username, $this->password);
 	}
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Reconnect
 	 *
 	 * Keep / reestablish the db connection if no queries have been
@@ -176,6 +193,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		return TRUE;
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Identifier escape character
 	 *
 	 * Must be empty for ODBC.
@@ -197,6 +216,7 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	 * @var	array
 	 */
 	protected $_random_keyword = array('RND()', 'RND(%d)');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 	// --------------------------------------------------------------------
@@ -215,10 +235,13 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		// @todo - add support if needed
 		return TRUE;
 	}
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Version number query string
 	 *
 	 * @access	public
@@ -229,6 +252,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		return "SELECT version() AS ver";
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * ODBC result ID resource returned from odbc_prepare()
 	 *
 	 * @var	resource
@@ -241,11 +266,15 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	 * @var	array
 	 */
 	private $binds = array();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Execute the query
 	 *
@@ -258,6 +287,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		$sql = $this->_prep_query($sql);
 		return @odbc_exec($this->conn_id, $sql);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Class constructor
 	 *
 	 * @param	array	$params
@@ -272,12 +303,16 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		{
 			$this->dsn = $this->hostname;
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Prep the query
 	 *
@@ -291,6 +326,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	{
 		return $sql;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Non-persistent database connection
 	 *
 	 * @param	bool	$persistent
@@ -301,12 +338,16 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		return ($persistent === TRUE)
 			? odbc_pconnect($this->dsn, $this->username, $this->password)
 			: odbc_connect($this->dsn, $this->username, $this->password);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Begin Transaction
 	 *
@@ -385,6 +426,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		odbc_autocommit($this->conn_id, TRUE);
 		return $ret;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Compile Bindings
 	 *
 	 * @param	string	$sql	SQL statement
@@ -448,6 +491,7 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		}
 
 		return $sql;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -486,11 +530,14 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		}
 
 		return $str;
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Affected Rows
 	 *
 	 * @access	public
@@ -500,6 +547,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	{
 		return @odbc_num_rows($this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Execute the query
 	 *
 	 * @param	string	$sql	an SQL query
@@ -526,12 +575,16 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		$this->binds       = array();
 
 		return $success;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Insert ID
 	 *
@@ -542,6 +595,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	{
 		return @odbc_insert_id($this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Begin Transaction
 	 *
 	 * @return	bool
@@ -549,12 +604,16 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	protected function _trans_begin()
 	{
 		return odbc_autocommit($this->conn_id, FALSE);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * "Count All" query
 	 *
@@ -583,6 +642,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		$this->_reset_select();
 		return (int) $row->numrows;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Commit Transaction
 	 *
 	 * @return	bool
@@ -596,12 +657,16 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Show table query
 	 *
@@ -623,6 +688,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 
 		return $sql;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Rollback Transaction
 	 *
 	 * @return	bool
@@ -636,12 +703,16 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Show column query
 	 *
@@ -684,6 +755,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	{
 		return odbc_errormsg($this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Determines if a query is a "write" type.
 	 *
 	 * @param	string	An SQL query string
@@ -691,18 +764,26 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	 */
 	public function is_write_type($sql)
 	{
+<<<<<<< HEAD
 		if (preg_match('#^(INSERT|UPDATE).*RETURNING\s.+(\,\s?.+)*$#i', $sql))
+=======
+		if (preg_match('#^(INSERT|UPDATE).*RETURNING\s.+(\,\s?.+)*$#is', $sql))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
 		return parent::is_write_type($sql);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * The error message number
 	 *
@@ -755,6 +836,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		// remove duplicates if the user already included the escape
 		return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Platform-dependant string escape
 	 *
 	 * @param	string
@@ -763,12 +846,16 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	protected function _escape_str($str)
 	{
 		$this->db->display_error('db_unsupported_feature');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * From Tables
 	 *
@@ -788,6 +875,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 
 		return '('.implode(', ', $tables).')';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Affected Rows
 	 *
 	 * @return	int
@@ -795,12 +884,16 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	public function affected_rows()
 	{
 		return odbc_num_rows($this->result_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Insert statement
 	 *
@@ -816,6 +909,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	{
 		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Insert ID
 	 *
 	 * @return	bool
@@ -823,6 +918,7 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	public function insert_id()
 	{
 		return ($this->db->db_debug) ? $this->db->display_error('db_unsupported_feature') : FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -880,6 +976,13 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	{
 		return $this->_delete($table);
 =======
+=======
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Show table query
 	 *
 	 * Generates a platform-specific query string so that the table names can be fetched
@@ -913,12 +1016,16 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	protected function _list_columns($table = '')
 	{
 		return 'SHOW COLUMNS FROM '.$table;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Delete statement
 	 *
@@ -950,6 +1057,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 
 		return "DELETE FROM ".$table.$conditions.$limit;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Field data query
 	 *
 	 * Generates a platform-specific query so that the column data can be retrieved
@@ -960,12 +1069,16 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	protected function _field_data($table)
 	{
 		return 'SELECT TOP 1 FROM '.$table;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Limit string
 	 *
@@ -982,6 +1095,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		// Does ODBC doesn't use the LIMIT clause?
 		return $sql;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Error
 	 *
 	 * Returns an array containing code and message of the last
@@ -992,7 +1107,10 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	public function error()
 	{
 		return array('code' => odbc_error($this->conn_id), 'message' => odbc_errormsg($this->conn_id));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -1000,6 +1118,7 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	/**
 	 * Close DB Connection
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	resource
@@ -1018,6 +1137,8 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 /* End of file odbc_driver.php */
 /* Location: ./system/database/drivers/odbc/odbc_driver.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	void
 	 */
 	protected function _close()
@@ -1025,4 +1146,7 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		odbc_close($this->conn_id);
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

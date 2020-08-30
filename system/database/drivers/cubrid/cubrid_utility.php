@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CUBRID Utility Class
@@ -63,16 +69,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Database
  * @author		Esen Sagynov
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
 =======
  * @link		https://codeigniter.com/user_guide/database/
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/database/
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_cubrid_utility extends CI_DB_utility {
 
 	/**
 	 * List databases
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	array
@@ -113,6 +124,8 @@ class CI_DB_cubrid_utility extends CI_DB_utility {
 		// database administration tool. See the link above for more info.
 		return FALSE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function list_databases()
@@ -123,12 +136,16 @@ class CI_DB_cubrid_utility extends CI_DB_utility {
 		}
 
 		return $this->db->data_cache['db_names'] = cubrid_list_dbs($this->db->conn_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Repair table query
 	 *
@@ -157,17 +174,23 @@ class CI_DB_cubrid_utility extends CI_DB_utility {
 	 */
 	function _backup($params = array())
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CUBRID Export
 	 *
 	 * @param	array	Preferences
 	 * @return	mixed
 	 */
 	protected function _backup($params = array())
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		// No SQL based support in CUBRID as of version 8.4.0. Database or
 		// table backup can be performed using CUBRID Manager
 		// database administration tool.
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return $this->db->display_error('db_unsuported_feature');
 	}
@@ -180,3 +203,8 @@ class CI_DB_cubrid_utility extends CI_DB_utility {
 	}
 }
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return $this->db->display_error('db_unsupported_feature');
+	}
+}
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

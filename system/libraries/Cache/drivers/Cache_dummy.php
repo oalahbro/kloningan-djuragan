@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Dummy Caching Class
@@ -74,12 +80,17 @@ class CI_Cache_dummy extends CI_Driver {
 	 * Since this is the dummy class, it's always going to return FALSE.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param 	string
 	 * @return 	Boolean		FALSE
 =======
 	 * @param	string
 	 * @return	bool	FALSE
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @param	string
+	 * @return	bool	FALSE
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function get($id)
 	{
@@ -92,6 +103,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 * Cache Save
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param 	string		Unique Key
 	 * @param 	mixed		Data to store
 	 * @param 	int			Length of time (in seconds) to cache the data
@@ -100,6 +112,8 @@ class CI_Cache_dummy extends CI_Driver {
 	 */
 	public function save($id, $data, $ttl = 60)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	Unique Key
 	 * @param	mixed	Data to store
 	 * @param	int	Length of time (in seconds) to cache the data
@@ -107,7 +121,10 @@ class CI_Cache_dummy extends CI_Driver {
 	 * @return	bool	TRUE, Simulating success
 	 */
 	public function save($id, $data, $ttl = 60, $raw = FALSE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return TRUE;
 	}
@@ -118,12 +135,17 @@ class CI_Cache_dummy extends CI_Driver {
 	 * Delete from Cache
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param 	mixed		unique identifier of the item in the cache
 	 * @param 	boolean		TRUE, simulating success
 =======
 	 * @param	mixed	unique identifier of the item in the cache
 	 * @return	bool	TRUE, simulating success
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @param	mixed	unique identifier of the item in the cache
+	 * @return	bool	TRUE, simulating success
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function delete($id)
 	{
@@ -134,10 +156,13 @@ class CI_Cache_dummy extends CI_Driver {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Clean the cache
 	 *
 	 * @return 	boolean		TRUE, simulating success
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Increment a raw value
 	 *
 	 * @param	string	$id	Cache ID
@@ -169,7 +194,10 @@ class CI_Cache_dummy extends CI_Driver {
 	 * Clean the cache
 	 *
 	 * @return	bool	TRUE, simulating success
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function clean()
 	{
@@ -182,12 +210,17 @@ class CI_Cache_dummy extends CI_Driver {
 	 * Cache Info
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param 	string		user/filehits
 	 * @return 	boolean		FALSE
 =======
 	 * @param	string	user/filehits
 	 * @return	bool	FALSE
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @param	string	user/filehits
+	 * @return	bool	FALSE
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	 public function cache_info($type = NULL)
 	 {
@@ -200,12 +233,17 @@ class CI_Cache_dummy extends CI_Driver {
 	 * Get Cache Metadata
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param 	mixed		key to get cache metadata on
 	 * @return 	boolean		FALSE
 =======
 	 * @param	mixed	key to get cache metadata on
 	 * @return	bool	FALSE
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @param	mixed	key to get cache metadata on
+	 * @return	bool	FALSE
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function get_metadata($id)
 	{
@@ -219,10 +257,14 @@ class CI_Cache_dummy extends CI_Driver {
 	 * Of course this one is.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @return TRUE;
 =======
 	 * @return	bool	TRUE
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	bool	TRUE
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function is_supported()
 	{
@@ -231,8 +273,11 @@ class CI_Cache_dummy extends CI_Driver {
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* End of file Cache_dummy.php */
 /* Location: ./system/libraries/Cache/drivers/Cache_dummy.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

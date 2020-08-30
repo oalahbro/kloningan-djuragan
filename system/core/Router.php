@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Router Class
@@ -65,6 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @package		CodeIgniter
  * @subpackage	Libraries
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @author		EllisLab Dev Team
  * @category	Libraries
  * @link		http://codeigniter.com/user_guide/general/routing.html
@@ -73,10 +80,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/general/routing.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @category	Libraries
+ * @author		EllisLab Dev Team
+ * @link		https://codeigniter.com/user_guide/general/routing.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_Router {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Config class
 	 *
@@ -138,6 +151,8 @@ class CI_Router {
 		$this->uri =& load_class('URI', 'core');
 		log_message('debug', "Router Class Initialized");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * CI_Config class object
 	 *
 	 * @var	object
@@ -227,12 +242,16 @@ class CI_Router {
 		}
 
 		log_message('info', 'Router Class Initialized');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Set the route mapping
 	 *
@@ -349,6 +368,8 @@ class CI_Router {
 
 		log_message('debug', "No URI present. Default controller set.");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Set route mapping
 	 *
 	 * Determines what should be served based on the URI request,
@@ -435,12 +456,16 @@ class CI_Router {
 		{
 			$this->_set_default_controller();
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Set the Route
 	 *
@@ -467,6 +492,8 @@ class CI_Router {
 		{
 			// A standard method request
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Set request route
 	 *
 	 * Takes an array of URI segments as input and sets the class/method
@@ -499,11 +526,15 @@ class CI_Router {
 		$this->set_class($segments[0]);
 		if (isset($segments[1]))
 		{
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$this->set_method($segments[1]);
 		}
 		else
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			// This lets the "routed" segment array identify that the default
 			// index method is being used.
@@ -514,18 +545,24 @@ class CI_Router {
 		// Note: If there is no custom routing, this array will be
 		// identical to $this->uri->segments
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$segments[1] = 'index';
 		}
 
 		array_unshift($segments, NULL);
 		unset($segments[0]);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$this->uri->rsegments = $segments;
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Validates the supplied segments.  Attempts to determine the path to
 	 * the controller.
@@ -620,6 +657,8 @@ class CI_Router {
 		// Nothing else to do at this point but show a 404
 		show_404($segments[0]);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Set default controller
 	 *
 	 * @return	void
@@ -692,12 +731,16 @@ class CI_Router {
 
 		// This means that all segments were actually directories
 		return $segments;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *  Parse Routes
 	 *
@@ -710,6 +753,8 @@ class CI_Router {
 	 */
 	function _parse_routes()
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Parse Routes
 	 *
 	 * Matches any routes that may exist in the config/routes.php file
@@ -718,11 +763,15 @@ class CI_Router {
 	 * @return	void
 	 */
 	protected function _parse_routes()
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		// Turn the segment array into a URI string
 		$uri = implode('/', $this->uri->segments);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Is there a literal match?  If so we're done
 		if (isset($this->routes[$uri]))
@@ -742,6 +791,8 @@ class CI_Router {
 				// Do we have a back-reference?
 				if (strpos($val, '$') !== FALSE AND strpos($key, '(') !== FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Get HTTP verb
 		$http_verb = isset($_SERVER['REQUEST_METHOD']) ? strtolower($_SERVER['REQUEST_METHOD']) : 'cli';
 
@@ -779,32 +830,45 @@ class CI_Router {
 				}
 				// Are we using the default routing method for back-references?
 				elseif (strpos($val, '$') !== FALSE && strpos($key, '(') !== FALSE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				{
 					$val = preg_replace('#^'.$key.'$#', $val, $uri);
 				}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 				return $this->_set_request(explode('/', $val));
 =======
 				$this->_set_request(explode('/', $val));
 				return;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				$this->_set_request(explode('/', $val));
+				return;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 		}
 
 		// If we got this far it means we didn't encounter a
 		// matching route so we'll set the site default route
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$this->_set_request($this->uri->segments);
 =======
 		$this->_set_request(array_values($this->uri->segments));
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$this->_set_request(array_values($this->uri->segments));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Set the class name
 	 *
@@ -814,13 +878,18 @@ class CI_Router {
 	 */
 	function set_class($class)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Set class name
 	 *
 	 * @param	string	$class	Class name
 	 * @return	void
 	 */
 	public function set_class($class)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$this->class = str_replace(array('/', '.'), '', $class);
 	}
@@ -831,16 +900,22 @@ class CI_Router {
 	 * Fetch the current class
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	string
 	 */
 	function fetch_class()
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @deprecated	3.0.0	Read the 'class' property instead
 	 * @return	string
 	 */
 	public function fetch_class()
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->class;
 	}
@@ -848,6 +923,7 @@ class CI_Router {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *  Set the method name
 	 *
@@ -857,13 +933,18 @@ class CI_Router {
 	 */
 	function set_method($method)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Set method name
 	 *
 	 * @param	string	$method	Method name
 	 * @return	void
 	 */
 	public function set_method($method)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$this->method = $method;
 	}
@@ -871,6 +952,7 @@ class CI_Router {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *  Fetch the current method
 	 *
@@ -885,6 +967,8 @@ class CI_Router {
 		}
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Fetch the current method
 	 *
 	 * @deprecated	3.0.0	Read the 'method' property instead
@@ -892,13 +976,17 @@ class CI_Router {
 	 */
 	public function fetch_method()
 	{
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $this->method;
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *  Set the directory name
 	 *
@@ -910,6 +998,8 @@ class CI_Router {
 	{
 		$this->directory = str_replace(array('/', '.'), '', $dir).'/';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Set directory name
 	 *
 	 * @param	string	$dir	Directory name
@@ -926,12 +1016,16 @@ class CI_Router {
 		{
 			$this->directory .= str_replace('.', '', trim($dir, '/')).'/';
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *  Fetch the sub-directory (if any) that contains the requested controller class
 	 *
@@ -940,6 +1034,8 @@ class CI_Router {
 	 */
 	function fetch_directory()
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Fetch directory
 	 *
 	 * Feches the sub-directory (if any) that contains the requested
@@ -949,11 +1045,15 @@ class CI_Router {
 	 * @return	string
 	 */
 	public function fetch_directory()
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->directory;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// --------------------------------------------------------------------
 
@@ -997,3 +1097,6 @@ class CI_Router {
 =======
 }
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+}
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

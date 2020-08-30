@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter File Helpers
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/file_helpers.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/file_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/file_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Read File
@@ -115,6 +126,8 @@ if ( ! function_exists('read_file'))
 
 		return $data;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('read_file'))
 {
 	/**
@@ -130,12 +143,16 @@ if ( ! function_exists('read_file'))
 	function read_file($file)
 	{
 		return @file_get_contents($file);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Write File
@@ -152,6 +169,8 @@ if ( ! function_exists('write_file'))
 {
 	function write_file($path, $data, $mode = FOPEN_WRITE_CREATE_DESTRUCTIVE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('write_file'))
 {
 	/**
@@ -166,7 +185,10 @@ if ( ! function_exists('write_file'))
 	 * @return	bool
 	 */
 	function write_file($path, $data, $mode = 'wb')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if ( ! $fp = @fopen($path, $mode))
 		{
@@ -175,12 +197,15 @@ if ( ! function_exists('write_file'))
 
 		flock($fp, LOCK_EX);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fwrite($fp, $data);
 		flock($fp, LOCK_UN);
 		fclose($fp);
 
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		for ($result = $written = 0, $length = strlen($data); $written < $length; $written += $result)
 		{
@@ -194,12 +219,16 @@ if ( ! function_exists('write_file'))
 		fclose($fp);
 
 		return is_int($result);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Delete Files
@@ -221,6 +250,8 @@ if ( ! function_exists('delete_files'))
 		// Trim the trailing slash
 		$path = rtrim($path, DIRECTORY_SEPARATOR);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('delete_files'))
 {
 	/**
@@ -241,7 +272,10 @@ if ( ! function_exists('delete_files'))
 	{
 		// Trim the trailing slash
 		$path = rtrim($path, '/\\');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		if ( ! $current_dir = @opendir($path))
 		{
@@ -250,6 +284,7 @@ if ( ! function_exists('delete_files'))
 
 		while (FALSE !== ($filename = @readdir($current_dir)))
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if ($filename != "." and $filename != "..")
 			{
@@ -276,6 +311,8 @@ if ( ! function_exists('delete_files'))
 
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			if ($filename !== '.' && $filename !== '..')
 			{
 				$filepath = $path.DIRECTORY_SEPARATOR.$filename;
@@ -296,12 +333,16 @@ if ( ! function_exists('delete_files'))
 		return ($del_dir === TRUE && $_level > 0)
 			? @rmdir($path)
 			: TRUE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Get Filenames
@@ -318,6 +359,8 @@ if ( ! function_exists('delete_files'))
 if ( ! function_exists('get_filenames'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('get_filenames'))
 {
 	/**
@@ -331,7 +374,10 @@ if ( ! function_exists('get_filenames'))
 	 * @param	bool	internal variable to determine recursion status - do not use in calls
 	 * @return	array
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function get_filenames($source_dir, $include_path = FALSE, $_recursion = FALSE)
 	{
 		static $_filedata = array();
@@ -347,6 +393,7 @@ if ( ! function_exists('get_filenames'))
 
 			while (FALSE !== ($file = readdir($fp)))
 			{
+<<<<<<< HEAD
 <<<<<<< HEAD
 				if (@is_dir($source_dir.$file) && strncmp($file, '.', 1) !== 0)
 				{
@@ -364,6 +411,8 @@ if ( ! function_exists('get_filenames'))
 			return FALSE;
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				if (is_dir($source_dir.$file) && $file[0] !== '.')
 				{
 					get_filenames($source_dir.$file.DIRECTORY_SEPARATOR, $include_path, TRUE);
@@ -379,12 +428,16 @@ if ( ! function_exists('get_filenames'))
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Get Directory File Information
@@ -403,6 +456,8 @@ if ( ! function_exists('get_filenames'))
 if ( ! function_exists('get_dir_file_info'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('get_dir_file_info'))
 {
 	/**
@@ -418,7 +473,10 @@ if ( ! function_exists('get_dir_file_info'))
 	 * @param	bool	internal variable to determine recursion status - do not use in calls
 	 * @return	array
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function get_dir_file_info($source_dir, $top_level_only = TRUE, $_recursion = FALSE)
 	{
 		static $_filedata = array();
@@ -437,24 +495,31 @@ if ( ! function_exists('get_dir_file_info'))
 			while (FALSE !== ($file = readdir($fp)))
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (@is_dir($source_dir.$file) AND strncmp($file, '.', 1) !== 0 AND $top_level_only === FALSE)
 				{
 					get_dir_file_info($source_dir.$file.DIRECTORY_SEPARATOR, $top_level_only, TRUE);
 				}
 				elseif (strncmp($file, '.', 1) !== 0)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				if (is_dir($source_dir.$file) && $file[0] !== '.' && $top_level_only === FALSE)
 				{
 					get_dir_file_info($source_dir.$file.DIRECTORY_SEPARATOR, $top_level_only, TRUE);
 				}
 				elseif ($file[0] !== '.')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				{
 					$_filedata[$file] = get_file_info($source_dir.$file);
 					$_filedata[$file]['relative_path'] = $relative_path;
 				}
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return $_filedata;
 		}
@@ -463,17 +528,23 @@ if ( ! function_exists('get_dir_file_info'))
 			return FALSE;
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			closedir($fp);
 			return $_filedata;
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
 * Get File Info
@@ -494,6 +565,8 @@ if ( ! function_exists('get_file_info'))
 	{
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('get_file_info'))
 {
 	/**
@@ -510,7 +583,10 @@ if ( ! function_exists('get_file_info'))
 	 */
 	function get_file_info($file, $returned_values = array('name', 'server_path', 'size', 'date'))
 	{
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ( ! file_exists($file))
 		{
 			return FALSE;
@@ -527,10 +603,14 @@ if ( ! function_exists('get_file_info'))
 			{
 				case 'name':
 <<<<<<< HEAD
+<<<<<<< HEAD
 					$fileinfo['name'] = substr(strrchr($file, DIRECTORY_SEPARATOR), 1);
 =======
 					$fileinfo['name'] = basename($file);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+					$fileinfo['name'] = basename($file);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					break;
 				case 'server_path':
 					$fileinfo['server_path'] = $file;
@@ -546,11 +626,15 @@ if ( ! function_exists('get_file_info'))
 					break;
 				case 'writable':
 <<<<<<< HEAD
+<<<<<<< HEAD
 					// There are known problems using is_weritable on IIS.  It may not be reliable - consider fileperms()
 					$fileinfo['writable'] = is_writable($file);
 =======
 					$fileinfo['writable'] = is_really_writable($file);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+					$fileinfo['writable'] = is_really_writable($file);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					break;
 				case 'executable':
 					$fileinfo['executable'] = is_executable($file);
@@ -567,6 +651,7 @@ if ( ! function_exists('get_file_info'))
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Get Mime by Extension
@@ -602,6 +687,8 @@ if ( ! function_exists('get_mime_by_extension'))
 
 			if ( ! is_array($mimes))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('get_mime_by_extension'))
 {
 	/**
@@ -625,12 +712,16 @@ if ( ! function_exists('get_mime_by_extension'))
 			$mimes = get_mimes();
 
 			if (empty($mimes))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				return FALSE;
 			}
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (array_key_exists($extension, $mimes))
 		{
@@ -649,6 +740,8 @@ if ( ! function_exists('get_mime_by_extension'))
 			return FALSE;
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$extension = strtolower(substr(strrchr($filename, '.'), 1));
 
 		if (isset($mimes[$extension]))
@@ -659,12 +752,16 @@ if ( ! function_exists('get_mime_by_extension'))
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Symbolic Permissions
@@ -706,6 +803,8 @@ if ( ! function_exists('symbolic_permissions'))
 		}
 		elseif (($perms & 0x1000) == 0x1000)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('symbolic_permissions'))
 {
 	/**
@@ -744,7 +843,10 @@ if ( ! function_exists('symbolic_permissions'))
 			$symbolic = 'c'; // Character special
 		}
 		elseif (($perms & 0x1000) === 0x1000)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$symbolic = 'p'; // FIFO pipe
 		}
@@ -754,6 +856,7 @@ if ( ! function_exists('symbolic_permissions'))
 		}
 
 		// Owner
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$symbolic .= (($perms & 0x0100) ? 'r' : '-');
 		$symbolic .= (($perms & 0x0080) ? 'w' : '-');
@@ -769,6 +872,8 @@ if ( ! function_exists('symbolic_permissions'))
 		$symbolic .= (($perms & 0x0002) ? 'w' : '-');
 		$symbolic .= (($perms & 0x0001) ? (($perms & 0x0200) ? 't' : 'x' ) : (($perms & 0x0200) ? 'T' : '-'));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$symbolic .= (($perms & 0x0100) ? 'r' : '-')
 			.(($perms & 0x0080) ? 'w' : '-')
 			.(($perms & 0x0040) ? (($perms & 0x0800) ? 's' : 'x' ) : (($perms & 0x0800) ? 'S' : '-'));
@@ -782,7 +887,10 @@ if ( ! function_exists('symbolic_permissions'))
 		$symbolic .= (($perms & 0x0004) ? 'r' : '-')
 			.(($perms & 0x0002) ? 'w' : '-')
 			.(($perms & 0x0001) ? (($perms & 0x0200) ? 't' : 'x' ) : (($perms & 0x0200) ? 'T' : '-'));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		return $symbolic;
 	}
@@ -790,6 +898,7 @@ if ( ! function_exists('symbolic_permissions'))
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Octal Permissions
@@ -804,6 +913,8 @@ if ( ! function_exists('symbolic_permissions'))
 if ( ! function_exists('octal_permissions'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('octal_permissions'))
 {
 	/**
@@ -815,12 +926,16 @@ if ( ! function_exists('octal_permissions'))
 	 * @param	int	$perms	Permissions
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function octal_permissions($perms)
 	{
 		return substr(sprintf('%o', $perms), -3);
 	}
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -828,3 +943,5 @@ if ( ! function_exists('octal_permissions'))
 /* Location: ./system/helpers/file_helper.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

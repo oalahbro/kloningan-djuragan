@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,13 +58,17 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Database Utility Class
  *
  * @category	Database
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
  */
@@ -84,6 +91,8 @@ class CI_DB_utility extends CI_DB_forge {
 
 		log_message('debug', "Database Utility Class Initialized");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/database/
  */
 abstract class CI_DB_utility {
@@ -130,7 +139,10 @@ abstract class CI_DB_utility {
 	{
 		$this->db =& $db;
 		log_message('info', 'Database Utility Class Initialized');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -138,6 +150,7 @@ abstract class CI_DB_utility {
 	/**
 	 * List databases
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	bool
@@ -163,6 +176,8 @@ abstract class CI_DB_utility {
 		$this->data_cache['db_names'] = $dbs;
 		return $this->data_cache['db_names'];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function list_databases()
@@ -191,7 +206,10 @@ abstract class CI_DB_utility {
 		}
 
 		return $this->db->data_cache['db_names'];
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -199,6 +217,7 @@ abstract class CI_DB_utility {
 	/**
 	 * Determine if a particular database exists
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string
@@ -221,6 +240,8 @@ abstract class CI_DB_utility {
 
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$database_name
 	 * @return	bool
 	 */
@@ -229,12 +250,16 @@ abstract class CI_DB_utility {
 		return in_array($database_name, $this->list_databases());
 	}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// --------------------------------------------------------------------
 
 	/**
 	 * Optimize Table
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the table name
@@ -256,6 +281,8 @@ abstract class CI_DB_utility {
 		// of PHP we can not pass function call directly into it
 		return current($res);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$table_name
 	 * @return	mixed
 	 */
@@ -274,7 +301,10 @@ abstract class CI_DB_utility {
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -282,6 +312,7 @@ abstract class CI_DB_utility {
 	/**
 	 * Optimize Database
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	array
@@ -305,6 +336,8 @@ abstract class CI_DB_utility {
 			// of PHP we can not pass function call directly into it
 			$res = $query->result_array();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	mixed
 	 */
 	public function optimize_database()
@@ -325,7 +358,10 @@ abstract class CI_DB_utility {
 
 			// Build the result array...
 			$res = $res->result_array();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$res = current($res);
 			$key = str_replace($this->db->database.'.', '', current($res));
 			$keys = array_keys($res);
@@ -342,6 +378,7 @@ abstract class CI_DB_utility {
 	/**
 	 * Repair Table
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the table name
@@ -363,6 +400,8 @@ abstract class CI_DB_utility {
 		$res = $query->result_array();
 		return current($res);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$table_name
 	 * @return	mixed
 	 */
@@ -381,7 +420,10 @@ abstract class CI_DB_utility {
 
 		$query = $query->result_array();
 		return current($query);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -389,6 +431,7 @@ abstract class CI_DB_utility {
 	/**
 	 * Generate CSV from a query result object
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	object	The query result object
@@ -399,6 +442,8 @@ abstract class CI_DB_utility {
 	 */
 	function csv_from_result($query, $delim = ",", $newline = "\n", $enclosure = '"')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	object	$query		Query result object
 	 * @param	string	$delim		Delimiter (default: ,)
 	 * @param	string	$newline	Newline character (default: \n)
@@ -406,7 +451,10 @@ abstract class CI_DB_utility {
 	 * @return	string
 	 */
 	public function csv_from_result($query, $delim = ',', $newline = "\n", $enclosure = '"')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if ( ! is_object($query) OR ! method_exists($query, 'list_fields'))
 		{
@@ -415,15 +463,19 @@ abstract class CI_DB_utility {
 
 		$out = '';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// First generate the headings from the table column names
 		foreach ($query->list_fields() as $name)
 		{
 			$out .= $enclosure.str_replace($enclosure, $enclosure.$enclosure, $name).$enclosure.$delim;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$out = rtrim($out);
 		$out .= $newline;
@@ -438,6 +490,8 @@ abstract class CI_DB_utility {
 			$out = rtrim($out);
 			$out .= $newline;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$out = substr($out, 0, -strlen($delim)).$newline;
 
 		// Next blast through the result array and build out the rows
@@ -449,7 +503,10 @@ abstract class CI_DB_utility {
 				$line[] = $enclosure.str_replace($enclosure, $enclosure.$enclosure, $item).$enclosure;
 			}
 			$out .= implode($delim, $line).$newline;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $out;
@@ -461,6 +518,7 @@ abstract class CI_DB_utility {
 	 * Generate XML data from a query result object
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	object	The query result object
 	 * @param	array	Any preferences
@@ -468,12 +526,17 @@ abstract class CI_DB_utility {
 	 */
 	function xml_from_result($query, $params = array())
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	object	$query	Query result object
 	 * @param	array	$params	Any preferences
 	 * @return	string
 	 */
 	public function xml_from_result($query, $params = array())
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if ( ! is_object($query) OR ! method_exists($query, 'list_fields'))
 		{
@@ -494,6 +557,7 @@ abstract class CI_DB_utility {
 
 		// Load the xml helper
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$CI =& get_instance();
 		$CI->load->helper('xml');
 
@@ -513,6 +577,8 @@ abstract class CI_DB_utility {
 
 		return $xml;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		get_instance()->load->helper('xml');
 
 		// Generate the result
@@ -528,7 +594,10 @@ abstract class CI_DB_utility {
 		}
 
 		return $xml.'</'.$root.'>'.$newline;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -537,16 +606,22 @@ abstract class CI_DB_utility {
 	 * Database Backup
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	void
 	 */
 	function backup($params = array())
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array	$params
 	 * @return	string
 	 */
 	public function backup($params = array())
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		// If the parameters have not been submitted as an
 		// array then we know that it is simply the table
@@ -556,6 +631,7 @@ abstract class CI_DB_utility {
 			$params = array('tables' => $params);
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// ------------------------------------------------------
 
@@ -570,6 +646,8 @@ abstract class CI_DB_utility {
 							'newline'		=> "\n"
 						);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Set up our default preferences
 		$prefs = array(
 			'tables'		=> array(),
@@ -581,7 +659,10 @@ abstract class CI_DB_utility {
 			'newline'		=> "\n",
 			'foreign_key_checks'	=> TRUE
 		);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Did the user submit any preferences? If so set them....
 		if (count($params) > 0)
@@ -596,6 +677,7 @@ abstract class CI_DB_utility {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// ------------------------------------------------------
 
 		// Are we backing up a complete database or individual tables?
@@ -606,21 +688,30 @@ abstract class CI_DB_utility {
 		// If no table names were submitted we'll fetch the entire table list
 		if (count($prefs['tables']) === 0)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		// Are we backing up a complete database or individual tables?
+		// If no table names were submitted we'll fetch the entire table list
+		if (count($prefs['tables']) === 0)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$prefs['tables'] = $this->db->list_tables();
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// ------------------------------------------------------
 
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Validate the format
 		if ( ! in_array($prefs['format'], array('gzip', 'zip', 'txt'), TRUE))
 		{
 			$prefs['format'] = 'txt';
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// ------------------------------------------------------
 
@@ -633,6 +724,8 @@ abstract class CI_DB_utility {
 			{
 				return $this->db->display_error('db_unsuported_compression');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Is the encoder supported? If not, we'll either issue an
 		// error or use plain text depending on the debug settings
 		if (($prefs['format'] === 'gzip' && ! function_exists('gzencode'))
@@ -641,12 +734,16 @@ abstract class CI_DB_utility {
 			if ($this->db->db_debug)
 			{
 				return $this->db->display_error('db_unsupported_compression');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$prefs['format'] = 'txt';
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// ------------------------------------------------------
 
@@ -693,6 +790,8 @@ abstract class CI_DB_utility {
 			// Load the Zip class and output it
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Was a Zip file requested?
 		if ($prefs['format'] === 'zip')
 		{
@@ -718,12 +817,16 @@ abstract class CI_DB_utility {
 			}
 
 			// Load the Zip class and output it
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$CI =& get_instance();
 			$CI->load->library('zip');
 			$CI->zip->add_data($prefs['filename'], $this->_backup($prefs));
 			return $CI->zip->get_zip();
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	}
@@ -734,6 +837,8 @@ abstract class CI_DB_utility {
 /* End of file DB_utility.php */
 /* Location: ./system/database/DB_utility.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		elseif ($prefs['format'] === 'txt') // Was a text file requested?
 		{
 			return $this->_backup($prefs);
@@ -747,4 +852,7 @@ abstract class CI_DB_utility {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

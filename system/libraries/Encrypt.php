@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Encryption Class
@@ -66,6 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Libraries
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/encryption.html
  */
@@ -91,6 +98,8 @@ class CI_Encrypt {
 
 		if ($this->_mcrypt_exists === FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/libraries/encryption.html
  */
 class CI_Encrypt {
@@ -138,16 +147,23 @@ class CI_Encrypt {
 	public function __construct()
 	{
 		if (($this->_mcrypt_exists = function_exists('mcrypt_encrypt')) === FALSE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			show_error('The Encrypt library requires the Mcrypt extension.');
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log_message('debug', "Encrypt Class Initialized");
 =======
 		log_message('info', 'Encrypt Class Initialized');
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		log_message('info', 'Encrypt Class Initialized');
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -159,6 +175,7 @@ class CI_Encrypt {
 	 * Mcrypt is sensitive to keys that are not the correct length
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	string
 	 * @return	string
@@ -169,6 +186,8 @@ class CI_Encrypt {
 		{
 			if ($this->encryption_key != '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @return	string
 	 */
@@ -177,11 +196,15 @@ class CI_Encrypt {
 		if ($key === '')
 		{
 			if ($this->encryption_key !== '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				return $this->encryption_key;
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$CI =& get_instance();
 			$key = $CI->config->item('encryption_key');
@@ -192,6 +215,11 @@ class CI_Encrypt {
 
 			if ( ! strlen($key))
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$key = config_item('encryption_key');
+
+			if ( ! strlen($key))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				show_error('In order to use the encryption class requires that you set an encryption key in your config file.');
 			}
@@ -206,6 +234,7 @@ class CI_Encrypt {
 	 * Set the encryption key
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	string
 	 * @return	void
@@ -214,6 +243,8 @@ class CI_Encrypt {
 	{
 		$this->encryption_key = $key;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @return	CI_Encrypt
 	 */
@@ -221,7 +252,10 @@ class CI_Encrypt {
 	{
 		$this->encryption_key = $key;
 		return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -238,13 +272,17 @@ class CI_Encrypt {
 	 * message and key are the same.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	the string to encode
 	 * @param	string	the key
 	 * @return	string
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	function encode($string, $key = '')
 	{
@@ -257,6 +295,11 @@ class CI_Encrypt {
 	{
 		return base64_encode($this->mcrypt_encode($string, $this->get_key($key)));
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	public function encode($string, $key = '')
+	{
+		return base64_encode($this->mcrypt_encode($string, $this->get_key($key)));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -267,13 +310,17 @@ class CI_Encrypt {
 	 * Reverses the above process
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	string
 	 * @return	string
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	function decode($string, $key = '')
 	{
@@ -292,15 +339,24 @@ class CI_Encrypt {
 	{
 		if (preg_match('/[^a-zA-Z0-9\/\+=]/', $string) OR base64_encode(base64_decode($string)) !== $string)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	public function decode($string, $key = '')
+	{
+		if (preg_match('/[^a-zA-Z0-9\/\+=]/', $string) OR base64_encode(base64_decode($string)) !== $string)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return $dec;
 =======
 		return $this->mcrypt_decode(base64_decode($string), $this->get_key($key));
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return $this->mcrypt_decode(base64_decode($string), $this->get_key($key));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -314,6 +370,7 @@ class CI_Encrypt {
 	 * new encryption algorithms.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * For more details, see http://codeigniter.com/user_guide/installation/upgrade_200.html#encryption
 	 *
 	 * @access	public
@@ -321,15 +378,22 @@ class CI_Encrypt {
 	 * For more details, see https://codeigniter.com/user_guide/installation/upgrade_200.html#encryption
 	 *
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * For more details, see https://codeigniter.com/user_guide/installation/upgrade_200.html#encryption
+	 *
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	int		(mcrypt mode constant)
 	 * @param	string
 	 * @return	string
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	function encode_from_legacy($string, $legacy_mode = MCRYPT_MODE_ECB, $key = '')
 	{
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	public function encode_from_legacy($string, $legacy_mode = MCRYPT_MODE_ECB, $key = '')
 	{
 		if (preg_match('/[^a-zA-Z0-9\/\+=]/', $string))
@@ -337,7 +401,10 @@ class CI_Encrypt {
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// decode it first
 		// set mode temporarily to what it was when string was encoded with the legacy
 		// algorithm - typically MCRYPT_MODE_ECB
@@ -346,6 +413,7 @@ class CI_Encrypt {
 
 		$key = $this->get_key($key);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (preg_match('/[^a-zA-Z0-9\/\+=]/', $string))
 		{
@@ -357,11 +425,16 @@ class CI_Encrypt {
 		if (($dec = $this->mcrypt_decode($dec, $key)) === FALSE)
 		{
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$dec = base64_decode($string);
 		if (($dec = $this->mcrypt_decode($dec, $key)) === FALSE)
 		{
 			$this->set_mode($current_mode);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			return FALSE;
 		}
 
@@ -383,22 +456,30 @@ class CI_Encrypt {
 	 * plain-text original message
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	private
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	string
 	 * @return	string
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	function _xor_decode($string, $key)
 =======
 	protected function _xor_decode($string, $key)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	protected function _xor_decode($string, $key)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$string = $this->_xor_merge($string, $key);
 
 		$dec = '';
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for ($i = 0; $i < strlen($string); $i++)
 		{
@@ -408,6 +489,11 @@ class CI_Encrypt {
 		{
 			$dec .= ($string[$i++] ^ $string[$i]);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		for ($i = 0, $l = strlen($string); $i < $l; $i++)
+		{
+			$dec .= ($string[$i++] ^ $string[$i]);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $dec;
@@ -421,13 +507,17 @@ class CI_Encrypt {
 	 * Takes a string and key as input and computes the difference using XOR
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	private
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	string
 	 * @return	string
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	function _xor_merge($string, $key)
 	{
@@ -437,6 +527,8 @@ class CI_Encrypt {
 		{
 			$str .= substr($string, $i, 1) ^ substr($hash, ($i % strlen($hash)), 1);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	protected function _xor_merge($string, $key)
 	{
 		$hash = $this->hash($key);
@@ -444,7 +536,10 @@ class CI_Encrypt {
 		for ($i = 0, $ls = strlen($string), $lh = strlen($hash); $i < $ls; $i++)
 		{
 			$str .= $string[$i] ^ $hash[($i % $lh)];
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $str;
@@ -456,18 +551,25 @@ class CI_Encrypt {
 	 * Encrypt using Mcrypt
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	string
 	 * @return	string
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	function mcrypt_encode($data, $key)
 =======
 	public function mcrypt_encode($data, $key)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	public function mcrypt_encode($data, $key)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$init_size = mcrypt_get_iv_size($this->_get_cipher(), $this->_get_mode());
 		$init_vect = mcrypt_create_iv($init_size, MCRYPT_RAND);
@@ -480,18 +582,25 @@ class CI_Encrypt {
 	 * Decrypt using Mcrypt
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	string
 	 * @return	string
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	function mcrypt_decode($data, $key)
 =======
 	public function mcrypt_decode($data, $key)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	public function mcrypt_decode($data, $key)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$data = $this->_remove_cipher_noise($data, $key);
 		$init_size = mcrypt_get_iv_size($this->_get_cipher(), $this->_get_mode());
@@ -514,15 +623,19 @@ class CI_Encrypt {
 	 * http://www.ciphersbyritter.com/GLOSSARY.HTM#IV
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Function description
 	 *
 	 * @access	private
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	string
 	 * @return	string
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	function _add_cipher_noise($data, $key)
 	{
@@ -534,6 +647,8 @@ class CI_Encrypt {
 		{
 			if ($j >= $keylen)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	protected function _add_cipher_noise($data, $key)
 	{
 		$key = $this->hash($key);
@@ -542,16 +657,23 @@ class CI_Encrypt {
 		for ($i = 0, $j = 0, $ld = strlen($data), $lk = strlen($key); $i < $ld; ++$i, ++$j)
 		{
 			if ($j >= $lk)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$j = 0;
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$str .= chr((ord($data[$i]) + ord($keyhash[$j])) % 256);
 =======
 			$str .= chr((ord($data[$i]) + ord($key[$j])) % 256);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$str .= chr((ord($data[$i]) + ord($key[$j])) % 256);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $str;
@@ -565,6 +687,7 @@ class CI_Encrypt {
 	 *
 	 * Function description
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	type
@@ -580,6 +703,8 @@ class CI_Encrypt {
 		{
 			if ($j >= $keylen)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$data
 	 * @param	string	$key
 	 * @return	string
@@ -592,11 +717,15 @@ class CI_Encrypt {
 		for ($i = 0, $j = 0, $ld = strlen($data), $lk = strlen($key); $i < $ld; ++$i, ++$j)
 		{
 			if ($j >= $lk)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				$j = 0;
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$temp = ord($data[$i]) - ord($keyhash[$j]);
 
@@ -604,12 +733,17 @@ class CI_Encrypt {
 			{
 				$temp = $temp + 256;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$temp = ord($data[$i]) - ord($key[$j]);
 
 			if ($temp < 0)
 			{
 				$temp += 256;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$str .= chr($temp);
@@ -624,6 +758,7 @@ class CI_Encrypt {
 	 * Set the Mcrypt Cipher
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	constant
 	 * @return	string
@@ -632,6 +767,8 @@ class CI_Encrypt {
 	{
 		$this->_mcrypt_cipher = $cipher;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	int
 	 * @return	CI_Encrypt
 	 */
@@ -639,7 +776,10 @@ class CI_Encrypt {
 	{
 		$this->_mcrypt_cipher = $cipher;
 		return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -647,6 +787,7 @@ class CI_Encrypt {
 	/**
 	 * Set the Mcrypt Mode
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	constant
@@ -656,6 +797,8 @@ class CI_Encrypt {
 	{
 		$this->_mcrypt_mode = $mode;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	int
 	 * @return	CI_Encrypt
 	 */
@@ -663,7 +806,10 @@ class CI_Encrypt {
 	{
 		$this->_mcrypt_mode = $mode;
 		return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -671,6 +817,7 @@ class CI_Encrypt {
 	/**
 	 * Get Mcrypt cipher Value
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	string
@@ -681,6 +828,8 @@ class CI_Encrypt {
 		{
 			$this->_mcrypt_cipher = MCRYPT_RIJNDAEL_256;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	protected function _get_cipher()
@@ -688,7 +837,10 @@ class CI_Encrypt {
 		if ($this->_mcrypt_cipher === NULL)
 		{
 			return $this->_mcrypt_cipher = MCRYPT_RIJNDAEL_256;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $this->_mcrypt_cipher;
@@ -700,6 +852,7 @@ class CI_Encrypt {
 	 * Get Mcrypt Mode Value
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	private
 	 * @return	string
 	 */
@@ -709,6 +862,8 @@ class CI_Encrypt {
 		{
 			$this->_mcrypt_mode = MCRYPT_MODE_CBC;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	protected function _get_mode()
@@ -716,7 +871,10 @@ class CI_Encrypt {
 		if ($this->_mcrypt_mode === NULL)
 		{
 			return $this->_mcrypt_mode = MCRYPT_MODE_CBC;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $this->_mcrypt_mode;
@@ -728,6 +886,7 @@ class CI_Encrypt {
 	 * Set the Hash type
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	string
 	 * @return	string
@@ -736,13 +895,18 @@ class CI_Encrypt {
 	{
 		$this->_hash_type = ($type != 'sha1' AND $type != 'md5') ? 'sha1' : $type;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @return	void
 	 */
 	public function set_hash($type = 'sha1')
 	{
 		$this->_hash_type = in_array($type, hash_algos()) ? $type : 'sha1';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -750,6 +914,7 @@ class CI_Encrypt {
 	/**
 	 * Hash encode a string
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string
@@ -797,6 +962,8 @@ class CI_Encrypt {
 /* End of file Encrypt.php */
 /* Location: ./system/libraries/Encrypt.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @return	string
 	 */
@@ -806,4 +973,7 @@ class CI_Encrypt {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

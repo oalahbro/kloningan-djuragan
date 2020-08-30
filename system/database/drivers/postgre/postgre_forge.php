@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,26 +58,36 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Postgre Forge Class
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/database/
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_postgre_forge extends CI_DB_forge {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Create database
 	 *
@@ -87,6 +100,8 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 		return "CREATE DATABASE ".$name;
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * UNSIGNED support
 	 *
 	 * @var	array
@@ -109,11 +124,15 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 	 * @var	string
 	 */
 	protected $_null = 'NULL';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Drop database
 	 *
@@ -125,6 +144,8 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 	{
 		return "DROP DATABASE ".$name;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Class constructor
 	 *
 	 * @param	object	&$db	Database object
@@ -138,12 +159,16 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 		{
 			$this->create_table_if = 'CREATE TABLE IF NOT EXISTS';
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Create Table
 	 *
@@ -300,6 +325,8 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 		return $sql;
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * ALTER TABLE
 	 *
 	 * @param	string	$alter_type	ALTER type
@@ -357,11 +384,15 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 
 		return $sqls;
  	}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Drop Table
 	 *
@@ -425,6 +456,8 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 		return $sql;
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Field attribute TYPE
 	 *
 	 * Performs a data type mapping between different databases.
@@ -452,12 +485,16 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 				return;
 			default: return;
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Rename a table
 	 *
@@ -480,6 +517,8 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 /* End of file postgre_forge.php */
 /* Location: ./system/database/drivers/postgre/postgre_forge.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Field attribute AUTO_INCREMENT
 	 *
 	 * @param	array	&$attributes
@@ -497,4 +536,7 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

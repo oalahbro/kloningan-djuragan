@@ -152,10 +152,15 @@ class CI_Encryption {
 	public function __construct(array $params = array())
 	{
 		$this->_drivers = array(
+<<<<<<< HEAD
 			'mcrypt' => defined('MCRYPT_DEV_URANDOM'),
 			// While OpenSSL is available for PHP 5.3.0, an IV parameter
 			// for the encrypt/decrypt functions is only available since 5.3.3
 			'openssl' => (is_php('5.3.3') && extension_loaded('openssl'))
+=======
+			'mcrypt'  => defined('MCRYPT_DEV_URANDOM'),
+			'openssl' => extension_loaded('openssl')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		);
 
 		if ( ! $this->_drivers['mcrypt'] && ! $this->_drivers['openssl'])
@@ -909,7 +914,11 @@ class CI_Encryption {
 	 * Byte-safe strlen()
 	 *
 	 * @param	string	$str
+<<<<<<< HEAD
 	 * @return	integer
+=======
+	 * @return	int
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	protected static function strlen($str)
 	{

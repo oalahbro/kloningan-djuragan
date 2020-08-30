@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -44,6 +45,8 @@ class CI_DB_forge {
 		$this->db =& $CI->db;
 		log_message('debug', "Database Forge Class Initialized");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -214,7 +217,10 @@ abstract class CI_DB_forge {
 	{
 		$this->db =& $db;
 		log_message('info', 'Database Forge Class Initialized');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -222,6 +228,7 @@ abstract class CI_DB_forge {
 	/**
 	 * Create database
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the database name
@@ -238,6 +245,8 @@ abstract class CI_DB_forge {
 
 		return $this->db->query($sql);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$db_name
 	 * @return	bool
 	 */
@@ -247,7 +256,11 @@ abstract class CI_DB_forge {
 		{
 			return ($this->db->db_debug) ? $this->db->display_error('db_unsupported_feature') : FALSE;
 		}
+<<<<<<< HEAD
 		elseif ( ! $this->db->query(sprintf($this->_create_database, $db_name, $this->db->char_set, $this->db->dbcollat)))
+=======
+		elseif ( ! $this->db->query(sprintf($this->_create_database, $this->db->escape_identifiers($db_name), $this->db->char_set, $this->db->dbcollat)))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return ($this->db->db_debug) ? $this->db->display_error('db_unable_to_drop') : FALSE;
 		}
@@ -258,7 +271,10 @@ abstract class CI_DB_forge {
 		}
 
 		return TRUE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -266,6 +282,7 @@ abstract class CI_DB_forge {
 	/**
 	 * Drop database
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the database name
@@ -282,6 +299,8 @@ abstract class CI_DB_forge {
 
 		return $this->db->query($sql);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$db_name
 	 * @return	bool
 	 */
@@ -291,7 +310,11 @@ abstract class CI_DB_forge {
 		{
 			return ($this->db->db_debug) ? $this->db->display_error('db_unsupported_feature') : FALSE;
 		}
+<<<<<<< HEAD
 		elseif ( ! $this->db->query(sprintf($this->_drop_database, $db_name)))
+=======
+		elseif ( ! $this->db->query(sprintf($this->_drop_database, $this->db->escape_identifiers($db_name))))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return ($this->db->db_debug) ? $this->db->display_error('db_unable_to_drop') : FALSE;
 		}
@@ -306,7 +329,10 @@ abstract class CI_DB_forge {
 		}
 
 		return TRUE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -314,6 +340,7 @@ abstract class CI_DB_forge {
 	/**
 	 * Add Key
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	key
@@ -324,6 +351,8 @@ abstract class CI_DB_forge {
 	{
 		if (is_array($key))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$key
 	 * @param	bool	$primary
 	 * @return	CI_DB_forge
@@ -337,13 +366,17 @@ abstract class CI_DB_forge {
 		//
 		// It's not the same for regular indexes.
 		if ($primary === TRUE && is_array($key))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			foreach ($key as $one)
 			{
 				$this->add_key($one, $primary);
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return;
 		}
@@ -354,6 +387,9 @@ abstract class CI_DB_forge {
 =======
 			return $this;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			return $this;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		if ($primary === TRUE)
@@ -365,10 +401,15 @@ abstract class CI_DB_forge {
 			$this->keys[] = $key;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 		return $this;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+
+		return $this;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -376,6 +417,7 @@ abstract class CI_DB_forge {
 	/**
 	 * Add Field
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	collation
@@ -400,6 +442,8 @@ abstract class CI_DB_forge {
 													)
 								));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array	$field
 	 * @return	CI_DB_forge
 	 */
@@ -416,7 +460,10 @@ abstract class CI_DB_forge {
 						'auto_increment' => TRUE
 					)
 				));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$this->add_key('id', TRUE);
 			}
 			else
@@ -436,9 +483,13 @@ abstract class CI_DB_forge {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		return $this;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return $this;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -446,6 +497,7 @@ abstract class CI_DB_forge {
 	/**
 	 * Create Table
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the table name
@@ -460,6 +512,8 @@ abstract class CI_DB_forge {
 
 		if (count($this->fields) == 0)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$table		Table name
 	 * @param	bool	$if_not_exists	Whether to add IF NOT EXISTS condition
 	 * @param	array	$attributes	Associative array of table attributes
@@ -477,17 +531,23 @@ abstract class CI_DB_forge {
 		}
 
 		if (count($this->fields) === 0)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			show_error('Field information is required.');
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$sql = $this->_create_table($this->db->dbprefix.$table, $this->fields, $this->primary_keys, $this->keys, $if_not_exists);
 
 		$this->_reset();
 		return $this->db->query($sql);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$sql = $this->_create_table($table, $if_not_exists, $attributes);
 
 		if (is_bool($sql))
@@ -594,7 +654,10 @@ abstract class CI_DB_forge {
 		}
 
 		return $sql;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -602,6 +665,7 @@ abstract class CI_DB_forge {
 	/**
 	 * Drop Table
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the table name
@@ -618,6 +682,8 @@ abstract class CI_DB_forge {
 
 		return $this->db->query($sql);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$table_name	Table name
 	 * @param	bool	$if_exists	Whether to add an IF EXISTS condition
 	 * @return	bool
@@ -647,12 +713,16 @@ abstract class CI_DB_forge {
 		}
 
 		return $query;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Rename Table
 	 *
@@ -671,6 +741,8 @@ abstract class CI_DB_forge {
 		$sql = $this->_rename_table($this->db->dbprefix.$table_name, $this->db->dbprefix.$new_table_name);
 		return $this->db->query($sql);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Drop Table
 	 *
 	 * Generates a platform-specific DROP TABLE string
@@ -699,12 +771,16 @@ abstract class CI_DB_forge {
 		}
 
 		return $sql.' '.$this->db->escape_identifiers($table);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Column Add
 	 *
@@ -739,6 +815,8 @@ abstract class CI_DB_forge {
 
 			if ($this->db->query($sql) === FALSE)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Rename Table
 	 *
 	 * @param	string	$table_name	Old table name
@@ -811,7 +889,10 @@ abstract class CI_DB_forge {
 		for ($i = 0, $c = count($sqls); $i < $c; $i++)
 		{
 			if ($this->db->query($sqls[$i]) === FALSE)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				return FALSE;
 			}
@@ -819,9 +900,12 @@ abstract class CI_DB_forge {
 
 		return TRUE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -829,6 +913,7 @@ abstract class CI_DB_forge {
 	/**
 	 * Column Drop
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the table name
@@ -852,6 +937,8 @@ abstract class CI_DB_forge {
 
 		return $this->db->query($sql);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$table		Table name
 	 * @param	string	$column_name	Column name
 	 * @return	bool
@@ -907,12 +994,16 @@ abstract class CI_DB_forge {
 		}
 
 		return TRUE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Column Modify
 	 *
@@ -959,6 +1050,8 @@ abstract class CI_DB_forge {
 
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * ALTER TABLE
 	 *
 	 * @param	string	$alter_type	ALTER type
@@ -1312,7 +1405,10 @@ abstract class CI_DB_forge {
 		}
 
 		return $sqls;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -1322,6 +1418,7 @@ abstract class CI_DB_forge {
 	 *
 	 * Resets table creation vars
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	void
@@ -1338,6 +1435,8 @@ abstract class CI_DB_forge {
 /* End of file DB_forge.php */
 /* Location: ./system/database/DB_forge.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	void
 	 */
 	protected function _reset()
@@ -1346,4 +1445,7 @@ abstract class CI_DB_forge {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

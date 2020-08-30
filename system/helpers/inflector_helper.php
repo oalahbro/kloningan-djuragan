@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Inflector Helpers
@@ -64,6 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Helpers
  * @category	Helpers
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/directory_helper.html
  */
@@ -83,6 +90,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if ( ! function_exists('singular'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/helpers/inflector_helper.html
  */
 
@@ -98,11 +107,15 @@ if ( ! function_exists('singular'))
 	 * @param	string	$str	Input string
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function singular($str)
 	{
 		$result = strval($str);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$singular_rules = array(
 			'/(matr)ices$/'         => '\1ix',
@@ -135,6 +148,8 @@ if ( ! function_exists('singular'))
 		);
 		
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ( ! is_countable($result))
 		{
 			return $result;
@@ -170,7 +185,10 @@ if ( ! function_exists('singular'))
 			'/([^us])s$/'		=> '\1'
 		);
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		foreach ($singular_rules as $rule => $replacement)
 		{
 			if (preg_match($rule, $result))
@@ -186,6 +204,7 @@ if ( ! function_exists('singular'))
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Plural
@@ -205,6 +224,8 @@ if ( ! function_exists('plural'))
 	
 		$plural_rules = array(
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('plural'))
 {
 	/**
@@ -226,7 +247,10 @@ if ( ! function_exists('plural'))
 
 		$plural_rules = array(
 			'/(quiz)$/'                => '\1zes',      // quizzes
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			'/^(ox)$/'                 => '\1\2en',     // ox
 			'/([m|l])ouse$/'           => '\1ice',      // mouse, louse
 			'/(matr|vert|ind)ix|ex$/'  => '\1ices',     // matrix, vertex, index
@@ -242,10 +266,14 @@ if ( ! function_exists('plural'))
 			'/(buffal|tomat)o$/'       => '\1\2oes',    // buffalo, tomato
 			'/(bu|campu)s$/'           => '\1\2ses',    // bus, campus
 <<<<<<< HEAD
+<<<<<<< HEAD
 			'/(alias|status|virus)/'   => '\1es',       // alias
 =======
 			'/(alias|status|virus)$/'  => '\1es',       // alias
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			'/(alias|status|virus)$/'  => '\1es',       // alias
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			'/(octop)us$/'             => '\1i',        // octopus
 			'/(ax|cris|test)is$/'      => '\1es',       // axis, crisis
 			'/s$/'                     => 's',          // no change (compatibility)
@@ -268,6 +296,7 @@ if ( ! function_exists('plural'))
 // --------------------------------------------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * Camelize
  *
@@ -285,6 +314,8 @@ if ( ! function_exists('camelize'))
 		$str = ucwords(preg_replace('/[\s_]+/', ' ', $str));
 		return substr(str_replace(' ', '', $str), 1);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('camelize'))
 {
 	/**
@@ -298,12 +329,16 @@ if ( ! function_exists('camelize'))
 	function camelize($str)
 	{
 		return strtolower($str[0]).substr(str_replace(' ', '', ucwords(preg_replace('/[\s_]+/', ' ', $str))), 1);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Underscore
@@ -320,6 +355,8 @@ if ( ! function_exists('underscore'))
 	{
 		return preg_replace('/[\s]+/', '_', strtolower(trim($str)));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('underscore'))
 {
 	/**
@@ -333,12 +370,16 @@ if ( ! function_exists('underscore'))
 	function underscore($str)
 	{
 		return preg_replace('/[\s]+/', '_', trim(MB_ENABLED ? mb_strtolower($str) : strtolower($str)));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Humanize
@@ -361,6 +402,8 @@ if ( ! function_exists('humanize'))
 /* End of file inflector_helper.php */
 /* Location: ./system/helpers/inflector_helper.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('humanize'))
 {
 	/**
@@ -393,10 +436,47 @@ if ( ! function_exists('is_countable'))
 		return ! in_array(
 			strtolower($word),
 			array(
+<<<<<<< HEAD
 				'equipment', 'information', 'rice', 'money',
 				'species', 'series', 'fish', 'meta'
+=======
+				'audio',
+				'bison',
+				'chassis',
+				'compensation',
+				'coreopsis',
+				'data',
+				'deer',
+				'education',
+				'emoji',
+				'equipment',
+				'fish',
+				'furniture',
+				'gold',
+				'information',
+				'knowledge',
+				'love',
+				'rain',
+				'money',
+				'moose',
+				'nutrition',
+				'offspring',
+				'plankton',
+				'pokemon',
+				'police',
+				'rice',
+				'series',
+				'sheep',
+				'species',
+				'swine',
+				'traffic',
+				'wheat'
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			)
 		);
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

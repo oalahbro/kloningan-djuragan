@@ -1,6 +1,9 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -38,7 +41,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 $lang['db_invalid_connection_str'] = 'Unable to determine the database settings based on the connection string you submitted.';
 $lang['db_unable_to_connect'] = 'Unable to connect to your database server using the provided settings.';
@@ -56,12 +62,17 @@ $lang['db_unsupported_function'] = 'This feature is not available for the databa
 $lang['db_transaction_failure'] = 'Transaction failure: Rollback performed.';
 $lang['db_unable_to_drop'] = 'Unable to drop the specified database.';
 <<<<<<< HEAD
+<<<<<<< HEAD
 $lang['db_unsuported_feature'] = 'Unsupported feature of the database platform you are using.';
 $lang['db_unsuported_compression'] = 'The file compression format you chose is not supported by your server.';
 =======
 $lang['db_unsupported_feature'] = 'Unsupported feature of the database platform you are using.';
 $lang['db_unsupported_compression'] = 'The file compression format you chose is not supported by your server.';
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+$lang['db_unsupported_feature'] = 'Unsupported feature of the database platform you are using.';
+$lang['db_unsupported_compression'] = 'The file compression format you chose is not supported by your server.';
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 $lang['db_filepath_error'] = 'Unable to write data to the file path you have submitted.';
 $lang['db_invalid_cache_path'] = 'The cache path you submitted is not valid or writable.';
 $lang['db_table_name_required'] = 'A table name is required for that operation.';
@@ -70,8 +81,11 @@ $lang['db_column_definition_required'] = 'A column definition is required for th
 $lang['db_unable_to_set_charset'] = 'Unable to set client connection character set: %s';
 $lang['db_error_heading'] = 'A Database Error Occurred';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* End of file db_lang.php */
 /* Location: ./system/language/english/db_lang.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

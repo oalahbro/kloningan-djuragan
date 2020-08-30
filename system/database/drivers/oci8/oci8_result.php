@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * oci8 Result Class
@@ -64,6 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @category	Database
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
  */
@@ -96,6 +103,8 @@ class CI_DB_oci8_result extends CI_DB_result {
 
 		return $this->num_rows;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/database/
  */
 class CI_DB_oci8_result extends CI_DB_result {
@@ -145,7 +154,10 @@ class CI_DB_oci8_result extends CI_DB_result {
 		$this->limit_used = $driver_object->limit_used;
 		$this->commit_mode =& $driver_object->commit_mode;
 		$driver_object->stmt_id = FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -153,6 +165,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 	/**
 	 * Number of fields in the result set
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access  public
 	 * @return  integer
@@ -169,6 +182,8 @@ class CI_DB_oci8_result extends CI_DB_result {
 
 		return $count;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_fields()
@@ -177,7 +192,10 @@ class CI_DB_oci8_result extends CI_DB_result {
 
 		// if we used a limit we subtract it
 		return ($this->limit_used) ? $count - 1 : $count;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -188,9 +206,12 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 * Generates an array of column names
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function list_fields()
@@ -211,11 +232,15 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 * Generates an array of objects containing field meta-data
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access  public
 	 * @return  array
 =======
 	 * @return	array
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	array
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function field_data()
 	{
@@ -223,16 +248,22 @@ class CI_DB_oci8_result extends CI_DB_result {
 		for ($c = 1, $fieldCount = $this->num_fields(); $c <= $fieldCount; $c++)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$F			= new stdClass();
 			$F->name		= oci_field_name($this->stmt_id, $c);
 			$F->type		= oci_field_type($this->stmt_id, $c);
 			$F->max_length		= oci_field_size($this->stmt_id, $c);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$F		= new stdClass();
 			$F->name	= oci_field_name($this->stmt_id, $c);
 			$F->type	= oci_field_type($this->stmt_id, $c);
 			$F->max_length	= oci_field_size($this->stmt_id, $c);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 			$retval[] = $F;
 		}
@@ -246,10 +277,14 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 * Free the result
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @return	null
 =======
 	 * @return	void
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	void
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function free_result()
 	{
@@ -259,7 +294,10 @@ class CI_DB_oci8_result extends CI_DB_result {
 			$this->result_id = FALSE;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		if (is_resource($this->stmt_id))
 		{
@@ -271,7 +309,10 @@ class CI_DB_oci8_result extends CI_DB_result {
 			oci_cancel($this->curs_id);
 			$this->curs_id = NULL;
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -282,11 +323,15 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 * Returns the result set as an array
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access  protected
 	 * @return  array
 =======
 	 * @return	array
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	array
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	protected function _fetch_assoc()
 	{
@@ -301,6 +346,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access  protected
 	 * @return  object
@@ -358,6 +404,8 @@ class CI_DB_oci8_result extends CI_DB_result {
 /* End of file oci8_result.php */
 /* Location: ./system/database/drivers/oci8/oci8_result.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$class_name
 	 * @return	object
 	 */
@@ -382,4 +430,7 @@ class CI_DB_oci8_result extends CI_DB_result {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

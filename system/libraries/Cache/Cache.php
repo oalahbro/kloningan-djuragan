@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter Caching Class
@@ -69,6 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CI_Cache extends CI_Driver_Library {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	protected $valid_drivers 	= array(
 		'cache_apc', 'cache_file', 'cache_memcached', 'cache_dummy'
 	);
@@ -79,6 +86,8 @@ class CI_Cache extends CI_Driver_Library {
 
 	// ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	/**
 	 * Valid cache drivers
 	 *
@@ -120,11 +129,15 @@ class CI_Cache extends CI_Driver_Library {
 	 * @var	string
 	 */
 	public $key_prefix = '';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	/**
 	 * Constructor
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @param array
 	 */
@@ -134,6 +147,8 @@ class CI_Cache extends CI_Driver_Library {
 		{
 			$this->_initialize($config);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Initialize class properties based on the configuration array.
 	 *
 	 * @param	array	$config = array()
@@ -160,7 +175,10 @@ class CI_Cache extends CI_Driver_Library {
 				log_message('debug', 'Cache adapter "'.$this->_adapter.'" is unavailable. Falling back to "'.$this->_backup_driver.'" backup adapter.');
 				$this->_adapter = $this->_backup_driver;
 			}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 	}
 
@@ -169,6 +187,7 @@ class CI_Cache extends CI_Driver_Library {
 	/**
 	 * Get
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Look for a value in the cache.  If it exists, return the data
 	 * if not, return FALSE
@@ -180,6 +199,8 @@ class CI_Cache extends CI_Driver_Library {
 	{
 		return $this->{$this->_adapter}->get($id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Look for a value in the cache. If it exists, return the data
 	 * if not, return FALSE
 	 *
@@ -189,7 +210,10 @@ class CI_Cache extends CI_Driver_Library {
 	public function get($id)
 	{
 		return $this->{$this->_adapter}->get($this->key_prefix.$id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
@@ -197,6 +221,7 @@ class CI_Cache extends CI_Driver_Library {
 	/**
 	 * Cache Save
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @param 	string		Unique Key
 	 * @param 	mixed		Data to store
@@ -208,6 +233,8 @@ class CI_Cache extends CI_Driver_Library {
 	{
 		return $this->{$this->_adapter}->save($id, $data, $ttl);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$id	Cache ID
 	 * @param	mixed	$data	Data to store
 	 * @param	int	$ttl	Cache TTL (in seconds)
@@ -217,7 +244,10 @@ class CI_Cache extends CI_Driver_Library {
 	public function save($id, $data, $ttl = 60, $raw = FALSE)
 	{
 		return $this->{$this->_adapter}->save($this->key_prefix.$id, $data, $ttl, $raw);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
@@ -226,6 +256,7 @@ class CI_Cache extends CI_Driver_Library {
 	 * Delete from Cache
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param 	mixed		unique identifier of the item in the cache
 	 * @return 	boolean		true on success/false on failure
 	 */
@@ -233,18 +264,24 @@ class CI_Cache extends CI_Driver_Library {
 	{
 		return $this->{$this->_adapter}->delete($id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$id	Cache ID
 	 * @return	bool	TRUE on success, FALSE on failure
 	 */
 	public function delete($id)
 	{
 		return $this->{$this->_adapter}->delete($this->key_prefix.$id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Clean the cache
 	 *
@@ -254,6 +291,8 @@ class CI_Cache extends CI_Driver_Library {
 	{
 		return $this->{$this->_adapter}->clean();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Increment a raw value
 	 *
 	 * @param	string	$id	Cache ID
@@ -263,12 +302,16 @@ class CI_Cache extends CI_Driver_Library {
 	public function increment($id, $offset = 1)
 	{
 		return $this->{$this->_adapter}->increment($this->key_prefix.$id, $offset);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Cache Info
 	 *
@@ -279,6 +322,8 @@ class CI_Cache extends CI_Driver_Library {
 	{
 		return $this->{$this->_adapter}->cache_info($type);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Decrement a raw value
 	 *
 	 * @param	string	$id	Cache ID
@@ -288,12 +333,16 @@ class CI_Cache extends CI_Driver_Library {
 	public function decrement($id, $offset = 1)
 	{
 		return $this->{$this->_adapter}->decrement($this->key_prefix.$id, $offset);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Get Cache Metadata
 	 *
@@ -304,6 +353,8 @@ class CI_Cache extends CI_Driver_Library {
 	{
 		return $this->{$this->_adapter}->get_metadata($id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Clean the cache
 	 *
 	 * @return	bool	TRUE on success, FALSE on failure
@@ -311,12 +362,16 @@ class CI_Cache extends CI_Driver_Library {
 	public function clean()
 	{
 		return $this->{$this->_adapter}->clean();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Initialize
 	 *
@@ -350,6 +405,8 @@ class CI_Cache extends CI_Driver_Library {
 			}
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Cache Info
 	 *
 	 * @param	string	$type = 'user'	user/filehits
@@ -358,12 +415,16 @@ class CI_Cache extends CI_Driver_Library {
 	public function cache_info($type = 'user')
 	{
 		return $this->{$this->_adapter}->cache_info($type);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Is the requested driver supported in this environment?
 	 *
@@ -381,6 +442,8 @@ class CI_Cache extends CI_Driver_Library {
 
 		return $support[$driver];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Get Cache Metadata
 	 *
 	 * @param	string	$id	key to get cache metadata on
@@ -389,12 +452,16 @@ class CI_Cache extends CI_Driver_Library {
 	public function get_metadata($id)
 	{
 		return $this->{$this->_adapter}->get_metadata($this->key_prefix.$id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * __get()
 	 *
@@ -419,6 +486,8 @@ class CI_Cache extends CI_Driver_Library {
 /* End of file Cache.php */
 /* Location: ./system/libraries/Cache/Cache.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Is the requested driver supported in this environment?
 	 *
 	 * @param	string	$driver	The driver to test
@@ -436,4 +505,7 @@ class CI_Cache extends CI_Driver_Library {
 		return $support[$driver];
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

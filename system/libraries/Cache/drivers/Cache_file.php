@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -20,6 +21,8 @@
 /**
  * CodeIgniter Memcached Caching Class
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -61,7 +64,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * CodeIgniter File Caching Class
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
@@ -72,11 +78,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CI_Cache_file extends CI_Driver {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	protected $_cache_path;
 
 	/**
 	 * Constructor
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	/**
 	 * Directory in which to save cache files
 	 *
@@ -88,12 +97,16 @@ class CI_Cache_file extends CI_Driver {
 	 * Initialize file-based cache
 	 *
 	 * @return	void
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function __construct()
 	{
 		$CI =& get_instance();
 		$CI->load->helper('file');
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		$path = $CI->config->item('cache_path');
@@ -103,6 +116,10 @@ class CI_Cache_file extends CI_Driver {
 		$path = $CI->config->item('cache_path');
 		$this->_cache_path = ($path === '') ? APPPATH.'cache/' : $path;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$path = $CI->config->item('cache_path');
+		$this->_cache_path = ($path === '') ? APPPATH.'cache/' : $path;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
@@ -110,6 +127,7 @@ class CI_Cache_file extends CI_Driver {
 	/**
 	 * Fetch from cache
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @param 	mixed		unique key id
 	 * @return 	mixed		data on success/false on failure
@@ -132,6 +150,8 @@ class CI_Cache_file extends CI_Driver {
 
 		return $data['data'];
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$id	Cache ID
 	 * @return	mixed	Data on success, FALSE on failure
 	 */
@@ -139,7 +159,10 @@ class CI_Cache_file extends CI_Driver {
 	{
 		$data = $this->_get($id);
 		return is_array($data) ? $data['data'] : FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
@@ -147,6 +170,7 @@ class CI_Cache_file extends CI_Driver {
 	/**
 	 * Save into cache
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @param 	string		unique key
 	 * @param 	mixed		data to store
@@ -166,6 +190,8 @@ class CI_Cache_file extends CI_Driver {
 		{
 			@chmod($this->_cache_path.$id, 0777);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$id	Cache ID
 	 * @param	mixed	$data	Data to store
 	 * @param	int	$ttl	Time to live in seconds
@@ -183,7 +209,10 @@ class CI_Cache_file extends CI_Driver {
 		if (write_file($this->_cache_path.$id, serialize($contents)))
 		{
 			chmod($this->_cache_path.$id, 0640);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			return TRUE;
 		}
 
@@ -196,6 +225,7 @@ class CI_Cache_file extends CI_Driver {
 	 * Delete from Cache
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param 	mixed		unique identifier of item in cache
 	 * @return 	boolean		true on success/false on failure
 	 */
@@ -203,12 +233,18 @@ class CI_Cache_file extends CI_Driver {
 	{
 		return unlink($this->_cache_path.$id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	mixed	unique identifier of item in cache
 	 * @return	bool	true on success/false on failure
 	 */
 	public function delete($id)
 	{
+<<<<<<< HEAD
 		return file_exists($this->_cache_path.$id) ? unlink($this->_cache_path.$id) : FALSE;
+=======
+		return is_file($this->_cache_path.$id) ? unlink($this->_cache_path.$id) : FALSE;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
@@ -265,7 +301,10 @@ class CI_Cache_file extends CI_Driver {
 		return $this->save($id, $new_value, $data['ttl'])
 			? $new_value
 			: FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
@@ -274,18 +313,24 @@ class CI_Cache_file extends CI_Driver {
 	 * Clean the Cache
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @return 	boolean		false on failure/true on success
 	 */
 	public function clean()
 	{
 		return delete_files($this->_cache_path);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	bool	false on failure/true on success
 	 */
 	public function clean()
 	{
 		return delete_files($this->_cache_path, FALSE, TRUE);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// ------------------------------------------------------------------------
@@ -296,12 +341,17 @@ class CI_Cache_file extends CI_Driver {
 	 * Not supported by file-based caching
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param 	string	user/filehits
 	 * @return 	mixed 	FALSE
 =======
 	 * @param	string	user/filehits
 	 * @return	mixed	FALSE
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @param	string	user/filehits
+	 * @return	mixed	FALSE
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function cache_info($type = NULL)
 	{
@@ -314,6 +364,7 @@ class CI_Cache_file extends CI_Driver {
 	 * Get Cache Metadata
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param 	mixed		key to get cache metadata on
 	 * @return 	mixed		FALSE on failure, array on success.
 =======
@@ -324,27 +375,44 @@ class CI_Cache_file extends CI_Driver {
 	public function get_metadata($id)
 	{
 		if ( ! file_exists($this->_cache_path.$id))
+=======
+	 * @param	mixed	key to get cache metadata on
+	 * @return	mixed	FALSE on failure, array on success.
+	 */
+	public function get_metadata($id)
+	{
+		if ( ! is_file($this->_cache_path.$id))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$data = read_file($this->_cache_path.$id);
 		$data = unserialize($data);
 =======
 		$data = unserialize(file_get_contents($this->_cache_path.$id));
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$data = unserialize(file_get_contents($this->_cache_path.$id));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		if (is_array($data))
 		{
 			$mtime = filemtime($this->_cache_path.$id);
 
+<<<<<<< HEAD
 			if ( ! isset($data['ttl']))
+=======
+			if ( ! isset($data['ttl'], $data['time']))
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				return FALSE;
 			}
 
 			return array(
+<<<<<<< HEAD
 <<<<<<< HEAD
 				'expire'	=> $mtime + $data['ttl'],
 				'mtime'		=> $mtime
@@ -352,6 +420,10 @@ class CI_Cache_file extends CI_Driver {
 				'expire' => $mtime + $data['ttl'],
 				'mtime'	 => $mtime
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+				'expire' => $data['time'] + $data['ttl'],
+				'mtime'	 => $mtime
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			);
 		}
 
@@ -366,10 +438,14 @@ class CI_Cache_file extends CI_Driver {
 	 * In the file driver, check to see that the cache directory is indeed writable
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @return boolean
 =======
 	 * @return	bool
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	bool
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 */
 	public function is_supported()
 	{
@@ -377,11 +453,14 @@ class CI_Cache_file extends CI_Driver {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 /* End of file Cache_file.php */
 /* Location: ./system/libraries/Cache/drivers/Cache_file.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// ------------------------------------------------------------------------
 
 	/**
@@ -411,4 +490,7 @@ class CI_Cache_file extends CI_Driver {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

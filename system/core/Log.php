@@ -104,6 +104,16 @@ class CI_Log {
 	 */
 	protected $_levels = array('ERROR' => 1, 'DEBUG' => 2, 'INFO' => 3, 'ALL' => 4);
 
+<<<<<<< HEAD
+=======
+	/**
+	 * mbstring.func_override flag
+	 *
+	 * @var	bool
+	 */
+	protected static $func_override;
+
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	// --------------------------------------------------------------------
 
 	/**
@@ -115,6 +125,11 @@ class CI_Log {
 	{
 		$config =& get_config();
 
+<<<<<<< HEAD
+=======
+		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
+
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$this->_log_path = ($config['log_path'] !== '') ? $config['log_path'] : APPPATH.'logs/';
 		$this->_file_ext = (isset($config['log_file_extension']) && $config['log_file_extension'] !== '')
 			? ltrim($config['log_file_extension'], '.') : 'php';
@@ -208,9 +223,15 @@ class CI_Log {
 
 		$message .= $this->_format_line($level, $date, $msg);
 
+<<<<<<< HEAD
 		for ($written = 0, $length = strlen($message); $written < $length; $written += $result)
 		{
 			if (($result = fwrite($fp, substr($message, $written))) === FALSE)
+=======
+		for ($written = 0, $length = self::strlen($message); $written < $length; $written += $result)
+		{
+			if (($result = fwrite($fp, self::substr($message, $written))) === FALSE)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				break;
 			}
@@ -244,4 +265,47 @@ class CI_Log {
 	{
 		return $level.' - '.$date.' --> '.$message."\n";
 	}
+<<<<<<< HEAD
+=======
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Byte-safe strlen()
+	 *
+	 * @param	string	$str
+	 * @return	int
+	 */
+	protected static function strlen($str)
+	{
+		return (self::$func_override)
+			? mb_strlen($str, '8bit')
+			: strlen($str);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Byte-safe substr()
+	 *
+	 * @param	string	$str
+	 * @param	int	$start
+	 * @param	int	$length
+	 * @return	string
+	 */
+	protected static function substr($str, $start, $length = NULL)
+	{
+		if (self::$func_override)
+		{
+			// mb_substr($str, $start, null, '8bit') returns an empty
+			// string on PHP 5.3
+			isset($length) OR $length = ($start >= 0 ? self::strlen($str) - $start : -$start);
+			return mb_substr($str, $start, $length, '8bit');
+		}
+
+		return isset($length)
+			? substr($str, $start, $length)
+			: substr($str, $start);
+	}
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 }

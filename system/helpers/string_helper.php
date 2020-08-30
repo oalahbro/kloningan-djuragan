@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * CodeIgniter String Helpers
@@ -65,14 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/helpers/string_helper.html
 =======
  * @link		https://codeigniter.com/user_guide/helpers/string_helper.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/helpers/string_helper.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Trim Slashes
@@ -92,6 +103,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if ( ! function_exists('trim_slashes'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('trim_slashes'))
 {
 	/**
@@ -111,7 +124,10 @@ if ( ! function_exists('trim_slashes'))
 	 * @param	string
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function trim_slashes($str)
 	{
 		return trim($str, '/');
@@ -120,6 +136,7 @@ if ( ! function_exists('trim_slashes'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Strip Slashes
@@ -145,6 +162,8 @@ if ( ! function_exists('strip_slashes'))
 		{
 			$str = stripslashes($str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('strip_slashes'))
 {
 	/**
@@ -165,7 +184,10 @@ if ( ! function_exists('strip_slashes'))
 		foreach ($str as $key => $val)
 		{
 			$str[$key] = strip_slashes($val);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $str;
@@ -174,6 +196,7 @@ if ( ! function_exists('strip_slashes'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Strip Quotes
@@ -187,6 +210,8 @@ if ( ! function_exists('strip_slashes'))
 if ( ! function_exists('strip_quotes'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('strip_quotes'))
 {
 	/**
@@ -197,7 +222,10 @@ if ( ! function_exists('strip_quotes'))
 	 * @param	string
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function strip_quotes($str)
 	{
 		return str_replace(array('"', "'"), '', $str);
@@ -206,6 +234,7 @@ if ( ! function_exists('strip_quotes'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Quotes to Entities
@@ -219,6 +248,8 @@ if ( ! function_exists('strip_quotes'))
 if ( ! function_exists('quotes_to_entities'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('quotes_to_entities'))
 {
 	/**
@@ -229,7 +260,10 @@ if ( ! function_exists('quotes_to_entities'))
 	 * @param	string
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function quotes_to_entities($str)
 	{
 		return str_replace(array("\'","\"","'",'"'), array("&#39;","&quot;","&#39;","&quot;"), $str);
@@ -238,6 +272,7 @@ if ( ! function_exists('quotes_to_entities'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Reduce Double Slashes
@@ -261,6 +296,8 @@ if ( ! function_exists('reduce_double_slashes'))
 	{
 		return preg_replace("#(^|[^:])//+#", "\\1/", $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('reduce_double_slashes'))
 {
 	/**
@@ -281,12 +318,16 @@ if ( ! function_exists('reduce_double_slashes'))
 	function reduce_double_slashes($str)
 	{
 		return preg_replace('#(^|[^:])//+#', '\\1/', $str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Reduce Multiples
@@ -318,6 +359,8 @@ if ( ! function_exists('reduce_multiples'))
 
 		return $str;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('reduce_multiples'))
 {
 	/**
@@ -340,12 +383,16 @@ if ( ! function_exists('reduce_multiples'))
 	{
 		$str = preg_replace('#'.preg_quote($character, '#').'{2,}#', $character, $str);
 		return ($trim === TRUE) ? trim($str, $character) : $str;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Create a Random String
@@ -403,6 +450,8 @@ if ( ! function_exists('random_string'))
 						return do_hash(uniqid(mt_rand(), TRUE), 'sha1');
 				break;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('random_string'))
 {
 	/**
@@ -446,13 +495,17 @@ if ( ! function_exists('random_string'))
 			case 'encrypt': // todo: remove in 3.1+
 			case 'sha1':
 				return sha1(uniqid(mt_rand(), TRUE));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 	}
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Add's _1 to a string or increment the ending number to allow _2, _3, etc
@@ -468,6 +521,8 @@ function increment_string($str, $separator = '_', $first = 1)
 
 	return isset($match[2]) ? $match[1].$separator.($match[2] + 1) : $str.$separator.$first;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('increment_string'))
 {
 	/**
@@ -483,11 +538,15 @@ if ( ! function_exists('increment_string'))
 		preg_match('/(.+)'.preg_quote($separator, '/').'([0-9]+)$/', $str, $match);
 		return isset($match[2]) ? $match[1].$separator.($match[2] + 1) : $str.$separator.$first;
 	}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 }
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Alternator
@@ -501,6 +560,8 @@ if ( ! function_exists('increment_string'))
 if ( ! function_exists('alternator'))
 {
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('alternator'))
 {
 	/**
@@ -511,24 +572,35 @@ if ( ! function_exists('alternator'))
 	 * @param	string (as many parameters as needed)
 	 * @return	string
 	 */
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	function alternator()
 	{
 		static $i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (func_num_args() == 0)
 =======
 		if (func_num_args() === 0)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		if (func_num_args() === 0)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			$i = 0;
 			return '';
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$args = func_get_args();
 		return $args[($i++ % count($args))];
 	}
@@ -536,6 +608,7 @@ if ( ! function_exists('alternator'))
 
 // ------------------------------------------------------------------------
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * Repeater function
@@ -557,6 +630,8 @@ if ( ! function_exists('repeater'))
 /* End of file string_helper.php */
 /* Location: ./system/helpers/string_helper.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 if ( ! function_exists('repeater'))
 {
 	/**
@@ -574,4 +649,7 @@ if ( ! function_exists('repeater'))
 		return ($num > 0) ? str_repeat($data, $num) : '';
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

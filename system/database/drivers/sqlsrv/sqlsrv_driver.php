@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,23 +58,31 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * SQLSRV Database Adapter Class
  *
  * Note: _DB is an extender class that the app controller
 <<<<<<< HEAD
+<<<<<<< HEAD
  * creates dynamically based on whether the active record
 =======
  * creates dynamically based on whether the query builder
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * creates dynamically based on whether the query builder
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * class is being used or not.
  *
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
  */
@@ -152,6 +163,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		// not implemented in MSSQL
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/database/
  */
 class CI_DB_sqlsrv_driver extends CI_DB {
@@ -174,6 +187,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 * @var	mixed
 	 */
 	public $scrollable;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 	// --------------------------------------------------------------------
@@ -189,10 +203,13 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		return $this->_execute('USE ' . $this->database);
 	}
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Set client character set
 	 *
 	 * @access	public
@@ -206,6 +223,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		return TRUE;
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * ORDER BY random keyword
 	 *
 	 * @var	array
@@ -221,11 +240,15 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 * @var	bool
 	 */
 	protected $_quoted_identifier = TRUE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Execute the query
 	 *
@@ -241,6 +264,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 			'SendStreamParamsAtExec'	=> true
 		));
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Class constructor
 	 *
 	 * @param	array	$params
@@ -257,12 +282,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 				? SQLSRV_CURSOR_CLIENT_BUFFERED
 				: FALSE;
 		}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Prep the query
 	 *
@@ -305,6 +334,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 
 		return sqlsrv_begin_transaction($this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Database connection
 	 *
 	 * @param	bool	$pooling
@@ -342,12 +373,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		}
 
 		return $this->conn_id;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Commit Transaction
 	 *
@@ -369,6 +404,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 
 		return sqlsrv_commit($this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Select the database
 	 *
 	 * @param	string	$database
@@ -389,12 +426,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Rollback Transaction
 	 *
@@ -416,6 +457,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 
 		return sqlsrv_rollback($this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Execute the query
 	 *
 	 * @param	string	$sql	an SQL query
@@ -426,12 +469,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		return ($this->scrollable === FALSE OR $this->is_write_type($sql))
 			? sqlsrv_query($this->conn_id, $sql)
 			: sqlsrv_query($this->conn_id, $sql, NULL, array('Scrollable' => $this->scrollable));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Escape String
 	 *
@@ -445,6 +492,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		// Escape single quotes
 		return str_replace("'", "''", $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Begin Transaction
 	 *
 	 * @return	bool
@@ -452,12 +501,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	protected function _trans_begin()
 	{
 		return sqlsrv_begin_transaction($this->conn_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Affected Rows
 	 *
@@ -468,6 +521,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		return @sqlrv_rows_affected($this->conn_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Commit Transaction
 	 *
 	 * @return	bool
@@ -475,12 +530,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	protected function _trans_commit()
 	{
 		return sqlsrv_commit($this->conn_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	* Insert ID
 	*
@@ -493,6 +552,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		return $this->query('select @@IDENTITY as insert_id')->row('insert_id');
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Rollback Transaction
 	 *
 	 * @return	bool
@@ -500,12 +561,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	protected function _trans_rollback()
 	{
 		return sqlsrv_rollback($this->conn_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	* Parse major version
 	*
@@ -521,6 +586,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		preg_match('/([0-9]+)\.([0-9]+)\.([0-9]+)/', $version, $ver_info);
 		return $ver_info[1]; // return the major version b/c that's all we're interested in.
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Affected Rows
 	 *
 	 * @return	int
@@ -528,12 +595,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	public function affected_rows()
 	{
 		return sqlsrv_rows_affected($this->result_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	* Version number query string
 	*
@@ -545,6 +616,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		$info = sqlsrv_server_info($this->conn_id);
 		return sprintf("select '%s' as ver", $info['SQLServerVersion']);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Insert ID
 	 *
 	 * Returns the last id created in the Identity column.
@@ -554,12 +627,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	public function insert_id()
 	{
 		return $this->query('SELECT SCOPE_IDENTITY() AS insert_id')->row()->insert_id;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * "Count All" query
 	 *
@@ -588,6 +665,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		$this->_reset_select();
 		return (int) $row->numrows;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Database version number
 	 *
 	 * @return	string
@@ -605,7 +684,10 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		}
 
 		return $this->data_cache['version'] = $info['SQLServerVersion'];
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -616,6 +698,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 * Generates a platform-specific query string so that the table names can be fetched
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	private
 	 * @param	boolean
 	 * @return	string
@@ -624,6 +707,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		return "SELECT name FROM sysobjects WHERE type = 'U' ORDER BY name";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	bool
 	 * @return	string	$prefix_limit
 	 */
@@ -640,7 +725,10 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		}
 
 		return $sql.' ORDER BY '.$this->escape_identifiers('name');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -651,6 +739,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 * Generates a platform-specific query string so that the column names can be fetched
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	private
 	 * @param	string	the table name
 	 * @return	string
@@ -659,6 +748,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		return "SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME = '".$this->_escape_table($table)."'";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$table
 	 * @return	string
 	 */
@@ -667,12 +758,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		return 'SELECT COLUMN_NAME
 			FROM INFORMATION_SCHEMA.Columns
 			WHERE UPPER(TABLE_NAME) = '.$this->escape(strtoupper($table));
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Field data query
 	 *
@@ -714,6 +809,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		$error = array_shift(sqlsrv_errors());
 		return isset($error['SQLSTATE']) ? $error['SQLSTATE'] : null;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Returns an object with field data
 	 *
 	 * @param	string	$table
@@ -742,12 +839,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		}
 
 		return $retval;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Escape Table Name
 	 *
@@ -799,6 +900,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 
 		return implode(', ', $tables);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Error
 	 *
 	 * Returns an array containing code and message of the last
@@ -832,12 +935,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		}
 
 		return $error;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Insert statement
 	 *
@@ -853,6 +960,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		return "INSERT INTO ".$this->_escape_table($table)." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Update statement
 	 *
 	 * Generates a platform-specific update string from the supplied data
@@ -866,12 +975,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		$this->qb_limit = FALSE;
 		$this->qb_orderby = array();
 		return parent::_update($table, $values);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Update statement
 	 *
@@ -894,6 +1007,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 
 		return "UPDATE ".$this->_escape_table($table)." SET ".implode(', ', $valstr)." WHERE ".implode(" ", $where);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Truncate statement
 	 *
 	 * Generates a platform-specific truncate string from the supplied data
@@ -907,12 +1022,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	protected function _truncate($table)
 	{
 		return 'TRUNCATE TABLE '.$table;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Truncate statement
 	 *
@@ -928,6 +1047,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		return "TRUNCATE TABLE ".$table;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Delete statement
 	 *
 	 * Generates a platform-specific delete string from the supplied data
@@ -943,12 +1064,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		}
 
 		return parent::_delete($table);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Delete statement
 	 *
@@ -964,6 +1089,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	{
 		return "DELETE FROM ".$this->_escape_table($table)." WHERE ".implode(" ", $where);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * LIMIT
 	 *
 	 * Generates a platform-specific LIMIT clause
@@ -1018,12 +1145,16 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		}
 
 		return preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$limit.' ', $sql);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Limit string
 	 *
@@ -1041,6 +1172,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 
 		return preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Insert batch statement
 	 *
 	 * Generates a platform-specific insert string from the supplied data.
@@ -1059,7 +1192,10 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 		}
 
 		return ($this->db->db_debug) ? $this->db->display_error('db_unsupported_feature') : FALSE;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -1067,6 +1203,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	/**
 	 * Close DB Connection
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	resource
@@ -1084,6 +1221,8 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 /* End of file sqlsrv_driver.php */
 /* Location: ./system/database/drivers/sqlsrv/sqlsrv_driver.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	void
 	 */
 	protected function _close()
@@ -1092,4 +1231,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

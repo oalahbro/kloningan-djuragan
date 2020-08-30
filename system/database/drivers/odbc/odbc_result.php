@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * ODBC Result Class
@@ -63,22 +69,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * This class extends the parent result class: CI_DB_result
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/database/
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_odbc_result extends CI_DB_result {
 
 	/**
 	 * Number of rows in the result set
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
@@ -87,6 +100,8 @@ class CI_DB_odbc_result extends CI_DB_result {
 	{
 		return @odbc_num_rows($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_rows()
@@ -111,7 +126,10 @@ class CI_DB_odbc_result extends CI_DB_result {
 		}
 
 		return $this->num_rows = count($this->result_array());
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -120,6 +138,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 * Number of fields in the result set
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
 	 */
@@ -127,12 +146,17 @@ class CI_DB_odbc_result extends CI_DB_result {
 	{
 		return @odbc_num_fields($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_fields()
 	{
 		return odbc_num_fields($this->result_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -142,6 +166,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 *
 	 * Generates an array of column names
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	array
@@ -153,6 +178,8 @@ class CI_DB_odbc_result extends CI_DB_result {
 		{
 			$field_names[]	= odbc_field_name($this->result_id, $i);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function list_fields()
@@ -166,7 +193,10 @@ class CI_DB_odbc_result extends CI_DB_result {
 			{
 				$field_names[] = odbc_field_name($this->result_id, $i);
 			}
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $field_names;
@@ -179,6 +209,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	array
@@ -197,6 +228,8 @@ class CI_DB_odbc_result extends CI_DB_result {
 
 			$retval[] = $F;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function field_data()
@@ -210,7 +243,10 @@ class CI_DB_odbc_result extends CI_DB_result {
 			$retval[$i]->max_length		= odbc_field_len($this->result_id, $odbc_index);
 			$retval[$i]->primary_key	= 0;
 			$retval[$i]->default		= '';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $retval;
@@ -222,6 +258,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 * Free the result
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @return	null
 	 */
 	function free_result()
@@ -230,6 +267,11 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 */
 	public function free_result()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	void
+	 */
+	public function free_result()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if (is_resource($this->result_id))
 		{
@@ -241,6 +283,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Data Seek
 	 *
@@ -255,6 +298,8 @@ class CI_DB_odbc_result extends CI_DB_result {
 	{
 		return FALSE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Result - associative array
 	 *
 	 * Returns the result set as an array
@@ -264,6 +309,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	protected function _fetch_assoc()
 	{
 		return odbc_fetch_array($this->result_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -288,6 +334,8 @@ class CI_DB_odbc_result extends CI_DB_result {
 		{
 			return $this->_odbc_fetch_array($this->result_id);
 		}
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -297,6 +345,7 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
+<<<<<<< HEAD
 	 * @access	private
 	 * @return	object
 	 */
@@ -367,6 +416,8 @@ class CI_DB_odbc_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$class_name
 	 * @return	object
 	 */
@@ -455,4 +506,7 @@ if ( ! function_exists('odbc_fetch_object'))
 		return $rs_object;
 	}
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

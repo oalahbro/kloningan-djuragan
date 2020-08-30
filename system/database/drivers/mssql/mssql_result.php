@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -26,6 +27,8 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -75,13 +78,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/database/
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_mssql_result extends CI_DB_result {
 
 	/**
 	 * Number of rows in the result set
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
@@ -90,6 +97,8 @@ class CI_DB_mssql_result extends CI_DB_result {
 	{
 		return @mssql_num_rows($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_rows()
@@ -97,7 +106,10 @@ class CI_DB_mssql_result extends CI_DB_result {
 		return is_int($this->num_rows)
 			? $this->num_rows
 			: $this->num_rows = mssql_num_rows($this->result_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -106,6 +118,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 * Number of fields in the result set
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
 	 */
@@ -113,12 +126,17 @@ class CI_DB_mssql_result extends CI_DB_result {
 	{
 		return @mssql_num_fields($this->result_id);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function num_fields()
 	{
 		return mssql_num_fields($this->result_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -129,6 +147,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 * Generates an array of column names
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	array
 	 */
@@ -136,13 +155,18 @@ class CI_DB_mssql_result extends CI_DB_result {
 	{
 		$field_names = array();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function list_fields()
 	{
 		$field_names = array();
 		mssql_field_seek($this->result_id, 0);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		while ($field = mssql_fetch_field($this->result_id))
 		{
 			$field_names[] = $field->name;
@@ -158,6 +182,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	array
@@ -176,6 +201,8 @@ class CI_DB_mssql_result extends CI_DB_result {
 
 			$retval[] = $F;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	array
 	 */
 	public function field_data()
@@ -189,7 +216,10 @@ class CI_DB_mssql_result extends CI_DB_result {
 			$retval[$i]->name	= $field->name;
 			$retval[$i]->type	= $field->type;
 			$retval[$i]->max_length	= $field->max_length;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $retval;
@@ -201,6 +231,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 * Free the result
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @return	null
 	 */
 	function free_result()
@@ -209,6 +240,11 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	public function free_result()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	void
+	 */
+	public function free_result()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if (is_resource($this->result_id))
 		{
@@ -223,6 +259,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 * Data Seek
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Moves the internal pointer to the desired offset.  We call
 	 * this internally before fetching results to make sure the
 	 * result set starts at zero
@@ -232,6 +269,8 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	function _data_seek($n = 0)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Moves the internal pointer to the desired offset. We call
 	 * this internally before fetching results to make sure the
 	 * result set starts at zero.
@@ -240,7 +279,10 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 * @return	bool
 	 */
 	public function data_seek($n = 0)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return mssql_data_seek($this->result_id, $n);
 	}
@@ -253,6 +295,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 * Returns the result set as an array
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	private
 	 * @return	array
 	 */
@@ -262,6 +305,11 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	array
+	 */
+	protected function _fetch_assoc()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return mssql_fetch_assoc($this->result_id);
 	}
@@ -273,6 +321,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @return	object
@@ -288,6 +337,8 @@ class CI_DB_mssql_result extends CI_DB_result {
 /* End of file mssql_result.php */
 /* Location: ./system/database/drivers/mssql/mssql_result.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$class_name
 	 * @return	object
 	 */
@@ -310,4 +361,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

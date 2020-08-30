@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Parser Class
@@ -64,6 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Parser
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/parser.html
  */
@@ -76,6 +83,8 @@ class CI_Parser {
 	/**
 	 *  Parse a template
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/libraries/parser.html
  */
 class CI_Parser {
@@ -118,15 +127,21 @@ class CI_Parser {
 
 	/**
 	 * Parse a template
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 *
 	 * Parses pseudo-variables contained in the specified template view,
 	 * replacing them with the data in the second param
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	array
 	 * @param	bool
@@ -135,11 +150,15 @@ class CI_Parser {
 	public function parse($template, $data, $return = FALSE)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$CI =& get_instance();
 		$template = $CI->load->view($template, $data, TRUE);
 =======
 		$template = $this->CI->load->view($template, $data, TRUE);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$template = $this->CI->load->view($template, $data, TRUE);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		return $this->_parse($template, $data, $return);
 	}
@@ -148,28 +167,39 @@ class CI_Parser {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *  Parse a String
 =======
 	 * Parse a String
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * Parse a String
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 *
 	 * Parses pseudo-variables contained in the specified string,
 	 * replacing them with the data in the second param
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	array
 	 * @param	bool
 	 * @return	string
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	function parse_string($template, $data, $return = FALSE)
 =======
 	public function parse_string($template, $data, $return = FALSE)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	public function parse_string($template, $data, $return = FALSE)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return $this->_parse($template, $data, $return);
 	}
@@ -178,23 +208,31 @@ class CI_Parser {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *  Parse a template
 =======
 	 * Parse a template
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * Parse a template
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 *
 	 * Parses pseudo-variables contained in the specified template,
 	 * replacing them with the data in the second param
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	array
 	 * @param	bool
 	 * @return	string
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	function _parse($template, $data, $return = FALSE)
 	{
@@ -204,10 +242,16 @@ class CI_Parser {
 	{
 		if ($template === '')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	protected function _parse($template, $data, $return = FALSE)
+	{
+		if ($template === '')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		foreach ($data as $key => $val)
 		{
@@ -226,6 +270,8 @@ class CI_Parser {
 			$CI =& get_instance();
 			$CI->output->append_output($template);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$replace = array();
 		foreach ($data as $key => $val)
 		{
@@ -243,7 +289,10 @@ class CI_Parser {
 		if ($return === FALSE)
 		{
 			$this->CI->output->append_output($template);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		}
 
 		return $template;
@@ -253,6 +302,7 @@ class CI_Parser {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *  Set the left/right variable delimiters
 	 *
 	 * @access	public
@@ -260,15 +310,23 @@ class CI_Parser {
 	 * Set the left/right variable delimiters
 	 *
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * Set the left/right variable delimiters
+	 *
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	string
 	 * @return	void
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	function set_delimiters($l = '{', $r = '}')
 =======
 	public function set_delimiters($l = '{', $r = '}')
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	public function set_delimiters($l = '{', $r = '}')
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		$this->l_delim = $l;
 		$this->r_delim = $r;
@@ -278,6 +336,7 @@ class CI_Parser {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 *  Parse a single key/value
 	 *
 	 * @access	private
@@ -285,11 +344,16 @@ class CI_Parser {
 	 * Parse a single key/value
 	 *
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * Parse a single key/value
+	 *
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	string
 	 * @param	string
 	 * @return	string
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	function _parse_single($key, $val, $string)
 	{
@@ -299,11 +363,17 @@ class CI_Parser {
 	{
 		return array($this->l_delim.$key.$this->r_delim => (string) $val);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	protected function _parse_single($key, $val, $string)
+	{
+		return array($this->l_delim.$key.$this->r_delim => (string) $val);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 *  Parse a tag pair
 	 *
@@ -311,16 +381,22 @@ class CI_Parser {
 	 *
 	 * @access	private
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Parse a tag pair
 	 *
 	 * Parses tag pairs: {some_tag} string... {/some_tag}
 	 *
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string
 	 * @param	array
 	 * @param	string
 	 * @return	string
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	function _parse_pair($variable, $data, $string)
 	{
@@ -377,6 +453,8 @@ class CI_Parser {
 /* End of file Parser.php */
 /* Location: ./system/libraries/Parser.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	protected function _parse_pair($variable, $data, $string)
 	{
 		$replace = array();
@@ -419,4 +497,7 @@ class CI_Parser {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

@@ -1,10 +1,17 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Deny from all
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <IfModule authz_core_module>
 	Require all denied
 </IfModule>
 <IfModule !authz_core_module>
 	Deny from all
+<<<<<<< HEAD
 </IfModule>
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+</IfModule>
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

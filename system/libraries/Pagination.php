@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * Pagination Class
@@ -64,6 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Pagination
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/pagination.html
  */
@@ -103,6 +110,8 @@ class CI_Pagination {
 	var $display_pages		= TRUE;
 	var $anchor_class		= '';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/libraries/pagination.html
  */
 class CI_Pagination {
@@ -379,11 +388,15 @@ class CI_Pagination {
 	protected $CI;
 
 	// --------------------------------------------------------------------
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	/**
 	 * Constructor
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	array	initialization parameters
@@ -402,6 +415,8 @@ class CI_Pagination {
 
 		log_message('debug', "Pagination Class Initialized");
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array	$params	Initialization parameters
 	 * @return	void
 	 */
@@ -419,7 +434,10 @@ class CI_Pagination {
 
 		$this->initialize($params);
 		log_message('info', 'Pagination Class Initialized');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -427,6 +445,7 @@ class CI_Pagination {
 	/**
 	 * Initialize Preferences
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	array	initialization parameters
@@ -445,6 +464,8 @@ class CI_Pagination {
 			}
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	array	$params	Initialization parameters
 	 * @return	CI_Pagination
 	 */
@@ -484,7 +505,10 @@ class CI_Pagination {
 		}
 
 		return $this;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -493,6 +517,7 @@ class CI_Pagination {
 	 * Generate the pagination links
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @return	string
 	 */
@@ -500,13 +525,18 @@ class CI_Pagination {
 	{
 		// If our item count or per-page total is zero there is no need to continue.
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	string
 	 */
 	public function create_links()
 	{
 		// If our item count or per-page total is zero there is no need to continue.
 		// Note: DO NOT change the operator to === here!
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ($this->total_rows == 0 OR $this->per_page == 0)
 		{
 			return '';
@@ -514,20 +544,27 @@ class CI_Pagination {
 
 		// Calculate the total number of pages
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$num_pages = ceil($this->total_rows / $this->per_page);
 
 		// Is there only one page? Hm... nothing more to do here then.
 		if ($num_pages == 1)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		$num_pages = (int) ceil($this->total_rows / $this->per_page);
 
 		// Is there only one page? Hm... nothing more to do here then.
 		if ($num_pages === 1)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return '';
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Set the base page index for starting page number
 		if ($this->use_page_numbers)
@@ -584,6 +621,8 @@ class CI_Pagination {
 		// Is the page number beyond the result range?
 		// If so we show the last page
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Check the user defined number of links.
 		$this->num_links = (int) $this->num_links;
 
@@ -701,7 +740,10 @@ class CI_Pagination {
 
 		// Is the page number beyond the result range?
 		// If so, we show the last page.
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ($this->use_page_numbers)
 		{
 			if ($this->cur_page > $num_pages)
@@ -709,6 +751,7 @@ class CI_Pagination {
 				$this->cur_page = $num_pages;
 			}
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		else
 		{
@@ -741,6 +784,8 @@ class CI_Pagination {
 			$this->base_url = rtrim($this->base_url, '/') .'/';
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		elseif ($this->cur_page > $this->total_rows)
 		{
 			$this->cur_page = ($num_pages - 1) * $this->per_page;
@@ -759,11 +804,15 @@ class CI_Pagination {
 		// which number to start and end the digit links with.
 		$start	= (($this->cur_page - $this->num_links) > 0) ? $this->cur_page - ($this->num_links - 1) : 1;
 		$end	= (($this->cur_page + $this->num_links) < $num_pages) ? $this->cur_page + $this->num_links : $num_pages;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// And here we go...
 		$output = '';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Render the "First" link
 		if  ($this->first_link !== FALSE AND $this->cur_page > ($this->num_links + 1))
@@ -793,6 +842,8 @@ class CI_Pagination {
 				$i = ($i == 0) ? '' : $this->prefix.$i.$this->suffix;
 				$output .= $this->prev_tag_open.'<a '.$this->anchor_class.'href="'.$this->base_url.$i.'">'.$this->prev_link.'</a>'.$this->prev_tag_close;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Render the "First" link.
 		if ($this->first_link !== FALSE && $this->cur_page > ($this->num_links + 1 + ! $this->num_links))
 		{
@@ -821,7 +872,10 @@ class CI_Pagination {
 				$append = $this->prefix.$i.$this->suffix;
 				$output .= $this->prev_tag_open.'<a href="'.$base_url.$append.'"'.$attributes.$this->_attr_rel('prev').'>'
 					.$this->prev_link.'</a>'.$this->prev_tag_close;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 		}
@@ -830,6 +884,7 @@ class CI_Pagination {
 		if ($this->display_pages !== FALSE)
 		{
 			// Write the digit links
+<<<<<<< HEAD
 <<<<<<< HEAD
 			for ($loop = $start -1; $loop <= $end; $loop++)
 			{
@@ -863,6 +918,8 @@ class CI_Pagination {
 							$output .= $this->num_tag_open.'<a '.$this->anchor_class.'href="'.$this->base_url.$n.'">'.$loop.'</a>'.$this->num_tag_close;
 						}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			for ($loop = $start - 1; $loop <= $end; $loop++)
 			{
 				$i = ($this->use_page_numbers) ? $loop : ($loop * $this->per_page) - $this->per_page;
@@ -887,13 +944,17 @@ class CI_Pagination {
 						$append = $this->prefix.$i.$this->suffix;
 						$output .= $this->num_tag_open.'<a href="'.$base_url.$append.'"'.$attributes.'>'
 							.$loop.'</a>'.$this->num_tag_close;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					}
 				}
 			}
 		}
 
 		// Render the "next" link
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if ($this->next_link !== FALSE AND $this->cur_page < $num_pages)
 		{
@@ -938,6 +999,8 @@ class CI_Pagination {
 /* End of file Pagination.php */
 /* Location: ./system/libraries/Pagination.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		if ($this->next_link !== FALSE && $this->cur_page < $num_pages)
 		{
 			$i = ($this->use_page_numbers) ? $this->cur_page + 1 : $this->cur_page * $this->per_page;
@@ -1011,4 +1074,7 @@ class CI_Pagination {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

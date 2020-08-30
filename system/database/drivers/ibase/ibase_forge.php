@@ -111,7 +111,11 @@ class CI_DB_ibase_forge extends CI_DB_forge {
 	 * @param	string	$db_name	(ignored)
 	 * @return	bool
 	 */
+<<<<<<< HEAD
 	public function drop_database($db_name = '')
+=======
+	public function drop_database($db_name)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		if ( ! ibase_drop_db($this->conn_id))
 		{

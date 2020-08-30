@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -23,6 +24,8 @@
  * This class enables you to mark points and calculate the time difference
  * between them.  Memory consumption can also be displayed.
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -67,21 +70,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * This class enables you to mark points and calculate the time difference
  * between them. Memory consumption can also be displayed.
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
  * @category	Libraries
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/libraries/benchmark.html
 =======
  * @link		https://codeigniter.com/user_guide/libraries/benchmark.html
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/libraries/benchmark.html
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_Benchmark {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * List of all benchmark markers and when they were added
 	 *
@@ -91,17 +102,23 @@ class CI_Benchmark {
 
 	// --------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * List of all benchmark markers
 	 *
 	 * @var	array
 	 */
 	public $marker = array();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	/**
 	 * Set a benchmark marker
 	 *
 	 * Multiple calls to this function can be made so that several
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * execution points can be timed
 	 *
@@ -113,6 +130,8 @@ class CI_Benchmark {
 	{
 		$this->marker[$name] = microtime();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * execution points can be timed.
 	 *
 	 * @param	string	$name	Marker name
@@ -121,17 +140,25 @@ class CI_Benchmark {
 	public function mark($name)
 	{
 		$this->marker[$name] = microtime(TRUE);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	 * Elapsed time
 	 *
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * Elapsed time
+	 *
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Calculates the time difference between two marked points.
 	 *
 	 * If the first parameter is empty this function instead returns the
@@ -139,6 +166,7 @@ class CI_Benchmark {
 	 * execution time to be shown in a template. The output class will
 	 * swap the real value for this variable.
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	string	a particular marked point
@@ -150,6 +178,8 @@ class CI_Benchmark {
 	{
 		if ($point1 == '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$point1		A particular marked point
 	 * @param	string	$point2		A particular marked point
 	 * @param	int	$decimals	Number of decimal places
@@ -161,7 +191,10 @@ class CI_Benchmark {
 	public function elapsed_time($point1 = '', $point2 = '', $decimals = 4)
 	{
 		if ($point1 === '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return '{elapsed_time}';
 		}
@@ -174,6 +207,7 @@ class CI_Benchmark {
 		if ( ! isset($this->marker[$point2]))
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$this->marker[$point2] = microtime();
 		}
 
@@ -182,11 +216,16 @@ class CI_Benchmark {
 
 		return number_format(($em + $es) - ($sm + $ss), $decimals);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			$this->marker[$point2] = microtime(TRUE);
 		}
 
 		return number_format($this->marker[$point2] - $this->marker[$point1], $decimals);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -195,15 +234,21 @@ class CI_Benchmark {
 	 * Memory Usage
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * This function returns the {memory_usage} pseudo-variable.
 =======
 	 * Simply returns the {memory_usage} marker.
 	 *
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * Simply returns the {memory_usage} marker.
+	 *
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * This permits it to be put it anywhere in a template
 	 * without the memory being calculated until the end.
 	 * The output class will swap the real value for this variable.
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	string
@@ -214,11 +259,17 @@ class CI_Benchmark {
 	 */
 	public function memory_usage()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	string	'{memory_usage}'
+	 */
+	public function memory_usage()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return '{memory_usage}';
 	}
 
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 // END CI_Benchmark class
@@ -227,3 +278,5 @@ class CI_Benchmark {
 /* Location: ./system/core/Benchmark.php */
 =======
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

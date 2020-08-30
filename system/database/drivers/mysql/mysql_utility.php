@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -17,6 +18,8 @@
 
 // ------------------------------------------------------------------------
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -55,7 +58,10 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * MySQL Utility Class
@@ -63,14 +69,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Database
  * @author		EllisLab Dev Team
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
 =======
  * @link		https://codeigniter.com/user_guide/database/
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * @link		https://codeigniter.com/user_guide/database/
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  */
 class CI_DB_mysql_utility extends CI_DB_utility {
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * List databases
 	 *
@@ -126,6 +137,8 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 	{
 		if (count($params) == 0)
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * List databases statement
 	 *
 	 * @var	string
@@ -157,7 +170,10 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 	protected function _backup($params = array())
 	{
 		if (count($params) === 0)
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		{
 			return FALSE;
 		}
@@ -168,11 +184,14 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 		// Build the output
 		$output = '';
 <<<<<<< HEAD
+<<<<<<< HEAD
 		foreach ((array)$tables as $table)
 		{
 			// Is the table in the "ignore" list?
 			if (in_array($table, (array)$ignore, TRUE))
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 		// Do we need to include a statement to disable foreign key checks?
 		if ($foreign_key_checks === FALSE)
@@ -184,17 +203,24 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 		{
 			// Is the table in the "ignore" list?
 			if (in_array($table, (array) $ignore, TRUE))
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				continue;
 			}
 
 			// Get the table schema
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$query = $this->db->query("SHOW CREATE TABLE `".$this->db->database.'`.`'.$table.'`');
 =======
 			$query = $this->db->query('SHOW CREATE TABLE '.$this->db->escape_identifiers($this->db->database.'.'.$table));
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$query = $this->db->query('SHOW CREATE TABLE '.$this->db->escape_identifiers($this->db->database.'.'.$table));
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 			// No result means the table name was invalid
 			if ($query === FALSE)
@@ -206,6 +232,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 			$output .= '#'.$newline.'# TABLE STRUCTURE FOR: '.$table.$newline.'#'.$newline.$newline;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ($add_drop == TRUE)
 			{
 				$output .= 'DROP TABLE IF EXISTS '.$table.';'.$newline.$newline;
@@ -214,6 +241,11 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 			{
 				$output .= 'DROP TABLE IF EXISTS '.$this->db->protect_identifiers($table).';'.$newline.$newline;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			if ($add_drop === TRUE)
+			{
+				$output .= 'DROP TABLE IF EXISTS '.$this->db->protect_identifiers($table).';'.$newline.$newline;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$i = 0;
@@ -228,15 +260,20 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 
 			// If inserts are not needed we're done...
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ($add_insert == FALSE)
 =======
 			if ($add_insert === FALSE)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			if ($add_insert === FALSE)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				continue;
 			}
 
 			// Grab all the data from the current table
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$query = $this->db->query("SELECT * FROM $table");
 
@@ -246,16 +283,25 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 
 			if ($query->num_rows() === 0)
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$query = $this->db->query('SELECT * FROM '.$this->db->protect_identifiers($table));
+
+			if ($query->num_rows() === 0)
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			{
 				continue;
 			}
 
 			// Fetch the field names and determine if the field is an
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// integer type.  We use this info to decide whether to
 =======
 			// integer type. We use this info to decide whether to
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			// integer type. We use this info to decide whether to
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			// surround the data with quotes or not
 
 			$i = 0;
@@ -264,6 +310,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 			while ($field = mysql_fetch_field($query->result_id))
 			{
 				// Most versions of MySQL store timestamp as a string
+<<<<<<< HEAD
 <<<<<<< HEAD
 				$is_int[$i] = (in_array(
 										strtolower(mysql_field_type($query->result_id, $i)),
@@ -274,23 +321,32 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 				// Create a string of field names
 				$field_str .= '`'.$field->name.'`, ';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$is_int[$i] = in_array(strtolower(mysql_field_type($query->result_id, $i)),
 							array('tinyint', 'smallint', 'mediumint', 'int', 'bigint'), //, 'timestamp'),
 							TRUE);
 
 				// Create a string of field names
 				$field_str .= $this->db->escape_identifiers($field->name).', ';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$i++;
 			}
 
 			// Trim off the end comma
+<<<<<<< HEAD
 <<<<<<< HEAD
 			$field_str = preg_replace( "/, $/" , "" , $field_str);
 
 =======
 			$field_str = preg_replace('/, $/' , '', $field_str);
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+			$field_str = preg_replace('/, $/' , '', $field_str);
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 			// Build the insert string
 			foreach ($query->result_array() as $row)
@@ -309,6 +365,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 					{
 						// Escape the data if it's not an integer
 <<<<<<< HEAD
+<<<<<<< HEAD
 						if ($is_int[$i] == FALSE)
 						{
 							$val_str .= $this->db->escape($v);
@@ -320,6 +377,9 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 =======
 						$val_str .= ($is_int[$i] === FALSE) ? $this->db->escape($v) : $v;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+						$val_str .= ($is_int[$i] === FALSE) ? $this->db->escape($v) : $v;
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 					}
 
 					// Append a comma
@@ -329,21 +389,28 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 
 				// Remove the comma at the end of the string
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$val_str = preg_replace( "/, $/" , "" , $val_str);
 
 				// Build the INSERT string
 				$output .= 'INSERT INTO '.$table.' ('.$field_str.') VALUES ('.$val_str.');'.$newline;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 				$val_str = preg_replace('/, $/' , '', $val_str);
 
 				// Build the INSERT string
 				$output .= 'INSERT INTO '.$this->db->protect_identifiers($table).' ('.$field_str.') VALUES ('.$val_str.');'.$newline;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 			}
 
 			$output .= $newline.$newline;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return $output;
 	}
@@ -352,6 +419,8 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 /* End of file mysql_utility.php */
 /* Location: ./system/database/drivers/mysql/mysql_utility.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		// Do we need to include a statement to re-enable foreign key checks?
 		if ($foreign_key_checks === FALSE)
 		{
@@ -362,4 +431,7 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

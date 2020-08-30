@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -19,6 +20,8 @@
 
 
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 <?php
 /**
  * CodeIgniter
@@ -57,23 +60,31 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 /**
  * SQLite Database Adapter Class
  *
  * Note: _DB is an extender class that the app controller
 <<<<<<< HEAD
+<<<<<<< HEAD
  * creates dynamically based on whether the active record
 =======
  * creates dynamically based on whether the query builder
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+ * creates dynamically based on whether the query builder
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * class is being used or not.
  *
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @link		http://codeigniter.com/user_guide/database/
  */
@@ -144,6 +155,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 		return $conn_id;
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
  * @link		https://codeigniter.com/user_guide/database/
  */
 class CI_DB_sqlite_driver extends CI_DB {
@@ -154,11 +167,15 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 * @var	string
 	 */
 	public $dbdriver = 'sqlite';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Reconnect
 	 *
@@ -173,16 +190,22 @@ class CI_DB_sqlite_driver extends CI_DB {
 		// not implemented in SQLite
 	}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * ORDER BY random keyword
 	 *
 	 * @var	array
 	 */
 	protected $_random_keyword = array('RANDOM()', 'RANDOM()');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Select the database
 	 *
@@ -209,6 +232,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 		// @todo - add support if needed
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Non-persistent database connection
 	 *
 	 * @param	bool	$persistent
@@ -224,12 +249,16 @@ class CI_DB_sqlite_driver extends CI_DB {
 		isset($error) && log_message('error', $error);
 
 		return $conn_id;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Version number query string
 	 *
@@ -240,6 +269,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 	{
 		return sqlite_libversion();
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Database version number
 	 *
 	 * @return	string
@@ -249,7 +280,10 @@ class CI_DB_sqlite_driver extends CI_DB {
 		return isset($this->data_cache['version'])
 			? $this->data_cache['version']
 			: $this->data_cache['version'] = sqlite_libversion();
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -257,6 +291,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	/**
 	 * Execute the query
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private called by the base class
 	 * @param	string	an SQL query
@@ -283,6 +318,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 	{
 		return $sql;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$sql	an SQL query
 	 * @return	resource
 	 */
@@ -291,7 +328,10 @@ class CI_DB_sqlite_driver extends CI_DB {
 		return $this->is_write_type($sql)
 			? sqlite_exec($this->conn_id, $sql)
 			: sqlite_query($this->conn_id, $sql);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -299,6 +339,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	/**
 	 * Begin Transaction
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	bool
@@ -324,12 +365,17 @@ class CI_DB_sqlite_driver extends CI_DB {
 		$this->simple_query('BEGIN TRANSACTION');
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	bool
 	 */
 	protected function _trans_begin()
 	{
 		return $this->simple_query('BEGIN TRANSACTION');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -337,6 +383,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	/**
 	 * Commit Transaction
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	bool
@@ -357,12 +404,17 @@ class CI_DB_sqlite_driver extends CI_DB {
 		$this->simple_query('COMMIT');
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	bool
 	 */
 	protected function _trans_commit()
 	{
 		return $this->simple_query('COMMIT');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -370,6 +422,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	/**
 	 * Rollback Transaction
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	bool
@@ -390,17 +443,23 @@ class CI_DB_sqlite_driver extends CI_DB {
 		$this->simple_query('ROLLBACK');
 		return TRUE;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	bool
 	 */
 	protected function _trans_rollback()
 	{
 		return $this->simple_query('ROLLBACK');
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Escape String
 	 *
@@ -433,6 +492,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 
 		return $str;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Platform-dependant string escape
 	 *
 	 * @param	string
@@ -441,7 +502,10 @@ class CI_DB_sqlite_driver extends CI_DB {
 	protected function _escape_str($str)
 	{
 		return sqlite_escape_string($str);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -449,6 +513,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	/**
 	 * Affected Rows
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
@@ -459,6 +524,11 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 */
 	public function affected_rows()
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+	 * @return	int
+	 */
+	public function affected_rows()
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		return sqlite_changes($this->conn_id);
 	}
@@ -468,6 +538,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	/**
 	 * Insert ID
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @return	integer
@@ -507,12 +578,17 @@ class CI_DB_sqlite_driver extends CI_DB {
 		$this->_reset_select();
 		return (int) $row->numrows;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	int
 	 */
 	public function insert_id()
 	{
 		return sqlite_last_insert_rowid($this->conn_id);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -522,6 +598,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 *
 	 * Generates a platform-specific query string so that the table names can be fetched
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	private
 	 * @param	boolean
@@ -536,6 +613,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 			$sql .= " AND 'name' LIKE '".$this->escape_like_str($this->dbprefix)."%' ".sprintf($this->_like_escape_str, $this->_like_escape_chr);
 		}
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	bool	$prefix_limit
 	 * @return	string
 	 */
@@ -548,7 +627,10 @@ class CI_DB_sqlite_driver extends CI_DB {
 			return $sql." AND 'name' LIKE '".$this->escape_like_str($this->dbprefix)."%' ".sprintf($this->_like_escape_str, $this->_like_escape_chr);
 		}
 
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 		return $sql;
 	}
 
@@ -560,17 +642,23 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 * Generates a platform-specific query string so that the column names can be fetched
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @access	public
 	 * @param	string	the table name
 	 * @return	string
 	 */
 	function _list_columns($table = '')
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @param	string	$table
 	 * @return	bool
 	 */
 	protected function _list_columns($table = '')
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	{
 		// Not supported
 		return FALSE;
@@ -579,6 +667,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Field data query
 	 *
@@ -660,6 +749,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 		// remove duplicates if the user already included the escape
 		return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Returns an object with field data
 	 *
 	 * @param	string	$table
@@ -690,12 +781,16 @@ class CI_DB_sqlite_driver extends CI_DB {
 		}
 
 		return $retval;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * From Tables
 	 *
@@ -715,6 +810,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 
 		return '('.implode(', ', $tables).')';
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Error
 	 *
 	 * Returns an array containing code and message of the last
@@ -727,12 +824,16 @@ class CI_DB_sqlite_driver extends CI_DB {
 		$error = array('code' => sqlite_last_error($this->conn_id));
 		$error['message'] = sqlite_error_string($error['code']);
 		return $error;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Insert statement
 	 *
@@ -748,6 +849,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 	{
 		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Replace statement
 	 *
 	 * Generates a platform-specific replace string from the supplied data
@@ -760,6 +863,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	protected function _replace($table, $keys, $values)
 	{
 		return 'INSERT OR '.parent::_replace($table, $keys, $values);
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
@@ -850,11 +954,14 @@ class CI_DB_sqlite_driver extends CI_DB {
 		$limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
 
 		return "DELETE FROM ".$table.$conditions.$limit;
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Limit string
 	 *
 	 * Generates a platform-specific LIMIT clause
@@ -878,6 +985,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 
 		return $sql."LIMIT ".$offset.$limit;
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * Truncate statement
 	 *
 	 * Generates a platform-specific truncate string from the supplied data
@@ -891,7 +1000,10 @@ class CI_DB_sqlite_driver extends CI_DB {
 	protected function _truncate($table)
 	{
 		return 'DELETE FROM '.$table;
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	}
 
 	// --------------------------------------------------------------------
@@ -899,6 +1011,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	/**
 	 * Close DB Connection
 	 *
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * @access	public
 	 * @param	resource
@@ -916,6 +1029,8 @@ class CI_DB_sqlite_driver extends CI_DB {
 /* End of file sqlite_driver.php */
 /* Location: ./system/database/drivers/sqlite/sqlite_driver.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	 * @return	void
 	 */
 	protected function _close()
@@ -924,4 +1039,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	}
 
 }
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3

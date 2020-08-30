@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $lang['migration_none_found']			= "No migrations were found.";
 $lang['migration_not_found']			= "This migration could not be found.";
@@ -13,6 +14,8 @@ $lang['migration_invalid_filename']		= "Migration \"%s\" has an invalid filename
 /* End of file migration_lang.php */
 /* Location: ./system/language/english/migration_lang.php */
 =======
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 /**
  * CodeIgniter
  *
@@ -59,4 +62,7 @@ $lang['migration_class_doesnt_exist'] = 'The migration class "%s" could not be f
 $lang['migration_missing_up_method'] = 'The migration class "%s" is missing an "up" method.';
 $lang['migration_missing_down_method'] = 'The migration class "%s" is missing a "down" method.';
 $lang['migration_invalid_filename'] = 'Migration "%s" has an invalid filename.';
+<<<<<<< HEAD
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+>>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
