@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -393,10 +402,17 @@ if ( ! function_exists('auto_link'))
 	function auto_link($str, $type = 'both', $popup = FALSE)
 	{
 		// Find and replace any URLs.
+<<<<<<< HEAD
 		if ($type !== 'email' && preg_match_all('#(\w*://|www\.)[^\s()<>;]+\w#i', $str, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER))
 		{
 			// Set our target HTML if using popup links.
 			$target = ($popup) ? ' target="_blank"' : '';
+=======
+		if ($type !== 'email' && preg_match_all('#(\w*://|www\.)[a-z0-9]+(-+[a-z0-9]+)*(\.[a-z0-9]+(-+[a-z0-9]+)*)+(/([^\s()<>;]+\w)?/?)?#i', $str, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER))
+		{
+			// Set our target HTML if using popup links.
+			$target = ($popup) ? ' target="_blank" rel="noopener"' : '';
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 			// We process the links in reverse order (last -> first) so that
 			// the returned string offsets from preg_match_all() are not

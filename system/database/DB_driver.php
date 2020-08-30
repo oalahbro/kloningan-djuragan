@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -142,7 +151,11 @@ abstract class CI_DB_driver {
 	 *
 	 * @var	int
 	 */
+<<<<<<< HEAD
 	public $port			= '';
+=======
+	public $port			= NULL;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 	/**
 	 * Persistent connection flag
@@ -916,6 +929,10 @@ abstract class CI_DB_driver {
 
 		if ($this->_trans_begin())
 		{
+<<<<<<< HEAD
+=======
+			$this->_trans_status = TRUE;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 			$this->_trans_depth++;
 			return TRUE;
 		}
@@ -1000,7 +1017,11 @@ abstract class CI_DB_driver {
 		$ml = strlen($this->bind_marker);
 
 		// Make sure not to replace a chunk inside a string that happens to match the bind marker
+<<<<<<< HEAD
 		if ($c = preg_match_all("/'[^']*'/i", $sql, $matches))
+=======
+		if ($c = preg_match_all("/'[^']*'|\"[^\"]*\"/i", $sql, $matches))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		{
 			$c = preg_match_all('/'.preg_quote($this->bind_marker, '/').'/i',
 				str_replace($matches[0],
@@ -1044,7 +1065,11 @@ abstract class CI_DB_driver {
 	 */
 	public function is_write_type($sql)
 	{
+<<<<<<< HEAD
 		return (bool) preg_match('/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX)\s/i', $sql);
+=======
+		return (bool) preg_match('/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX|MERGE)\s/i', $sql);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -1173,14 +1198,22 @@ abstract class CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Platform-dependant string escape
+=======
+	 * Platform-dependent string escape
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	 *
 	 * @param	string
 	 * @return	string
 	 */
 	protected function _escape_str($str)
 	{
+<<<<<<< HEAD
 		return str_replace("'", "''", remove_invisible_characters($str));
+=======
+		return str_replace("'", "''", remove_invisible_characters($str, FALSE));
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -1307,19 +1340,26 @@ abstract class CI_DB_driver {
 	 */
 	public function list_fields($table)
 	{
+<<<<<<< HEAD
 		// Is there a cached result?
 		if (isset($this->data_cache['field_names'][$table]))
 		{
 			return $this->data_cache['field_names'][$table];
 		}
 
+=======
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		if (FALSE === ($sql = $this->_list_columns($table)))
 		{
 			return ($this->db_debug) ? $this->display_error('db_unsupported_function') : FALSE;
 		}
 
 		$query = $this->query($sql);
+<<<<<<< HEAD
 		$this->data_cache['field_names'][$table] = array();
+=======
+		$fields = array();
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 		foreach ($query->result_array() as $row)
 		{
@@ -1341,10 +1381,17 @@ abstract class CI_DB_driver {
 				}
 			}
 
+<<<<<<< HEAD
 			$this->data_cache['field_names'][$table][] = $row[$key];
 		}
 
 		return $this->data_cache['field_names'][$table];
+=======
+			$fields[] = $row[$key];
+		}
+
+		return $fields;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -1527,7 +1574,11 @@ abstract class CI_DB_driver {
 		return 'UPDATE '.$table.' SET '.implode(', ', $valstr)
 			.$this->_compile_wh('qb_where')
 			.$this->_compile_order_by()
+<<<<<<< HEAD
 			.($this->qb_limit ? ' LIMIT '.$this->qb_limit : '');
+=======
+			.($this->qb_limit !== FALSE ? ' LIMIT '.$this->qb_limit : '');
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -1925,6 +1976,7 @@ abstract class CI_DB_driver {
 					$i++;
 				}
 
+<<<<<<< HEAD
 				// Verify table prefix and replace if necessary
 				if ($this->swap_pre !== '' && strpos($parts[$i], $this->swap_pre) === 0)
 				{
@@ -1934,6 +1986,21 @@ abstract class CI_DB_driver {
 				elseif (strpos($parts[$i], $this->dbprefix) !== 0)
 				{
 					$parts[$i] = $this->dbprefix.$parts[$i];
+=======
+				// dbprefix may've already been applied, with or without the identifier escaped
+				$ec = '(?<ec>'.preg_quote(is_array($this->_escape_char) ? $this->_escape_char[0] : $this->_escape_char).')?';
+				isset($ec[0]) && $ec .= '?'; // Just in case someone has disabled escaping by forcing an empty escape character
+
+				// Verify table prefix and replace if necessary
+				if ($this->swap_pre !== '' && preg_match('#^'.$ec.preg_quote($this->swap_pre).'#', $parts[$i]))
+				{
+					$parts[$i] = preg_replace('#^'.$ec.preg_quote($this->swap_pre).'(\S+?)#', '\\1'.$this->dbprefix.'\\2', $parts[$i]);
+				}
+				// We only add the table prefix if it does not already exist
+				else
+				{
+					preg_match('#^'.$ec.preg_quote($this->dbprefix).'#', $parts[$i]) OR $parts[$i] = $this->dbprefix.$parts[$i];
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 				}
 
 				// Put the parts back together

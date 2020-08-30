@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 $route['default_controller'] = 'login';
 
 $route['admin'] = 'admin/pesanan/read';
@@ -75,3 +76,23 @@ $route['keluar'] = 'authentic/logout';
 $route['admin'] = 'admin/pesanan/lihat';
 $route['admin/pesanan'] = 'admin/pesanan/lihat';
 >>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
+=======
+$route['default_controller'] = 'dasbor';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+$route['download'] = 'download';
+$route['unduh_pdf/(:any)'] = 'download/pdf';
+
+$route['upgrade'] = 'upgrade';
+$route['upgrade/(:any)'] = 'upgrade/$1';
+
+//$route['login'] = 'auth/masuk';
+$route['logout'] = 'keluar';
+$route['valid'] = 'auth/valid';
+//$route['forgot'] = 'auth/lupa';
+//$route['register'] = 'auth/daftar';
+$route['excel'] = 'excel';
+
+$route['session'] = 'dasbor/log';
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053

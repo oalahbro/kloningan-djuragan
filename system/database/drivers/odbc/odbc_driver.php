@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 1.3.0
  * @filesource
@@ -172,7 +181,11 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 		$ml = strlen($this->bind_marker);
 
 		// Make sure not to replace a chunk inside a string that happens to match the bind marker
+<<<<<<< HEAD
 		if ($c = preg_match_all("/'[^']*'/i", $sql, $matches))
+=======
+		if ($c = preg_match_all("/'[^']*'|\"[^\"]*\"/i", $sql, $matches))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		{
 			$c = preg_match_all('/'.preg_quote($this->bind_marker, '/').'/i',
 				str_replace($matches[0],
@@ -309,14 +322,22 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Platform-dependant string escape
+=======
+	 * Platform-dependent string escape
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	 *
 	 * @param	string
 	 * @return	string
 	 */
 	protected function _escape_str($str)
 	{
+<<<<<<< HEAD
 		$this->db->display_error('db_unsupported_feature');
+=======
+		$this->display_error('db_unsupported_feature');
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -340,7 +361,11 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	 */
 	public function insert_id()
 	{
+<<<<<<< HEAD
 		return ($this->db->db_debug) ? $this->db->display_error('db_unsupported_feature') : FALSE;
+=======
+		return ($this->db_debug) ? $this->display_error('db_unsupported_feature') : FALSE;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -402,7 +427,11 @@ class CI_DB_odbc_driver extends CI_DB_driver {
 	 * Error
 	 *
 	 * Returns an array containing code and message of the last
+<<<<<<< HEAD
 	 * database error that has occured.
+=======
+	 * database error that has occurred.
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	 *
 	 * @return	array
 	 */

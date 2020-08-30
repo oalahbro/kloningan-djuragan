@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -392,6 +401,19 @@ class CI_Image_lib {
 			$this->initialize($props);
 		}
 
+<<<<<<< HEAD
+=======
+		/**
+		 * A work-around for some improperly formatted, but
+		 * usable JPEGs; known to be produced by Samsung
+		 * smartphones' front-facing cameras.
+		 *
+		 * @see	https://github.com/bcit-ci/CodeIgniter/issues/4967
+		 * @see	https://bugs.php.net/bug.php?id=72404
+		 */
+		ini_set('gd.jpeg_ignore_warning', 1);
+
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		log_message('info', 'Image Lib Class Initialized');
 	}
 
@@ -544,6 +566,7 @@ class CI_Image_lib {
 		 */
 		if ($this->new_image === '')
 		{
+<<<<<<< HEAD
 			$this->dest_image = $this->source_image;
 			$this->dest_folder = $this->source_folder;
 		}
@@ -575,6 +598,32 @@ class CI_Image_lib {
 				$this->dest_image = end($x);
 				$this->dest_folder = str_replace($this->dest_image, '', $full_dest_path);
 			}
+=======
+			$this->dest_image  = $this->source_image;
+			$this->dest_folder = $this->source_folder;
+		}
+		elseif (strpos($this->new_image, '/') === FALSE && strpos($this->new_image, '\\') === FALSE)
+		{
+			$this->dest_image  = $this->new_image;
+			$this->dest_folder = $this->source_folder;
+		}
+		else
+		{
+			// Is there a file name?
+			if ( ! preg_match('#\.(jpg|jpeg|gif|png)$#i', $this->new_image))
+			{
+				$this->dest_image  = $this->source_image;
+				$this->dest_folder = $this->new_image;
+			}
+			else
+			{
+				$x = explode('/', str_replace('\\', '/', $this->new_image));
+				$this->dest_image  = end($x);
+				$this->dest_folder = str_replace($this->dest_image, '', $this->new_image);
+			}
+
+			$this->dest_folder = realpath($this->dest_folder).'/';
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		}
 
 		/* Compile the finalized filenames/paths
@@ -832,7 +881,14 @@ class CI_Image_lib {
 		imagedestroy($dst_img);
 		imagedestroy($src_img);
 
+<<<<<<< HEAD
 		chmod($this->full_dst_path, $this->file_permissions);
+=======
+		if ($this->dynamic_output !== TRUE)
+		{
+			chmod($this->full_dst_path, $this->file_permissions);
+		}
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 		return TRUE;
 	}
@@ -886,7 +942,11 @@ class CI_Image_lib {
 			}
 		}
 
+<<<<<<< HEAD
 		$cmd .= escapeshellarg($this->full_src_path).' '.escapeshellarg($this->full_dst_path).' 2>&1';
+=======
+		$cmd .= ' '.escapeshellarg($this->full_src_path).' '.escapeshellarg($this->full_dst_path).' 2>&1';
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 		$retval = 1;
 		// exec() might be disabled
@@ -969,7 +1029,11 @@ class CI_Image_lib {
 			$cmd_inner = 'pnmscale -xysize '.$this->width.' '.$this->height;
 		}
 
+<<<<<<< HEAD
 		$cmd = $this->library_path.$cmd_in.' '.$this->full_src_path.' | '.$cmd_inner.' | '.$cmd_out.' > '.$this->dest_folder.'netpbm.tmp';
+=======
+		$cmd = $this->library_path.$cmd_in.' '.escapeshellarg($this->full_src_path).' | '.$cmd_inner.' | '.$cmd_out.' > '.$this->dest_folder.'netpbm.tmp';
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 		$retval = 1;
 		// exec() might be disabled
@@ -1646,12 +1710,24 @@ class CI_Image_lib {
 		}
 
 		$vals = getimagesize($path);
+<<<<<<< HEAD
 		$types = array(1 => 'gif', 2 => 'jpeg', 3 => 'png');
 		$mime = (isset($types[$vals[2]])) ? 'image/'.$types[$vals[2]] : 'image/jpg';
+=======
+		if ($vals === FALSE)
+		{
+			$this->set_error('imglib_invalid_image');
+			return FALSE;
+		}
+
+		$types = array(1 => 'gif', 2 => 'jpeg', 3 => 'png');
+		$mime = isset($types[$vals[2]]) ? 'image/'.$types[$vals[2]] : 'image/jpg';
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 		if ($return === TRUE)
 		{
 			return array(
+<<<<<<< HEAD
 					'width' =>	$vals[0],
 					'height' =>	$vals[1],
 					'image_type' =>	$vals[2],
@@ -1665,6 +1741,21 @@ class CI_Image_lib {
 		$this->image_type	= $vals[2];
 		$this->size_str		= $vals[3];
 		$this->mime_type	= $mime;
+=======
+				'width'      => $vals[0],
+				'height'     => $vals[1],
+				'image_type' => $vals[2],
+				'size_str'   => $vals[3],
+				'mime_type'  => $mime
+			);
+		}
+
+		$this->orig_width  = $vals[0];
+		$this->orig_height = $vals[1];
+		$this->image_type  = $vals[2];
+		$this->size_str    = $vals[3];
+		$this->mime_type   = $mime;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 		return TRUE;
 	}

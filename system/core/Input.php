@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -137,7 +146,11 @@ class CI_Input {
 	 */
 	public function __construct()
 	{
+<<<<<<< HEAD
 		$this->_allow_get_array		= (config_item('allow_get_array') === TRUE);
+=======
+		$this->_allow_get_array		= (config_item('allow_get_array') !== FALSE);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		$this->_enable_xss		= (config_item('global_xss_filtering') === TRUE);
 		$this->_enable_csrf		= (config_item('csrf_protection') === TRUE);
 		$this->_standardize_newlines	= (bool) config_item('standardize_newlines');
@@ -359,7 +372,11 @@ class CI_Input {
 	 * @param	bool		$httponly	Whether to only makes the cookie accessible via HTTP (no javascript)
 	 * @return	void
 	 */
+<<<<<<< HEAD
 	public function set_cookie($name, $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE, $httponly = FALSE)
+=======
+	public function set_cookie($name, $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = NULL, $httponly = NULL)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	{
 		if (is_array($name))
 		{
@@ -388,6 +405,7 @@ class CI_Input {
 			$path = config_item('cookie_path');
 		}
 
+<<<<<<< HEAD
 		if ($secure === FALSE && config_item('cookie_secure') === TRUE)
 		{
 			$secure = config_item('cookie_secure');
@@ -397,6 +415,15 @@ class CI_Input {
 		{
 			$httponly = config_item('cookie_httponly');
 		}
+=======
+		$secure = ($secure === NULL && config_item('cookie_secure') !== NULL)
+			? (bool) config_item('cookie_secure')
+			: (bool) $secure;
+
+		$httponly = ($httponly === NULL && config_item('cookie_httponly') !== NULL)
+			? (bool) config_item('cookie_httponly')
+			: (bool) $httponly;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 		if ( ! is_numeric($expire))
 		{
@@ -521,7 +548,11 @@ class CI_Input {
 						$netaddr = explode(':', str_replace('::', str_repeat(':', 9 - substr_count($netaddr, ':')), $netaddr));
 						for ($j = 0; $j < 8; $j++)
 						{
+<<<<<<< HEAD
 							$netaddr[$i] = intval($netaddr[$j], 16);
+=======
+							$netaddr[$j] = intval($netaddr[$j], 16);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 						}
 					}
 					else

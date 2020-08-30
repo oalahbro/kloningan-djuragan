@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 3.0.0
  * @filesource
@@ -84,11 +93,19 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	protected $_sid_regexp;
 
 	/**
+<<<<<<< HEAD
 	 * mbstring.func_override flag
 	 *
 	 * @var	bool
 	 */
 	protected static $func_override;
+=======
+	 * mbstring.func_overload flag
+	 *
+	 * @var	bool
+	 */
+	protected static $func_overload;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 	// ------------------------------------------------------------------------
 
@@ -115,7 +132,11 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 
 		$this->_sid_regexp = $this->_config['_sid_regexp'];
 
+<<<<<<< HEAD
 		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
+=======
+		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// ------------------------------------------------------------------------
@@ -135,12 +156,22 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 		{
 			if ( ! mkdir($save_path, 0700, TRUE))
 			{
+<<<<<<< HEAD
 				throw new Exception("Session: Configured save path '".$this->_config['save_path']."' is not a directory, doesn't exist or cannot be created.");
+=======
+				log_message('error', "Session: Configured save path '".$this->_config['save_path']."' is not a directory, doesn't exist or cannot be created.");
+				return $this->_failure;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 			}
 		}
 		elseif ( ! is_writable($save_path))
 		{
+<<<<<<< HEAD
 			throw new Exception("Session: Configured save path '".$this->_config['save_path']."' is not writable by the PHP process.");
+=======
+			log_message('error', "Session: Configured save path '".$this->_config['save_path']."' is not writable by the PHP process.");
+			return $this->_failure;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		}
 
 		$this->_config['save_path'] = $save_path;
@@ -148,6 +179,11 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 			.$name // we'll use the session cookie name as a prefix to avoid collisions
 			.($this->_config['match_ip'] ? md5($_SERVER['REMOTE_ADDR']) : '');
 
+<<<<<<< HEAD
+=======
+		$this->php5_validate_id();
+
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		return $this->_success;
 	}
 
@@ -392,6 +428,27 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Validate ID
+	 *
+	 * Checks whether a session ID record exists server-side,
+	 * to enforce session.use_strict_mode.
+	 *
+	 * @param	string	$id
+	 * @return	bool
+	 */
+	public function validateSessionId($id)
+	{
+		$result = is_file($this->_file_path.$id);
+		clearstatcache(TRUE, $this->_file_path.$id);
+		return $result;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	 * Byte-safe strlen()
 	 *
 	 * @param	string	$str
@@ -399,7 +456,11 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 */
 	protected static function strlen($str)
 	{
+<<<<<<< HEAD
 		return (self::$func_override)
+=======
+		return (self::$func_overload)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 			? mb_strlen($str, '8bit')
 			: strlen($str);
 	}

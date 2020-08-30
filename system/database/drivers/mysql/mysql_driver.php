@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -337,7 +346,11 @@ class CI_DB_mysql_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 	 * Platform-dependant string escape
+=======
+	 * Platform-dependent string escape
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	 *
 	 * @param	string
 	 * @return	string
@@ -383,7 +396,11 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	protected function _list_tables($prefix_limit = FALSE)
 	{
+<<<<<<< HEAD
 		$sql = 'SHOW TABLES FROM '.$this->escape_identifiers($this->database);
+=======
+		$sql = 'SHOW TABLES FROM '.$this->_escape_char.$this->database.$this->_escape_char;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 		if ($prefix_limit !== FALSE && $this->dbprefix !== '')
 		{
@@ -448,7 +465,11 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * Error
 	 *
 	 * Returns an array containing code and message of the last
+<<<<<<< HEAD
 	 * database error that has occured.
+=======
+	 * database error that has occurred.
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	 *
 	 * @return	array
 	 */

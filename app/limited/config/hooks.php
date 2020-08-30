@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $hook['post_controller_constructor'] = array(
      'class'    => '',
@@ -21,3 +22,25 @@ $hook['post_controller_constructor'] = array(
 );
 =======
 >>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
+=======
+$hook['post_controller_constructor'][] = array(
+	'class'    => '',
+	'function' => 'load_config',
+	'filename' => 'pengaturan.php',
+	'filepath' => 'hooks'
+);
+/*
+$hook['post_controller_constructor'][] = array(
+	'function' => 'redirect_ssl',
+	'filename' => 'ssl.php',
+	'filepath' => 'hooks'
+);
+
+$hook['display_override'][] = array(
+	'class' => '',
+	'function' => 'compress',
+	'filename' => 'compress.php',
+	'filepath' => 'hooks'
+);
+*/
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053

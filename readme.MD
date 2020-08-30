@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Baca Ya..#
 
 Web Order Juragan yang baru dengan angularJS dan sistem Codeigniter 3. Lebih cepat dan lebih powerful dengan peningkatan berbagai sisi.
@@ -51,3 +52,10 @@ ALTER TABLE `juragan_auth`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 >>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 ````
+=======
+## INFO
+pindah ke https://github.com/seven-inc/djuragan.com
+# Langkah update #
+* pastikan `hook` dalam `config.php` dalam mode `FALSE`.
+* jalankan `/upgrade`. Setelah selesai step 1 dapat diubah hook menjadi `TRUE`.
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053

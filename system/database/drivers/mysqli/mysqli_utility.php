@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 1.3.0
  * @filesource
@@ -155,9 +164,13 @@ class CI_DB_mysqli_utility extends CI_DB_utility {
 			while ($field = $query->result_id->fetch_field())
 			{
 				// Most versions of MySQL store timestamp as a string
+<<<<<<< HEAD
 				$is_int[$i] = in_array(strtolower($field->type),
 							array('tinyint', 'smallint', 'mediumint', 'int', 'bigint'), //, 'timestamp'),
 							TRUE);
+=======
+				$is_int[$i] = in_array($field->type, array(MYSQLI_TYPE_TINY, MYSQLI_TYPE_SHORT, MYSQLI_TYPE_INT24, MYSQLI_TYPE_LONG), TRUE);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 				// Create a string of field names
 				$field_str .= $this->db->escape_identifiers($field->name).', ';

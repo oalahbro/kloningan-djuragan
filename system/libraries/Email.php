@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -375,11 +384,19 @@ class CI_Email {
 	);
 
 	/**
+<<<<<<< HEAD
 	 * mbstring.func_override flag
 	 *
 	 * @var	bool
 	 */
 	protected static $func_override;
+=======
+	 * mbstring.func_overload flag
+	 *
+	 * @var	bool
+	 */
+	protected static $func_overload;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 	// --------------------------------------------------------------------
 
@@ -397,7 +414,11 @@ class CI_Email {
 		$this->initialize($config);
 		$this->_safe_mode = ( ! is_php('5.4') && ini_get('safe_mode'));
 
+<<<<<<< HEAD
 		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
+=======
+		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 		log_message('info', 'Email Class Initialized');
 	}
@@ -458,7 +479,10 @@ class CI_Email {
 		$this->_headers		= array();
 		$this->_debug_msg	= array();
 
+<<<<<<< HEAD
 		$this->set_header('User-Agent', $this->useragent);
+=======
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		$this->set_header('Date', $this->_set_date());
 
 		if ($clear_attachments !== FALSE)
@@ -914,6 +938,7 @@ class CI_Email {
 	/**
 	 * Get Mail Protocol
 	 *
+<<<<<<< HEAD
 	 * @param	bool
 	 * @return	mixed
 	 */
@@ -926,6 +951,15 @@ class CI_Email {
 		{
 			return $this->protocol;
 		}
+=======
+	 * @return	mixed
+	 */
+	protected function _get_protocol()
+	{
+		$this->protocol = strtolower($this->protocol);
+		in_array($this->protocol, $this->_protocols, TRUE) OR $this->protocol = 'mail';
+		return $this->protocol;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -933,25 +967,39 @@ class CI_Email {
 	/**
 	 * Get Mail Encoding
 	 *
+<<<<<<< HEAD
 	 * @param	bool
 	 * @return	string
 	 */
 	protected function _get_encoding($return = TRUE)
+=======
+	 * @return	string
+	 */
+	protected function _get_encoding()
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	{
 		in_array($this->_encoding, $this->_bit_depths) OR $this->_encoding = '8bit';
 
 		foreach ($this->_base_charsets as $charset)
 		{
+<<<<<<< HEAD
 			if (strpos($charset, $this->charset) === 0)
+=======
+			if (strpos($this->charset, $charset) === 0)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 			{
 				$this->_encoding = '7bit';
 			}
 		}
 
+<<<<<<< HEAD
 		if ($return === TRUE)
 		{
 			return $this->_encoding;
 		}
+=======
+		return $this->_encoding;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -971,10 +1019,15 @@ class CI_Email {
 		{
 			return 'plain-attach';
 		}
+<<<<<<< HEAD
 		else
 		{
 			return 'plain';
 		}
+=======
+
+		return 'plain';
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -1044,9 +1097,23 @@ class CI_Email {
 	 */
 	public function valid_email($email)
 	{
+<<<<<<< HEAD
 		if (function_exists('idn_to_ascii') && $atpos = strpos($email, '@'))
 		{
 			$email = self::substr($email, 0, ++$atpos).idn_to_ascii(self::substr($email, $atpos));
+=======
+		if (function_exists('idn_to_ascii') && strpos($email, '@'))
+		{
+			list($account, $domain) = explode('@', $email, 2);
+			$domain = defined('INTL_IDNA_VARIANT_UTS46')
+				? idn_to_ascii($domain, 0, INTL_IDNA_VARIANT_UTS46)
+				: idn_to_ascii($domain);
+
+			if ($domain !== FALSE)
+			{
+				$email = $account.'@'.$domain;
+			}
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		}
 
 		return (bool) filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -1215,6 +1282,10 @@ class CI_Email {
 	 */
 	protected function _build_headers()
 	{
+<<<<<<< HEAD
+=======
+		$this->set_header('User-Agent', $this->useragent);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		$this->set_header('X-Sender', $this->clean_email($this->_headers['From']));
 		$this->set_header('X-Mailer', $this->useragent);
 		$this->set_header('X-Priority', $this->_priorities[$this->priority]);
@@ -1829,6 +1900,7 @@ class CI_Email {
 	{
 		$this->_unwrap_specials();
 
+<<<<<<< HEAD
 		$method = '_send_with_'.$this->_get_protocol();
 		if ( ! $this->$method())
 		{
@@ -1837,12 +1909,61 @@ class CI_Email {
 		}
 
 		$this->_set_error_message('lang:email_sent', $this->_get_protocol());
+=======
+		$protocol = $this->_get_protocol();
+		$method   = '_send_with_'.$protocol;
+		if ( ! $this->$method())
+		{
+			$this->_set_error_message('lang:email_send_failure_'.($protocol === 'mail' ? 'phpmail' : $protocol));
+			return FALSE;
+		}
+
+		$this->_set_error_message('lang:email_sent', $protocol);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		return TRUE;
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Validate email for shell
+	 *
+	 * Applies stricter, shell-safe validation to email addresses.
+	 * Introduced to prevent RCE via sendmail's -f option.
+	 *
+	 * @see	https://github.com/bcit-ci/CodeIgniter/issues/4963
+	 * @see	https://gist.github.com/Zenexer/40d02da5e07f151adeaeeaa11af9ab36
+	 * @license	https://creativecommons.org/publicdomain/zero/1.0/	CC0 1.0, Public Domain
+	 *
+	 * Credits for the base concept go to Paul Buonopane <paul@namepros.com>
+	 *
+	 * @param	string	$email
+	 * @return	bool
+	 */
+	protected function _validate_email_for_shell(&$email)
+	{
+		if (function_exists('idn_to_ascii') && strpos($email, '@'))
+		{
+			list($account, $domain) = explode('@', $email, 2);
+			$domain = defined('INTL_IDNA_VARIANT_UTS46')
+				? idn_to_ascii($domain, 0, INTL_IDNA_VARIANT_UTS46)
+				: idn_to_ascii($domain);
+
+			if ($domain !== FALSE)
+			{
+				$email = $account.'@'.$domain;
+			}
+		}
+
+		return (filter_var($email, FILTER_VALIDATE_EMAIL) === $email && preg_match('#\A[a-z0-9._+-]+@[a-z0-9.-]{1,253}\z#i', $email));
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	 * Send using mail()
 	 *
 	 * @return	bool
@@ -1854,7 +1975,15 @@ class CI_Email {
 			$this->_recipients = implode(', ', $this->_recipients);
 		}
 
+<<<<<<< HEAD
 		if ($this->_safe_mode === TRUE)
+=======
+		// _validate_email_for_shell() below accepts by reference,
+		// so this needs to be assigned to a variable
+		$from = $this->clean_email($this->_headers['Return-Path']);
+
+		if ($this->_safe_mode === TRUE || ! $this->_validate_email_for_shell($from))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		{
 			return mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str);
 		}
@@ -1862,7 +1991,11 @@ class CI_Email {
 		{
 			// most documentation of sendmail using the "-f" flag lacks a space after it, however
 			// we've encountered servers that seem to require it to be in place.
+<<<<<<< HEAD
 			return mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str, '-f '.$this->clean_email($this->_headers['Return-Path']));
+=======
+			return mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str, '-f '.$from);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		}
 	}
 
@@ -1875,6 +2008,7 @@ class CI_Email {
 	 */
 	protected function _send_with_sendmail()
 	{
+<<<<<<< HEAD
 		// is popen() enabled?
 		if ( ! function_usable('popen')
 			OR FALSE === ($fp = @popen(
@@ -1882,6 +2016,24 @@ class CI_Email {
 						, 'w'))
 		) // server probably has popen disabled, so nothing we can do to get a verbose error.
 		{
+=======
+		// _validate_email_for_shell() below accepts by reference,
+		// so this needs to be assigned to a variable
+		$from = $this->clean_email($this->_headers['From']);
+		if ($this->_validate_email_for_shell($from))
+		{
+			$from = '-f '.$from;
+		}
+		else
+		{
+			$from = '';
+		}
+
+		// is popen() enabled?
+		if ( ! function_usable('popen')	OR FALSE === ($fp = @popen($this->mailpath.' -oi '.$from.' -t', 'w')))
+		{
+			// server probably has popen disabled, so nothing we can do to get a verbose error.
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 			return FALSE;
 		}
 
@@ -2036,7 +2188,23 @@ class CI_Email {
 			$this->_send_command('hello');
 			$this->_send_command('starttls');
 
+<<<<<<< HEAD
 			$crypto = stream_socket_enable_crypto($this->_smtp_connect, TRUE, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+=======
+			/**
+			 * STREAM_CRYPTO_METHOD_TLS_CLIENT is quite the mess ...
+			 *
+			 * - On PHP <5.6 it doesn't even mean TLS, but SSL 2.0, and there's no option to use actual TLS
+			 * - On PHP 5.6.0-5.6.6, >=7.2 it means negotiation with any of TLS 1.0, 1.1, 1.2
+			 * - On PHP 5.6.7-7.1.* it means only TLS 1.0
+			 *
+			 * We want the negotiation, so we'll force it below ...
+			 */
+			$method = is_php('5.6')
+				? STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT
+				: STREAM_CRYPTO_METHOD_TLS_CLIENT;
+			$crypto = stream_socket_enable_crypto($this->_smtp_connect, TRUE, $method);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 			if ($crypto !== TRUE)
 			{
@@ -2227,10 +2395,15 @@ class CI_Email {
 				usleep(250000);
 				continue;
 			}
+<<<<<<< HEAD
 			else
 			{
 				$timestamp = 0;
 			}
+=======
+
+			$timestamp = 0;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		}
 
 		if ($result === FALSE)
@@ -2402,7 +2575,11 @@ class CI_Email {
 	 */
 	protected static function strlen($str)
 	{
+<<<<<<< HEAD
 		return (self::$func_override)
+=======
+		return (self::$func_overload)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 			? mb_strlen($str, '8bit')
 			: strlen($str);
 	}
@@ -2419,7 +2596,11 @@ class CI_Email {
 	 */
 	protected static function substr($str, $start, $length = NULL)
 	{
+<<<<<<< HEAD
 		if (self::$func_override)
+=======
+		if (self::$func_overload)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		{
 			// mb_substr($str, $start, null, '8bit') returns an empty
 			// string on PHP 5.3

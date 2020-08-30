@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -63,7 +72,11 @@ if ( ! function_exists('singular'))
 	{
 		$result = strval($str);
 
+<<<<<<< HEAD
 		if ( ! is_countable($result))
+=======
+		if ( ! word_is_countable($result))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		{
 			return $result;
 		}
@@ -95,6 +108,10 @@ if ( ! function_exists('singular'))
 			'/(s)tatuses$/'		=> '\1\2tatus',
 			'/(c)hildren$/'		=> '\1\2hild',
 			'/(n)ews$/'		=> '\1\2ews',
+<<<<<<< HEAD
+=======
+			'/(quiz)zes$/'		=> '\1',
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 			'/([^us])s$/'		=> '\1'
 		);
 
@@ -127,7 +144,11 @@ if ( ! function_exists('plural'))
 	{
 		$result = strval($str);
 
+<<<<<<< HEAD
 		if ( ! is_countable($result))
+=======
+		if ( ! word_is_countable($result))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 		{
 			return $result;
 		}
@@ -225,7 +246,11 @@ if ( ! function_exists('humanize'))
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
 if ( ! function_exists('is_countable'))
+=======
+if ( ! function_exists('word_is_countable'))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 {
 	/**
 	 * Checks if the given word has a plural version.
@@ -233,7 +258,11 @@ if ( ! function_exists('is_countable'))
 	 * @param	string	$word	Word to check
 	 * @return	bool
 	 */
+<<<<<<< HEAD
 	function is_countable($word)
+=======
+	function word_is_countable($word)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	{
 		return ! in_array(
 			strtolower($word),
@@ -273,3 +302,17 @@ if ( ! function_exists('is_countable'))
 		);
 	}
 }
+<<<<<<< HEAD
+=======
+
+// --------------------------------------------------------------------
+
+if ( ! function_exists('is_countable'))
+{
+	function is_countable($word)
+	{
+		trigger_error('is_countable() is a native PHP function since version 7.3.0; use word_is_countable() instead', E_USER_WARNING);
+		return word_is_countable($word);
+	}
+}
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053

@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $config = array(
 	'cur_tag_open' => '<li class="active"><a href="#!">',
 	'cur_tag_close' => '</a></li>',
@@ -54,3 +55,26 @@ $config = array(
 	'last_link' 		=> '<span aria-hidden="true">&rarr;</span><span class="sr-only">Last</span>'
 >>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	);
+=======
+$config = array(
+    'cur_tag_open'   => '<li class="page-item active"><a class="page-link" href="#!"><span class="sr-only">(current)</span>',
+    'cur_tag_close'   => '</a></li>',
+    'num_tag_open'    => '<li class="page-item">',
+    'num_tag_close'   => '</li>',
+    'next_link'       => '<i class="fas fa-angle-right"></i>',
+    'next_tag_open'   => '<li class="page-item">',
+    'next_tag_close'  => '</li>',
+    'prev_link'       => '<i class="fas fa-angle-left"></i>',
+    'prev_tag_open'   => '<li class="page-item">',
+    'prev_tag_close'  => '</li>',
+    'first_link'      => '<i class="fas fa-angle-double-left"></i>',
+    'first_tag_open'  => '<li class="page-item">',
+    'first_tag_close' => '</li>',
+    'last_link'       => '<i class="fas fa-angle-double-right"></i>',
+    'last_tag_open'   => '<li class="page-item">',
+    'last_tag_close'  => '</li>',
+    'full_tag_open'   => '<nav aria-label="Page navigation example"><ul class="pagination justify-content-center">',
+    'full_tag_close'  => '</ul></nav>',
+    'attributes' => array('class' => 'page-link')
+    );
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053

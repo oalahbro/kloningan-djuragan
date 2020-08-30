@@ -11,7 +11,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | and disable it back when you're done.
 |
 */
+<<<<<<< HEAD
 $config['migration_enabled'] = FALSE;
+=======
+$config['migration_enabled'] = TRUE;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +47,11 @@ $config['migration_type'] = 'timestamp';
 | will migrate up. This must be set.
 |
 */
+<<<<<<< HEAD
 $config['migration_table'] = 'migrations';
+=======
+$config['migration_table'] = 'versions';
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +65,11 @@ $config['migration_table'] = 'migrations';
 | in your code to have the latest migration.
 |
 */
+<<<<<<< HEAD
 $config['migration_auto_latest'] = FALSE;
+=======
+$config['migration_auto_latest'] = TRUE;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 /*
 |--------------------------------------------------------------------------
@@ -81,4 +93,8 @@ $config['migration_version'] = 0;
 | Also, writing permission is required within the migrations path.
 |
 */
+<<<<<<< HEAD
 $config['migration_path'] = APPPATH.'migrations/';
+=======
+$config['migration_path'] = APPPATH.'upgrades/';
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053

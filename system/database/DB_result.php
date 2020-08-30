@@ -6,7 +6,11 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +33,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -163,10 +172,15 @@ class CI_DB_result {
 		{
 			return $this->result_object();
 		}
+<<<<<<< HEAD
 		else
 		{
 			return $this->custom_result_object($type);
 		}
+=======
+
+		return $this->custom_result_object($type);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -336,7 +350,12 @@ class CI_DB_result {
 
 		if ($type === 'object') return $this->row_object($n);
 		elseif ($type === 'array') return $this->row_array($n);
+<<<<<<< HEAD
 		else return $this->custom_row_object($n, $type);
+=======
+
+		return $this->custom_row_object($n, $type);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 	}
 
 	// --------------------------------------------------------------------
@@ -382,7 +401,11 @@ class CI_DB_result {
 	 */
 	public function custom_row_object($n, $type)
 	{
+<<<<<<< HEAD
 		isset($this->custom_result_object[$type]) OR $this->custom_result_object($type);
+=======
+		isset($this->custom_result_object[$type]) OR $this->custom_result_object[$type] = $this->custom_result_object($type);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
 
 		if (count($this->custom_result_object[$type]) === 0)
 		{
