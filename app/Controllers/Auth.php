@@ -232,11 +232,15 @@ class Auth extends BaseController
 
 	public function keluar()
 	{
-		// hapus sesion
-		$this->session->destroy();
-		return redirect()->to('/');
+		// hapus sesi 
+		// tidak menggunakan `session_destroy()` agar flshdata logout kelua
+		$this->session->remove(['id','username','name','email','level', 'logged']);
+		
+		// redirect dan membawa pesan keluar
+		return redirect()->to('/')->with('status', '<div class="alert alert-success"><strong class="d-block">Yay!</strong>Sampai jumpa lagi ya.<br/>Selalu sehat ya.</div>');
+		
 	}
 
 	// ------------------------------------------------------------------------
-	
+
 }
