@@ -216,10 +216,10 @@ $JSmin = new Minify\JS();
 					<li class="nav-item dropdown">
 						<a class="nav-link" id="dropSetting" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fad fa-cogs d-block d-md-none"></i> <span class="d-none d-md-inline-block">Pengaturan</span></a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-							<?= anchor('settings', '<i class="fad fa-globe"></i> Situs', array('class' => 'dropdown-item')); ?>
+							<?= anchor('admin/settings', '<i class="fad fa-globe"></i> Situs', array('class' => 'dropdown-item')); ?>
 							<hr class="dropdown-divider" />
-							<?= anchor('settings/juragan', '<i class="fad fa-user-circle"></i> Juragan', array('class' => 'dropdown-item')); ?>
-							<?= anchor('settings/pengguna', '<i class="fad fa-users"></i> Pengguna', array('class' => 'dropdown-item')); ?>
+							<?= anchor('admin/settings/juragan', '<i class="fad fa-user-circle"></i> Juragan', array('class' => 'dropdown-item')); ?>
+							<?= anchor('admin/settings/pengguna', '<i class="fad fa-users"></i> Pengguna', array('class' => 'dropdown-item')); ?>
 						</div>
 					</li>
 					<li class="nav-item dropdown">

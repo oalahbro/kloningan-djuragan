@@ -1,7 +1,7 @@
 <?php
 $pager = \Config\Services::pager();
 ?>
-<?= $this->extend('template/logged') ?>
+<?= $this->extend('template/default_admin') ?>
 
 <?= $this->section('content') ?>
 
@@ -81,7 +81,7 @@ $pager = \Config\Services::pager();
 				</div>
 				<div class="card-body">
 
-					<?= form_open('settings/save_pengguna'); ?>
+					<?= form_open('admin/settings/save_pengguna'); ?>
 					<div class="mb-3 row gx-2 bg-warning rounded pb-1">
 						<div class="col-6">
 							<?= form_label('Username', 'username', ['class' => 'form-label']); ?>
@@ -157,7 +157,7 @@ $pager = \Config\Services::pager();
 <div class="modal fade" id="modalSuntingPengguna" data-backdrop="static" tabindex="-1" aria-labelledby="modalSuntingPenggunaLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
-			<?= form_open('settings/update_pengguna', '', ['id' => '']); ?>
+			<?= form_open('admin/settings/update_pengguna', '', ['id' => '']); ?>
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalSuntingPenggunaLabel">Update Pengguna</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -242,7 +242,7 @@ $pager = \Config\Services::pager();
 <?php
 $link_api_juragan = site_url("api/get_juragan");
 $link_invoice = site_url('invoices/index/');
-$link_api_relasi = site_url('settings/pengguna_relasi');
+$link_api_relasi = site_url('admin/settings/pengguna_relasi');
 
 $js = <<< JS
 $(function() { 

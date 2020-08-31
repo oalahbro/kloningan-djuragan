@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
+
+use App\Controllers\BaseController;
 
 class Settings extends BaseController
 {
@@ -26,7 +28,7 @@ class Settings extends BaseController
 			'banks'     => $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll()
 		];
 
-		echo view(base_user() . '/pengaturan/situs', $data);
+		echo view('admin/pengaturan/situs', $data);
 	}
 
 	// ------------------------------------------------------------------------
@@ -59,7 +61,7 @@ class Settings extends BaseController
 			// return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
 		}
 
-		return redirect()->to('/settings');
+		return redirect()->to('/admin/settings');
 	}
 
 	// ------------------------------------------------------------------------
@@ -74,7 +76,7 @@ class Settings extends BaseController
 			'banks' 	=> $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll()
 		];
 
-		echo view(base_user() . '/pengaturan/juragan', $data);
+		echo view('admin/pengaturan/juragan', $data);
 	}
 
 	// ------------------------------------------------------------------------
@@ -112,7 +114,7 @@ class Settings extends BaseController
 				}
 			}
 		}
-		return redirect()->to('/settings/juragan');
+		return redirect()->to('/admin/settings/juragan');
 	}
 
 	// ------------------------------------------------------------------------
@@ -154,7 +156,7 @@ class Settings extends BaseController
 				}
 			}
 		}
-		return redirect()->to('/settings/juragan');
+		return redirect()->to('/admin/settings/juragan');
 	}
 
 	// ------------------------------------------------------------------------
@@ -169,7 +171,7 @@ class Settings extends BaseController
 			'penggunas' => $this->user->orderBy('status DESC')->findAll()
 		];
 
-		echo view(base_user() . '/pengaturan/pengguna', $data);
+		echo view('admin/pengaturan/pengguna', $data);
 	}
 
 	// ------------------------------------------------------------------------
@@ -215,7 +217,7 @@ class Settings extends BaseController
 				}
 			}
 		}
-		return redirect()->to('/settings/pengguna');
+		return redirect()->to('/admin/settings/pengguna');
 	}
 
 	// ------------------------------------------------------------------------
@@ -271,7 +273,7 @@ class Settings extends BaseController
 				}
 			}
 		}
-		return redirect()->to('/settings/pengguna');
+		return redirect()->to('/admin/settings/pengguna');
 	}
 
 	// ------------------------------------------------------------------------

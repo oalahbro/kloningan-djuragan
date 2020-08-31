@@ -1,7 +1,7 @@
 <?php
 $pager = \Config\Services::pager();
 ?>
-<?= $this->extend('template/logged') ?>
+<?= $this->extend('template/default_admin') ?>
 <?= $this->section('content') ?>
 <div class="container-xxl">
     <h1 class="h3 mt-5">Pengaturan Situs</h1>

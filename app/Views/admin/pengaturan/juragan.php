@@ -1,7 +1,7 @@
 <?php
 $pager = \Config\Services::pager();
 ?>
-<?= $this->extend('template/logged') ?>
+<?= $this->extend('template/default_admin') ?>
 
 <?= $this->section('content') ?>
 
@@ -86,7 +86,7 @@ $pager = \Config\Services::pager();
 					</ul>
 				</div>
 				<div class="card-body">
-					<?= form_open('settings/save_juragan'); ?>
+					<?= form_open('admin/settings/save_juragan'); ?>
 					<div class="mb-3">
 						<?= form_label('Nama Juragan', 'nama_juragan', ['class' => 'form-label']); ?>
 						<?= form_input('nama_juragan', '', ['class' => 'form-control', 'id' => 'nama_juragan', 'required' => '', 'placeholder' => 'nama juragan']); ?>
@@ -118,7 +118,7 @@ $pager = \Config\Services::pager();
 <div class="modal fade" id="modalSuntingJuragan" data-backdrop="static" tabindex="-1" aria-labelledby="modalSuntingJuraganLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
-			<?= form_open('settings/update_juragan', ['id' => 'mf'], ['id' => '']); ?>
+			<?= form_open('admin/settings/update_juragan', ['id' => 'mf'], ['id' => '']); ?>
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalSuntingJuraganLabel">Update Juragan</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
