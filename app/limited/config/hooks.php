@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $hook['post_controller_constructor'] = array(
      'class'    => '',
@@ -23,6 +24,8 @@ $hook['post_controller_constructor'] = array(
 =======
 >>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 $hook['post_controller_constructor'][] = array(
 	'class'    => '',
 	'function' => 'load_config',
@@ -42,5 +45,9 @@ $hook['display_override'][] = array(
 	'filename' => 'compress.php',
 	'filepath' => 'hooks'
 );
+<<<<<<< HEAD
 */
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+*/
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5

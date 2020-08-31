@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -594,10 +603,14 @@ class CI_Form_validation {
 				if ($row['is_array'] === FALSE)
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					isset($_POST[$field]) && $_POST[$field] = $row['postdata'];
 =======
 					isset($_POST[$field]) && $_POST[$field] = is_array($row['postdata']) ? NULL : $row['postdata'];
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+					isset($_POST[$field]) && $_POST[$field] = is_array($row['postdata']) ? NULL : $row['postdata'];
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				}
 				else
 				{
@@ -1222,7 +1235,10 @@ class CI_Form_validation {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		// Apparently, FILTER_VALIDATE_URL doesn't reject digit-only names for some reason ...
 		// See https://github.com/bcit-ci/CodeIgniter/issues/5755
 		if (ctype_digit($str))
@@ -1230,7 +1246,10 @@ class CI_Form_validation {
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		// PHP 7 accepts IPv6 addresses within square brackets as hostnames,
 		// but it appears that the PR that came in with https://bugs.php.net/bug.php?id=68039
 		// was never merged into a PHP 5 branch ... https://3v4l.org/8PsSN
@@ -1253,10 +1272,13 @@ class CI_Form_validation {
 	public function valid_email($str)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (function_exists('idn_to_ascii') && sscanf($str, '%[^@]@%s', $name, $domain) === 2)
 		{
 			$str = $name.'@'.idn_to_ascii($domain);
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if (function_exists('idn_to_ascii') && preg_match('#\A([^@]+)@(.+)\z#', $str, $matches))
 		{
 			$domain = defined('INTL_IDNA_VARIANT_UTS46')
@@ -1267,7 +1289,10 @@ class CI_Form_validation {
 			{
 				$str = $matches[1].'@'.$domain;
 			}
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		return (bool) filter_var($str, FILTER_VALIDATE_EMAIL);

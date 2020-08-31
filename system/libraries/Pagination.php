@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -349,12 +358,18 @@ class CI_Pagination {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		// _parse_attributes(), called by initialize(), needs to run at least once
 		// in order to enable "rel" attributes, and this triggers it.
 		isset($params['attributes']) OR $params['attributes'] = array();
 
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		$this->initialize($params);
 		log_message('info', 'Pagination Class Initialized');
 	}
@@ -370,11 +385,15 @@ class CI_Pagination {
 	public function initialize(array $params = array())
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		isset($params['attributes']) OR $params['attributes'] = array();
 		if (is_array($params['attributes']))
 =======
 		if (isset($params['attributes']) && is_array($params['attributes']))
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if (isset($params['attributes']) && is_array($params['attributes']))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			$this->_parse_attributes($params['attributes']);
 			unset($params['attributes']);
@@ -449,10 +468,14 @@ class CI_Pagination {
 			$get = $this->CI->input->get();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// Unset the controll, method, old-school routing options
 =======
 			// Unset the control, method, old-school routing options
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			// Unset the control, method, old-school routing options
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			unset($get['c'], $get['m'], $get[$this->query_string_segment]);
 		}
 		else

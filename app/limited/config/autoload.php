@@ -60,6 +60,7 @@ $autoload['packages'] = array();
 */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 $autoload['libraries'] = array('database', 'session', 'form_validation', 'pagination', 'user_agent');
 =======
 $autoload['libraries'] = array('database', 'session', 'form_validation', 'pagination');
@@ -67,6 +68,9 @@ $autoload['libraries'] = array('database', 'session', 'form_validation', 'pagina
 =======
 $autoload['libraries'] = array('database', 'session', 'pagination', 'form_validation', 'email', 'encryption', 'migration');
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+$autoload['libraries'] = array('database', 'session', 'pagination', 'form_validation', 'email', 'encryption', 'migration');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 /*
 | -------------------------------------------------------------------
@@ -99,6 +103,7 @@ $autoload['drivers'] = array();
 */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 $autoload['helper'] = array('url', 'form', 'fungsi', 'string', 'date', 'array');
 =======
 $autoload['helper'] = array('url', 'html', 'form', 'fungsi', 'security', 'string', 'date');
@@ -106,6 +111,9 @@ $autoload['helper'] = array('url', 'html', 'form', 'fungsi', 'security', 'string
 =======
 $autoload['helper'] = array('url', 'date', 'form', 'html', 'fungsi', 'cookie', 'download', 'array', 'string');
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+$autoload['helper'] = array('url', 'date', 'form', 'html', 'fungsi', 'cookie', 'download', 'array', 'string');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 /*
 | -------------------------------------------------------------------
@@ -150,6 +158,7 @@ $autoload['language'] = array();
 */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 $autoload['model'] = array('Db_config' => 'pengaturan', 'Login_model' => 'login', 'Juragan_model' => 'juragan', 'Pesanan_model' => 'pesanan', 'Kurir_model' => 'kurir');
 =======
 $autoload['model'] = array('login_model' => 'login', 'user_model' => 'user', 'juragan_model' => 'juragan', 'pesanan_model' => 'pesanan');
@@ -157,3 +166,6 @@ $autoload['model'] = array('login_model' => 'login', 'user_model' => 'user', 'ju
 =======
 $autoload['model'] = array('faktur_model' => 'faktur', 'pengaturan_model' => 'pengaturan', 'pengguna_model' => 'pengguna', 'juragan_model' => 'juragan', 'notifikasi_model' => 'notifikasi');
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+$autoload['model'] = array('faktur_model' => 'faktur', 'pengaturan_model' => 'pengaturan', 'pengguna_model' => 'pengguna', 'juragan_model' => 'juragan', 'notifikasi_model' => 'notifikasi');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5

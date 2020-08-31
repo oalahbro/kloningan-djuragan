@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -145,10 +154,14 @@ if ( ! function_exists('load_class'))
 	 * @param	string	the class name being requested
 	 * @param	string	the directory where the class should be found
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	string	an optional argument to pass to the class constructor
 =======
 	 * @param	mixed	an optional argument to pass to the class constructor
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * @param	mixed	an optional argument to pass to the class constructor
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * @return	object
 	 */
 	function &load_class($class, $directory = 'libraries', $param = NULL)
@@ -333,6 +346,7 @@ if ( ! function_exists('get_mimes'))
 		if (empty($_mimes))
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/mimes.php'))
 			{
 				$_mimes = include(APPPATH.'config/'.ENVIRONMENT.'/mimes.php');
@@ -345,6 +359,8 @@ if ( ! function_exists('get_mimes'))
 			{
 				$_mimes = array();
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$_mimes = file_exists(APPPATH.'config/mimes.php')
 				? include(APPPATH.'config/mimes.php')
 				: array();
@@ -352,7 +368,10 @@ if ( ! function_exists('get_mimes'))
 			if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/mimes.php'))
 			{
 				$_mimes = array_merge($_mimes, include(APPPATH.'config/'.ENVIRONMENT.'/mimes.php'));
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 		}
 
@@ -434,6 +453,7 @@ if ( ! function_exists('show_error'))
 		{
 			$exit_status = $status_code + 9; // 9 is EXIT__AUTO_MIN
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ($exit_status > 125) // 125 is EXIT__AUTO_MAX
 			{
 				$exit_status = 1; // EXIT_ERROR
@@ -441,6 +461,8 @@ if ( ! function_exists('show_error'))
 
 =======
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$status_code = 500;
 		}
 		else
@@ -598,6 +620,7 @@ if ( ! function_exists('set_status_header'))
 		{
 			header('Status: '.$code.' '.$text, TRUE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else
 		{
@@ -605,13 +628,18 @@ if ( ! function_exists('set_status_header'))
 			header($server_protocol.' '.$code.' '.$text, TRUE, $code);
 		}
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			return;
 		}
 
 		$server_protocol = (isset($_SERVER['SERVER_PROTOCOL']) && in_array($_SERVER['SERVER_PROTOCOL'], array('HTTP/1.0', 'HTTP/1.1', 'HTTP/2'), TRUE))
 			? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
 		header($server_protocol.' '.$code.' '.$text, TRUE, $code);
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 }
 
@@ -760,9 +788,13 @@ if ( ! function_exists('remove_invisible_characters'))
 			$non_displayables[] = '/%0[0-8bcef]/i';	// url encoded 00-08, 11, 12, 14, 15
 			$non_displayables[] = '/%1[0-9a-f]/i';	// url encoded 16-31
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			$non_displayables[] = '/%7f/i';	// url encoded 127
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			$non_displayables[] = '/%7f/i';	// url encoded 127
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		$non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';	// 00-08, 11, 12, 14-31, 127
@@ -867,10 +899,14 @@ if ( ! function_exists('function_usable'))
 	 *
 	 * The above described behavior turned out to be a bug in Suhosin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * but even though a fix was commited for 0.9.34 on 2012-02-12,
 =======
 	 * but even though a fix was committed for 0.9.34 on 2012-02-12,
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * but even though a fix was committed for 0.9.34 on 2012-02-12,
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * that version is yet to be released. This function will therefore
 	 * be just temporary, but would probably be kept for a few years.
 	 *

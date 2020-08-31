@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 $config = array(
 	'cur_tag_open' => '<li class="active"><a href="#!">',
 	'cur_tag_close' => '</a></li>',
@@ -56,6 +57,8 @@ $config = array(
 >>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 	);
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 $config = array(
     'cur_tag_open'   => '<li class="page-item active"><a class="page-link" href="#!"><span class="sr-only">(current)</span>',
     'cur_tag_close'   => '</a></li>',
@@ -77,4 +80,7 @@ $config = array(
     'full_tag_close'  => '</ul></nav>',
     'attributes' => array('class' => 'page-link')
     );
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5

@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 2.0
  * @filesource
@@ -120,10 +129,14 @@ class CI_Cache_memcached extends CI_Driver {
 			if ($this->_memcached instanceof Memcache)
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Third parameter is persistance and defaults to TRUE.
 =======
 				// Third parameter is persistence and defaults to TRUE.
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+				// Third parameter is persistence and defaults to TRUE.
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				$this->_memcached->addServer(
 					$cache_server['hostname'],
 					$cache_server['port'],
@@ -212,15 +225,21 @@ class CI_Cache_memcached extends CI_Driver {
 	public function increment($id, $offset = 1)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return $this->_memcached->increment($id, $offset);
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if (($result = $this->_memcached->increment($id, $offset)) === FALSE)
 		{
 			return $this->_memcached->add($id, $offset) ? $offset : FALSE;
 		}
 
 		return $result;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -235,15 +254,21 @@ class CI_Cache_memcached extends CI_Driver {
 	public function decrement($id, $offset = 1)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return $this->_memcached->decrement($id, $offset);
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if (($result = $this->_memcached->decrement($id, $offset)) === FALSE)
 		{
 			return $this->_memcached->add($id, 0) ? 0 : FALSE;
 		}
 
 		return $result;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------

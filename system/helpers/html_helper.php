@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -202,10 +211,14 @@ if ( ! function_exists('img'))
 		foreach ($src as $k => $v)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ($k === 'src' && ! preg_match('#^([a-z]+:)?//#i', $v))
 =======
 			if ($k === 'src' && ! preg_match('#^(data:[a-z,;])|(([a-z]+:)?(?<!data:)//)#i', $v))
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			if ($k === 'src' && ! preg_match('#^(data:[a-z,;])|(([a-z]+:)?(?<!data:)//)#i', $v))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			{
 				if ($index_page === TRUE)
 				{
@@ -214,10 +227,14 @@ if ( ! function_exists('img'))
 				else
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					$img .= ' src="'.get_instance()->config->slash_item('base_url').$v.'"';
 =======
 					$img .= ' src="'.get_instance()->config->base_url($v).'"';
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+					$img .= ' src="'.get_instance()->config->base_url($v).'"';
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				}
 			}
 			else
@@ -310,10 +327,14 @@ if ( ! function_exists('link_tag'))
 					else
 					{
 <<<<<<< HEAD
+<<<<<<< HEAD
 						$link .= 'href="'.$CI->config->slash_item('base_url').$v.'" ';
 =======
 						$link .= 'href="'.$CI->config->base_url($v).'" ';
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+						$link .= 'href="'.$CI->config->base_url($v).'" ';
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 					}
 				}
 				else
@@ -335,10 +356,14 @@ if ( ! function_exists('link_tag'))
 			else
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$link .= 'href="'.$CI->config->slash_item('base_url').$href.'" ';
 =======
 				$link .= 'href="'.$CI->config->base_url($href).'" ';
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+				$link .= 'href="'.$CI->config->base_url($href).'" ';
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 
 			$link .= 'rel="'.$rel.'" type="'.$type.'" ';

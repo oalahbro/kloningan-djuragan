@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.3.0
  * @filesource
@@ -140,6 +149,7 @@ class CI_DB_postgre_driver extends CI_DB {
 		foreach (array('connect_timeout', 'options', 'sslmode', 'service') as $key)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (isset($this->$key) && is_string($this->key) && $this->key !== '')
 			{
 				$this->dsn .= $key."='".$this->key."' ";
@@ -148,6 +158,11 @@ class CI_DB_postgre_driver extends CI_DB {
 			{
 				$this->dsn .= $key."='".$this->$key."' ";
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			if (isset($this->$key) && is_string($this->$key) && $this->$key !== '')
+			{
+				$this->dsn .= $key."='".$this->$key."' ";
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 		}
 
@@ -240,12 +255,17 @@ class CI_DB_postgre_driver extends CI_DB {
 		 * order to get it.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return isset($pg_version['server'])
 			? $this->data_cache['version'] = $pg_version['server']
 =======
 		return (isset($pg_version['server']) && preg_match('#^(\d+\.\d+)#', $pg_version['server'], $match))
 			? $this->data_cache['version'] = $match[1]
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return (isset($pg_version['server']) && preg_match('#^(\d+\.\d+)#', $pg_version['server'], $match))
+			? $this->data_cache['version'] = $match[1]
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			: parent::version();
 	}
 
@@ -320,10 +340,14 @@ class CI_DB_postgre_driver extends CI_DB {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Platform-dependant string escape
 =======
 	 * Platform-dependent string escape
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * Platform-dependent string escape
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 *
 	 * @param	string
 	 * @return	string
@@ -379,11 +403,15 @@ class CI_DB_postgre_driver extends CI_DB {
 	public function insert_id()
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$v = pg_version($this->conn_id);
 		$v = isset($v['server']) ? $v['server'] : 0; // 'server' key is only available since PosgreSQL 7.4
 =======
 		$v = $this->version();
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$v = $this->version();
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		$table	= (func_num_args() > 0) ? func_get_arg(0) : NULL;
 		$column	= (func_num_args() > 1) ? func_get_arg(1) : NULL;
@@ -500,10 +528,14 @@ class CI_DB_postgre_driver extends CI_DB {
 	 *
 	 * Returns an array containing code and message of the last
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * database error that has occured.
 =======
 	 * database error that has occurred.
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * database error that has occurred.
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 *
 	 * @return	array
 	 */
@@ -583,20 +615,28 @@ class CI_DB_postgre_driver extends CI_DB {
 		foreach ($values as $key => $val)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$ids[] = $val[$index];
 =======
 			$ids[] = $val[$index]['value'];
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			$ids[] = $val[$index]['value'];
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 			foreach (array_keys($val) as $field)
 			{
 				if ($field !== $index)
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					$final[$field][] = 'WHEN '.$val[$index].' THEN '.$val[$field];
 =======
 					$final[$val[$field]['field']][] = 'WHEN '.$val[$index]['value'].' THEN '.$val[$field]['value'];
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+					$final[$val[$field]['field']][] = 'WHEN '.$val[$index]['value'].' THEN '.$val[$field]['value'];
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				}
 			}
 		}
@@ -605,19 +645,27 @@ class CI_DB_postgre_driver extends CI_DB {
 		foreach ($final as $k => $v)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$cases .= $k.' = (CASE '.$index."\n"
 =======
 			$cases .= $k.' = (CASE '.$val[$index]['field']."\n"
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			$cases .= $k.' = (CASE '.$val[$index]['field']."\n"
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				.implode("\n", $v)."\n"
 				.'ELSE '.$k.' END), ';
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$this->where($index.' IN('.implode(',', $ids).')', NULL, FALSE);
 =======
 		$this->where($val[$index]['field'].' IN('.implode(',', $ids).')', NULL, FALSE);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$this->where($val[$index]['field'].' IN('.implode(',', $ids).')', NULL, FALSE);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		return 'UPDATE '.$table.' SET '.substr($cases, 0, -2).$this->_compile_wh('qb_where');
 	}

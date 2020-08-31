@@ -51,6 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 $route['default_controller'] = 'login';
 
 $route['admin'] = 'admin/pesanan/read';
@@ -77,6 +78,8 @@ $route['admin'] = 'admin/pesanan/lihat';
 $route['admin/pesanan'] = 'admin/pesanan/lihat';
 >>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 $route['default_controller'] = 'dasbor';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
@@ -95,4 +98,7 @@ $route['valid'] = 'auth/valid';
 $route['excel'] = 'excel';
 
 $route['session'] = 'dasbor/log';
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5

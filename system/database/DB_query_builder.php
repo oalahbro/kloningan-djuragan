@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -160,7 +169,10 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * QB data set for update_batch()
 	 *
 	 * @var	array
@@ -168,7 +180,10 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	protected $qb_set_ub			= array();
 
 	/**
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * QB aliased tables list
 	 *
 	 * @var	array
@@ -228,7 +243,10 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * QB Cache aliased tables list
 	 *
 	 * @var	array
@@ -236,7 +254,10 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	protected $qb_cache_aliased_tables			= array();
 
 	/**
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * QB Cache WHERE data
 	 *
 	 * @var	array
@@ -696,10 +717,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 				if ($escape === TRUE)
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					$v = ' '.$this->escape($v);
 =======
 					$v = $this->escape($v);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+					$v = $this->escape($v);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				}
 
 				if ( ! $this->_has_operator($k))
@@ -718,17 +743,23 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$this->{$qb_key}[] = array('condition' => $prefix.$k.$v, 'escape' => $escape);
 			if ($this->qb_caching === TRUE)
 			{
 				$this->{$qb_cache_key}[] = array('condition' => $prefix.$k.$v, 'escape' => $escape);
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			${$qb_key} = array('condition' => $prefix.$k, 'value' => $v, 'escape' => $escape);
 			$this->{$qb_key}[] = ${$qb_key};
 			if ($this->qb_caching === TRUE)
 			{
 				$this->{$qb_cache_key}[] = ${$qb_key};
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				$this->qb_cache_exists[] = substr($qb_key, 3);
 			}
 
@@ -862,9 +893,13 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		$where_in = array(
 			'condition' => $prefix.$key.$not.' IN('.implode(', ', $where_in).')',
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			'value' => NULL,
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			'value' => NULL,
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			'escape' => $escape
 		);
 
@@ -994,6 +1029,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ($side === 'none')
 			{
 				$like_statement = "{$prefix} {$k} {$not} LIKE '{$v}'";
@@ -1010,6 +1046,8 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			{
 				$like_statement = "{$prefix} {$k} {$not} LIKE '%{$v}%'";
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			switch ($side)
 			{
 				case 'none':
@@ -1025,12 +1063,16 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 				default:
 					$v = "'%{$v}%'";
 					break;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 
 			// some platforms require an escape sequence definition for LIKE wildcards
 			if ($escape === TRUE && $this->_like_escape_str !== '')
 			{
+<<<<<<< HEAD
 <<<<<<< HEAD
 				$like_statement .= sprintf($this->_like_escape_str, $this->_like_escape_chr);
 			}
@@ -1040,6 +1082,8 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			{
 				$this->qb_cache_where[] = array('condition' => $like_statement, 'escape' => $escape);
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				$v .= sprintf($this->_like_escape_str, $this->_like_escape_chr);
 			}
 
@@ -1048,7 +1092,10 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			if ($this->qb_caching === TRUE)
 			{
 				$this->qb_cache_where[] = $qb_where;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				$this->qb_cache_exists[] = 'where';
 			}
 		}
@@ -1074,9 +1121,13 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		$where = array(
 			'condition' => $prefix.$not.str_repeat(' ', ++$this->qb_where_group_count).' (',
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			'value' => NULL,
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			'value' => NULL,
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			'escape' => FALSE
 		);
 
@@ -1138,9 +1189,13 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		$where = array(
 			'condition' => str_repeat(' ', $this->qb_where_group_count--).')',
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			'value' => NULL,
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			'value' => NULL,
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			'escape' => FALSE
 		);
 
@@ -1472,6 +1527,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		// on Microsoft SQL Server) and ultimately unnecessary
 		// for selecting COUNT(*) ...
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ( ! empty($this->qb_orderby))
 		{
 			$orderby = $this->qb_orderby;
@@ -1480,12 +1536,17 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 		$result = ($this->qb_distinct === TRUE OR ! empty($this->qb_groupby))
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		$qb_orderby       = $this->qb_orderby;
 		$qb_cache_orderby = $this->qb_cache_orderby;
 		$this->qb_orderby = $this->qb_cache_orderby = array();
 
 		$result = ($this->qb_distinct === TRUE OR ! empty($this->qb_groupby) OR ! empty($this->qb_cache_groupby) OR $this->qb_limit OR $this->qb_offset)
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			? $this->query($this->_count_string.$this->protect_identifiers('numrows')."\nFROM (\n".$this->_compile_select()."\n) CI_count_all_results")
 			: $this->query($this->_compile_select($this->_count_string.$this->protect_identifiers('numrows')));
 
@@ -1494,16 +1555,22 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			$this->_reset_select();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// If we've previously reset the qb_orderby values, get them back
 		elseif ( ! isset($this->qb_orderby))
 		{
 			$this->qb_orderby = $orderby;
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		else
 		{
 			$this->qb_orderby       = $qb_orderby;
 			$this->qb_cache_orderby = $qb_cache_orderby;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		if ($result->num_rows() === 0)
@@ -1519,10 +1586,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Get_Where
 =======
 	 * get_where()
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * get_where()
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 *
 	 * Allows the where clause, limit and offset to be added directly
 	 *
@@ -1648,10 +1719,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		is_bool($escape) OR $escape = $this->_protect_identifiers;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$keys = array_keys($this->_object_to_array(current($key)));
 =======
 		$keys = array_keys($this->_object_to_array(reset($key)));
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$keys = array_keys($this->_object_to_array(reset($key)));
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		sort($keys);
 
 		foreach ($key as $row)
@@ -1992,10 +2067,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		if ($set === NULL)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (empty($this->qb_set))
 =======
 			if (empty($this->qb_set_ub))
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			if (empty($this->qb_set_ub))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			{
 				return ($this->db_debug) ? $this->display_error('db_must_use_set') : FALSE;
 			}
@@ -2023,6 +2102,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		// Batch this baby
 		$affected_rows = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ($i = 0, $total = count($this->qb_set); $i < $total; $i += $batch_size)
 		{
 			if ($this->query($this->_update_batch($this->protect_identifiers($table, TRUE, NULL, FALSE), array_slice($this->qb_set, $i, $batch_size), $index)))
@@ -2031,6 +2111,11 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		{
 			if ($this->query($this->_update_batch($this->protect_identifiers($table, TRUE, NULL, FALSE), array_slice($this->qb_set_ub, $i, $batch_size), $index)))
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		for ($i = 0, $total = count($this->qb_set_ub); $i < $total; $i += $batch_size)
+		{
+			if ($this->query($this->_update_batch($this->protect_identifiers($table, TRUE, NULL, FALSE), array_slice($this->qb_set_ub, $i, $batch_size), $index)))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			{
 				$affected_rows += $this->affected_rows();
 			}
@@ -2057,6 +2142,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	protected function _update_batch($table, $values, $index)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$index_escaped = $this->protect_identifiers($index);
 
 		$ids = array();
@@ -2064,21 +2150,30 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		{
 			$ids[] = $val[$index];
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		$ids = array();
 		foreach ($values as $key => $val)
 		{
 			$ids[] = $val[$index]['value'];
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 			foreach (array_keys($val) as $field)
 			{
 				if ($field !== $index)
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					$final[$field][] = 'WHEN '.$index_escaped.' = '.$val[$index].' THEN '.$val[$field];
 =======
 					$final[$val[$field]['field']][] = 'WHEN '.$val[$index]['field'].' = '.$val[$index]['value'].' THEN '.$val[$field]['value'];
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+					$final[$val[$field]['field']][] = 'WHEN '.$val[$index]['field'].' = '.$val[$index]['value'].' THEN '.$val[$field]['value'];
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				}
 			}
 		}
@@ -2092,10 +2187,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$this->where($index_escaped.' IN('.implode(',', $ids).')', NULL, FALSE);
 =======
 		$this->where($val[$index]['field'].' IN('.implode(',', $ids).')', NULL, FALSE);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$this->where($val[$index]['field'].' IN('.implode(',', $ids).')', NULL, FALSE);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		return 'UPDATE '.$table.' SET '.substr($cases, 0, -2).$this->_compile_wh('qb_where');
 	}
@@ -2133,13 +2232,19 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 				}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$clean[$this->protect_identifiers($k2, FALSE, $escape)] = ($escape === FALSE) ? $v2 : $this->escape($v2);
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				$clean[$k2] = array(
 					'field'  => $this->protect_identifiers($k2, FALSE, $escape),
 					'value'  => ($escape === FALSE ? $v2 : $this->escape($v2))
 				);
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 
 			if ($index_set === FALSE)
@@ -2148,10 +2253,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$this->qb_set[] = $clean;
 =======
 			$this->qb_set_ub[] = $clean;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			$this->qb_set_ub[] = $clean;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		return $this;
@@ -2339,10 +2448,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	{
 		return 'DELETE FROM '.$table.$this->_compile_wh('qb_where')
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.($this->qb_limit ? ' LIMIT '.$this->qb_limit : '');
 =======
 			.($this->qb_limit !== FALSE ? ' LIMIT '.$this->qb_limit : '');
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			.($this->qb_limit !== FALSE ? ' LIMIT '.$this->qb_limit : '');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -2419,10 +2532,13 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 			// Store the alias, if it doesn't already exist
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ( ! in_array($table, $this->qb_aliased_tables))
 			{
 				$this->qb_aliased_tables[] = $table;
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			if ( ! in_array($table, $this->qb_aliased_tables, TRUE))
 			{
 				$this->qb_aliased_tables[] = $table;
@@ -2431,7 +2547,10 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 					$this->qb_cache_aliased_tables[] = $table;
 					$this->qb_cache_exists[] = 'aliased_tables';
 				}
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 		}
 	}
@@ -2499,10 +2618,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 		// LIMIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($this->qb_limit OR $this->qb_offset)
 =======
 		if ($this->qb_limit !== FALSE OR $this->qb_offset)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if ($this->qb_limit !== FALSE OR $this->qb_offset)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			return $this->_limit($sql."\n");
 		}
@@ -2538,10 +2661,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 				elseif ($this->{$qb_key}[$i]['escape'] === FALSE)
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					$this->{$qb_key}[$i] = $this->{$qb_key}[$i]['condition'];
 =======
 					$this->{$qb_key}[$i] = $this->{$qb_key}[$i]['condition'].(isset($this->{$qb_key}[$i]['value']) ? ' '.$this->{$qb_key}[$i]['value'] : '');
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+					$this->{$qb_key}[$i] = $this->{$qb_key}[$i]['condition'].(isset($this->{$qb_key}[$i]['value']) ? ' '.$this->{$qb_key}[$i]['value'] : '');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 					continue;
 				}
 
@@ -2581,10 +2708,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 				}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$this->{$qb_key}[$i] = implode('', $conditions);
 =======
 				$this->{$qb_key}[$i] = implode('', $conditions).(isset($this->{$qb_key}[$i]['value']) ? ' '.$this->{$qb_key}[$i]['value'] : '');
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+				$this->{$qb_key}[$i] = implode('', $conditions).(isset($this->{$qb_key}[$i]['value']) ? ' '.$this->{$qb_key}[$i]['value'] : '');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 
 			return ($qb_key === 'qb_having' ? "\nHAVING " : "\nWHERE ")
@@ -2602,10 +2733,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	 * Escapes identifiers in GROUP BY statements at execution time.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Required so that aliases are tracked properly, regardless of wether
 =======
 	 * Required so that aliases are tracked properly, regardless of whether
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * Required so that aliases are tracked properly, regardless of whether
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * group_by() is called prior to from(), join() and dbprefix is added
 	 * only if needed.
 	 *
@@ -2642,10 +2777,14 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	 * Escapes identifiers in ORDER BY statements at execution time.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Required so that aliases are tracked properly, regardless of wether
 =======
 	 * Required so that aliases are tracked properly, regardless of whether
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * Required so that aliases are tracked properly, regardless of whether
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * order_by() is called prior to from(), join() and dbprefix is added
 	 * only if needed.
 	 *
@@ -2653,6 +2792,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	 */
 	protected function _compile_order_by()
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (is_array($this->qb_orderby) && count($this->qb_orderby) > 0)
 		{
@@ -2675,6 +2815,8 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 		return '';
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if (empty($this->qb_orderby))
 		{
 			return '';
@@ -2696,7 +2838,10 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		}
 
 		return "\nORDER BY ".implode(', ', $this->qb_orderby);
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -2818,11 +2963,16 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			'qb_cache_set'			=> array(),
 			'qb_cache_exists'		=> array(),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			'qb_cache_no_escape'	=> array()
 =======
 			'qb_cache_no_escape'	=> array(),
 			'qb_cache_aliased_tables'	=> array()
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			'qb_cache_no_escape'	=> array(),
+			'qb_cache_aliased_tables'	=> array()
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		));
 
 		return $this;
@@ -2874,6 +3024,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		// If we are "protecting identifiers" we need to examine the "from"
 		// portion of the query to determine if there are any aliases
@@ -2883,6 +3034,8 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		}
 =======
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -2986,9 +3139,13 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		$this->_reset_run(array(
 			'qb_set'	=> array(),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			'qb_set_ub'	=> array(),
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			'qb_set_ub'	=> array(),
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			'qb_from'	=> array(),
 			'qb_join'	=> array(),
 			'qb_where'	=> array(),

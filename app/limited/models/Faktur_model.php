@@ -125,6 +125,7 @@ class Faktur_model extends CI_Model
                     }
                 }
 
+<<<<<<< HEAD
                 /*
                 $searchTerms = explode(' ', $cari['q']);
                 $searchTermBits = array();
@@ -142,6 +143,8 @@ class Faktur_model extends CI_Model
                 }
                 */
 
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
                 $query_q .= ") ";
             }
  

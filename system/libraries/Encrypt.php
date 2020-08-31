@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -132,10 +141,14 @@ class CI_Encrypt {
 			$key = config_item('encryption_key');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ( ! strlen($key))
 =======
 			if ( ! self::strlen($key))
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			if ( ! self::strlen($key))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			{
 				show_error('In order to use the encryption class requires that you set an encryption key in your config file.');
 			}
@@ -266,10 +279,14 @@ class CI_Encrypt {
 
 		$dec = '';
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ($i = 0, $l = strlen($string); $i < $l; $i++)
 =======
 		for ($i = 0, $l = self::strlen($string); $i < $l; $i++)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		for ($i = 0, $l = self::strlen($string); $i < $l; $i++)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			$dec .= ($string[$i++] ^ $string[$i]);
 		}
@@ -293,11 +310,16 @@ class CI_Encrypt {
 		$hash = $this->hash($key);
 		$str = '';
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ($i = 0, $ls = strlen($string), $lh = strlen($hash); $i < $ls; $i++)
 =======
 
 		for ($i = 0, $ls = self::strlen($string), $lh = self::strlen($hash); $i < $ls; $i++)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+
+		for ($i = 0, $ls = self::strlen($string), $lh = self::strlen($hash); $i < $ls; $i++)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			$str .= $string[$i] ^ $hash[($i % $lh)];
 		}
@@ -318,10 +340,14 @@ class CI_Encrypt {
 	{
 		$init_size = mcrypt_get_iv_size($this->_get_cipher(), $this->_get_mode());
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$init_vect = mcrypt_create_iv($init_size, MCRYPT_RAND);
 =======
 		$init_vect = mcrypt_create_iv($init_size, MCRYPT_DEV_URANDOM);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$init_vect = mcrypt_create_iv($init_size, MCRYPT_DEV_URANDOM);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		return $this->_add_cipher_noise($init_vect.mcrypt_encrypt($this->_get_cipher(), $key, $data, $this->_get_mode(), $init_vect), $key);
 	}
 
@@ -340,14 +366,19 @@ class CI_Encrypt {
 		$init_size = mcrypt_get_iv_size($this->_get_cipher(), $this->_get_mode());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($init_size > strlen($data))
 =======
 		if ($init_size > self::strlen($data))
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if ($init_size > self::strlen($data))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$init_vect = substr($data, 0, $init_size);
 		$data = substr($data, $init_size);
@@ -356,6 +387,11 @@ class CI_Encrypt {
 		$data      = self::substr($data, $init_size);
 
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$init_vect = self::substr($data, 0, $init_size);
+		$data      = self::substr($data, $init_size);
+
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		return rtrim(mcrypt_decrypt($this->_get_cipher(), $key, $data, $this->_get_mode(), $init_vect), "\0");
 	}
 
@@ -376,10 +412,14 @@ class CI_Encrypt {
 		$str = '';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ($i = 0, $j = 0, $ld = strlen($data), $lk = strlen($key); $i < $ld; ++$i, ++$j)
 =======
 		for ($i = 0, $j = 0, $ld = self::strlen($data), $lk = self::strlen($key); $i < $ld; ++$i, ++$j)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		for ($i = 0, $j = 0, $ld = self::strlen($data), $lk = self::strlen($key); $i < $ld; ++$i, ++$j)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			if ($j >= $lk)
 			{
@@ -410,10 +450,14 @@ class CI_Encrypt {
 		$str = '';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ($i = 0, $j = 0, $ld = strlen($data), $lk = strlen($key); $i < $ld; ++$i, ++$j)
 =======
 		for ($i = 0, $j = 0, $ld = self::strlen($data), $lk = self::strlen($key); $i < $ld; ++$i, ++$j)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		for ($i = 0, $j = 0, $ld = self::strlen($data), $lk = self::strlen($key); $i < $ld; ++$i, ++$j)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			if ($j >= $lk)
 			{
@@ -522,7 +566,10 @@ class CI_Encrypt {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	// --------------------------------------------------------------------
 
 	/**
@@ -562,5 +609,8 @@ class CI_Encrypt {
 			? substr($str, $start, $length)
 			: substr($str, $start);
 	}
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 }

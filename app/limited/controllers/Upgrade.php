@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Upgrade extends CI_Controller {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public function __construct() {
 		parent::__construct();
     	$this->load->dbforge();
@@ -422,6 +423,8 @@ class Upgrade extends CI_Controller {
 	}
 }
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 	public function __construct() {
 		parent::__construct();
@@ -565,5 +568,9 @@ class Upgrade extends CI_Controller {
 	    exit;
 	}
 
+<<<<<<< HEAD
 }
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+}
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5

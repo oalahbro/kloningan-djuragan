@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -112,10 +121,14 @@ if ( ! function_exists('character_limiter'))
 
 		// a bit complicated, but faster than preg_replace with \s+
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$str = preg_replace('/ {2,}/', ' ', str_replace(array("\r", "\n", "\t", "\x0B", "\x0C"), ' ', $str));
 =======
 		$str = preg_replace('/ {2,}/', ' ', str_replace(array("\r", "\n", "\t", "\v", "\f"), ' ', $str));
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$str = preg_replace('/ {2,}/', ' ', str_replace(array("\r", "\n", "\t", "\v", "\f"), ' ', $str));
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		if (mb_strlen($str) <= $n)
 		{
@@ -152,13 +165,19 @@ if ( ! function_exists('ascii_to_entities'))
 	{
 		$out = '';
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ($i = 0, $s = strlen($str) - 1, $count = 1, $temp = array(); $i <= $s; $i++)
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		$length = defined('MB_OVERLOAD_STRING')
 			? mb_strlen($str, '8bit') - 1
 			: strlen($str) - 1;
 		for ($i = 0, $count = 1, $temp = array(); $i <= $length; $i++)
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			$ordinal = ord($str[$i]);
 
@@ -197,10 +216,14 @@ if ( ! function_exists('ascii_to_entities'))
 				}
 				// If this is the last iteration, just output whatever we have
 <<<<<<< HEAD
+<<<<<<< HEAD
 				elseif ($i === $s)
 =======
 				elseif ($i === $length)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+				elseif ($i === $length)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				{
 					$out .= '&#'.implode(';', $temp).';';
 				}

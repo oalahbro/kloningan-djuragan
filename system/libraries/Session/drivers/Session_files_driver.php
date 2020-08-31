@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 3.0.0
  * @filesource
@@ -94,18 +103,24 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * mbstring.func_override flag
 	 *
 	 * @var	bool
 	 */
 	protected static $func_override;
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * mbstring.func_overload flag
 	 *
 	 * @var	bool
 	 */
 	protected static $func_overload;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 	// ------------------------------------------------------------------------
 
@@ -133,10 +148,14 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 		$this->_sid_regexp = $this->_config['_sid_regexp'];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
 =======
 		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -157,21 +176,31 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 			if ( ! mkdir($save_path, 0700, TRUE))
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				throw new Exception("Session: Configured save path '".$this->_config['save_path']."' is not a directory, doesn't exist or cannot be created.");
 =======
 				log_message('error', "Session: Configured save path '".$this->_config['save_path']."' is not a directory, doesn't exist or cannot be created.");
 				return $this->_failure;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+				log_message('error', "Session: Configured save path '".$this->_config['save_path']."' is not a directory, doesn't exist or cannot be created.");
+				return $this->_failure;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 		}
 		elseif ( ! is_writable($save_path))
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			throw new Exception("Session: Configured save path '".$this->_config['save_path']."' is not writable by the PHP process.");
 =======
 			log_message('error', "Session: Configured save path '".$this->_config['save_path']."' is not writable by the PHP process.");
 			return $this->_failure;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			log_message('error', "Session: Configured save path '".$this->_config['save_path']."' is not writable by the PHP process.");
+			return $this->_failure;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		$this->_config['save_path'] = $save_path;
@@ -180,10 +209,15 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 			.($this->_config['match_ip'] ? md5($_SERVER['REMOTE_ADDR']) : '');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		$this->php5_validate_id();
 
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$this->php5_validate_id();
+
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		return $this->_success;
 	}
 
@@ -429,7 +463,10 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * Validate ID
 	 *
 	 * Checks whether a session ID record exists server-side,
@@ -448,7 +485,10 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * Byte-safe strlen()
 	 *
 	 * @param	string	$str
@@ -457,10 +497,14 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	protected static function strlen($str)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (self::$func_override)
 =======
 		return (self::$func_overload)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return (self::$func_overload)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			? mb_strlen($str, '8bit')
 			: strlen($str);
 	}

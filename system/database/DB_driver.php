@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -152,10 +161,14 @@ abstract class CI_DB_driver {
 	 * @var	int
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public $port			= '';
 =======
 	public $port			= NULL;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	public $port			= NULL;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 	/**
 	 * Persistent connection flag
@@ -930,9 +943,13 @@ abstract class CI_DB_driver {
 		if ($this->_trans_begin())
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			$this->_trans_status = TRUE;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			$this->_trans_status = TRUE;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$this->_trans_depth++;
 			return TRUE;
 		}
@@ -1018,10 +1035,14 @@ abstract class CI_DB_driver {
 
 		// Make sure not to replace a chunk inside a string that happens to match the bind marker
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($c = preg_match_all("/'[^']*'/i", $sql, $matches))
 =======
 		if ($c = preg_match_all("/'[^']*'|\"[^\"]*\"/i", $sql, $matches))
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if ($c = preg_match_all("/'[^']*'|\"[^\"]*\"/i", $sql, $matches))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			$c = preg_match_all('/'.preg_quote($this->bind_marker, '/').'/i',
 				str_replace($matches[0],
@@ -1066,10 +1087,14 @@ abstract class CI_DB_driver {
 	public function is_write_type($sql)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (bool) preg_match('/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX)\s/i', $sql);
 =======
 		return (bool) preg_match('/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX|MERGE)\s/i', $sql);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return (bool) preg_match('/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX|MERGE)\s/i', $sql);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -1199,10 +1224,14 @@ abstract class CI_DB_driver {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Platform-dependant string escape
 =======
 	 * Platform-dependent string escape
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * Platform-dependent string escape
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 *
 	 * @param	string
 	 * @return	string
@@ -1210,10 +1239,14 @@ abstract class CI_DB_driver {
 	protected function _escape_str($str)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return str_replace("'", "''", remove_invisible_characters($str));
 =======
 		return str_replace("'", "''", remove_invisible_characters($str, FALSE));
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return str_replace("'", "''", remove_invisible_characters($str, FALSE));
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -1341,6 +1374,7 @@ abstract class CI_DB_driver {
 	public function list_fields($table)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Is there a cached result?
 		if (isset($this->data_cache['field_names'][$table]))
 		{
@@ -1349,6 +1383,8 @@ abstract class CI_DB_driver {
 
 =======
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if (FALSE === ($sql = $this->_list_columns($table)))
 		{
 			return ($this->db_debug) ? $this->display_error('db_unsupported_function') : FALSE;
@@ -1356,10 +1392,14 @@ abstract class CI_DB_driver {
 
 		$query = $this->query($sql);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$this->data_cache['field_names'][$table] = array();
 =======
 		$fields = array();
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$fields = array();
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		foreach ($query->result_array() as $row)
 		{
@@ -1382,16 +1422,22 @@ abstract class CI_DB_driver {
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$this->data_cache['field_names'][$table][] = $row[$key];
 		}
 
 		return $this->data_cache['field_names'][$table];
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$fields[] = $row[$key];
 		}
 
 		return $fields;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -1575,10 +1621,14 @@ abstract class CI_DB_driver {
 			.$this->_compile_wh('qb_where')
 			.$this->_compile_order_by()
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.($this->qb_limit ? ' LIMIT '.$this->qb_limit : '');
 =======
 			.($this->qb_limit !== FALSE ? ' LIMIT '.$this->qb_limit : '');
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			.($this->qb_limit !== FALSE ? ' LIMIT '.$this->qb_limit : '');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -1977,6 +2027,7 @@ abstract class CI_DB_driver {
 				}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				// Verify table prefix and replace if necessary
 				if ($this->swap_pre !== '' && strpos($parts[$i], $this->swap_pre) === 0)
 				{
@@ -1987,6 +2038,8 @@ abstract class CI_DB_driver {
 				{
 					$parts[$i] = $this->dbprefix.$parts[$i];
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				// dbprefix may've already been applied, with or without the identifier escaped
 				$ec = '(?<ec>'.preg_quote(is_array($this->_escape_char) ? $this->_escape_char[0] : $this->_escape_char).')?';
 				isset($ec[0]) && $ec .= '?'; // Just in case someone has disabled escaping by forcing an empty escape character
@@ -2000,7 +2053,10 @@ abstract class CI_DB_driver {
 				else
 				{
 					preg_match('#^'.$ec.preg_quote($this->dbprefix).'#', $parts[$i]) OR $parts[$i] = $this->dbprefix.$parts[$i];
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				}
 
 				// Put the parts back together

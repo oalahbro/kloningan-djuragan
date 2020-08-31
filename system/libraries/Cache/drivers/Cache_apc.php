@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 2.0.0
  * @filesource
@@ -90,6 +99,7 @@ class CI_Cache_apc extends CI_Driver {
 		$data = apc_fetch($id, $success);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ($success === TRUE)
 		{
 			return is_array($data)
@@ -101,6 +111,9 @@ class CI_Cache_apc extends CI_Driver {
 =======
 		return ($success === TRUE) ? $data : FALSE;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return ($success === TRUE) ? $data : FALSE;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -112,14 +125,19 @@ class CI_Cache_apc extends CI_Driver {
 	 * @param	mixed	$data	Data to store
 	 * @param	int	$ttl	Length of time (in seconds) to cache the data
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	bool	$raw	Whether to store the raw value
 =======
 	 * @param	bool	$raw	Whether to store the raw value (unused)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * @param	bool	$raw	Whether to store the raw value (unused)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * @return	bool	TRUE on success, FALSE on failure
 	 */
 	public function save($id, $data, $ttl = 60, $raw = FALSE)
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$ttl = (int) $ttl;
 
@@ -131,6 +149,9 @@ class CI_Cache_apc extends CI_Driver {
 =======
 		return apc_store($id, $data, (int) $ttl);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return apc_store($id, $data, (int) $ttl);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -210,6 +231,7 @@ class CI_Cache_apc extends CI_Driver {
 	public function get_metadata($id)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$success = FALSE;
 		$stored = apc_fetch($id, $success);
 
@@ -218,10 +240,15 @@ class CI_Cache_apc extends CI_Driver {
 		$cache_info = apc_cache_info('user', FALSE);
 		if (empty($cache_info) OR empty($cache_info['cache_list']))
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$cache_info = apc_cache_info('user', FALSE);
+		if (empty($cache_info) OR empty($cache_info['cache_list']))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		list($data, $time, $ttl) = $stored;
 
@@ -231,6 +258,8 @@ class CI_Cache_apc extends CI_Driver {
 			'data'		=> unserialize($data)
 		);
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		foreach ($cache_info['cache_list'] as &$entry)
 		{
 			if ($entry['info'] !== $id)
@@ -249,7 +278,10 @@ class CI_Cache_apc extends CI_Driver {
 		}
 
 		return FALSE;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------

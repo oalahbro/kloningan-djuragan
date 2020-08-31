@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Baca Ya..#
 
 Web Order Juragan yang baru dengan angularJS dan sistem Codeigniter 3. Lebih cepat dan lebih powerful dengan peningkatan berbagai sisi.
@@ -59,3 +60,8 @@ pindah ke https://github.com/seven-inc/djuragan.com
 * pastikan `hook` dalam `config.php` dalam mode `FALSE`.
 * jalankan `/upgrade`. Setelah selesai step 1 dapat diubah hook menjadi `TRUE`.
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+# Langkah update #
+* pastikan `hook` dalam `config.php` dalam mode `FALSE`.
+* jalankan `/upgrade`. Setelah selesai step 1 dapat diubah hook menjadi `TRUE`.
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5

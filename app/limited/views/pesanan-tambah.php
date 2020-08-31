@@ -20,6 +20,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 
+<<<<<<< HEAD
+=======
+
+<script src="<?php echo base_url('berkas/js/gpicker.js'); ?>"></script>
+<script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
+
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 <script>
     var myEl = document.getElementById('DOCS_IMAGES');
         myEl.addEventListener('click', function() {

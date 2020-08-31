@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.3.0
  * @filesource
@@ -177,6 +186,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 			empty($this->encrypt['ssl_cipher']) OR $ssl['cipher'] = $this->encrypt['ssl_cipher'];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if ( ! empty($ssl))
 			{
 				if (isset($this->encrypt['ssl_verify']))
@@ -198,6 +208,8 @@ class CI_DB_mysqli_driver extends CI_DB {
 				}
 
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			if (isset($this->encrypt['ssl_verify']))
 			{
 				$client_flags |= MYSQLI_CLIENT_SSL;
@@ -220,7 +232,10 @@ class CI_DB_mysqli_driver extends CI_DB {
 
 			if ( ! empty($ssl))
 			{
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				$client_flags |= MYSQLI_CLIENT_SSL;
 				$this->_mysqli->ssl_set(
 					isset($ssl['key'])    ? $ssl['key']    : NULL,
@@ -245,10 +260,14 @@ class CI_DB_mysqli_driver extends CI_DB {
 				$message = 'MySQLi was configured for an SSL connection, but got an unencrypted connection instead!';
 				log_message('error', $message);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return ($this->db->db_debug) ? $this->db->display_error($message, '', TRUE) : FALSE;
 =======
 				return ($this->db_debug) ? $this->display_error($message, '', TRUE) : FALSE;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+				return ($this->db_debug) ? $this->display_error($message, '', TRUE) : FALSE;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 
 			return $this->_mysqli;
@@ -420,10 +439,14 @@ class CI_DB_mysqli_driver extends CI_DB {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Platform-dependant string escape
 =======
 	 * Platform-dependent string escape
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * Platform-dependent string escape
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 *
 	 * @param	string
 	 * @return	string
@@ -470,10 +493,14 @@ class CI_DB_mysqli_driver extends CI_DB {
 	protected function _list_tables($prefix_limit = FALSE)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$sql = 'SHOW TABLES FROM '.$this->escape_identifiers($this->database);
 =======
 		$sql = 'SHOW TABLES FROM '.$this->_escape_char.$this->database.$this->_escape_char;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$sql = 'SHOW TABLES FROM '.$this->_escape_char.$this->database.$this->_escape_char;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		if ($prefix_limit !== FALSE && $this->dbprefix !== '')
 		{

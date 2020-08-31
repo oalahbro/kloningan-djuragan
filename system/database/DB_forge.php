@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -358,13 +367,19 @@ abstract class CI_DB_forge {
 		if (($result = $this->db->query($sql)) !== FALSE)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			empty($this->db->data_cache['table_names']) OR $this->db->data_cache['table_names'][] = $table;
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			if (isset($this->db->data_cache['table_names']))
 			{
 				$this->db->data_cache['table_names'][] = $table;
 			}
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 			// Most databases don't support creating indexes from within the CREATE TABLE statement
 			if ( ! empty($this->keys))
@@ -399,6 +414,7 @@ abstract class CI_DB_forge {
 				return TRUE;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else
 			{
 				$if_not_exists = FALSE;
@@ -407,6 +423,10 @@ abstract class CI_DB_forge {
 
 			$if_not_exists = FALSE;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+
+			$if_not_exists = FALSE;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		$sql = ($if_not_exists)
@@ -510,10 +530,14 @@ abstract class CI_DB_forge {
 	 * @param	string	$table		Table name
 	 * @param	bool	$if_exists	Whether to add an IF EXISTS condition
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @return	string
 =======
 	 * @return	mixed	(Returns a platform-specific DROP table string, or TRUE to indicate there's nothing to do)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * @return	mixed	(Returns a platform-specific DROP table string, or TRUE to indicate there's nothing to do)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 */
 	protected function _drop_table($table, $if_exists)
 	{
@@ -752,10 +776,14 @@ abstract class CI_DB_forge {
 				'length'		=> '',
 				'unsigned'		=> '',
 <<<<<<< HEAD
+<<<<<<< HEAD
 				'null'			=> '',
 =======
 				'null'			=> NULL,
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+				'null'			=> NULL,
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				'unique'		=> '',
 				'default'		=> '',
 				'auto_increment'	=> '',
@@ -1009,12 +1037,17 @@ abstract class CI_DB_forge {
 	 * Process indexes
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	string	$table
 	 * @return	string
 =======
 	 * @param	string	$table	Table name
 	 * @return	string[] list of SQL statements
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * @param	string	$table	Table name
+	 * @return	string[] list of SQL statements
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 */
 	protected function _process_indexes($table)
 	{

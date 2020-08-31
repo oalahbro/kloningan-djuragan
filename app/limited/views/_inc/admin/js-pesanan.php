@@ -32,8 +32,13 @@ function load_tooltips() {
 
 // load "juragan" column
 function load_juragan(c, a, e) {
+<<<<<<< HEAD
 	$.getJSON(uri + "a/json/juragan/" + a, function(a) {
 		var b = '<a href="'+uri+'a/faktur/lihat/' + a.slug + '">' + a.nama + "</a>";
+=======
+	$.getJSON(uri + "faktur/json_juragan/" + a, function(a) {
+		var b = '<a href="'+uri+'faktur/data/' + a.slug + '">' + a.nama + "</a>";
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		a = '<hr/><span class="text-muted small">CS: ' + a.nama_cs + "</span>";
 		$(c).empty().append(b + a);
 		e();
@@ -42,7 +47,11 @@ function load_juragan(c, a, e) {
 
 // load "status", "pesanan", "pembayaran" column
 function load_pembayaran(c, a, e, b, m) {
+<<<<<<< HEAD
 	$.getJSON(uri + "a/json/pembayaran/" + b, function(b) {
+=======
+	$.getJSON(uri + "faktur/json_pembayaran/" + b, function(b) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		var f = "", v = "", n = "", w = "", x = "", y = "";
 		switch(b.status) {
 		case 1:
@@ -172,7 +181,11 @@ function load_pembayaran(c, a, e, b, m) {
 		d += '<div class="dropdown-divider"></div>';
 		d += '<h6 class="dropdown-header">Lainnya</h6>';
 		d += '<a class="dropdown-item" href="' + uri + 'faktur/pdf/' + b.seri_faktur + '">Unduh PDF</a>';
+<<<<<<< HEAD
 		d += '<a href="' + uri + 'a/faktur/sunting/' + b.seri_faktur + '" class="dropdown-item">Sunting</a>';
+=======
+		d += '<a href="' + uri + 'faktur/sunting/' + b.seri_faktur + '" class="dropdown-item">Sunting</a>';
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		d += '<button class="dropdown-item text-danger hapus_pesanan">Hapus</button>';
 		d += "</div>";
 		d += "</div>";
@@ -193,7 +206,11 @@ function load_pembayaran(c, a, e, b, m) {
 // load "keterangan" column
 function load_keterangan(c, a) {
 	var e = "", b = "", m = "", f = "", u = "show";
+<<<<<<< HEAD
 	$.getJSON(uri + "a/json/keterangan/" + a, function(a) {
+=======
+	$.getJSON(uri + "faktur/json_keterangan/" + a, function(a) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if ("undefined" !== typeof a.ket || "undefined" !== typeof a.gambar) {
 		e = '<button class="btn btn-outline-info dropdown-toggle btn-sm mb-1 mr-1" type="button" data-toggle="collapse" data-target="#collapseKeterangan-' + a.id + '" aria-expanded="false" aria-controls="collapseKeterangan-' + a.id + '"><i class="fas fa-scroll"></i> Keterangan</button>';
 		}
@@ -233,7 +250,11 @@ function load_keterangan(c, a) {
 // load data pembayaran, modal inside
 function load_data_pembayaran(c) {
 	var a = "";
+<<<<<<< HEAD
 	$.ajax({type:"GET", url:uri + "a/json/get_pembayaran", data:{id:c}, dataType:"json", success:function(e) {
+=======
+	$.ajax({type:"GET", url:uri + "faktur/ambil_pembayaran", data:{id:c}, dataType:"json", success:function(e) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		a += '<div class="pt-3">';
 		if (0 === e.length) {
 			a += '<p class="alert alert-danger">Tidak ditemukan data pembayaran</p>';
@@ -311,7 +332,11 @@ function load_data_tambahPembayaran(c) {
 
 // load form edit pembayaran, modal inside
 function load_data_suntingPembayaran(c) {
+<<<<<<< HEAD
 	var a = "", e = uri + "a/json/edit_pembayaran/" + c;
+=======
+	var a = "", e = uri + "faktur/detail_pembayaran/" + c;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	$("#nav-sunting-tab").html("");
 	
 	a += '<form class="mt-3" method="post" accept-charset="utf-8">';
@@ -420,7 +445,11 @@ $(document).on("click", ".submitMe", function(c) {
 	c = a.closest("form").serialize();
 	a.prop("disabled", !0).html(spinner_btn);
 
+<<<<<<< HEAD
 	$.ajax({type:"POST", url:uri + "a/json/add_pembayaran", data:c, dataType:"json", success:function(a) {
+=======
+	$.ajax({type:"POST", url:uri + "faktur/tambah_pembayaran", data:c, dataType:"json", success:function(a) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if (a.status) {
 			$("#nav-cek").tab("show");
 			var b = "#pesanan-" + a.faktur_id;
@@ -447,7 +476,11 @@ $(document).on("keyup change", "#nav-cek-tab .sbm", function() {
 	checking = "";
 	checking = this.checked ? "ya" : "tidak";
 	c.prop("disabled", !0);
+<<<<<<< HEAD
 	$.post(uri + "a/json/check_pembayaran", {id_faktur:id_faktur, id_pembayaran:id_pembayaran, check:checking}, function(a, c) {
+=======
+	$.post(uri + "faktur/check_pembayaran", {id_faktur:id_faktur, id_pembayaran:id_pembayaran, check:checking}, function(a, c) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		var b = "#pesanan-" + a.faktur_id;
 		$(b + " .pesanan").html(spinner);
 		$(b + " .status").html(spinner);
@@ -475,7 +508,11 @@ $(document).on("click", ".simpanSuntingBayar", function(c) {
 	var a = $(this);
 	c = a.closest("form").serialize();
 	a.prop("disabled", !0).html(spinner_btn);
+<<<<<<< HEAD
 	$.ajax({type:"POST", url:uri + "a/json/update_pembayaran", data:c, dataType:"json", success:function(a) {
+=======
+	$.ajax({type:"POST", url:uri + "faktur/simpan_pembayaran", data:c, dataType:"json", success:function(a) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if (a.status) {
 			$("#nav-cek").tab("show");
 			var b = "#pesanan-" + a.faktur_id;
@@ -498,7 +535,11 @@ $(document).on("click", ".simpanSuntingBayar", function(c) {
 $(document).on("click", ".hapusBayar", function(c) {
 	c.preventDefault();
 	c = $(this).closest(".dropdown").attr("data-id");
+<<<<<<< HEAD
 	$.post(uri + "a/json/delete_pembayaran", {idpembayaran:c}, function(a, c) {
+=======
+	$.post(uri + "faktur/hapus_pembayaran", {idpembayaran:c}, function(a, c) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		var b = "#pesanan-" + a.faktur_id;
 		$(b + " .pesanan").html(spinner);
 		$(b + " .status").html(spinner);
@@ -540,7 +581,11 @@ $(document).on("click", ".button-radios .radio", function(e){
 
 	$("#dynamicModal").modal('hide');
 	if(current !== status_text) {
+<<<<<<< HEAD
 		$.post('<?php echo site_url("a/json/ubah_paket") ?>', {faktur_id: faktur_id, status: status}, function(response) {
+=======
+		$.post('<?php echo site_url("faktur/ubah_paket") ?>', {faktur_id: faktur_id, status: status}, function(response) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$(b + " .pesanan").html(spinner);
 			$(b + " .status").html(spinner);
 			$(b + " .pembayaran").html(spinner);
@@ -596,7 +641,11 @@ $(document).on("click", ".set_kirim", function(e){
 function load_data_pengiriman(id) {
 	var a = "";
 	$('#nav-cek-kirim-tab').html(spinner);
+<<<<<<< HEAD
 	$.ajax({type:"GET", url:uri + "a/json/get_pengiriman", data:{id:id}, dataType:"json", success:function(e) {
+=======
+	$.ajax({type:"GET", url:uri + "faktur/ambil_pengiriman", data:{id:id}, dataType:"json", success:function(e) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		a += '<div class="pt-3">';
 		if (0 === e.length) {
 			a += '<p class="alert alert-danger">Tidak ditemukan data pengiriman</p>';
@@ -723,7 +772,11 @@ function load_data_sunting_pengiriman(id) {
 		option += '<option value="'+v+'">'+v+'</option>';
 	});
 
+<<<<<<< HEAD
 	$.ajax({type:"GET", url:uri + "a/json/edit_pengiriman", data:{id:id}, dataType:"json", success:function(e) {
+=======
+	$.ajax({type:"GET", url:uri + "faktur/detail_pengiriman", data:{id:id}, dataType:"json", success:function(e) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		konten += '<form>';
 
 		konten += '<input name="faktur_id" type="hidden" value="'+e.faktur_id+'"/>';
@@ -807,7 +860,11 @@ $(document).on("click", ".SimpanSuntingKirim", function(c) {
 	var a = $(this);
 	c = a.closest("form").serialize();
 	a.prop("disabled", !0).html(spinner_btn);
+<<<<<<< HEAD
 	$.ajax({type:"POST", url:uri + "a/json/update_pengiriman", data:c, dataType:"json", success:function(a) {
+=======
+	$.ajax({type:"POST", url:uri + "faktur/simpan_pengiriman", data:c, dataType:"json", success:function(a) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if (a.status) {
 			$("#nav-cek-kirim").tab("show");
 			var b = "#pesanan-" + a.faktur_id;
@@ -835,7 +892,11 @@ $(document).on("click", ".tambahKirim", function(c) {
 	var a = $(this);
 	c = a.closest("form").serialize();
 	a.prop("disabled", !0).html(spinner_btn);
+<<<<<<< HEAD
 	$.ajax({type:"POST", url:uri + "a/json/add_pengiriman", data:c, dataType:"json", success:function(a) {
+=======
+	$.ajax({type:"POST", url:uri + "faktur/tambah_pengiriman", data:c, dataType:"json", success:function(a) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if (a.status) {
 			$("#nav-cek-kirim").tab("show");
 			var b = "#pesanan-" + a.faktur_id;
@@ -887,7 +948,11 @@ $(document).on("shown.bs.tab", 'a[data-inf="tab_kirim"]', function(c) {
 $(document).on("click", ".hapusKirim", function(c) {
 	c.preventDefault();
 	c = $(this).closest(".dropdown").attr("data-id");
+<<<<<<< HEAD
 	$.post(uri + "a/json/delete_pengiriman", {idpengiriman:c}, function(a) {
+=======
+	$.post(uri + "faktur/hapus_pengiriman", {idpengiriman:c}, function(a) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		var b = "#pesanan-" + a.faktur_id;
 		$(b + " .keterangan").html(spinner);
 		$(b + " .status").html(spinner);
@@ -909,10 +974,17 @@ $(document).on("click", ".hapus_pesanan", function(c) {
 	c = $(this).closest(".mn");
 	var seri_faktur = c.attr('data-faktur'),
 		id_faktur = c.attr('data-id');
+<<<<<<< HEAD
 	// console.log(seri_faktur);
 	if (confirm("Hapus data pesanan "+ id_faktur +"?" )) {
 		// your deletion code
 		$.post(uri + "a/faktur/delete", {id_faktur:id_faktur}, function(a) {
+=======
+	console.log(c);
+	if (confirm("Hapus data pesanan "+c+"?" )) {
+		// your deletion code
+		$.post(uri + "faktur/delete_faktur", {id_faktur:id_faktur}, function(a) {
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			if(a.status) {
 				location.reload();
 			}

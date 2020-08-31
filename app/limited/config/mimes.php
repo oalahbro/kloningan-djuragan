@@ -165,10 +165,13 @@ return array(
 	'vtt'	=>	array('text/vtt', 'text/plain'),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	'ico'	=>	array('image/x-icon', 'image/x-ico', 'image/vnd.microsoft.icon')
 =======
 =======
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	'ico'	=>	array('image/x-icon', 'image/x-ico', 'image/vnd.microsoft.icon'),
 	'odc'	=>	'application/vnd.oasis.opendocument.chart',
 	'otc'	=>	'application/vnd.oasis.opendocument.chart-template',
@@ -187,7 +190,10 @@ return array(
 	'ott'	=>	'application/vnd.oasis.opendocument.text-template',
 	'oth'	=>	'application/vnd.oasis.opendocument.text-web'
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 =======
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 );

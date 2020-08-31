@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // ambil data auth dari juragan yang diijinkan
 function _auth($value='') {
 	$CI =& get_instance();
@@ -101,6 +102,8 @@ function _is_login() {
 function _is_user_level($level = 'superadmin') {
 	if(data_session('level') === $level) {
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 if( ! function_exists('save_url_encode')) {
 	function save_url_encode($input) {
 		$TO =& get_instance();
@@ -262,11 +265,15 @@ function punya_member($user_id) {
 
 	$punya_member = $TO->juragan_model->setting_member($user_id);
 	if($punya_member) {
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		return TRUE;
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 function list_juragan() {
 	$TO =& get_instance();
@@ -283,6 +290,8 @@ function harga($data_harga) {
 
 function tanggal_range($akhir_mulai) {
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 /**
  * data_session()
@@ -340,7 +349,10 @@ function get_halaman($page)
  */
 function date_ranger($akhir_mulai)
 {
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	$TO =& get_instance();
 	$default_tanggal_mulai = $TO->config->item('config_tanggal_mulai');
 	$default_tanggal_akhir = $TO->config->item('config_tanggal_selesai');
@@ -396,7 +408,10 @@ function date_ranger($akhir_mulai)
 		return $tanggal_akhir;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 }
 
 
@@ -462,5 +477,8 @@ function get_count($juragan, $table, $status)
 	}
 
 	return $total;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 }

@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -116,18 +125,24 @@ class CI_Zip {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * mbstring.func_override flag
 	 *
 	 * @var	bool
 	 */
 	protected static $func_override;
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * mbstring.func_overload flag
 	 *
 	 * @var	bool
 	 */
 	protected static $func_overload;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 	/**
 	 * Initialize zip compression class
@@ -137,10 +152,14 @@ class CI_Zip {
 	public function __construct()
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
 =======
 		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		$this->now = time();
 		log_message('info', 'Zip Compression Class Initialized');
@@ -522,10 +541,14 @@ class CI_Zip {
 	protected static function strlen($str)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (self::$func_override)
 =======
 		return (self::$func_overload)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return (self::$func_overload)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			? mb_strlen($str, '8bit')
 			: strlen($str);
 	}
@@ -543,10 +566,14 @@ class CI_Zip {
 	protected static function substr($str, $start, $length = NULL)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (self::$func_override)
 =======
 		if (self::$func_overload)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if (self::$func_overload)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			// mb_substr($str, $start, null, '8bit') returns an empty
 			// string on PHP 5.3

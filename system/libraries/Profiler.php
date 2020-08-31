@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -326,10 +335,14 @@ class CI_Profiler {
 				is_int($key) OR $key = "'".htmlspecialchars($key, ENT_QUOTES, config_item('charset'))."'";
 				$val = (is_array($val) OR is_object($val))
 <<<<<<< HEAD
+<<<<<<< HEAD
 					? '<pre>'.htmlspecialchars(print_r($val, TRUE), ENT_QUOTES, config_item('charset'))
 =======
 					? '<pre>'.htmlspecialchars(print_r($val, TRUE), ENT_QUOTES, config_item('charset')).'</pre>'
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+					? '<pre>'.htmlspecialchars(print_r($val, TRUE), ENT_QUOTES, config_item('charset')).'</pre>'
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 					: htmlspecialchars($val, ENT_QUOTES, config_item('charset'));
 
 				$output .= '<tr><td style="width:50%;color:#000;background-color:#ddd;padding:5px;">&#36;_GET['
@@ -370,10 +383,14 @@ class CI_Profiler {
 				is_int($key) OR $key = "'".htmlspecialchars($key, ENT_QUOTES, config_item('charset'))."'";
 				$val = (is_array($val) OR is_object($val))
 <<<<<<< HEAD
+<<<<<<< HEAD
 					? '<pre>'.htmlspecialchars(print_r($val, TRUE), ENT_QUOTES, config_item('charset'))
 =======
 					? '<pre>'.htmlspecialchars(print_r($val, TRUE), ENT_QUOTES, config_item('charset')).'</pre>'
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+					? '<pre>'.htmlspecialchars(print_r($val, TRUE), ENT_QUOTES, config_item('charset')).'</pre>'
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 					: htmlspecialchars($val, ENT_QUOTES, config_item('charset'));
 
 				$output .= '<tr><td style="width:50%;padding:5px;color:#000;background-color:#ddd;">&#36;_POST['
@@ -386,10 +403,14 @@ class CI_Profiler {
 				is_int($key) OR $key = "'".htmlspecialchars($key, ENT_QUOTES, config_item('charset'))."'";
 				$val = (is_array($val) OR is_object($val))
 <<<<<<< HEAD
+<<<<<<< HEAD
 					? '<pre>'.htmlspecialchars(print_r($val, TRUE), ENT_QUOTES, config_item('charset'))
 =======
 					? '<pre>'.htmlspecialchars(print_r($val, TRUE), ENT_QUOTES, config_item('charset')).'</pre>'
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+					? '<pre>'.htmlspecialchars(print_r($val, TRUE), ENT_QUOTES, config_item('charset')).'</pre>'
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 					: htmlspecialchars($val, ENT_QUOTES, config_item('charset'));
 
 				$output .= '<tr><td style="width:50%;padding:5px;color:#000;background-color:#ddd;">&#36;_FILES['
@@ -506,6 +527,7 @@ class CI_Profiler {
 		foreach ($this->CI->config->config as $config => $val)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (is_array($val) OR is_object($val))
 			{
 				$val = print_r($val, TRUE);
@@ -514,6 +536,8 @@ class CI_Profiler {
 			$output .= '<tr><td style="padding:5px;vertical-align:top;color:#900;background-color:#ddd;">'
 				.$config.'&nbsp;&nbsp;</td><td style="padding:5px;color:#000;background-color:#ddd;">'.htmlspecialchars($val)."</td></tr>\n";
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$pre       = '';
 			$pre_close = '';
                         
@@ -527,7 +551,10 @@ class CI_Profiler {
 
 			$output .= '<tr><td style="padding:5px;vertical-align:top;color:#900;background-color:#ddd;">'
 				.$config.'&nbsp;&nbsp;</td><td style="padding:5px;color:#000;background-color:#ddd;">'.$pre.htmlspecialchars($val, ENT_QUOTES, config_item('charset')).$pre_close."</td></tr>\n";
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		return $output."</table>\n</fieldset>";
@@ -554,6 +581,7 @@ class CI_Profiler {
 		foreach ($this->CI->session->userdata() as $key => $val)
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (is_array($val) OR is_object($val))
 			{
 				$val = print_r($val, TRUE);
@@ -562,6 +590,8 @@ class CI_Profiler {
 			$output .= '<tr><td style="padding:5px;vertical-align:top;color:#900;background-color:#ddd;">'
 				.$key.'&nbsp;&nbsp;</td><td style="padding:5px;color:#000;background-color:#ddd;">'.htmlspecialchars($val)."</td></tr>\n";
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$pre       = '';
 			$pre_close = '';
                         
@@ -575,7 +605,10 @@ class CI_Profiler {
 
 			$output .= '<tr><td style="padding:5px;vertical-align:top;color:#900;background-color:#ddd;">'
 				.$key.'&nbsp;&nbsp;</td><td style="padding:5px;color:#000;background-color:#ddd;">'.$pre.htmlspecialchars($val, ENT_QUOTES, config_item('charset')).$pre_close."</td></tr>\n";
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		return $output."</table>\n</fieldset>";

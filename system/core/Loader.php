@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -192,10 +201,14 @@ class CI_Loader {
 	 * Designed to be called from application controllers.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	string	$library	Library name
 =======
 	 * @param	mixed	$library	Library name
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * @param	mixed	$library	Library name
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * @param	array	$params		Optional parameters to pass to the library class constructor
 	 * @param	string	$object_name	An optional object name to assign to
 	 * @return	object
@@ -240,10 +253,14 @@ class CI_Loader {
 	 * Loads and instantiates models.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	string	$model		Model name
 =======
 	 * @param	mixed	$model		Model name
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * @param	mixed	$model		Model name
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * @param	string	$name		An optional object name to assign to
 	 * @param	bool	$db_conn	An optional database connection configuration to initialize
 	 * @return	object
@@ -321,10 +338,15 @@ class CI_Loader {
 					throw new RuntimeException($app_path."Model.php exists, but doesn't declare class CI_Model");
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 				log_message('info', 'CI_Model class loaded');
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+
+				log_message('info', 'CI_Model class loaded');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 			elseif ( ! class_exists('CI_Model', FALSE))
 			{
@@ -340,10 +362,15 @@ class CI_Loader {
 					throw new RuntimeException($app_path.$class.".php exists, but doesn't declare class ".$class);
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 				log_message('info', config_item('subclass_prefix').'Model class loaded');
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+
+				log_message('info', config_item('subclass_prefix').'Model class loaded');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 		}
 
@@ -378,12 +405,18 @@ class CI_Loader {
 
 		$this->_ci_models[] = $name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$CI->$name = new $model();
 =======
 		$model = new $model();
 		$CI->$name = $model;
 		log_message('info', 'Model "'.get_class($model).'" initialized');
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$model = new $model();
+		$CI->$name = $model;
+		log_message('info', 'Model "'.get_class($model).'" initialized');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		return $this;
 	}
 
@@ -520,10 +553,14 @@ class CI_Loader {
 	public function view($view, $vars = array(), $return = FALSE)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return $this->_ci_load(array('_ci_view' => $view, '_ci_vars' => $this->_ci_object_to_array($vars), '_ci_return' => $return));
 =======
 		return $this->_ci_load(array('_ci_view' => $view, '_ci_vars' => $this->_ci_prepare_view_vars($vars), '_ci_return' => $return));
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return $this->_ci_load(array('_ci_view' => $view, '_ci_vars' => $this->_ci_prepare_view_vars($vars), '_ci_return' => $return));
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -557,6 +594,7 @@ class CI_Loader {
 	public function vars($vars, $val = '')
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (is_string($vars))
 		{
 			$vars = array($vars => $val);
@@ -571,6 +609,8 @@ class CI_Loader {
 				$this->_ci_cached_vars[$key] = $val;
 			}
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		$vars = is_string($vars)
 			? array($vars => $val)
 			: $this->_ci_prepare_view_vars($vars);
@@ -578,7 +618,10 @@ class CI_Loader {
 		foreach ($vars as $key => $val)
 		{
 			$this->_ci_cached_vars[$key] = $val;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		return $this;
@@ -639,9 +682,12 @@ class CI_Loader {
 	public function helper($helpers = array())
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		foreach ($this->_ci_prep_filename($helpers, '_helper') as $helper)
 		{
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		is_array($helpers) OR $helpers = array($helpers);
 		foreach ($helpers as &$helper)
 		{
@@ -650,7 +696,10 @@ class CI_Loader {
 			$filename = strtolower(preg_replace('#(_helper)?(\.php)?$#i', '', $filename)).'_helper';
 			$helper   = $filepath.$filename;
 
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			if (isset($this->_ci_helpers[$helper]))
 			{
 				continue;
@@ -658,10 +707,14 @@ class CI_Loader {
 
 			// Is this a helper extension request?
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$ext_helper = config_item('subclass_prefix').$helper;
 =======
 			$ext_helper = config_item('subclass_prefix').$filename;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			$ext_helper = config_item('subclass_prefix').$filename;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$ext_loaded = FALSE;
 			foreach ($this->_ci_helper_paths as $path)
 			{
@@ -997,6 +1050,7 @@ class CI_Loader {
 		 * other views can have access to these variables.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (is_array($_ci_vars))
 		{
 			foreach (array_keys($_ci_vars) as $key)
@@ -1012,6 +1066,9 @@ class CI_Loader {
 =======
 		empty($_ci_vars) OR $this->_ci_cached_vars = array_merge($this->_ci_cached_vars, $_ci_vars);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		empty($_ci_vars) OR $this->_ci_cached_vars = array_merge($this->_ci_cached_vars, $_ci_vars);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		extract($this->_ci_cached_vars);
 
 		/*
@@ -1115,7 +1172,10 @@ class CI_Loader {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		// Safety: Was the class already loaded by a previous call?
 		if (class_exists($class, FALSE))
 		{
@@ -1136,7 +1196,10 @@ class CI_Loader {
 			return $this->_ci_init_library($class, '', $params, $object_name);
 		}
 
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		// Let's search for the requested library file and load it.
 		foreach ($this->_ci_library_paths as $path)
 		{
@@ -1147,6 +1210,7 @@ class CI_Loader {
 			}
 
 			$filepath = $path.'libraries/'.$subdir.$class.'.php';
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 			// Safety: Was the class already loaded by a previous call?
@@ -1173,6 +1237,10 @@ class CI_Loader {
 			// Does the file exist? No? Bummer...
 			if ( ! file_exists($filepath))
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			// Does the file exist? No? Bummer...
+			if ( ! file_exists($filepath))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			{
 				continue;
 			}
@@ -1218,6 +1286,7 @@ class CI_Loader {
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// Before we deem this to be a duplicate request, let's see
 			// if a custom object name is being supplied. If so, we'll
 			// return a new instance of the object
@@ -1229,6 +1298,8 @@ class CI_Loader {
 					return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
 				}
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$property = $object_name;
 			if (empty($property))
 			{
@@ -1240,7 +1311,10 @@ class CI_Loader {
 			if ( ! isset($CI->$property))
 			{
 				return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 
 			log_message('debug', $library_name.' class already loaded. Second attempt ignored.');
@@ -1263,6 +1337,7 @@ class CI_Loader {
 					return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				else
 				{
 					log_message('debug', $path.' exists, but does not declare '.$prefix.$library_name);
@@ -1271,6 +1346,10 @@ class CI_Loader {
 
 				log_message('debug', $path.' exists, but does not declare '.$prefix.$library_name);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+
+				log_message('debug', $path.' exists, but does not declare '.$prefix.$library_name);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 		}
 
@@ -1289,6 +1368,7 @@ class CI_Loader {
 					break;
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				else
 				{
 					log_message('debug', $path.' exists, but does not declare '.$subclass);
@@ -1297,6 +1377,10 @@ class CI_Loader {
 
 				log_message('debug', $path.' exists, but does not declare '.$subclass);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+
+				log_message('debug', $path.' exists, but does not declare '.$subclass);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 		}
 
@@ -1495,6 +1579,7 @@ class CI_Loader {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * CI Object to Array translator
 	 *
 	 * Takes an object as input and converts the class variables to
@@ -1507,6 +1592,8 @@ class CI_Loader {
 	{
 		return is_object($object) ? get_object_vars($object) : $object;
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * Prepare variables for _ci_vars, to be later extract()-ed inside views
 	 *
 	 * Converts objects to associative arrays and filters-out internal
@@ -1533,7 +1620,10 @@ class CI_Loader {
 		}
 
 		return $vars;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -1551,6 +1641,7 @@ class CI_Loader {
 		$CI =& get_instance();
 		return $CI->$component;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	// --------------------------------------------------------------------
@@ -1584,4 +1675,6 @@ class CI_Loader {
 
 =======
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 }

@@ -12,10 +12,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 $config['migration_enabled'] = FALSE;
 =======
 $config['migration_enabled'] = TRUE;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+$config['migration_enabled'] = TRUE;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 /*
 |--------------------------------------------------------------------------
@@ -48,10 +52,14 @@ $config['migration_type'] = 'timestamp';
 |
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 $config['migration_table'] = 'migrations';
 =======
 $config['migration_table'] = 'versions';
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+$config['migration_table'] = 'versions';
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 /*
 |--------------------------------------------------------------------------
@@ -66,10 +74,14 @@ $config['migration_table'] = 'versions';
 |
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 $config['migration_auto_latest'] = FALSE;
 =======
 $config['migration_auto_latest'] = TRUE;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+$config['migration_auto_latest'] = TRUE;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 /*
 |--------------------------------------------------------------------------
@@ -94,7 +106,11 @@ $config['migration_version'] = 0;
 |
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 $config['migration_path'] = APPPATH.'migrations/';
 =======
 $config['migration_path'] = APPPATH.'upgrades/';
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+$config['migration_path'] = APPPATH.'upgrades/';
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5

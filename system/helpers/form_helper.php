@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -100,6 +109,7 @@ if ( ! function_exists('form_open'))
 		$form = '<form action="'.$action.'"'.$attributes.">\n";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// Add CSRF field if enabled, but leave it out for GET requests and requests to external websites
 		if ($CI->config->item('csrf_protection') === TRUE && strpos($action, $CI->config->base_url()) !== FALSE && ! stripos($form, 'method="get"'))
 		{
@@ -108,6 +118,8 @@ if ( ! function_exists('form_open'))
 
 =======
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if (is_array($hidden))
 		{
 			foreach ($hidden as $name => $value)
@@ -117,7 +129,10 @@ if ( ! function_exists('form_open'))
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		// Add CSRF field if enabled, but leave it out for GET requests and requests to external websites
 		if ($CI->config->item('csrf_protection') === TRUE && strpos($action, $CI->config->base_url()) !== FALSE && ! stripos($form, 'method="get"'))
 		{
@@ -153,7 +168,10 @@ if ( ! function_exists('form_open'))
 			);
 		}
 
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		return $form;
 	}
 }
@@ -619,10 +637,14 @@ if ( ! function_exists('form_label'))
 	 * @param	string	The text to appear onscreen
 	 * @param	string	The id the label applies to
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	array	Additional attributes
 =======
 	 * @param	mixed	Additional attributes
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * @param	mixed	Additional attributes
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * @return	string
 	 */
 	function form_label($label_text = '', $id = '', $attributes = array())
@@ -636,6 +658,7 @@ if ( ! function_exists('form_label'))
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (is_array($attributes) && count($attributes) > 0)
 		{
 			foreach ($attributes as $key => $val)
@@ -646,6 +669,9 @@ if ( ! function_exists('form_label'))
 =======
 		$label .= _attributes_to_string($attributes);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$label .= _attributes_to_string($attributes);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		return $label.'>'.$label_text.'</label>';
 	}

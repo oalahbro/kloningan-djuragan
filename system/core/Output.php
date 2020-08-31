@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -133,18 +142,24 @@ class CI_Output {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * mbstring.func_override flag
 	 *
 	 * @var	bool
 	 */
 	protected static $func_override;
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * mbstring.func_overload flag
 	 *
 	 * @var	bool
 	 */
 	protected static $func_overload;
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 	/**
 	 * Class constructor
@@ -163,10 +178,14 @@ class CI_Output {
 		);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
 =======
 		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		// Get mime types for later
 		$this->mimes =& get_mimes();
@@ -333,19 +352,25 @@ class CI_Output {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ($i = 0, $c = count($headers); $i < $c; $i++)
 		{
 			if (strncasecmp($header, $headers[$i], $l = self::strlen($header)) === 0)
 			{
 				return trim(self::substr($headers[$i], $l+1));
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		// Count backwards, in order to get the last matching header
 		for ($c = count($headers) - 1; $c > -1; $c--)
 		{
 			if (strncasecmp($header, $headers[$c], $l = self::strlen($header)) === 0)
 			{
 				return trim(self::substr($headers[$c], $l+1));
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 		}
 
@@ -616,6 +641,7 @@ class CI_Output {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (flock($fp, LOCK_EX))
 		{
 			// If output compression is enabled, compress the cache
@@ -673,6 +699,8 @@ class CI_Output {
 			log_message('error', 'Unable to write the complete cache content at: '.$cache_path);
 		}
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if ( ! flock($fp, LOCK_EX))
 		{
 			log_message('error', 'Unable to secure a file lock for file at: '.$cache_path);
@@ -726,7 +754,10 @@ class CI_Output {
 
 		// Send HTTP cache-control headers to browser to match file cache settings.
 		$this->set_cache_header($_SERVER['REQUEST_TIME'], $expire);
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -794,6 +825,7 @@ class CI_Output {
 			return FALSE;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 		{
 			// Or else send the HTTP cache control headers.
@@ -804,6 +836,11 @@ class CI_Output {
 		// Send the HTTP cache control headers
 		$this->set_cache_header($last_modified, $expire);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+
+		// Send the HTTP cache control headers
+		$this->set_cache_header($last_modified, $expire);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		// Add headers from cache file.
 		foreach ($cache_info['headers'] as $header)
@@ -890,6 +927,7 @@ class CI_Output {
 			exit;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 		{
 			header('Pragma: public');
@@ -898,12 +936,17 @@ class CI_Output {
 			header('Last-modified: '.gmdate('D, d M Y H:i:s', $last_modified).' GMT');
 		}
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		header('Pragma: public');
 		header('Cache-Control: max-age='.$max_age.', public');
 		header('Expires: '.gmdate('D, d M Y H:i:s', $expiration).' GMT');
 		header('Last-modified: '.gmdate('D, d M Y H:i:s', $last_modified).' GMT');
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// --------------------------------------------------------------------
@@ -917,10 +960,14 @@ class CI_Output {
 	protected static function strlen($str)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (self::$func_override)
 =======
 		return (self::$func_overload)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return (self::$func_overload)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			? mb_strlen($str, '8bit')
 			: strlen($str);
 	}
@@ -938,10 +985,14 @@ class CI_Output {
 	protected static function substr($str, $start, $length = NULL)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (self::$func_override)
 =======
 		if (self::$func_overload)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if (self::$func_overload)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			// mb_substr($str, $start, null, '8bit') returns an empty
 			// string on PHP 5.3

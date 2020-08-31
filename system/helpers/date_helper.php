@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -506,9 +515,13 @@ if ( ! function_exists('nice_date'))
 	 * that is actually useful. This only works for dates after unix epoch.
 	 *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	 * @deprecated	3.1.3	Use DateTime::createFromFormat($input_format, $input)->format($output_format);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * @deprecated	3.1.3	Use DateTime::createFromFormat($input_format, $input)->format($output_format);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * @param	string	The terribly formatted date-like string
 	 * @param	string	Date format to return (same as php date function)
 	 * @return	string
@@ -543,6 +556,7 @@ if ( ! function_exists('nice_date'))
 
 		// Date Like: YYYYMMDD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (preg_match('/^(\d{2})\d{2}(\d{4})$/i', $bad_date, $matches))
 		{
 			return date($format, strtotime($matches[1].'/01/'.$matches[2]));
@@ -551,6 +565,11 @@ if ( ! function_exists('nice_date'))
 		{
 			return DateTime::createFromFormat('Ymd', $bad_date)->format($format);
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if (preg_match('/^\d{8}$/i', $bad_date, $matches))
+		{
+			return DateTime::createFromFormat('Ymd', $bad_date)->format($format);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		// Date Like: MM-DD-YYYY __or__ M-D-YYYY (or anything in between)

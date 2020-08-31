@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.4.1
  * @filesource
@@ -107,10 +116,14 @@ class CI_DB_oci8_driver extends CI_DB {
 	 * @var	bool
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public $limit_used;
 =======
 	public $limit_used = FALSE;
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	public $limit_used = FALSE;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 	// --------------------------------------------------------------------
 
@@ -567,10 +580,14 @@ class CI_DB_oci8_driver extends CI_DB {
 	 *
 	 * Returns an array containing code and message of the last
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * database error that has occured.
 =======
 	 * database error that has occurred.
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * database error that has occurred.
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 *
 	 * @return	array
 	 */
@@ -703,7 +720,10 @@ class CI_DB_oci8_driver extends CI_DB {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	// --------------------------------------------------------------------
 
 	/**
@@ -717,5 +737,8 @@ class CI_DB_oci8_driver extends CI_DB {
 		$this->limit_used = FALSE;
 		parent::_reset_select();
 	}
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 }

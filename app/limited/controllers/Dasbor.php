@@ -8,7 +8,11 @@ class Dasbor extends CI_Controller {
 
 	public function index() {
 		if($this->session->logged) {
+<<<<<<< HEAD
 			redirect('a/faktur/lihat');
+=======
+			redirect('faktur');
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 		else {
 			redirect('auth/masuk');

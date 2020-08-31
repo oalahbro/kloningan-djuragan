@@ -7,10 +7,14 @@
  * This content is released under the MIT License (MIT)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
 =======
  * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +38,17 @@
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
 =======
  * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
  * @license	https://opensource.org/licenses/MIT	MIT License
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 3.0.0
  * @filesource
@@ -183,12 +192,18 @@ if ( ! function_exists('hash_pbkdf2'))
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$hash_length = strlen(hash($algo, NULL, TRUE));
 =======
 		$hash_length = defined('MB_OVERLOAD_STRING')
 			? mb_strlen(hash($algo, NULL, TRUE), '8bit')
 			: strlen(hash($algo, NULL, TRUE));
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$hash_length = defined('MB_OVERLOAD_STRING')
+			? mb_strlen(hash($algo, NULL, TRUE), '8bit')
+			: strlen(hash($algo, NULL, TRUE));
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		empty($length) && $length = $hash_length;
 
 		// Pre-hash password inputs longer than the algorithm's block size
@@ -237,10 +252,14 @@ if ( ! function_exists('hash_pbkdf2'))
 		);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (isset($block_sizes[$algo]) && strlen($password) > $block_sizes[$algo])
 =======
 		if (isset($block_sizes[$algo], $password[$block_sizes[$algo]]))
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if (isset($block_sizes[$algo], $password[$block_sizes[$algo]]))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			$password = hash($algo, $password, TRUE);
 		}
@@ -248,10 +267,14 @@ if ( ! function_exists('hash_pbkdf2'))
 		$hash = '';
 		// Note: Blocks are NOT 0-indexed
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ($bc = ceil($length / $hash_length), $bi = 1; $bi <= $bc; $bi++)
 =======
 		for ($bc = (int) ceil($length / $hash_length), $bi = 1; $bi <= $bc; $bi++)
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		for ($bc = (int) ceil($length / $hash_length), $bi = 1; $bi <= $bc; $bi++)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			$key = $derived_key = hash_hmac($algo, $salt.pack('N', $bi), $password, TRUE);
 			for ($i = 1; $i < $iterations; $i++)
@@ -264,8 +287,11 @@ if ( ! function_exists('hash_pbkdf2'))
 
 		// This is not RFC-compatible, but we're aiming for natural PHP compatibility
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return substr($raw_output ? $hash : bin2hex($hash), 0, $length);
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		if ( ! $raw_output)
 		{
 			$hash = bin2hex($hash);
@@ -274,6 +300,9 @@ if ( ! function_exists('hash_pbkdf2'))
 		return defined('MB_OVERLOAD_STRING')
 			? mb_substr($hash, 0, $length, '8bit')
 			: substr($hash, 0, $length);
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 }

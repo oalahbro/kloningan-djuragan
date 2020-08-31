@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 date_default_timezone_set('Asia/Jakarta');
 
 class Juragan_model extends CI_Model {
@@ -286,6 +287,8 @@ class Juragan_model extends CI_Model {
 }
 >>>>>>> ec19eafa2dc32677f923592888a9f50dc35f55c3
 =======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 class Juragan_model extends CI_Model
 {
 	private $tabel;
@@ -365,4 +368,7 @@ class Juragan_model extends CI_Model
 	}
 	
 }
+<<<<<<< HEAD
 >>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
