@@ -7,12 +7,11 @@ Web POS ini dibangun dengan menggunakan framework [Codeigniter](http://codeignit
 ## Update System
 
 Untuk update versi CI, cukup jalankan `composer update`.
+Jangan lupa untuk perhatikan apa-apa yang perlu diperbarui untuk versi terbaru
 
-Jangan lupa untuk perhaikan apa-apa yang perlu diperbarui untuk versi terbaru
-
-## Setup
-
-Jalankan  `php -r "file_exists('.env') || copy('env', '.env');"` di-root dan lakukan pengaturan baseUrl dan database atau yang lainnya.
+## Setup Local
+- Jalankan `composer install`
+- Copy file `env` dan rename menjadi `.env` atau jalankan  `php -r "file_exists('.env') || copy('env', '.env');"` di-root dan lakukan pengaturan baseUrl dan database atau yang lainnya.
 
 ## Upload ke server
 
