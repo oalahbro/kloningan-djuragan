@@ -241,7 +241,7 @@ $pager = \Config\Services::pager();
 <?= $this->section('js') ?>
 <?php
 $link_api_juragan = site_url("api/get_juragan");
-$link_invoice = site_url('invoices/index/');
+$link_invoice = site_url('admin/invoices/lihat/');
 $link_api_relasi = site_url('admin/settings/pengguna_relasi');
 
 $js = <<< JS

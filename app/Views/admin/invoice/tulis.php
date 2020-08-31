@@ -446,8 +446,8 @@ $link_api_provinsi = site_url('rajaongkir/provinsi');
 $link_api_kota = site_url('rajaongkir/kota');
 $link_api_kecamatan = site_url('rajaongkir/kecamatan');
 $link_post_pelanggan = site_url('pelanggan/baru');
-$link_invoice = site_url('invoices/index/');
-$link_api_invoice = site_url('invoices/save');
+$link_invoice = site_url('admin/invoices/lihat/');
+$link_api_invoice = site_url('admin/invoices/save');
 
 $js = <<< JS
 $(function() { 
