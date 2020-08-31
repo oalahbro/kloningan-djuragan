@@ -64,6 +64,10 @@ class BaseController extends Controller
 		$this->juragan 	= new JuraganModel();
 		$this->relasi 	= new RelasiModel();
 		$this->user 	= new UserModel();
+
+		// migration here
+		$migrate = \Config\Services::migrations();
+		$migrate->latest();
 	}
 
 	// ------------------------------------------------------------------------
