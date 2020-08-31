@@ -18,7 +18,11 @@ Options All -Indexes
 
 	# Redirect Trailing Slashes...
 	RewriteCond %{REQUEST_FILENAME} !-d
+<<<<<<< HEAD
 	RewriteRule ^(.*)/$ /$1 [L,R=301]
+=======
+    	RewriteRule ^(.*)/$ /$1 [L,R=301]
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 
 	# Rewrite "www.example.com -> example.com"
 	RewriteCond %{HTTPS} !=on
@@ -30,7 +34,11 @@ Options All -Indexes
     # request to the front controller, index.php
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
+<<<<<<< HEAD
 	RewriteRule ^([\s\S]*)$ index.php/$1 [L,NC,QSA]
+=======
+	RewriteRule ^(.*)$ index.php/$1 [L]
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 
 	# Ensure Authorization header is passed along
     RewriteCond %{HTTP:Authorization} .

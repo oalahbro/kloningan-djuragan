@@ -13,9 +13,20 @@ namespace App\Controllers;
  *
  * @package CodeIgniter
  */
+<<<<<<< HEAD
 
 use CodeIgniter\Controller;
 
+=======
+use CodeIgniter\Controller;
+
+use App\Models\BankModel;
+use App\Models\FakturModel;
+use App\Models\JuraganModel;
+use App\Models\RelasiModel;
+use App\Models\UserModel;
+
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 class BaseController extends Controller
 {
 
@@ -26,7 +37,11 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
+<<<<<<< HEAD
 	protected $helpers = [];
+=======
+	protected $helpers = ['date','form','fungsi','number','text','url'];
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 
 	/**
 	 * Constructor.
@@ -36,11 +51,28 @@ class BaseController extends Controller
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
 
+<<<<<<< HEAD
+=======
+		$config = config('JuraganConfig');
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
+<<<<<<< HEAD
 		// $this->session = \Config\Services::session();
 	}
 
+=======
+		$this->cache = \Config\Services::cache();
+		$this->session = \Config\Services::session();
+		$this->validation = \Config\Services::validation();
+
+		$this->bank 	= new BankModel();
+		$this->faktur 	= new FakturModel();
+		$this->juragan 	= new JuraganModel();
+		$this->relasi 	= new RelasiModel();
+		$this->user 	= new UserModel();
+	}
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 }

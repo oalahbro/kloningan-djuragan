@@ -29,4 +29,8 @@ defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', true);
   | items. It can always be used within your own application too.
  */
 
+<<<<<<< HEAD
 defined('CI_DEBUG') || define('CI_DEBUG', true);
+=======
+defined('CI_DEBUG') || define('CI_DEBUG', 1);
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef

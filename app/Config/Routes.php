@@ -1,7 +1,11 @@
 <?php namespace Config;
 
 // Create a new instance of our RouteCollection class.
+<<<<<<< HEAD
 $routes = Services::routes();
+=======
+$routes = Services::routes(true);
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
@@ -38,7 +42,11 @@ $routes->get('/', 'Home::index');
  * --------------------------------------------------------------------
  *
  * There will often be times that you need additional routing and you
+<<<<<<< HEAD
  * need it to be able to override any defaults in this file. Environment
+=======
+ * need to it be able to override any defaults in this file. Environment
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
  * based routes is one such time. require() additional route files here
  * to make that happen.
  *

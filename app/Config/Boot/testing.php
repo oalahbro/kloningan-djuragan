@@ -30,4 +30,8 @@ defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', true);
   | release of the framework.
  */
 
+<<<<<<< HEAD
 defined('CI_DEBUG') || define('CI_DEBUG', true);
+=======
+defined('CI_DEBUG') || define('CI_DEBUG', 1);
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef

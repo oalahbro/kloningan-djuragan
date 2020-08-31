@@ -64,7 +64,10 @@ p.lead {
     border-radius: 5px;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     margin: 0;
+<<<<<<< HEAD
     overflow-x: scroll;
+=======
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 }
 .source span.line {
     line-height: 1.4;

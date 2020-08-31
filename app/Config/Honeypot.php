@@ -11,7 +11,10 @@ class Honeypot extends BaseConfig
 	 * @var boolean
 	 */
 	public $hidden = true;
+<<<<<<< HEAD
 
+=======
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 	/**
 	 * Honeypot Label Content
 	 *
@@ -32,6 +35,7 @@ class Honeypot extends BaseConfig
 	 * @var string
 	 */
 	public $template = '<label>{label}</label><input type="text" name="{name}" value=""/>';
+<<<<<<< HEAD
 
 	/**
 	 * Honeypot container
@@ -39,4 +43,6 @@ class Honeypot extends BaseConfig
 	 * @var string
 	 */
 	public $container = '<div style="display:none">{template}</div>';
+=======
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 }

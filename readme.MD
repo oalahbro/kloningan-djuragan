@@ -1,3 +1,5 @@
+## pindah ke https://github.com/seven-inc/djuragan.com
+
 # CodeIgniter 4 Framework
 
 ## What is CodeIgniter?
@@ -8,6 +10,8 @@ More information can be found at the [official site](http://codeigniter.com).
 This repository holds the distributable version of the framework,
 including the user guide. It has been built from the 
 [development repository](https://github.com/codeigniter4/CodeIgniter4).
+
+**This is pre-release code and should not be used in production sites.**
 
 More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
 

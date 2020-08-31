@@ -84,6 +84,7 @@
 # contentsecuritypolicy.upgradeInsecureRequests = false
 
 #--------------------------------------------------------------------
+<<<<<<< HEAD
 # ENCRYPTION
 #--------------------------------------------------------------------
 
@@ -99,3 +100,12 @@
 # honeypot.name = 'honeypot'
 # honeypot.template = '<label>{label}</label><input type="text" name="{name}" value=""/>'
 # honeypot.container = '<div style="display:none">{template}</div>'
+=======
+# HONEYPOT
+#--------------------------------------------------------------------
+
+#  honeypot.hidden = 'true'
+#  honeypot.label = 'Fill This Field'
+#  honeypot.name = 'honeypot'
+#  honeypot.template = '<label>{label}</label><input type="text" name="{name}" value=""/>'
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef

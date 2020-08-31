@@ -1,13 +1,21 @@
 <?php namespace Config;
 
+<<<<<<< HEAD
 use CodeIgniter\Config\BaseConfig;
 
+=======
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 /**
  * Setup how the exception handler works.
  *
  * @package Config
  */
+<<<<<<< HEAD
 class Exceptions extends BaseConfig
+=======
+
+class Exceptions
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 {
 	/*
 	 |--------------------------------------------------------------------------

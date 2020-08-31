@@ -132,7 +132,11 @@
 					<?php if (empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var]))
 					{
 						continue;
+<<<<<<< HEAD
 					} ?>
+=======
+} ?>
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 
 					<h3>$<?= $var ?></h3>
 
@@ -235,7 +239,11 @@
 					<?php if (empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var]))
 					{
 						continue;
+<<<<<<< HEAD
 					} ?>
+=======
+} ?>
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 
 					<?php $empty = false; ?>
 
@@ -287,6 +295,7 @@
 							</tr>
 						</thead>
 						<tbody>
+<<<<<<< HEAD
 						<?php foreach ($headers as $value) : ?>
 							<?php if (empty($value))
 							{
@@ -296,6 +305,17 @@
 							{
 								$value = [$value];
 							} ?>
+=======
+						<?php foreach ($headers as $name => $value) : ?>
+							<?php if (empty($value))
+							{
+								continue;
+} ?>
+							<?php if (! is_array($value))
+							{
+								$value = [$value];
+} ?>
+>>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
 							<?php foreach ($value as $h) : ?>
 								<tr>
 									<td><?= esc($h->getName(), 'html') ?></td>
