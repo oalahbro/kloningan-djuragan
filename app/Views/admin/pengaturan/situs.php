@@ -1,8 +1,4 @@
 <?php
-<<<<<<< HEAD
-use CodeIgniter\I18n\Time;
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 $pager = \Config\Services::pager();
 ?>
 <?= $this->extend('template/logged') ?>
@@ -31,11 +27,7 @@ $pager = \Config\Services::pager();
                             </tr>
                         </thead>
                         <tbody>
-<<<<<<< HEAD
-                            <?php 
-=======
                             <?php
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
                             foreach ($banks as $bank) { ?>
                                 <tr>
                                     <td>
@@ -46,12 +38,6 @@ $pager = \Config\Services::pager();
                                         <div class="text-muted"><?= $bank->atas_nama; ?></div>
                                     </td>
                                     <td>
-<<<<<<< HEAD
-                                        <button class="btn btn-outline-secondary"><i class="fad fa-pencil"></i></button>
-                                    </td>
-                                </tr>
-                            <?php 
-=======
                                         <?php if ($bank->id_bank > 2) { // COD not editable
                                         ?>
                                             <button class="btn btn-outline-secondary"><i class="fad fa-pencil"></i></button>
@@ -59,7 +45,6 @@ $pager = \Config\Services::pager();
                                     </td>
                                 </tr>
                             <?php
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
                             }
                             ?>
                         </tbody>
@@ -72,34 +57,21 @@ $pager = \Config\Services::pager();
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-<<<<<<< HEAD
-                            <span class="nav-link active" aria-current="true">Tambah Bank</span>
-=======
                             <span class="nav-link active" aria-current="true">Tambah Bank / EDC</span>
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <?= form_open('settings/save_bank'); ?>
                     <div class="mb-3">
-<<<<<<< HEAD
-                        <?= form_label('Nama Bank', 'nama_bank', ['class' => 'form-label']); ?>
-                        <select name="nama_bank" id="nama_bank" class="form-select" required="">
-                            <option value="" selected="selected" disabled="">Pilih bank</option>
-=======
                         <?= form_label('Tipe Akun', 'nama_bank', ['class' => 'form-label']); ?>
                         <select name="nama_bank" id="nama_bank" class="form-select" required="">
                             <option value="" selected="selected" disabled="">Pilih tipe</option>
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
                             <option value="bca">BCA</option>
                             <option value="bni">BNI</option>
                             <option value="bri">BRI</option>
                             <option value="mandiri">Mandiri</option>
-<<<<<<< HEAD
-=======
                             <option value="edc">EDC</option>
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
                         </select>
                     </div>
                     <div class="mb-3">
@@ -119,8 +91,6 @@ $pager = \Config\Services::pager();
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-=======
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
@@ -160,5 +130,4 @@ $packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();
 echo '<script>' . $packed_js . '</script>';
 ?>
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 <?= $this->endSection() ?>

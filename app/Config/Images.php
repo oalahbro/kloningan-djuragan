@@ -22,15 +22,7 @@ class Images extends BaseConfig
 	/**
 	 * The available handler classes.
 	 *
-<<<<<<< HEAD
-<<<<<<< HEAD
 	 * @var \CodeIgniter\Images\Handlers\BaseHandler[]
-=======
-	 * @var array
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
-	 * @var \CodeIgniter\Images\Handlers\BaseHandler[]
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	 */
 	public $handlers = [
 		'gd'      => \CodeIgniter\Images\Handlers\GDHandler::class,

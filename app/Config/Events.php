@@ -1,14 +1,7 @@
 <?php namespace Config;
 
 use CodeIgniter\Events\Events;
-<<<<<<< HEAD
-<<<<<<< HEAD
 use CodeIgniter\Exceptions\FrameworkException;
-=======
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
-use CodeIgniter\Exceptions\FrameworkException;
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 /*
  * --------------------------------------------------------------------
@@ -30,10 +23,6 @@ use CodeIgniter\Exceptions\FrameworkException;
 Events::on('pre_system', function () {
 	if (ENVIRONMENT !== 'testing')
 	{
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		if (ini_get('zlib.output_compression'))
 		{
 			throw FrameworkException::forEnabledZlibOutputCompression();
@@ -45,17 +34,6 @@ Events::on('pre_system', function () {
 		}
 
 		ob_start(function ($buffer) {
-<<<<<<< HEAD
-=======
-		while (\ob_get_level() > 0)
-		{
-			\ob_end_flush();
-		}
-
-		\ob_start(function ($buffer) {
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 			return $buffer;
 		});
 	}

@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-<?php namespace App\Controllers;
-
-class Api extends BaseController
-{
-	/*
-	 * ambil semua juragan
-	 * 
-	 */
-	public function get_juragan()
-	{
-		if ( ! isAuthorized()) {
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
-
-		$nama_cache = 'list_juragan';
-		$i = 0;
-		if ( ! $ngelist = $this->cache->get($nama_cache)) {
-			$listJuragan_ = $this->juragan->ambil()->getResult();
-=======
 <?php
 
 namespace App\Controllers;
@@ -45,7 +25,6 @@ class Api extends BaseController
 		$i = 0;
 		if (!$ngelist = $this->cache->get($nama_cache)) {
 			$listJuragan_ = $this->juragan->ambil()->get()->getResult();
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 			$ngelist = array();
 			foreach ($listJuragan_ as $juragan) {
@@ -58,34 +37,12 @@ class Api extends BaseController
 			}
 
 			// simpan cache selama 5 menit
-<<<<<<< HEAD
-			$this->cache->save($nama_cache, $ngelist, 60*5);
-=======
 			$this->cache->save($nama_cache, $ngelist, 60 * 5);
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		}
 
 		return $this->response->setJSON($ngelist);
 	}
 
-<<<<<<< HEAD
-	/*
-	 * ambil semua pengguna
-	 * 
-	 */
-	public function get_pengguna()
-	{
-		if ( ! isAuthorized()) {
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
-
-		$nama_cache = 'list_admincs';
-		if ( ! $listJuragan = $this->cache->get($nama_cache)) {
-			$listJuragan = $this->user->orderBy('name','ASC')->findAll();
-
-			// simpan cache selama 5 menit
-			$this->cache->save($nama_cache, $listJuragan, 60*5);
-=======
 	// ------------------------------------------------------------------------
 
 	public function get_pengguna()
@@ -96,18 +53,13 @@ class Api extends BaseController
 
 			// simpan cache selama 5 menit
 			$this->cache->save($nama_cache, $listJuragan, 60 * 5);
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		}
 
 		return $this->response->setJSON($listJuragan);
 	}
 
-<<<<<<< HEAD
-	
-=======
 	// ------------------------------------------------------------------------
 
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	public function get_kecamatan()
 	{
 		$kecamatan = $this->rajaongkir->getSubdistricts();

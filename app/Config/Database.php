@@ -32,26 +32,11 @@ class Database extends \CodeIgniter\Database\Config
 	public $default = [
 		'DSN'      => '',
 		'hostname' => 'localhost',
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		'username' => '',
 		'password' => '',
 		'database' => '',
 		'DBDriver' => 'MySQLi',
-<<<<<<< HEAD
-		'DBPrefix' => '',
-=======
-		'username' => 'root',
-		'password' => '',
-		'database' => 'djuragan',
-		'DBDriver' => 'MySQLi',
 		'DBPrefix' => 'order_',
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
-		'DBPrefix' => 'order_',
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		'pConnect' => false,
 		'DBDebug'  => (ENVIRONMENT !== 'production'),
 		'cacheOn'  => false,

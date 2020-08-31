@@ -20,11 +20,7 @@ class Paths
 	 * Include the path if the folder is not in the same directory
 	 * as this file.
 	 */
-<<<<<<< HEAD
-	public $systemDirectory = __DIR__ . '/../../system';
-=======
 	public $systemDirectory = __DIR__ . '/../../vendor/codeigniter4/framework/system';
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 	/*
 	 *---------------------------------------------------------------
@@ -60,13 +56,10 @@ class Paths
 	 * ---------------------------------------------------------------
 	 *
 	 * This variable must contain the name of your "tests" directory.
-<<<<<<< HEAD
-=======
 	 * The writable directory allows you to group all directories that
 	 * need write permission to a single place that can be tucked away
 	 * for maximum security, keeping it out of the app and/or
 	 * system directories.
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	 */
 	public $testsDirectory = __DIR__ . '/../../tests';
 

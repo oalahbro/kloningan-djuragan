@@ -39,10 +39,6 @@ class Format extends BaseConfig
 		'application/xml'  => \CodeIgniter\Format\XMLFormatter::class,
 		'text/xml'         => \CodeIgniter\Format\XMLFormatter::class,
 	];
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	
 	/*
 	|--------------------------------------------------------------------------
@@ -58,12 +54,6 @@ class Format extends BaseConfig
 		'application/xml'  => 0,
 		'text/xml'         => 0,
 	];	
-<<<<<<< HEAD
-=======
-
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	//--------------------------------------------------------------------
 
 	/**

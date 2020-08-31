@@ -13,15 +13,7 @@ define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 
 // Location of the Paths config file.
 // This is the line that might need to be changed, depending on your folder structure.
-<<<<<<< HEAD
-<<<<<<< HEAD
-$pathsPath = realpath(FCPATH . '../app/Config/Paths.php');
-=======
 $pathsPath = FCPATH . '../app/Config/Paths.php';
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
-$pathsPath = FCPATH . '../app/Config/Paths.php';
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 // ^^^ Change this if you move your application folder
 
 /*

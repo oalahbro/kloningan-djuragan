@@ -84,13 +84,6 @@ phpunit
 # Composer
 #-------------------------
 vendor/
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-composer.lock
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 #-------------------------
 # IDE / Development Files
@@ -131,11 +124,4 @@ nb-configuration.xml
 /results/
 /phpunit*.xml
 /.phpunit.*.cache
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
-
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 <?php
 
 namespace Config;
@@ -9,15 +5,6 @@ namespace Config;
 use CodeIgniter\Modules\Modules as CoreModules;
 
 class Modules extends CoreModules
-<<<<<<< HEAD
-=======
-<?php namespace Config;
-
-// Cannot extend BaseConfig or looping resources occurs.
-class Modules
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 {
 	/*
 	 |--------------------------------------------------------------------------
@@ -45,59 +32,14 @@ class Modules
 	| Auto-discover Rules
 	|--------------------------------------------------------------------------
 	|
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	| Aliases list of all discovery classes that will be active and used during
 	| the current application request.
 	| If it is not listed, only the base application elements will be used.
 	*/
 	public $aliases = [
-<<<<<<< HEAD
-=======
-	| Lists the aliases of all discovery classes that will be active
-	| and used during the current application request. If it is not
-	| listed here, only the base application elements will be used.
-	*/
-	public $activeExplorers = [
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		'events',
 		'registrars',
 		'routes',
 		'services',
 	];
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-	/**
-	 * Should the application auto-discover the requested resources.
-	 *
-	 * Valid values are:
-	 *  - events
-	 *  - registrars
-	 *  - routes
-	 *  - services
-	 *
-	 * @param string $alias
-	 *
-	 * @return boolean
-	 */
-	public function shouldDiscover(string $alias)
-	{
-		if (! $this->enabled)
-		{
-			return false;
-		}
-
-		$alias = strtolower($alias);
-
-		return in_array($alias, $this->activeExplorers);
-	}
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 }

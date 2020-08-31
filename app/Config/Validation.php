@@ -33,11 +33,6 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 	public $signin = [
 		'username'     => 'required',
@@ -52,11 +47,7 @@ class Validation
 	];
 
 	public $addBank = [
-<<<<<<< HEAD
-		'nama_bank'	=> 'required|in_list[bri,bni,bca,mandiri]',
-=======
 		'nama_bank'	=> 'required|in_list[bri,bni,bca,mandiri,edc]',
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		'nomor_rekening' => 'required|max_length[50]|alpha_dash',
 		'atas_nama'	=> 'required|max_length[50]|alpha_space'
 	];
@@ -79,27 +70,13 @@ class Validation
 		'email'		=> 'required|valid_email|max_length[100]|is_unique[user.email]',
 		'level' 	=> 'required|in_list[superadmin,admin,cs,viewer,reseller]',
 		'status' 	=> 'required|in_list[pending,inactive,active,blocked]',
-<<<<<<< HEAD
-		// 'juragan' 	=> 'required',
 	];
 
 	public $editPengguna = [
-		// 'username' 	=> 'required|min_length[3]|max_length[100]|is_unique[user.username,id,{id}]|alpha_dash',
-		// 'password' 	=> 'min_length[6]',
-=======
-	];
-
-	public $editPengguna = [
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		'nama' 		=> 'required|min_length[3]|max_length[50]',
 		'email'		=> 'required|valid_email|max_length[100]|is_unique[user.email,id,{id}]',
 		'level' 	=> 'required|in_list[superadmin,admin,cs,viewer,reseller]',
 		'status' 	=> 'required|in_list[pending,inactive,active,blocked]',
-<<<<<<< HEAD
-		// 'juragan' 	=> 'required',
-	];
->>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
-=======
 	];
 
 	public $addInvoice = [
@@ -120,5 +97,4 @@ class Validation
 		'stat' 			=> 'required'
 		// 'keterangan' 	=> 'required'
 	];
->>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 }
