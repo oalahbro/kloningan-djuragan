@@ -1,11 +1,24 @@
+<<<<<<< HEAD
 <?php namespace App\Models;
 use CodeIgniter\Model;
  
+=======
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 class JuraganModel extends Model
 {
 	protected $table = 'juragan';
 	protected $primaryKey = 'id_juragan';
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	protected $returnType = 'object';
 	protected $useSoftDeletes = true;
 
@@ -34,7 +47,12 @@ class JuraganModel extends Model
 		$builder->where('r.table', '2');
 
 		$builder->groupBy("j.id_juragan");
+<<<<<<< HEAD
 		return $builder->get();
 	}
 
+=======
+		return $builder;
+	}
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 }

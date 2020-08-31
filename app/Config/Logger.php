@@ -37,6 +37,7 @@ class Logger extends BaseConfig
 	/*
 	|--------------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	| Error Logging Directory Path
 	|--------------------------------------------------------------------------
@@ -48,6 +49,8 @@ class Logger extends BaseConfig
 	/*
 	|--------------------------------------------------------------------------
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	| Date Format for Logs
 	|--------------------------------------------------------------------------
 	|
@@ -120,6 +123,9 @@ class Logger extends BaseConfig
 			 */
 			'filePermissions' => 0644,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 			/*
 			 * Logging Directory Path
@@ -128,8 +134,11 @@ class Logger extends BaseConfig
 			 * Specify a different destination here, if desired.
 			 */
 			'path'            => '',
+<<<<<<< HEAD
 =======
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		],
 
 		/**

@@ -22,10 +22,14 @@ class App extends BaseConfig
 	|
 	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public $baseURL = 'http://localhost:8080/';
 =======
 	public $baseURL = 'http://djuragan.local/';
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+	public $baseURL = 'http://localhost:8080/';
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 	/*
 	|--------------------------------------------------------------------------
@@ -68,10 +72,14 @@ class App extends BaseConfig
 	|
 	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public $defaultLocale = 'en';
 =======
 	public $defaultLocale = 'id';
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+	public $defaultLocale = 'id';
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 	/*
 	|--------------------------------------------------------------------------
@@ -108,10 +116,14 @@ class App extends BaseConfig
 	|
 	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public $appTimezone = 'America/Chicago';
 =======
 	public $appTimezone = 'Asia/Jakarta';
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+	public $appTimezone = 'Asia/Jakarta';
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 	/*
 	|--------------------------------------------------------------------------
@@ -195,10 +207,14 @@ class App extends BaseConfig
 	*/
 	public $sessionDriver            = 'CodeIgniter\Session\Handlers\FileHandler';
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public $sessionCookieName        = 'ci_session';
 =======
 	public $sessionCookieName        = 'djuragan_session';
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+	public $sessionCookieName        = 'ci_session';
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	public $sessionExpiration        = 7200;
 	public $sessionSavePath          = WRITEPATH . 'session';
 	public $sessionMatchIP           = false;

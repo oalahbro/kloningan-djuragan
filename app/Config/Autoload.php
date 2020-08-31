@@ -1,14 +1,20 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 <?php
 
 namespace Config;
 
 use CodeIgniter\Config\AutoloadConfig;
+<<<<<<< HEAD
 =======
 <?php namespace Config;
 
 require_once SYSTEMPATH . 'Config/AutoloadConfig.php';
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 /**
  * -------------------------------------------------------------------
@@ -17,6 +23,9 @@ require_once SYSTEMPATH . 'Config/AutoloadConfig.php';
  * This file defines the namespaces and class maps so the Autoloader
  * can find the files as needed.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
  *
  * NOTE: If you use an identical key in $psr4 or $classmap, then
  * the values in this file will overwrite the framework's values.
@@ -70,6 +79,7 @@ class Autoload extends AutoloadConfig
 	 * @var array
 	 */
 	public $classmap = [];
+<<<<<<< HEAD
 =======
  */
 class Autoload extends \CodeIgniter\Config\AutoloadConfig
@@ -149,4 +159,6 @@ class Autoload extends \CodeIgniter\Config\AutoloadConfig
 	//--------------------------------------------------------------------
 
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 }

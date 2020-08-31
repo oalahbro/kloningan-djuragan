@@ -85,6 +85,9 @@
 
 #--------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 # ENCRYPTION
 #--------------------------------------------------------------------
 
@@ -100,6 +103,7 @@
 # honeypot.name = 'honeypot'
 # honeypot.template = '<label>{label}</label><input type="text" name="{name}" value=""/>'
 # honeypot.container = '<div style="display:none">{template}</div>'
+<<<<<<< HEAD
 =======
 # HONEYPOT
 #--------------------------------------------------------------------
@@ -109,3 +113,5 @@
 #  honeypot.name = 'honeypot'
 #  honeypot.template = '<label>{label}</label><input type="text" name="{name}" value=""/>'
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11

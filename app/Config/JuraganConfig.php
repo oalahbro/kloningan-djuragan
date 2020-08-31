@@ -8,6 +8,10 @@ class JuraganConfig extends BaseConfig
 
 	public $label = array(
 		 '1' => 'Blibli',
+<<<<<<< HEAD
+=======
+		 '12' => 'OLX',
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		 '2' => 'Bukalapak',
 		 '3' => 'Facebook',
 		 '4' => 'Instagram',
@@ -15,7 +19,11 @@ class JuraganConfig extends BaseConfig
 		 '7' => 'Shopee',
 		 '11' => 'Tokopedia',
 		 '9' => 'WhatsApp',
+<<<<<<< HEAD
 		 '10' => 'Zalora',    	 
+=======
+		 '10' => 'Zalora',
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		 '8' => 'Web/App lain',
 		 '6' => 'Offline Store/COD'
 	);
@@ -39,5 +47,9 @@ class JuraganConfig extends BaseConfig
 			'34' => '34'
 		)
 		// custom
+<<<<<<< HEAD
 	);	
+=======
+	);
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 }

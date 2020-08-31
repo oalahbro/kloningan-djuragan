@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 <?php
 
 namespace Config;
@@ -6,12 +9,15 @@ namespace Config;
 use CodeIgniter\Modules\Modules as CoreModules;
 
 class Modules extends CoreModules
+<<<<<<< HEAD
 =======
 <?php namespace Config;
 
 // Cannot extend BaseConfig or looping resources occurs.
 class Modules
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 {
 	/*
 	 |--------------------------------------------------------------------------
@@ -40,11 +46,15 @@ class Modules
 	|--------------------------------------------------------------------------
 	|
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	| Aliases list of all discovery classes that will be active and used during
 	| the current application request.
 	| If it is not listed, only the base application elements will be used.
 	*/
 	public $aliases = [
+<<<<<<< HEAD
 =======
 	| Lists the aliases of all discovery classes that will be active
 	| and used during the current application request. If it is not
@@ -52,11 +62,14 @@ class Modules
 	*/
 	public $activeExplorers = [
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		'events',
 		'registrars',
 		'routes',
 		'services',
 	];
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -85,4 +98,6 @@ class Modules
 		return in_array($alias, $this->activeExplorers);
 	}
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 }

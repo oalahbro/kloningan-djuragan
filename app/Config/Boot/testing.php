@@ -31,7 +31,11 @@ defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', true);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 defined('CI_DEBUG') || define('CI_DEBUG', true);
 =======
 defined('CI_DEBUG') || define('CI_DEBUG', 1);
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+defined('CI_DEBUG') || define('CI_DEBUG', true);
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11

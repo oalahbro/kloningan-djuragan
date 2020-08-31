@@ -2,11 +2,14 @@
 
 use CodeIgniter\Config\Services as CoreServices;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 use CodeIgniter\Config\BaseConfig;
 
 require_once SYSTEMPATH . 'Config/Services.php';
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
 /**
  * Services Configuration file.

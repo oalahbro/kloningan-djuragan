@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php namespace App\Models;
 use CodeIgniter\Model;
  
@@ -10,6 +11,23 @@ class UserModel extends Model
     protected $useSoftDeletes = true;
 
     protected $allowedFields = ['username','password','name','email','level','status','login_terakhir'];
+=======
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class UserModel extends Model
+{
+    protected $table = 'user';
+    protected $primaryKey = 'id';
+
+    protected $returnType = 'object';
+    protected $useSoftDeletes = true;
+
+    protected $allowedFields = ['username', 'password', 'name', 'email', 'level', 'status', 'login_terakhir'];
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
@@ -34,6 +52,10 @@ class UserModel extends Model
         $builder->where('r.table', '1');
 
         $builder->groupBy("u.id");
+<<<<<<< HEAD
         return $builder->get();
+=======
+        return $builder;
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
     }
 }

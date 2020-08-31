@@ -1,12 +1,19 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"name": "codeigniter4/framework",
 	"type": "project",
 	"description": "The CodeIgniter framework v4",
+=======
+	"name": "codeigniter4/appstarter",
+	"type": "project",
+	"description": "CodeIgniter4 starter app",
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 	"homepage": "https://codeigniter.com",
 	"license": "MIT",
 	"require": {
 		"php": ">=7.2",
+<<<<<<< HEAD
 		"ext-curl": "*",
 		"ext-intl": "*",
 		"ext-json": "*",
@@ -26,12 +33,31 @@
 	"autoload": {
 		"psr-4": {
 			"CodeIgniter\\": "system/"
+=======
+		"codeigniter4/framework": "^4",
+		"matthiasmullie/minify": "^1.3",
+		"steevenz/rajaongkir": "^2.2",
+		"tholu/php-packer": "^0.2.0"
+	},
+	"require-dev": {
+		"fzaninotto/faker": "^1.9@dev",
+		"mikey179/vfsstream": "1.6.*",
+		"phpunit/phpunit": "^8.5"
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Support\\": "tests/_support"
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		}
 	},
 	"scripts": {
 		"post-update-cmd": [
+<<<<<<< HEAD
 			"@composer dump-autoload",
 			"CodeIgniter\\ComposerScripts::postUpdate"
+=======
+			"@composer dump-autoload"
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 		],
 		"test": "phpunit"
 	},
@@ -40,6 +66,7 @@
 		"source": "https://github.com/codeigniter4/CodeIgniter4",
 		"slack": "https://codeigniterchat.slack.com"
 	}
+<<<<<<< HEAD
 =======
     "name": "codeigniter4/codeigniter4",
     "type": "project",
@@ -79,4 +106,6 @@
         "slack": "https://codeigniterchat.slack.com"
     }
 >>>>>>> a3f02c4b0f4736440cdd0afc6ed9b10879e6dbef
+=======
+>>>>>>> 545025698c6c7be18bd842f8bcc798818ed0db11
 }
