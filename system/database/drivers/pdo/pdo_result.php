@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 2.1.2
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,30 +37,29 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 2.1.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * PDO Result Class
  *
  * This class extends the parent result class: CI_DB_result
  *
-<<<<<<< HEAD
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/database/
- */
-class CI_DB_pdo_result extends CI_DB_result {
-
-	public $num_rows;
-
-=======
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
@@ -80,7 +68,6 @@ class CI_DB_pdo_result extends CI_DB_result {
  */
 class CI_DB_pdo_result extends CI_DB_result {
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	/**
 	 * Number of rows in the result set
 	 *
@@ -92,16 +79,6 @@ class CI_DB_pdo_result extends CI_DB_result {
 		{
 			return $this->num_rows;
 		}
-<<<<<<< HEAD
-		elseif (($this->num_rows = $this->result_id->rowCount()) > 0)
-		{
-			return $this->num_rows;
-		}
-
-		$this->num_rows = count($this->result_id->fetchAll());
-		$this->result_id->execute();
-		return $this->num_rows;
-=======
 		elseif (count($this->result_array) > 0)
 		{
 			return $this->num_rows = count($this->result_array);
@@ -116,7 +93,6 @@ class CI_DB_pdo_result extends CI_DB_result {
 		}
 
 		return $this->num_rows = count($this->result_array());
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -124,16 +100,9 @@ class CI_DB_pdo_result extends CI_DB_result {
 	/**
 	 * Number of fields in the result set
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	integer
-	 */
-	function num_fields()
-=======
 	 * @return	int
 	 */
 	public function num_fields()
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		return $this->result_id->columnCount();
 	}
@@ -145,18 +114,6 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 *
 	 * Generates an array of column names
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	array
-	 */
-	function list_fields()
-	{
-		if ($this->db->db_debug)
-		{
-			return $this->db->display_error('db_unsuported_feature');
-		}
-		return FALSE;
-=======
 	 * @return	bool
 	 */
 	public function list_fields()
@@ -171,7 +128,6 @@ class CI_DB_pdo_result extends CI_DB_result {
 		}
 
 		return $field_names;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -181,23 +137,6 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	array
-	 */
-	function field_data()
-	{
-		$data = array();
-	
-		try
-		{
-			for($i = 0; $i < $this->num_fields(); $i++)
-			{
-				$data[] = $this->result_id->getColumnMeta($i);
-			}
-			
-			return $data;
-=======
 	 * @return	array
 	 */
 	public function field_data()
@@ -212,26 +151,28 @@ class CI_DB_pdo_result extends CI_DB_result {
 
 				$retval[$i]			= new stdClass();
 				$retval[$i]->name		= $field['name'];
+<<<<<<< HEAD
+<<<<<<< HEAD
 				$retval[$i]->type		= $field['native_type'];
+=======
+				$retval[$i]->type		= isset($field['native_type']) ? $field['native_type'] : null;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+				$retval[$i]->type		= isset($field['native_type']) ? $field['native_type'] : null;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 				$retval[$i]->max_length		= ($field['len'] > 0) ? $field['len'] : NULL;
 				$retval[$i]->primary_key	= (int) ( ! empty($field['flags']) && in_array('primary_key', $field['flags'], TRUE));
 			}
 
 			return $retval;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 		catch (Exception $e)
 		{
 			if ($this->db->db_debug)
 			{
-<<<<<<< HEAD
-				return $this->db->display_error('db_unsuported_feature');
-			}
-=======
 				return $this->db->display_error('db_unsupported_feature');
 			}
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			return FALSE;
 		}
 	}
@@ -241,15 +182,9 @@ class CI_DB_pdo_result extends CI_DB_result {
 	/**
 	 * Free the result
 	 *
-<<<<<<< HEAD
-	 * @return	null
-	 */
-	function free_result()
-=======
 	 * @return	void
 	 */
 	public function free_result()
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		if (is_object($this->result_id))
 		{
@@ -260,40 +195,13 @@ class CI_DB_pdo_result extends CI_DB_result {
 	// --------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-	 * Data Seek
-	 *
-	 * Moves the internal pointer to the desired offset.  We call
-	 * this internally before fetching results to make sure the
-	 * result set starts at zero
-	 *
-	 * @access	private
-	 * @return	array
-	 */
-	function _data_seek($n = 0)
-	{
-		return FALSE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-=======
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 * Result - associative array
 	 *
 	 * Returns the result set as an array
 	 *
-<<<<<<< HEAD
-	 * @access	private
-	 * @return	array
-	 */
-	function _fetch_assoc()
-=======
 	 * @return	array
 	 */
 	protected function _fetch_assoc()
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		return $this->result_id->fetch(PDO::FETCH_ASSOC);
 	}
@@ -305,21 +213,6 @@ class CI_DB_pdo_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
-<<<<<<< HEAD
-	 * @access	private
-	 * @return	object
-	 */
-	function _fetch_object()
-	{	
-		return $this->result_id->fetchObject();
-	}
-
-}
-
-
-/* End of file pdo_result.php */
-/* Location: ./system/database/drivers/pdo/pdo_result.php */
-=======
 	 * @param	string	$class_name
 	 * @return	object
 	 */
@@ -329,4 +222,3 @@ class CI_DB_pdo_result extends CI_DB_result {
 	}
 
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

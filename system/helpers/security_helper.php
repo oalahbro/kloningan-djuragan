@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * CodeIgniter Security Helpers
@@ -64,31 +62,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Helpers
  * @category	Helpers
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/helpers/security_helper.html
-=======
  * @link		https://codeigniter.com/user_guide/helpers/security_helper.html
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * XSS Filtering
- *
- * @access	public
- * @param	string
- * @param	bool	whether or not the content is an image file
- * @return	string
- */
-if ( ! function_exists('xss_clean'))
-{
-	function xss_clean($str, $is_image = FALSE)
-	{
-		$CI =& get_instance();
-		return $CI->security->xss_clean($str, $is_image);
-=======
 if ( ! function_exists('xss_clean'))
 {
 	/**
@@ -101,27 +79,11 @@ if ( ! function_exists('xss_clean'))
 	function xss_clean($str, $is_image = FALSE)
 	{
 		return get_instance()->security->xss_clean($str, $is_image);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Sanitize Filename
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('sanitize_filename'))
-{
-	function sanitize_filename($filename)
-	{
-		$CI =& get_instance();
-		return $CI->security->sanitize_filename($filename);
-=======
 if ( ! function_exists('sanitize_filename'))
 {
 	/**
@@ -133,33 +95,11 @@ if ( ! function_exists('sanitize_filename'))
 	function sanitize_filename($filename)
 	{
 		return get_instance()->security->sanitize_filename($filename);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // --------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Hash encode a string
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('do_hash'))
-{
-	function do_hash($str, $type = 'sha1')
-	{
-		if ($type == 'sha1')
-		{
-			return sha1($str);
-		}
-		else
-		{
-			return md5($str);
-		}
-=======
 if ( ! function_exists('do_hash'))
 {
 	/**
@@ -179,29 +119,11 @@ if ( ! function_exists('do_hash'))
 		}
 
 		return hash($type, $str);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Strip Image Tags
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('strip_image_tags'))
-{
-	function strip_image_tags($str)
-	{
-		$str = preg_replace("#<img\s+.*?src\s*=\s*[\"'](.+?)[\"'].*?\>#", "\\1", $str);
-		$str = preg_replace("#<img\s+.*?src\s*=\s*(.+?).*?\>#", "\\1", $str);
-
-		return $str;
-=======
 if ( ! function_exists('strip_image_tags'))
 {
 	/**
@@ -213,32 +135,11 @@ if ( ! function_exists('strip_image_tags'))
 	function strip_image_tags($str)
 	{
 		return get_instance()->security->strip_image_tags($str);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Convert PHP tags to entities
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('encode_php_tags'))
-{
-	function encode_php_tags($str)
-	{
-		return str_replace(array('<?php', '<?PHP', '<?', '?>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
-	}
-}
-
-
-/* End of file security_helper.php */
-/* Location: ./system/helpers/security_helper.php */
-=======
 if ( ! function_exists('encode_php_tags'))
 {
 	/**
@@ -252,4 +153,3 @@ if ( ! function_exists('encode_php_tags'))
 		return str_replace(array('<?', '?>'), array('&lt;?', '?&gt;'), $str);
 	}
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

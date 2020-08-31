@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2006 - 2014 EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 2.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 2.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * CodeIgniter Dummy Caching Class
@@ -73,13 +71,8 @@ class CI_Cache_dummy extends CI_Driver {
 	 *
 	 * Since this is the dummy class, it's always going to return FALSE.
 	 *
-<<<<<<< HEAD
-	 * @param 	string
-	 * @return 	Boolean		FALSE
-=======
 	 * @param	string
 	 * @return	bool	FALSE
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function get($id)
 	{
@@ -91,15 +84,6 @@ class CI_Cache_dummy extends CI_Driver {
 	/**
 	 * Cache Save
 	 *
-<<<<<<< HEAD
-	 * @param 	string		Unique Key
-	 * @param 	mixed		Data to store
-	 * @param 	int			Length of time (in seconds) to cache the data
-	 *
-	 * @return 	boolean		TRUE, Simulating success
-	 */
-	public function save($id, $data, $ttl = 60)
-=======
 	 * @param	string	Unique Key
 	 * @param	mixed	Data to store
 	 * @param	int	Length of time (in seconds) to cache the data
@@ -107,7 +91,6 @@ class CI_Cache_dummy extends CI_Driver {
 	 * @return	bool	TRUE, Simulating success
 	 */
 	public function save($id, $data, $ttl = 60, $raw = FALSE)
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		return TRUE;
 	}
@@ -117,13 +100,8 @@ class CI_Cache_dummy extends CI_Driver {
 	/**
 	 * Delete from Cache
 	 *
-<<<<<<< HEAD
-	 * @param 	mixed		unique identifier of the item in the cache
-	 * @param 	boolean		TRUE, simulating success
-=======
 	 * @param	mixed	unique identifier of the item in the cache
 	 * @return	bool	TRUE, simulating success
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function delete($id)
 	{
@@ -133,11 +111,6 @@ class CI_Cache_dummy extends CI_Driver {
 	// ------------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-	 * Clean the cache
-	 *
-	 * @return 	boolean		TRUE, simulating success
-=======
 	 * Increment a raw value
 	 *
 	 * @param	string	$id	Cache ID
@@ -169,7 +142,6 @@ class CI_Cache_dummy extends CI_Driver {
 	 * Clean the cache
 	 *
 	 * @return	bool	TRUE, simulating success
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function clean()
 	{
@@ -181,13 +153,8 @@ class CI_Cache_dummy extends CI_Driver {
 	/**
 	 * Cache Info
 	 *
-<<<<<<< HEAD
-	 * @param 	string		user/filehits
-	 * @return 	boolean		FALSE
-=======
 	 * @param	string	user/filehits
 	 * @return	bool	FALSE
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	 public function cache_info($type = NULL)
 	 {
@@ -199,13 +166,8 @@ class CI_Cache_dummy extends CI_Driver {
 	/**
 	 * Get Cache Metadata
 	 *
-<<<<<<< HEAD
-	 * @param 	mixed		key to get cache metadata on
-	 * @return 	boolean		FALSE
-=======
 	 * @param	mixed	key to get cache metadata on
 	 * @return	bool	FALSE
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function get_metadata($id)
 	{
@@ -218,11 +180,7 @@ class CI_Cache_dummy extends CI_Driver {
 	 * Is this caching driver supported on the system?
 	 * Of course this one is.
 	 *
-<<<<<<< HEAD
-	 * @return TRUE;
-=======
 	 * @return	bool	TRUE
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function is_supported()
 	{
@@ -230,9 +188,3 @@ class CI_Cache_dummy extends CI_Driver {
 	}
 
 }
-<<<<<<< HEAD
-
-/* End of file Cache_dummy.php */
-/* Location: ./system/libraries/Cache/drivers/Cache_dummy.php */
-=======
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

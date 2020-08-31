@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-
-/**
- * CodeIgniter Application Controller Class
-=======
 <?php
 /**
  * CodeIgniter
@@ -28,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -51,8 +37,18 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -61,7 +57,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Application Controller Class
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  *
  * This class object is the super class that every library in
  * CodeIgniter will be assigned to.
@@ -70,16 +65,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Libraries
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/general/controllers.html
- */
-class CI_Controller {
-
-	private static $instance;
-
-	/**
-	 * Constructor
-=======
  * @link		https://codeigniter.com/user_guide/general/controllers.html
  */
 class CI_Controller {
@@ -92,10 +77,25 @@ class CI_Controller {
 	private static $instance;
 
 	/**
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+	 * CI_Loader
+	 *
+	 * @var	CI_Loader
+	 */
+	public $load;
+
+	/**
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * Class constructor
 	 *
 	 * @return	void
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function __construct()
 	{
@@ -110,14 +110,6 @@ class CI_Controller {
 		}
 
 		$this->load =& load_class('Loader', 'core');
-<<<<<<< HEAD
-
-		$this->load->initialize();
-		
-		log_message('debug', "Controller Class Initialized");
-	}
-
-=======
 		$this->load->initialize();
 		log_message('info', 'Controller Class Initialized');
 	}
@@ -130,18 +122,9 @@ class CI_Controller {
 	 * @static
 	 * @return	object
 	 */
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	public static function &get_instance()
 	{
 		return self::$instance;
 	}
-<<<<<<< HEAD
-}
-// END Controller class
-
-/* End of file Controller.php */
-/* Location: ./system/core/Controller.php */
-=======
 
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

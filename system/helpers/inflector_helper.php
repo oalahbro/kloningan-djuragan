@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * CodeIgniter Inflector Helpers
@@ -64,25 +62,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Helpers
  * @category	Helpers
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/helpers/directory_helper.html
- */
-
-
-// --------------------------------------------------------------------
-
-/**
- * Singular
- *
- * Takes a plural word and makes it singular
- *
- * @access	public
- * @param	string
- * @return	str
- */
-if ( ! function_exists('singular'))
-{
-=======
  * @link		https://codeigniter.com/user_guide/helpers/inflector_helper.html
  */
 
@@ -98,44 +77,19 @@ if ( ! function_exists('singular'))
 	 * @param	string	$str	Input string
 	 * @return	string
 	 */
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	function singular($str)
 	{
 		$result = strval($str);
 
 <<<<<<< HEAD
-		$singular_rules = array(
-			'/(matr)ices$/'         => '\1ix',
-			'/(vert|ind)ices$/'     => '\1ex',
-			'/^(ox)en/'             => '\1',
-			'/(alias)es$/'          => '\1',
-			'/([octop|vir])i$/'     => '\1us',
-			'/(cris|ax|test)es$/'   => '\1is',
-			'/(shoe)s$/'            => '\1',
-			'/(o)es$/'              => '\1',
-			'/(bus|campus)es$/'     => '\1',
-			'/([m|l])ice$/'         => '\1ouse',
-			'/(x|ch|ss|sh)es$/'     => '\1',
-			'/(m)ovies$/'           => '\1\2ovie',
-			'/(s)eries$/'           => '\1\2eries',
-			'/([^aeiouy]|qu)ies$/'  => '\1y',
-			'/([lr])ves$/'          => '\1f',
-			'/(tive)s$/'            => '\1',
-			'/(hive)s$/'            => '\1',
-			'/([^f])ves$/'          => '\1fe',
-			'/(^analy)ses$/'        => '\1sis',
-			'/((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$/' => '\1\2sis',
-			'/([ti])a$/'            => '\1um',
-			'/(p)eople$/'           => '\1\2erson',
-			'/(m)en$/'              => '\1an',
-			'/(s)tatuses$/'         => '\1\2tatus',
-			'/(c)hildren$/'         => '\1\2hild',
-			'/(n)ews$/'             => '\1\2ews',
-			'/([^u])s$/'            => '\1',
-		);
-		
-=======
+<<<<<<< HEAD
 		if ( ! is_countable($result))
+=======
+		if ( ! word_is_countable($result))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if ( ! word_is_countable($result))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			return $result;
 		}
@@ -167,10 +121,17 @@ if ( ! function_exists('singular'))
 			'/(s)tatuses$/'		=> '\1\2tatus',
 			'/(c)hildren$/'		=> '\1\2hild',
 			'/(n)ews$/'		=> '\1\2ews',
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			'/(quiz)zes$/'		=> '\1',
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			'/(quiz)zes$/'		=> '\1',
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			'/([^us])s$/'		=> '\1'
 		);
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		foreach ($singular_rules as $rule => $replacement)
 		{
 			if (preg_match($rule, $result))
@@ -186,25 +147,6 @@ if ( ! function_exists('singular'))
 
 // --------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Plural
- *
- * Takes a singular word and makes it plural
- *
- * @access	public
- * @param	string
- * @param	bool
- * @return	str
- */
-if ( ! function_exists('plural'))
-{
-	function plural($str, $force = FALSE)
-	{
-		$result = strval($str);
-	
-		$plural_rules = array(
-=======
 if ( ! function_exists('plural'))
 {
 	/**
@@ -219,14 +161,21 @@ if ( ! function_exists('plural'))
 	{
 		$result = strval($str);
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 		if ( ! is_countable($result))
+=======
+		if ( ! word_is_countable($result))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if ( ! word_is_countable($result))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			return $result;
 		}
 
 		$plural_rules = array(
 			'/(quiz)$/'                => '\1zes',      // quizzes
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			'/^(ox)$/'                 => '\1\2en',     // ox
 			'/([m|l])ouse$/'           => '\1ice',      // mouse, louse
 			'/(matr|vert|ind)ix|ex$/'  => '\1ices',     // matrix, vertex, index
@@ -241,11 +190,7 @@ if ( ! function_exists('plural'))
 			'/(c)hild$/'               => '\1hildren',  // child
 			'/(buffal|tomat)o$/'       => '\1\2oes',    // buffalo, tomato
 			'/(bu|campu)s$/'           => '\1\2ses',    // bus, campus
-<<<<<<< HEAD
-			'/(alias|status|virus)/'   => '\1es',       // alias
-=======
 			'/(alias|status|virus)$/'  => '\1es',       // alias
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			'/(octop)us$/'             => '\1i',        // octopus
 			'/(ax|cris|test)is$/'      => '\1es',       // axis, crisis
 			'/s$/'                     => 's',          // no change (compatibility)
@@ -267,24 +212,6 @@ if ( ! function_exists('plural'))
 
 // --------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Camelize
- *
- * Takes multiple words separated by spaces or underscores and camelizes them
- *
- * @access	public
- * @param	string
- * @return	str
- */
-if ( ! function_exists('camelize'))
-{
-	function camelize($str)
-	{
-		$str = 'x'.strtolower(trim($str));
-		$str = ucwords(preg_replace('/[\s_]+/', ' ', $str));
-		return substr(str_replace(' ', '', $str), 1);
-=======
 if ( ! function_exists('camelize'))
 {
 	/**
@@ -298,28 +225,11 @@ if ( ! function_exists('camelize'))
 	function camelize($str)
 	{
 		return strtolower($str[0]).substr(str_replace(' ', '', ucwords(preg_replace('/[\s_]+/', ' ', $str))), 1);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // --------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Underscore
- *
- * Takes multiple words separated by spaces and underscores them
- *
- * @access	public
- * @param	string
- * @return	str
- */
-if ( ! function_exists('underscore'))
-{
-	function underscore($str)
-	{
-		return preg_replace('/[\s]+/', '_', strtolower(trim($str)));
-=======
 if ( ! function_exists('underscore'))
 {
 	/**
@@ -333,34 +243,11 @@ if ( ! function_exists('underscore'))
 	function underscore($str)
 	{
 		return preg_replace('/[\s]+/', '_', trim(MB_ENABLED ? mb_strtolower($str) : strtolower($str)));
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // --------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Humanize
- *
- * Takes multiple words separated by underscores and changes them to spaces
- *
- * @access	public
- * @param	string
- * @return	str
- */
-if ( ! function_exists('humanize'))
-{
-	function humanize($str)
-	{
-		return ucwords(preg_replace('/[_]+/', ' ', strtolower(trim($str))));
-	}
-}
-
-
-/* End of file inflector_helper.php */
-/* Location: ./system/helpers/inflector_helper.php */
-=======
 if ( ! function_exists('humanize'))
 {
 	/**
@@ -380,7 +267,15 @@ if ( ! function_exists('humanize'))
 
 // --------------------------------------------------------------------
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 if ( ! function_exists('is_countable'))
+=======
+if ( ! function_exists('word_is_countable'))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+if ( ! function_exists('word_is_countable'))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 {
 	/**
 	 * Checks if the given word has a plural version.
@@ -388,15 +283,71 @@ if ( ! function_exists('is_countable'))
 	 * @param	string	$word	Word to check
 	 * @return	bool
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
 	function is_countable($word)
+=======
+	function word_is_countable($word)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	function word_is_countable($word)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	{
 		return ! in_array(
 			strtolower($word),
 			array(
-				'equipment', 'information', 'rice', 'money',
-				'species', 'series', 'fish', 'meta'
+				'audio',
+				'bison',
+				'chassis',
+				'compensation',
+				'coreopsis',
+				'data',
+				'deer',
+				'education',
+				'emoji',
+				'equipment',
+				'fish',
+				'furniture',
+				'gold',
+				'information',
+				'knowledge',
+				'love',
+				'rain',
+				'money',
+				'moose',
+				'nutrition',
+				'offspring',
+				'plankton',
+				'pokemon',
+				'police',
+				'rice',
+				'series',
+				'sheep',
+				'species',
+				'swine',
+				'traffic',
+				'wheat'
 			)
 		);
 	}
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+
+// --------------------------------------------------------------------
+
+if ( ! function_exists('is_countable'))
+{
+	function is_countable($word)
+	{
+		trigger_error('is_countable() is a native PHP function since version 7.3.0; use word_is_countable() instead', E_USER_WARNING);
+		return word_is_countable($word);
+	}
+}
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5

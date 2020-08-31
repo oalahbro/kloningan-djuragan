@@ -1,30 +1,4 @@
 <?php
-<<<<<<< HEAD
-
-$lang['ut_test_name']		= 'Test Name';
-$lang['ut_test_datatype']	= 'Test Datatype';
-$lang['ut_res_datatype']	= 'Expected Datatype';
-$lang['ut_result']			= 'Result';
-$lang['ut_undefined']		= 'Undefined Test Name';
-$lang['ut_file']			= 'File Name';
-$lang['ut_line']			= 'Line Number';
-$lang['ut_passed']			= 'Passed';
-$lang['ut_failed']			= 'Failed';
-$lang['ut_boolean']			= 'Boolean';
-$lang['ut_integer']			= 'Integer';
-$lang['ut_float']			= 'Float';
-$lang['ut_double']			= 'Float'; // can be the same as float
-$lang['ut_string']			= 'String';
-$lang['ut_array']			= 'Array';
-$lang['ut_object']			= 'Object';
-$lang['ut_resource']		= 'Resource';
-$lang['ut_null']			= 'Null';
-$lang['ut_notes']			= 'Notes';
-
-
-/* End of file unit_test_lang.php */
-/* Location: ./system/language/english/unit_test_lang.php */
-=======
 /**
  * CodeIgniter
  *
@@ -32,7 +6,15 @@ $lang['ut_notes']			= 'Notes';
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -55,8 +37,18 @@ $lang['ut_notes']			= 'Notes';
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -82,4 +74,3 @@ $lang['ut_object'] = 'Object';
 $lang['ut_resource'] = 'Resource';
 $lang['ut_null'] = 'Null';
 $lang['ut_notes'] = 'Notes';
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

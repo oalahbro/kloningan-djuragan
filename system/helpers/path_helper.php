@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * CodeIgniter Path Helpers
@@ -64,31 +62,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Helpers
  * @category	Helpers
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/helpers/xml_helper.html
-=======
  * @link		https://codeigniter.com/user_guide/helpers/path_helper.html
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Set Realpath
- *
- * @access	public
- * @param	string
- * @param	bool	checks to see if the path exists
- * @return	string
- */
-if ( ! function_exists('set_realpath'))
-{
-	function set_realpath($path, $check_existance = FALSE)
-	{
-		// Security check to make sure the path is NOT a URL.  No remote file inclusion!
-		if (preg_match("#^(http:\/\/|https:\/\/|www\.|ftp|[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})#i", $path))
-=======
 if ( ! function_exists('set_realpath'))
 {
 	/**
@@ -102,38 +80,11 @@ if ( ! function_exists('set_realpath'))
 	{
 		// Security check to make sure the path is NOT a URL. No remote file inclusion!
 		if (preg_match('#^(http:\/\/|https:\/\/|www\.|ftp|php:\/\/)#i', $path) OR filter_var($path, FILTER_VALIDATE_IP) === $path)
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		{
 			show_error('The path you submitted must be a local server path, not a URL');
 		}
 
 		// Resolve the path
-<<<<<<< HEAD
-		if (function_exists('realpath') AND @realpath($path) !== FALSE)
-		{
-			$path = realpath($path).'/';
-		}
-
-		// Add a trailing slash
-		$path = preg_replace("#([^/])/*$#", "\\1/", $path);
-
-		// Make sure the path exists
-		if ($check_existance == TRUE)
-		{
-			if ( ! is_dir($path))
-			{
-				show_error('Not a valid path: '.$path);
-			}
-		}
-
-		return $path;
-	}
-}
-
-
-/* End of file path_helper.php */
-/* Location: ./system/helpers/path_helper.php */
-=======
 		if (realpath($path) !== FALSE)
 		{
 			$path = realpath($path);
@@ -147,4 +98,3 @@ if ( ! function_exists('set_realpath'))
 		return is_dir($path) ? rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR : $path;
 	}
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

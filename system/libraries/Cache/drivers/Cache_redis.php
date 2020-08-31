@@ -6,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +37,18 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 3.0.0
  * @filesource
@@ -76,6 +94,22 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	protected $_serialized = array();
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+	/**
+	 * del()/delete() method name depending on phpRedis version
+	 *
+	 * @var	string
+	 */
+	protected static $_delete_name;
+
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	// ------------------------------------------------------------------------
 
 	/**
@@ -97,6 +131,19 @@ class CI_Cache_redis extends CI_Driver
 			return;
 		}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+		isset(static::$_delete_name) OR static::$_delete_name = version_compare(phpversion('phpredis'), '5', '>=')
+			? 'del'
+			: 'delete';
+
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		$CI =& get_instance();
 
 		if ($CI->config->load('redis', TRUE, TRUE))
@@ -135,10 +182,16 @@ class CI_Cache_redis extends CI_Driver
 		{
 			log_message('error', 'Cache: Redis connection refused ('.$e->getMessage().')');
 		}
+<<<<<<< HEAD
+<<<<<<< HEAD
 
 		// Initialize the index of serialized values.
 		$serialized = $this->_redis->sMembers('_ci_redis_serialized');
 		empty($serialized) OR $this->_serialized = array_flip($serialized);
+=======
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -153,7 +206,15 @@ class CI_Cache_redis extends CI_Driver
 	{
 		$value = $this->_redis->get($key);
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 		if ($value !== FALSE && isset($this->_serialized[$key]))
+=======
+		if ($value !== FALSE && $this->_redis->sIsMember('_ci_redis_serialized', $key))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if ($value !== FALSE && $this->_redis->sIsMember('_ci_redis_serialized', $key))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			return unserialize($value);
 		}
@@ -184,9 +245,19 @@ class CI_Cache_redis extends CI_Driver
 			isset($this->_serialized[$id]) OR $this->_serialized[$id] = TRUE;
 			$data = serialize($data);
 		}
+<<<<<<< HEAD
+<<<<<<< HEAD
 		elseif (isset($this->_serialized[$id]))
 		{
 			$this->_serialized[$id] = NULL;
+=======
+		else
+		{
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		else
+		{
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$this->_redis->sRemove('_ci_redis_serialized', $id);
 		}
 
@@ -203,16 +274,32 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function delete($key)
 	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		if ($this->_redis->delete($key) !== 1)
+=======
+		if ($this->_redis->{static::$_delete_name}($key) !== 1)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if ($this->_redis->{static::$_delete_name}($key) !== 1)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 		if (isset($this->_serialized[$key]))
 		{
 			$this->_serialized[$key] = NULL;
 			$this->_redis->sRemove('_ci_redis_serialized', $key);
 		}
+=======
+		$this->_redis->sRemove('_ci_redis_serialized', $key);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$this->_redis->sRemove('_ci_redis_serialized', $key);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 		return TRUE;
 	}
@@ -228,7 +315,15 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function increment($id, $offset = 1)
 	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		return $this->_redis->incr($id, $offset);
+=======
+		return $this->_redis->incrBy($id, $offset);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return $this->_redis->incrBy($id, $offset);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -242,7 +337,15 @@ class CI_Cache_redis extends CI_Driver
 	 */
 	public function decrement($id, $offset = 1)
 	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		return $this->_redis->decr($id, $offset);
+=======
+		return $this->_redis->decrBy($id, $offset);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return $this->_redis->decrBy($id, $offset);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------

@@ -1,6 +1,7 @@
 <?php
 <<<<<<< HEAD
 =======
+date_default_timezone_set('Asia/Jakarta');
 /**
  * CodeIgniter
  *
@@ -8,7 +9,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,13 +32,13 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 /*
  *---------------------------------------------------------------
@@ -63,7 +64,7 @@
  */
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -115,7 +116,7 @@ switch (ENVIRONMENT)
 		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
 		echo 'The application environment is not set correctly.';
 		exit(1); // EXIT_ERROR
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 }
 
 /*
@@ -134,7 +135,7 @@ switch (ENVIRONMENT)
  *
  * This variable must contain the name of your "system" directory.
  * Set the path if it is not in the same directory as this file.
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  */
 	$system_path = 'system';
 
@@ -152,8 +153,6 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  *
- */
-	$application_folder = 'system/juragan';
 =======
  * APPLICATION DIRECTORY NAME
  *---------------------------------------------------------------
@@ -167,10 +166,13 @@ switch (ENVIRONMENT)
  * https://codeigniter.com/user_guide/general/managing_apps.html
  *
  * NO TRAILING SLASH!
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  */
-	$application_folder = 'application';
+	$application_folder = 'app/limited';
 
 /*
+<<<<<<< HEAD
+=======
  *---------------------------------------------------------------
  * VIEW DIRECTORY NAME
  *---------------------------------------------------------------
@@ -185,9 +187,9 @@ switch (ENVIRONMENT)
  */
 	$view_folder = '';
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /*
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * --------------------------------------------------------------------
  * DEFAULT CONTROLLER
  * --------------------------------------------------------------------
@@ -198,7 +200,7 @@ switch (ENVIRONMENT)
  * specific controller class/function here.  For most applications, you
 =======
  * specific controller class/function here. For most applications, you
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * WILL NOT set your routing here, but it's an option for those
  * special instances where you might want to override the standard
  * routing in a specific front controller that shares a common CI installation.
@@ -230,7 +232,7 @@ switch (ENVIRONMENT)
 	// $routing['directory'] = '';
 
 	// The controller class file name.  Example:  mycontroller
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	// $routing['controller'] = '';
 
 	// The controller function you wish to be called.
@@ -253,7 +255,7 @@ switch (ENVIRONMENT)
 <<<<<<< HEAD
  *
 =======
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  */
 	// $assign_to_config['name_of_config_item'] = 'value of config item';
 
@@ -297,7 +299,7 @@ switch (ENVIRONMENT)
 			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
 		).DIRECTORY_SEPARATOR;
 	}
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 	// Is the system path correct?
 	if ( ! is_dir($system_path))
@@ -308,7 +310,7 @@ switch (ENVIRONMENT)
 		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
 		echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME);
 		exit(3); // EXIT_CONFIG
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 /*
@@ -429,7 +431,7 @@ switch (ENVIRONMENT)
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
@@ -446,4 +448,4 @@ require_once BASEPATH.'core/CodeIgniter.php';
 =======
  */
 require_once BASEPATH.'core/CodeIgniter.php';
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5

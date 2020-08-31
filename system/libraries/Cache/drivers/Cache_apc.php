@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2006 - 2014 EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 2.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 2.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * CodeIgniter APC Caching Class
@@ -69,21 +67,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CI_Cache_apc extends CI_Driver {
 
 	/**
-<<<<<<< HEAD
-	 * Get
-	 *
-	 * Look for a value in the cache.  If it exists, return the data
-	 * if not, return FALSE
-	 *
-	 * @param 	string
-	 * @return 	mixed		value that is stored/FALSE on failure
-	 */
-	public function get($id)
-	{
-		$data = apc_fetch($id);
-
-		return (is_array($data)) ? $data[0] : FALSE;
-=======
 	 * Class constructor
 	 *
 	 * Only present so that an error message is logged
@@ -115,6 +98,8 @@ class CI_Cache_apc extends CI_Driver {
 		$success = FALSE;
 		$data = apc_fetch($id, $success);
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 		if ($success === TRUE)
 		{
 			return is_array($data)
@@ -123,7 +108,12 @@ class CI_Cache_apc extends CI_Driver {
 		}
 
 		return FALSE;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return ($success === TRUE) ? $data : FALSE;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return ($success === TRUE) ? $data : FALSE;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -131,25 +121,24 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Cache Save
 	 *
-<<<<<<< HEAD
-	 * @param 	string		Unique Key
-	 * @param 	mixed		Data to store
-	 * @param 	int			Length of time (in seconds) to cache the data
-	 *
-	 * @return 	boolean		true on success/false on failure
-	 */
-	public function save($id, $data, $ttl = 60)
-	{
-		return apc_store($id, array($data, time(), $ttl), $ttl);
-=======
 	 * @param	string	$id	Cache ID
 	 * @param	mixed	$data	Data to store
 	 * @param	int	$ttl	Length of time (in seconds) to cache the data
+<<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param	bool	$raw	Whether to store the raw value
+=======
+	 * @param	bool	$raw	Whether to store the raw value (unused)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * @param	bool	$raw	Whether to store the raw value (unused)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * @return	bool	TRUE on success, FALSE on failure
 	 */
 	public function save($id, $data, $ttl = 60, $raw = FALSE)
 	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		$ttl = (int) $ttl;
 
 		return apc_store(
@@ -157,7 +146,12 @@ class CI_Cache_apc extends CI_Driver {
 			($raw === TRUE ? $data : array(serialize($data), time(), $ttl)),
 			$ttl
 		);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		return apc_store($id, $data, (int) $ttl);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return apc_store($id, $data, (int) $ttl);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -165,13 +159,8 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Delete from Cache
 	 *
-<<<<<<< HEAD
-	 * @param 	mixed		unique identifier of the item in the cache
-	 * @param 	boolean		true on success/false on failure
-=======
 	 * @param	mixed	unique identifier of the item in the cache
 	 * @return	bool	true on success/false on failure
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function delete($id)
 	{
@@ -181,11 +170,6 @@ class CI_Cache_apc extends CI_Driver {
 	// ------------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-	 * Clean the cache
-	 *
-	 * @return 	boolean		false on failure/true on success
-=======
 	 * Increment a raw value
 	 *
 	 * @param	string	$id	Cache ID
@@ -217,7 +201,6 @@ class CI_Cache_apc extends CI_Driver {
 	 * Clean the cache
 	 *
 	 * @return	bool	false on failure/true on success
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function clean()
 	{
@@ -229,15 +212,6 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Cache Info
 	 *
-<<<<<<< HEAD
-	 * @param 	string		user/filehits
-	 * @return 	mixed		array on success, false on failure
-	 */
-	public function cache_info($type = NULL)
-	{
-		return apc_cache_info($type);
-	}
-=======
 	 * @param	string	user/filehits
 	 * @return	mixed	array on success, false on failure
 	 */
@@ -245,48 +219,69 @@ class CI_Cache_apc extends CI_Driver {
 	 {
 		 return apc_cache_info($type);
 	 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 	// ------------------------------------------------------------------------
 
 	/**
 	 * Get Cache Metadata
 	 *
-<<<<<<< HEAD
-	 * @param 	mixed		key to get cache metadata on
-	 * @return 	mixed		array on success/false on failure
-	 */
-	public function get_metadata($id)
-	{
-		$stored = apc_fetch($id);
-
-		if (count($stored) !== 3)
-=======
 	 * @param	mixed	key to get cache metadata on
 	 * @return	mixed	array on success/false on failure
 	 */
 	public function get_metadata($id)
 	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		$success = FALSE;
 		$stored = apc_fetch($id, $success);
 
 		if ($success === FALSE OR count($stored) !== 3)
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+		$cache_info = apc_cache_info('user', FALSE);
+		if (empty($cache_info) OR empty($cache_info['cache_list']))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		$cache_info = apc_cache_info('user', FALSE);
+		if (empty($cache_info) OR empty($cache_info['cache_list']))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		{
 			return FALSE;
 		}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 		list($data, $time, $ttl) = $stored;
 
 		return array(
 			'expire'	=> $time + $ttl,
 			'mtime'		=> $time,
-<<<<<<< HEAD
-			'data'		=> $data
-=======
 			'data'		=> unserialize($data)
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		);
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+		foreach ($cache_info['cache_list'] as &$entry)
+		{
+			if ($entry['info'] !== $id)
+			{
+				continue;
+			}
+
+			$success  = FALSE;
+			$metadata = array(
+				'expire' => ($entry['ttl'] ? $entry['mtime'] + $entry['ttl'] : 0),
+				'mtime'  => $entry['ttl'],
+				'data'   => apc_fetch($id, $success)
+			);
+
+			return ($success === TRUE) ? $metadata : FALSE;
+		}
+
+		return FALSE;
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -295,24 +290,6 @@ class CI_Cache_apc extends CI_Driver {
 	 * is_supported()
 	 *
 	 * Check to see if APC is available on this system, bail if it isn't.
-<<<<<<< HEAD
-	 */
-	public function is_supported()
-	{
-		if ( ! extension_loaded('apc') OR ini_get('apc.enabled') != "1")
-		{
-			log_message('error', 'The APC PHP extension must be loaded to use APC Cache.');
-			return FALSE;
-		}
-
-		return TRUE;
-	}
-
-}
-
-/* End of file Cache_apc.php */
-/* Location: ./system/libraries/Cache/drivers/Cache_apc.php */
-=======
 	 *
 	 * @return	bool
 	 */
@@ -321,4 +298,3 @@ class CI_Cache_apc extends CI_Driver {
 		return (extension_loaded('apc') && ini_get('apc.enabled'));
 	}
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

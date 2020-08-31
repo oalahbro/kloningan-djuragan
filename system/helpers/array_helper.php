@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * CodeIgniter Array Helpers
@@ -64,39 +62,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Helpers
  * @category	Helpers
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/helpers/array_helper.html
-=======
  * @link		https://codeigniter.com/user_guide/helpers/array_helper.html
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Element
- *
- * Lets you determine whether an array index is set and whether it has a value.
- * If the element is empty it returns FALSE (or whatever you specify as the default value.)
- *
- * @access	public
- * @param	string
- * @param	array
- * @param	mixed
- * @return	mixed	depends on what the array contains
- */
-if ( ! function_exists('element'))
-{
-	function element($item, $array, $default = FALSE)
-	{
-		if ( ! isset($array[$item]) OR $array[$item] == "")
-		{
-			return $default;
-		}
-
-		return $array[$item];
-=======
 if ( ! function_exists('element'))
 {
 	/**
@@ -113,31 +83,11 @@ if ( ! function_exists('element'))
 	function element($item, array $array, $default = NULL)
 	{
 		return array_key_exists($item, $array) ? $array[$item] : $default;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Random Element - Takes an array as input and returns a random element
- *
- * @access	public
- * @param	array
- * @return	mixed	depends on what the array contains
- */
-if ( ! function_exists('random_element'))
-{
-	function random_element($array)
-	{
-		if ( ! is_array($array))
-		{
-			return $array;
-		}
-
-		return $array[array_rand($array)];
-=======
 if ( ! function_exists('random_element'))
 {
 	/**
@@ -149,47 +99,11 @@ if ( ! function_exists('random_element'))
 	function random_element($array)
 	{
 		return is_array($array) ? $array[array_rand($array)] : $array;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // --------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Elements
- *
- * Returns only the array items specified.  Will return a default value if
- * it is not set.
- *
- * @access	public
- * @param	array
- * @param	array
- * @param	mixed
- * @return	mixed	depends on what the array contains
- */
-if ( ! function_exists('elements'))
-{
-	function elements($items, $array, $default = FALSE)
-	{
-		$return = array();
-		
-		if ( ! is_array($items))
-		{
-			$items = array($items);
-		}
-		
-		foreach ($items as $item)
-		{
-			if (isset($array[$item]))
-			{
-				$return[$item] = $array[$item];
-			}
-			else
-			{
-				$return[$item] = $default;
-			}
-=======
 if ( ! function_exists('elements'))
 {
 	/**
@@ -212,15 +126,8 @@ if ( ! function_exists('elements'))
 		foreach ($items as $item)
 		{
 			$return[$item] = array_key_exists($item, $array) ? $array[$item] : $default;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 
 		return $return;
 	}
 }
-<<<<<<< HEAD
-
-/* End of file array_helper.php */
-/* Location: ./system/helpers/array_helper.php */
-=======
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,100 +37,32 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (http://bcit.ca/)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (http://bcit.ca/)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.3.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * SQLite Utility Class
  *
  * @category	Database
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/database/
-=======
  * @link		https://codeigniter.com/user_guide/database/
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 class CI_DB_sqlite_utility extends CI_DB_utility {
 
 	/**
-<<<<<<< HEAD
-	 * List databases
-	 *
-	 * I don't believe you can do a database listing with SQLite
-	 * since each database is its own file.  I suppose we could
-	 * try reading a directory looking for SQLite files, but
-	 * that doesn't seem like a terribly good idea
-	 *
-	 * @access	private
-	 * @return	bool
-	 */
-	function _list_databases()
-	{
-		if ($this->db_debug)
-		{
-			return $this->db->display_error('db_unsuported_feature');
-		}
-		return array();
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Optimize table query
-	 *
-	 * Is optimization even supported in SQLite?
-	 *
-	 * @access	private
-	 * @param	string	the table name
-	 * @return	object
-	 */
-	function _optimize_table($table)
-	{
-		return FALSE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Repair table query
-	 *
-	 * Are table repairs even supported in SQLite?
-	 *
-	 * @access	private
-	 * @param	string	the table name
-	 * @return	object
-	 */
-	function _repair_table($table)
-	{
-		return FALSE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * SQLite Export
-	 *
-	 * @access	private
-	 * @param	array	Preferences
-	 * @return	mixed
-	 */
-	function _backup($params = array())
-	{
-		// Currently unsupported
-		return $this->db->display_error('db_unsuported_feature');
-	}
-}
-
-/* End of file sqlite_utility.php */
-/* Location: ./system/database/drivers/sqlite/sqlite_utility.php */
-=======
 	 * Export
 	 *
 	 * @param	array	$params	Preferences
@@ -154,4 +75,3 @@ class CI_DB_sqlite_utility extends CI_DB_utility {
 	}
 
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

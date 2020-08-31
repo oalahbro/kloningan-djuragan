@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * CodeIgniter Cookie Helpers
@@ -64,39 +62,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Helpers
  * @category	Helpers
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/helpers/cookie_helper.html
-=======
  * @link		https://codeigniter.com/user_guide/helpers/cookie_helper.html
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Set cookie
- *
- * Accepts six parameter, or you can submit an associative
- * array in the first parameter containing all the values.
- *
- * @access	public
- * @param	mixed
- * @param	string	the value of the cookie
- * @param	string	the number of seconds until expiration
- * @param	string	the cookie domain.  Usually:  .yourdomain.com
- * @param	string	the cookie path
- * @param	string	the cookie prefix
- * @return	void
- */
-if ( ! function_exists('set_cookie'))
-{
-	function set_cookie($name = '', $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE)
-	{
-		// Set the config file options
-		$CI =& get_instance();
-		$CI->input->set_cookie($name, $value, $expire, $domain, $path, $prefix, $secure);
-=======
 if ( ! function_exists('set_cookie'))
 {
 	/**
@@ -115,40 +85,23 @@ if ( ! function_exists('set_cookie'))
 	 * @param	bool	true makes the cookie accessible via http(s) only (no javascript)
 	 * @return	void
 	 */
+<<<<<<< HEAD
+<<<<<<< HEAD
 	function set_cookie($name, $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE, $httponly = FALSE)
+=======
+	function set_cookie($name, $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = NULL, $httponly = NULL)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	function set_cookie($name, $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = NULL, $httponly = NULL)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	{
 		// Set the config file options
 		get_instance()->input->set_cookie($name, $value, $expire, $domain, $path, $prefix, $secure, $httponly);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // --------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Fetch an item from the COOKIE array
- *
- * @access	public
- * @param	string
- * @param	bool
- * @return	mixed
- */
-if ( ! function_exists('get_cookie'))
-{
-	function get_cookie($index = '', $xss_clean = FALSE)
-	{
-		$CI =& get_instance();
-
-		$prefix = '';
-
-		if ( ! isset($_COOKIE[$index]) && config_item('cookie_prefix') != '')
-		{
-			$prefix = config_item('cookie_prefix');
-		}
-
-		return $CI->input->cookie($prefix.$index, $xss_clean);
-=======
 if ( ! function_exists('get_cookie'))
 {
 	/**
@@ -163,26 +116,11 @@ if ( ! function_exists('get_cookie'))
 		is_bool($xss_clean) OR $xss_clean = (config_item('global_xss_filtering') === TRUE);
 		$prefix = isset($_COOKIE[$index]) ? '' : config_item('cookie_prefix');
 		return get_instance()->input->cookie($prefix.$index, $xss_clean);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // --------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Delete a COOKIE
- *
- * @param	mixed
- * @param	string	the cookie domain.  Usually:  .yourdomain.com
- * @param	string	the cookie path
- * @param	string	the cookie prefix
- * @return	void
- */
-if ( ! function_exists('delete_cookie'))
-{
-	function delete_cookie($name = '', $domain = '', $path = '/', $prefix = '')
-=======
 if ( ! function_exists('delete_cookie'))
 {
 	/**
@@ -195,15 +133,7 @@ if ( ! function_exists('delete_cookie'))
 	 * @return	void
 	 */
 	function delete_cookie($name, $domain = '', $path = '/', $prefix = '')
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		set_cookie($name, '', '', $domain, $path, $prefix);
 	}
 }
-<<<<<<< HEAD
-
-
-/* End of file cookie_helper.php */
-/* Location: ./system/helpers/cookie_helper.php */
-=======
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

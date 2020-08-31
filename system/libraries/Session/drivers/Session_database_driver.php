@@ -6,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +37,18 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 3.0.0
  * @filesource
@@ -130,9 +148,23 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	{
 		if (empty($this->_db->conn_id) && ! $this->_db->db_connect())
 		{
+<<<<<<< HEAD
+<<<<<<< HEAD
 			return $this->_fail();
 		}
 
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+			return $this->_failure;
+		}
+
+		$this->php5_validate_id();
+
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		return $this->_success;
 	}
 
@@ -148,6 +180,8 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 */
 	public function read($session_id)
 	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		if ($this->_get_lock($session_id) !== FALSE)
 		{
 			// Prevent previous QB calls from messing with our queries
@@ -190,6 +224,54 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 
 		$this->_fingerprint = md5('');
 		return '';
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+		if ($this->_get_lock($session_id) === FALSE)
+		{
+			return $this->_failure;
+		}
+
+		// Prevent previous QB calls from messing with our queries
+		$this->_db->reset_query();
+
+		// Needed by write() to detect session_regenerate_id() calls
+		$this->_session_id = $session_id;
+
+		$this->_db
+			->select('data')
+			->from($this->_config['save_path'])
+			->where('id', $session_id);
+
+		if ($this->_config['match_ip'])
+		{
+			$this->_db->where('ip_address', $_SERVER['REMOTE_ADDR']);
+		}
+
+		if ( ! ($result = $this->_db->get()) OR ($result = $result->row()) === NULL)
+		{
+			// PHP7 will reuse the same SessionHandler object after
+			// ID regeneration, so we need to explicitly set this to
+			// FALSE instead of relying on the default ...
+			$this->_row_exists = FALSE;
+			$this->_fingerprint = md5('');
+			return '';
+		}
+
+		// PostgreSQL's variant of a BLOB datatype is Bytea, which is a
+		// PITA to work with, so we use base64-encoded data in a TEXT
+		// field instead.
+		$result = ($this->_platform === 'postgre')
+			? base64_decode(rtrim($result->data))
+			: $result->data;
+
+		$this->_fingerprint = md5($result);
+		$this->_row_exists = TRUE;
+		return $result;
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -209,11 +291,25 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 		$this->_db->reset_query();
 
 		// Was the ID regenerated?
+<<<<<<< HEAD
+<<<<<<< HEAD
 		if ($session_id !== $this->_session_id)
 		{
 			if ( ! $this->_release_lock() OR ! $this->_get_lock($session_id))
 			{
 				return $this->_fail();
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+		if (isset($this->_session_id) && $session_id !== $this->_session_id)
+		{
+			if ( ! $this->_release_lock() OR ! $this->_get_lock($session_id))
+			{
+				return $this->_failure;
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 
 			$this->_row_exists = FALSE;
@@ -221,7 +317,15 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 		}
 		elseif ($this->_lock === FALSE)
 		{
+<<<<<<< HEAD
+<<<<<<< HEAD
 			return $this->_fail();
+=======
+			return $this->_failure;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			return $this->_failure;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		if ($this->_row_exists === FALSE)
@@ -240,7 +344,15 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 				return $this->_success;
 			}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 			return $this->_fail();
+=======
+			return $this->_failure;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			return $this->_failure;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 		}
 
 		$this->_db->where('id', $session_id);
@@ -263,7 +375,15 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 			return $this->_success;
 		}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 		return $this->_fail();
+=======
+		return $this->_failure;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return $this->_failure;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -278,7 +398,15 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	public function close()
 	{
 		return ($this->_lock && ! $this->_release_lock())
+<<<<<<< HEAD
+<<<<<<< HEAD
 			? $this->_fail()
+=======
+			? $this->_failure
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			? $this->_failure
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			: $this->_success;
 	}
 
@@ -307,7 +435,15 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 
 			if ( ! $this->_db->delete($this->_config['save_path']))
 			{
+<<<<<<< HEAD
+<<<<<<< HEAD
 				return $this->_fail();
+=======
+				return $this->_failure;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+				return $this->_failure;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			}
 		}
 
@@ -317,7 +453,15 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 			return $this->_success;
 		}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 		return $this->_fail();
+=======
+		return $this->_failure;
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return $this->_failure;
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -337,7 +481,41 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 
 		return ($this->_db->delete($this->_config['save_path'], 'timestamp < '.(time() - $maxlifetime)))
 			? $this->_success
+<<<<<<< HEAD
+<<<<<<< HEAD
 			: $this->_fail();
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+			: $this->_failure;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Validate ID
+	 *
+	 * Checks whether a session ID record exists server-side,
+	 * to enforce session.use_strict_mode.
+	 *
+	 * @param	string	$id
+	 * @return	bool
+	 */
+	public function validateSessionId($id)
+	{
+		// Prevent previous QB calls from messing with our queries
+		$this->_db->reset_query();
+
+		$this->_db->select('1')->from($this->_config['save_path'])->where('id', $id);
+		empty($this->_config['match_ip']) OR $this->_db->where('ip_address', $_SERVER['REMOTE_ADDR']);
+		$result = $this->_db->get();
+		empty($result) OR $result = $result->row();
+
+		return ! empty($result);
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	}
 
 	// ------------------------------------------------------------------------
@@ -354,7 +532,15 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	{
 		if ($this->_platform === 'mysql')
 		{
+<<<<<<< HEAD
+<<<<<<< HEAD
 			$arg = $session_id.($this->_config['match_ip'] ? '_'.$_SERVER['REMOTE_ADDR'] : '');
+=======
+			$arg = md5($session_id.($this->_config['match_ip'] ? '_'.$_SERVER['REMOTE_ADDR'] : ''));
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			$arg = md5($session_id.($this->_config['match_ip'] ? '_'.$_SERVER['REMOTE_ADDR'] : ''));
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			if ($this->_db->query("SELECT GET_LOCK('".$arg."', 300) AS ci_session_lock")->row()->ci_session_lock)
 			{
 				$this->_lock = $arg;
@@ -417,4 +603,12 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 
 		return parent::_release_lock();
 	}
+<<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+}
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5

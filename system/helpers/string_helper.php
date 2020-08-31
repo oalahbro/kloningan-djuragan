@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * CodeIgniter String Helpers
@@ -64,34 +62,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Helpers
  * @category	Helpers
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/helpers/string_helper.html
-=======
  * @link		https://codeigniter.com/user_guide/helpers/string_helper.html
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Trim Slashes
- *
- * Removes any leading/trailing slashes from a string:
- *
- * /this/that/theother/
- *
- * becomes:
- *
- * this/that/theother
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('trim_slashes'))
-{
-=======
 if ( ! function_exists('trim_slashes'))
 {
 	/**
@@ -111,7 +86,6 @@ if ( ! function_exists('trim_slashes'))
 	 * @param	string
 	 * @return	string
 	 */
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	function trim_slashes($str)
 	{
 		return trim($str, '/');
@@ -120,31 +94,6 @@ if ( ! function_exists('trim_slashes'))
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Strip Slashes
- *
- * Removes slashes contained in a string or in an array
- *
- * @access	public
- * @param	mixed	string or array
- * @return	mixed	string or array
- */
-if ( ! function_exists('strip_slashes'))
-{
-	function strip_slashes($str)
-	{
-		if (is_array($str))
-		{
-			foreach ($str as $key => $val)
-			{
-				$str[$key] = strip_slashes($val);
-			}
-		}
-		else
-		{
-			$str = stripslashes($str);
-=======
 if ( ! function_exists('strip_slashes'))
 {
 	/**
@@ -165,7 +114,6 @@ if ( ! function_exists('strip_slashes'))
 		foreach ($str as $key => $val)
 		{
 			$str[$key] = strip_slashes($val);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 
 		return $str;
@@ -174,19 +122,6 @@ if ( ! function_exists('strip_slashes'))
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Strip Quotes
- *
- * Removes single and double quotes from a string
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('strip_quotes'))
-{
-=======
 if ( ! function_exists('strip_quotes'))
 {
 	/**
@@ -197,7 +132,6 @@ if ( ! function_exists('strip_quotes'))
 	 * @param	string
 	 * @return	string
 	 */
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	function strip_quotes($str)
 	{
 		return str_replace(array('"', "'"), '', $str);
@@ -206,19 +140,6 @@ if ( ! function_exists('strip_quotes'))
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Quotes to Entities
- *
- * Converts single and double quotes to entities
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('quotes_to_entities'))
-{
-=======
 if ( ! function_exists('quotes_to_entities'))
 {
 	/**
@@ -229,7 +150,6 @@ if ( ! function_exists('quotes_to_entities'))
 	 * @param	string
 	 * @return	string
 	 */
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	function quotes_to_entities($str)
 	{
 		return str_replace(array("\'","\"","'",'"'), array("&#39;","&quot;","&#39;","&quot;"), $str);
@@ -238,29 +158,6 @@ if ( ! function_exists('quotes_to_entities'))
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Reduce Double Slashes
- *
- * Converts double slashes in a string to a single slash,
- * except those found in http://
- *
- * http://www.some-site.com//index.php
- *
- * becomes:
- *
- * http://www.some-site.com/index.php
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('reduce_double_slashes'))
-{
-	function reduce_double_slashes($str)
-	{
-		return preg_replace("#(^|[^:])//+#", "\\1/", $str);
-=======
 if ( ! function_exists('reduce_double_slashes'))
 {
 	/**
@@ -281,43 +178,11 @@ if ( ! function_exists('reduce_double_slashes'))
 	function reduce_double_slashes($str)
 	{
 		return preg_replace('#(^|[^:])//+#', '\\1/', $str);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Reduce Multiples
- *
- * Reduces multiple instances of a particular character.  Example:
- *
- * Fred, Bill,, Joe, Jimmy
- *
- * becomes:
- *
- * Fred, Bill, Joe, Jimmy
- *
- * @access	public
- * @param	string
- * @param	string	the character you wish to reduce
- * @param	bool	TRUE/FALSE - whether to trim the character from the beginning/end
- * @return	string
- */
-if ( ! function_exists('reduce_multiples'))
-{
-	function reduce_multiples($str, $character = ',', $trim = FALSE)
-	{
-		$str = preg_replace('#'.preg_quote($character, '#').'{2,}#', $character, $str);
-
-		if ($trim === TRUE)
-		{
-			$str = trim($str, $character);
-		}
-
-		return $str;
-=======
 if ( ! function_exists('reduce_multiples'))
 {
 	/**
@@ -340,75 +205,25 @@ if ( ! function_exists('reduce_multiples'))
 	{
 		$str = preg_replace('#'.preg_quote($character, '#').'{2,}#', $character, $str);
 		return ($trim === TRUE) ? trim($str, $character) : $str;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Create a Random String
- *
- * Useful for generating passwords or hashes.
- *
- * @access	public
- * @param	string	type of random string.  basic, alpha, alunum, numeric, nozero, unique, md5, encrypt and sha1
- * @param	integer	number of characters
- * @return	string
- */
-if ( ! function_exists('random_string'))
-{
-	function random_string($type = 'alnum', $len = 8)
-	{
-		switch($type)
-		{
-			case 'basic'	: return mt_rand();
-				break;
-			case 'alnum'	:
-			case 'numeric'	:
-			case 'nozero'	:
-			case 'alpha'	:
-
-					switch ($type)
-					{
-						case 'alpha'	:	$pool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-							break;
-						case 'alnum'	:	$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-							break;
-						case 'numeric'	:	$pool = '0123456789';
-							break;
-						case 'nozero'	:	$pool = '123456789';
-							break;
-					}
-
-					$str = '';
-					for ($i=0; $i < $len; $i++)
-					{
-						$str .= substr($pool, mt_rand(0, strlen($pool) -1), 1);
-					}
-					return $str;
-				break;
-			case 'unique'	:
-			case 'md5'		:
-
-						return md5(uniqid(mt_rand()));
-				break;
-			case 'encrypt'	:
-			case 'sha1'	:
-
-						$CI =& get_instance();
-						$CI->load->helper('security');
-
-						return do_hash(uniqid(mt_rand(), TRUE), 'sha1');
-				break;
-=======
 if ( ! function_exists('random_string'))
 {
 	/**
+<<<<<<< HEAD
+<<<<<<< HEAD
 	 * Create a Random String
 	 *
 	 * Useful for generating passwords or hashes.
+=======
+	 * Create a "Random" String
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	 * Create a "Random" String
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 *
 	 * @param	string	type of random string.  basic, alpha, alnum, numeric, nozero, unique, md5, encrypt and sha1
 	 * @param	int	number of characters
@@ -446,28 +261,12 @@ if ( ! function_exists('random_string'))
 			case 'encrypt': // todo: remove in 3.1+
 			case 'sha1':
 				return sha1(uniqid(mt_rand(), TRUE));
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 	}
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Add's _1 to a string or increment the ending number to allow _2, _3, etc
- *
- * @param   string  $str  required
- * @param   string  $separator  What should the duplicate number be appended with
- * @param   string  $first  Which number should be used for the first dupe increment
- * @return  string
- */
-function increment_string($str, $separator = '_', $first = 1)
-{
-	preg_match('/(.+)'.$separator.'([0-9]+)$/', $str, $match);
-
-	return isset($match[2]) ? $match[1].$separator.($match[2] + 1) : $str.$separator.$first;
-=======
 if ( ! function_exists('increment_string'))
 {
 	/**
@@ -483,24 +282,10 @@ if ( ! function_exists('increment_string'))
 		preg_match('/(.+)'.preg_quote($separator, '/').'([0-9]+)$/', $str, $match);
 		return isset($match[2]) ? $match[1].$separator.($match[2] + 1) : $str.$separator.$first;
 	}
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 }
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Alternator
- *
- * Allows strings to be alternated.  See docs...
- *
- * @access	public
- * @param	string (as many parameters as needed)
- * @return	string
- */
-if ( ! function_exists('alternator'))
-{
-=======
 if ( ! function_exists('alternator'))
 {
 	/**
@@ -511,24 +296,16 @@ if ( ! function_exists('alternator'))
 	 * @param	string (as many parameters as needed)
 	 * @return	string
 	 */
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	function alternator()
 	{
 		static $i;
 
-<<<<<<< HEAD
-		if (func_num_args() == 0)
-=======
 		if (func_num_args() === 0)
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		{
 			$i = 0;
 			return '';
 		}
-<<<<<<< HEAD
-=======
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		$args = func_get_args();
 		return $args[($i++ % count($args))];
 	}
@@ -536,27 +313,6 @@ if ( ! function_exists('alternator'))
 
 // ------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/**
- * Repeater function
- *
- * @access	public
- * @param	string
- * @param	integer	number of repeats
- * @return	string
- */
-if ( ! function_exists('repeater'))
-{
-	function repeater($data, $num = 1)
-	{
-		return (($num > 0) ? str_repeat($data, $num) : '');
-	}
-}
-
-
-/* End of file string_helper.php */
-/* Location: ./system/helpers/string_helper.php */
-=======
 if ( ! function_exists('repeater'))
 {
 	/**
@@ -574,4 +330,3 @@ if ( ! function_exists('repeater'))
 		return ($num > 0) ? str_repeat($data, $num) : '';
 	}
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

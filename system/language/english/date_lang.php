@@ -1,24 +1,4 @@
 <?php
-<<<<<<< HEAD
-
-$lang['date_year'] = "Year";
-$lang['date_years'] = "Years";
-$lang['date_month'] = "Month";
-$lang['date_months'] = "Months";
-$lang['date_week'] = "Week";
-$lang['date_weeks'] = "Weeks";
-$lang['date_day'] = "Day";
-$lang['date_days'] = "Days";
-$lang['date_hour'] = "Hour";
-$lang['date_hours'] = "Hours";
-$lang['date_minute'] = "Minute";
-$lang['date_minutes'] = "Minutes";
-$lang['date_second'] = "Second";
-$lang['date_seconds'] = "Seconds";
-
-$lang['UM12']	= '(UTC -12:00) Baker/Howland Island';
-$lang['UM11']	= '(UTC -11:00) Samoa Time Zone, Niue';
-=======
 /**
  * CodeIgniter
  *
@@ -26,7 +6,15 @@ $lang['UM11']	= '(UTC -11:00) Samoa Time Zone, Niue';
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -49,8 +37,18 @@ $lang['UM11']	= '(UTC -11:00) Samoa Time Zone, Niue';
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -74,7 +72,6 @@ $lang['date_seconds'] = 'Seconds';
 
 $lang['UM12']	= '(UTC -12:00) Baker/Howland Island';
 $lang['UM11']	= '(UTC -11:00) Niue';
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 $lang['UM10']	= '(UTC -10:00) Hawaii-Aleutian Standard Time, Cook Islands, Tahiti';
 $lang['UM95']	= '(UTC -9:30) Marquesas Islands';
 $lang['UM9']	= '(UTC -9:00) Alaska Standard Time, Gambier Islands';
@@ -91,11 +88,7 @@ $lang['UM1']	= '(UTC -1:00) Azores, Cape Verde Islands';
 $lang['UTC']	= '(UTC) Greenwich Mean Time, Western European Time';
 $lang['UP1']	= '(UTC +1:00) Central European Time, West Africa Time';
 $lang['UP2']	= '(UTC +2:00) Central Africa Time, Eastern European Time, Kaliningrad Time';
-<<<<<<< HEAD
-$lang['UP3']	= '(UTC +3:00) Moscow Time, East Africa Time';
-=======
 $lang['UP3']	= '(UTC +3:00) Moscow Time, East Africa Time, Arabia Standard Time';
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 $lang['UP35']	= '(UTC +3:30) Iran Standard Time';
 $lang['UP4']	= '(UTC +4:00) Azerbaijan Standard Time, Samara Time';
 $lang['UP45']	= '(UTC +4:30) Afghanistan';
@@ -115,14 +108,5 @@ $lang['UP11']	= '(UTC +11:00) Srednekolymsk Time, Solomon Islands, Vanuatu';
 $lang['UP115']	= '(UTC +11:30) Norfolk Island';
 $lang['UP12']	= '(UTC +12:00) Fiji, Gilbert Islands, Kamchatka Time, New Zealand Standard Time';
 $lang['UP1275']	= '(UTC +12:45) Chatham Islands Standard Time';
-<<<<<<< HEAD
-$lang['UP13']	= '(UTC +13:00) Phoenix Islands Time, Tonga';
-$lang['UP14']	= '(UTC +14:00) Line Islands';
-
-
-/* End of file date_lang.php */
-/* Location: ./system/language/english/date_lang.php */
-=======
 $lang['UP13']	= '(UTC +13:00) Samoa Time Zone, Phoenix Islands Time, Tonga';
 $lang['UP14']	= '(UTC +14:00) Line Islands';
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * System Initialization File
@@ -63,40 +61,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Loads the base classes and executes the request.
  *
  * @package		CodeIgniter
-<<<<<<< HEAD
- * @subpackage	codeigniter
- * @category	Front-controller
- * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/
-=======
  * @subpackage	CodeIgniter
  * @category	Front-controller
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 
 /**
  * CodeIgniter Version
  *
-<<<<<<< HEAD
- * @var string
- *
- */
-	define('CI_VERSION', '2.2.5');
-
-/**
- * CodeIgniter Branch (Core = TRUE, Reactor = FALSE)
- *
- * @var boolean
- *
- */
-	define('CI_CORE', FALSE);
-=======
  * @var	string
  *
  */
-	define('CI_VERSION', '3.1.0');
+<<<<<<< HEAD
+<<<<<<< HEAD
+	const CI_VERSION = '3.1.2';
+=======
+	const CI_VERSION = '3.1.11';
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+	const CI_VERSION = '3.1.11';
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 /*
  * ------------------------------------------------------
@@ -108,31 +93,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		require_once(APPPATH.'config/'.ENVIRONMENT.'/constants.php');
 	}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 	require_once(APPPATH.'config/constants.php');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+	if (file_exists(APPPATH.'config/constants.php'))
+	{
+		require_once(APPPATH.'config/constants.php');
+	}
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 
 /*
  * ------------------------------------------------------
  *  Load the global functions
  * ------------------------------------------------------
  */
-<<<<<<< HEAD
-	require(BASEPATH.'core/Common.php');
-
-/*
- * ------------------------------------------------------
- *  Load the framework constants
- * ------------------------------------------------------
- */
-	if (defined('ENVIRONMENT') AND file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
-	{
-		require(APPPATH.'config/'.ENVIRONMENT.'/constants.php');
-	}
-	else
-	{
-		require(APPPATH.'config/constants.php');
-	}
-=======
 	require_once(BASEPATH.'core/Common.php');
 
 
@@ -185,25 +165,15 @@ if ( ! is_php('5.4'))
 	}
 }
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /*
  * ------------------------------------------------------
  *  Define a custom error handler so we can log PHP errors
  * ------------------------------------------------------
  */
-<<<<<<< HEAD
-	set_error_handler('_exception_handler');
-
-	if ( ! is_php('5.3'))
-	{
-		@set_magic_quotes_runtime(0); // Kill magic quotes
-	}
-=======
 	set_error_handler('_error_handler');
 	set_exception_handler('_exception_handler');
 	register_shutdown_function('_shutdown_handler');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /*
  * ------------------------------------------------------
@@ -214,38 +184,20 @@ if ( ! is_php('5.4'))
  * The subclass prefix allows CI to know if a core class is
  * being extended via a library in the local application
  * "libraries" folder. Since CI allows config items to be
-<<<<<<< HEAD
- * overriden via data set in the main index. php file,
- * before proceeding we need to know if a subclass_prefix
- * override exists.  If so, we will set this value now,
-=======
  * overridden via data set in the main index.php file,
  * before proceeding we need to know if a subclass_prefix
  * override exists. If so, we will set this value now,
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  * before any classes are loaded
  * Note: Since the config file data is cached it doesn't
  * hurt to load it here.
  */
-<<<<<<< HEAD
-	if (isset($assign_to_config['subclass_prefix']) AND $assign_to_config['subclass_prefix'] != '')
-=======
 	if ( ! empty($assign_to_config['subclass_prefix']))
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		get_config(array('subclass_prefix' => $assign_to_config['subclass_prefix']));
 	}
 
 /*
  * ------------------------------------------------------
-<<<<<<< HEAD
- *  Set a liberal script execution time limit
- * ------------------------------------------------------
- */
-	if (function_exists("set_time_limit") == TRUE AND @ini_get("safe_mode") == 0)
-	{
-		@set_time_limit(300);
-=======
  *  Should we use a Composer autoloader?
  * ------------------------------------------------------
  */
@@ -265,7 +217,6 @@ if ( ! is_php('5.4'))
 		{
 			log_message('error', 'Could not find the specified $config[\'composer_autoload\'] path: '.$composer_autoload);
 		}
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 /*
@@ -289,56 +240,31 @@ if ( ! is_php('5.4'))
  *  Is there a "pre_system" hook?
  * ------------------------------------------------------
  */
-<<<<<<< HEAD
-	$EXT->_call_hook('pre_system');
-=======
 	$EXT->call_hook('pre_system');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /*
  * ------------------------------------------------------
  *  Instantiate the config class
  * ------------------------------------------------------
-<<<<<<< HEAD
-=======
  *
  * Note: It is important that Config is loaded first as
  * most other classes depend on it either directly or by
  * depending on another class that uses it.
  *
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 	$CFG =& load_class('Config', 'core');
 
 	// Do we have any manually set config items in the index.php file?
-<<<<<<< HEAD
-	if (isset($assign_to_config))
-	{
-		$CFG->_assign_to_config($assign_to_config);
-=======
 	if (isset($assign_to_config) && is_array($assign_to_config))
 	{
 		foreach ($assign_to_config as $key => $value)
 		{
 			$CFG->set_item($key, $value);
 		}
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 /*
  * ------------------------------------------------------
-<<<<<<< HEAD
- *  Instantiate the UTF-8 class
- * ------------------------------------------------------
- *
- * Note: Order here is rather important as the UTF-8
- * class needs to be used very early on, but it cannot
- * properly determine if UTf-8 can be supported until
- * after the Config class is instantiated.
- *
- */
-
-=======
  * Important charset-related stuff
  * ------------------------------------------------------
  *
@@ -404,7 +330,6 @@ if ( ! is_php('5.4'))
  *  Instantiate the UTF-8 class
  * ------------------------------------------------------
  */
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	$UNI =& load_class('Utf8', 'core');
 
 /*
@@ -419,18 +344,7 @@ if ( ! is_php('5.4'))
  *  Instantiate the routing class and set the routing
  * ------------------------------------------------------
  */
-<<<<<<< HEAD
-	$RTR =& load_class('Router', 'core');
-	$RTR->_set_routing();
-
-	// Set any routing overrides that may exist in the main index file
-	if (isset($routing))
-	{
-		$RTR->_set_overrides($routing);
-	}
-=======
 	$RTR =& load_class('Router', 'core', isset($routing) ? $routing : NULL);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /*
  * ------------------------------------------------------
@@ -441,24 +355,12 @@ if ( ! is_php('5.4'))
 
 /*
  * ------------------------------------------------------
-<<<<<<< HEAD
- *	Is there a valid cache file?  If so, we're done...
- * ------------------------------------------------------
- */
-	if ($EXT->_call_hook('cache_override') === FALSE)
-	{
-		if ($OUT->_display_cache($CFG, $URI) == TRUE)
-		{
-			exit;
-		}
-=======
  *	Is there a valid cache file? If so, we're done...
  * ------------------------------------------------------
  */
 	if ($EXT->call_hook('cache_override') === FALSE && $OUT->_display_cache($CFG, $URI) === TRUE)
 	{
 		exit;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 /*
@@ -489,10 +391,6 @@ if ( ! is_php('5.4'))
  *
  */
 	// Load the base controller class
-<<<<<<< HEAD
-	require BASEPATH.'core/Controller.php';
-
-=======
 	require_once BASEPATH.'core/Controller.php';
 
 	/**
@@ -502,79 +400,21 @@ if ( ! is_php('5.4'))
 	 *
 	 * @return CI_Controller
 	 */
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	function &get_instance()
 	{
 		return CI_Controller::get_instance();
 	}
 
-<<<<<<< HEAD
-
-	if (file_exists(APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php'))
-	{
-		require APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php';
-	}
-
-	// Load the local application controller
-	// Note: The Router class automatically validates the controller path using the router->_validate_request().
-	// If this include fails it means that the default controller in the Routes.php file is not resolving to something valid.
-	if ( ! file_exists(APPPATH.'controllers/'.$RTR->fetch_directory().$RTR->fetch_class().'.php'))
-	{
-		show_error('Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.');
-	}
-
-	include(APPPATH.'controllers/'.$RTR->fetch_directory().$RTR->fetch_class().'.php');
-
-=======
 	if (file_exists(APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php'))
 	{
 		require_once APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php';
 	}
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	// Set a mark point for benchmarking
 	$BM->mark('loading_time:_base_classes_end');
 
 /*
  * ------------------------------------------------------
-<<<<<<< HEAD
- *  Security check
- * ------------------------------------------------------
- *
- *  None of the functions in the app controller or the
- *  loader class can be called via the URI, nor can
- *  controller functions that begin with an underscore
- */
-	$class  = $RTR->fetch_class();
-	$method = $RTR->fetch_method();
-
-	if ( ! class_exists($class)
-		OR strncmp($method, '_', 1) == 0
-		OR in_array(strtolower($method), array_map('strtolower', get_class_methods('CI_Controller')))
-		)
-	{
-		if ( ! empty($RTR->routes['404_override']))
-		{
-			$x = explode('/', $RTR->routes['404_override']);
-			$class = $x[0];
-			$method = (isset($x[1]) ? $x[1] : 'index');
-			if ( ! class_exists($class))
-			{
-				if ( ! file_exists(APPPATH.'controllers/'.$class.'.php'))
-				{
-					show_404("{$class}/{$method}");
-				}
-
-				include_once(APPPATH.'controllers/'.$class.'.php');
-			}
-		}
-		else
-		{
-			show_404("{$class}/{$method}");
-		}
-	}
-
-=======
  *  Sanity checks
  * ------------------------------------------------------
  *
@@ -615,13 +455,36 @@ if ( ! is_php('5.4'))
 			$params = array($method, array_slice($URI->rsegments, 2));
 			$method = '_remap';
 		}
-		// WARNING: It appears that there are issues with is_callable() even in PHP 5.2!
-		// Furthermore, there are bug reports and feature/change requests related to it
-		// that make it unreliable to use in this context. Please, DO NOT change this
-		// work-around until a better alternative is available.
-		elseif ( ! in_array(strtolower($method), array_map('strtolower', get_class_methods($class)), TRUE))
+		elseif ( ! method_exists($class, $method))
 		{
 			$e404 = TRUE;
+		}
+		/**
+		 * DO NOT CHANGE THIS, NOTHING ELSE WORKS!
+		 *
+		 * - method_exists() returns true for non-public methods, which passes the previous elseif
+		 * - is_callable() returns false for PHP 4-style constructors, even if there's a __construct()
+		 * - method_exists($class, '__construct') won't work because CI_Controller::__construct() is inherited
+		 * - People will only complain if this doesn't work, even though it is documented that it shouldn't.
+		 *
+		 * ReflectionMethod::isConstructor() is the ONLY reliable check,
+		 * knowing which method will be executed as a constructor.
+		 */
+<<<<<<< HEAD
+<<<<<<< HEAD
+		elseif ( ! is_callable(array($class, $method)) && strcasecmp($class, $method) === 0)
+=======
+		elseif ( ! is_callable(array($class, $method)))
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		elseif ( ! is_callable(array($class, $method)))
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+		{
+			$reflection = new ReflectionMethod($class, $method);
+			if ( ! $reflection->isPublic() OR $reflection->isConstructor())
+			{
+				$e404 = TRUE;
+			}
 		}
 	}
 
@@ -681,17 +544,12 @@ if ( ! is_php('5.4'))
 		$params = array_slice($URI->rsegments, 2);
 	}
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 /*
  * ------------------------------------------------------
  *  Is there a "pre_controller" hook?
  * ------------------------------------------------------
  */
-<<<<<<< HEAD
-	$EXT->_call_hook('pre_controller');
-=======
 	$EXT->call_hook('pre_controller');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /*
  * ------------------------------------------------------
@@ -708,61 +566,14 @@ if ( ! is_php('5.4'))
  *  Is there a "post_controller_constructor" hook?
  * ------------------------------------------------------
  */
-<<<<<<< HEAD
-	$EXT->_call_hook('post_controller_constructor');
-=======
 	$EXT->call_hook('post_controller_constructor');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /*
  * ------------------------------------------------------
  *  Call the requested method
  * ------------------------------------------------------
  */
-<<<<<<< HEAD
-	// Is there a "remap" function? If so, we call it instead
-	if (method_exists($CI, '_remap'))
-	{
-		$CI->_remap($method, array_slice($URI->rsegments, 2));
-	}
-	else
-	{
-		// is_callable() returns TRUE on some versions of PHP 5 for private and protected
-		// methods, so we'll use this workaround for consistent behavior
-		if ( ! in_array(strtolower($method), array_map('strtolower', get_class_methods($CI))))
-		{
-			// Check and see if we are using a 404 override and use it.
-			if ( ! empty($RTR->routes['404_override']))
-			{
-				$x = explode('/', $RTR->routes['404_override']);
-				$class = $x[0];
-				$method = (isset($x[1]) ? $x[1] : 'index');
-				if ( ! class_exists($class))
-				{
-					if ( ! file_exists(APPPATH.'controllers/'.$class.'.php'))
-					{
-						show_404("{$class}/{$method}");
-					}
-
-					include_once(APPPATH.'controllers/'.$class.'.php');
-					unset($CI);
-					$CI = new $class();
-				}
-			}
-			else
-			{
-				show_404("{$class}/{$method}");
-			}
-		}
-
-		// Call the requested method.
-		// Any URI segments present (besides the class/function) will be passed to the method for convenience
-		call_user_func_array(array(&$CI, $method), array_slice($URI->rsegments, 2));
-	}
-
-=======
 	call_user_func_array(array(&$CI, $method), $params);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 	// Mark a benchmark end point
 	$BM->mark('controller_execution_time_( '.$class.' / '.$method.' )_end');
@@ -772,22 +583,14 @@ if ( ! is_php('5.4'))
  *  Is there a "post_controller" hook?
  * ------------------------------------------------------
  */
-<<<<<<< HEAD
-	$EXT->_call_hook('post_controller');
-=======
 	$EXT->call_hook('post_controller');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /*
  * ------------------------------------------------------
  *  Send the final rendered output to the browser
  * ------------------------------------------------------
  */
-<<<<<<< HEAD
-	if ($EXT->_call_hook('display_override') === FALSE)
-=======
 	if ($EXT->call_hook('display_override') === FALSE)
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		$OUT->_display();
 	}
@@ -797,22 +600,4 @@ if ( ! is_php('5.4'))
  *  Is there a "post_system" hook?
  * ------------------------------------------------------
  */
-<<<<<<< HEAD
-	$EXT->_call_hook('post_system');
-
-/*
- * ------------------------------------------------------
- *  Close the DB connection if one exists
- * ------------------------------------------------------
- */
-	if (class_exists('CI_DB') AND isset($CI->db))
-	{
-		$CI->db->close();
-	}
-
-
-/* End of file CodeIgniter.php */
-/* Location: ./system/core/CodeIgniter.php */
-=======
 	$EXT->call_hook('post_system');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

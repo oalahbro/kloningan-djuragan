@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2006 - 2014 EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 2.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-
-/**
- * CodeIgniter Memcached Caching Class
-=======
 <?php
 /**
  * CodeIgniter
@@ -28,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -51,8 +37,18 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 2.0
  * @filesource
@@ -61,7 +57,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * CodeIgniter File Caching Class
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
@@ -71,12 +66,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class CI_Cache_file extends CI_Driver {
 
-<<<<<<< HEAD
-	protected $_cache_path;
-
-	/**
-	 * Constructor
-=======
 	/**
 	 * Directory in which to save cache files
 	 *
@@ -88,21 +77,13 @@ class CI_Cache_file extends CI_Driver {
 	 * Initialize file-based cache
 	 *
 	 * @return	void
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function __construct()
 	{
 		$CI =& get_instance();
 		$CI->load->helper('file');
-<<<<<<< HEAD
-
-		$path = $CI->config->item('cache_path');
-
-		$this->_cache_path = ($path == '') ? APPPATH.'cache/' : $path;
-=======
 		$path = $CI->config->item('cache_path');
 		$this->_cache_path = ($path === '') ? APPPATH.'cache/' : $path;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// ------------------------------------------------------------------------
@@ -110,28 +91,6 @@ class CI_Cache_file extends CI_Driver {
 	/**
 	 * Fetch from cache
 	 *
-<<<<<<< HEAD
-	 * @param 	mixed		unique key id
-	 * @return 	mixed		data on success/false on failure
-	 */
-	public function get($id)
-	{
-		if ( ! file_exists($this->_cache_path.$id))
-		{
-			return FALSE;
-		}
-
-		$data = read_file($this->_cache_path.$id);
-		$data = unserialize($data);
-
-		if (time() >  $data['time'] + $data['ttl'])
-		{
-			unlink($this->_cache_path.$id);
-			return FALSE;
-		}
-
-		return $data['data'];
-=======
 	 * @param	string	$id	Cache ID
 	 * @return	mixed	Data on success, FALSE on failure
 	 */
@@ -139,7 +98,6 @@ class CI_Cache_file extends CI_Driver {
 	{
 		$data = $this->_get($id);
 		return is_array($data) ? $data['data'] : FALSE;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// ------------------------------------------------------------------------
@@ -147,25 +105,6 @@ class CI_Cache_file extends CI_Driver {
 	/**
 	 * Save into cache
 	 *
-<<<<<<< HEAD
-	 * @param 	string		unique key
-	 * @param 	mixed		data to store
-	 * @param 	int		length of time (in seconds) the cache is valid
-	 *					- Default is 60 seconds
-	 * @return 	boolean		true on success/false on failure
-	 */
-	public function save($id, $data, $ttl = 60)
-	{
-		$contents = array(
-				'time'		=> time(),
-				'ttl'		=> $ttl,
-				'data'		=> $data
-			);
-
-		if (write_file($this->_cache_path.$id, serialize($contents)))
-		{
-			@chmod($this->_cache_path.$id, 0777);
-=======
 	 * @param	string	$id	Cache ID
 	 * @param	mixed	$data	Data to store
 	 * @param	int	$ttl	Time to live in seconds
@@ -183,7 +122,6 @@ class CI_Cache_file extends CI_Driver {
 		if (write_file($this->_cache_path.$id, serialize($contents)))
 		{
 			chmod($this->_cache_path.$id, 0640);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			return TRUE;
 		}
 
@@ -195,20 +133,12 @@ class CI_Cache_file extends CI_Driver {
 	/**
 	 * Delete from Cache
 	 *
-<<<<<<< HEAD
-	 * @param 	mixed		unique identifier of item in cache
-	 * @return 	boolean		true on success/false on failure
-	 */
-	public function delete($id)
-	{
-		return unlink($this->_cache_path.$id);
-=======
 	 * @param	mixed	unique identifier of item in cache
 	 * @return	bool	true on success/false on failure
 	 */
 	public function delete($id)
 	{
-		return file_exists($this->_cache_path.$id) ? unlink($this->_cache_path.$id) : FALSE;
+		return is_file($this->_cache_path.$id) ? unlink($this->_cache_path.$id) : FALSE;
 	}
 
 	// ------------------------------------------------------------------------
@@ -265,7 +195,6 @@ class CI_Cache_file extends CI_Driver {
 		return $this->save($id, $new_value, $data['ttl'])
 			? $new_value
 			: FALSE;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// ------------------------------------------------------------------------
@@ -273,19 +202,11 @@ class CI_Cache_file extends CI_Driver {
 	/**
 	 * Clean the Cache
 	 *
-<<<<<<< HEAD
-	 * @return 	boolean		false on failure/true on success
-	 */
-	public function clean()
-	{
-		return delete_files($this->_cache_path);
-=======
 	 * @return	bool	false on failure/true on success
 	 */
 	public function clean()
 	{
 		return delete_files($this->_cache_path, FALSE, TRUE);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// ------------------------------------------------------------------------
@@ -295,13 +216,8 @@ class CI_Cache_file extends CI_Driver {
 	 *
 	 * Not supported by file-based caching
 	 *
-<<<<<<< HEAD
-	 * @param 	string	user/filehits
-	 * @return 	mixed 	FALSE
-=======
 	 * @param	string	user/filehits
 	 * @return	mixed	FALSE
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function cache_info($type = NULL)
 	{
@@ -313,45 +229,30 @@ class CI_Cache_file extends CI_Driver {
 	/**
 	 * Get Cache Metadata
 	 *
-<<<<<<< HEAD
-	 * @param 	mixed		key to get cache metadata on
-	 * @return 	mixed		FALSE on failure, array on success.
-=======
 	 * @param	mixed	key to get cache metadata on
 	 * @return	mixed	FALSE on failure, array on success.
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function get_metadata($id)
 	{
-		if ( ! file_exists($this->_cache_path.$id))
+		if ( ! is_file($this->_cache_path.$id))
 		{
 			return FALSE;
 		}
 
-<<<<<<< HEAD
-		$data = read_file($this->_cache_path.$id);
-		$data = unserialize($data);
-=======
 		$data = unserialize(file_get_contents($this->_cache_path.$id));
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 		if (is_array($data))
 		{
 			$mtime = filemtime($this->_cache_path.$id);
 
-			if ( ! isset($data['ttl']))
+			if ( ! isset($data['ttl'], $data['time']))
 			{
 				return FALSE;
 			}
 
 			return array(
-<<<<<<< HEAD
-				'expire'	=> $mtime + $data['ttl'],
-				'mtime'		=> $mtime
-=======
-				'expire' => $mtime + $data['ttl'],
+				'expire' => $data['time'] + $data['ttl'],
 				'mtime'	 => $mtime
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			);
 		}
 
@@ -365,23 +266,13 @@ class CI_Cache_file extends CI_Driver {
 	 *
 	 * In the file driver, check to see that the cache directory is indeed writable
 	 *
-<<<<<<< HEAD
-	 * @return boolean
-=======
 	 * @return	bool
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	 */
 	public function is_supported()
 	{
 		return is_really_writable($this->_cache_path);
 	}
 
-<<<<<<< HEAD
-}
-
-/* End of file Cache_file.php */
-/* Location: ./system/libraries/Cache/drivers/Cache_file.php */
-=======
 	// ------------------------------------------------------------------------
 
 	/**
@@ -403,7 +294,15 @@ class CI_Cache_file extends CI_Driver {
 
 		if ($data['ttl'] > 0 && time() > $data['time'] + $data['ttl'])
 		{
+<<<<<<< HEAD
+<<<<<<< HEAD
 			unlink($this->_cache_path.$id);
+=======
+			file_exists($this->_cache_path.$id) && unlink($this->_cache_path.$id);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			file_exists($this->_cache_path.$id) && unlink($this->_cache_path.$id);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			return FALSE;
 		}
 
@@ -411,4 +310,3 @@ class CI_Cache_file extends CI_Driver {
 	}
 
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

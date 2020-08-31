@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-
-/**
- * CodeIgniter Config Class
-=======
 <?php
 /**
  * CodeIgniter
@@ -28,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -51,8 +37,18 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -61,7 +57,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Config Class
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  *
  * This class contains functions that enable config files to be managed
  *
@@ -69,63 +64,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Libraries
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/libraries/config.html
-=======
  * @link		https://codeigniter.com/user_guide/libraries/config.html
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 class CI_Config {
 
 	/**
 	 * List of all loaded config values
 	 *
-<<<<<<< HEAD
-	 * @var array
-	 */
-	var $config = array();
-	/**
-	 * List of all loaded config files
-	 *
-	 * @var array
-	 */
-	var $is_loaded = array();
-	/**
-	 * List of paths to search when trying to load a config file
-	 *
-	 * @var array
-	 */
-	var $_config_paths = array(APPPATH);
-
-	/**
-	 * Constructor
-	 *
-	 * Sets the $config data from the primary config.php file as a class variable
-	 *
-	 * @access   public
-	 * @param   string	the config file name
-	 * @param   boolean  if configuration values should be loaded into their own section
-	 * @param   boolean  true if errors should just return false, false if an error message should be displayed
-	 * @return  boolean  if the file was successfully loaded or not
-	 */
-	function __construct()
-	{
-		$this->config =& get_config();
-		log_message('debug', "Config Class Initialized");
-
-		// Set the base_url automatically if none was provided
-		if ($this->config['base_url'] == '')
-		{
-			// The regular expression is only a basic validation for a valid "Host" header.
-			// It's not exhaustive, only checks for valid characters.
-			if (isset($_SERVER['HTTP_HOST']) && preg_match('/^((\[[0-9a-f:]+\])|(\d{1,3}(\.\d{1,3}){3})|[a-z0-9\-\.]+)(:\d+)?$/i', $_SERVER['HTTP_HOST']))
-			{
-				$base_url = (empty($_SERVER['HTTPS']) OR strtolower($_SERVER['HTTPS']) === 'off') ? 'http' : 'https';
-				$base_url .= '://'. $_SERVER['HTTP_HOST'];
-				$base_url .= substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
-			}
-
-=======
 	 * @var	array
 	 */
 	public $config = array();
@@ -175,7 +120,6 @@ class CI_Config {
 				$base_url = (is_https() ? 'https' : 'http').'://'.$server_addr
 					.substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
 			}
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			else
 			{
 				$base_url = 'http://localhost/';
@@ -183,11 +127,8 @@ class CI_Config {
 
 			$this->set_item('base_url', $base_url);
 		}
-<<<<<<< HEAD
-=======
 
 		log_message('info', 'Config Class Initialized');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -195,93 +136,6 @@ class CI_Config {
 	/**
 	 * Load Config File
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @param	string	the config file name
-	 * @param   boolean  if configuration values should be loaded into their own section
-	 * @param   boolean  true if errors should just return false, false if an error message should be displayed
-	 * @return	boolean	if the file was loaded correctly
-	 */
-	function load($file = '', $use_sections = FALSE, $fail_gracefully = FALSE)
-	{
-		$file = ($file == '') ? 'config' : str_replace('.php', '', $file);
-		$found = FALSE;
-		$loaded = FALSE;
-
-		$check_locations = defined('ENVIRONMENT')
-			? array(ENVIRONMENT.'/'.$file, $file)
-			: array($file);
-
-		foreach ($this->_config_paths as $path)
-		{
-			foreach ($check_locations as $location)
-			{
-				$file_path = $path.'config/'.$location.'.php';
-
-				if (in_array($file_path, $this->is_loaded, TRUE))
-				{
-					$loaded = TRUE;
-					continue 2;
-				}
-
-				if (file_exists($file_path))
-				{
-					$found = TRUE;
-					break;
-				}
-			}
-
-			if ($found === FALSE)
-			{
-				continue;
-			}
-
-			include($file_path);
-
-			if ( ! isset($config) OR ! is_array($config))
-			{
-				if ($fail_gracefully === TRUE)
-				{
-					return FALSE;
-				}
-				show_error('Your '.$file_path.' file does not appear to contain a valid configuration array.');
-			}
-
-			if ($use_sections === TRUE)
-			{
-				if (isset($this->config[$file]))
-				{
-					$this->config[$file] = array_merge($this->config[$file], $config);
-				}
-				else
-				{
-					$this->config[$file] = $config;
-				}
-			}
-			else
-			{
-				$this->config = array_merge($this->config, $config);
-			}
-
-			$this->is_loaded[] = $file_path;
-			unset($config);
-
-			$loaded = TRUE;
-			log_message('debug', 'Config file loaded: '.$file_path);
-			break;
-		}
-
-		if ($loaded === FALSE)
-		{
-			if ($fail_gracefully === TRUE)
-			{
-				return FALSE;
-			}
-			show_error('The configuration file '.$file.'.php does not exist.');
-		}
-
-		return TRUE;
-=======
 	 * @param	string	$file			Configuration file name
 	 * @param	bool	$use_sections		Whether configuration values should be loaded into their own section
 	 * @param	bool	$fail_gracefully	Whether to just return FALSE or display an error message
@@ -347,7 +201,6 @@ class CI_Config {
 		}
 
 		show_error('The configuration file '.$file.'.php does not exist.');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -355,42 +208,6 @@ class CI_Config {
 	/**
 	 * Fetch a config file item
 	 *
-<<<<<<< HEAD
-	 *
-	 * @access	public
-	 * @param	string	the config item name
-	 * @param	string	the index name
-	 * @param	bool
-	 * @return	string
-	 */
-	function item($item, $index = '')
-	{
-		if ($index == '')
-		{
-			if ( ! isset($this->config[$item]))
-			{
-				return FALSE;
-			}
-
-			$pref = $this->config[$item];
-		}
-		else
-		{
-			if ( ! isset($this->config[$index]))
-			{
-				return FALSE;
-			}
-
-			if ( ! isset($this->config[$index][$item]))
-			{
-				return FALSE;
-			}
-
-			$pref = $this->config[$index][$item];
-		}
-
-		return $pref;
-=======
 	 * @param	string	$item	Config item name
 	 * @param	string	$index	Index name
 	 * @return	string|null	The configuration item or NULL if the item doesn't exist
@@ -403,28 +220,11 @@ class CI_Config {
 		}
 
 		return isset($this->config[$index], $this->config[$index][$item]) ? $this->config[$index][$item] : NULL;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-	 * Fetch a config file item - adds slash after item (if item is not empty)
-	 *
-	 * @access	public
-	 * @param	string	the config item name
-	 * @param	bool
-	 * @return	string
-	 */
-	function slash_item($item)
-	{
-		if ( ! isset($this->config[$item]))
-		{
-			return FALSE;
-		}
-		if( trim($this->config[$item]) == '')
-=======
 	 * Fetch a config file item with slash appended (if not empty)
 	 *
 	 * @param	string		$item	Config item name
@@ -437,7 +237,6 @@ class CI_Config {
 			return NULL;
 		}
 		elseif (trim($this->config[$item]) === '')
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		{
 			return '';
 		}
@@ -449,30 +248,6 @@ class CI_Config {
 
 	/**
 	 * Site URL
-<<<<<<< HEAD
-	 * Returns base_url . index_page [. uri_string]
-	 *
-	 * @access	public
-	 * @param	string	the URI string
-	 * @return	string
-	 */
-	function site_url($uri = '')
-	{
-		if ($uri == '')
-		{
-			return $this->slash_item('base_url').$this->item('index_page');
-		}
-
-		if ($this->item('enable_query_strings') == FALSE)
-		{
-			$suffix = ($this->item('url_suffix') == FALSE) ? '' : $this->item('url_suffix');
-			return $this->slash_item('base_url').$this->slash_item('index_page').$this->_uri_string($uri).$suffix;
-		}
-		else
-		{
-			return $this->slash_item('base_url').$this->item('index_page').'?'.$this->_uri_string($uri);
-		}
-=======
 	 *
 	 * Returns base_url . index_page [. uri_string]
 	 *
@@ -530,24 +305,12 @@ class CI_Config {
 		}
 
 		return $base_url.$this->item('index_page').$uri;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// -------------------------------------------------------------
 
 	/**
 	 * Base URL
-<<<<<<< HEAD
-	 * Returns base_url [. uri_string]
-	 *
-	 * @access public
-	 * @param string $uri
-	 * @return string
-	 */
-	function base_url($uri = '')
-	{
-		return $this->slash_item('base_url').ltrim($this->_uri_string($uri), '/');
-=======
 	 *
 	 * Returns base_url [. uri_string]
 	 *
@@ -575,46 +338,11 @@ class CI_Config {
 		}
 
 		return $base_url.$this->_uri_string($uri);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// -------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-	 * Build URI string for use in Config::site_url() and Config::base_url()
-	 *
-	 * @access protected
-	 * @param  $uri
-	 * @return string
-	 */
-	protected function _uri_string($uri)
-	{
-		if ($this->item('enable_query_strings') == FALSE)
-		{
-			if (is_array($uri))
-			{
-				$uri = implode('/', $uri);
-			}
-			$uri = trim($uri, '/');
-		}
-		else
-		{
-			if (is_array($uri))
-			{
-				$i = 0;
-				$str = '';
-				foreach ($uri as $key => $val)
-				{
-					$prefix = ($i == 0) ? '' : '&';
-					$str .= $prefix.$key.'='.$val;
-					$i++;
-				}
-				$uri = $str;
-			}
-		}
-	    return $uri;
-=======
 	 * Build URI string
 	 *
 	 * @used-by	CI_Config::site_url()
@@ -636,7 +364,6 @@ class CI_Config {
 		}
 
 		return $uri;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -644,21 +371,12 @@ class CI_Config {
 	/**
 	 * System URL
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	string
-	 */
-	function system_url()
-	{
-		$x = explode("/", preg_replace("|/*(.+?)/*$|", "\\1", BASEPATH));
-=======
 	 * @deprecated	3.0.0	Encourages insecure practices
 	 * @return	string
 	 */
 	public function system_url()
 	{
 		$x = explode('/', preg_replace('|/*(.+?)/*$|', '\\1', BASEPATH));
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		return $this->slash_item('base_url').end($x).'/';
 	}
 
@@ -667,54 +385,13 @@ class CI_Config {
 	/**
 	 * Set a config file item
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @param	string	the config item key
-	 * @param	string	the config item value
-	 * @return	void
-	 */
-	function set_item($item, $value)
-=======
 	 * @param	string	$item	Config item key
 	 * @param	string	$value	Config item value
 	 * @return	void
 	 */
 	public function set_item($item, $value)
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		$this->config[$item] = $value;
 	}
 
-<<<<<<< HEAD
-	// --------------------------------------------------------------------
-
-	/**
-	 * Assign to Config
-	 *
-	 * This function is called by the front controller (CodeIgniter.php)
-	 * after the Config class is instantiated.  It permits config items
-	 * to be assigned or overriden by variables contained in the index.php file
-	 *
-	 * @access	private
-	 * @param	array
-	 * @return	void
-	 */
-	function _assign_to_config($items = array())
-	{
-		if (is_array($items))
-		{
-			foreach ($items as $key => $val)
-			{
-				$this->set_item($key, $val);
-			}
-		}
-	}
 }
-
-// END CI_Config class
-
-/* End of file Config.php */
-/* Location: ./system/core/Config.php */
-=======
-}
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

@@ -1,56 +1,4 @@
 <?php
-<<<<<<< HEAD
-
-$lang['cal_su']			= "Su";
-$lang['cal_mo']			= "Mo";
-$lang['cal_tu']			= "Tu";
-$lang['cal_we']			= "We";
-$lang['cal_th']			= "Th";
-$lang['cal_fr']			= "Fr";
-$lang['cal_sa']			= "Sa";
-$lang['cal_sun']		= "Sun";
-$lang['cal_mon']		= "Mon";
-$lang['cal_tue']		= "Tue";
-$lang['cal_wed']		= "Wed";
-$lang['cal_thu']		= "Thu";
-$lang['cal_fri']		= "Fri";
-$lang['cal_sat']		= "Sat";
-$lang['cal_sunday']		= "Sunday";
-$lang['cal_monday']		= "Monday";
-$lang['cal_tuesday']	= "Tuesday";
-$lang['cal_wednesday']	= "Wednesday";
-$lang['cal_thursday']	= "Thursday";
-$lang['cal_friday']		= "Friday";
-$lang['cal_saturday']	= "Saturday";
-$lang['cal_jan']		= "Jan";
-$lang['cal_feb']		= "Feb";
-$lang['cal_mar']		= "Mar";
-$lang['cal_apr']		= "Apr";
-$lang['cal_may']		= "May";
-$lang['cal_jun']		= "Jun";
-$lang['cal_jul']		= "Jul";
-$lang['cal_aug']		= "Aug";
-$lang['cal_sep']		= "Sep";
-$lang['cal_oct']		= "Oct";
-$lang['cal_nov']		= "Nov";
-$lang['cal_dec']		= "Dec";
-$lang['cal_january']	= "January";
-$lang['cal_february']	= "February";
-$lang['cal_march']		= "March";
-$lang['cal_april']		= "April";
-$lang['cal_mayl']		= "May";
-$lang['cal_june']		= "June";
-$lang['cal_july']		= "July";
-$lang['cal_august']		= "August";
-$lang['cal_september']	= "September";
-$lang['cal_october']	= "October";
-$lang['cal_november']	= "November";
-$lang['cal_december']	= "December";
-
-
-/* End of file calendar_lang.php */
-/* Location: ./system/language/english/calendar_lang.php */
-=======
 /**
  * CodeIgniter
  *
@@ -58,7 +6,15 @@ $lang['cal_december']	= "December";
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -81,8 +37,18 @@ $lang['cal_december']	= "December";
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -134,4 +100,3 @@ $lang['cal_september'] = 'September';
 $lang['cal_october'] = 'October';
 $lang['cal_november'] = 'November';
 $lang['cal_december'] = 'December';
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

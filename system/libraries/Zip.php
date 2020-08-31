@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * Zip Compression Class
@@ -70,27 +68,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Encryption
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/libraries/zip.html
- */
-class CI_Zip  {
-
-	var $zipdata	= '';
-	var $directory	= '';
-	var $entries	= 0;
-	var $file_num	= 0;
-	var $offset		= 0;
-	var $now;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		log_message('debug', "Zip Compression Class Initialized");
-
-		$this->now = time();
-=======
  * @link		https://codeigniter.com/user_guide/libraries/zip.html
  */
 class CI_Zip {
@@ -147,15 +124,45 @@ class CI_Zip {
 	public $compression_level = 2;
 
 	/**
+<<<<<<< HEAD
+<<<<<<< HEAD
+	 * mbstring.func_override flag
+	 *
+	 * @var	bool
+	 */
+	protected static $func_override;
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+	 * mbstring.func_overload flag
+	 *
+	 * @var	bool
+	 */
+	protected static $func_overload;
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+
+	/**
 	 * Initialize zip compression class
 	 *
 	 * @return	void
 	 */
 	public function __construct()
 	{
+<<<<<<< HEAD
+<<<<<<< HEAD
+		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
+=======
+		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+
 		$this->now = time();
 		log_message('info', 'Zip Compression Class Initialized');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -165,17 +172,6 @@ class CI_Zip {
 	 *
 	 * Lets you add a virtual directory into which you can place files.
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @param	mixed	the directory name. Can be string or array
-	 * @return	void
-	 */
-	function add_dir($directory)
-	{
-		foreach ((array)$directory as $dir)
-		{
-			if ( ! preg_match("|.+/$|", $dir))
-=======
 	 * @param	mixed	$directory	the directory name. Can be string or array
 	 * @return	void
 	 */
@@ -184,16 +180,11 @@ class CI_Zip {
 		foreach ((array) $directory as $dir)
 		{
 			if ( ! preg_match('|.+/$|', $dir))
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			{
 				$dir .= '/';
 			}
 
 			$dir_time = $this->_get_mod_time($dir);
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			$this->_add_dir($dir, $dir_time['file_mtime'], $dir_time['file_mdate']);
 		}
 	}
@@ -201,24 +192,6 @@ class CI_Zip {
 	// --------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-	 *	Get file/directory modification time
-	 *
-	 *	If this is a newly created file/dir, we will set the time to 'now'
-	 *
-	 *	@param string	path to file
-	 *	@return array	filemtime/filemdate
-	 */
-	function _get_mod_time($dir)
-	{
-		// filemtime() will return false, but it does raise an error.
-		$date = (@filemtime($dir)) ? filemtime($dir) : getdate($this->now);
-
-		$time['file_mtime'] = ($date['hours'] << 11) + ($date['minutes'] << 5) + $date['seconds'] / 2;
-		$time['file_mdate'] = (($date['year'] - 1980) << 9) + ($date['mon'] << 5) + $date['mday'];
-
-		return $time;
-=======
 	 * Get file/directory modification time
 	 *
 	 * If this is a newly created file/dir, we will set the time to 'now'
@@ -235,7 +208,6 @@ class CI_Zip {
 			'file_mtime' => ($date['hours'] << 11) + ($date['minutes'] << 5) + $date['seconds'] / 2,
 			'file_mdate' => (($date['year'] - 1980) << 9) + ($date['mon'] << 5) + $date['mday']
 		);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -243,15 +215,6 @@ class CI_Zip {
 	/**
 	 * Add Directory
 	 *
-<<<<<<< HEAD
-	 * @access	private
-	 * @param	string	the directory name
-	 * @return	void
-	 */
-	function _add_dir($dir, $file_mtime, $file_mdate)
-	{
-		$dir = str_replace("\\", "/", $dir);
-=======
 	 * @param	string	$dir	the directory name
 	 * @param	int	$file_mtime
 	 * @param	int	$file_mdate
@@ -260,7 +223,6 @@ class CI_Zip {
 	protected function _add_dir($dir, $file_mtime, $file_mdate)
 	{
 		$dir = str_replace('\\', '/', $dir);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 		$this->zipdata .=
 			"\x50\x4b\x03\x04\x0a\x00\x00\x00\x00\x00"
@@ -269,7 +231,7 @@ class CI_Zip {
 			.pack('V', 0) // crc32
 			.pack('V', 0) // compressed filesize
 			.pack('V', 0) // uncompressed filesize
-			.pack('v', strlen($dir)) // length of pathname
+			.pack('v', self::strlen($dir)) // length of pathname
 			.pack('v', 0) // extra field length
 			.$dir
 			// below is "data descriptor" segment
@@ -284,7 +246,7 @@ class CI_Zip {
 			.pack('V',0) // crc32
 			.pack('V',0) // compressed filesize
 			.pack('V',0) // uncompressed filesize
-			.pack('v', strlen($dir)) // length of pathname
+			.pack('v', self::strlen($dir)) // length of pathname
 			.pack('v', 0) // extra field length
 			.pack('v', 0) // file comment length
 			.pack('v', 0) // disk number start
@@ -293,7 +255,7 @@ class CI_Zip {
 			.pack('V', $this->offset) // relative offset of local header
 			.$dir;
 
-		$this->offset = strlen($this->zipdata);
+		$this->offset = self::strlen($this->zipdata);
 		$this->entries++;
 	}
 
@@ -303,17 +265,6 @@ class CI_Zip {
 	 * Add Data to Zip
 	 *
 	 * Lets you add files to the archive. If the path is included
-<<<<<<< HEAD
-	 * in the filename it will be placed within a directory.  Make
-	 * sure you use add_dir() first to create the folder.
-	 *
-	 * @access	public
-	 * @param	mixed
-	 * @param	string
-	 * @return	void
-	 */
-	function add_data($filepath, $data = NULL)
-=======
 	 * in the filename it will be placed within a directory. Make
 	 * sure you use add_dir() first to create the folder.
 	 *
@@ -322,27 +273,18 @@ class CI_Zip {
 	 * @return	void
 	 */
 	public function add_data($filepath, $data = NULL)
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		if (is_array($filepath))
 		{
 			foreach ($filepath as $path => $data)
 			{
 				$file_data = $this->_get_mod_time($path);
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 				$this->_add_data($path, $data, $file_data['file_mtime'], $file_data['file_mdate']);
 			}
 		}
 		else
 		{
 			$file_data = $this->_get_mod_time($filepath);
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			$this->_add_data($filepath, $data, $file_data['file_mtime'], $file_data['file_mdate']);
 		}
 	}
@@ -352,22 +294,6 @@ class CI_Zip {
 	/**
 	 * Add Data to Zip
 	 *
-<<<<<<< HEAD
-	 * @access	private
-	 * @param	string	the file name/path
-	 * @param	string	the data to be encoded
-	 * @return	void
-	 */
-	function _add_data($filepath, $data, $file_mtime, $file_mdate)
-	{
-		$filepath = str_replace("\\", "/", $filepath);
-
-		$uncompressed_size = strlen($data);
-		$crc32  = crc32($data);
-
-		$gzdata = gzcompress($data);
-		$gzdata = substr($gzdata, 2, -4);
-=======
 	 * @param	string	$filepath	the file name/path
 	 * @param	string	$data	the data to be encoded
 	 * @param	int	$file_mtime
@@ -378,11 +304,10 @@ class CI_Zip {
 	{
 		$filepath = str_replace('\\', '/', $filepath);
 
-		$uncompressed_size = strlen($data);
+		$uncompressed_size = self::strlen($data);
 		$crc32  = crc32($data);
-		$gzdata = substr(gzcompress($data, $this->compression_level), 2, -4);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
-		$compressed_size = strlen($gzdata);
+		$gzdata = self::substr(gzcompress($data, $this->compression_level), 2, -4);
+		$compressed_size = self::strlen($gzdata);
 
 		$this->zipdata .=
 			"\x50\x4b\x03\x04\x14\x00\x00\x00\x08\x00"
@@ -391,7 +316,7 @@ class CI_Zip {
 			.pack('V', $crc32)
 			.pack('V', $compressed_size)
 			.pack('V', $uncompressed_size)
-			.pack('v', strlen($filepath)) // length of filename
+			.pack('v', self::strlen($filepath)) // length of filename
 			.pack('v', 0) // extra field length
 			.$filepath
 			.$gzdata; // "file data" segment
@@ -403,7 +328,7 @@ class CI_Zip {
 			.pack('V', $crc32)
 			.pack('V', $compressed_size)
 			.pack('V', $uncompressed_size)
-			.pack('v', strlen($filepath)) // length of filename
+			.pack('v', self::strlen($filepath)) // length of filename
 			.pack('v', 0) // extra field length
 			.pack('v', 0) // file comment length
 			.pack('v', 0) // disk number start
@@ -412,7 +337,7 @@ class CI_Zip {
 			.pack('V', $this->offset) // relative offset of local header
 			.$filepath;
 
-		$this->offset = strlen($this->zipdata);
+		$this->offset = self::strlen($this->zipdata);
 		$this->entries++;
 		$this->file_num++;
 	}
@@ -422,25 +347,6 @@ class CI_Zip {
 	/**
 	 * Read the contents of a file and add it to the zip
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	bool
-	 */
-	function read_file($path, $preserve_filepath = FALSE)
-	{
-		if ( ! file_exists($path))
-		{
-			return FALSE;
-		}
-
-		if (FALSE !== ($data = file_get_contents($path)))
-		{
-			$name = str_replace("\\", "/", $path);
-
-			if ($preserve_filepath === FALSE)
-			{
-				$name = preg_replace("|.*/(.+)|", "\\1", $name);
-=======
 	 * @param	string	$path
 	 * @param	bool	$archive_filepath
 	 * @return	bool
@@ -461,16 +367,12 @@ class CI_Zip {
 				{
 					$name = preg_replace('|.*/(.+)|', '\\1', $name);
 				}
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			}
 
 			$this->add_data($name, $data);
 			return TRUE;
 		}
-<<<<<<< HEAD
-=======
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		return FALSE;
 	}
 
@@ -480,17 +382,6 @@ class CI_Zip {
 	 * Read a directory and add it to the zip.
 	 *
 	 * This function recursively reads a folder and everything it contains (including
-<<<<<<< HEAD
-	 * sub-folders) and creates a zip based on it.  Whatever directory structure
-	 * is in the original file path will be recreated in the zip file.
-	 *
-	 * @access	public
-	 * @param	string	path to source
-	 * @return	bool
-	 */
-	function read_dir($path, $preserve_filepath = TRUE, $root_path = NULL)
-	{
-=======
 	 * sub-folders) and creates a zip based on it. Whatever directory structure
 	 * is in the original file path will be recreated in the zip file.
 	 *
@@ -502,7 +393,6 @@ class CI_Zip {
 	public function read_dir($path, $preserve_filepath = TRUE, $root_path = NULL)
 	{
 		$path = rtrim($path, '/\\').DIRECTORY_SEPARATOR;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		if ( ! $fp = @opendir($path))
 		{
 			return FALSE;
@@ -511,46 +401,16 @@ class CI_Zip {
 		// Set the original directory root for child dir's to use as relative
 		if ($root_path === NULL)
 		{
-<<<<<<< HEAD
-			$root_path = dirname($path).'/';
-=======
 			$root_path = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, dirname($path)).DIRECTORY_SEPARATOR;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 
 		while (FALSE !== ($file = readdir($fp)))
 		{
-<<<<<<< HEAD
-			if (substr($file, 0, 1) == '.')
-=======
 			if ($file[0] === '.')
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			{
 				continue;
 			}
 
-<<<<<<< HEAD
-			if (@is_dir($path.$file))
-			{
-				$this->read_dir($path.$file."/", $preserve_filepath, $root_path);
-			}
-			else
-			{
-				if (FALSE !== ($data = file_get_contents($path.$file)))
-				{
-					$name = str_replace("\\", "/", $path);
-
-					if ($preserve_filepath === FALSE)
-					{
-						$name = str_replace($root_path, '', $name);
-					}
-
-					$this->add_data($name.$file, $data);
-				}
-			}
-		}
-
-=======
 			if (is_dir($path.$file))
 			{
 				$this->read_dir($path.$file.DIRECTORY_SEPARATOR, $preserve_filepath, $root_path);
@@ -568,7 +428,6 @@ class CI_Zip {
 		}
 
 		closedir($fp);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		return TRUE;
 	}
 
@@ -577,45 +436,23 @@ class CI_Zip {
 	/**
 	 * Get the Zip file
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	binary string
-	 */
-	function get_zip()
-	{
-		// Is there any data to return?
-		if ($this->entries == 0)
-=======
 	 * @return	string	(binary encoded)
 	 */
 	public function get_zip()
 	{
 		// Is there any data to return?
 		if ($this->entries === 0)
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		{
 			return FALSE;
 		}
 
-<<<<<<< HEAD
-		$zip_data = $this->zipdata;
-		$zip_data .= $this->directory."\x50\x4b\x05\x06\x00\x00\x00\x00";
-		$zip_data .= pack('v', $this->entries); // total # of entries "on this disk"
-		$zip_data .= pack('v', $this->entries); // total # of entries overall
-		$zip_data .= pack('V', strlen($this->directory)); // size of central dir
-		$zip_data .= pack('V', strlen($this->zipdata)); // offset to start of central dir
-		$zip_data .= "\x00\x00"; // .zip file comment length
-
-		return $zip_data;
-=======
 		return $this->zipdata
 			.$this->directory."\x50\x4b\x05\x06\x00\x00\x00\x00"
 			.pack('v', $this->entries) // total # of entries "on this disk"
 			.pack('v', $this->entries) // total # of entries overall
-			.pack('V', strlen($this->directory)) // size of central dir
-			.pack('V', strlen($this->zipdata)) // offset to start of central dir
+			.pack('V', self::strlen($this->directory)) // size of central dir
+			.pack('V', self::strlen($this->zipdata)) // offset to start of central dir
 			."\x00\x00"; // .zip file comment length
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -625,38 +462,21 @@ class CI_Zip {
 	 *
 	 * Lets you write a file
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @param	string	the file name
-	 * @return	bool
-	 */
-	function archive($filepath)
-	{
-		if ( ! ($fp = @fopen($filepath, FOPEN_WRITE_CREATE_DESTRUCTIVE)))
-=======
 	 * @param	string	$filepath	the file name
 	 * @return	bool
 	 */
 	public function archive($filepath)
 	{
 		if ( ! ($fp = @fopen($filepath, 'w+b')))
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		{
 			return FALSE;
 		}
 
 		flock($fp, LOCK_EX);
-<<<<<<< HEAD
-		fwrite($fp, $this->get_zip());
-		flock($fp, LOCK_UN);
-		fclose($fp);
 
-		return TRUE;
-=======
-
-		for ($result = $written = 0, $data = $this->get_zip(), $length = strlen($data); $written < $length; $written += $result)
+		for ($result = $written = 0, $data = $this->get_zip(), $length = self::strlen($data); $written < $length; $written += $result)
 		{
-			if (($result = fwrite($fp, substr($data, $written))) === FALSE)
+			if (($result = fwrite($fp, self::substr($data, $written))) === FALSE)
 			{
 				break;
 			}
@@ -666,7 +486,6 @@ class CI_Zip {
 		fclose($fp);
 
 		return is_int($result);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -674,37 +493,18 @@ class CI_Zip {
 	/**
 	 * Download
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @param	string	the file name
-	 * @param	string	the data to be encoded
-	 * @return	bool
-	 */
-	function download($filename = 'backup.zip')
-	{
-		if ( ! preg_match("|.+?\.zip$|", $filename))
-=======
 	 * @param	string	$filename	the file name
 	 * @return	void
 	 */
 	public function download($filename = 'backup.zip')
 	{
 		if ( ! preg_match('|.+?\.zip$|', $filename))
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		{
 			$filename .= '.zip';
 		}
 
-<<<<<<< HEAD
-		$CI =& get_instance();
-		$CI->load->helper('download');
-
-		$get_zip = $this->get_zip();
-
-=======
 		get_instance()->load->helper('download');
 		$get_zip = $this->get_zip();
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		$zip_content =& $get_zip;
 
 		force_download($filename, $zip_content);
@@ -715,27 +515,6 @@ class CI_Zip {
 	/**
 	 * Initialize Data
 	 *
-<<<<<<< HEAD
-	 * Lets you clear current zip data.  Useful if you need to create
-	 * multiple zips with different data.
-	 *
-	 * @access	public
-	 * @return	void
-	 */
-	function clear_data()
-	{
-		$this->zipdata		= '';
-		$this->directory	= '';
-		$this->entries		= 0;
-		$this->file_num		= 0;
-		$this->offset		= 0;
-	}
-
-}
-
-/* End of file Zip.php */
-/* Location: ./system/libraries/Zip.php */
-=======
 	 * Lets you clear current zip data. Useful if you need to create
 	 * multiple zips with different data.
 	 *
@@ -751,5 +530,59 @@ class CI_Zip {
 		return $this;
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Byte-safe strlen()
+	 *
+	 * @param	string	$str
+	 * @return	int
+	 */
+	protected static function strlen($str)
+	{
+<<<<<<< HEAD
+<<<<<<< HEAD
+		return (self::$func_override)
+=======
+		return (self::$func_overload)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		return (self::$func_overload)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+			? mb_strlen($str, '8bit')
+			: strlen($str);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Byte-safe substr()
+	 *
+	 * @param	string	$str
+	 * @param	int	$start
+	 * @param	int	$length
+	 * @return	string
+	 */
+	protected static function substr($str, $start, $length = NULL)
+	{
+<<<<<<< HEAD
+<<<<<<< HEAD
+		if (self::$func_override)
+=======
+		if (self::$func_overload)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+		if (self::$func_overload)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+		{
+			// mb_substr($str, $start, null, '8bit') returns an empty
+			// string on PHP 5.3
+			isset($length) OR $length = ($start >= 0 ? self::strlen($str) - $start : -$start);
+			return mb_substr($str, $start, $length, '8bit');
+		}
+
+		return isset($length)
+			? substr($str, $start, $length)
+			: substr($str, $start);
+	}
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

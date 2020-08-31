@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +37,21 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (http://bcit.ca/)
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (http://bcit.ca/)
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.3.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * SQLite Result Class
@@ -64,25 +60,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @category	Database
  * @author		EllisLab Dev Team
-<<<<<<< HEAD
- * @link		http://codeigniter.com/user_guide/database/
-=======
  * @link		https://codeigniter.com/user_guide/database/
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 class CI_DB_sqlite_result extends CI_DB_result {
 
 	/**
 	 * Number of rows in the result set
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	integer
-	 */
-	function num_rows()
-	{
-		return @sqlite_num_rows($this->result_id);
-=======
 	 * @return	int
 	 */
 	public function num_rows()
@@ -90,7 +74,6 @@ class CI_DB_sqlite_result extends CI_DB_result {
 		return is_int($this->num_rows)
 			? $this->num_rows
 			: $this->num_rows = @sqlite_num_rows($this->result_id);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -98,16 +81,9 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	/**
 	 * Number of fields in the result set
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	integer
-	 */
-	function num_fields()
-=======
 	 * @return	int
 	 */
 	public function num_fields()
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		return @sqlite_num_fields($this->result_id);
 	}
@@ -119,17 +95,6 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 *
 	 * Generates an array of column names
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	array
-	 */
-	function list_fields()
-	{
-		$field_names = array();
-		for ($i = 0; $i < $this->num_fields(); $i++)
-		{
-			$field_names[] = sqlite_field_name($this->result_id, $i);
-=======
 	 * @return	array
 	 */
 	public function list_fields()
@@ -138,7 +103,6 @@ class CI_DB_sqlite_result extends CI_DB_result {
 		for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
 		{
 			$field_names[$i] = sqlite_field_name($this->result_id, $i);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 
 		return $field_names;
@@ -151,24 +115,6 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	array
-	 */
-	function field_data()
-	{
-		$retval = array();
-		for ($i = 0; $i < $this->num_fields(); $i++)
-		{
-			$F				= new stdClass();
-			$F->name		= sqlite_field_name($this->result_id, $i);
-			$F->type		= 'varchar';
-			$F->max_length	= 0;
-			$F->primary_key = 0;
-			$F->default		= '';
-
-			$retval[] = $F;
-=======
 	 * @return	array
 	 */
 	public function field_data()
@@ -180,7 +126,6 @@ class CI_DB_sqlite_result extends CI_DB_result {
 			$retval[$i]->name		= sqlite_field_name($this->result_id, $i);
 			$retval[$i]->type		= NULL;
 			$retval[$i]->max_length		= NULL;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 
 		return $retval;
@@ -189,30 +134,6 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	// --------------------------------------------------------------------
 
 	/**
-<<<<<<< HEAD
-	 * Free the result
-	 *
-	 * @return	null
-	 */
-	function free_result()
-	{
-		// Not implemented in SQLite
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Data Seek
-	 *
-	 * Moves the internal pointer to the desired offset.  We call
-	 * this internally before fetching results to make sure the
-	 * result set starts at zero
-	 *
-	 * @access	private
-	 * @return	array
-	 */
-	function _data_seek($n = 0)
-=======
 	 * Data Seek
 	 *
 	 * Moves the internal pointer to the desired offset. We call
@@ -223,7 +144,6 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 * @return	bool
 	 */
 	public function data_seek($n = 0)
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		return sqlite_seek($this->result_id, $n);
 	}
@@ -235,16 +155,9 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an array
 	 *
-<<<<<<< HEAD
-	 * @access	private
-	 * @return	array
-	 */
-	function _fetch_assoc()
-=======
 	 * @return	array
 	 */
 	protected function _fetch_assoc()
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	{
 		return sqlite_fetch_array($this->result_id);
 	}
@@ -256,35 +169,6 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
-<<<<<<< HEAD
-	 * @access	private
-	 * @return	object
-	 */
-	function _fetch_object()
-	{
-		if (function_exists('sqlite_fetch_object'))
-		{
-			return sqlite_fetch_object($this->result_id);
-		}
-		else
-		{
-			$arr = sqlite_fetch_array($this->result_id, SQLITE_ASSOC);
-			if (is_array($arr))
-			{
-				$obj = (object) $arr;
-				return $obj;
-			} else {
-				return NULL;
-			}
-		}
-	}
-
-}
-
-
-/* End of file sqlite_result.php */
-/* Location: ./system/database/drivers/sqlite/sqlite_result.php */
-=======
 	 * @param	string	$class_name
 	 * @return	object
 	 */
@@ -294,4 +178,3 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	}
 
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

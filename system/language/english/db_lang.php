@@ -1,6 +1,4 @@
 <?php
-<<<<<<< HEAD
-=======
 /**
  * CodeIgniter
  *
@@ -8,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,14 +37,23 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 $lang['db_invalid_connection_str'] = 'Unable to determine the database settings based on the connection string you submitted.';
 $lang['db_unable_to_connect'] = 'Unable to connect to your database server using the provided settings.';
@@ -55,13 +70,8 @@ $lang['db_field_param_missing'] = 'To fetch fields requires the name of the tabl
 $lang['db_unsupported_function'] = 'This feature is not available for the database you are using.';
 $lang['db_transaction_failure'] = 'Transaction failure: Rollback performed.';
 $lang['db_unable_to_drop'] = 'Unable to drop the specified database.';
-<<<<<<< HEAD
-$lang['db_unsuported_feature'] = 'Unsupported feature of the database platform you are using.';
-$lang['db_unsuported_compression'] = 'The file compression format you chose is not supported by your server.';
-=======
 $lang['db_unsupported_feature'] = 'Unsupported feature of the database platform you are using.';
 $lang['db_unsupported_compression'] = 'The file compression format you chose is not supported by your server.';
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 $lang['db_filepath_error'] = 'Unable to write data to the file path you have submitted.';
 $lang['db_invalid_cache_path'] = 'The cache path you submitted is not valid or writable.';
 $lang['db_table_name_required'] = 'A table name is required for that operation.';
@@ -69,9 +79,3 @@ $lang['db_column_name_required'] = 'A column name is required for that operation
 $lang['db_column_definition_required'] = 'A column definition is required for that operation.';
 $lang['db_unable_to_set_charset'] = 'Unable to set client connection character set: %s';
 $lang['db_error_heading'] = 'A Database Error Occurred';
-<<<<<<< HEAD
-
-/* End of file db_lang.php */
-/* Location: ./system/language/english/db_lang.php */
-=======
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd

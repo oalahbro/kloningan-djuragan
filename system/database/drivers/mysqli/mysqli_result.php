@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
-=======
 <?php
 /**
  * CodeIgniter
@@ -25,7 +6,15 @@
  *
  * This content is released under the MIT License (MIT)
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,45 +37,40 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+<<<<<<< HEAD
+<<<<<<< HEAD
  * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
  * @link	https://codeigniter.com
  * @since	Version 1.3.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 
 /**
  * MySQLi Result Class
  *
  * This class extends the parent result class: CI_DB_result
  *
-<<<<<<< HEAD
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/database/
-=======
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/database/
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
  */
 class CI_DB_mysqli_result extends CI_DB_result {
 
 	/**
 	 * Number of rows in the result set
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	integer
-	 */
-	function num_rows()
-	{
-		return @mysqli_num_rows($this->result_id);
-=======
 	 * @return	int
 	 */
 	public function num_rows()
@@ -94,7 +78,6 @@ class CI_DB_mysqli_result extends CI_DB_result {
 		return is_int($this->num_rows)
 			? $this->num_rows
 			: $this->num_rows = $this->result_id->num_rows;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -102,20 +85,11 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	/**
 	 * Number of fields in the result set
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	integer
-	 */
-	function num_fields()
-	{
-		return @mysqli_num_fields($this->result_id);
-=======
 	 * @return	int
 	 */
 	public function num_fields()
 	{
 		return $this->result_id->field_count;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -125,15 +99,6 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 *
 	 * Generates an array of column names
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	array
-	 */
-	function list_fields()
-	{
-		$field_names = array();
-		while ($field = mysqli_fetch_field($this->result_id))
-=======
 	 * @return	array
 	 */
 	public function list_fields()
@@ -141,7 +106,6 @@ class CI_DB_mysqli_result extends CI_DB_result {
 		$field_names = array();
 		$this->result_id->field_seek(0);
 		while ($field = $this->result_id->fetch_field())
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		{
 			$field_names[] = $field->name;
 		}
@@ -156,29 +120,6 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
-<<<<<<< HEAD
-	 * @access	public
-	 * @return	array
-	 */
-	function field_data()
-	{
-		$retval = array();
-		while ($field = mysqli_fetch_object($this->result_id))
-		{
-			preg_match('/([a-zA-Z]+)(\(\d+\))?/', $field->Type, $matches);
-
-			$type = (array_key_exists(1, $matches)) ? $matches[1] : NULL;
-			$length = (array_key_exists(2, $matches)) ? preg_replace('/[^\d]/', '', $matches[2]) : NULL;
-
-			$F				= new stdClass();
-			$F->name		= $field->Field;
-			$F->type		= $type;
-			$F->default		= $field->Default;
-			$F->max_length	= $length;
-			$F->primary_key = ( $field->Key == 'PRI' ? 1 : 0 );
-
-			$retval[] = $F;
-=======
 	 * @return	array
 	 */
 	public function field_data()
@@ -189,34 +130,87 @@ class CI_DB_mysqli_result extends CI_DB_result {
 		{
 			$retval[$i]			= new stdClass();
 			$retval[$i]->name		= $field_data[$i]->name;
+<<<<<<< HEAD
+<<<<<<< HEAD
 			$retval[$i]->type		= $field_data[$i]->type;
 			$retval[$i]->max_length		= $field_data[$i]->max_length;
 			$retval[$i]->primary_key	= (int) ($field_data[$i]->flags & 2);
+=======
+			$retval[$i]->type		= static::_get_field_type($field_data[$i]->type);
+			$retval[$i]->max_length		= $field_data[$i]->max_length;
+			$retval[$i]->primary_key	= (int) ($field_data[$i]->flags & MYSQLI_PRI_KEY_FLAG);
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+			$retval[$i]->type		= static::_get_field_type($field_data[$i]->type);
+			$retval[$i]->max_length		= $field_data[$i]->max_length;
+			$retval[$i]->primary_key	= (int) ($field_data[$i]->flags & MYSQLI_PRI_KEY_FLAG);
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 			$retval[$i]->default		= $field_data[$i]->def;
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 		}
 
 		return $retval;
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	// --------------------------------------------------------------------
 
 	/**
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
+	 * Get field type
+	 *
+	 * Extracts field type info from the bitflags returned by
+	 * mysqli_result::fetch_fields()
+	 *
+	 * @used-by	CI_DB_mysqli_result::field_data()
+	 * @param	int	$type
+	 * @return	string
+	 */
+	private static function _get_field_type($type)
+	{
+		static $map;
+		isset($map) OR $map = array(
+			MYSQLI_TYPE_DECIMAL     => 'decimal',
+			MYSQLI_TYPE_BIT         => 'bit',
+			MYSQLI_TYPE_TINY        => 'tinyint',
+			MYSQLI_TYPE_SHORT       => 'smallint',
+			MYSQLI_TYPE_INT24       => 'mediumint',
+			MYSQLI_TYPE_LONG        => 'int',
+			MYSQLI_TYPE_LONGLONG    => 'bigint',
+			MYSQLI_TYPE_FLOAT       => 'float',
+			MYSQLI_TYPE_DOUBLE      => 'double',
+			MYSQLI_TYPE_TIMESTAMP   => 'timestamp',
+			MYSQLI_TYPE_DATE        => 'date',
+			MYSQLI_TYPE_TIME        => 'time',
+			MYSQLI_TYPE_DATETIME    => 'datetime',
+			MYSQLI_TYPE_YEAR        => 'year',
+			MYSQLI_TYPE_NEWDATE     => 'date',
+			MYSQLI_TYPE_INTERVAL    => 'interval',
+			MYSQLI_TYPE_ENUM        => 'enum',
+			MYSQLI_TYPE_SET         => 'set',
+			MYSQLI_TYPE_TINY_BLOB   => 'tinyblob',
+			MYSQLI_TYPE_MEDIUM_BLOB => 'mediumblob',
+			MYSQLI_TYPE_BLOB        => 'blob',
+			MYSQLI_TYPE_LONG_BLOB   => 'longblob',
+			MYSQLI_TYPE_STRING      => 'char',
+			MYSQLI_TYPE_VAR_STRING  => 'varchar',
+			MYSQLI_TYPE_GEOMETRY    => 'geometry'
+		);
+
+		return isset($map[$type]) ? $map[$type] : $type;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+<<<<<<< HEAD
+>>>>>>> b746267e0988f2a31635814dda93c719d8ac9053
+=======
+>>>>>>> eb68956f7286b5445022c62d4cf169ba8ee3e9f5
 	 * Free the result
 	 *
-<<<<<<< HEAD
-	 * @return	null
-	 */
-	function free_result()
-	{
-		if (is_object($this->result_id))
-		{
-			mysqli_free_result($this->result_id);
-=======
 	 * @return	void
 	 */
 	public function free_result()
@@ -224,7 +218,6 @@ class CI_DB_mysqli_result extends CI_DB_result {
 		if (is_object($this->result_id))
 		{
 			$this->result_id->free();
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 			$this->result_id = FALSE;
 		}
 	}
@@ -234,18 +227,6 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	/**
 	 * Data Seek
 	 *
-<<<<<<< HEAD
-	 * Moves the internal pointer to the desired offset.  We call
-	 * this internally before fetching results to make sure the
-	 * result set starts at zero
-	 *
-	 * @access	private
-	 * @return	array
-	 */
-	function _data_seek($n = 0)
-	{
-		return mysqli_data_seek($this->result_id, $n);
-=======
 	 * Moves the internal pointer to the desired offset. We call
 	 * this internally before fetching results to make sure the
 	 * result set starts at zero.
@@ -256,7 +237,6 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	public function data_seek($n = 0)
 	{
 		return $this->result_id->data_seek($n);
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -266,20 +246,11 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an array
 	 *
-<<<<<<< HEAD
-	 * @access	private
-	 * @return	array
-	 */
-	function _fetch_assoc()
-	{
-		return mysqli_fetch_assoc($this->result_id);
-=======
 	 * @return	array
 	 */
 	protected function _fetch_assoc()
 	{
 		return $this->result_id->fetch_assoc();
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
 	}
 
 	// --------------------------------------------------------------------
@@ -289,21 +260,6 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
-<<<<<<< HEAD
-	 * @access	private
-	 * @return	object
-	 */
-	function _fetch_object()
-	{
-		return mysqli_fetch_object($this->result_id);
-	}
-
-}
-
-
-/* End of file mysqli_result.php */
-/* Location: ./system/database/drivers/mysqli/mysqli_result.php */
-=======
 	 * @param	string	$class_name
 	 * @return	object
 	 */
@@ -313,4 +269,3 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	}
 
 }
->>>>>>> 1e7ce1cbbbe40fba202b66d016202e02057623bd
