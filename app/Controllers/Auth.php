@@ -123,6 +123,11 @@ class Auth extends BaseController
 
 				$this->user->save($data);
 
+				$redirect = '/user';
+				if ($db->level === 'admin' or $db->level === 'superadmin') {
+					$redirect = '/admin';
+				}
+
 				$arr = [
 					'sesi' => [
 						'id'  		=> $db->id,
@@ -132,7 +137,9 @@ class Auth extends BaseController
 						'level'  	=> $db->level,
 						'logged'	=> TRUE
 					],
-					'redirect' => '/invoices',
+
+
+					'redirect' => $redirect,
 					'status' => '<div class="alert alert-sucess"><strong class="d-block">Hay!</strong>Jangan lupa bahagia ya.</div>'
 				];
 				break;
