@@ -92,7 +92,7 @@ class Validation
 	];
 
 	public $simpanProgress = [
-		'id_invoice' 	=> 'required',
+		'id_invoice' 	=> 'required|integer',
 		'status'		=> 'required',
 		'stat' 			=> 'required'
 		// 'keterangan' 	=> 'required'
