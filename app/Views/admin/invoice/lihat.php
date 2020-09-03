@@ -475,7 +475,7 @@ $pager = \Config\Services::pager();
 								<?= form_input(['name' => 'jumlah_dana', 'class' => 'form-control', 'id' => 'jumlah_dana', 'required' => '', 'placeholder' => '200000', 'type' => 'number']); ?>
 							</div>
 						</div>
-						<hr/>
+						<hr />
 						<button class="btn btn-primary" type="submit">Simpan</button>
 						<?= form_close(); ?>
 					</div>
@@ -493,6 +493,7 @@ $pager = \Config\Services::pager();
 $link_api_juragan = site_url("api/get_juragan");
 $link_invoice = site_url('admin/invoices/lihat/');
 $link_save_progress = site_url('admin/invoices/save_progress');
+$link_update_pembayaran = site_url('admin/invoices/update_bayar');
 
 $js = <<< JS
 $(function() { 
@@ -678,12 +679,12 @@ $(function() {
 
 					default:
 						btn = `<li>
-									<button class="dropdown-item" data-val="1">
+									<button class="dropdown-item" data-val="3" data-invoice="`+id+`" data-id="`+ bayar[i].id +`">
 										Dana ada
 									</button>
 								</li>
 								<li>
-									<button class="dropdown-item" data-val="2">
+									<button class="dropdown-item" data-val="2" data-invoice="`+id+`" data-id="`+ bayar[i].id +`">
 										Dana tidak ada
 									</button>
 								</li>`;
@@ -738,12 +739,25 @@ $(function() {
 
 	// set dana 
 	$(document).on('click', '.btn-action .dropdown-item',function() {
-		var btn = $(this).data('val');
+		var id = $(this).data('id'),
+			invoice = $(this).data('invoice'),
+			status = $(this).data('val');
 
-		console.log(btn);
+		if(confirm("Sudah yakin, ini tidak bisa diubah lho?"))
+		{
+			$.ajax({
+				method: "POST",
+				url: "$link_update_pembayaran",
+				data: { id_pembayaran: id, status: status, invoice_id: invoice }
+			})
+			.done(function( msg ) {
+				// console.log( "Data Saved: " + msg );
+				document.location.href = msg.url;
+			});
+		}
 	});
 
-
+	// create date from unix
 	function tanggal(unixtime) {
 		var u = new Date(unixtime*1000);
 

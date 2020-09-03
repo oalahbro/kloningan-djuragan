@@ -259,4 +259,42 @@ class Invoices extends BaseController
 			}
 		}
 	}
+
+	// ------------------------------------------------------------------------
+	// update status pembayaran
+	public function update_bayar()
+	{
+		if ($this->request->getPost()) {
+			$this->validation->setRuleGroup('updatePembayaran');
+		}
+
+		if ($this->request->isAJAX()) {
+			if (!$this->validation->withRequest($this->request)->run()) {
+
+				$this->response->setStatusCode(406);
+				$errors = $this->validation->getErrors();
+
+				return $this->response->setJSON($errors);
+			} else {
+				$status = $this->request->getPost('status');
+				$data = [
+					'id_pembayaran' => $this->request->getPost('id_pembayaran'),
+					'status' 		=> $status,
+					'tanggal_cek' 	=> time()
+				];
+				$this->pembayaran->save($data);
+
+				// 
+				$invoice_id = $this->request->getPost('invoice_id');
+
+				$res = [
+					'status' => 'data tersimpan',
+					'url' 	=> site_url('admin/invoices/lihat?q=id:' . $invoice_id)
+				];
+
+				return $this->response->setJSON($res);
+			}
+		}
+	}
+
 }

@@ -100,6 +100,7 @@ class Validation
 
 	public $updatePembayaran = [
 		'id_pembayaran' => 'required|integer',
+		'invoice_id' 	=> 'required|integer',
 		'status' 		=> 'required'
 	];
 }
