@@ -48,19 +48,17 @@ class Invoices extends BaseController
 	{
 		if ($seri === '' or empty($seri)) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
-		else {
+		} else {
 			// cek di database
 			$pesanan = $this->invoice->ambil_data()->get()->getResult();
 			if (count($pesanan) > 0) {
-			
+
 				$data = [
 					'title' 	=> 'Sunting Invoice #' . $seri,
 					'pesanans' 	=> $pesanan
 				];
 				return view('admin/invoice/lihat', $data);
-			}
-			else {
+			} else {
 				throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 			}
 		}

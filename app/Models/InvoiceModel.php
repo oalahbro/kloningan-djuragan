@@ -25,6 +25,7 @@ class InvoiceModel extends Model
 	protected $validationMessages = [];
 	protected $skipValidation     = false;
 
+	// ------------------------------------------------------------------------
 	// ambil data
 	public function ambil_data($juragan = NULL)
 	{
@@ -62,4 +63,26 @@ class InvoiceModel extends Model
 		// $query = $inv->get();
 		return $inv;
 	}
+
+	// ------------------------------------------------------------------------
+
+	public function total_biaya($invoice_id)
+	{
+		$biaya = $this->db->table('dibeli d');
+		$biaya->select('SUM(DISTINCT d.harga*d.qty) as barang');
+		$biaya->select('SUM(DISTINCT c.nominal) as lain');
+		$biaya->select("SUM(DISTINCT case when x.status='3' then x.total_pembayaran else 0 end) as terbayar");
+
+		$biaya->join('biaya c', 'c.invoice_id = d.invoice_id', 'left');
+		$biaya->join('pembayaran x', 'x.invoice_id = d.invoice_id', 'left');
+
+		$biaya->where('d.invoice_id', $invoice_id);
+
+		// $biaya->groupBy("d.invoice_id");
+		return $biaya->get();
+
+	}
+
+	// ------------------------------------------------------------------------
+
 }
