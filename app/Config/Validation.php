@@ -97,4 +97,9 @@ class Validation
 		'stat' 			=> 'required'
 		// 'keterangan' 	=> 'required'
 	];
+
+	public $updatePembayaran = [
+		'id_pembayaran' => 'required|integer',
+		'status' 		=> 'required'
+	];
 }
