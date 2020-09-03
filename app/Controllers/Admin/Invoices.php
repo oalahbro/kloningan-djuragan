@@ -23,10 +23,10 @@ class Invoices extends BaseController
 
 	// ------------------------------------------------------------------------
 	// menampilkan semua invoice
-    public function lihat($juragan = 'semua')
-    {
-        // 
-        $title = 'Semua Juragan';
+	public function lihat($juragan = 'semua')
+	{
+		// 
+		$title = 'Semua Juragan';
 		if ($juragan !== 'semua') {
 			$juragans = $this->juragan->where('juragan', $juragan)->findAll();
 			if (count($juragans) < 1) {
@@ -40,7 +40,7 @@ class Invoices extends BaseController
 			'pesanans' 	=> $this->invoice->ambil_data()->get()->getResult()
 		];
 		echo view('admin/invoice/lihat', $data);
-    }
+	}
 
 	// ------------------------------------------------------------------------
 	// halaman untuk menyunting invoice verdasarkan $seri
