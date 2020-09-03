@@ -369,7 +369,11 @@ $pager = \Config\Services::pager();
 						</ul>
 					</div>
 
-					<button type="button" data-invoice="<?= $pesanan->id_invoice; ?>" data-status='<?= $pesanan->status; ?>' data-toggle="modal" data-target="#modalProgress" class="btn btn-dark ml-1 pesanStatus"><i class="fad fa-comment-alt-plus"></i> Proses Orderan</button>
+					<?php if ($pesanan->status_pembayaran !== '1') { ?>
+
+						<button type="button" data-invoice="<?= $pesanan->id_invoice; ?>" data-status='<?= $pesanan->status; ?>' data-toggle="modal" data-target="#modalProgress" class="btn btn-dark ml-1 pesanStatus"><i class="fad fa-comment-alt-plus"></i> Proses Orderan</button>
+
+					<?php } ?>
 					<button type="button" data-invoice="<?= $pesanan->id_invoice; ?>" data-juragan="<?= $juragan->id; ?>" data-bayar='<?= $pesanan->pembayaran; ?>' data-toggle="modal" data-target="#modalBayar" class="btn btn-outline-secondary ml-1 pesanBayar"><i class="fad fa-wallet"></i> Cek Pembayaran</button>
 				</div>
 			</div>
@@ -449,6 +453,10 @@ $pager = \Config\Services::pager();
 						<a class="nav-link" id="tambah-tab" data-toggle="tab" href="#tambah" role="tab" aria-controls="tambah" aria-selected="false"><i class="fad fa-plus"></i></a>
 					</li>
 				</ul>
+				<div class="bg-warning p-2 rounded mt-2">
+					Perlu diingat, detail pembayaran tidak bisa dihapus atau diubah
+				</div>
+
 				<div class="tab-content mt-3" id="myTabContent">
 					<div class="tab-pane fade show active" id="cek" role="tabpanel" aria-labelledby="cek-tab">...</div>
 					<div class="tab-pane fade" id="tambah" role="tabpanel" aria-labelledby="tambah-tab">
@@ -466,24 +474,12 @@ $pager = \Config\Services::pager();
 								<?= form_label('Jumlah Dana', 'jumlah_dana', ['class' => 'form-label']); ?>
 								<?= form_input(['name' => 'jumlah_dana', 'class' => 'form-control', 'id' => 'jumlah_dana', 'required' => '', 'placeholder' => '200000', 'type' => 'number']); ?>
 							</div>
-							<div class="col-6 form-group mb-3">
-								<?= form_label('Dana ada?', 'ada_dana', ['class' => 'form-label']); ?>
-								<div class="input-group mb-3">
-									<div class="input-group-text">
-										<?= form_hidden('dana_ada', 'tidak'); ?>
-										<?= form_checkbox('dana_ada', 'ada', FALSE, ['class' => 'form-check-input']); ?>
-									</div>
-									<?= form_input(['name' => 'tanggal_cek', 'class' => 'form-control', 'id' => 'tanggal_cek', 'required' => '', 'disabled' => '', 'type' => 'date']); ?>
-								</div>
-							</div>
 						</div>
+						<hr/>
+						<button class="btn btn-primary" type="submit">Simpan</button>
 						<?= form_close(); ?>
 					</div>
 				</div>
-			</div>
-			<div class="modal-footer d-none">
-				<button type="button" class="btn btn-link text-decoration-none" data-dismiss="modal">Batal</button>
-				<button type="submit" class="btn btn-primary">Simpan</button>
 			</div>
 		</div>
 	</div>
@@ -651,41 +647,84 @@ $(function() {
 		let juragan = $(this).data('juragan');
 		let id = $(this).data('invoice');
 		let bayar = $(this).data('bayar');
-		let dv_list =$("<div/>").addClass('list-group').attr('id', 'list_pembayaran');
+		let dv_list =$("<div/>").addClass('list-group list-group-flushs').attr('id', 'list_pembayaran');
 
+		// invoice_id
+		$('#myTabContent [name="invoice_id"]').val(id);
 
+		// buka tab cek secara default
+		// load data pembayaran jika tersedia
+		// kalau tidak ada data, tampilkan pesan kosong		
 		if (bayar !== '') {
 			for(var i in bayar) {
 				// console.log(bayar[i].id);
-				var label = $('<label/>').addClass('list-group-item list-group-item-action');
+				var label = $('<div/>').addClass('list-group-item list-group-action');
+
+				var info = '';
+				var ico = '';
+				var btn = '';
+				switch (bayar[i].status) {
+					case 2:
+						btn = ``;
+						ico = 'times-circle text-danger';
+						info = 'dana tidak ada, sudah cek pada: '+ tanggal(bayar[i].tanggal_cek);
+						break;
+
+					case 3:
+						btn = ``;
+						ico = 'check-circle text-success';
+						info = 'dana ada, sudah cek pada: '+ tanggal(bayar[i].tanggal_cek);
+						break;
+
+					default:
+						btn = `<li>
+									<button class="dropdown-item" data-val="1">
+										Dana ada
+									</button>
+								</li>
+								<li>
+									<button class="dropdown-item" data-val="2">
+										Dana tidak ada
+									</button>
+								</li>`;
+						ico = 'minus-circle text-info';
+						info = 'dana belum dicek';
+						break;
+				}
+
+				var bta = `<div>
+					<div class="dropdown">
+						<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+							<i class="fad fa-ellipsis-h"></i>
+						</button>
+						<ul class="dropdown-menu btn-action" aria-labelledby="dropdownMenuButton">`+ btn +`</ul>
+					</div>
+				</div>`;
+
+				if (bayar[i].status !== 1) {
+					bta = '';
+				}
+
+				var bank = bayar[i].atas_nama;
+				if (bayar[i].sumber > 2) {
+					bank = bayar[i].nama + ' (' + bayar[i].atas_nama + ')';
+				}
 
 				var dv = $(`
-					<div class="d-flex justify-content-between">
-						<div class="d-flex w-100 justify-content-start">
-							<div class="mr-3 d-flex align-items-center"><i class="fad fa-check-circle text-success fa-2x"></i></div>
-							<div>
-								
-								<input name="pembayaran[34967]" type="hidden" value="tidak">
-								<input type="checkbox" name="pembayaran[34967]" data-id="34967" value="ya" class="d-none sbm" id="check0" checked="">
-								
-								<h5 class="mb-1 text-uppercase">EDC BNI <span class="badge bg-warning ml-2">Rp 50.000,-</span></h5>
-								<p class="mb-1">dibayar  pada 04-09-2019<br>dicek ada/masuk pada 05-09-2019</p>
-							</div>
-						</div>
-				
-						<div class="dropdown" data-id="34967">
-							<button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="mm-0" class="btn btn-outline-secondary btn-sm"><i class="fad fa-chevron-down"></i></button>
-							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="mm-0">
-								<button class="dropdown-item suntingBayar">Sunting</button>
-								<button class="dropdown-item hapusBayar">Hapus</button>
-							</div>
+				<div class="d-flex justify-content-between">
+					<div class="d-flex justify-content-start align-items-center">
+						<i class="fad fa-`+ ico +` fa-2x mr-3"></i>
+						<div>`+
+						
+							bank.toUpperCase() +`&nbsp;-&nbsp;`+ new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR',maximumSignificantDigits: 2 }).format(bayar[i].nominal) +`&nbsp;(`+ tanggal(bayar[i].tanggal_bayar) +`)
+							<div class="text-muted small">`+ info +`</div>
 						</div>
 					</div>
+					`+ bta +`
+				</div>
 				`);
-
 				
 				label.append(dv);
-
 				dv_list.append(label);
 
 				$('#modalBayar #cek').empty().append(dv_list);
@@ -693,53 +732,25 @@ $(function() {
 		}
 		else {
 			// console.log('data bayar kosong');
-			// $('#modalBayar #cek').empty().append('<div class="text-center my-5"><i class="fad fa-wallet fa-4x"></i><br/>data kosong</div>');
-
-			$('#modalBayar #cek').empty().append(`
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item">
-					<div class="d-flex justify-content-start">
-						<input class="form-check-input mr-1" type="checkbox" value="" aria-label="...">
-						<div>
-							BCA&nbsp;-&nbsp;Rp 200.000&nbsp;(28/08/2020)
-							<div class="text-muted small">dana ada,&nbsp;dicek pada:&nbsp;28/08/2020</div>
-						</div>
-					</div>
-				</li>
-				<li class="list-group-item">
-					<div class="d-flex justify-content-start">
-						<input class="form-check-input mr-1" type="checkbox" value="" aria-label="...">
-						<div>
-							BCA&nbsp;-&nbsp;Rp 200.000&nbsp;(28/08/2020)
-							<div class="text-muted small">dana ada,&nbsp;dicek pada:&nbsp;28/08/2020</div>
-						</div>
-					</div>
-				</li>
-				<li class="list-group-item">
-					<div class="d-flex justify-content-start">
-						<input class="form-check-input mr-1" type="checkbox" value="" aria-label="...">
-						<div>
-							BCA&nbsp;-&nbsp;Rp 200.000&nbsp;(28/08/2020)
-							<div class="text-muted small">dana ada,&nbsp;dicek pada:&nbsp;28/08/2020</div>
-						</div>
-					</div>
-				</li>
-				<li class="list-group-item">
-					<div class="d-flex justify-content-start">
-						<input class="form-check-input mr-1" type="checkbox" value="" aria-label="...">
-						<div>
-							BCA&nbsp;-&nbsp;Rp 200.000&nbsp;(28/08/2020)
-							<div class="text-muted small">dana ada,&nbsp;dicek pada:&nbsp;28/08/2020</div>
-						</div>
-					</div>
-				</li>
-			</ul>
-			`);
-
-
+			$('#modalBayar #cek').empty().append('<div class="text-center my-5"><i class="fad fa-wallet fa-4x"></i><br/>data kosong</div>');
 		}
 	});
 
+	// set dana 
+	$(document).on('click', '.btn-action .dropdown-item',function() {
+		var btn = $(this).data('val');
+
+		console.log(btn);
+	});
+
+
+	function tanggal(unixtime) {
+		var u = new Date(unixtime*1000);
+
+		return ('0' + u.getUTCDate()).slice(-2) +
+			'/' + ('0' + u.getUTCMonth()).slice(-2) +
+			'/' + u.getUTCFullYear()
+	};
 });
 JS;
 

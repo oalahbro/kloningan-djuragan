@@ -203,12 +203,14 @@ $JSmin = new Minify\JS();
 					<li class="nav-item">
 						<?= anchor('admin/invoices/tulis', 'Tulis Orderan', ['class' => 'nav-link']) ?>
 					</li>
+					<?php /*
 					<li class="nav-item">
 						<?= anchor('pelanggan', 'Customer', ['class' => 'nav-link']) ?>
 					</li>
 					<li class="nav-item">
 						<?= anchor('produk', 'Produk', ['class' => 'nav-link']) ?>
 					</li>
+					*/ ?>
 				</ul>
 			</div>
 			<div id="topmenu" class="ml-sm-auto">
