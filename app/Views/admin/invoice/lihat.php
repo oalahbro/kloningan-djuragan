@@ -59,7 +59,7 @@ $pager = \Config\Services::pager();
 								$juragan = json_decode($pesanan->juragan);
 								$pengguna = json_decode($pesanan->pengguna);
 								?>
-								<span class="text-muted text-lowercase">Juragan:</span> <?= anchor('invoices/index/' . $juragan->slug, $juragan->nama); ?><br />
+								<span class="text-muted text-lowercase">Juragan:</span> <?= anchor('admin/invoices/lihat/' . $juragan->slug, $juragan->nama); ?><br />
 								<span class="text-muted text-lowercase">Admin/CS:</span> <?= $pengguna->nama; ?>
 							</div>
 						</div>
