@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\I18n\Time;
+
 use App\Controllers\BaseController;
 
 class Invoices extends BaseController
