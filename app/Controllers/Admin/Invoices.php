@@ -363,8 +363,12 @@ class Invoices extends BaseController
 
 	public function detail_status($invoice_id)
 	{
-		$arr = array_slice($this->invoice->status($invoice_id)->getResult(), -1);
-		return $this->response->setJSON($arr);
+		if ($this->request->isAJAX()) {
+			$arr = array_slice($this->invoice->status($invoice_id)->getResult(), -1);
+			return $this->response->setJSON($arr);
+		} else {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
 	}
 
 	// ------------------------------------------------------------------------
