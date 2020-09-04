@@ -250,6 +250,13 @@ $pager = \Config\Services::pager();
 												<div class="font-weight-bold text-danger"><?= number_to_currency(- ($wajib_bayar - $sudah_bayar), 'IDR'); ?></div>
 											</div>
 										<?php }
+										if ($sudah_bayar > $wajib_bayar) {
+										?>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">Lebih</span>&nbsp;Bayar</div>
+												<div class="font-weight-bold"><?= number_to_currency(($sudah_bayar - $wajib_bayar), 'IDR'); ?></div>
+											</div>
+										<?php }
 										?>
 									</div>
 									<div class="p-2 list-group-item-<?= status_pembayaran($pesanan->pembayaran, $pesanan->status_pembayaran, 'l_class');; ?> shadow rounded rounded-sm">
@@ -332,7 +339,7 @@ $pager = \Config\Services::pager();
 
 					<?php if ($pesanan->status_pembayaran !== '1') { ?>
 
-						<button type="button" data-invoice="<?= $pesanan->id_invoice; ?>" data-status='<?= $pesanan->status; ?>' data-toggle="modal" data-target="#modalProgress" class="btn btn-dark ml-1 pesanStatus"><i class="fad fa-comment-alt-plus"></i> Proses Orderan</button>
+						<button type="button" data-invoice="<?= $pesanan->id_invoice; ?>" data-toggle="modal" data-target="#modalProgress" class="btn btn-dark ml-1 pesanStatus"><i class="fad fa-comment-alt-plus"></i> Proses Orderan</button>
 
 					<?php } ?>
 					<button type="button" data-invoice="<?= $pesanan->id_invoice; ?>" data-juragan="<?= $juragan->id; ?>" data-bayar='<?= $pesanan->pembayaran; ?>' data-toggle="modal" data-target="#modalBayar" class="btn btn-outline-secondary ml-1 pesanBayar"><i class="fad fa-wallet"></i> Cek Pembayaran</button>
