@@ -231,22 +231,27 @@ if( ! function_exists('status_pembayaran')) {
 
 		//
 		switch ($status) {
-			case 2: // tunggu konfirmasi
-				$class = 'text-info';
+			case 2: // tunggu konfirmasi (belum bayar)
+				$class = '';
 				$l_class = 'info';
-				$title = 'Sebagian sudah dibayar';
+				$title = 'Belum ada pembayaran (cek)';
 				break;
-			case 3: // kredit
+			case 3: // tunggu konfirmasi (kredit)
+				$class = 'half';
+				$l_class = 'info';
+				$title = 'Sebagian sudah dibayar (cek)';
+				break;
+			case 4: // kredit
 				$class = 'half';
 				$l_class = 'warning';
 				$title = 'Sebagian sudah dibayar';
 				break;
-			case 4: // kelebihan
+			case 5: // kelebihan
 				$class = 'full';
 				$l_class = 'primary';
 				$title = 'Pembayaran lunas, ada kelebihan';
 				break;
-			case 5: // lunas
+			case 6: // lunas
 				$class = 'full';
 				$l_class = 'success';
 				$title = 'Pembayaran sudah Lunas';

@@ -286,11 +286,14 @@ class Invoices extends BaseController
 					'total_pembayaran' => $this->request->getPost('total_pembayaran'),
 					'tanggal_pembayaran' => $time
 				];
-				
+
 				$this->pembayaran->save($data);
-				
+
+				// update status pembayaran (invoice)
+				$this->_update_status_pembayaran($invoice_id);
+
 				//
-				return $this->response->setJSON( ['url' => site_url('admin/invoices/lihat/?q=id:' . $invoice_id )] );
+				return $this->response->setJSON(['url' => site_url('admin/invoices/lihat/?q=id:' . $invoice_id)]);
 			}
 		}
 	}
@@ -322,6 +325,10 @@ class Invoices extends BaseController
 				// 
 				$invoice_id = $this->request->getPost('invoice_id');
 
+				// update status pembayaran (invoice)
+				// 
+				$this->_update_status_pembayaran($invoice_id);
+
 				$res = [
 					'status' => 'data tersimpan',
 					'url' 	=> site_url('admin/invoices/lihat?q=id:' . $invoice_id)
@@ -330,6 +337,53 @@ class Invoices extends BaseController
 				return $this->response->setJSON($res);
 			}
 		}
+	}
+
+	// ------------------------------------------------------------------------
+
+	private function _update_status_pembayaran($invoice_id)
+	{
+		$cek = $this->invoice->total_biaya($invoice_id)->getResult()[0];
+		// cek yang terbayar dan belum terbayar
+		$terbayar = (int) $cek->terbayar;
+		$total_bayar = (int) $cek->barang + (int) $cek->lain;
+		$belum_bayar = $total_bayar - $terbayar;
+		$belum_cek = (int) $cek->belumcek;
+
+		if ($belum_cek > 0) { 
+			if ($terbayar > 0) { // ada yang belum dicek, tapi sudah ada dana masuk
+				$status_bayar = '3';
+			}
+			else {
+				$status_bayar = '2';
+			}
+		}
+		else { //  tidak ada yang pelu dicek
+			if ($terbayar === 0) {
+				$status_bayar = '1';
+			} else {
+				if ($terbayar === $total_bayar) {
+					// sudah lunas
+					$status_bayar = '6';
+				} elseif ($terbayar < $total_bayar) {
+					// masih belum lunas / kredit
+					$status_bayar = '4';
+				} elseif ($terbayar > $total_bayar) {
+					// ada kelebihan
+					$status_bayar = '5';
+				}
+			}
+		}
+
+		// update status_pembayaran
+		// jadikan status
+		$update_invoice = [
+			'id_invoice' => $invoice_id,
+			'status_pembayaran' => $status_bayar
+		];
+		$this->invoice->save($update_invoice);
+
+		return TRUE;
 	}
 
 	// ------------------------------------------------------------------------

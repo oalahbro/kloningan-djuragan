@@ -40,7 +40,8 @@ class AddInvoice extends \CodeIgniter\Database\Migration {
 			],
 			'status_pembayaran' => [
 				'type'           => 'ENUM',
-				'constraint' 	 => ["1","2","3","4","5"], // 1: belum bayar, 2: tunggu konfirmasi, 3: kredit, 4: kelebihan, 5: lunas
+				'constraint' 	 => ["1","2","3","4","5","6"], 
+				// 1: belum bayar, 2: tunggu konfirmasi (belum bayar), 3: tunggu konfirmasi (kredit), 4: kredit, 5: kelebihan, 6: lunas
 				'default' 		 => "1"
 			],
 			'status_pengiriman' => [

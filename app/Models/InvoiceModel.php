@@ -72,6 +72,7 @@ class InvoiceModel extends Model
 		$biaya->select('SUM(DISTINCT d.harga*d.qty) as barang');
 		$biaya->select('SUM(DISTINCT c.nominal) as lain');
 		$biaya->select("SUM(DISTINCT case when x.status='3' then x.total_pembayaran else 0 end) as terbayar");
+		$biaya->select("SUM(DISTINCT case when x.status='1' then x.total_pembayaran else 0 end) as belumcek");
 
 		$biaya->join('biaya c', 'c.invoice_id = d.invoice_id', 'left');
 		$biaya->join('pembayaran x', 'x.invoice_id = d.invoice_id', 'left');

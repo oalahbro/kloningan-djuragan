@@ -433,7 +433,7 @@ $pager = \Config\Services::pager();
 							</div>
 							<div class="col-6 form-group mb-3">
 								<?= form_label('Jumlah Dana', 'jumlah_dana', ['class' => 'form-label']); ?>
-								<?= form_input(['name' => 'total_pembayaran', 'class' => 'form-control', 'id' => 'jumlah_dana', 'required' => '', 'placeholder' => '200000', 'type' => 'number']); ?>
+								<?= form_input(['name' => 'total_pembayaran', 'class' => 'form-control', 'id' => 'jumlah_dana', 'required' => '', 'placeholder' => '200000', 'type' => 'number', 'min' => '1']); ?>
 							</div>
 						</div>
 						<hr />
