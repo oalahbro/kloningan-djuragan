@@ -171,92 +171,67 @@ class Invoices extends BaseController
 
 				return $this->response->setJSON($errors);
 			} else {
-				$db = \Config\Database::connect();
-				$builder = $db->table('invoice_status');
+
 
 				$invoice_id = $this->request->getPost('id_invoice');
 				$status = $this->request->getPost('status');
-				$stat = $this->request->getPost('stat');
+				$stat = $this->request->getPost('stat'); // if 1 = akhir, 0 = mulai
 				$keterangan = $this->request->getPost('keterangan');
 
-				// 
-				$builder->where([
-					'invoice_id' 	=> $invoice_id,
-					'status' 		=> $status
-				]);
+				$data = [
+					'invoice_id' => $invoice_id,
+					'status' 	 => $status,
+					'stat' 		 => $stat,
+					'keterangan' => ($keterangan !== '' ? $keterangan : NULL)
+				];
 
-				$obj = $builder->get()->getResult();
+				// ambil yang terakhir
+				$arr = array_slice($this->invoice->status($invoice_id)->getResult(), -1);
 
-				if (empty($obj)) {
-					// create new status
-					$data = [
-						'invoice_id' => $invoice_id,
-						'status' => $status,
-						'tanggal_masuk' => time(),
-						'keterangan_masuk' => ($keterangan !== '' ? $keterangan : NULL)
-					];
-
-					$builder->set($data);
-					$builder->insert();
+				if (empty($arr)) {
+					// jika kosong, bikin baru
+					$this->_simpan_status($data);
 				} else {
-					// edit if not complete, or create new if complete
-					// get array of status
-					$item = [];
-					foreach ($obj as $struct) {
-						if ($status == $struct->status) {
-							$item[] = $struct;
-							// break;
-						}
-					}
-
-					$last_array = end($item);
-
-					switch ($stat) {
-						case '1':
-							if ($last_array->tanggal_selesai === NULL) {
-								// edit for current
-								// add `tanggal selesai`
-								$data = [
-									'invoice_id' => $invoice_id,
-									'status' => $status,
-									'tanggal_selesai' => time(),
-									'keterangan_selesai' => ($keterangan !== '' ? $keterangan : NULL)
-								];
-
-								$builder->set($data);
-								$builder->where('id_status', $last_array->id_status);
-								$builder->update();
-							} else {
-								// new status with start-end
-								$data = [
-									'invoice_id' => $invoice_id,
-									'status' => $status,
-									'tanggal_masuk' => time(),
-									'tanggal_selesai' => time(),
-									'keterangan_selesai' => ($keterangan !== '' ? $keterangan : NULL)
-								];
-
-								$builder->set($data);
-								$builder->insert();
-							}
-							break;
-
-						default:
-							// create new status
-							$data = [
-								'invoice_id' => $invoice_id,
-								'status' => $status,
-								'tanggal_masuk' => time(),
-								'keterangan_masuk' => ($keterangan !== '' ? $keterangan : NULL)
-							];
-
-							$builder->set($data);
-							$builder->insert();
-							break;
+					// pastinya update yang sudah ada (belum lengkap)
+					// atau bikin baru kalau yang terakhir sudah lengkap
+					if ($arr[0]->tanggal_selesai === NULL) {
+						// update
+						$this->_simpan_status($data, $arr[0]->id_status);
+					} else {
+						// create
+						$this->_simpan_status($data);
 					}
 				}
-				return $this->response->setJSON($obj);
+
+				return $this->response->setJSON($arr);
 			}
+		}
+	}
+
+	// ------------------------------------------------------------------------
+
+	private function _simpan_status($data, $id_status = FALSE)
+	{
+		$db = \Config\Database::connect();
+		$builder = $db->table('invoice_status');
+
+		$builder->set('invoice_id', $data['invoice_id']);
+		$builder->set('status', $data['status']);
+		$builder->set('tanggal_masuk', time());
+
+		if ($data['stat'] === '1') {
+			$builder->set('tanggal_selesai', time());
+			$builder->set('keterangan_selesai', $data['keterangan']);
+		} else {
+			$builder->set('keterangan_masuk', $data['keterangan']);
+		}
+
+		// 
+		if ($id_status === FALSE) {
+			$builder->insert();
+		} else {
+			$builder->where('id_status', $id_status);
+			$builder->update();
 		}
 	}
 
@@ -350,15 +325,13 @@ class Invoices extends BaseController
 		$belum_bayar = $total_bayar - $terbayar;
 		$belum_cek = (int) $cek->belumcek;
 
-		if ($belum_cek > 0) { 
+		if ($belum_cek > 0) {
 			if ($terbayar > 0) { // ada yang belum dicek, tapi sudah ada dana masuk
 				$status_bayar = '3';
-			}
-			else {
+			} else {
 				$status_bayar = '2';
 			}
-		}
-		else { //  tidak ada yang pelu dicek
+		} else { //  tidak ada yang pelu dicek
 			if ($terbayar === 0) {
 				$status_bayar = '1';
 			} else {

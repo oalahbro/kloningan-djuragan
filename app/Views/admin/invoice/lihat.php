@@ -453,6 +453,7 @@ $pager = \Config\Services::pager();
 
 $link_api_get_bank = site_url("api/get_bank/");
 $link_api_juragan = site_url("api/get_juragan");
+$link_get_status_invoice = site_url('admin/invoices/detail_status/');
 $link_invoice = site_url('admin/invoices/lihat/');
 $link_save_progress = site_url('admin/invoices/save_progress');
 $link_tambah_pembayaran = site_url('admin/invoices/simpan_pembayaran');
@@ -504,23 +505,60 @@ $(function() {
 
 	//
 	$('.pesanStatus').on('click',function(){
-		let status = $(this).data('status');
 		let id = $(this).data('invoice');
-		// console.log(status[0].status);
-		// console.log(id);
 
 		$('#newStatus [name="id_invoice"]').val(id);
+		$("#status option").prop('disabled', false);
+		$('#stat option').prop('disabled', false);
+		$.get("$link_get_status_invoice" + id, function(data, status){
+
+			if (data.length === 0) {
+				// console.log('data');
+				$("#status option").not('option[value=1]').each(function (index) {
+					$(this).prop('disabled', true);
+				});
+			} else {
+				// console.log(data);
+				if (data[0].tanggal_selesai === null) {
+					$("#status option").not('option[value='+data[0].status+']').each(function (index) {
+						$(this).prop('disabled', true);
+					});
+					$('#stat option').not('option[value=1]').prop('disabled', true);
+				} else {
+					
+				}
+			}
+		});
+
+		/*
 
 		// let arr = $(this).data('status');
 
+		// jika status kosong,
+		// maka hanya satus `data pesanan` yang aktif
+		$("#status option").prop('disabled', false);
 		if (status === '') {
 			$("#status option").not('option[value=1]').each(function (index) {
 				$(this).prop('disabled', true);
 			});
 		}
 		else {
-			$("#status option").prop('disabled', false);
+			
+			if (selesai === null) {
+				$("#status option").not('option[value='+stts+']').each(function (index) {
+					$(this).prop('disabled', true);
+				});
+			} else {
+				
+			}
 		}
+
+		*/
+
+		
+
+		
+		
 	});
 
 	//

@@ -85,4 +85,15 @@ class InvoiceModel extends Model
 
 	// ------------------------------------------------------------------------
 
+	public function status($invoice_id)
+	{
+		$status = $this->db->table('invoice_status s');
+		$status->where('s.invoice_id', $invoice_id);
+		$status->orderBy('s.id_status', 'ASC');
+
+		return $status->get();
+	}
+
+	// ------------------------------------------------------------------------
+
 }
