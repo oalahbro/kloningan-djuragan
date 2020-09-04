@@ -66,4 +66,44 @@ class Api extends BaseController
 
 		return $this->response->setJSON($kecamatan);
 	}
+
+	// ------------------------------------------------------------------------
+
+	public function get_bank($juragan_id)
+	{
+		// 
+		$nama_cache = 'bank_juragan_' . $juragan_id;
+		if (!$bank_juragan = $this->cache->get($nama_cache)) {
+			$juragan = $this->juragan->ambil_bank($juragan_id)->getResult();
+
+			$res = [];
+			$i = 0;
+			foreach ($juragan as $j) {
+				$fn = $j->atas_nama;
+				if($j->id_bank > 2){
+					$fn = $j->nama_bank . ' ' . $j->atas_nama;
+				}
+
+				$res[$i]['juragan_id'] = $j->id_juragan;
+				$res[$i]['bank_id'] = $j->id_bank;
+				$res[$i]['nama'] = $j->nama_bank;
+				$res[$i]['tipe'] = $j->tipe_bank;
+				$res[$i]['rekening'] = $j->rekening;
+				$res[$i]['atas_nama'] = $j->atas_nama;
+				$res[$i]['fn'] = strtoupper( $fn );
+
+				$i++;
+			}
+
+			$bank_juragan = $res;
+			
+			// simpan cache selama 24 jam
+			$this->cache->save($nama_cache, $bank_juragan, 60 * 60 * 24);
+		}
+
+		return $this->response->setJSON($bank_juragan);
+	}
+
+	// ------------------------------------------------------------------------
+
 }

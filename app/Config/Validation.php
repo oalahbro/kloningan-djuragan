@@ -98,6 +98,14 @@ class Validation
 		// 'keterangan' 	=> 'required'
 	];
 
+	public $tambahPembayaran = [
+		'invoice_id' 		=> 'required|integer',
+		'sumber_dana' 		=> 'required',
+		'total_pembayaran' 	=> 'required|integer',
+		// 'status' 			=> 'required',
+		'tanggal_pembayaran' => 'required'
+	];
+
 	public $updatePembayaran = [
 		'id_pembayaran' => 'required|integer',
 		'invoice_id' 	=> 'required|integer',

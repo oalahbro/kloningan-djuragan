@@ -25,6 +25,8 @@ class JuraganModel extends Model
 	protected $validationMessages = [];
 	protected $skipValidation     = false;
 
+	// ------------------------------------------------------------------------
+
 	public function ambil()
 	{
 		$builder = $this->db->table('juragan j');
@@ -39,4 +41,23 @@ class JuraganModel extends Model
 		$builder->groupBy("j.id_juragan");
 		return $builder;
 	}
+
+	// ------------------------------------------------------------------------
+
+    public function ambil_bank($juragan_id)
+    {
+		$bank = $this->db->table('juragan j');
+
+		$bank->join('relasi r', 'r.juragan_id = j.id_juragan', 'left');
+		$bank->join('bank b', 'b.id_bank = r.val_id', 'left');
+		
+		$bank->where('j.id_juragan', $juragan_id);
+
+		$bank->orderBy('b.id_bank', 'DESC');
+
+		return $bank->get();
+    }
+
+    // ------------------------------------------------------------------------
+
 }

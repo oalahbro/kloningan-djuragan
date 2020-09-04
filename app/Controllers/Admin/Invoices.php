@@ -259,6 +259,41 @@ class Invoices extends BaseController
 	}
 
 	// ------------------------------------------------------------------------
+	// tambah pembayaran
+	public function simpan_pembayaran()
+	{
+		if ($this->request->getPost()) {
+			$this->validation->setRuleGroup('tambahPembayaran');
+		}
+
+		if ($this->request->isAJAX()) {
+			if (!$this->validation->withRequest($this->request)->run()) {
+
+				$this->response->setStatusCode(406);
+				$errors = $this->validation->getErrors();
+
+				return $this->response->setJSON($errors);
+			} else {
+
+				$time = Time::parse($this->request->getPost('tanggal_pembayaran'))->getTimestamp();
+				$invoice_id = $this->request->getPost('invoice_id');
+
+				$data = [
+					'invoice_id' => $invoice_id,
+					'sumber_dana' => $this->request->getPost('sumber_dana'),
+					'total_pembayaran' => $this->request->getPost('total_pembayaran'),
+					'tanggal_pembayaran' => $time
+				];
+				
+				$this->pembayaran->save($data);
+				
+				//
+				return $this->response->setJSON( ['url' => site_url('admin/invoices/lihat/?q=id:' . $invoice_id )] );
+			}
+		}
+	}
+
+	// ------------------------------------------------------------------------
 	// update status pembayaran
 	public function update_bayar()
 	{
@@ -294,5 +329,7 @@ class Invoices extends BaseController
 			}
 		}
 	}
+
+	// ------------------------------------------------------------------------
 
 }

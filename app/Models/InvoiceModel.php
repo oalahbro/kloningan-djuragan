@@ -80,7 +80,6 @@ class InvoiceModel extends Model
 
 		// $biaya->groupBy("d.invoice_id");
 		return $biaya->get();
-
 	}
 
 	// ------------------------------------------------------------------------

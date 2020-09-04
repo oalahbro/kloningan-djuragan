@@ -460,19 +460,19 @@ $pager = \Config\Services::pager();
 				<div class="tab-content mt-3" id="myTabContent">
 					<div class="tab-pane fade show active" id="cek" role="tabpanel" aria-labelledby="cek-tab">...</div>
 					<div class="tab-pane fade" id="tambah" role="tabpanel" aria-labelledby="tambah-tab">
-						<?= form_open('', [], ['invoice_id' => '']); ?>
+						<?= form_open('', ['id' => 'tambahPembayaran'], ['invoice_id' => '']); ?>
 						<div class="row mb-0 gx-2">
 							<div class="col-6 form-group mb-3">
 								<?= form_label('Tujuan Bayar', 'tujuan', ['class' => 'form-label']); ?>
-								<?= form_dropdown('bank', [], '', ['class' => 'form-select', 'required' => '', 'id' => 'tujuan']); ?>
+								<?= form_dropdown('sumber_dana', [], '', ['class' => 'form-select', 'required' => '', 'id' => 'tujuan']); ?>
 							</div>
 							<div class="col-6 form-group mb-3">
 								<?= form_label('Tanggal Bayar', 'tanggal_bayar', ['class' => 'form-label']); ?>
-								<?= form_input(['name' => 'tanggal_bayar', 'class' => 'form-control', 'id' => 'tanggal_bayar', 'required' => '', 'type' => 'date']); ?>
+								<?= form_input(['name' => 'tanggal_pembayaran', 'class' => 'form-control', 'id' => 'tanggal_bayar', 'required' => '', 'type' => 'date']); ?>
 							</div>
 							<div class="col-6 form-group mb-3">
 								<?= form_label('Jumlah Dana', 'jumlah_dana', ['class' => 'form-label']); ?>
-								<?= form_input(['name' => 'jumlah_dana', 'class' => 'form-control', 'id' => 'jumlah_dana', 'required' => '', 'placeholder' => '200000', 'type' => 'number']); ?>
+								<?= form_input(['name' => 'total_pembayaran', 'class' => 'form-control', 'id' => 'jumlah_dana', 'required' => '', 'placeholder' => '200000', 'type' => 'number']); ?>
 							</div>
 						</div>
 						<hr />
@@ -490,9 +490,11 @@ $pager = \Config\Services::pager();
 <?= $this->section('js') ?>
 <?php
 
+$link_api_get_bank = site_url("api/get_bank/");
 $link_api_juragan = site_url("api/get_juragan");
 $link_invoice = site_url('admin/invoices/lihat/');
 $link_save_progress = site_url('admin/invoices/save_progress');
+$link_tambah_pembayaran = site_url('admin/invoices/simpan_pembayaran');
 $link_update_pembayaran = site_url('admin/invoices/update_bayar');
 
 $js = <<< JS
@@ -643,7 +645,6 @@ $(function() {
 	});
 
 	// cek pembayaran
-
 	$('.pesanBayar').on('click',function(){
 		let juragan = $(this).data('juragan');
 		let id = $(this).data('invoice');
@@ -652,6 +653,17 @@ $(function() {
 
 		// invoice_id
 		$('#myTabContent [name="invoice_id"]').val(id);
+		
+		// set dropdown sumber_dana
+		$.get("$link_api_get_bank" + juragan, function(data, status){
+			// console.log("Data: " + data[0]['fn']);
+
+			var apnd = "";
+			for (var i = 0; i < data.length; i++) {
+				apnd += "<option value = '" + data[i].bank_id + " '>" + data[i].fn + " </option>";
+			}
+			$("#tambahPembayaran #tujuan").empty().append(apnd);
+		});
 
 		// buka tab cek secara default
 		// load data pembayaran jika tersedia
@@ -735,6 +747,61 @@ $(function() {
 			// console.log('data bayar kosong');
 			$('#modalBayar #cek').empty().append('<div class="text-center my-5"><i class="fad fa-wallet fa-4x"></i><br/>data kosong</div>');
 		}
+	});
+
+	// tambah pembayaran
+	var req_pay;
+	var tambah_pay=$('#tambahPembayaran');
+	tambah_pay.on('submit',function(f){
+		f.preventDefault(),
+		f.stopPropagation();
+		
+		// Abort any pending request
+		if (req_pay) {
+			req_pay.abort();
+		}
+		// setup some local variables
+		var f = $(this);
+
+		// Let's select and cache all the fields
+		var inputs = f.find("input, select, button, textarea");
+
+		// Serialize the data in the form
+		var serializedData = f.serialize();
+
+		// Let's disable the inputs for the duration of the Ajax request.
+		// Note: we disable elements AFTER the form data has been serialized.
+		// Disabled form elements will not be serialized.
+		inputs.prop("disabled", true);
+
+		// Fire off the request to /form.php
+		req_pay = $.ajax({
+			url: "$link_tambah_pembayaran",
+			type: "post",
+			data: serializedData
+		});
+
+		// Callback handler that will be called on success
+		req_pay.done(function (response, textStatus, jqXHR){
+			// Log a message to the console
+			// console.log(response);
+			// redirect
+			document.location.href = response.url;
+		});
+
+		// Callback handler that will be called on failure
+		req_pay.fail(function (jqXHR, textStatus, errorThrown){
+			// 
+			// console.log( Object.keys(jqXHR['responseJSON']).length);
+		});
+
+		// Callback handler that will be called regardless
+		// if the request failed or succeeded
+		req_pay.always(function () {
+			// Reenable the inputs
+			inputs.prop("disabled", false);
+			
+		});		
 	});
 
 	// set dana 
