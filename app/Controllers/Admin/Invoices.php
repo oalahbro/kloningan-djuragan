@@ -171,8 +171,6 @@ class Invoices extends BaseController
 
 				return $this->response->setJSON($errors);
 			} else {
-
-
 				$invoice_id = $this->request->getPost('id_invoice');
 				$status = $this->request->getPost('status');
 				$stat = $this->request->getPost('stat'); // if 1 = akhir, 0 = mulai
@@ -191,6 +189,14 @@ class Invoices extends BaseController
 				if (empty($arr)) {
 					// jika kosong, bikin baru
 					$this->_simpan_status($data);
+
+					// update orderan menjadi `diproses` (2)
+					$update_invoice = [
+						'id_invoice' => $invoice_id,
+						'status_pesanan' => '2'
+					];
+					$this->invoice->save($update_invoice);
+
 				} else {
 					// pastinya update yang sudah ada (belum lengkap)
 					// atau bikin baru kalau yang terakhir sudah lengkap
@@ -366,6 +372,21 @@ class Invoices extends BaseController
 		if ($this->request->isAJAX()) {
 			$arr = array_slice($this->invoice->status($invoice_id)->getResult(), -1);
 			return $this->response->setJSON($arr);
+		} else {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
+	}
+
+	// ------------------------------------------------------------------------
+
+	public function hapus_orderan()
+	{
+		if ($this->request->isAJAX()) {
+			$invoice_id = $this->request->getPost('invoice_id');
+			$this->invoice->delete($invoice_id);
+
+			return $this->response->setJSON(['status' => 'Orderan dihapus', 'url' => site_url('admin/invoices')]);
+
 		} else {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}

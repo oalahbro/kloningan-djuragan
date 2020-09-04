@@ -327,13 +327,12 @@ $pager = \Config\Services::pager();
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Action</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
-							<li><a class="dropdown-item" href="#">Something else here</a></li>
+							<li><a class="dropdown-item" href="#">Print</a></li>
+							<li><a class="dropdown-item" href="#">Unduh</a></li>
 							<li>
-								<hr class="dropdown-divider">
+								<hr class="dropdown-divider" />
 							</li>
-							<li><a class="dropdown-item" href="#">Separated link</a></li>
+							<li><button data-invoice="<?= $pesanan->id_invoice; ?>" data-seri="<?= $pesanan->seri; ?>" class="dropdown-item hapusOrderan">Hapus</button></li>
 						</ul>
 					</div>
 
@@ -461,6 +460,7 @@ $pager = \Config\Services::pager();
 $link_api_get_bank = site_url("api/get_bank/");
 $link_api_juragan = site_url("api/get_juragan");
 $link_get_status_invoice = site_url('admin/invoices/detail_status/');
+$link_hapus_orderan = site_url('admin/invoices/hapus_orderan/');
 $link_invoice = site_url('admin/invoices/lihat/');
 $link_save_progress = site_url('admin/invoices/save_progress');
 $link_tambah_pembayaran = site_url('admin/invoices/simpan_pembayaran');
@@ -535,37 +535,7 @@ $(function() {
 					
 				}
 			}
-		});
-
-		/*
-
-		// let arr = $(this).data('status');
-
-		// jika status kosong,
-		// maka hanya satus `data pesanan` yang aktif
-		$("#status option").prop('disabled', false);
-		if (status === '') {
-			$("#status option").not('option[value=1]').each(function (index) {
-				$(this).prop('disabled', true);
-			});
-		}
-		else {
-			
-			if (selesai === null) {
-				$("#status option").not('option[value='+stts+']').each(function (index) {
-					$(this).prop('disabled', true);
-				});
-			} else {
-				
-			}
-		}
-
-		*/
-
-		
-
-		
-		
+		});		
 	});
 
 	//
@@ -828,6 +798,26 @@ $(function() {
 				document.location.href = msg.url;
 			});
 		}
+	});
+
+	$('.hapusOrderan').on('click',function(){
+		let seri = $(this).data('seri');
+		let id = $(this).data('invoice');
+
+		if(confirm("Hapus orderan " + seri + "? sudah yakin?"))
+		{
+			$.ajax({
+				method: "POST",
+				url: "$link_hapus_orderan",
+				data: { invoice_id: id }
+			})
+			.done(function( msg ) {
+				// console.log( "Data Saved: " + msg );
+				document.location.href = msg.url;
+			});
+		}
+
+		alert(id);
 	});
 
 	// create date from unix
