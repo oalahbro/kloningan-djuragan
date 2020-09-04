@@ -225,3 +225,70 @@ if( ! function_exists('status_orderan')) {
 }
 
 // ------------------------------------------------------------------------
+
+if( ! function_exists('status_pembayaran')) {
+	function status_pembayaran($pembayaran, $status, $return = 'html') {
+
+		//
+		switch ($status) {
+			case 2: // tunggu konfirmasi
+				$class = 'text-info';
+				$l_class = 'info';
+				$title = 'Sebagian sudah dibayar';
+				break;
+			case 3: // kredit
+				$class = 'half';
+				$l_class = 'warning';
+				$title = 'Sebagian sudah dibayar';
+				break;
+			case 4: // kelebihan
+				$class = 'full';
+				$l_class = 'primary';
+				$title = 'Pembayaran lunas, ada kelebihan';
+				break;
+			case 5: // lunas
+				$class = 'full';
+				$l_class = 'success';
+				$title = 'Pembayaran sudah Lunas';
+				break;
+			default: // belum bayar
+				$class = '';
+				$l_class = 'danger';
+				$title = 'Belum ada pembayaran';
+				break;
+		}
+
+		$sudah_bayar = 0;
+		$tanggal_bayar = '';
+		if ($pembayaran !== NULL) {
+			foreach (json_decode($pembayaran) as $pay) {
+				if ($pay->status === 3) {
+					$sudah_bayar += $pay->nominal;
+					$tanggal_bayar = Time::createFromTimestamp($pay->tanggal_bayar);
+				}
+			}
+		}
+
+		$html = '<li class="list-inline-item mr-0 position-relative '. $class .'" data-toggle="tooltip" data-placement="top" title="'. $title .'"><div class="d-flex justify-content-center">';
+			$html .= '<div class="text-center"><i class="fad fa-wallet icon d-block"></i>';
+			if ($tanggal_bayar !=='') {
+				$html .= '<span><abbr title="'. $tanggal_bayar->humanize() .'">'. $tanggal_bayar->day .'/'. $tanggal_bayar->month .'</abbr></span></div></div>';
+			}
+			else {
+				$html .= '<span>??/??</span>';
+			}
+		$html .= '</li>';
+
+		if ($return === 'html') {
+			return $html;
+		}
+		else if($return === 'sudah_bayar'){
+			return $sudah_bayar;
+		}
+		else if($return === 'l_class'){
+			return $l_class;
+		}
+	}
+}
+
+// ------------------------------------------------------------------------

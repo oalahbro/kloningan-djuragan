@@ -3,6 +3,7 @@
 use CodeIgniter\I18n\Time;
 use App\Libraries\Ongkir;
 
+$sekarang = new Time('now');
 $pager = \Config\Services::pager();
 ?>
 <?= $this->extend('template/default_admin') ?>
@@ -63,40 +64,6 @@ $pager = \Config\Services::pager();
 							</div>
 						</div>
 
-						<?php
-						$sudah_bayar = 0;
-						if ($pesanan->pembayaran !== NULL) {
-							foreach (json_decode($pesanan->pembayaran) as $pay) {
-								if ($pay->status === 3) {
-									$sudah_bayar += $pay->nominal;
-								}
-							}
-						}
-
-						switch ($pesanan->status_pembayaran) {
-							case 2: // tunggu konfirmasi
-								$c_status_bayar = 'warning';
-								$t_status_bayar = 'Sebagian sudah dibayar';
-								break;
-							case 3: // kredit
-								$c_status_bayar = 'warning';
-								$t_status_bayar = 'Sebagian sudah dibayar';
-								break;
-							case 4: // kelebihan
-								$c_status_bayar = 'primary';
-								$t_status_bayar = 'Pembayaran lunas, ada kelebihan';
-								break;
-							case 5: // lunas
-								$c_status_bayar = 'success';
-								$t_status_bayar = 'Pembayaran sudah Lunas';
-								break;
-							default: // belum bayar
-								$c_status_bayar = 'danger';
-								$t_status_bayar = 'Belum ada pembayaran';
-								break;
-						}
-						?>
-
 						<div>
 							<ul class="list-inline mb-0 timeliner">
 								<li class="list-inline-item mr-0 position-relative start full" data-toggle="tooltip" data-placement="top" title="Pesanan Ditambahkan">
@@ -108,14 +75,7 @@ $pager = \Config\Services::pager();
 									</div>
 								</li>
 
-								<li class="list-inline-item mr-0 position-relative <?= ($sudah_bayar > 0 ? 'half' : ''); ?>" data-toggle="tooltip" data-placement="top" title="Dibayar Lunas">
-									<div class="d-flex justify-content-center">
-										<div class="text-center">
-											<i class="fad fa-wallet icon d-block"></i>
-											<span>??/??</span>
-										</div>
-									</div>
-								</li>
+								<?= status_pembayaran($pesanan->pembayaran, $pesanan->status_pembayaran); ?>
 
 								<?php
 								$statuss = json_decode($pesanan->status);
@@ -274,6 +234,7 @@ $pager = \Config\Services::pager();
 											<?php }
 										}
 										echo '<hr/>';
+										$sudah_bayar = status_pembayaran($pesanan->pembayaran, $pesanan->status_pembayaran, 'sudah_bayar');
 										if ($sudah_bayar > 0) {
 											?>
 
@@ -291,7 +252,7 @@ $pager = \Config\Services::pager();
 										<?php }
 										?>
 									</div>
-									<div class="p-2 list-group-item-<?= $c_status_bayar; ?> shadow rounded rounded-sm">
+									<div class="p-2 list-group-item-<?= status_pembayaran($pesanan->pembayaran, $pesanan->status_pembayaran, 'l_class');; ?> shadow rounded rounded-sm">
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="small text-uppercase">Wajib Bayar</div>
 											<div class="h3 mb-0"><?= number_to_currency($wajib_bayar, 'IDR'); ?></div>
@@ -468,7 +429,7 @@ $pager = \Config\Services::pager();
 							</div>
 							<div class="col-6 form-group mb-3">
 								<?= form_label('Tanggal Bayar', 'tanggal_bayar', ['class' => 'form-label']); ?>
-								<?= form_input(['name' => 'tanggal_pembayaran', 'class' => 'form-control', 'id' => 'tanggal_bayar', 'required' => '', 'type' => 'date']); ?>
+								<?= form_input('tanggal_pembayaran', set_value('tanggal_pembayaran', $sekarang->toDateString()), ['class' => 'form-control', 'id' => 'tanggal_pembayaran', 'required' => '', 'max' => $sekarang->toDateString()], 'date'); ?>
 							</div>
 							<div class="col-6 form-group mb-3">
 								<?= form_label('Jumlah Dana', 'jumlah_dana', ['class' => 'form-label']); ?>
