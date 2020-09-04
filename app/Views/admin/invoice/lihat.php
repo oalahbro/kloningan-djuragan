@@ -828,9 +828,7 @@ $(function() {
 	function tanggal(unixtime) {
 		var u = new Date(unixtime*1000);
 
-		return ('0' + u.getUTCDate()).slice(-2) +
-			'/' + ('0' + u.getUTCMonth()).slice(-2) +
-			'/' + u.getUTCFullYear()
+		return ('0' + u.getDate()).slice(-2) + '/' + ('0' + u.getMonth()).slice(-2) + '/' + u.getFullYear();
 	};
 });
 JS;
