@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05446019496a5c5d041bf33a70dee364",
+    "content-hash": "1b7c5a9a1e1fefd703be12fdbb4570d4",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -51,6 +51,42 @@
             "description": "The CodeIgniter framework v4",
             "homepage": "https://codeigniter.com",
             "time": "2020-07-16T03:44:28+00:00"
+        },
+        {
+            "name": "codeigniter4/translations",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codeigniter4/translations.git",
+                "reference": "593a3b9086acc3f0f8cdc5bd6af267873fb025e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codeigniter4/translations/zipball/593a3b9086acc3f0f8cdc5bd6af267873fb025e7",
+                "reference": "593a3b9086acc3f0f8cdc5bd6af267873fb025e7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "codeigniter4/framework": "dev-master",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Translations\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Translations for CodeIgniter v4 web framework",
+            "homepage": "https://codeigniter.com",
+            "time": "2020-08-26T13:44:25+00:00"
         },
         {
             "name": "filp/whoops",
@@ -2802,6 +2838,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "codeigniter4/translations": 20,
         "fzaninotto/faker": 20
     },
     "prefer-stable": false,

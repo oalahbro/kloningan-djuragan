@@ -233,12 +233,12 @@ if( ! function_exists('status_pembayaran')) {
 		switch ($status) {
 			case 2: // tunggu konfirmasi (belum bayar)
 				$class = '';
-				$l_class = 'info';
+				$l_class = 'danger';
 				$title = 'Belum ada pembayaran (cek)';
 				break;
 			case 3: // tunggu konfirmasi (kredit)
 				$class = 'half';
-				$l_class = 'info';
+				$l_class = 'warning';
 				$title = 'Sebagian sudah dibayar (cek)';
 				break;
 			case 4: // kredit
