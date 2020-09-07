@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 /**
@@ -13,6 +14,7 @@ namespace App\Controllers;
  *
  * @package CodeIgniter
  */
+
 use CodeIgniter\Controller;
 
 use App\Models\BankModel;
@@ -32,7 +34,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['date','form','fungsi','number','text','url'];
+	protected $helpers = ['date', 'form', 'fungsi', 'number', 'text', 'url'];
 
 	public $cache;
 	public $session;
@@ -56,7 +58,7 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
-		// E.g.:
+
 		$this->cache = \Config\Services::cache();
 		$this->session = \Config\Services::session();
 		$this->validation = \Config\Services::validation();
@@ -77,14 +79,12 @@ class BaseController extends Controller
 
 	public function isLogged()
 	{
-		if ($this->session->has('logged')) {
-			if (!$this->session->get('logged')) {
-				return FALSE;
-			}
-			return TRUE;
-		} else {
-			return FALSE;
+		$r = FALSE;
+		if ($this->session->has('logged') && $this->session->get('logged')) {
+			$r = TRUE;
 		}
+
+		return $r;
 	}
 
 	// ------------------------------------------------------------------------
@@ -92,16 +92,17 @@ class BaseController extends Controller
 	public function isAdmin($superadmin = FALSE)
 	{
 		$return = FALSE;
-		if ($superadmin === TRUE) {
-			// jika $superadmin === TRUE, maka yang diambil hanya superadmin
-			if ($this->session->get('level') === 'superadmin') {
-				$return = TRUE;
-			}
-		}
-		else {
-			// levelnya admin dan superadmin
-			if ($this->session->get('level') === 'admin' or $this->session->get('level') === 'superadmin') {
-				$return = TRUE;
+		if ($this->isLogged()) {
+			if ($superadmin === TRUE) {
+				// jika $superadmin === TRUE, maka yang diambil hanya superadmin
+				if ($this->session->get('level') === 'superadmin') {
+					$return = TRUE;
+				}
+			} else {
+				// levelnya admin dan superadmin
+				if ($this->session->get('level') === 'admin' or $this->session->get('level') === 'superadmin') {
+					$return = TRUE;
+				}
 			}
 		}
 
@@ -109,5 +110,5 @@ class BaseController extends Controller
 	}
 
 	// ------------------------------------------------------------------------
-	
+
 }

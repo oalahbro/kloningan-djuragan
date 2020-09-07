@@ -2,21 +2,22 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\I18n\Time;
-
 use App\Controllers\BaseController;
+use CodeIgniter\I18n\Time;
 
 class Invoices extends BaseController
 {
-	// tampilkan detail berdasarkan nomor seri
-	public function baca($seri = '')
-	{
-	}
-
-	// ------------------------------------------------------------------------
 	// halaman untuk membuat invoice baru
 	public function tulis()
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		$data = [
 			'title' => 'Tulis Orderan Baru'
 		];
@@ -27,6 +28,14 @@ class Invoices extends BaseController
 	// menampilkan semua invoice
 	public function lihat($juragan = 'semua')
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		// 
 		$title = 'Semua Juragan';
 		if ($juragan !== 'semua') {
@@ -48,6 +57,14 @@ class Invoices extends BaseController
 	// halaman untuk menyunting invoice verdasarkan $seri
 	public function sunting($seri = '')
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($seri === '' or empty($seri)) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		} else {
@@ -68,15 +85,38 @@ class Invoices extends BaseController
 
 	// ------------------------------------------------------------------------
 	// hapus invoice
-	public function hapus()
+	public function hapus_orderan()
 	{
-		# code...
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
+		if ($this->request->isAJAX()) {
+			$invoice_id = $this->request->getPost('invoice_id');
+			$this->invoice->delete($invoice_id);
+
+			return $this->response->setJSON(['status' => 'Orderan dihapus', 'url' => site_url('admin/invoices')]);
+		} else {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
 	}
 
 	// ------------------------------------------------------------------------
 
 	public function save()
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('addInvoice');
 		}
@@ -159,6 +199,14 @@ class Invoices extends BaseController
 
 	public function save_progress()
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('simpanProgress');
 		}
@@ -196,7 +244,6 @@ class Invoices extends BaseController
 						'status_pesanan' => '2'
 					];
 					$this->invoice->save($update_invoice);
-
 				} else {
 					// pastinya update yang sudah ada (belum lengkap)
 					// atau bikin baru kalau yang terakhir sudah lengkap
@@ -218,6 +265,14 @@ class Invoices extends BaseController
 
 	private function _simpan_status($data, $id_status = FALSE)
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		$db = \Config\Database::connect();
 		$builder = $db->table('invoice_status');
 
@@ -245,6 +300,14 @@ class Invoices extends BaseController
 	// tambah pembayaran
 	public function simpan_pembayaran()
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('tambahPembayaran');
 		}
@@ -283,6 +346,14 @@ class Invoices extends BaseController
 	// update status pembayaran
 	public function update_bayar()
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('updatePembayaran');
 		}
@@ -324,6 +395,14 @@ class Invoices extends BaseController
 
 	private function _update_status_pembayaran($invoice_id)
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		$cek = $this->invoice->total_biaya($invoice_id)->getResult()[0];
 		// cek yang terbayar dan belum terbayar
 		$terbayar = (int) $cek->terbayar;
@@ -369,24 +448,17 @@ class Invoices extends BaseController
 
 	public function detail_status($invoice_id)
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($this->request->isAJAX()) {
 			$arr = array_slice($this->invoice->status($invoice_id)->getResult(), -1);
 			return $this->response->setJSON($arr);
-		} else {
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
-	}
-
-	// ------------------------------------------------------------------------
-
-	public function hapus_orderan()
-	{
-		if ($this->request->isAJAX()) {
-			$invoice_id = $this->request->getPost('invoice_id');
-			$this->invoice->delete($invoice_id);
-
-			return $this->response->setJSON(['status' => 'Orderan dihapus', 'url' => site_url('admin/invoices')]);
-
 		} else {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
