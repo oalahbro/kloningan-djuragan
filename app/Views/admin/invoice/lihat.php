@@ -173,7 +173,7 @@ $pager = \Config\Services::pager();
 										$content = '<div class=\'text-right\'>';
 										$content .= 'harga @: <strong>' . number_to_currency($b->harga, 'IDR') . '</strong>';
 										if ($b->qty > 1) {
-											$content .= '<br/>harga @ x '.$b->qty.': <strong>' . number_to_currency($b->harga * $b->qty, 'IDR') . '</strong>';
+											$content .= '<br/>harga @ x ' . $b->qty . ': <strong>' . number_to_currency($b->harga * $b->qty, 'IDR') . '</strong>';
 										}
 										$content .= '</div>';
 
@@ -239,7 +239,20 @@ $pager = \Config\Services::pager();
 											?>
 
 											<div class="d-flex justify-content-between align-items-center">
-												<div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">Sudah</span>&nbsp;Bayar</div>
+												<div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">
+														Sudah</span>&nbsp;Bayar
+													<?= form_button([
+														'class' 		=> 'text-dark ml-1 pesanBayar',
+														'content' 		=> '<i class="fad fa-info-circle"></i> <span class="sr-only">info</span>',
+														'data-bayar' 	=> esc($pesanan->pembayaran),
+														'data-invoice' 	=> $pesanan->id_invoice,
+														'data-juragan' 	=> $juragan->id,
+														'data-target' 	=> '#modalBayar',
+														'data-toggle' 	=> 'modal',
+														'style' 		=> 'border:none; background:transparent'
+													]);
+													?>
+												</div>
 												<div class="font-weight-bold"><?= number_to_currency($sudah_bayar, 'IDR'); ?></div>
 											</div>
 										<?php }
@@ -327,21 +340,63 @@ $pager = \Config\Services::pager();
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Print</a></li>
-							<li><a class="dropdown-item" href="#">Unduh</a></li>
+							<li><a class="dropdown-item" href="#">Print Label</a></li>
+							<li><a class="dropdown-item" href="#">Unduh Invoice (PDF)</a></li>
 							<li>
 								<hr class="dropdown-divider" />
 							</li>
-							<li><button data-invoice="<?= $pesanan->id_invoice; ?>" data-seri="<?= $pesanan->seri; ?>" class="dropdown-item hapusOrderan">Hapus</button></li>
+							<li>
+								<?= form_button([
+									'class' 		=> 'dropdown-item tambahBayar',
+									'content' 		=> 'Tambah Pembayaran',
+									'data-invoice' 	=> $pesanan->id_invoice,
+									'data-juragan' 	=> $juragan->id,
+									'data-kurang' 	=> $wajib_bayar - $sudah_bayar,
+									'data-seri' 	=> $pesanan->seri,
+									'data-target' 	=> '#modalTambahBayar',
+									'data-toggle' 	=> 'modal'
+								]); ?>
+							</li>
+							<li>
+								<hr class="dropdown-divider" />
+							</li>
+							<li>
+								<?= form_button([
+									'class' 	=> 'dropdown-item hapusOrderan text-danger',
+									'content' 	=> 'Hapus',
+									'data-invoice' => $pesanan->id_invoice,
+									'data-seri' => $pesanan->seri
+								]); ?>
+							</li>
 						</ul>
 					</div>
 
-					<?php if ($pesanan->status_pembayaran !== '1') { ?>
+					<?php if ($pesanan->status_pembayaran !== '1') {
 
-						<button type="button" data-invoice="<?= $pesanan->id_invoice; ?>" data-toggle="modal" data-target="#modalProgress" class="btn btn-dark ml-1 pesanStatus"><i class="fad fa-comment-alt-plus"></i> Proses Orderan</button>
+						// tombol proses pesanan
+						echo form_button([
+							'class' 		=> 'btn btn-dark ml-1 pesanStatus',
+							'content' 		=> '<i class="fad fa-comment-alt-plus"></i> Proses Orderan',
+							'data-invoice' 	=> $pesanan->id_invoice,
+							'data-seri' 	=> $pesanan->seri,
+							'data-target' 	=> '#modalProgress',
+							'data-toggle' 	=> 'modal'
+						]);
 
-					<?php } ?>
-					<button type="button" data-invoice="<?= $pesanan->id_invoice; ?>" data-juragan="<?= $juragan->id; ?>" data-bayar='<?= $pesanan->pembayaran; ?>' data-toggle="modal" data-target="#modalBayar" class="btn btn-outline-secondary ml-1 pesanBayar"><i class="fad fa-wallet"></i> Cek Pembayaran</button>
+						if ($pesanan->status_pembayaran === '2' or $pesanan->status_pembayaran === '3') {
+							// tombol cek pembayaran
+							// hanya tampil jika ada pembayaran yang perlu dicek
+							echo form_button([
+								'class' 		=> 'btn btn-warning ml-1 pesanBayar',
+								'content' 		=> '<i class="fad fa-wallet"></i> Cek Pembayaran',
+								'data-bayar' 	=> esc($pesanan->pembayaran),
+								'data-invoice' 	=> $pesanan->id_invoice,
+								'data-juragan' 	=> $juragan->id,
+								'data-target' 	=> '#modalBayar',
+								'data-toggle' 	=> 'modal'
+							]);
+						}
+					} ?>
 				</div>
 			</div>
 	<?php
@@ -401,7 +456,7 @@ $pager = \Config\Services::pager();
 	</div>
 </div>
 
-<!-- Modal pembayaran -->
+<!-- Modal cek pembayaran -->
 <div class="modal fade" id="modalBayar" tabindex="-1" aria-labelledby="modalBayarLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -412,40 +467,50 @@ $pager = \Config\Services::pager();
 				</button>
 			</div>
 			<div class="modal-body">
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
-					<li class="nav-item" role="presentation">
-						<a class="nav-link active" id="cek-tab" data-toggle="tab" href="#cek" role="tab" aria-controls="cek" aria-selected="true">Cek</a>
-					</li>
-					<li class="nav-item" role="presentation">
-						<a class="nav-link" id="tambah-tab" data-toggle="tab" href="#tambah" role="tab" aria-controls="tambah" aria-selected="false"><i class="fad fa-plus"></i></a>
-					</li>
-				</ul>
+				<div class="bg-warning p-2 rounded mb-2">
+					Perlu diingat, detail pembayaran tidak bisa dihapus atau diubah
+				</div>
+
+				<div id="cek">...</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal tambah pembayaran -->
+<div class="modal fade" id="modalTambahBayar" tabindex="-1" aria-labelledby="modalTambahBayarLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalTambahBayarLabel">Tambah Pembayaran</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
 				<div class="bg-warning p-2 rounded mt-2">
 					Perlu diingat, detail pembayaran tidak bisa dihapus atau diubah
 				</div>
 
 				<div class="tab-content mt-3" id="myTabContent">
-					<div class="tab-pane fade show active" id="cek" role="tabpanel" aria-labelledby="cek-tab">...</div>
-					<div class="tab-pane fade" id="tambah" role="tabpanel" aria-labelledby="tambah-tab">
-						<?= form_open('', ['id' => 'tambahPembayaran'], ['invoice_id' => '']); ?>
-						<div class="row mb-0 gx-2">
-							<div class="col-6 form-group mb-3">
-								<?= form_label('Tujuan Bayar', 'tujuan', ['class' => 'form-label']); ?>
-								<?= form_dropdown('sumber_dana', [], '', ['class' => 'form-select', 'required' => '', 'id' => 'tujuan']); ?>
-							</div>
-							<div class="col-6 form-group mb-3">
-								<?= form_label('Tanggal Bayar', 'tanggal_bayar', ['class' => 'form-label']); ?>
-								<?= form_input('tanggal_pembayaran', set_value('tanggal_pembayaran', $sekarang->toDateString()), ['class' => 'form-control', 'id' => 'tanggal_pembayaran', 'required' => '', 'max' => $sekarang->toDateString()], 'date'); ?>
-							</div>
-							<div class="col-6 form-group mb-3">
-								<?= form_label('Jumlah Dana', 'jumlah_dana', ['class' => 'form-label']); ?>
-								<?= form_input(['name' => 'total_pembayaran', 'class' => 'form-control', 'id' => 'jumlah_dana', 'required' => '', 'placeholder' => '200000', 'type' => 'number', 'min' => '1']); ?>
-							</div>
+					<?= form_open('', ['id' => 'tambahPembayaran'], ['invoice_id' => '']); ?>
+					<div class="row mb-0 gx-2">
+						<div class="col-6 form-group mb-3">
+							<?= form_label('Tujuan Bayar', 'tujuan', ['class' => 'form-label']); ?>
+							<?= form_dropdown('sumber_dana', [], '', ['class' => 'form-select', 'required' => '', 'id' => 'tujuan']); ?>
 						</div>
-						<hr />
-						<button class="btn btn-primary" type="submit">Simpan</button>
-						<?= form_close(); ?>
+						<div class="col-6 form-group mb-3">
+							<?= form_label('Tanggal Bayar', 'tanggal_bayar', ['class' => 'form-label']); ?>
+							<?= form_input('tanggal_pembayaran', set_value('tanggal_pembayaran', $sekarang->toDateString()), ['class' => 'form-control', 'id' => 'tanggal_pembayaran', 'required' => '', 'max' => $sekarang->toDateString()], 'date'); ?>
+						</div>
+						<div class="col-6 form-group mb-3">
+							<?= form_label('Jumlah Dana', 'jumlah_dana', ['class' => 'form-label']); ?>
+							<?= form_input(['name' => 'total_pembayaran', 'class' => 'form-control', 'id' => 'jumlah_dana', 'required' => '', 'placeholder' => '200000', 'type' => 'number', 'min' => '1']); ?>
+						</div>
 					</div>
+					<hr />
+					<button class="btn btn-primary" type="submit">Simpan</button>
+					<?= form_close(); ?>
 				</div>
 			</div>
 		</div>
@@ -627,20 +692,6 @@ $(function() {
 		let bayar = $(this).data('bayar');
 		let dv_list =$("<div/>").addClass('list-group list-group-flushs').attr('id', 'list_pembayaran');
 
-		// invoice_id
-		$('#myTabContent [name="invoice_id"]').val(id);
-		
-		// set dropdown sumber_dana
-		$.get("$link_api_get_bank" + juragan, function(data, status){
-			// console.log("Data: " + data[0]['fn']);
-
-			var apnd = "";
-			for (var i = 0; i < data.length; i++) {
-				apnd += "<option value = '" + data[i].bank_id + " '>" + data[i].fn + " </option>";
-			}
-			$("#tambahPembayaran #tujuan").empty().append(apnd);
-		});
-
 		// buka tab cek secara default
 		// load data pembayaran jika tersedia
 		// kalau tidak ada data, tampilkan pesan kosong		
@@ -726,6 +777,25 @@ $(function() {
 	});
 
 	// tambah pembayaran
+	$('.tambahBayar').on('click',function(){
+		let juragan = $(this).data('juragan');
+		let id = $(this).data('invoice');
+
+		// invoice_id
+		$('#myTabContent [name="invoice_id"]').val(id);
+		
+		// set dropdown sumber_dana
+		$.get("$link_api_get_bank" + juragan, function(data, status){
+			// console.log("Data: " + data[0]['fn']);
+
+			var apnd = '<option value="">Pilih Tujuan</option>';
+			for (var i = 0; i < data.length; i++) {
+				apnd += "<option value = '" + data[i].bank_id + " '>" + data[i].fn + " </option>";
+			}
+			$("#modalTambahBayar #tujuan").empty().append(apnd);
+		});
+	});
+
 	var req_pay;
 	var tambah_pay=$('#tambahPembayaran');
 	tambah_pay.on('submit',function(f){
@@ -816,8 +886,6 @@ $(function() {
 				document.location.href = msg.url;
 			});
 		}
-
-		alert(id);
 	});
 
 	// create date from unix
