@@ -687,10 +687,10 @@ $(function() {
 
 	// cek pembayaran
 	$('.pesanBayar').on('click',function(){
-		let juragan = $(this).data('juragan');
-		let id = $(this).data('invoice');
-		let bayar = $(this).data('bayar');
-		let dv_list =$("<div/>").addClass('list-group list-group-flushs').attr('id', 'list_pembayaran');
+		let juragan = $(this).data('juragan'),
+			id = $(this).data('invoice'),
+			bayar = $(this).data('bayar'),
+			dv_list =$("<div/>").addClass('list-group list-group-flushs').attr('id', 'list_pembayaran');
 
 		// buka tab cek secara default
 		// load data pembayaran jika tersedia
@@ -778,11 +778,17 @@ $(function() {
 
 	// tambah pembayaran
 	$('.tambahBayar').on('click',function(){
-		let juragan = $(this).data('juragan');
-		let id = $(this).data('invoice');
+		let juragan = $(this).data('juragan'),
+			id = $(this).data('invoice'),
+			kekurangan = $(this).data('kurang'),
+			ttl = $('#myTabContent [name="total_pembayaran"]');
 
 		// invoice_id
 		$('#myTabContent [name="invoice_id"]').val(id);
+		ttl.val('');
+		if (parseInt(kekurangan)>0) {
+			ttl.val(kekurangan);	
+		}
 		
 		// set dropdown sumber_dana
 		$.get("$link_api_get_bank" + juragan, function(data, status){
@@ -796,8 +802,8 @@ $(function() {
 		});
 	});
 
-	var req_pay;
-	var tambah_pay=$('#tambahPembayaran');
+	var req_pay,
+		tambah_pay=$('#tambahPembayaran');
 	tambah_pay.on('submit',function(f){
 		f.preventDefault(),
 		f.stopPropagation();
