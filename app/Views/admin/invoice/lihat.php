@@ -173,7 +173,7 @@ $pager = \Config\Services::pager();
 										$content = '<div class=\'text-right\'>';
 										$content .= 'harga @: <strong>' . number_to_currency($b->harga, 'IDR') . '</strong>';
 										if ($b->qty > 1) {
-											$content .= '<br/>harga total: <strong>' . number_to_currency($b->harga * $b->qty, 'IDR') . '</strong>';
+											$content .= '<br/>harga @ x '.$b->qty.': <strong>' . number_to_currency($b->harga * $b->qty, 'IDR') . '</strong>';
 										}
 										$content .= '</div>';
 
