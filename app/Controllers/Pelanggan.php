@@ -90,16 +90,21 @@ class Pelanggan extends BaseController
         //     throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         // }
 
-        $match = $this->request->getGet('q');
+        $cari = $this->request->getGet('q');
+        $juragan_id = $this->request->getGet('juragan_id');
         $pelanggan     = new PelangganModel();
         $ongkir = new Ongkir();
 
         $builder = $pelanggan->builder();
-        if ($this->request->getVar('q') && $match !== null) {
-            $builder->like('nama_pelanggan', $match, 'both');
-            $builder->orLike('hp', $match, 'both');
+        $builder->join('invoice i', 'i.pelanggan_id=pelanggan.id_pelanggan');
+
+        if ($this->request->getVar('q') && $cari !== null) {
+            $builder->like('nama_pelanggan', $cari, 'both');
+            $builder->orLike('hp', $cari, 'both');
         }
+        $builder->where('i.juragan_id', $juragan_id);
         $builder->limit(10);
+        $builder->groupBy('pelanggan.id_pelanggan');
 
         $s = [];
         $i = 0;
@@ -140,7 +145,7 @@ class Pelanggan extends BaseController
         }
 
         $return = [
-            'query'     => $match,
+            'query'     => $cari,
             'results'   => $s
         ];
 

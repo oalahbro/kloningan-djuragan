@@ -29,6 +29,39 @@ $sekarang = new Time('now');
 	<div class="col-sm-4 mb-3">
 
 		<div class="sticky-top" style="top: 60px">
+		<div class="card mb-3">
+				<div class="card-body">
+					<div class="mb-3">
+						<div class="row gx-2 mb-3">
+							<div class="col">
+								<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
+								<?= form_dropdown('juragan', ['' => 'Pilih Juragan'], '', ['class' => 'form-select', 'id' => 'juragan', 'required' => '']); ?>
+							</div>
+							<div class="col">
+								<?= form_label('Admin/CS', 'pengguna', ['class' => 'form-label']); ?>
+								<?= form_dropdown('pengguna', ['' => 'Pilih Admin/CS'], '', ['class' => 'form-select', 'id' => 'pengguna', 'required' => '']); ?>
+							</div>
+						</div>
+						<div class="row gx-2">
+							<div class="col-sm-5">
+								<?= form_label('Asal Orderan', 'asal_orderan', ['class' => 'form-label']); ?>
+								<?php
+								$options_label = array('' => 'Pilih asal');
+								foreach (config('JuraganConfig')->label as $key => $label) {
+									$options_label[$key] = $label;
+								}
+								?>
+								<?= form_dropdown('asal_orderan', $options_label, '', ['class' => 'form-select', 'id' => 'asal_orderan', 'required' => '']); ?>
+							</div>
+							<div class="col-sm-7">
+								<?= form_label('Label', 'label', ['class' => 'form-label']); ?>
+								<?= form_input('label', '', ['class' => 'form-control', 'id' => 'label', 'placeholder' => 'label - opsional, max: 50 karakter']); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="card mb-3">
 				<div class="card-body">
 					<div class="mb-3">
@@ -36,7 +69,7 @@ $sekarang = new Time('now');
 						<?= form_input('tanggal_order', set_value('tanggal_order', $sekarang->toDateString()), ['class' => 'form-control', 'id' => 'tanggal_order', 'required' => '', 'max' => $sekarang->toDateString()], 'date'); ?>
 					</div>
 					<div class="mb-3">
-						<div class="">
+						<div class="hidden_id">
 							<?= form_label('Pelanggan', 'pelanggan', ['class' => 'form-label']); ?>
 							<?= form_hidden('id_pemesan', ''); ?>
 							<?= form_hidden('id_kirimke', ''); ?>
@@ -91,39 +124,6 @@ $sekarang = new Time('now');
 					<div class="mb-3">
 						<?= form_label('Note / Keterangan', 'keterangan', ['class' => 'form-label']); ?>
 						<?= form_textarea(['name' => 'keterangan', 'id' => 'keterangan', 'class' => 'form-control', 'rows' => '3', 'placeholder' => 'opsional']); ?>
-					</div>
-				</div>
-			</div>
-
-			<div class="card mb-3">
-				<div class="card-body">
-					<div class="mb-3">
-						<div class="row gx-2 mb-3">
-							<div class="col">
-								<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
-								<?= form_dropdown('juragan', ['' => 'Pilih Juragan'], '', ['class' => 'form-select', 'id' => 'juragan', 'required' => '']); ?>
-							</div>
-							<div class="col">
-								<?= form_label('Admin/CS', 'pengguna', ['class' => 'form-label']); ?>
-								<?= form_dropdown('pengguna', ['' => 'Pilih Admin/CS'], '', ['class' => 'form-select', 'id' => 'pengguna', 'required' => '']); ?>
-							</div>
-						</div>
-						<div class="row gx-2">
-							<div class="col-sm-5">
-								<?= form_label('Asal Orderan', 'asal_orderan', ['class' => 'form-label']); ?>
-								<?php
-								$options_label = array('' => 'Pilih asal');
-								foreach (config('JuraganConfig')->label as $key => $label) {
-									$options_label[$key] = $label;
-								}
-								?>
-								<?= form_dropdown('asal_orderan', $options_label, '', ['class' => 'form-select', 'id' => 'asal_orderan', 'required' => '']); ?>
-							</div>
-							<div class="col-sm-7">
-								<?= form_label('Label', 'label', ['class' => 'form-label']); ?>
-								<?= form_input('label', '', ['class' => 'form-control', 'id' => 'label', 'placeholder' => 'label - opsional, max: 50 karakter']); ?>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -409,7 +409,10 @@ $(function() {
 	// cari pelanggan jika ada pelanggan lama repeat order
 	$(".cari_pelanggan").autocomplete({
 		paramName: 'q', // query
-		serviceUrl: '$link_cari_pelanggan', 
+		serviceUrl: '$link_cari_pelanggan',
+		showNoSuggestionNotice: true,
+		noSuggestionNotice: '<p class="p-2 bg-warning">Data tidak ada</p>',
+		// params: {juragan_id: $('[name="juragan"]').val()},
 		transformResult: function(response) {
 			let arr = JSON.parse(response);
 			return {
@@ -446,30 +449,48 @@ $(function() {
 			c+='<span class="d-block">'+ suggestion.data.full + '</span>';
 
 			var form = $('.form_pemesan');
-			if (!form.hasClass("ganti-data-pemesan")) {
+			//
+			//
+			if (($(this).hasClass('kirimKe') && !$(this).hasClass("ganti-data-pemesan")) || ($(this).hasClass("pemesan") && !$(this).hasClass("ganti-data-pemesan")) ) {
 				// sisipkan data kirim kepada
 				$('#alamat_kirimKe').empty().append('<h6 class="text-muted font-weight-normal">Kirim Kepada</h6>' + c),
 				$('.info-data-kirimKe').show(); // tampilkan data alamat kirim Kepada
+
+				$('.form_kirimKe').hide();
+
+				$('.hidden_id [name="id_kirimke"]').val(suggestion.data.id);
 			}
 
-			if (!$(this).hasClass("kirimKe")) {
+			// sisipkan data pemesan
+			// hanya & jika form .pemesan & .ganti-data-pemesan
+			if ($(this).hasClass("pemesan") || $(this).hasClass("ganti-data-pemesan") ) {
 				$('#alamat_pemesan').empty().append('<h6 class="text-muted font-weight-normal">Pemesan</h6>' + c),
 				$('.info-data-pemesan').show(); // tampilkan data alamat pemesan
 				form.hide(); // sembunyikan form cari / tombol tambah pelanggan
+
+				$('.hidden_id [name="id_pemesan"]').val(suggestion.data.id);
 			}
-			else {
-				$('.form_kirimKe').hide();
-			}
+			
 
 			$(this).autocomplete('clear').val(''); // hapus cache dan selected
 		}
 	});
 
+	$('[name="juragan"]').on('change', function() {
+		var id = $(this).val();
+		$(".cari_pelanggan").autocomplete().setOptions({
+			params: { juragan_id: id }
+		});
+	});
+
 	// hapus data pemesan
 	$('.btn-hapus-alamat-pemesan').on('click', function(){
 		$('#alamat_pemesan').empty(); // hapus alamat pemesan
-		$('.form_pemesan').show().addClass('ganti-data-pemesan');
+		$('.form_pemesan').show();
+		$('.cari_pelanggan').show().addClass('ganti-data-pemesan');
 		$('.info-data-pemesan').hide();
+
+		$('.hidden_id [name="id_pemesan"]').val('');
 
 	});
 
@@ -479,6 +500,9 @@ $(function() {
 		$('#alamat_kirimKe').empty();
 		$('.form_kirimKe').show();
 		$('.info-data-kirimKe').hide();
+
+		$('.hidden_id [name="id_kirimke"]').val('');
+
 	});
 
 	// ------------------------------------------------------------------------
