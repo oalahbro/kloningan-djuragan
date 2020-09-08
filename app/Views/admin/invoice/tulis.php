@@ -44,7 +44,7 @@ $sekarang = new Time('now');
 
 						<div class="input-group mb-3 mycustom form_pemesan">
 							<?= form_input([
-								'class' 	=> 'form-control',
+								'class' 	=> 'form-control cari_pelanggan pemesan',
 								'id' 		=> 'cari_pemesan',
 								'placeholder' => 'cari data pelanggan',
 								'type' 		=> 'search'
@@ -67,7 +67,7 @@ $sekarang = new Time('now');
 
 						<div class="input-group mb-3 mycustom form_kirimKe" style="display: none">
 							<?= form_input([
-								'class' 	=> 'form-control',
+								'class' 	=> 'form-control cari_pelanggan kirimKe',
 								'id' 		=> 'cari_kirimKe',
 								'placeholder' => 'cari data pelanggan',
 								'type' 		=> 'search'
@@ -407,7 +407,7 @@ $(function() {
 	// ------------------------------------------------------------------------
 	// autocomplete
 	// cari pelanggan jika ada pelanggan lama repeat order
-	$("#cari_pemesan").autocomplete({
+	$(".cari_pelanggan").autocomplete({
 		paramName: 'q', // query
 		serviceUrl: '$link_cari_pelanggan', 
 		transformResult: function(response) {
@@ -445,23 +445,40 @@ $(function() {
 			c+='</span>';
 			c+='<span class="d-block">'+ suggestion.data.full + '</span>';
 
-			$('#alamat_pemesan').empty().append('<h6 class="text-muted font-weight-normal">Pemesan</h6>' + c),
-			$('#alamat_kirimKe').empty().append('<h6 class="text-muted font-weight-normal">Kirim Kepada</h6>' + c),
-			$('.info-data-pemesan').show(); // tampilkan data alamat pemesan
-			$('.info-data-kirimKe').show(); // tampilkan data alamat kirim Kepada
-			$('#cari_pemesan').autocomplete('clear').val(''); // hapus cache dan selected
-			$('.form_pemesan').hide(); // sembunyikan form cari / tombol tambah pelanggan
+			var form = $('.form_pemesan');
+			if (!form.hasClass("ganti-data-pemesan")) {
+				// sisipkan data kirim kepada
+				$('#alamat_kirimKe').empty().append('<h6 class="text-muted font-weight-normal">Kirim Kepada</h6>' + c),
+				$('.info-data-kirimKe').show(); // tampilkan data alamat kirim Kepada
+			}
+
+			if (!$(this).hasClass("kirimKe")) {
+				$('#alamat_pemesan').empty().append('<h6 class="text-muted font-weight-normal">Pemesan</h6>' + c),
+				$('.info-data-pemesan').show(); // tampilkan data alamat pemesan
+				form.hide(); // sembunyikan form cari / tombol tambah pelanggan
+			}
+			else {
+				$('.form_kirimKe').hide();
+			}
+
+			$(this).autocomplete('clear').val(''); // hapus cache dan selected
 		}
 	});
 
 	// hapus data pemesan
 	$('.btn-hapus-alamat-pemesan').on('click', function(){
-		alert('hapus');
+		$('#alamat_pemesan').empty(); // hapus alamat pemesan
+		$('.form_pemesan').show().addClass('ganti-data-pemesan');
+		$('.info-data-pemesan').hide();
+
 	});
 
 	// hapus data kirim kepada
 	$('.btn-hapus-alamat-kirimKe').on('click', function(){
-		alert('hapus Kirim');
+		// hapus alamat kirimKe
+		$('#alamat_kirimKe').empty();
+		$('.form_kirimKe').show();
+		$('.info-data-kirimKe').hide();
 	});
 
 	// ------------------------------------------------------------------------
