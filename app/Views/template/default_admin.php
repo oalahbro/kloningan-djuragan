@@ -184,15 +184,15 @@ $JSmin = new Minify\JS();
 	.mt-n5 {
 		margin-top: -3.60em;
 	}
-	.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+	.autocomplete-suggestions { border: 1px solid #ced4da; margin-top: 10px; background: #FFF; overflow: auto; border-radius: .25rem}
 	.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #eee; }
 	.autocomplete-selected { background: #F0F0F0; }
 	.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
 	.autocomplete-group { padding: 2px 5px; }
 	.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
 
-	.mycustom input[type="text"] {
-		border-radius: 4px !important;
+	.mycustom input[type="search"] {
+		border-radius: .25rem !important;
 	}
 	.mycustom .btn {
 		position: absolute;
@@ -200,7 +200,7 @@ $JSmin = new Minify\JS();
 		top: 4px;
 		bottom: 4px;
 		z-index: 9;
-		border-radius: 4px !important;
+		border-radius: .25rem !important;
 		padding: 0 15px
 	}
 	

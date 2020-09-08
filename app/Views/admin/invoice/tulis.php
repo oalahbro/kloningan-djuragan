@@ -38,23 +38,54 @@ $sekarang = new Time('now');
 					<div class="mb-3">
 						<div class="">
 							<?= form_label('Pelanggan', 'pelanggan', ['class' => 'form-label']); ?>
-							<?= form_hidden('pelanggan', ''); ?>
+							<?= form_hidden('id_pemesan', ''); ?>
+							<?= form_hidden('id_kirimke', ''); ?>
 						</div>
 
-						<div class="input-group mb-3 mycustom">
-							<input type="text" class="form-control" placeholder="cari" id="nama_pelanggan" aria-label="Recipient's username" aria-describedby="button-addon2">
-							<button class="btn btn-dark" type="button" id="button-addon2"><i class="fad fa-plus"></i> Tambah</button>
+						<div class="input-group mb-3 mycustom form_pemesan">
+							<?= form_input([
+								'class' 	=> 'form-control',
+								'id' 		=> 'cari_pemesan',
+								'placeholder' => 'cari data pelanggan',
+								'type' 		=> 'search'
+							]); ?>
+							<?= form_button([
+								'class' 	=> 'btn btn-dark',
+								'content' 	=> '<i class="fad fa-plus"></i> Tambah',
+								'title' 	=> 'Tambah Pemesan'
+							]); ?>
 						</div>
 
-						<!-- <div class="mb-3 btn-nambahPelanggan">
-							<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modalTambahPelanggan" data-action="1" data-judul="Tambah Pelanggan"><i class="fad fa-plus"></i> Tambah Pelanggan</button>
-						</div> -->
+						<div class="mb-3 info-data-pemesan" style="display: none;">
+							<?= form_button([
+								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat-pemesan',
+								'content' 	=> '<i class="fad fa-trash"></i> <span class="sr-only">Hapus</span>',
+								'title' 	=> 'Hapus Pemesan'
+							]); ?>
+							<span id="alamat_pemesan" class="border rounded p-2 d-block"></span>
+						</div>
 
-						<div class="mb-3">
-							<button class="btn btn-link text-decoration-none btn-sm float-right btn-sunting" type="button" data-toggle="modal" data-target="#modalTambahPelanggan" data-action="2" data-judul="Sunting Pelanggan" style="display:none">
-								<i class="fad fa-pencil"></i>
-							</button>
-							<span id="alamat_pemesan"></span>
+						<div class="input-group mb-3 mycustom form_kirimKe" style="display: none">
+							<?= form_input([
+								'class' 	=> 'form-control',
+								'id' 		=> 'cari_kirimKe',
+								'placeholder' => 'cari data pelanggan',
+								'type' 		=> 'search'
+							]); ?>
+							<?= form_button([
+								'class' 	=> 'btn btn-dark',
+								'content' 	=> '<i class="fad fa-plus"></i> Tambah',
+								'title' 	=> 'Tambah Kirim Kepada'
+							]); ?>
+						</div>
+
+						<div class="mb-3 info-data-kirimKe" style="display: none;">
+							<?= form_button([
+								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat-kirimKe',
+								'content' 	=> '<i class="fad fa-trash"></i> <span class="sr-only">Hapus</span>',
+								'title' 	=> 'Hapus Kirim'
+							]); ?>
+							<span id="alamat_kirimKe" class="border rounded p-2 d-block"></span>
 						</div>
 					</div>
 					<div class="mb-3">
@@ -360,6 +391,8 @@ $(function() {
 		});
 	});
 
+	// ambil data juragan 
+	// ketika klik tombol menu sidebar diatas
 	$('#sidebarCollapse').on('click',function(){
 		$('#listLi').html(''),
 		$.getJSON('$link_api_juragan',function(b){
@@ -371,8 +404,69 @@ $(function() {
 		});
 	});
 
-	// load juragan
 	// ------------------------------------------------------------------------
+	// autocomplete
+	// cari pelanggan jika ada pelanggan lama repeat order
+	$("#cari_pemesan").autocomplete({
+		paramName: 'q', // query
+		serviceUrl: '$link_cari_pelanggan', 
+		transformResult: function(response) {
+			let arr = JSON.parse(response);
+			return {
+				suggestions: $.map(arr.results, function(dataItem) {
+					return { value: dataItem.nama, data: dataItem };
+				})
+			};
+		},
+		formatResult: function (suggestion, currentValue) {
+			// console.log(suggestion.data);
+			let hp = '';
+			let ph = suggestion.data.hp
+			for (let i = 0; i < ph.length; i++) {
+				if (i > 0) {
+					hp+= ' / ';
+				}
+				hp += ph[i];
+			}
+			return '<h6 class="mb-0">' +suggestion.value + '</h6>' + hp + '<br/>' + suggestion.data.full;
+		},
+		onSelect: function (suggestion) {
+			// alert('You selected: ' + suggestion.value + ', ' + suggestion.data.id);
+
+			var c='';
+			c+='<span class="d-block font-weight-bold">'+ suggestion.data.nama +'</span>',
+			c+='<span class="d-block">';
+			$.each(suggestion.data.hp, function (i,v){
+				if(i>0) {
+					c+='<span> / </span>'; // pemisah nomor hp
+				}
+				c+=v;				
+			});
+			c+='</span>';
+			c+='<span class="d-block">'+ suggestion.data.full + '</span>';
+
+			$('#alamat_pemesan').empty().append('<h6 class="text-muted font-weight-normal">Pemesan</h6>' + c),
+			$('#alamat_kirimKe').empty().append('<h6 class="text-muted font-weight-normal">Kirim Kepada</h6>' + c),
+			$('.info-data-pemesan').show(); // tampilkan data alamat pemesan
+			$('.info-data-kirimKe').show(); // tampilkan data alamat kirim Kepada
+			$('#cari_pemesan').autocomplete('clear').val(''); // hapus cache dan selected
+			$('.form_pemesan').hide(); // sembunyikan form cari / tombol tambah pelanggan
+		}
+	});
+
+	// hapus data pemesan
+	$('.btn-hapus-alamat-pemesan').on('click', function(){
+		alert('hapus');
+	});
+
+	// hapus data kirim kepada
+	$('.btn-hapus-alamat-kirimKe').on('click', function(){
+		alert('hapus Kirim');
+	});
+
+	// ------------------------------------------------------------------------
+	// load juragan
+	// embed langsung ke form select - dropdown
 	$.ajax({
 		method:'GET',
 		url:'$link_api_juragan'
@@ -382,8 +476,9 @@ $(function() {
 		;});
 	});
 
-	// load admin/cs
 	// ------------------------------------------------------------------------
+	// load admin/cs
+	// embed langsung ke form select - dropdown
 	$.ajax({
 		method:'GET',
 		url:'$link_api_pengguna'
@@ -415,35 +510,7 @@ $(function() {
 				$('<option />',{value:a.province_id,text:a.province}).appendTo(b);
 			});
 		});
-	});
-
-	// autocomplete
-	$("#nama_pelanggan").autocomplete({
-		paramName: 'q',
-		serviceUrl: '$link_cari_pelanggan',
-		transformResult: function(response) {
-			let arr = JSON.parse(response);
-			return {
-				suggestions: $.map(arr.results, function(dataItem) {
-					return { value: dataItem.nama, data: dataItem };
-				})
-			};
-		},
-		formatResult: function (suggestion, currentValue) {
-			// console.log(suggestion.data);
-			let hp = '';
-			let ph = suggestion.data.hp
-			for (let i = 0; i < ph.length; i++) {
-				if (i > 0) {
-					hp+= ' / ';
-				}
-				hp += ph[i];
-				
-			}
-			return '<h6 class="mb-0">' +suggestion.value + '</h6>' + hp + '<br/>' + suggestion.data.full;
-		}
-	});
-	
+	});	
 
 	$(document).on("keyup change", '.swictCOD',function(){
         if(this.checked) {
