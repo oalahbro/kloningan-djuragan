@@ -40,9 +40,15 @@ $sekarang = new Time('now');
 							<?= form_label('Pelanggan', 'pelanggan', ['class' => 'form-label']); ?>
 							<?= form_hidden('pelanggan', ''); ?>
 						</div>
-						<div class="mb-3 btn-nambahPelanggan">
-							<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modalTambahPelanggan" data-action="1" data-judul="Tambah Pelanggan"><i class="fad fa-plus"></i> Tambah Pelanggan</button>
+
+						<div class="input-group mb-3 mycustom">
+							<input type="text" class="form-control" placeholder="cari" id="nama_pelanggan" aria-label="Recipient's username" aria-describedby="button-addon2">
+							<button class="btn btn-dark" type="button" id="button-addon2"><i class="fad fa-plus"></i> Tambah</button>
 						</div>
+
+						<!-- <div class="mb-3 btn-nambahPelanggan">
+							<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modalTambahPelanggan" data-action="1" data-judul="Tambah Pelanggan"><i class="fad fa-plus"></i> Tambah Pelanggan</button>
+						</div> -->
 
 						<div class="mb-3">
 							<button class="btn btn-link text-decoration-none btn-sm float-right btn-sunting" type="button" data-toggle="modal" data-target="#modalTambahPelanggan" data-action="2" data-judul="Sunting Pelanggan" style="display:none">
@@ -93,180 +99,67 @@ $sekarang = new Time('now');
 		</div>
 	</div>
 	<div class="col-sm-8 mb-3">
-		<div class="card mb-3">
-			<div class="card-header">
-				<ul class="nav nav-tabs card-header-tabs">
-					<li class="nav-item">
-						<span class="nav-link active" aria-current="true">Orderan</span>
-					</li>
-					<li class="nav-item">
-						<a href="#!" class="nav-link" data-toggle="modal" data-target="#tambahProduk">
-							<i class="fad fa-plus"></i>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th scope="col">Produk</th>
-								<th scope="col">Harga</th>
-								<th scope="col">QTY</th>
-								<th scope="col" class="text-right">Subtotal</th>
-							</tr>
-						</thead>
-						<tbody class="list-orderan" data-length="1">
-							<tr class="orderan-kosong">
-								<td class="text-center" colspan="4">
-									<div class="py-5"><i class="fad text-warning fa-<?= random_element(['shopping-cart', 'shopping-bag', 'shopping-basket', 'bags-shopping', 'dolly-flatbed-empty', 'dolly-empty']) ?> fa-4x"></i>
-										<p class="mb-0"><?= random_element(['orderan kosong?', 'isi dulu orderannya ya?', 'jangan lupa isi orderannya ya?']) ?></p>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-						<tfoot class="customBiaya d-none listBiaya">
-							<tr>
-								<td colspan="3" class="text-right">Subtotal</td>
-								<td class="text-right" data-totalbiaya="0" data-subtotal="0" id="subTotal"></td>
-							</tr>
-						</tfoot>
-					</table>
+		<div class="sticky-top" style="top: 60px">
+			<div class="card mb-3">
+				<div class="card-header">
+					<ul class="nav nav-tabs card-header-tabs">
+						<li class="nav-item">
+							<span class="nav-link active" aria-current="true">Orderan</span>
+						</li>
+						<li class="nav-item">
+							<a href="#!" class="nav-link" data-toggle="modal" data-target="#tambahProduk">
+								<i class="fad fa-plus"></i>
+							</a>
+						</li>
+					</ul>
 				</div>
-
-				<div class="border-bottom pb-3 customBiaya d-none">
-					<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder" data-biayaID="1" data-judul="Ongkir" data-operasi="1"><i class="fad fa-plus"></i> Ongkir</button>
-					<button type="button" class="btn btn-sm btn-outline-primary" data-target="#biayaOrder" data-toggle="modal" data-biayaID="2" data-judul="Lain-lain" data-operasi="1"><i class="fad fa-plus"></i> Biaya Lain</button>
-				</div>
-				<div class="customBiaya d-none">
-					<div class="d-flex justify-content-between align-items-center">
-						<h6 class="font-weight-bold">TOTAL</h6>
-						<div class="h2 text-primary" id="grandTotal"></div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Produk</th>
+									<th scope="col">Harga</th>
+									<th scope="col">QTY</th>
+									<th scope="col" class="text-right">Subtotal</th>
+								</tr>
+							</thead>
+							<tbody class="list-orderan" data-length="1">
+								<tr class="orderan-kosong">
+									<td class="text-center" colspan="4">
+										<div class="py-5"><i class="fad text-warning fa-<?= random_element(['shopping-cart', 'shopping-bag', 'shopping-basket', 'bags-shopping', 'dolly-flatbed-empty', 'dolly-empty']) ?> fa-4x"></i>
+											<p class="mb-0"><?= random_element(['orderan kosong?', 'isi dulu orderannya ya?', 'jangan lupa isi orderannya ya?']) ?></p>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+							<tfoot class="customBiaya d-none listBiaya">
+								<tr>
+									<td colspan="3" class="text-right">Subtotal</td>
+									<td class="text-right" data-totalbiaya="0" data-subtotal="0" id="subTotal"></td>
+								</tr>
+							</tfoot>
+						</table>
 					</div>
-				</div>
-			</div>
-		</div>
 
-		<div class="mb-3 row">
-			<div class="col-sm-6">
-				<div class="card">
-					<div class="card-header">
-						<ul class="nav nav-tabs card-header-tabs">
-							<li class="nav-item">
-								<span class="nav-link active" aria-current="true">Pembayaran</span>
-							</li>
-							<li class="nav-item">
-								<a href="#!" class="nav-link" aria-current="false"><i class="fad fa-plus"></i></a>
-							</li>
-						</ul>
+					<div class="border-bottom pb-3 customBiaya d-none">
+						<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder" data-biayaID="1" data-judul="Ongkir" data-operasi="1"><i class="fad fa-plus"></i> Ongkir</button>
+						<button type="button" class="btn btn-sm btn-outline-primary" data-target="#biayaOrder" data-toggle="modal" data-biayaID="2" data-judul="Lain-lain" data-operasi="1"><i class="fad fa-plus"></i> Biaya Lain</button>
 					</div>
-					<div class="card-body">
-						<div class="list-group list-group-flush">
-							<div class="list-group-item d-flex justify-content-between">
-								<div class="d-flex align-items-center">
-									<div class="mr-2">
-										<i class="fad fa-times-circle text-danger fa-2x"></i>
-									</div>
-									<div>
-										<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
-										<small class="text-muted">BCA - 490853549</small>
-									</div>
-								</div>
-								<div>
-									<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-										<i class="fad fa-ellipsis-h"></i>
-									</button>
-									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-										<li><a class="dropdown-item" href="#">Action</a></li>
-										<li><a class="dropdown-item" href="#">Another action</a></li>
-										<li><a class="dropdown-item" href="#">Something else here</a></li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="list-group-item d-flex justify-content-between">
-								<div class="d-flex align-items-center">
-									<div class="mr-2">
-										<i class="fad fa-check-circle text-success fa-2x"></i>
-									</div>
-									<div>
-										<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
-										<small class="text-muted">BCA - 490853549</small>
-									</div>
-								</div>
-								<div>
-									<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-										<i class="fad fa-ellipsis-h"></i>
-									</button>
-									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-										<li><a class="dropdown-item" href="#">Action</a></li>
-										<li><a class="dropdown-item" href="#">Another action</a></li>
-										<li><a class="dropdown-item" href="#">Something else here</a></li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="list-group-item d-flex justify-content-between">
-								<div class="d-flex align-items-center">
-									<div class="mr-2">
-										<i class="fad fa-circle fa-2x"></i>
-									</div>
-									<div>
-										<div class="font-weight-bold">Rp 20.000 <span class="font-weight-normal">( 20/7/2020 )</span></div>
-										<small class="text-muted">BCA - 490853549</small>
-									</div>
-								</div>
-								<div>
-									<button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-										<i class="fad fa-ellipsis-h"></i>
-									</button>
-									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-										<li><a class="dropdown-item" href="#">Action</a></li>
-										<li><a class="dropdown-item" href="#">Another action</a></li>
-										<li><a class="dropdown-item" href="#">Something else here</a></li>
-									</ul>
-								</div>
-							</div>
+					<div class="customBiaya d-none">
+						<div class="d-flex justify-content-between align-items-center">
+							<h6 class="font-weight-bold">TOTAL</h6>
+							<div class="h2 text-primary" id="grandTotal"></div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-6">
-				<div class="card">
-					<div class="card-header">
-						<ul class="nav nav-tabs card-header-tabs">
-							<li class="nav-item">
-								<span class="nav-link active" aria-current="true">Pengiriman</span>
-							</li>
-							<li class="nav-item">
-								<a href="#!" class="nav-link" aria-current="false"><i class="fad fa-plus"></i></a>
-							</li>
-						</ul>
-					</div>
-					<div class="card-body">
-						<div class="row g-3">
-							<div class="col">
-								<label for="juragan_id" class="form-label">Status Pengiriman</label>
-								<select name="juragan_id" id="juragan_id" class="form-select" required="">
-									<option selected="selected" value="1">Belum Dikirim</option>
-									<option value="2">Sebagian Dikirim</option>
-									<option value="3">Sudah Dikirim Semua</option>
-								</select>
-							</div>
-							<div class="col">
 
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<hr />
+			<button type="submit" class="btn btn-primary btn-block text-uppercase">
+				<i class="fad fa-save"></i> Simpan
+			</button>
 		</div>
-
-		<hr />
-		<button type="submit" class="btn btn-primary btn-block text-uppercase">
-			<i class="fad fa-save"></i> Simpan
-		</button>
 	</div>
 	<?= form_close(); ?>
 
@@ -286,6 +179,8 @@ $sekarang = new Time('now');
 			<div class="mb-3">
 				<?= form_label('Nama Pelanggan', 'nama_pelanggan', ['class' => 'form-label']); ?>
 				<?= form_input('nama_pelanggan', '', ['class' => 'form-control input', 'id' => 'nama_pelanggan', 'required' => '', 'placeholder' => 'nama pelanggan', 'autocomplete' => 'off']); ?>
+
+				<div id="auto-results"></div>
 			</div>
 			<div class="row gx-2 mb-3">
 				<div class="col-6">
@@ -445,6 +340,7 @@ $link_api_pengguna = site_url('api/get_pengguna');
 $link_api_provinsi = site_url('rajaongkir/provinsi');
 $link_api_kota = site_url('rajaongkir/kota');
 $link_api_kecamatan = site_url('rajaongkir/kecamatan');
+$link_cari_pelanggan = site_url('pelanggan/cari');
 $link_post_pelanggan = site_url('pelanggan/baru');
 $link_invoice = site_url('admin/invoices/lihat/');
 $link_api_invoice = site_url('admin/invoices/save');
@@ -520,6 +416,34 @@ $(function() {
 			});
 		});
 	});
+
+	// autocomplete
+	$("#nama_pelanggan").autocomplete({
+		paramName: 'q',
+		serviceUrl: '$link_cari_pelanggan',
+		transformResult: function(response) {
+			let arr = JSON.parse(response);
+			return {
+				suggestions: $.map(arr.results, function(dataItem) {
+					return { value: dataItem.nama, data: dataItem };
+				})
+			};
+		},
+		formatResult: function (suggestion, currentValue) {
+			// console.log(suggestion.data);
+			let hp = '';
+			let ph = suggestion.data.hp
+			for (let i = 0; i < ph.length; i++) {
+				if (i > 0) {
+					hp+= ' / ';
+				}
+				hp += ph[i];
+				
+			}
+			return '<h6 class="mb-0">' +suggestion.value + '</h6>' + hp + '<br/>' + suggestion.data.full;
+		}
+	});
+	
 
 	$(document).on("keyup change", '.swictCOD',function(){
         if(this.checked) {
@@ -900,6 +824,6 @@ JS;
 
 $packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();
-echo '<script>' . $packed_js . '</script>';
+echo '<script>' . $js . '</script>';
 ?>
 <?= $this->endSection() ?>
