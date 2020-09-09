@@ -501,6 +501,7 @@ $(function() {
 				$('.info-data-kirimKe').hide();
 
 				$(".cari_pelanggan").removeClass('ganti-data-pemesan');
+				$('#tambah_pemesan').attr("id","tambah_pemesan_kirimKe");
 			}
 		}
 		else if($(this).hasClass("kirimKe")) {
@@ -516,6 +517,7 @@ $(function() {
 				$('.form_kirimKe').hide();
 
 				$(".cari_pelanggan").removeClass('ganti-data-kirimKe');
+				$('#tambah_pemesan').attr("id","tambah_pemesan_kirimKe");
 			}
 		}
 	});
