@@ -408,18 +408,27 @@ $(function() {
 	// autocomplete
 	// cari pelanggan jika ada pelanggan lama repeat order
 	$(".cari_pelanggan").autocomplete({
-		paramName: 'q', // query
-		serviceUrl: '$link_cari_pelanggan',
 		showNoSuggestionNotice: true,
 		noSuggestionNotice: '<p class="p-2 bg-warning">Data tidak ada</p>',
-		// params: {juragan_id: $('[name="juragan"]').val()},
-		transformResult: function(response) {
-			let arr = JSON.parse(response);
-			return {
-				suggestions: $.map(arr.results, function(dataItem) {
-					return { value: dataItem.nama, data: dataItem };
-				})
-			};
+		lookup: function (query, done) {
+			// Do Ajax call or lookup locally, when done,
+			// call the callback and pass your results:
+			var result = null;
+			$.ajax({
+				'async': false,
+				'type': "GET",
+				'url': "$link_cari_pelanggan",
+				'data': { 'q': query, 'juragan_id': $('[name="juragan"]').val()},
+				'success': function (data) {
+					result =  {
+						suggestions: $.map(data.results, function(item) {
+							return { value: item.nama, data: item };
+						})
+					};
+				}
+			});
+
+			done(result);
 		},
 		formatResult: function (suggestion, currentValue) {
 			// console.log(suggestion.data);
@@ -449,10 +458,9 @@ $(function() {
 			c+='<span class="d-block">'+ suggestion.data.full + '</span>';
 
 			var form = $('.form_pemesan');
-			//
-			//
+			// sisipkan data kirim kepada
+			// hanya & jika input tidak memiliki .ganti-data-pemesan
 			if (!$(this).hasClass("ganti-data-pemesan")) {
-				// sisipkan data kirim kepada
 				$('#alamat_kirimKe').empty().append('<h6 class="text-muted font-weight-normal">Kirim Kepada</h6>' + c),
 				$('.info-data-kirimKe').show(); // tampilkan data alamat kirim Kepada
 
@@ -471,16 +479,8 @@ $(function() {
 				$('.hidden_id [name="id_pemesan"]').val(suggestion.data.id);
 			}
 			
-
 			$(this).autocomplete('clear').val(''); // hapus cache dan selected
 		}
-	});
-
-	$('[name="juragan"]').on('change', function() {
-		var id = $(this).val();
-		$(".cari_pelanggan").autocomplete().setOptions({
-			params: { juragan_id: id }
-		});
 	});
 
 	// hapus data pemesan

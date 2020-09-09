@@ -12,7 +12,7 @@ class InvoiceModel extends Model
 	protected $returnType = 'object';
 	protected $useSoftDeletes = true;
 
-	protected $allowedFields = ['seri', 'tanggal_pesan', 'pelanggan_id', 'juragan_id', 'user_id', 'status_pesanan', 'status_pembayaran', 'status_pengiriman', 'keterangan'];
+	protected $allowedFields = ['seri', 'tanggal_pesan', 'pemesan_id', 'juragan_id', 'user_id', 'status_pesanan', 'status_pembayaran', 'status_pengiriman', 'keterangan'];
 
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';
@@ -36,7 +36,7 @@ class InvoiceModel extends Model
 
 		$inv->select('CONCAT("{","\"id\":",i.user_id,",","\"nama\":\"",u.name,"\"",",","\"username\":\"",u.username,"\"",,"}") as pengguna');
 
-		$inv->select('CONCAT("{","\"id\":",i.pelanggan_id,",","\"nama\":\"",p.nama_pelanggan,"\"",",","\"hp\":",p.hp,",","\"cod\":",p.cod,",","\"alamat\":\"",IFNULL(p.alamat, "null"),"\"",",","\"kecamatan\":",IFNULL(p.kecamatan,"null"),",","\"kabupaten\":",IFNULL(p.kabupaten,"null"),",","\"provinsi\":",IFNULL(p.provinsi,"null"),",","\"kodepos\":\"",IFNULL(p.kodepos,"null"),"\"","}") as pelanggan');
+		$inv->select('CONCAT("{","\"id\":",i.pemesan_id,",","\"nama\":\"",p.nama_pelanggan,"\"",",","\"hp\":",p.hp,",","\"cod\":",p.cod,",","\"alamat\":\"",IFNULL(p.alamat, "null"),"\"",",","\"kecamatan\":",IFNULL(p.kecamatan,"null"),",","\"kabupaten\":",IFNULL(p.kabupaten,"null"),",","\"provinsi\":",IFNULL(p.provinsi,"null"),",","\"kodepos\":\"",IFNULL(p.kodepos,"null"),"\"","}") as pelanggan');
 
 		$inv->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","\"id\":",b.id_beli,",","\"stok_id\":","\"",IFNULL(b.stok_id, "null"),"\",","\"kode\":\"",b.kode,"\",","\"ukuran\":\"",b.ukuran,"\",","\"harga\":",b.harga, ",","\"qty\":",b.qty,"}")),"]") as barang');
 
@@ -48,7 +48,7 @@ class InvoiceModel extends Model
 
 		$inv->join('juragan j', 'j.id_juragan = i.juragan_id');
 		$inv->join('user u', 'u.id = i.user_id');
-		$inv->join('pelanggan p', 'p.id_pelanggan = i.pelanggan_id');
+		$inv->join('pelanggan p', 'p.id_pelanggan = i.pemesan_id');
 		$inv->join('label_invoice l', 'l.invoice_id = i.id_invoice');
 		$inv->join('pembayaran x', 'x.invoice_id = i.id_invoice', 'left');
 		$inv->join('dibeli b', 'b.invoice_id = i.id_invoice', 'left');

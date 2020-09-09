@@ -40,7 +40,7 @@ class PelangganModel extends Model
     {
         $builder = $this->db->table($this->table . ' p');
         $builder->select('i.juragan_id, p.*');
-        $builder->join('invoice i', 'i.pelanggan_id=p.id_pelanggan');
+        $builder->join('invoice i', 'i.pemesan_id=p.id_pelanggan');
 
         if ($cari !== null or $cari !== '') {
             $builder->like('p.nama_pelanggan', $cari, 'both');
