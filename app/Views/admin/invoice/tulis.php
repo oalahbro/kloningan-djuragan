@@ -625,7 +625,7 @@ $(function() {
 			c+='<span class="d-block">';
 			$.each(response.hp, function (i,v){
 				if(i==1) {
-					c+='<span class="sr-only"> / </span><span class="mr-3"></span>';
+					c+='<span> / </span>';
 				}
 				c+=v;				
 			});
@@ -641,8 +641,8 @@ $(function() {
 
 			if (form.hasClass('tambah_pemesan_kirimKe')) {
 				// sisipkan dikedua
-				$('#alamat_pemesan').empty().append(c);
-				$('#alamat_kirimKe').empty().append(c);
+				$('#alamat_pemesan').empty().append('<h6 class="text-muted font-weight-normal">Pemesan</h6>' + c);
+				$('#alamat_kirimKe').empty().append('<h6 class="text-muted font-weight-normal">Kirim Kepada</h6>' + c);
 
 				$('.hidden_id [name="id_pemesan"]').val(response.id_pelanggan);
 				$('.hidden_id [name="id_kirimKe"]').val(response.id_pelanggan);
@@ -657,7 +657,7 @@ $(function() {
 			}
 			else if (form.hasClass('tambah_pemesan')) {
 				// sisipkan hanya untuk pemesan
-				$('#alamat_pemesan').empty().append(c);
+				$('#alamat_pemesan').empty().append('<h6 class="text-muted font-weight-normal">Pemesan</h6>' + c);
 				$('.hidden_id [name="id_pemesan"]').val(response.id_pelanggan);
 
 				$('.form_pemesan').hide();
@@ -665,7 +665,7 @@ $(function() {
 			}
 			else if (form.hasClass('tambah_kirimKe')) {
 				// sisipkan hanya untuk kirim kepada
-				$('#alamat_kirimKe').empty().append(c);
+				$('#alamat_kirimKe').empty().append('<h6 class="text-muted font-weight-normal">Kirim Kepada</h6>' + c);
 				$('.hidden_id [name="id_kirimKe"]').val(response.id_pelanggan);
 
 				$('.form_kirimKe').hide();
