@@ -85,7 +85,10 @@ $sekarang = new Time('now');
 							<?= form_button([
 								'class' 	=> 'btn btn-dark',
 								'content' 	=> '<i class="fad fa-plus"></i> Tambah',
-								'title' 	=> 'Tambah Pemesan'
+								'data-target' => '#modalTambahPelanggan',
+								'data-toggle' => 'modal',
+								'id' 		=> 'tambah_pemesan_kirimKe',
+								'title' 	=> 'Tambah Data Pemesan'
 							]); ?>
 						</div>
 
@@ -108,7 +111,10 @@ $sekarang = new Time('now');
 							<?= form_button([
 								'class' 	=> 'btn btn-dark',
 								'content' 	=> '<i class="fad fa-plus"></i> Tambah',
-								'title' 	=> 'Tambah Kirim Kepada'
+								'data-target' => '#modalTambahPelanggan',
+								'data-toggle' => 'modal',
+								'id' 		=> 'tambah_kirimKe',
+								'title' 	=> 'Tambah Data Kirim Kepada'
 							]); ?>
 						</div>
 
@@ -543,9 +549,11 @@ $(function() {
 	var mpel=document.getElementById('modalTambahPelanggan');
 	mpel.addEventListener('show.bs.modal',function(g){
 		var a=g.relatedTarget,
-			c=a.getAttribute('data-judul'),
+			c=a.getAttribute('title'),
+			d=a.getAttribute('id'),
 			e=mpel.querySelector('.modal-title');
 		e.textContent=c;
+		$('#tambahPelanggan').addClass(d);
 	});
 
 	var CoN = document.getElementById('nonCOD');
@@ -576,32 +584,44 @@ $(function() {
 
 	var kab=mpel.querySelector('#modalTambahPelanggan [name="kabupaten"]'),
 		kec=mpel.querySelector('#modalTambahPelanggan [name="kecamatan"]'),
-		fpel=$('#tambahPelanggan');
-	fpel.on('submit',function(b){
-		b.preventDefault(),
-		b.stopPropagation();
+		fpel=$('#tambahPelanggan'),
+		request_pelanggan;
 
-		var s=$('#tambahPelanggan .submit'),
-			l=$('#tambahPelanggan .loading'),
-			f=$('#tambahPelanggan .input');
+	fpel.on('submit',function(event){
+		// Prevent default posting of form - put here to work in case of errors
+		event.preventDefault();
 
-		$(l).show(),
-		$(s).hide(),
-		$(f).attr('readonly',true);
+		// Abort any pending request
+		if (request_pelanggan) {
+			request_pelanggan.abort();
+		}
+		// setup some local variables
+		var form = $(this);
 
-		//
-		var fd=$(fpel).serialize();
-		$.ajax({
-			method:'POST',
-			url:'$link_post_pelanggan',
-			data:fd,
-			dataType: "json"
-		})
-		.done(function(a){
+		// Let's select and cache all the fields
+		var inputs = form.find("input, select, button, textarea");
+
+		// Serialize the data in the form
+		var serializedData = form.serialize();
+
+		// Let's disable the inputs for the duration of the Ajax request.
+		// Note: we disable elements AFTER the form data has been serialized.
+		// Disabled form elements will not be serialized.
+		inputs.prop("disabled", true);
+
+		// Fire off the request to /form.php
+		request_pelanggan = $.ajax({
+			url: "$link_post_pelanggan",
+			type: "post",
+			data: serializedData
+		});
+
+		// Callback handler that will be called on success
+		request_pelanggan.done(function (response, textStatus, jqXHR){
 			var c='';
-			c+='<span class="d-block font-weight-bold">'+a.nama_pelanggan+'</span>',
+			c+='<span class="d-block font-weight-bold">'+response.nama_pelanggan+'</span>',
 			c+='<span class="d-block">';
-			$.each(a.hp, function (i,v){
+			$.each(response.hp, function (i,v){
 				if(i==1) {
 					c+='<span class="sr-only"> / </span><span class="mr-3"></span>';
 				}
@@ -609,38 +629,63 @@ $(function() {
 			});
 			c+='</span>';
 			c+='<span class="d-block">';
-			if (a.cod === '0') {
-				c+=a.alamat+', '+ a.nama_kecamatan+', '+a.nama_kabupaten +', '+ a.nama_provinsi+', '+ a.kodepos;
+			if (response.cod === '0') {
+				c+=response.alamat+', '+ response.nama_kecamatan+', '+response.nama_kabupaten +', '+ response.nama_provinsi+', '+response.kodepos;
 			}
 			else {
 				c+= 'C.O.D';
 			}
-			c+='</span>',
-			$('#alamat_pemesan').empty(),
-			$(c).appendTo('#alamat_pemesan');
-			if ($('#tambahPelanggan [name="id_pelanggan"]').length > 0) {
-				$(this).remove();
-			} else {
-				$('<input>').attr({
-					type: 'hidden',
-					name: 'id_pelanggan',
-					value: a.id_pelanggan
-				}).appendTo(fpel);
-			}
+			c+='</span>';
 
-			$('[name="pelanggan"]').val(a.id_pelanggan),
-			$(mpel).modal('hide'),
-			$('.btn-nambahPelanggan').hide(),
-			$('#alamat_pemesan').addClass('border rounded p-2 d-block'),
-			$('.btn-sunting').show(),
-			$(l).hide(),
-			$(s).show(),
-			$(f).attr('readonly',false);
-		})
-		.fail(function(a,b,c) {
-			$(l).hide(),
-			$(s).show(),
-			$(f).attr('readonly',false);
+			if (form.hasClass('tambah_pemesan_kirimKe')) {
+				// sisipkan dikedua
+				$('#alamat_pemesan').empty().append(c);
+				$('#alamat_kirimKe').empty().append(c);
+
+				$('.hidden_id [name="id_pemesan"]').val(response.id_pelanggan);
+				$('.hidden_id [name="id_kirimKe"]').val(response.id_pelanggan);
+
+				$('.form_pemesan').hide();
+
+				$('.info-data-pemesan').show();
+				$('.info-data-kirimKe').show();
+
+				form.removeClass('tambah_pemesan_kirimKe'),
+				$('#tambah_pemesan_kirimKe').attr("id","tambah_pemesan");
+			}
+			else if (form.hasClass('tambah_pemesan')) {
+				// sisipkan hanya untuk pemesan
+				$('#alamat_pemesan').empty().append(c);
+				$('.hidden_id [name="id_pemesan"]').val(response.id_pelanggan);
+
+				$('.form_pemesan').hide();
+				$('.info-data-pemesan').show();
+			}
+			else if (form.hasClass('tambah_kirimKe')) {
+				// sisipkan hanya untuk kirim kepada
+				$('#alamat_kirimKe').empty().append(c);
+				$('.hidden_id [name="id_kirimKe"]').val(response.id_pelanggan);
+
+				$('.form_kirimKe').hide();
+				$('.info-data-kirimKe').show();
+			}
+			$(mpel).modal('hide');
+		});
+
+		// Callback handler that will be called on failure
+		request_pelanggan.fail(function (jqXHR, textStatus, errorThrown){
+			// Log the error to the console
+			console.error(
+				"The following error occurred: "+
+				textStatus, errorThrown
+			);
+		});
+
+		// Callback handler that will be called regardless
+		// if the request failed or succeeded
+		request_pelanggan.always(function () {
+			// Reenable the inputs
+			inputs.prop("disabled", false);
 		});
 	}),
 	$('select[name="provinsi"]').on('change',function(){
