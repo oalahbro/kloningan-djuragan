@@ -23,7 +23,12 @@ class AddInvoice extends \CodeIgniter\Database\Migration {
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE,
 			],
-			'pelanggan_id' => [
+			'pemesan_id' => [
+				'type'           => 'INT',
+				'constraint' 	 => 11,
+				'unsigned' 		 => TRUE,
+			],
+			'kirimKepada_id' => [
 				'type'           => 'INT',
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE,
