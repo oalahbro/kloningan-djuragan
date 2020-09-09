@@ -431,7 +431,6 @@ $(function() {
 			done(result);
 		},
 		formatResult: function (suggestion, currentValue) {
-			// console.log(suggestion.data);
 			let hp = '';
 			let ph = suggestion.data.hp
 			for (let i = 0; i < ph.length; i++) {
@@ -443,8 +442,6 @@ $(function() {
 			return '<h6 class="mb-0">' +suggestion.value + '</h6>' + hp + '<br/>' + suggestion.data.full;
 		},
 		onSelect: function (suggestion) {
-			// alert('You selected: ' + suggestion.value + ', ' + suggestion.data.id);
-
 			var c='';
 			c+='<span class="d-block font-weight-bold">'+ suggestion.data.nama +'</span>',
 			c+='<span class="d-block">';
@@ -515,10 +512,7 @@ $(function() {
 				$(".cari_pelanggan").removeClass('ganti-data-kirimKe');
 			}
 		}
-
-		
 	});
-
 
 	// ------------------------------------------------------------------------
 	// load juragan
