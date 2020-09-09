@@ -29,7 +29,7 @@ $sekarang = new Time('now');
 	<div class="col-sm-4 mb-3">
 
 		<div class="sticky-top" style="top: 60px">
-		<div class="card mb-3">
+			<div class="card mb-3">
 				<div class="card-body">
 					<div class="mb-3">
 						<div class="row gx-2 mb-3">
@@ -72,7 +72,7 @@ $sekarang = new Time('now');
 						<div class="hidden_id">
 							<?= form_label('Pelanggan', 'pelanggan', ['class' => 'form-label']); ?>
 							<?= form_hidden('id_pemesan', ''); ?>
-							<?= form_hidden('id_kirimke', ''); ?>
+							<?= form_hidden('id_kirimKe', ''); ?>
 						</div>
 
 						<div class="input-group mb-3 mycustom form_pemesan">
@@ -91,7 +91,7 @@ $sekarang = new Time('now');
 
 						<div class="mb-3 info-data-pemesan" style="display: none;">
 							<?= form_button([
-								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat-pemesan',
+								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
 								'content' 	=> '<i class="fad fa-trash"></i> <span class="sr-only">Hapus</span>',
 								'title' 	=> 'Hapus Pemesan'
 							]); ?>
@@ -114,7 +114,7 @@ $sekarang = new Time('now');
 
 						<div class="mb-3 info-data-kirimKe" style="display: none;">
 							<?= form_button([
-								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat-kirimKe',
+								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
 								'content' 	=> '<i class="fad fa-trash"></i> <span class="sr-only">Hapus</span>',
 								'title' 	=> 'Hapus Kirim'
 							]); ?>
@@ -466,12 +466,12 @@ $(function() {
 
 				$('.form_kirimKe').hide();
 
-				$('.hidden_id [name="id_kirimke"]').val(suggestion.data.id);
+				$('.hidden_id [name="id_kirimKe"]').val(suggestion.data.id);
 			}
 
 			// sisipkan data pemesan
 			// hanya & jika form .pemesan & .ganti-data-pemesan
-			if ($(this).hasClass("pemesan") || $(this).hasClass("ganti-data-pemesan") ) {
+			if ($(this).hasClass("pemesan") || $(this).hasClass("ganti-data-pemesan")  ) {
 				$('#alamat_pemesan').empty().append('<h6 class="text-muted font-weight-normal">Pemesan</h6>' + c),
 				$('.info-data-pemesan').show(); // tampilkan data alamat pemesan
 				form.hide(); // sembunyikan form cari / tombol tambah pelanggan
@@ -483,27 +483,42 @@ $(function() {
 		}
 	});
 
-	// hapus data pemesan
-	$('.btn-hapus-alamat-pemesan').on('click', function(){
-		$('#alamat_pemesan').empty(); // hapus alamat pemesan
-		$('.form_pemesan').show();
-		$('.cari_pelanggan').show().addClass('ganti-data-pemesan');
-		$('.info-data-pemesan').hide();
+	// hapus data pemesan / kirim kepada
+	$('.btn-hapus-alamat').on('click', function(){
+		if($(this).hasClass("pemesan")) {
+			$('#alamat_pemesan').empty(); // hapus alamat pemesan
+			$('.form_pemesan').show();
+			$('#cari_pemesan').show().addClass('ganti-data-pemesan');
+			$('.info-data-pemesan').hide();
 
-		$('.hidden_id [name="id_pemesan"]').val('');
+			$('.hidden_id [name="id_pemesan"]').val('');
 
+			if ($('.hidden_id [name="id_kirimKe"]').val() == '') {
+				$('.form_kirimKe').hide();
+				$('.info-data-kirimKe').hide();
+
+				$(".cari_pelanggan").removeClass('ganti-data-pemesan');
+			}
+		}
+		else if($(this).hasClass("kirimKe")) {
+			$('#alamat_kirimKe').empty(); // hapus alamat pemesan
+			$('.form_kirimKe').show();
+			$('#cari_kirimKe').show().addClass('ganti-data-kirimKe');
+			$('.info-data-kirimKe').hide();
+
+			$('.hidden_id [name="id_kirimKe"]').val('');
+
+			if ($('.hidden_id [name="id_pemesan"]').val() == '') {
+				// $('.form_pemesan').hide();
+				$('.form_kirimKe').hide();
+
+				$(".cari_pelanggan").removeClass('ganti-data-kirimKe');
+			}
+		}
+
+		
 	});
 
-	// hapus data kirim kepada
-	$('.btn-hapus-alamat-kirimKe').on('click', function(){
-		// hapus alamat kirimKe
-		$('#alamat_kirimKe').empty();
-		$('.form_kirimKe').show();
-		$('.info-data-kirimKe').hide();
-
-		$('.hidden_id [name="id_kirimke"]').val('');
-
-	});
 
 	// ------------------------------------------------------------------------
 	// load juragan
