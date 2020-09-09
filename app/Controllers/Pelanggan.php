@@ -95,9 +95,15 @@ class Pelanggan extends BaseController
         $pelanggan     = new PelangganModel();
         $ongkir = new Ongkir();
 
+        if ($this->request->getVar('juragan_id') && $juragan_id !== null) {
+            $juragan_id = $juragan_id;
+        }
+        else {
+            $juragan_id = '0';
+        }
+
         $builder = $pelanggan->cari($juragan_id, $cari);
        
-
         $s = [];
         $i = 0;
         foreach ($builder->getResult() as $u) {
