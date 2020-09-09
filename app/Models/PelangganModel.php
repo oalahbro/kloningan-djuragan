@@ -33,4 +33,27 @@ class PelangganModel extends Model
 
         return $query;
     }
+
+    // ------------------------------------------------------------------------
+
+    public function cari($juragan_id, $cari)
+    {
+        $builder = $this->db->table($this->table . ' p');
+        $builder->select('i.juragan_id, p.*');
+        $builder->join('invoice i', 'i.pelanggan_id=p.id_pelanggan');
+
+        if ($cari !== null or $cari !== '') {
+            $builder->like('p.nama_pelanggan', $cari, 'both');
+            $builder->orLike('p.hp', $cari, 'both');
+        }
+
+        $builder->having('i.juragan_id', $juragan_id);
+        $builder->limit(10);
+        $builder->groupBy('p.id_pelanggan');
+
+        return $builder->get();
+    }
+
+    // ------------------------------------------------------------------------
+
 }

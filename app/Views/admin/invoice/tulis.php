@@ -451,7 +451,7 @@ $(function() {
 			var form = $('.form_pemesan');
 			//
 			//
-			if (($(this).hasClass('kirimKe') && !$(this).hasClass("ganti-data-pemesan")) || ($(this).hasClass("pemesan") && !$(this).hasClass("ganti-data-pemesan")) ) {
+			if (!$(this).hasClass("ganti-data-pemesan")) {
 				// sisipkan data kirim kepada
 				$('#alamat_kirimKe').empty().append('<h6 class="text-muted font-weight-normal">Kirim Kepada</h6>' + c),
 				$('.info-data-kirimKe').show(); // tampilkan data alamat kirim Kepada

@@ -95,27 +95,18 @@ class Pelanggan extends BaseController
         $pelanggan     = new PelangganModel();
         $ongkir = new Ongkir();
 
-        $builder = $pelanggan->builder();
-        $builder->join('invoice i', 'i.pelanggan_id=pelanggan.id_pelanggan');
-
-        if ($this->request->getVar('q') && $cari !== null) {
-            $builder->like('nama_pelanggan', $cari, 'both');
-            $builder->orLike('hp', $cari, 'both');
-        }
-        $builder->where('i.juragan_id', $juragan_id);
-        $builder->limit(10);
-        $builder->groupBy('pelanggan.id_pelanggan');
+        $builder = $pelanggan->cari($juragan_id, $cari);
+       
 
         $s = [];
         $i = 0;
-        foreach ($builder->get()->getResult() as $u) {
+        foreach ($builder->getResult() as $u) {
             $s[$i] = [
                 'id'    => (int) $u->id_pelanggan,
                 'nama'  => $u->nama_pelanggan,
                 'hp'    => json_decode($u->hp),
                 'cod'   => (int) $u->cod,
                 'full'  => 'C.O.D'
-
             ];
 
             if ($u->cod === '0') {
