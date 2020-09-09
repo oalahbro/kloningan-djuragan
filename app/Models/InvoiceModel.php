@@ -38,6 +38,8 @@ class InvoiceModel extends Model
 
 		$inv->select('CONCAT("{","\"id\":",i.pemesan_id,",","\"nama\":\"",p.nama_pelanggan,"\"",",","\"hp\":",p.hp,",","\"cod\":",p.cod,",","\"alamat\":\"",IFNULL(p.alamat, "null"),"\"",",","\"kecamatan\":",IFNULL(p.kecamatan,"null"),",","\"kabupaten\":",IFNULL(p.kabupaten,"null"),",","\"provinsi\":",IFNULL(p.provinsi,"null"),",","\"kodepos\":\"",IFNULL(p.kodepos,"null"),"\"","}") as pelanggan');
 
+		$inv->select('CONCAT("{","\"id\":",i.kirimKepada_id,",","\"nama\":\"",k.nama_pelanggan,"\"",",","\"hp\":",k.hp,",","\"cod\":",k.cod,",","\"alamat\":\"",IFNULL(k.alamat, "null"),"\"",",","\"kecamatan\":",IFNULL(k.kecamatan,"null"),",","\"kabupaten\":",IFNULL(k.kabupaten,"null"),",","\"provinsi\":",IFNULL(k.provinsi,"null"),",","\"kodepos\":\"",IFNULL(k.kodepos,"null"),"\"","}") as kirimKe');
+
 		$inv->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","\"id\":",b.id_beli,",","\"stok_id\":","\"",IFNULL(b.stok_id, "null"),"\",","\"kode\":\"",b.kode,"\",","\"ukuran\":\"",b.ukuran,"\",","\"harga\":",b.harga, ",","\"qty\":",b.qty,"}")),"]") as barang');
 
 		$inv->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","\"id\":",c.id_biaya,",","\"biaya_id\":",c.biaya_id,",","\"nominal\":\"",c.nominal,"\",","\"label\":","\"",IFNULL(c.label, "null"),"\"}")),"]") as biaya');
@@ -48,8 +50,9 @@ class InvoiceModel extends Model
 
 		$inv->join('juragan j', 'j.id_juragan = i.juragan_id');
 		$inv->join('user u', 'u.id = i.user_id');
-		$inv->join('pelanggan p', 'p.id_pelanggan = i.pemesan_id');
 		$inv->join('label_invoice l', 'l.invoice_id = i.id_invoice');
+		$inv->join('pelanggan p', 'p.id_pelanggan = i.pemesan_id');
+		$inv->join('pelanggan k', 'k.id_pelanggan = i.kirimKepada_id');
 		$inv->join('pembayaran x', 'x.invoice_id = i.id_invoice', 'left');
 		$inv->join('dibeli b', 'b.invoice_id = i.id_invoice', 'left');
 		$inv->join('invoice_status s', 's.invoice_id = i.id_invoice', 'left');

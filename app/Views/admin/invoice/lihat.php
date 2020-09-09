@@ -111,7 +111,8 @@ $pager = \Config\Services::pager();
 					<div class="row">
 						<div class="col-12 col-sm-3 mb-3">
 							<div class="mb-3">
-								<div class="card-subtitle text-muted text-uppercase small">Pelanggan</div>
+								<div class="card-subtitle text-muted text-uppercase small"><?= ($pesanan->kirimKepada_id === $pesanan->pemesan_id ? 'Pemesan / Kirim Kepada' : 'Pemesan') ?></div>
+
 								<div class="border-bottom pb-2">
 									<?php $pelanggan = json_decode($pesanan->pelanggan); ?>
 									<span class="d-block font-weight-bold"><?= strtoupper($pelanggan->nama); ?></span>
@@ -148,6 +149,48 @@ $pager = \Config\Services::pager();
 									</span>
 								</div>
 							</div>
+
+							<?php if ($pesanan->kirimKepada_id !== $pesanan->pemesan_id) { ?>
+								<div class="mb-3">
+									<div class="card-subtitle text-muted text-uppercase small">Kirim Kepada</div>
+
+									<div class="border-bottom pb-2">
+										<?php $kirimKe = json_decode($pesanan->kirimKe); ?>
+										<span class="d-block font-weight-bold"><?= strtoupper($kirimKe->nama); ?></span>
+										<span class="d-block lead">
+											<?php
+											for ($i = 0; $i < count($kirimKe->hp); $i++) {
+												if ($i === 1) {
+													echo '<span class="sr-only">/</span>';
+												}
+												echo '<span class="badge bg-secondary mr-1 font-weight-light">' . $kirimKe->hp[$i] . '</span>';
+											}
+											?>
+										</span>
+										<span class="d-block">
+											<?php
+											if ($kirimKe->cod === 1) {
+												echo 'C.O.D';
+											} else {
+												//
+												$ongkir = new Ongkir();
+
+												$PPro = $kirimKe->provinsi;
+												$PKab = $kirimKe->kabupaten;
+												$PKec = $kirimKe->kecamatan;
+												$kota = $ongkir->kota($PPro, $PKab);
+
+												$kec = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
+												$kab = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
+												$prov = strtoupper($ongkir->provinsi($PPro)['province']);
+
+												echo $kirimKe->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $kirimKe->kodepos;
+											}
+											?>
+										</span>
+									</div>
+								</div>
+							<?php } ?>
 
 							<div>
 								<div class="card-subtitle text-muted text-uppercase small">Asal Orderan</div>
