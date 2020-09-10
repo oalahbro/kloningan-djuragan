@@ -84,8 +84,9 @@ class Validation
 		'pengguna'		=> 'required',
 		'asal_orderan' 	=> 'required',
 		'tanggal_order'	=> 'required',
-		'pelanggan' 	=> 'required',
-		'juragan' 		=> 'required',
+		'juragan'	 	=> 'required',
+		'id_pemesan' 	=> 'required',
+		'id_kirimKe' 	=> 'required',
 		// 'keterangan' => 'required',
 		'produk' 		=> 'required'
 		// 'biaya' 		=> 'required'

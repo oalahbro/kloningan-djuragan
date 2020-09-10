@@ -137,7 +137,8 @@ class Invoices extends BaseController
 				$data_invoice = [
 					'tanggal_pesan' => $this->request->getPost('tanggal_order'),
 					'seri'			=> strtoupper(first_letter($t->name) . time()),
-					'pelanggan_id' 	=> $this->request->getPost('pelanggan'),
+					'pemesan_id' 	=> $this->request->getPost('id_pemesan'),
+					'kirimKepada_id' => $this->request->getPost('id_kirimKe'),
 					'juragan_id' 	=> $this->request->getPost('juragan'),
 					'user_id' 		=> $user_id,
 					// 'status_pesanan'=> '',
