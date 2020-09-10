@@ -29,7 +29,7 @@ class InvoiceModel extends Model
 	// ambil data
 	public function ambil_data($juragan = NULL)
 	{
-		$inv = $this->db->table('invoice i');
+		$inv = $this->db->table($this->table . ' i');
 		$inv->select('i.*,l.label as label_asal, l.source_id');
 
 		$inv->select('CONCAT("{","\"id\":",i.juragan_id,",","\"nama\":\"",j.nama_juragan,"\"",",","\"slug\":\"",j.juragan,"\"",,"}") as juragan');
