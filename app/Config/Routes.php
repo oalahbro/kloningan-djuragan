@@ -37,7 +37,8 @@ $routes->get('admin/invoices', 'admin/Invoices::lihat', ['as' => 'admin_inv']);
 $routes->addRedirect('admin', 'admin_inv');
 
 // user
-$routes->get('user', 'user/Invoices::index');
+$routes->get('user/invoices', 'user/Invoices::lihat', ['as' => 'user_inv']);
+$routes->addRedirect('user', 'user_inv');
 
 /**
  * --------------------------------------------------------------------
