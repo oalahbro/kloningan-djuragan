@@ -929,7 +929,7 @@ $(function() {
 		// Callback handler that will be called on success
 		request.done(function (response, textStatus, jqXHR){
 			// Log a message to the console
-			console.log("Hooray, it worked!");
+			document.location.href = response.url;
 		});
 
 		// Callback handler that will be called on failure
@@ -962,19 +962,16 @@ $(function() {
 		});		
 	});
 
-	
-
-
 	function makeToast(id,text,status) {
 		return `<div id="`+id+`" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
-  <div class="toast-header">
-    <strong class="mr-auto">`+status+`</strong>
-    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="toast-body">`+text+`</div>
-</div>`;
+			<div class="toast-header">
+				<strong class="mr-auto">`+status+`</strong>
+				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="toast-body">`+text+`</div>
+		</div>`;
 	}
 
 	//

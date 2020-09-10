@@ -133,10 +133,11 @@ class Invoices extends BaseController
 
 				$user_id = $this->request->getPost('pengguna');
 				$t = $this->user->find($user_id);
+				$seri = strtoupper(first_letter($t->name) . time());
 
 				$data_invoice = [
 					'tanggal_pesan' => $this->request->getPost('tanggal_order'),
-					'seri'			=> strtoupper(first_letter($t->name) . time()),
+					'seri'			=> $seri,
 					'pemesan_id' 	=> $this->request->getPost('id_pemesan'),
 					'kirimKepada_id' => $this->request->getPost('id_kirimKe'),
 					'juragan_id' 	=> $this->request->getPost('juragan'),
@@ -191,7 +192,12 @@ class Invoices extends BaseController
 						$db->table('biaya')->insertBatch($biaya);
 					}
 				}
-				return $this->response->setJSON($this->request->getPost());
+
+				$ret = [
+					'status' => 'data tersimpan',
+					'url' => site_url('admin/invoices/lihat?q=seri:' . $seri)
+				];
+				return $this->response->setJSON($ret);
 			}
 		}
 	}
