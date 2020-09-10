@@ -19,12 +19,12 @@ class Api extends BaseController
 
 	// ------------------------------------------------------------------------
 
-	public function get_juragan()
+	public function get_juragan($user_id)
 	{
-		$nama_cache = 'list_juragan';
+		$nama_cache = 'list_juragan_'.$user_id;
 		$i = 0;
 		if (!$ngelist = $this->cache->get($nama_cache)) {
-			$listJuragan_ = $this->juragan->ambil()->get()->getResult();
+			$listJuragan_ = $this->juragan->ambil($user_id)->get()->getResult();
 
 			$ngelist = array();
 			foreach ($listJuragan_ as $juragan) {

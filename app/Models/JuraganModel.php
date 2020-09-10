@@ -27,15 +27,23 @@ class JuraganModel extends Model
 
 	// ------------------------------------------------------------------------
 
-	public function ambil()
+	public function ambil($user_id = FALSE)
 	{
 		$builder = $this->db->table($this->table . ' j');
 		$builder->select('j.*');
 
 		$builder->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","&quot;id&quot;:",b.id_bank,",","&quot;nama&quot;:&quot;",b.nama_bank,"&quot;,","&quot;no&quot;:&quot;",b.rekening,"&quot;,","&quot;atas_nama&quot;:&quot;",b.atas_nama,"&quot;}")),"]") as bank');
 
+		if($user_id !== FALSE) {
+			$builder->select('u.id as user_id, u.name as nama_user, u.username, u.email');
+		}
+
 		$builder->join('relasi r', 'r.juragan_id = j.id_juragan', 'left');
 		$builder->join('bank b', 'b.id_bank = r.val_id', 'left');
+		if($user_id !== FALSE) {
+			$builder->join('user u', 'u.id = r.val_id', 'left');
+			$builder->where('u.id', $user_id);
+		}
 		$builder->where('r.table', '2');
 
 		$builder->groupBy("j.id_juragan");
