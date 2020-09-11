@@ -13,7 +13,7 @@ $session = \Config\Services::session();
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb p-0">
 			<li class="breadcrumb-item"><?= anchor('', 'Dasbor'); ?></li>
-			<li class="breadcrumb-item"><?= anchor('settings', 'Pengaturan'); ?></li>
+			<li class="breadcrumb-item"><?= anchor('admin/settings', 'Pengaturan'); ?></li>
 			<li class="breadcrumb-item active" aria-current="page">Juragan</li>
 		</ol>
 	</nav>
