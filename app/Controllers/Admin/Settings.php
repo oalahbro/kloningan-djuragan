@@ -68,11 +68,8 @@ class Settings extends BaseController
 
 	public function juragan()
 	{
-		$builder = $this->juragan->builder();
-
 		$data = [
 			'title' 	=> 'Pengaturan Juragan',
-			'juragans' 	=> $this->juragan->ambil()->get(),
 			'banks' 	=> $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll()
 		];
 
@@ -163,8 +160,6 @@ class Settings extends BaseController
 
 	public function pengguna()
 	{
-		$builder = $this->juragan->builder();
-
 		$data = [
 			'title' 	=> 'Pengaturan Pengguna',
 			'juragans' 	=> $this->juragan->ambil()->get(),

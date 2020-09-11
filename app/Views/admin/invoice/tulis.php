@@ -3,6 +3,7 @@
 use CodeIgniter\I18n\Time;
 
 $sekarang = new Time('now');
+$session = \Config\Services::session();
 ?>
 
 <?= $this->extend('template/default_admin') ?>
@@ -372,15 +373,16 @@ $sekarang = new Time('now');
 <?= $this->section('js') ?>
 <?php
 
-$link_api_juragan = site_url("api/get_juragan");
+$current_user_id = $session->get('id');
+$link_api_invoice = site_url('admin/invoices/save');
+$link_api_juragan = site_url("api/juragan/by_user/");
+$link_api_kecamatan = site_url('rajaongkir/kecamatan');
+$link_api_kota = site_url('rajaongkir/kota');
 $link_api_pengguna = site_url('api/get_pengguna');
 $link_api_provinsi = site_url('rajaongkir/provinsi');
-$link_api_kota = site_url('rajaongkir/kota');
-$link_api_kecamatan = site_url('rajaongkir/kecamatan');
 $link_cari_pelanggan = site_url('pelanggan/cari');
-$link_post_pelanggan = site_url('pelanggan/baru');
 $link_invoice = site_url('admin/invoices/lihat/');
-$link_api_invoice = site_url('admin/invoices/save');
+$link_post_pelanggan = site_url('pelanggan/baru');
 
 $js = <<< JS
 $(function() { 
@@ -400,12 +402,15 @@ $(function() {
 	// ambil data juragan 
 	// ketika klik tombol menu sidebar diatas
 	$('#sidebarCollapse').on('click',function(){
+		var id = $current_user_id;
 		$('#listLi').html(''),
-		$.getJSON('$link_api_juragan',function(b){
-			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice"><i class="fad fa-user-circle"></i> Semua Juragan</li></li>'),
-			$.each(b,function(c,b){
-				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.juragan+'"><i class="fad fa-user-circle"></i> '+b.nama_juragan+'</li>');
+		$.getJSON('$link_api_juragan', { id: id }, function(b){
+			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+'semua'+'"><i class="fad fa-user-circle"></i> Semua Juragan</li></li>');
+			
+			$.each(b[id].juragan,function(c,b){
+				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fad fa-user-circle"></i> '+b.nama+'</li>');
 			}),
+
 			$(a.join('')).appendTo('#listLi');
 		});
 	});
@@ -688,6 +693,7 @@ $(function() {
 		request_pelanggan.always(function () {
 			// Reenable the inputs
 			inputs.prop("disabled", false);
+			// matikan yang perlu dimatikan seperti sebelumnya
 		});
 	}),
 	$('select[name="provinsi"]').on('change',function(){

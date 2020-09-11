@@ -111,4 +111,55 @@ class BaseController extends Controller
 
 	// ------------------------------------------------------------------------
 
+	public function juraganBy($user_id)
+	{
+		$juragan = $this->juragan->byUser($user_id);
+
+		$ids = [];
+		foreach ($juragan as $r) {
+			$ids = array_merge($ids, array($r->id_juragan));
+		}
+
+		$return = $this->juragan->terakhir_update($ids);
+
+		return $return;
+	}
+
+	// ------------------------------------------------------------------------
+
+	public function isJuragan($juragan)
+	{
+		$get = $this->juragan->where('juragan', $juragan)->findAll();
+
+		$return = FALSE;
+		if (count($get) > 0) {
+			$return = TRUE;
+		}
+
+		return $return;
+	}
+
+	// ------------------------------------------------------------------------
+
+	public function allowedJuragan($user_id, $juragan)
+	{
+		$juragans = $this->juragan->byUser($user_id);
+
+		$return = FALSE;
+		if ($this->isJuragan($juragan)) {
+			$get = $this->juragan->where('juragan', $juragan)->findAll();
+
+			$result = array_search($get[0]->id_juragan, array_column($juragans, 'id_juragan'));  // false if not found, key off array if exist
+
+			$return = FALSE;
+			if ($result !== FALSE) {
+				$return = TRUE;
+			}
+		}
+
+		return $return;
+	}
+
+	// ------------------------------------------------------------------------
+
 }

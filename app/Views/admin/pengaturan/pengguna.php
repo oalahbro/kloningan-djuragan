@@ -1,5 +1,6 @@
 <?php
 $pager = \Config\Services::pager();
+$session = \Config\Services::session();
 ?>
 <?= $this->extend('template/default_admin') ?>
 
@@ -240,9 +241,10 @@ $pager = \Config\Services::pager();
 
 <?= $this->section('js') ?>
 <?php
-$link_api_juragan = site_url("api/get_juragan");
-$link_invoice = site_url('admin/invoices/lihat/');
+$current_user_id = $session->get('id');
+$link_api_juragan = site_url("api/juragan/by_user/");
 $link_api_relasi = site_url('admin/settings/pengguna_relasi');
+$link_invoice = site_url('admin/invoices/lihat/');
 
 $js = <<< JS
 $(function() { 
@@ -260,12 +262,15 @@ $(function() {
 	});
 
 	$('#sidebarCollapse').on('click',function(){
+		var id = $current_user_id;
 		$('#listLi').html(''),
-		$.getJSON('$link_api_juragan',function(b){
-			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice"><i class="fad fa-user-circle"></i> Semua Juragan</li></li>'),
-			$.each(b,function(c,b){
-				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.juragan+'"><i class="fad fa-user-circle"></i> '+b.nama_juragan+'</li>');
+		$.getJSON('$link_api_juragan', { id: id }, function(b){
+			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+'semua'+'"><i class="fad fa-user-circle"></i> Semua Juragan</li></li>');
+			
+			$.each(b[id].juragan,function(c,b){
+				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fad fa-user-circle"></i> '+b.nama+'</li>');
 			}),
+
 			$(a.join('')).appendTo('#listLi');
 		});
 	});

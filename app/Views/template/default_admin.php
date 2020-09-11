@@ -258,7 +258,7 @@ $JSmin = new Minify\JS();
 			</div>
 		</div>
 	</nav>
-	<nav id="sidebar" class="position-fixed bg-dark collapse sidebarcollapse" style="">
+	<nav id="sidebar" class="position-fixed bg-dark collapse sidebarcollapse">
 		<div class="d-block border-bottom border-secondary shadow">
 			<h6 class="dropdown-header py-3">Pilih Juragan</h6>
 		</div>

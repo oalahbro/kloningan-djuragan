@@ -27,24 +27,37 @@ class JuraganModel extends Model
 
 	// ------------------------------------------------------------------------
 
+	public function byUserId($user_id)
+	{
+		$builder = $this->db->table($this->table . ' j');
+		$builder->select('j.*, u.id as user_id, u.name as nama_user, u.username, u.email');
+	
+		$builder->join('relasi r', 'r.juragan_id = j.id_juragan', 'left');
+		$builder->join('user u', 'u.id = r.val_id', 'both');
+
+		$builder->where('u.id', $user_id);
+		$builder->groupBy("u.id");
+
+		$builder->groupBy("j.id_juragan");
+		return $builder->get();
+	}
+
+	// ------------------------------------------------------------------------
+
 	public function ambil($user_id = FALSE)
 	{
 		$builder = $this->db->table($this->table . ' j');
 		$builder->select('j.*');
-
-		$builder->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","&quot;id&quot;:",b.id_bank,",","&quot;nama&quot;:&quot;",b.nama_bank,"&quot;,","&quot;no&quot;:&quot;",b.rekening,"&quot;,","&quot;atas_nama&quot;:&quot;",b.atas_nama,"&quot;}")),"]") as bank');
-
 		if($user_id !== FALSE) {
 			$builder->select('u.id as user_id, u.name as nama_user, u.username, u.email');
 		}
 
 		$builder->join('relasi r', 'r.juragan_id = j.id_juragan', 'left');
-		$builder->join('bank b', 'b.id_bank = r.val_id', 'left');
 		if($user_id !== FALSE) {
-			$builder->join('user u', 'u.id = r.val_id', 'left');
+			$builder->join('user u', 'u.id = r.val_id', 'both');
 			$builder->where('u.id', $user_id);
+			$builder->groupBy("u.id");
 		}
-		$builder->where('r.table', '2');
 
 		$builder->groupBy("j.id_juragan");
 		return $builder;
@@ -86,4 +99,7 @@ class JuraganModel extends Model
 			return ['error' => '$ids_juragan harus array'];
 		}
 	}
+
+	// ------------------------------------------------------------------------
+
 }
