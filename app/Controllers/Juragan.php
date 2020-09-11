@@ -4,11 +4,11 @@ namespace App\Controllers;
 
 class Juragan extends BaseController
 {
-    public static function by_user($user_id, $bank = 'no')
+	public static function by_user($user_id, $bank = 'no')
 	{
-        $juragan = new \App\Models\JuraganModel();
-        $cache = \Config\Services::cache();
-        
+		$juragan = new \App\Models\JuraganModel();
+		$cache = \Config\Services::cache();
+
 		$nama_cache = 'juragan_by_user_' . $user_id . ($bank === 'yes' ? '_bank' : '');
 		if (!$json = $cache->get($nama_cache)) {
 			$x = $juragan->byUserId($user_id)->getResult();
