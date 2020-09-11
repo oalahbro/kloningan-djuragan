@@ -530,13 +530,10 @@ $(function() {
 	// ------------------------------------------------------------------------
 	// load juragan
 	// embed langsung ke form select - dropdown
-	$.ajax({
-		method:'GET',
-		url:'$link_api_juragan'
-	}).done(function(a){
-		$.each(a,function(b,a){
-			$('<option />',{value:a.id_juragan,text:a.nama_juragan}).appendTo($('select[name="juragan"]'))
-		;});
+	$.getJSON('$link_api_juragan', { id: $current_user_id }, function(b){
+		$.each(b[$current_user_id].juragan,function(c,b){
+			$('<option />',{value:b.id,text:b.nama}).appendTo($('select[name="juragan"]'));
+		});
 	});
 
 	// ------------------------------------------------------------------------
