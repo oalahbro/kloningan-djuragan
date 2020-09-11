@@ -16,6 +16,7 @@ namespace App\Controllers;
  */
 
 use CodeIgniter\Controller;
+use App\Controllers\Juragan as Jrgn;
 
 use App\Models\BankModel;
 use App\Models\InvoiceModel;
@@ -71,8 +72,8 @@ class BaseController extends Controller
 		$this->user 	= new UserModel();
 
 		// migration here
-		$migrate = \Config\Services::migrations();
-		$migrate->latest();
+		// $migrate = \Config\Services::migrations();
+		// $migrate->latest();
 	}
 
 	// ------------------------------------------------------------------------
@@ -113,11 +114,11 @@ class BaseController extends Controller
 
 	public function juraganBy($user_id)
 	{
-		$juragan = $this->juragan->byUser($user_id);
+		$juragan = Jrgn::by_user($user_id);
 
 		$ids = [];
-		foreach ($juragan as $r) {
-			$ids = array_merge($ids, array($r->id_juragan));
+		foreach ($juragan[$user_id]['juragan'] as $r) {
+			$ids = array_merge($ids, array($r['id']));
 		}
 
 		$return = $this->juragan->terakhir_update($ids);
@@ -143,13 +144,13 @@ class BaseController extends Controller
 
 	public function allowedJuragan($user_id, $juragan)
 	{
-		$juragans = $this->juragan->byUser($user_id);
+		$juragans = Jrgn::by_user($user_id);
 
 		$return = FALSE;
 		if ($this->isJuragan($juragan)) {
 			$get = $this->juragan->where('juragan', $juragan)->findAll();
 
-			$result = array_search($get[0]->id_juragan, array_column($juragans, 'id_juragan'));  // false if not found, key off array if exist
+			$result = array_search($get[0]->id_juragan, array_column($juragans[$user_id]['juragan'], 'id'));  // false if not found, key off array if exist
 
 			$return = FALSE;
 			if ($result !== FALSE) {
