@@ -30,12 +30,13 @@ class JuraganModel extends Model
 	public function byUserId($user_id)
 	{
 		$builder = $this->db->table($this->table . ' j');
-		$builder->select('j.*, u.id as user_id, u.name as nama_user, u.username, u.email');
+		$builder->select('j.*, u.id as user_id, u.name as nama_user, u.username, u.email, r.table');
 	
-		$builder->join('relasi r', 'r.juragan_id = j.id_juragan', 'left');
-		$builder->join('user u', 'u.id = r.val_id', 'both');
+		$builder->join('relasi r', 'r.juragan_id = j.id_juragan');
+		$builder->join('user u', 'u.id = r.val_id');
 
-		$builder->where('u.id', $user_id);
+		$builder->where('r.table', 1); // juragan-user
+		$builder->having('u.id', $user_id);
 		$builder->groupBy("u.id");
 
 		$builder->groupBy("j.id_juragan");
