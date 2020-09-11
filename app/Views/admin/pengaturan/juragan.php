@@ -154,13 +154,21 @@ $(function() {
 	$.getJSON('$link_api_juragan_all', function(b){
 		var a=[];		
 		$.each(b,function(c,b){
+			var selected = '';
+
+			var banks = b.bank;
+			for(var i in banks){
+				// console.log(i); //  key
+				// console.log(banks[i]); // key's value
+
+				selected += i + ',';
+			}
+
 			a.push(`<tr><td>
 				<div class="d-flex justify-content-between">
 					<div class="lead">`+b.nama+`</div>
-					<div class="">
-						<a href=""><i class="fad fa-file-search"></i> lihat orderan</a>
-
-						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSuntingJuragan" data-selected="" data-id="`+b.id+`" data-nama="`+b.nama+`"><i class="fad fa-pencil"></i> sunting</button>
+					<div>
+						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSuntingJuragan" data-selected="`+selected.replace(/,\s*$/, "")+`" data-id="`+b.id+`" data-nama="`+b.nama+`"><i class="fad fa-pencil"></i> sunting</button>
 
 						<a href="" class="text-decoration-none"><i class="fad fa-trash"></i> hapus</a>
 					</div>

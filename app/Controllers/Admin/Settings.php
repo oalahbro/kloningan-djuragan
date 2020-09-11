@@ -100,16 +100,18 @@ class Settings extends BaseController
 			]);
 			$id = $db->insertID();
 
-			// simpan ke tabel relasi
+			// simpan ke tabel relasi (juragan-bank)
 			if ($db->affectedRows() > 0) {
 				foreach ($banks as $bank) {
 					$this->relasi->insert([
-						'table' => 2,
+						'table' => 2, // juragan-bank
 						'juragan_id' => $id,
 						'val_id' => $bank
 					]);
 				}
 			}
+			// simpan relasi untuk semua admin / superadmin
+
 		}
 		return redirect()->to('/admin/settings/juragan');
 	}
@@ -146,7 +148,7 @@ class Settings extends BaseController
 			if ($db->affectedRows() > -1) {
 				foreach ($banks as $bank) {
 					$this->relasi->insert([
-						'table' => 2,
+						'table' => 2, // juragan-bank
 						'juragan_id' => $id_juragan,
 						'val_id' => $bank
 					]);
@@ -196,19 +198,16 @@ class Settings extends BaseController
 			]);
 			$id = $db->insertID();
 
-			// simpan ke tabel relasi, selain admin/superadmin
-			if ($level === 'superadmin' or $level === 'admin') {
-			} else {
-				$juragans = $this->request->getPost('juragan');
 
-				if ($db->affectedRows() > 0) {
-					foreach ($juragans as $juragan) {
-						$this->relasi->insert([
-							'table' => 1,
-							'juragan_id' => $juragan,
-							'val_id' => $id
-						]);
-					}
+			$juragans = $this->request->getPost('juragan');
+
+			if ($db->affectedRows() > 0) {
+				foreach ($juragans as $juragan) {
+					$this->relasi->insert([
+						'table' => 1, // juragan-user
+						'juragan_id' => $juragan,
+						'val_id' => $id
+					]);
 				}
 			}
 		}
@@ -253,18 +252,14 @@ class Settings extends BaseController
 				// hapus semua relasi 
 				$this->relasi->where(['table' => '1', 'val_id' => $id])->delete();
 
-				if ($level === 'superadmin' or $level === 'admin') {
-					// tidak ada yang disimpan untuk superadmin / admin
-				} else {
-					$juragans = $this->request->getPost('juragan');
+				$juragans = $this->request->getPost('juragan');
 
-					foreach ($juragans as $juragan) {
-						$this->relasi->insert([
-							'table' => 1,
-							'juragan_id' => $juragan,
-							'val_id' => $id
-						]);
-					}
+				foreach ($juragans as $juragan) {
+					$this->relasi->insert([
+						'table' => 1, // juragan-user
+						'juragan_id' => $juragan,
+						'val_id' => $id
+					]);
 				}
 			}
 		}
