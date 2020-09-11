@@ -566,7 +566,7 @@ $session = \Config\Services::session();
 <?= $this->section('js') ?>
 <?php
 
-$link_api_get_bank = site_url("api/get_bank/");
+$link_api_get_bank = site_url("api/juragan/all/");
 $link_api_juragan = site_url("api/juragan/by_user/");
 $link_get_status_invoice = site_url('admin/invoices/detail_status/');
 $link_hapus_orderan = site_url('admin/invoices/hapus_orderan/');
@@ -839,12 +839,11 @@ $(function() {
 		}
 		
 		// set dropdown sumber_dana
-		$.get("$link_api_get_bank" + juragan, function(data, status){
-			// console.log("Data: " + data[0]['fn']);
-
+		$.getJSON('$link_api_get_bank', function(data){
+			var banks = data[juragan].bank;
 			var apnd = '<option value="">Pilih Tujuan</option>';
-			for (var i = 0; i < data.length; i++) {
-				apnd += "<option value = '" + data[i].bank_id + " '>" + data[i].fn + " </option>";
+			for (var i in banks) {
+				apnd += "<option value = '" + banks[i].id + " '>" + banks[i].nama.toUpperCase() + ' (' + banks[i].atas_nama + ')' + " </option>";
 			}
 			$("#modalTambahBayar #tujuan").empty().append(apnd);
 		});

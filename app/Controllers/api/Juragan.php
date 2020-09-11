@@ -49,6 +49,8 @@ class Juragan extends \CodeIgniter\Controller
 		return $this->respond($json);
 	}
 
+	// ------------------------------------------------------------------------
+
 	public function by_user()
 	{
 		$user_id = $this->request->getGet('id'); // numeric
@@ -57,4 +59,7 @@ class Juragan extends \CodeIgniter\Controller
 		$json = Jrgn::by_user($user_id, $bank);
 		return $this->response->setJSON($json);
 	}
+
+	// ------------------------------------------------------------------------
+
 }
