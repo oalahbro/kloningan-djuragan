@@ -59,4 +59,30 @@ class Juragan extends BaseController
 
 	// ------------------------------------------------------------------------
 
+	public static function get_users($current_user_id)
+	{
+		$juragan = new \App\Models\JuraganModel();
+
+		$user = $juragan->byUserId($current_user_id)->getResult();
+		$ids_juragan = [];
+		foreach ($user as $u) {
+			$ids_juragan[] = $u->id_juragan;
+		}
+
+		$r_users = $juragan->getUsers($ids_juragan)->getResult();
+
+		$users = [];
+		foreach ($r_users as $jrgn) {
+			$users[] = [
+				'id' => (int) $jrgn->id,
+				'nama' => $jrgn->name,
+				'username' => $jrgn->username
+			];
+		}
+
+		return $users;
+	}
+
+	// ------------------------------------------------------------------------
+
 }

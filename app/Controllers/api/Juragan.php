@@ -62,4 +62,14 @@ class Juragan extends \CodeIgniter\Controller
 
 	// ------------------------------------------------------------------------
 
+	public function get_users()
+	{
+		$user_id = $this->request->getGet('id'); // numeric
+
+		$json = Jrgn::get_users($user_id);
+		return $this->response->setJSON($json);
+	}
+
+	// ------------------------------------------------------------------------
+
 }

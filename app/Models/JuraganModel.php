@@ -45,23 +45,23 @@ class JuraganModel extends Model
 
 	// ------------------------------------------------------------------------
 
-	public function ambil($user_id = FALSE)
+	public function getUsers($ids_juragan)
 	{
-		$builder = $this->db->table($this->table . ' j');
-		$builder->select('j.*');
-		if($user_id !== FALSE) {
-			$builder->select('u.id as user_id, u.name as nama_user, u.username, u.email');
-		}
+		if (is_array($ids_juragan)) {
+			$builder = $this->db->table($this->table . ' j');
+			$builder->select('j.*, u.*, r.table');
 
-		$builder->join('relasi r', 'r.juragan_id = j.id_juragan', 'left');
-		if($user_id !== FALSE) {
+			$builder->join('relasi r', 'r.juragan_id = j.id_juragan', 'left');
+
 			$builder->join('user u', 'u.id = r.val_id', 'both');
-			$builder->where('u.id', $user_id);
+			$builder->havingIn('j.id_juragan', $ids_juragan);
+			$builder->where('r.table', 1); // juragan-user
 			$builder->groupBy("u.id");
-		}
 
-		$builder->groupBy("j.id_juragan");
-		return $builder;
+			return $builder->get();
+		} else {
+			return FALSE;
+		}
 	}
 
 	// ------------------------------------------------------------------------
