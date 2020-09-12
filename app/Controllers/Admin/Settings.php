@@ -281,7 +281,7 @@ class Settings extends BaseController
 
 			$data = array();
 			$password = $this->request->getPost('password');
-			if (!empty($password) || isset($password)) {
+			if (!empty($password)) {
 				$data['password'] = password_hash($this->request->getPost('password'), PASSWORD_BCRYPT);
 			}
 
