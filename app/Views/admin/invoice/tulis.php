@@ -378,7 +378,7 @@ $link_api_invoice = site_url('admin/invoices/save');
 $link_api_juragan = site_url("api/juragan/by_user/");
 $link_api_kecamatan = site_url('rajaongkir/kecamatan');
 $link_api_kota = site_url('rajaongkir/kota');
-$link_api_pengguna = site_url('api/get_pengguna');
+$link_api_pengguna = site_url('api/juragan/get_users/');
 $link_api_provinsi = site_url('rajaongkir/provinsi');
 $link_cari_pelanggan = site_url('pelanggan/cari');
 $link_invoice = site_url('admin/invoices/lihat/');
@@ -539,12 +539,9 @@ $(function() {
 	// ------------------------------------------------------------------------
 	// load admin/cs
 	// embed langsung ke form select - dropdown
-	$.ajax({
-		method:'GET',
-		url:'$link_api_pengguna'
-	}).done(function(a){
+	$.getJSON('$link_api_pengguna', { id: $current_user_id }, function(a){
 		$.each(a,function(b,a){
-			$('<option />',{value:a.id,text:a.name}).appendTo($('select[name="pengguna"]'));
+			$('<option />',{value:a.id,text:a.nama}).appendTo($('select[name="pengguna"]'));
 		});
 	});
 
