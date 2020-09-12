@@ -163,9 +163,7 @@ class Settings extends BaseController
 	public function pengguna()
 	{
 		$data = [
-			'title' 	=> 'Pengaturan Pengguna',
-			'juragans' 	=> $this->juragan->ambil()->get(),
-			'penggunas' => $this->user->orderBy('status DESC')->findAll()
+			'title' 	=> 'Pengaturan Pengguna'
 		];
 
 		echo view('admin/pengaturan/pengguna', $data);
@@ -268,22 +266,4 @@ class Settings extends BaseController
 
 	// ------------------------------------------------------------------------
 
-	public function pengguna_relasi()
-	{
-		$id = $this->request->getGet('id');
-
-		if (!isset($id) or empty($id) or !is_numeric($id)) {
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
-
-		// ambil data relasi 
-		$relasi_pengguna = $this->relasi->where(['table' => 1, 'val_id' => $id])->findAll();
-
-		$data = array();
-		foreach ($relasi_pengguna as $rel) {
-			$data[$rel->id_relasi] = (int) $rel->juragan_id;
-		}
-
-		return $this->response->setJSON($data);
-	}
 }

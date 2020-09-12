@@ -33,39 +33,7 @@ $session = \Config\Services::session();
 									<th colspan="2">Status</th>
 								</tr>
 							</thead>
-							<tbody>
-								<?php
-								foreach ($penggunas as $pengguna) {
-								?>
-
-									<tr>
-										<td>
-											<div>
-												<div class="lead"><?= $pengguna->name; ?><span class="ml-2 badge rounded-pill bg-secondary font-weight-normal"><?= $pengguna->username; ?></span></div>
-												<div><?= $pengguna->email; ?></div>
-											</div>
-										</td>
-										<td><?= ucwords($pengguna->level); ?></td>
-										<td><?= ucwords($pengguna->status); ?></td>
-										<td class="text-right">
-											<!-- Example split danger button -->
-											<div class="btn-group">
-												<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modalSuntingPengguna" data-id="<?= $pengguna->id; ?>" data-nama="<?= $pengguna->name; ?>" data-email="<?= $pengguna->email; ?>" data-username="<?= $pengguna->username; ?>" data-level="<?= strtolower($pengguna->level); ?>" data-status="<?= strtolower($pengguna->status); ?>">Sunting</button>
-												<button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
-													<span class="sr-only">Toggle Dropdown</span>
-												</button>
-												<ul class="dropdown-menu">
-													<li><button class="dropdown-item" href="#">Hapus</button></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-
-								<?php
-								}
-								?>
-							</tbody>
-
+							<tbody id="listUsers"></tbody>
 						</table>
 					</div>
 				</div>
@@ -134,11 +102,13 @@ $session = \Config\Services::session();
 					<div class="mb-3">
 						<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
 						<?php
+						/*
 						foreach ($juragans->getResult() as $juragan) {
 							$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
 						}
+						*/
 
-						echo form_multiselect('juragan[]', $options_juragan, [], ['class' => 'form-select', 'id' => 'juragan']);
+						echo form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan']);
 						?>
 						<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 					</div>
@@ -218,11 +188,13 @@ $session = \Config\Services::session();
 				<div class="mb-3">
 					<?= form_label('Juragan', 'juragan_', ['class' => 'form-label']); ?>
 					<?php
+					/*
 					foreach ($juragans->getResult() as $juragan) {
 						$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
 					}
+					*/
 
-					echo form_multiselect('juragan[]', $options_juragan, [], ['class' => 'form-select', 'id' => 'juragan_']);
+					echo form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan_']);
 					?>
 					<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 				</div>
@@ -243,7 +215,9 @@ $session = \Config\Services::session();
 <?php
 $current_user_id = $session->get('id');
 $link_api_juragan = site_url("api/juragan/by_user/");
-$link_api_relasi = site_url('admin/settings/pengguna_relasi');
+$link_api_juragan_all = site_url("api/juragan/all/");
+$link_api_pengguna_all = site_url("api/pengguna/all/");
+$link_api_relasi = site_url('api/juragan/by_user');
 $link_invoice = site_url('admin/invoices/lihat/');
 
 $js = <<< JS
@@ -275,6 +249,44 @@ $(function() {
 		});
 	});
 
+	$.getJSON('$link_api_juragan_all', function(b){
+		var apnd = '';
+		for (var i in b) {
+			apnd += "<option value = '" + b[i].id + " '>" + b[i].nama + " </option>";
+		}
+		$('[name="juragan[]"]').empty().append(apnd);
+	});
+
+	$.getJSON('$link_api_pengguna_all', function(b){
+		var apnd = '';
+
+		for (let i = 0; i < b.length; i++) {
+			apnd += `<tr>
+				<td>
+					<div>
+						<div class="lead">`+b[i].nama+`<span class="ml-2 badge rounded-pill bg-secondary font-weight-normal">`+b[i].username+`</span></div>
+						<div>`+b[i].email+`</div>
+					</div>
+				</td>
+				<td>`+b[i].level+`</td>
+				<td>`+b[i].status+`</td>
+				<td class="text-right">
+					<!-- Example split danger button -->
+					<div class="btn-group">
+						<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modalSuntingPengguna" data-id="`+b[i].id+`" data-nama="`+b[i].nama+`" data-email="`+b[i].email+`" data-username="`+b[i].username+`" data-level="`+b[i].level+`" data-status="`+b[i].status+`">Sunting</button>
+						<button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><button class="dropdown-item" href="#">Hapus</button></li>
+						</ul>
+					</div>
+				</td>
+			</tr>`;
+		}
+		$('#listUsers').empty().append(apnd);
+	});
+
 	var mP=document.getElementById('modalSuntingPengguna');
 	mP.addEventListener('show.bs.modal',function(o){
 		var a=o.relatedTarget;
@@ -304,11 +316,47 @@ $(function() {
 			url:'$link_api_relasi',
 			data:{id:b}
 		}).done(function(a){
-			$('select#juragan_').val([]),
-			$.each(a,function(b,a){
-				$('select#juragan_').find('option[value='+a+']').prop('selected','selected');
+			var juragans = a[b].juragan;
+			var arr_lama = [];
+			var opt = [];
 
-			});
+			// $(document).find('option[value='+juragans[x].id+']');
+			var olds = $('select#juragan_ option');
+			// console.log(olds);
+
+			for (const x in olds) {
+				if (olds[x].value) arr_lama.push({
+					id: parseInt(olds[x].value), 
+					nama: olds[x].text
+				});
+			}
+			
+			var arr_baru = [];
+			for (const x in juragans) {
+				arr_baru.push({
+					id: juragans[x].id,
+					nama: juragans[x].nama,
+					selected: true
+				});
+			}
+			// console.log(selected);
+			let new_juragans = Object.assign(arr_lama,arr_baru);
+			// console.log(new_juragans);
+			// $('select#juragan_ option').val(selected);
+
+			for (let i = 0; i < new_juragans.length; i++) {
+				let _option = new_juragans[i];
+				let selected = '';
+				if (_option.selected) {
+					selected = 'selected="selected"';
+				}
+				opt.push(`
+				<option value="`+_option.id+`" `+selected+`>`+_option.nama+`</option>
+				`);
+			}
+
+			$('select#juragan_').empty();
+			$(opt.join('')).appendTo('select#juragan_');
 		});
 	});
 });
