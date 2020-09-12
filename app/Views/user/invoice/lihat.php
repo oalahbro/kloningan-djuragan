@@ -60,7 +60,7 @@ $session = \Config\Services::session();
 								$juragan = json_decode($pesanan->juragan);
 								$pengguna = json_decode($pesanan->pengguna);
 								?>
-								<span class="text-muted text-lowercase">Juragan:</span> <?= anchor('admin/invoices/lihat/' . $juragan->slug, $juragan->nama); ?><br />
+								<span class="text-muted text-lowercase">Juragan:</span> <?= anchor('user/invoices/lihat/' . $juragan->slug, $juragan->nama); ?><br />
 								<span class="text-muted text-lowercase">Admin/CS:</span> <?= $pengguna->nama; ?>
 							</div>
 						</div>
@@ -379,7 +379,7 @@ $session = \Config\Services::session();
 
 					<!-- Example split danger button -->
 					<div class="btn-group">
-						<?= anchor('admin/invoices/sunting/' . $pesanan->seri, '<i class="fad fa-pencil"></i> Sunting', ['class' => 'btn btn-outline-secondary', 'role' => 'button']); ?>
+						<?= anchor('user/invoices/sunting/' . $pesanan->seri, '<i class="fad fa-pencil"></i> Sunting', ['class' => 'btn btn-outline-secondary', 'role' => 'button']); ?>
 						<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
@@ -416,16 +416,6 @@ $session = \Config\Services::session();
 					</div>
 
 					<?php if ($pesanan->status_pembayaran !== '1') {
-
-						// tombol proses pesanan
-						echo form_button([
-							'class' 		=> 'btn btn-dark ml-1 pesanStatus',
-							'content' 		=> '<i class="fad fa-comment-alt-plus"></i> Proses Orderan',
-							'data-invoice' 	=> $pesanan->id_invoice,
-							'data-seri' 	=> $pesanan->seri,
-							'data-target' 	=> '#modalProgress',
-							'data-toggle' 	=> 'modal'
-						]);
 
 						if ($pesanan->status_pembayaran === '2' or $pesanan->status_pembayaran === '3') {
 							// tombol cek pembayaran
@@ -511,10 +501,6 @@ $session = \Config\Services::session();
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="bg-warning p-2 rounded mb-2">
-					Perlu diingat, detail pembayaran tidak bisa dihapus atau diubah
-				</div>
-
 				<div id="cek">...</div>
 			</div>
 		</div>
@@ -566,15 +552,13 @@ $session = \Config\Services::session();
 <?= $this->section('js') ?>
 <?php
 
+$current_user_id = $session->get('id');
 $link_api_get_bank = site_url("api/juragan/all/");
 $link_api_juragan = site_url("api/juragan/by_user/");
 $link_get_status_invoice = site_url('admin/invoices/detail_status/');
 $link_hapus_orderan = site_url('user/invoices/hapus_orderan/');
 $link_invoice = site_url('user/invoices/lihat/');
-$link_save_progress = site_url('admin/invoices/save_progress');
-$link_tambah_pembayaran = site_url('admin/invoices/simpan_pembayaran');
-$link_update_pembayaran = site_url('admin/invoices/update_bayar');
-$current_user_id = $session->get('id');
+$link_tambah_pembayaran = site_url('user/invoices/simpan_pembayaran');
 
 $js = <<< JS
 $(function() { 
@@ -624,34 +608,6 @@ $(function() {
 	});
 
 	//
-	$('.pesanStatus').on('click',function(){
-		let id = $(this).data('invoice');
-
-		$('#newStatus [name="id_invoice"]').val(id);
-		$("#status option").prop('disabled', false);
-		$('#stat option').prop('disabled', false);
-		$.get("$link_get_status_invoice" + id, function(data, status){
-
-			if (data.length === 0) {
-				// console.log('data');
-				$("#status option").not('option[value=1]').each(function (index) {
-					$(this).prop('disabled', true);
-				});
-			} else {
-				// console.log(data);
-				if (data[0].tanggal_selesai === null) {
-					$("#status option").not('option[value='+data[0].status+']').each(function (index) {
-						$(this).prop('disabled', true);
-					});
-					$('#stat option').not('option[value=1]').prop('disabled', true);
-				} else {
-					
-				}
-			}
-		});		
-	});
-
-	//
 	$("#status").change(function() {
 		let val = this.value;
 		// alert("Selected value is : " + val);
@@ -678,59 +634,6 @@ $(function() {
 			v1.text('Selesai');
 			v0.text('Masuk');
 		}
-	});
-
-	//
-	var request;
-	var submitform=$('#newStatus');
-	submitform.on('submit',function(f){
-		f.preventDefault(),
-		f.stopPropagation();
-		
-		// Abort any pending request
-		if (request) {
-			request.abort();
-		}
-		// setup some local variables
-		var f = $(this);
-
-		// Let's select and cache all the fields
-		var inputs = f.find("input, select, button, textarea");
-
-		// Serialize the data in the form
-		var serializedData = f.serialize();
-
-		// Let's disable the inputs for the duration of the Ajax request.
-		// Note: we disable elements AFTER the form data has been serialized.
-		// Disabled form elements will not be serialized.
-		inputs.prop("disabled", true);
-
-		// Fire off the request to /form.php
-		request = $.ajax({
-			url: "$link_save_progress",
-			type: "post",
-			data: serializedData
-		});
-
-		// Callback handler that will be called on success
-		request.done(function (response, textStatus, jqXHR){
-			// Log a message to the console
-			console.log("Hooray, it worked!");
-		});
-
-		// Callback handler that will be called on failure
-		request.fail(function (jqXHR, textStatus, errorThrown){
-			// 
-			// console.log( Object.keys(jqXHR['responseJSON']).length);
-		});
-
-		// Callback handler that will be called regardless
-		// if the request failed or succeeded
-		request.always(function () {
-			// Reenable the inputs
-			inputs.prop("disabled", false);
-			
-		});		
 	});
 
 	// cek pembayaran
@@ -765,29 +668,13 @@ $(function() {
 						break;
 
 					default:
-						btn = `<li>
-									<button class="dropdown-item" data-val="3" data-invoice="`+id+`" data-id="`+ bayar[i].id +`">
-										Dana ada
-									</button>
-								</li>
-								<li>
-									<button class="dropdown-item" data-val="2" data-invoice="`+id+`" data-id="`+ bayar[i].id +`">
-										Dana tidak ada
-									</button>
-								</li>`;
+						btn = ``;
 						ico = 'minus-circle text-info';
 						info = 'dana belum dicek';
 						break;
 				}
 
-				var bta = `<div>
-					<div class="dropdown">
-						<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-							<i class="fad fa-ellipsis-h"></i>
-						</button>
-						<ul class="dropdown-menu btn-action" aria-labelledby="dropdownMenuButton">`+ btn +`</ul>
-					</div>
-				</div>`;
+				var bta = ``;
 
 				if (bayar[i].status !== 1) {
 					bta = '';
@@ -901,26 +788,6 @@ $(function() {
 			inputs.prop("disabled", false);
 			
 		});		
-	});
-
-	// set dana 
-	$(document).on('click', '.btn-action .dropdown-item',function() {
-		var id = $(this).data('id'),
-			invoice = $(this).data('invoice'),
-			status = $(this).data('val');
-
-		if(confirm("Sudah yakin, ini tidak bisa diubah lho?"))
-		{
-			$.ajax({
-				method: "POST",
-				url: "$link_update_pembayaran",
-				data: { id_pembayaran: id, status: status, invoice_id: invoice }
-			})
-			.done(function( msg ) {
-				// console.log( "Data Saved: " + msg );
-				document.location.href = msg.url;
-			});
-		}
 	});
 
 	$('.hapusOrderan').on('click',function(){
