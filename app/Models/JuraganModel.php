@@ -31,7 +31,7 @@ class JuraganModel extends Model
 	{
 		$builder = $this->db->table($this->table . ' j');
 		$builder->select('j.*, u.id as user_id, u.name as nama_user, u.username, u.email, r.table');
-	
+
 		$builder->join('relasi r', 'r.juragan_id = j.id_juragan');
 		$builder->join('user u', 'u.id = r.val_id');
 
@@ -86,7 +86,7 @@ class JuraganModel extends Model
 
 	public function terakhir_update($ids_juragan)
 	{
-		if(is_array($ids_juragan)) {
+		if (is_array($ids_juragan)) {
 			$juragan = $this->db->table($this->table . ' j');
 			$juragan->select('i.juragan_id as id_juragan, j.*');
 			$juragan->join('relasi r', 'r.juragan_id = j.id_juragan', 'left');
@@ -97,8 +97,7 @@ class JuraganModel extends Model
 			$juragan->orderBy('i.update_at', 'ASC');
 
 			return $juragan->get()->getLastRow();
-		}
-		else {
+		} else {
 			return ['error' => '$ids_juragan harus array'];
 		}
 	}
