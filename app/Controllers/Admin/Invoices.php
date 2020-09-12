@@ -48,7 +48,7 @@ class Invoices extends BaseController
 
 		$data = [
 			'title' 	=> 'Invoice ' . $title,
-			'pesanans' 	=> $this->invoice->ambil_data()->get()->getResult()
+			'pesanans' 	=> $this->invoice->ambil_data()->getResult()
 		];
 		echo view('admin/invoice/lihat', $data);
 	}

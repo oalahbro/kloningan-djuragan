@@ -63,8 +63,8 @@ class InvoiceModel extends Model
 
 		$inv->orderBy('i.created_at', 'DESC');
 		$inv->groupBy("i.id_invoice");
-		// $query = $inv->get();
-		return $inv;
+
+		return $inv->get();
 	}
 
 	// ------------------------------------------------------------------------
