@@ -6,23 +6,16 @@ use App\Controllers\BaseController;
 
 class Settings extends BaseController
 {
-	public function __construct()
-	{
-		$session = \Config\Services::session();
-
-		if ($session->has('logged')) {
-			if (!$session->get('logged')) {
-				return redirect()->to('/auth');
-			}
-		} else {
-			return redirect()->to('/auth');
-		}
-	}
-
-	// ------------------------------------------------------------------------
-
 	public function index()
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		$data = [
 			'title'     => 'Pengaturan Situs',
 			'banks'     => $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll()
@@ -35,6 +28,14 @@ class Settings extends BaseController
 
 	public function save_bank()
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('addBank');
 		}
@@ -68,6 +69,14 @@ class Settings extends BaseController
 
 	public function juragan()
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		$data = [
 			'title' 	=> 'Pengaturan Juragan',
 			'banks' 	=> $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll()
@@ -80,6 +89,14 @@ class Settings extends BaseController
 
 	public function save_juragan() // new insert
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('addJuragan');
 		}
@@ -120,6 +137,14 @@ class Settings extends BaseController
 
 	public function update_juragan() // update if exist
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('editJuragan');
 		}
@@ -162,6 +187,14 @@ class Settings extends BaseController
 
 	public function pengguna()
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		$data = [
 			'title' 	=> 'Pengaturan Pengguna'
 		];
@@ -173,6 +206,14 @@ class Settings extends BaseController
 
 	public function save_pengguna() // new insert
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('addPengguna');
 		}
@@ -216,6 +257,14 @@ class Settings extends BaseController
 
 	public function update_pengguna() // update if exist
 	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
 		if ($this->request->getPost()) {
 			$this->validation->setRuleGroup('editPengguna');
 		}
