@@ -415,7 +415,7 @@ $session = \Config\Services::session();
 						</ul>
 					</div>
 
-					<?php if ($pesanan->status_pembayaran !== '1') {
+					<?php if ((int) $pesanan->status_pembayaran > 2) {
 
 						// tombol proses pesanan
 						echo form_button([
@@ -426,21 +426,22 @@ $session = \Config\Services::session();
 							'data-target' 	=> '#modalProgress',
 							'data-toggle' 	=> 'modal'
 						]);
+					}
 
-						if ($pesanan->status_pembayaran === '2' or $pesanan->status_pembayaran === '3') {
-							// tombol cek pembayaran
-							// hanya tampil jika ada pembayaran yang perlu dicek
-							echo form_button([
-								'class' 		=> 'btn btn-warning ml-1 pesanBayar',
-								'content' 		=> '<i class="fad fa-wallet"></i> Cek Pembayaran',
-								'data-bayar' 	=> esc($pesanan->pembayaran),
-								'data-invoice' 	=> $pesanan->id_invoice,
-								'data-juragan' 	=> $juragan->id,
-								'data-target' 	=> '#modalBayar',
-								'data-toggle' 	=> 'modal'
-							]);
-						}
-					} ?>
+					if ($pesanan->status_pembayaran === '2' or $pesanan->status_pembayaran === '3') {
+						// tombol cek pembayaran
+						// hanya tampil jika ada pembayaran yang perlu dicek
+						echo form_button([
+							'class' 		=> 'btn btn-warning ml-1 pesanBayar',
+							'content' 		=> '<i class="fad fa-wallet"></i> Cek Pembayaran',
+							'data-bayar' 	=> esc($pesanan->pembayaran),
+							'data-invoice' 	=> $pesanan->id_invoice,
+							'data-juragan' 	=> $juragan->id,
+							'data-target' 	=> '#modalBayar',
+							'data-toggle' 	=> 'modal'
+						]);
+					}
+					?>
 				</div>
 			</div>
 	<?php
