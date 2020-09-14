@@ -7,42 +7,42 @@ use CodeIgniter\I18n\Time;
 
 class Invoices extends BaseController
 {
-    // menampilkan semua invoice
-    public function lihat($juragan = '')
-    {
-        if (!$this->isLogged()) {
-            return redirect()->to('/auth');
-        } else {
-            if ($this->isAdmin()) {
-                return redirect()->to('/auth');
-            }
-        }
+	// menampilkan semua invoice
+	public function lihat($juragan = '')
+	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if ($this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
 
-        $user_id = $this->session->get('id');
+		$user_id = $this->session->get('id');
 
-        if ($juragan === '') {
-            $juragan = $this->juraganBy($user_id);
-            return redirect()->to('/user/invoices/lihat/' . $juragan->juragan);
-        }
-        
-        // diijinkan atau tidak
-        if ($this->allowedJuragan($user_id, $juragan)) {
-            // 
-            $juragans = $this->juragan->where('juragan', $juragan)->findAll();
-            $title = $juragans[0]->nama_juragan;
+		if ($juragan === '') {
+			$juragan = $this->juraganBy($user_id);
+			return redirect()->to('/user/invoices/lihat/' . $juragan->juragan);
+		}
 
-            $data = [
-                'title'     => 'Invoice ' . $title,
-                'pesanans'  => $this->invoice->ambil_data()->getResult()
-            ];
-            echo view('user/invoice/lihat', $data);
-        }
-        else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
-    }
+		// diijinkan atau tidak
+		if ($this->allowedJuragan($user_id, $juragan)) {
+			// 
+			$juragans = $this->juragan->where('juragan', $juragan)->findAll();
+			$title = $juragans[0]->nama_juragan;
+			$id_juragan = $juragans[0]->id_juragan;
 
-    // ------------------------------------------------------------------------
+			$data = [
+				'title'     => 'Invoice ' . $title,
+				'pesanans'  => $this->invoice->ambil_data($id_juragan)->getResult()
+			];
+			echo view('user/invoice/lihat', $data);
+		} else {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
+	}
+
+	// ------------------------------------------------------------------------
 	// tambah pembayaran
 	public function simpan_pembayaran()
 	{
@@ -86,9 +86,9 @@ class Invoices extends BaseController
 				return $this->response->setJSON(['url' => site_url('admin/invoices/lihat/?q=id:' . $invoice_id)]);
 			}
 		}
-    }
-    
-    // ------------------------------------------------------------------------
+	}
+
+	// ------------------------------------------------------------------------
 
 	private function _update_status_pembayaran($invoice_id)
 	{
@@ -141,17 +141,17 @@ class Invoices extends BaseController
 		return TRUE;
 	}
 
-    // ------------------------------------------------------------------------
+	// ------------------------------------------------------------------------
 	// hapus invoice
 	public function hapus_orderan()
 	{
 		if (!$this->isLogged()) {
-            return redirect()->to('/auth');
-        } else {
-            if ($this->isAdmin()) {
-                return redirect()->to('/auth');
-            }
-        }
+			return redirect()->to('/auth');
+		} else {
+			if ($this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
 
 		if ($this->request->isAJAX()) {
 			$invoice_id = $this->request->getPost('invoice_id');
@@ -163,6 +163,6 @@ class Invoices extends BaseController
 		}
 	}
 
-    // ------------------------------------------------------------------------
+	// ------------------------------------------------------------------------
 
 }
