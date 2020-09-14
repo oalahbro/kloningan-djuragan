@@ -433,8 +433,8 @@ $session = \Config\Services::session();
 						</div>
 
 						<div class="form-check form-check-inline">
-							<?= form_checkbox(['name'=> 'cetak[]', 'class' => 'form-check-input', 'id' => 'printLabel-' . $pesanan->id_invoice], $pesanan->id_invoice) ?>
-							<?= form_label('Print Label Masal', 'printLabel-' . $pesanan->id_invoice, ['class' => 'form-check-label'] ); ?>
+							<?= form_checkbox(['name' => 'cetak[]', 'class' => 'form-check-input', 'id' => 'printLabel-' . $pesanan->id_invoice], $pesanan->id_invoice) ?>
+							<?= form_label('Print Label Masal', 'printLabel-' . $pesanan->id_invoice, ['class' => 'form-check-label']); ?>
 						</div>
 					</div>
 				</div>
@@ -710,8 +710,8 @@ $(function() {
 
 		// Callback handler that will be called on success
 		request.done(function (response, textStatus, jqXHR){
-			// Log a message to the console
-			console.log("Hooray, it worked!");
+			// redirect
+			document.location.href = response.url;
 		});
 
 		// Callback handler that will be called on failure

@@ -266,7 +266,12 @@ class Invoices extends BaseController
 					}
 				}
 
-				return $this->response->setJSON($arr);
+				$response = [
+					'status' => 200,
+					'url' => site_url('admin/invoices/lihat?id:' . $invoice_id)
+				];
+
+				return $this->response->setJSON($response);
 			}
 		}
 	}
