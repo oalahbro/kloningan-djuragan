@@ -23,19 +23,6 @@ $session = \Config\Services::session();
 		</ol>
 	</nav>
 
-	<div class="wrap-btn-filter mb-3">
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Semua Orderan</a>
-		<a class="mb-2 btn btn-sm btn-primary rounded-pill mr-1" href="#!">Belum Diproses</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Dalam Proses</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Dibatalkan</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Tunggu Konfirmasi Transfer</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Cicilan</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Lunas</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Belum dikirim</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Dikirim Sebagian</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Selesai Dikirim</a>
-	</div>
-
 	<?php
 	if (count($pesanans) > 0) {
 		foreach ($pesanans as $pesanan) { ?>
