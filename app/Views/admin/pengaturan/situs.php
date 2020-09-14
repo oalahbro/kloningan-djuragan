@@ -63,7 +63,7 @@ $session = \Config\Services::session();
                     </ul>
                 </div>
                 <div class="card-body">
-                    <?= form_open('settings/save_bank'); ?>
+                    <?= form_open('admin/settings/save_bank'); ?>
                     <div class="mb-3">
                         <?= form_label('Tipe Akun', 'nama_bank', ['class' => 'form-label']); ?>
                         <select name="nama_bank" id="nama_bank" class="form-select" required="">
