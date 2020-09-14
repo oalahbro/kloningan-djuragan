@@ -27,7 +27,7 @@ class InvoiceModel extends Model
 
 	// ------------------------------------------------------------------------
 	// ambil data
-	public function ambil_data($juragan = NULL)
+	public function ambil_data($juragan_id = NULL)
 	{
 		$inv = $this->db->table($this->table . ' i');
 		$inv->select('i.*,l.label as label_asal, l.source_id');
@@ -59,6 +59,9 @@ class InvoiceModel extends Model
 		$inv->join('bank bn', 'bn.id_bank = x.sumber_dana', 'left outer');
 		$inv->join('biaya c', 'c.invoice_id = i.id_invoice', 'left');
 
+		if ($juragan_id !== NULL) {
+			$inv->having('i.juragan_id', $juragan_id);
+		}
 		$inv->where('i.deleted_at', NULL);
 
 		$inv->orderBy('i.created_at', 'DESC');

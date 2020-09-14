@@ -38,17 +38,20 @@ class Invoices extends BaseController
 
 		// 
 		$title = 'Semua Juragan';
+		$id_juragan = NULL;
 		if ($juragan !== 'semua') {
 			$juragans = $this->juragan->where('juragan', $juragan)->findAll();
 			if (count($juragans) < 1) {
 				return redirect()->to('/faktur?juragan_notfound=' . $juragan);
 			}
 			$title = $juragans[0]->nama_juragan;
+
+			$id_juragan = $juragans[0]->id_juragan;
 		}
 
 		$data = [
 			'title' 	=> 'Invoice ' . $title,
-			'pesanans' 	=> $this->invoice->ambil_data()->getResult()
+			'pesanans' 	=> $this->invoice->ambil_data($id_juragan)->getResult()
 		];
 		echo view('admin/invoice/lihat', $data);
 	}
