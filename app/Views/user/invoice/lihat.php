@@ -23,19 +23,6 @@ $session = \Config\Services::session();
 		</ol>
 	</nav>
 
-	<div class="wrap-btn-filter mb-3">
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Semua Orderan</a>
-		<a class="mb-2 btn btn-sm btn-primary rounded-pill mr-1" href="#!">Belum Diproses</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Dalam Proses</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Dibatalkan</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Tunggu Konfirmasi Transfer</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Cicilan</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Lunas</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Belum dikirim</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Dikirim Sebagian</a>
-		<a class="mb-2 btn btn-sm btn-outline-secondary rounded-pill mr-1" href="#!">Selesai Dikirim</a>
-	</div>
-
 	<?php
 	if (count($pesanans) > 0) {
 		foreach ($pesanans as $pesanan) { ?>
@@ -379,13 +366,12 @@ $session = \Config\Services::session();
 
 					<!-- Example split danger button -->
 					<div class="btn-group">
-						<?= anchor('user/invoices/sunting/' . $pesanan->seri, '<i class="fad fa-pencil"></i> Sunting', ['class' => 'btn btn-outline-secondary', 'role' => 'button']); ?>
+						<button type="button" class="btn btn-outline-secondary belumFungsi"><i class="fad fa-pencil"></i> Sunting</button>
 						<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Print Label</a></li>
-							<li><a class="dropdown-item" href="#">Unduh Invoice (PDF)</a></li>
+							<li><a class="dropdown-item belumFungsi" href="#!">Unduh Invoice (PDF)</a></li>
 							<li>
 								<hr class="dropdown-divider" />
 							</li>
@@ -399,17 +385,6 @@ $session = \Config\Services::session();
 									'data-seri' 	=> $pesanan->seri,
 									'data-target' 	=> '#modalTambahBayar',
 									'data-toggle' 	=> 'modal'
-								]); ?>
-							</li>
-							<li>
-								<hr class="dropdown-divider" />
-							</li>
-							<li>
-								<?= form_button([
-									'class' 	=> 'dropdown-item hapusOrderan text-danger',
-									'content' 	=> 'Hapus',
-									'data-invoice' => $pesanan->id_invoice,
-									'data-seri' => $pesanan->seri
 								]); ?>
 							</li>
 						</ul>
@@ -597,8 +572,7 @@ $(function() {
 		var id = $current_user_id;
 		$('#listLi').html(''),
 		$.getJSON('$link_api_juragan', { id: id }, function(b){
-			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+'semua'+'"><i class="fad fa-user-circle"></i> Semua Juragan</li></li>');
-			
+			var a=[];			
 			$.each(b[id].juragan,function(c,b){
 				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fad fa-user-circle"></i> '+b.nama+'</li>');
 			}),
@@ -790,22 +764,8 @@ $(function() {
 		});		
 	});
 
-	$('.hapusOrderan').on('click',function(){
-		let seri = $(this).data('seri');
-		let id = $(this).data('invoice');
-
-		if(confirm("Hapus orderan " + seri + "? sudah yakin?"))
-		{
-			$.ajax({
-				method: "POST",
-				url: "$link_hapus_orderan",
-				data: { invoice_id: id }
-			})
-			.done(function( msg ) {
-				// console.log( "Data Saved: " + msg );
-				document.location.href = msg.url;
-			});
-		}
+	$('.belumFungsi').on('click',function(){
+		alert('Fungsi ini belum tersedia');
 	});
 
 	// create date from unix
