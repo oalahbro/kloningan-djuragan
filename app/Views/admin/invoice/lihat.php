@@ -364,71 +364,79 @@ $session = \Config\Services::session();
 					</div>
 					<hr />
 
-					<!-- Example split danger button -->
-					<div class="btn-group">
-						<?= anchor('admin/invoices/sunting/' . $pesanan->seri, '<i class="fad fa-pencil"></i> Sunting', ['class' => 'btn btn-outline-secondary', 'role' => 'button']); ?>
-						<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Print Label</a></li>
-							<li><a class="dropdown-item" href="#">Unduh Invoice (PDF)</a></li>
-							<li>
-								<hr class="dropdown-divider" />
-							</li>
-							<li>
-								<?= form_button([
-									'class' 		=> 'dropdown-item tambahBayar',
-									'content' 		=> 'Tambah Pembayaran',
+					<div class="d-flex align-items-center justify-content-between">
+						<div>
+							<div class="btn-group">
+								<?= anchor('admin/invoices/sunting/' . $pesanan->seri, '<i class="fad fa-pencil"></i> Sunting', ['class' => 'btn btn-outline-secondary', 'role' => 'button']); ?>
+								<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="#">Print Label</a></li>
+									<li><a class="dropdown-item" href="#">Unduh Invoice (PDF)</a></li>
+									<li>
+										<hr class="dropdown-divider" />
+									</li>
+									<li>
+										<?= form_button([
+											'class' 		=> 'dropdown-item tambahBayar',
+											'content' 		=> 'Tambah Pembayaran',
+											'data-invoice' 	=> $pesanan->id_invoice,
+											'data-juragan' 	=> $juragan->id,
+											'data-kurang' 	=> $wajib_bayar - $sudah_bayar,
+											'data-seri' 	=> $pesanan->seri,
+											'data-target' 	=> '#modalTambahBayar',
+											'data-toggle' 	=> 'modal'
+										]); ?>
+									</li>
+									<li>
+										<hr class="dropdown-divider" />
+									</li>
+									<li>
+										<?= form_button([
+											'class' 	=> 'dropdown-item hapusOrderan text-danger',
+											'content' 	=> 'Hapus',
+											'data-invoice' => $pesanan->id_invoice,
+											'data-seri' => $pesanan->seri
+										]); ?>
+									</li>
+								</ul>
+							</div>
+
+							<?php if ((int) $pesanan->status_pembayaran > 2) {
+
+								// tombol proses pesanan
+								echo form_button([
+									'class' 		=> 'btn btn-dark ml-1 pesanStatus',
+									'content' 		=> '<i class="fad fa-comment-alt-plus"></i> Proses Orderan',
+									'data-invoice' 	=> $pesanan->id_invoice,
+									'data-seri' 	=> $pesanan->seri,
+									'data-target' 	=> '#modalProgress',
+									'data-toggle' 	=> 'modal'
+								]);
+							}
+
+							if ($pesanan->status_pembayaran === '2' or $pesanan->status_pembayaran === '3') {
+								// tombol cek pembayaran
+								// hanya tampil jika ada pembayaran yang perlu dicek
+								echo form_button([
+									'class' 		=> 'btn btn-warning ml-1 pesanBayar',
+									'content' 		=> '<i class="fad fa-wallet"></i> Cek Pembayaran',
+									'data-bayar' 	=> esc($pesanan->pembayaran),
 									'data-invoice' 	=> $pesanan->id_invoice,
 									'data-juragan' 	=> $juragan->id,
-									'data-kurang' 	=> $wajib_bayar - $sudah_bayar,
-									'data-seri' 	=> $pesanan->seri,
-									'data-target' 	=> '#modalTambahBayar',
+									'data-target' 	=> '#modalBayar',
 									'data-toggle' 	=> 'modal'
-								]); ?>
-							</li>
-							<li>
-								<hr class="dropdown-divider" />
-							</li>
-							<li>
-								<?= form_button([
-									'class' 	=> 'dropdown-item hapusOrderan text-danger',
-									'content' 	=> 'Hapus',
-									'data-invoice' => $pesanan->id_invoice,
-									'data-seri' => $pesanan->seri
-								]); ?>
-							</li>
-						</ul>
+								]);
+							}
+							?>
+						</div>
+
+						<div class="form-check form-check-inline">
+							<?= form_checkbox(['name'=> 'cetak[]', 'class' => 'form-check-input', 'id' => 'printLabel-' . $pesanan->id_invoice], $pesanan->id_invoice) ?>
+							<?= form_label('Print Label Masal', 'printLabel-' . $pesanan->id_invoice, ['class' => 'form-check-label'] ); ?>
+						</div>
 					</div>
-
-					<?php if ((int) $pesanan->status_pembayaran > 2) {
-
-						// tombol proses pesanan
-						echo form_button([
-							'class' 		=> 'btn btn-dark ml-1 pesanStatus',
-							'content' 		=> '<i class="fad fa-comment-alt-plus"></i> Proses Orderan',
-							'data-invoice' 	=> $pesanan->id_invoice,
-							'data-seri' 	=> $pesanan->seri,
-							'data-target' 	=> '#modalProgress',
-							'data-toggle' 	=> 'modal'
-						]);
-					}
-
-					if ($pesanan->status_pembayaran === '2' or $pesanan->status_pembayaran === '3') {
-						// tombol cek pembayaran
-						// hanya tampil jika ada pembayaran yang perlu dicek
-						echo form_button([
-							'class' 		=> 'btn btn-warning ml-1 pesanBayar',
-							'content' 		=> '<i class="fad fa-wallet"></i> Cek Pembayaran',
-							'data-bayar' 	=> esc($pesanan->pembayaran),
-							'data-invoice' 	=> $pesanan->id_invoice,
-							'data-juragan' 	=> $juragan->id,
-							'data-target' 	=> '#modalBayar',
-							'data-toggle' 	=> 'modal'
-						]);
-					}
-					?>
 				</div>
 			</div>
 	<?php
