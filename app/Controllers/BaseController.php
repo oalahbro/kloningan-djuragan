@@ -125,6 +125,19 @@ class BaseController extends Controller
 
 		$return = $this->juragan->terakhir_update($ids);
 
+		if ($return === NULL) {
+			//  $juragan[$user_id]['juragan'];
+			$arr = [];
+			foreach ($juragan[$user_id]['juragan'] as $r => $v) {
+				$arr['id_juragan'] = $v['id'];
+				$arr['juragan'] = $v['slug'];
+				$arr['nama_juragan'] = $v['nama'];
+				break;
+			}
+
+			$return = (object) $arr;
+		}
+
 		return $return;
 	}
 
