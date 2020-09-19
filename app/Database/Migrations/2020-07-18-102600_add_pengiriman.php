@@ -16,12 +16,11 @@ class AddPengiriman extends \CodeIgniter\Database\Migration {
 				'constraint' 	 => 11,
 				'unsigned' 		 => TRUE
 			],
-			'kurir_id' => [
-				'type' 			 => 'INT',
-				'constraint'     => 5,
-				'unsigned' 		 => TRUE
+			'kurir' => [
+				'type' 			 => 'VARCHAR',
+				'constraint'     => 50,
 			],
-			'ongkir_kirim' => [
+			'ongkir' => [
 				'type' 			 => 'INT',
 				'constraint' 	 => 5,
 				'unsigned' 		 => TRUE

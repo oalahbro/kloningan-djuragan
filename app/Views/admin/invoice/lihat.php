@@ -429,7 +429,15 @@ $session = \Config\Services::session();
 									'data-toggle' 	=> 'modal'
 								]);
 							}
-							?>
+							// 
+							if ($dipacking && (int) $pesanan->status_pengiriman < 3) {
+								echo form_button([
+									'class' 		=> 'btn btn-warning ml-1 kirimResi',
+									'content' 		=> '<i class="fad fa-paper-plane"></i> Input Resi',
+									'data-count' 	=> $count_barang,
+									'data-invoice' 	=> $pesanan->id_invoice
+								]);
+							} ?>
 						</div>
 
 						<div class="form-check form-check-inline">
@@ -557,20 +565,124 @@ $session = \Config\Services::session();
 	</div>
 </div>
 
+<!-- Modal input resi -->
+<div class="modal fade" id="modalKirim" tabindex="-1" aria-labelledby="modalKirimLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<?= form_open('', ['id' => 'submitResi', 'class' => 'modal-content'], ['invoice_id' => '1']); ?>
+		<div class="modal-header">
+			<h5 class="modal-title" id="modalKirimLabel">Modal title</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="row gx-2 mb-3">
+				<div class="col-4">
+					<?= form_label('Kurir', 'kurir', ['class' => 'form-label']); ?>
+					<?php
+					$options_kurir = array('' => 'Pilih kurir');
+					foreach (config('JuraganConfig')->kurir as $label) {
+						$options_kurir[$label] = $label;
+					}
+					?>
+
+					<?= form_dropdown('kurir', $options_kurir, '', ['class' => 'form-select', 'id' => 'kurir', 'required' => '']); ?>
+				</div>
+				<div class="col">
+					<?= form_label('Lainnya', 'resi', ['class' => 'form-label']); ?>
+					<?= form_input([
+						'class' 	=> 'form-control',
+						'disabled' 	=> '',
+						'id' 		=> 'lainnya',
+						'name' 		=> 'lainnya',
+						'placeholder' => 'kurir lain'
+					]); ?>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<?= form_label('No Resi', 'resi', ['class' => 'form-label']); ?>
+				<?= form_input([
+					'class' 	=> 'form-control',
+					'id' 		=> 'resi',
+					'name' 		=> 'resi',
+					'placeholder' => 'JOGxxxxxxxxxxx',
+					'required' 	=> ''
+				]); ?>
+			</div>
+
+
+			<div class="row gx-2 mb-3">
+				<div class="col-5">
+					<div class="mb-3">
+						<?= form_label('Tanggal Kirim', 'tanggal_kirim', ['class' => 'form-label']); ?>
+						<?= form_input([
+							'class' 	=> 'form-control',
+							'id' 		=> 'tanggal_kirim',
+							'max' 		=> $sekarang->toDateString(),
+							'name' 		=> 'tanggal_kirim',
+							'placeholder' => 'JOGxxxxxxxxxxx',
+							'required' 	=> '',
+							'type' 		=> 'date',
+							'value' 	=> $sekarang->toDateString()
+						]); ?>
+					</div>
+				</div>
+				<div class="col">
+					<div class="mb-3">
+						<?= form_label('Isi Paket', 'isi_paket', ['class' => 'form-label']); ?>
+						<?= form_input([
+							'class' 	=> 'form-control',
+							'id' 		=> 'isi_paket',
+							'min' 		=> 1,
+							'name' 		=> 'qty',
+							'placeholder' => '1',
+							'required' 	=> '',
+							'type' 		=> 'number'
+						]); ?>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="mb-3">
+						<?= form_label('Ongkir', 'ongkir', ['class' => 'form-label']); ?>
+						<?= form_input([
+							'class' 	=> 'form-control',
+							'id' 		=> 'ongkir',
+							'name' 		=> 'ongkir',
+							'placeholder' => '25000',
+							'required' 	=> '',
+							'min' 		=> 0,
+							'type' 		=> 'number'
+						]); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn link" data-dismiss="modal">Batal</button>
+			<button type="submit" class="btn btn-primary">Simpan</button>
+		</div>
+		<?= form_close(); ?>
+	</div>
+</div>
+
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
 <?php
 
+$current_user_id = $session->get('id');
 $link_api_get_bank = site_url("api/juragan/all/");
 $link_api_juragan = site_url("api/juragan/by_user/");
 $link_get_status_invoice = site_url('admin/invoices/detail_status/');
 $link_hapus_orderan = site_url('admin/invoices/hapus_orderan/');
 $link_invoice = site_url('admin/invoices/lihat/');
 $link_save_progress = site_url('admin/invoices/save_progress');
+$link_save_resi = site_url('admin/invoices/submit_resi');
 $link_tambah_pembayaran = site_url('admin/invoices/simpan_pembayaran');
 $link_update_pembayaran = site_url('admin/invoices/update_bayar');
-$current_user_id = $session->get('id');
+
+$codvalue = 'COD' . $sekarang->toLocalizedString('dmmyyyy');
 
 $js = <<< JS
 $(function() { 
@@ -935,6 +1047,102 @@ $(function() {
 				document.location.href = msg.url;
 			});
 		}
+	});
+
+	// submit resi
+	$('.kirimResi').on('click',function(){
+		var modalKirim = new bootstrap.Modal(document.getElementById('modalKirim'));
+		var invoice = $(this).data('invoice');
+		var count = $(this).data('count');
+
+		var qty = $('#submitResi [name="qty"]');
+
+		$('#submitResi [name="invoice_id"]').val(invoice);
+		qty.val(count).attr('readonly', true);
+
+		if (parseInt( count ) > 1 ) {
+			// remove readonly
+			qty.attr('readonly', false);			
+		}
+
+		modalKirim.show();
+	});
+
+	// kurir
+	$('#submitResi #kurir').on('change', function() {
+		var lainnya = $('#submitResi #lainnya');
+		var resi = $('#submitResi #resi');
+		if ($(this).val() === "lainnya") {
+			lainnya.attr('disabled', false);
+			lainnya.attr('required', true);
+		} else {
+			lainnya.attr('disabled', true);
+		}
+
+		if ($(this).val() === "COD") {
+			
+			resi.val('$codvalue');
+		} else {
+			resi.val('');
+		}
+	});
+
+
+	// Variable to hold request
+	var request_resi;
+
+	// Bind to the submit event of our form
+	$("#submitResi").submit(function(event){
+
+		// Prevent default posting of form - put here to work in case of errors
+		event.preventDefault();
+
+		// Abort any pending request
+		if (request_resi) {
+			request_resi.abort();
+		}
+		// setup some local variables
+		var form = $(this);
+
+		// Let's select and cache all the fields
+		var inputs = form.find("input, select, button, textarea");
+
+		// Serialize the data in the form
+		var serializedData = form.serialize();
+
+		// Let's disable the inputs for the duration of the Ajax request.
+		// Note: we disable elements AFTER the form data has been serialized.
+		// Disabled form elements will not be serialized.
+		inputs.prop("disabled", true);
+
+		// Fire off the request to /form.php
+		request_resi = $.ajax({
+			url: "$link_save_resi",
+			type: "post",
+			data: serializedData
+		});
+
+		// Callback handler that will be called on success
+		request_resi.done(function (response, textStatus, jqXHR){
+			document.location.href = response.url;
+		});
+
+		// Callback handler that will be called on failure
+		request_resi.fail(function (jqXHR, textStatus, errorThrown){
+			// Log the error to the console
+			console.error(
+				"The following error occurred: "+
+				textStatus, errorThrown
+			);
+		});
+
+		// Callback handler that will be called regardless
+		// if the request failed or succeeded
+		request_resi.always(function () {
+			// Reenable the inputs
+			inputs.prop("disabled", false);
+		});
+
 	});
 
 	// create date from unix

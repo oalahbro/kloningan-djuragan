@@ -48,12 +48,15 @@ class InvoiceModel extends Model
 
 		$inv->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","\"id\":",x.id_pembayaran,",","\"sumber\":",x.sumber_dana,",","\"nama\":","\"",bn.nama_bank,"\"",",","\"atas_nama\":","\"",bn.atas_nama,"\"",",","\"nominal\":",x.total_pembayaran,",","\"status\":",x.status,",","\"tanggal_bayar\":",x.tanggal_pembayaran,",","\"tanggal_cek\":",IFNULL(x.tanggal_cek, "null"),"}")),"]") as pembayaran');
 
+		$inv->select('CONCAT("[" ,GROUP_CONCAT(DISTINCT CONCAT("{","\"id\":",sx.id_pengiriman,",","\"ongkir\":",sx.ongkir,",","\"kurir\":","\"",sx.kurir,"\"",",","\"resi\":","\"",sx.resi,"\"",",","\"qty\":",sx.qty_kirim,",","\"tanggal_kirim\":",sx.tanggal_kirim,"}")),"]") as pengiriman');
+
 		$inv->join('juragan j', 'j.id_juragan = i.juragan_id');
 		$inv->join('user u', 'u.id = i.user_id');
 		$inv->join('label_invoice l', 'l.invoice_id = i.id_invoice');
 		$inv->join('pelanggan p', 'p.id_pelanggan = i.pemesan_id');
 		$inv->join('pelanggan k', 'k.id_pelanggan = i.kirimKepada_id');
 		$inv->join('pembayaran x', 'x.invoice_id = i.id_invoice', 'left');
+		$inv->join('pengiriman sx', 'sx.invoice_id = i.id_invoice', 'left');
 		$inv->join('dibeli b', 'b.invoice_id = i.id_invoice', 'left');
 		$inv->join('invoice_status s', 's.invoice_id = i.id_invoice', 'left');
 		$inv->join('bank bn', 'bn.id_bank = x.sumber_dana', 'left outer');
@@ -98,6 +101,20 @@ class InvoiceModel extends Model
 		$status->orderBy('s.id_status', 'ASC');
 
 		return $status->get();
+	}
+
+	// ------------------------------------------------------------------------
+
+	public function jumlah_produk($invoice_id)
+	{
+		$db = \Config\Database::connect();
+		$builder = $this->db->table('pengiriman p');
+
+		$builder->select('(SELECT SUM(p.qty_kirim) FROM '.$db->prefixTable('pengiriman').' p WHERE p.invoice_id='.$invoice_id.') AS sudah_kirim', FALSE);
+
+		$builder->select('(SELECT SUM(d.qty) FROM '.$db->prefixTable('dibeli').' d WHERE d.invoice_id='.$invoice_id.') AS wajib_kirim', FALSE);
+
+		return $builder->get();
 	}
 
 	// ------------------------------------------------------------------------

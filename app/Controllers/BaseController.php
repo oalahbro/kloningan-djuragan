@@ -22,6 +22,7 @@ use App\Models\BankModel;
 use App\Models\InvoiceModel;
 use App\Models\JuraganModel;
 use App\Models\PembayaranModel;
+use App\Models\PengirimanModel;
 use App\Models\RelasiModel;
 use App\Models\UserModel;
 
@@ -68,6 +69,7 @@ class BaseController extends Controller
 		$this->invoice 	= new InvoiceModel();
 		$this->juragan 	= new JuraganModel();
 		$this->pembayaran 	= new PembayaranModel();
+		$this->pengiriman 	= new PengirimanModel();
 		$this->relasi 	= new RelasiModel();
 		$this->user 	= new UserModel();
 

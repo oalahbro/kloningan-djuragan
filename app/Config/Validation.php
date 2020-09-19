@@ -112,4 +112,13 @@ class Validation
 		'invoice_id' 	=> 'required|integer',
 		'status' 		=> 'required'
 	];
+
+	public $tambahPengiriman = [
+		'invoice_id' 	=> 'required|integer',
+		'kurir' 		=> 'required',
+		'ongkir' 		=> 'required|integer',
+		'qty' 			=> 'required',
+		'resi' 			=> 'required',
+		'tanggal_kirim' => 'required'
+	];
 }

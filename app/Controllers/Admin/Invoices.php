@@ -481,4 +481,82 @@ class Invoices extends BaseController
 
 	// ------------------------------------------------------------------------
 
+	public function submit_resi()
+	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
+		if ($this->request->getPost()) {
+			$this->validation->setRuleGroup('tambahPengiriman');
+		}
+
+		if ($this->request->isAJAX()) {
+			if (!$this->validation->withRequest($this->request)->run()) {
+
+				$this->response->setStatusCode(406);
+				$errors = $this->validation->getErrors();
+
+				return $this->response->setJSON($errors);
+			} else {
+
+				$time = Time::parse($this->request->getPost('tanggal_kirim'))->getTimestamp();
+				$invoice_id = $this->request->getPost('invoice_id');
+				$qty = $this->request->getPost('qty');
+				$kurir = $this->request->getPost('kurir');
+				if ($kurir === 'lainnya') {
+					$kurir = $this->request->getPost('lainnya');
+				}
+
+				$data = [
+					'invoice_id' 	=> $invoice_id,
+					'kurir' 		=> $kurir,
+					'ongkir' 		=> $this->request->getPost('ongkir'),
+					'resi' 			=> $this->request->getPost('resi'),
+					'qty_kirim' 	=> $qty,
+					'tanggal_kirim' => $time
+				];
+
+				// simpan ke DB pengiriman
+				$this->pengiriman->save($data);
+
+				$db = \Config\Database::connect();
+
+				if ($db->affectedRows() > 0) {
+					// cek sudah selesai kirim atau belum
+					$hasil = $this->invoice->jumlah_produk($invoice_id)->getResult()[0];
+
+					$status = '2';
+					if ($hasil->wajib_kirim === $hasil->sudah_kirim) {
+						$status = '3';
+					} elseif ((int) $hasil->wajib_kirim < (int) $hasil->sudah_kirim) {
+						$status = '3';
+					}
+
+					// save db invoice
+					$this->invoice->save([
+						'id_invoice' => $invoice_id,
+						'status_pengiriman' => $status
+
+					]);
+				}
+			}
+
+			$res = [
+				'status' 	=> 'OK',
+				'url' 		=> site_url('admin/invoices/lihat/?q=id:' . $invoice_id)
+			];
+
+			return $this->response->setJSON($res);
+		} else {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
+	}
+
+	// ------------------------------------------------------------------------
+
 }

@@ -26,8 +26,8 @@ class Invoice extends ResourceController
                 $dibeli[] = [
                     'id' => $p->id,
                     'id_stock' => $p->stok_id,
-                    'code' => strtoupper( $p->kode ),
-                    'size' => strtoupper( $p->ukuran ),
+                    'code' => strtoupper($p->kode),
+                    'size' => strtoupper($p->ukuran),
                     'price' => $p->harga,
                     'qty' => $p->qty
 
@@ -110,4 +110,13 @@ class Invoice extends ResourceController
     }
 
     // ...
+    public function tes($id)
+    {
+        $hasil = $this->model->jumlah_produk($id)->getResult()[0];
+
+       
+
+        return $this->respond($hasil);
+        # code...
+    }
 }
