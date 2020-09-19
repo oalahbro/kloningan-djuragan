@@ -33,12 +33,26 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Auth::index');
 
 // admin
-$routes->get('admin/invoices', 'admin/Invoices::lihat', ['as' => 'admin_inv']);
+$routes->get('admin/invoices', 'Admin/Invoices::lihat', ['as' => 'admin_inv']);
 $routes->addRedirect('admin', 'admin_inv');
 
 // user
-$routes->get('user/invoices', 'user/Invoices::lihat', ['as' => 'user_inv']);
+$routes->get('user/invoices', 'User/Invoices::lihat', ['as' => 'user_inv']);
 $routes->addRedirect('user', 'user_inv');
+
+$routes->group('api', function($routes)
+{
+    $routes->group('juragan', function($routes)
+    {
+        $routes->add('(:segment)', 'Api\Juragan::$1');
+    });
+    
+    $routes->group('pengguna', function($routes)
+    {
+        $routes->add('(:segment)', 'Api\Pengguna::$1');
+    });
+
+});
 
 /**
  * --------------------------------------------------------------------
