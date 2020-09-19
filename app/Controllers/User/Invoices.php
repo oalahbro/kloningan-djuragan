@@ -7,6 +7,118 @@ use CodeIgniter\I18n\Time;
 
 class Invoices extends BaseController
 {
+	//
+	public function tulis()
+	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if ($this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
+		$data = [
+			'title' => 'Tulis Orderan Baru'
+		];
+		return view('user/invoice/tulis', $data);
+	}
+
+	// ------------------------------------------------------------------------
+
+	public function save()
+	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if ($this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
+		if ($this->request->getPost()) {
+			$this->validation->setRuleGroup('addInvoice');
+		}
+
+		if ($this->request->isAJAX()) {
+			if (!$this->validation->withRequest($this->request)->run()) {
+
+				$this->response->setStatusCode(406);
+				$errors = $this->validation->getErrors();
+
+				return $this->response->setJSON($errors);
+			} else {
+				$db = \Config\Database::connect();
+
+				$user_id = $this->request->getPost('pengguna');
+				$t = $this->user->find($user_id);
+				$seri = strtoupper(first_letter($t->name) . time());
+
+				$data_invoice = [
+					'tanggal_pesan' => $this->request->getPost('tanggal_order'),
+					'seri'			=> $seri,
+					'pemesan_id' 	=> $this->request->getPost('id_pemesan'),
+					'kirimKepada_id' => $this->request->getPost('id_kirimKe'),
+					'juragan_id' 	=> $this->request->getPost('juragan'),
+					'user_id' 		=> $user_id,
+					'keterangan' 	=> ($this->request->getPost('keterangan') !== "" ? $this->request->getPost('keterangan') : NULL)
+				];
+
+				// simpan ke database
+				$this->invoice->insert($data_invoice);
+
+				// 
+				if ($db->affectedRows() > 0) {
+					$invoice_id = $db->insertID();
+
+					// simpan asal orderan
+					$data_asal = [
+						'invoice_id' => $invoice_id,
+						'source_id' => $this->request->getPost('asal_orderan'),
+						'label' 	=> ($this->request->getPost('label') !== "" ? $this->request->getPost('label') : NULL)
+					];
+					$db->table('label_invoice')->insert($data_asal);
+
+					// simpan produk
+					$produks =  $this->request->getPost('produk');
+
+					// tambahkan `invoice_id` untuk tiap pesanan
+					$produk = [];
+					foreach ($produks as $k => $v) {
+						foreach ($v as $p => $d) {
+							$produk[$k]['invoice_id'] = $invoice_id;
+							$produk[$k][$p] = $d;
+						}
+					}
+					$db->table('dibeli')->insertBatch($produk);
+
+					// simpan biaya
+					if ($this->request->getVar('biaya') !== NULL) {
+						//
+						$biayas =  $this->request->getPost('biaya');
+
+						// tambahkan `invoice_id` untuk tiap biaya
+						$biaya = [];
+						foreach ($biayas as $k => $v) {
+							foreach ($v as $p => $d) {
+								$biaya[$k]['invoice_id'] = $invoice_id;
+								$biaya[$k][$p] = ($d !== "" ? $d : NULL);
+							}
+						}
+						$db->table('biaya')->insertBatch($biaya);
+					}
+				}
+
+				$ret = [
+					'status' => 'data tersimpan',
+					'url' => site_url('user/invoices/lihat?q=seri:' . $seri)
+				];
+				return $this->response->setJSON($ret);
+			}
+		}
+	}
+
+	// ------------------------------------------------------------------------
 	// menampilkan semua invoice
 	public function lihat($juragan = '')
 	{
