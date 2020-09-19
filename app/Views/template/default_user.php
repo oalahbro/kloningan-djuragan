@@ -203,6 +203,9 @@ $JSmin = new Minify\JS();
 		border-radius: .25rem !important;
 		padding: 0 15px
 	}
+	.keterangan .more-text{
+        display: none;
+	}
 	
 	';
 		$CSSmin->add($css);

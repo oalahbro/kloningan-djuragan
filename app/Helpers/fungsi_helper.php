@@ -105,8 +105,9 @@ if (!function_exists('first_letter')) {
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists('status_orderan')) {
-	function status_orderan($status, $mulai, $selesai, $keterangan_mulai, $keterangan_selesai) {
+if (!function_exists('status_orderan')) {
+	function status_orderan($status, $mulai, $selesai, $keterangan_mulai, $keterangan_selesai)
+	{
 		$class = '';
 		switch ($status) {
 			case 1:
@@ -115,109 +116,102 @@ if( ! function_exists('status_orderan')) {
 					$class = 'full';
 					$title = 'Data orderan sudah lengkap';
 					$time = Time::createFromTimestamp($selesai);
-					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
-				}
-				else if ($mulai !== NULL && $selesai === NULL) {
+					$title .= ($keterangan_selesai !== 'null' ? ': ' . $keterangan_selesai : '');
+				} else if ($mulai !== NULL && $selesai === NULL) {
 					$title = 'Data orderan belum lengkap';
 					$time = Time::createFromTimestamp($mulai);
-					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+					$title .= ($keterangan_mulai !== 'null' ? ': ' . $keterangan_mulai : '');
 				}
 				break;
-			
+
 			case 2:
 				$ico = 'layer-group';
 				if ($mulai !== NULL && $selesai !== NULL) {
 					$class = 'full';
 					$title = 'Bahan sudah ada';
 					$time = Time::createFromTimestamp($selesai);
-					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
-				}
-				else if ($mulai !== NULL && $selesai === NULL) {
+					$title .= ($keterangan_selesai !== 'null' ? ': ' . $keterangan_selesai : '');
+				} else if ($mulai !== NULL && $selesai === NULL) {
 					$title = 'Bahan belum ada';
 					$time = Time::createFromTimestamp($mulai);
-					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+					$title .= ($keterangan_mulai !== 'null' ? ': ' . $keterangan_mulai : '');
 				}
 				break;
-			
+
 			case 3:
 				$ico = 'print';
 				if ($mulai !== NULL && $selesai !== NULL) {
 					$class = 'full';
 					$title = 'Sudah selesai sablon';
 					$time = Time::createFromTimestamp($selesai);
-					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
-				}
-				else if ($mulai !== NULL && $selesai === NULL) {
+					$title .= ($keterangan_selesai !== 'null' ? ': ' . $keterangan_selesai : '');
+				} else if ($mulai !== NULL && $selesai === NULL) {
 					$title = 'Mulai di-sablon';
 					$time = Time::createFromTimestamp($mulai);
-					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+					$title .= ($keterangan_mulai !== 'null' ? ': ' . $keterangan_mulai : '');
 				}
 				break;
-			
+
 			case 4:
 				$ico = 'waveform-path fa-rotate-90';
 				if ($mulai !== NULL && $selesai !== NULL) {
 					$class = 'full';
 					$title = 'Sudah selesai bordir';
 					$time = Time::createFromTimestamp($selesai);
-					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
-				}
-				else if ($mulai !== NULL && $selesai === NULL) {
+					$title .= ($keterangan_selesai !== 'null' ? ': ' . $keterangan_selesai : '');
+				} else if ($mulai !== NULL && $selesai === NULL) {
 					$title = 'Mulai di-bordir';
 					$time = Time::createFromTimestamp($mulai);
-					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+					$title .= ($keterangan_mulai !== 'null' ? ': ' . $keterangan_mulai : '');
 				}
 				break;
-			
+
 			case 5:
 				$ico = 'cut fa-rotate-270';
 				if ($mulai !== NULL && $selesai !== NULL) {
 					$class = 'full';
 					$title = 'Selesai dari penjahit';
 					$time = Time::createFromTimestamp($selesai);
-					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
-				}
-				else if ($mulai !== NULL && $selesai === NULL) {
+					$title .= ($keterangan_selesai !== 'null' ? ': ' . $keterangan_selesai : '');
+				} else if ($mulai !== NULL && $selesai === NULL) {
 					$title = 'Masuk ke penjahit';
 					$time = Time::createFromTimestamp($mulai);
-					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+					$title .= ($keterangan_mulai !== 'null' ? ': ' . $keterangan_mulai : '');
 				}
 				break;
-			
+
 			case 6:
 				$ico = 'tasks';
 				if ($mulai !== NULL && $selesai !== NULL) {
 					$class = 'full';
 					$title = 'QC selesai';
 					$time = Time::createFromTimestamp($selesai);
-					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
-				}
-				else if ($mulai !== NULL && $selesai === NULL) {
+					$title .= ($keterangan_selesai !== 'null' ? ': ' . $keterangan_selesai : '');
+				} else if ($mulai !== NULL && $selesai === NULL) {
 					$title = 'Masuk QC';
 					$time = Time::createFromTimestamp($mulai);
-					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+					$title .= ($keterangan_mulai !== 'null' ? ': ' . $keterangan_mulai : '');
 				}
 				break;
-			
+
 			case 7:
 				$ico = 'box-alt';
 				if ($mulai !== NULL && $selesai !== NULL) {
 					$class = 'full';
 					$title = 'Selesai dipacking';
 					$time = Time::createFromTimestamp($selesai);
-					$title .= ($keterangan_selesai !== 'null'? ': ' . $keterangan_selesai: '');
-				}
-				else if ($mulai !== NULL && $selesai === NULL) {
+					$title .= ($keterangan_selesai !== 'null' ? ': ' . $keterangan_selesai : '');
+				} else if ($mulai !== NULL && $selesai === NULL) {
 					$title = 'Sedang dipacking';
 					$time = Time::createFromTimestamp($mulai);
-					$title .= ($keterangan_mulai !== 'null'? ': ' . $keterangan_mulai: '');
+					$title .= ($keterangan_mulai !== 'null' ? ': ' . $keterangan_mulai : '');
 				}
 				break;
 		}
 
-		$html = '<li class="list-inline-item mr-0 position-relative '. $class .'" data-toggle="tooltip" data-placement="top" title="'. $title .'"><div class="d-flex justify-content-center">';
-			$html .= '<div class="text-center"><i class="fad fa-'. $ico .' icon d-block"></i>';
-			$html .= '<span><abbr title="'. $time->humanize() .'">'. $time->day .'/'. $time->month .'</abbr></span></div></div>';
+		$html = '<li class="list-inline-item mr-0 position-relative ' . $class . '" data-toggle="tooltip" data-placement="top" title="' . $title . '"><div class="d-flex justify-content-center">';
+		$html .= '<div class="text-center"><i class="fad fa-' . $ico . ' icon d-block"></i>';
+		$html .= '<span><abbr title="' . $time->humanize() . '">' . $time->day . '/' . $time->month . '</abbr></span></div></div>';
 		$html .= '</li>';
 
 		return $html;
@@ -226,8 +220,9 @@ if( ! function_exists('status_orderan')) {
 
 // ------------------------------------------------------------------------
 
-if( ! function_exists('status_pembayaran')) {
-	function status_pembayaran($pembayaran, $status, $return = 'html') {
+if (!function_exists('status_pembayaran')) {
+	function status_pembayaran($pembayaran, $status, $return = 'html')
+	{
 
 		//
 		switch ($status) {
@@ -274,25 +269,65 @@ if( ! function_exists('status_pembayaran')) {
 			}
 		}
 
-		$html = '<li class="list-inline-item mr-0 position-relative '. $class .'" data-toggle="tooltip" data-placement="top" title="'. $title .'"><div class="d-flex justify-content-center">';
-			$html .= '<div class="text-center"><i class="fad fa-wallet icon d-block"></i>';
-			if ($tanggal_bayar !=='') {
-				$html .= '<span><abbr title="'. $tanggal_bayar->humanize() .'">'. $tanggal_bayar->day .'/'. $tanggal_bayar->month .'</abbr></span></div></div>';
-			}
-			else {
-				$html .= '<span>??/??</span>';
-			}
+		$html = '<li class="list-inline-item mr-0 position-relative ' . $class . '" data-toggle="tooltip" data-placement="top" title="' . $title . '"><div class="d-flex justify-content-center">';
+		$html .= '<div class="text-center"><i class="fad fa-wallet icon d-block"></i>';
+		if ($tanggal_bayar !== '') {
+			$html .= '<span><abbr title="' . $tanggal_bayar->humanize() . '">' . $tanggal_bayar->day . '/' . $tanggal_bayar->month . '</abbr></span></div></div>';
+		} else {
+			$html .= '<span>??/??</span>';
+		}
 		$html .= '</li>';
 
 		if ($return === 'html') {
 			return $html;
-		}
-		else if($return === 'sudah_bayar'){
+		} else if ($return === 'sudah_bayar') {
 			return $sudah_bayar;
-		}
-		else if($return === 'l_class'){
+		} else if ($return === 'l_class') {
 			return $l_class;
 		}
+	}
+}
+
+// ------------------------------------------------------------------------
+
+if (!function_exists('status_pengiriman')) {
+	function status_pengiriman($pengiriman, $status)
+	{
+
+		//
+		switch ($status) {
+			case 2: // dikirim sebagian
+				$class = 'half';
+				$title = 'Sebagian sudah dikirim';
+				break;
+			case 3: // dikirim semua
+				$class = 'full';
+				$title = 'Semua pesanan sudah dikirim';
+				break;
+			default: // belum kirim
+				$class = '';
+				$title = 'Masih menunggu';
+				break;
+		}
+
+		$tanggal_kirim = '';
+
+		if ($pengiriman !== NULL) {
+			foreach (json_decode($pengiriman) as $kirim) {
+				$tanggal_kirim = Time::createFromTimestamp($kirim->tanggal_kirim);
+			}
+		}
+
+		$html = '<li class="list-inline-item mr-0 position-relative ' . $class . '" data-toggle="tooltip" data-placement="top" title="' . $title . '"><div class="d-flex justify-content-center">';
+		$html .= '<div class="text-center"><i class="fad fa-truck icon d-block"></i>';
+		if ($tanggal_kirim !== '') {
+			$html .= '<span><abbr title="' . $tanggal_kirim->humanize() . '">' . $tanggal_kirim->day . '/' . $tanggal_kirim->month . '</abbr></span></div></div>';
+		} else {
+			$html .= '<span>??/??</span>';
+		}
+		$html .= '</li>';
+
+		return $html;
 	}
 }
 
