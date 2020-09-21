@@ -39,7 +39,7 @@ class PelangganModel extends Model
     public function cari($juragan_id, $cari)
     {
         $builder = $this->db->table($this->table . ' p');
-        $builder->select('x.juragan_id, i.juragan_id as alias_juragan, p.*');
+        $builder->select('x.juragan_id, i.juragan_id as alias_juragan, p.*, i.deleted_at');
         $builder->join('invoice i', 'i.pemesan_id=p.id_pelanggan', 'LEFT');
         $builder->join('invoice x', 'x.kirimKepada_id=p.id_pelanggan', 'LEFT');
 
@@ -50,6 +50,7 @@ class PelangganModel extends Model
 
         $builder->having('x.juragan_id', $juragan_id);
         $builder->orHaving('alias_juragan', $juragan_id);
+        $builder->having('i.deleted_at', NULL);
         $builder->limit(10);
         $builder->groupBy('p.id_pelanggan');
 
