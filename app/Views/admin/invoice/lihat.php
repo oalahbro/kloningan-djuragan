@@ -248,6 +248,8 @@ $session = \Config\Services::session();
 																$label = '';
 															} elseif ($c->label === 'null' && $c->biaya_id !== 1) {
 																$label = '';
+															} elseif ($c->label === 'null' && $c->biaya_id === 1) {
+																$label = '';
 															}
 															?>
 															<?= $biaya; ?>
