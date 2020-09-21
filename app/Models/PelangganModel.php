@@ -41,7 +41,7 @@ class PelangganModel extends Model
     {
         $builder = $this->db->table($this->table . ' p');
         $builder->select('i.*, p.*');
-        $builder->join('order_invoice i', 'p.id_pelanggan = i.pemesan_id OR i.kirimKepada_id = p.id_pelanggan', '', FALSE);
+        $builder->join('order_invoice i', '(p.id_pelanggan = i.pemesan_id OR i.kirimKepada_id = p.id_pelanggan) AND i.deleted_at IS NULL', '', FALSE);
 
         if ($cari !== null or $cari !== '') {
             $builder->like('p.nama_pelanggan', $cari, 'both');
