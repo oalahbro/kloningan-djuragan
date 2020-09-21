@@ -383,6 +383,7 @@ $session = \Config\Services::session();
 			</div>
 	<?php
 		}
+		echo $pager->makeLinks($page, $limit, $totalPage, 'front_full');
 	} else {
 		echo '<div class="text-center my-5"><i class="fad fa-5x fa-box-open text-primary"></i><br/>orderan masih kosong</div>';
 	}

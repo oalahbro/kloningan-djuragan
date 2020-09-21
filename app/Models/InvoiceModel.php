@@ -27,7 +27,7 @@ class InvoiceModel extends Model
 
 	// ------------------------------------------------------------------------
 	// ambil data
-	public function ambil_data($juragan_id = NULL)
+	public function ambil_data($juragan_id = NULL, $limit = NULL, $offset = NULL)
 	{
 		$inv = $this->db->table($this->table . ' i');
 		$inv->select('i.*,l.label as label_asal, l.source_id');
@@ -70,7 +70,11 @@ class InvoiceModel extends Model
 		$inv->orderBy('i.created_at', 'DESC');
 		$inv->groupBy("i.id_invoice");
 
-		return $inv->get();
+		if ($limit !== NULL && $offset !== NULL) {
+			$inv->limit($limit, $offset);
+		}
+
+		return $inv;
 	}
 
 	// ------------------------------------------------------------------------
@@ -110,9 +114,9 @@ class InvoiceModel extends Model
 		$db = \Config\Database::connect();
 		$builder = $this->db->table('pengiriman p');
 
-		$builder->select('(SELECT SUM(p.qty_kirim) FROM '.$db->prefixTable('pengiriman').' p WHERE p.invoice_id='.$invoice_id.') AS sudah_kirim', FALSE);
+		$builder->select('(SELECT SUM(p.qty_kirim) FROM ' . $db->prefixTable('pengiriman') . ' p WHERE p.invoice_id=' . $invoice_id . ') AS sudah_kirim', FALSE);
 
-		$builder->select('(SELECT SUM(d.qty) FROM '.$db->prefixTable('dibeli').' d WHERE d.invoice_id='.$invoice_id.') AS wajib_kirim', FALSE);
+		$builder->select('(SELECT SUM(d.qty) FROM ' . $db->prefixTable('dibeli') . ' d WHERE d.invoice_id=' . $invoice_id . ') AS wajib_kirim', FALSE);
 
 		return $builder->get();
 	}

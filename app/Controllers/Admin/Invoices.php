@@ -49,9 +49,23 @@ class Invoices extends BaseController
 			$id_juragan = $juragans[0]->id_juragan;
 		}
 
+		$limit = config('Pager')->perPage;
+		$page = (int) $this->request->getGet('page');
+
+		if (!isset($page) || $page === 0 || $page === 1) {
+			$page = 1;
+			$offset = 0;
+		} else {
+			$offset = ($page - 1) * $limit;
+			$page = $page;
+		}
+
 		$data = [
 			'title' 	=> 'Invoice ' . $title,
-			'pesanans' 	=> $this->invoice->ambil_data($id_juragan)->getResult()
+			'pesanans' 	=> $this->invoice->ambil_data($id_juragan, $limit, $offset)->get()->getResult(),
+			'totalPage' => $this->invoice->ambil_data($id_juragan, NULL, NULL)->countAllResults(),
+			'limit' 	=> $limit,
+			'page' 		=> $page
 		];
 		echo view('admin/invoice/lihat', $data);
 	}
