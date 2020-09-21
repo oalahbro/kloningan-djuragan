@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\Database\BaseBuilder;
 
 class PelangganModel extends Model
 {
@@ -39,18 +40,15 @@ class PelangganModel extends Model
     public function cari($juragan_id, $cari)
     {
         $builder = $this->db->table($this->table . ' p');
-        $builder->select('x.juragan_id, i.juragan_id as alias_juragan, p.*, i.deleted_at');
-        $builder->join('invoice i', 'i.pemesan_id=p.id_pelanggan', 'LEFT');
-        $builder->join('invoice x', 'x.kirimKepada_id=p.id_pelanggan', 'LEFT');
+        $builder->select('i.*, p.*');
+        $builder->join('order_invoice i', 'p.id_pelanggan = i.pemesan_id OR i.kirimKepada_id = p.id_pelanggan', '', FALSE);
 
         if ($cari !== null or $cari !== '') {
             $builder->like('p.nama_pelanggan', $cari, 'both');
             $builder->orLike('p.hp', $cari, 'both');
         }
 
-        $builder->having('x.juragan_id', $juragan_id);
-        $builder->orHaving('alias_juragan', $juragan_id);
-        $builder->having('i.deleted_at', NULL);
+        $builder->having('i.juragan_id', $juragan_id);
         $builder->limit(10);
         $builder->groupBy('p.id_pelanggan');
 
