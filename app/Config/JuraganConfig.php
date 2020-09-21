@@ -19,6 +19,7 @@ class JuraganConfig extends BaseConfig
 		'11' => 'Tokopedia',
 		'9' => 'WhatsApp',
 		'10' => 'Zalora',
+		'13' => 'Meesho',
 		'8' => 'Web/App lain',
 		'6' => 'Offline Store/COD'
 	);
