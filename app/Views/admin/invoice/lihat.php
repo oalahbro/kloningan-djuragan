@@ -246,9 +246,7 @@ $session = \Config\Services::session();
 															if ($c->label !== "null" && $c->biaya_id !== 1) {
 																$biaya = $c->label;
 																$label = '';
-															} elseif ($c->label === 'null' && $c->biaya_id !== 1) {
-																$label = '';
-															} elseif ($c->label === 'null' && $c->biaya_id === 1) {
+															} elseif ($c->label === 'null') {
 																$label = '';
 															}
 															?>
