@@ -35,7 +35,7 @@ class Pelanggan extends BaseController
                 $d['kecamatan']     = $this->request->getPost('kecamatan');
                 $d['kabupaten']     = $this->request->getPost('kabupaten');
                 $d['provinsi']      = $this->request->getPost('provinsi');
-                $d['alamat']        = strtoupper($this->request->getPost('alamat'));
+                $d['alamat']        = strtoupper(trim(preg_replace('/\s+/', ' ', $this->request->getPost('alamat'))));
                 $d['kodepos']       = $this->request->getPost('kodepos');
             }
 
