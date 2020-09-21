@@ -312,7 +312,7 @@ $session = \Config\Services::session();
 								<?php if ($pesanan->keterangan !== NULL) { ?>
 									<div class="card-subtitle text-muted text-uppercase small">Keterangan</div>
 									<p class="keterangan mb-3" id="keterangan-<?= $pesanan->id_invoice; ?>">
-										<?= $pesanan->keterangan; ?>
+										<?= nl2br($pesanan->keterangan); ?>
 									</p>
 								<?php } ?>
 
