@@ -327,7 +327,9 @@ $session = \Config\Services::session();
 											<div class="lead"><?= $kirim->resi; ?></div>
 											<p class="mb-0 text-muted">
 												<?= $tanggal_kirim->toLocalizedString('EEEE, d MMMM yyyy'); ?>
-												<br />ongkir fix (<?= $kirim->qty . 'pcs'; ?>): <u><?= number_to_currency($kirim->ongkir, 'IDR'); ?></u>
+												<?php if ($kirim->ongkir > 0) { ?>
+													<br />ongkir fix (<?= $kirim->qty . 'pcs'; ?>): <u><?= number_to_currency($kirim->ongkir, 'IDR'); ?></u>
+												<?php } ?>
 											</p>
 										</div>
 									<?php } ?>
