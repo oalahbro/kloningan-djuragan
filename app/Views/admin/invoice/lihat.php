@@ -378,7 +378,7 @@ $session = \Config\Services::session();
 								</ul>
 							</div>
 
-							<?php if ((int) $pesanan->status_pembayaran > 2) {
+							<?php if ((int) $pesanan->status_pembayaran > 2 && !$dipacking) {
 
 								// tombol proses pesanan
 								echo form_button([
