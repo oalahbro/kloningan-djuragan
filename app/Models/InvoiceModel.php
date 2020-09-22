@@ -71,15 +71,22 @@ class InvoiceModel extends Model
 
 			$inv->where('i.deleted_at', NULL);
 
-
-			$inv->orderBy('i.created_at', 'DESC');
+			$inv->orderBy("CASE 
+			WHEN i.status_pembayaran = '2' THEN 0 #perlu dicek (belum ada pembayaran sebelumnya)
+			WHEN i.status_pembayaran = '3' THEN 1 #perlu dicek 2 (sudah ada pembayaran sebelumnya)
+			WHEN i.status_pembayaran = '4' THEN 2 #pembayaran kredit
+			WHEN i.status_pembayaran = '6' THEN 3 #pembayaran lunas
+			WHEN i.status_pesanan = '2' THEN 4 #pesanan diproses
+			WHEN i.status_pembayaran = '1' THEN 5 #belum ada pembayaran
+			WHEN i.status_pembayaran = '5' THEN 6 #pembayaran ada kelebihan
+			WHEN i.status_pesanan = '3' THEN 7 #pesanan dibatalkan
+			END");
 			$inv->groupBy("i.id_invoice");
 
 			if ($limit !== NULL && $offset !== NULL) {
 				$inv->limit($limit, $offset);
 			}
 		}
-
 
 		return $inv;
 	}
