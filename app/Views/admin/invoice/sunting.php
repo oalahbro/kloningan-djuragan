@@ -278,8 +278,10 @@ $biaya 		= json_decode($orderan->biaya);
 							<tfoot class="customBiaya d-none listBiaya">
 								<?php
 								$totalbiaya = 0;
-								foreach ($biaya as $o) {
-									$totalbiaya += $o->nominal;
+								if ($biaya !== NULL) {
+									foreach ($biaya as $o) {
+										$totalbiaya += $o->nominal;
+									}
 								}
 
 								?>
@@ -288,19 +290,22 @@ $biaya 		= json_decode($orderan->biaya);
 									<td class="text-right" data-totalbiaya="<?= $totalbiaya; ?>" data-subtotal="<?= $subtotal; ?>" id="subTotal"><?= number_to_currency($subtotal, 'IDR'); ?></td>
 								</tr>
 
-								<?php foreach ($biaya as $o) { ?>
-									<tr>
-										<td colspan="3" class="text-right">
-											<button type="button" class="close hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>
-											<?= ($o->biaya_id === 1 ? 'Ongkir' : 'Lain-lain') ?><?= empty($o->label) ? '' : '<span class="text-muted ml-1">' . $o->label . '</span>'; ?></td>
-										<td>
-											<div data-biaya="<?= $o->nominal; ?>" class="text-right "><?= number_to_currency($o->nominal, 'IDR'); ?></div>
-											<?= form_hidden('biaya[' . $o->id . '][biaya_id]', $o->biaya_id); ?>
-											<?= form_hidden('biaya[' . $o->id . '][nominal]', $o->nominal); ?>
-											<?= form_hidden('biaya[' . $o->id . '][label]', $o->label); ?>
-										</td>
-									</tr>
-								<?php } ?>
+								<?php
+								if ($biaya !== NULL) {
+									foreach ($biaya as $o) { ?>
+										<tr>
+											<td colspan="3" class="text-right">
+												<button type="button" class="close hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>
+												<?= ($o->biaya_id === 1 ? 'Ongkir' : 'Lain-lain') ?><?= empty($o->label) ? '' : '<span class="text-muted ml-1">' . $o->label . '</span>'; ?></td>
+											<td>
+												<div data-biaya="<?= $o->nominal; ?>" class="text-right "><?= number_to_currency($o->nominal, 'IDR'); ?></div>
+												<?= form_hidden('biaya[' . $o->id . '][biaya_id]', $o->biaya_id); ?>
+												<?= form_hidden('biaya[' . $o->id . '][nominal]', $o->nominal); ?>
+												<?= form_hidden('biaya[' . $o->id . '][label]', $o->label); ?>
+											</td>
+										</tr>
+								<?php }
+								} ?>
 							</tfoot>
 						</table>
 					</div>
