@@ -974,6 +974,15 @@ $(function() {
 		</div>`;
 	}
 
+	// disable hit enter
+	// https://stackoverflow.com/a/895231/2094645
+	$(window).keydown(function(event){
+		if(event.keyCode == 13) {
+			event.preventDefault();
+			return false;
+		}
+	});
+
 	//
 	function uniqId() {
 		return Math.round(new Date().getTime() + (Math.random() * 100));

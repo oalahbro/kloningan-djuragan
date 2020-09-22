@@ -949,6 +949,15 @@ $(function() {
 
 		});
 
+		// disable hit enter
+		// https://stackoverflow.com/a/895231/2094645
+		$(window).keydown(function(event){
+			if(event.keyCode == 13) {
+				event.preventDefault();
+				return false;
+			}
+		});
+
 		// Callback handler that will be called regardless
 		// if the request failed or succeeded
 		request.always(function () {

@@ -62,8 +62,8 @@ class Invoices extends BaseController
 
 		$data = [
 			'title' 	=> 'Invoice ' . $title,
-			'pesanans' 	=> $this->invoice->ambil_data($id_juragan, $limit, $offset)->get()->getResult(),
-			'totalPage' => $this->invoice->ambil_data($id_juragan, NULL, NULL)->countAllResults(),
+			'pesanans' 	=> $this->invoice->ambil_data(NULL, $id_juragan, $limit, $offset)->get()->getResult(),
+			'totalPage' => $this->invoice->ambil_data(NULL, $id_juragan, NULL, NULL)->countAllResults(),
 			'limit' 	=> $limit,
 			'page' 		=> $page
 		];
@@ -82,21 +82,17 @@ class Invoices extends BaseController
 			}
 		}
 
-		if ($seri === '' or empty($seri)) {
+		$x = $this->invoice->where('seri', $seri)->first();
+
+		if ($seri === '' or empty($seri) or $x === NULL) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		} else {
-			// cek di database
-			$pesanan = $this->invoice->ambil_data()->get()->getResult();
-			if (count($pesanan) > 0) {
-
-				$data = [
-					'title' 	=> 'Sunting Invoice #' . $seri,
-					'pesanans' 	=> $pesanan
-				];
-				return view('admin/invoice/lihat', $data);
-			} else {
-				throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-			}
+			$pesanan = $this->invoice->ambil_data($seri, NULL, NULL, NULL)->get()->getResult();
+			$data = [
+				'title' 	=> 'Sunting Orderan #' . $seri,
+				'pesanan' 	=> $pesanan
+			];
+			return view('admin/invoice/sunting', $data);
 		}
 	}
 
@@ -213,6 +209,111 @@ class Invoices extends BaseController
 				$ret = [
 					'status' => 'data tersimpan',
 					'url' => site_url('admin/invoices/lihat?q=seri:' . $seri)
+				];
+				return $this->response->setJSON($ret);
+			}
+		}
+	}
+
+	// ------------------------------------------------------------------------
+
+	public function update()
+	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if (!$this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
+		if ($this->request->getPost()) {
+			$this->validation->setRuleGroup('updateInvoice');
+		}
+
+		if ($this->request->isAJAX()) {
+			if (!$this->validation->withRequest($this->request)->run()) {
+
+				$this->response->setStatusCode(406);
+				$errors = $this->validation->getErrors();
+
+				return $this->response->setJSON($errors);
+			} else {
+				$db = \Config\Database::connect();
+
+				$invoice_id = $this->request->getPost('id_invoice');
+				$user_id = $this->request->getPost('pengguna');
+				// $t = $this->user->find($user_id);
+				// $seri = strtoupper(first_letter($t->name) . time());
+
+				$data_invoice = [
+					'id_invoice' 	=> $invoice_id,
+					'tanggal_pesan' => $this->request->getPost('tanggal_order'),
+					// 'seri'			=> $seri,
+					'pemesan_id' 	=> $this->request->getPost('id_pemesan'),
+					'kirimKepada_id' => $this->request->getPost('id_kirimKe'),
+					'juragan_id' 	=> $this->request->getPost('juragan'),
+					'user_id' 		=> $user_id,
+					'keterangan' 	=> ($this->request->getPost('keterangan') !== "" ? $this->request->getPost('keterangan') : NULL)
+				];
+
+				// simpan ke database
+				$this->invoice->save($data_invoice);
+
+				// 
+				if ($db->affectedRows() > 0) {
+					// $invoice_id = $db->insertID();
+
+					// hapus data asal orderan
+					$db->table('label_invoice')->delete(['invoice_id' => $invoice_id]);
+
+					// simpan asal orderan
+					$data_asal = [
+						'invoice_id' => $invoice_id,
+						'source_id' => $this->request->getPost('asal_orderan'),
+						'label' 	=> ($this->request->getPost('label') !== "" ? $this->request->getPost('label') : NULL)
+					];
+					$db->table('label_invoice')->insert($data_asal);
+
+					// hapus produk dibeli
+					$db->table('dibeli')->delete(['invoice_id' => $invoice_id]);
+
+					// simpan produk
+					$produks =  $this->request->getPost('produk');
+
+					// tambahkan `invoice_id` untuk tiap pesanan
+					$produk = [];
+					foreach ($produks as $k => $v) {
+						foreach ($v as $p => $d) {
+							$produk[$k]['invoice_id'] = $invoice_id;
+							$produk[$k][$p] = $d;
+						}
+					}
+					$db->table('dibeli')->insertBatch($produk);
+
+					// hapus biaya 
+					$db->table('biaya')->delete(['invoice_id' => $invoice_id]);
+
+					// simpan biaya
+					if ($this->request->getVar('biaya') !== NULL) {
+						//
+						$biayas =  $this->request->getPost('biaya');
+
+						// tambahkan `invoice_id` untuk tiap biaya
+						$biaya = [];
+						foreach ($biayas as $k => $v) {
+							foreach ($v as $p => $d) {
+								$biaya[$k]['invoice_id'] = $invoice_id;
+								$biaya[$k][$p] = ($d !== "" ? $d : NULL);
+							}
+						}
+						$db->table('biaya')->insertBatch($biaya);
+					}
+				}
+
+				$ret = [
+					'status' => 'data tersimpan',
+					'url' => site_url('admin/invoices/lihat?q=id:' . $invoice_id)
 				];
 				return $this->response->setJSON($ret);
 			}

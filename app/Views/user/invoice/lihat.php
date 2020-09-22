@@ -759,6 +759,15 @@ $(function() {
 		$(this).remove();
 	});
 
+	// disable hit enter
+	// https://stackoverflow.com/a/895231/2094645
+	$(window).keydown(function(event){
+		if(event.keyCode == 13) {
+			event.preventDefault();
+			return false;
+		}
+	});
+
 	// create date from unix
 	function tanggal(unixtime) {
 		var u = new Date(unixtime*1000);

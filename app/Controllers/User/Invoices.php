@@ -157,8 +157,8 @@ class Invoices extends BaseController
 
 			$data = [
 				'title'     => 'Invoice ' . $title,
-				'pesanans' 	=> $this->invoice->ambil_data($id_juragan, $limit, $offset)->get()->getResult(),
-				'totalPage' => $this->invoice->ambil_data($id_juragan, NULL, NULL)->countAllResults(),
+				'pesanans' 	=> $this->invoice->ambil_data(NULL, $id_juragan, $limit, $offset)->get()->getResult(),
+				'totalPage' => $this->invoice->ambil_data(NULL, $id_juragan, NULL, NULL)->countAllResults(),
 				'limit' 	=> $limit,
 				'page' 		=> $page
 			];

@@ -11,7 +11,7 @@ class Invoice extends ResourceController
 
     public function index()
     {
-        $rows = $this->model->ambil_data()->getResult();
+        $rows = $this->model->ambil_data()->get()->getResult();
 
         $response = [];
         foreach ($rows as $pesanan) {

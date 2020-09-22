@@ -92,6 +92,20 @@ class Validation
 		// 'biaya' 		=> 'required'
 	];
 
+	public $updateInvoice = [
+		'id_invoice'	=> 'required',
+		'juragan' 		=> 'required',
+		'pengguna'		=> 'required',
+		'asal_orderan' 	=> 'required',
+		'tanggal_order'	=> 'required',
+		'juragan'	 	=> 'required',
+		'id_pemesan' 	=> 'required',
+		'id_kirimKe' 	=> 'required',
+		// 'keterangan' => 'required',
+		'produk' 		=> 'required'
+		// 'biaya' 		=> 'required'
+	];
+
 	public $simpanProgress = [
 		'id_invoice' 	=> 'required|integer',
 		'status'		=> 'required',
