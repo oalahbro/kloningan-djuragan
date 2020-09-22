@@ -339,7 +339,16 @@ $session = \Config\Services::session();
 
 					<!-- Example split danger button -->
 					<div class="btn-group">
-						<button type="button" class="btn btn-outline-secondary belumFungsi"><i class="fad fa-pencil"></i> Sunting</button>
+						<?= form_button([
+							'class' 		=> 'btn btn-outline-secondary tambahBayar',
+							'content' 		=> 'Tambah Pembayaran',
+							'data-invoice' 	=> $pesanan->id_invoice,
+							'data-juragan' 	=> $juragan->id,
+							'data-kurang' 	=> $wajib_bayar - $sudah_bayar,
+							'data-seri' 	=> $pesanan->seri,
+							'data-target' 	=> '#modalTambahBayar',
+							'data-toggle' 	=> 'modal'
+						]); ?>
 						<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
@@ -350,14 +359,8 @@ $session = \Config\Services::session();
 							</li>
 							<li>
 								<?= form_button([
-									'class' 		=> 'dropdown-item tambahBayar',
-									'content' 		=> 'Tambah Pembayaran',
-									'data-invoice' 	=> $pesanan->id_invoice,
-									'data-juragan' 	=> $juragan->id,
-									'data-kurang' 	=> $wajib_bayar - $sudah_bayar,
-									'data-seri' 	=> $pesanan->seri,
-									'data-target' 	=> '#modalTambahBayar',
-									'data-toggle' 	=> 'modal'
+									'class' 		=> 'dropdown-item belumFungsi',
+									'content' 		=> 'Sunting'
 								]); ?>
 							</li>
 						</ul>
