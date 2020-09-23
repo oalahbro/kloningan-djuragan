@@ -766,7 +766,7 @@ $(function() {
 
 	// disable hit enter
 	// https://stackoverflow.com/a/895231/2094645
-	$(window).keydown(function(event){
+	$(document).on("keydown", ":input:not(textarea)", function(event) {
 		if(event.keyCode == 13) {
 			event.preventDefault();
 			return false;
