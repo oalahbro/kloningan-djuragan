@@ -296,7 +296,8 @@ $biaya 		= json_decode($orderan->biaya);
 										<tr>
 											<td colspan="3" class="text-right">
 												<button type="button" class="close hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>
-												<?= ($o->biaya_id === 1 ? 'Ongkir' : 'Lain-lain') ?><?= empty($o->label) ? '' : '<span class="text-muted ml-1">' . $o->label . '</span>'; ?></td>
+												<?= ($o->biaya_id === 1 ? 'Ongkir' : 'Lain-lain') ?>
+												<?= empty($o->label) || $o->label === 'null' ? '' : '<span class="text-muted ml-1">' . $o->label . '</span>'; ?></td>
 											<td>
 												<div data-biaya="<?= $o->nominal; ?>" class="text-right "><?= number_to_currency($o->nominal, 'IDR'); ?></div>
 												<?= form_hidden('biaya[' . $o->id . '][biaya_id]', $o->biaya_id); ?>
