@@ -291,4 +291,39 @@ class Invoices extends BaseController
 
 	// ------------------------------------------------------------------------
 
+	public function info_pembayaran()
+	{
+		if (!$this->isLogged()) {
+			return redirect()->to('/auth');
+		} else {
+			if ($this->isAdmin()) {
+				return redirect()->to('/auth');
+			}
+		}
+
+		if ($this->request->isAJAX()) {
+			$invoice_id = $this->request->getGet('id');
+			$x = $this->pembayaran->ambil($invoice_id)->get()->getResult();
+
+			$res = [];
+
+			foreach ($x as $bayar) {
+				$res[] = [
+					'id' => (int) $bayar->id,
+					'nama' => $bayar->nama,
+					'atas_nama' => $bayar->atas_nama,
+					'nominal' => number_to_currency($bayar->nominal, 'IDR'), //(int) $bayar->nominal,
+					'status' => (int) $bayar->status,
+					'tanggal_bayar' => (int) $bayar->tanggal_pembayaran,
+					'tanggal_cek' => ($bayar->tanggal_cek !== NULL ? (int) $bayar->tanggal_cek : NULL)
+				];
+			}
+
+
+			return $this->response->setJSON($res);
+		}
+	}
+
+	// ------------------------------------------------------------------------
+
 }

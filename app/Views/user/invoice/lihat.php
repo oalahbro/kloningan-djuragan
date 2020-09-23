@@ -269,7 +269,6 @@ $session = \Config\Services::session();
 													<?= form_button([
 														'class' 		=> 'text-dark ml-1 pesanBayar',
 														'content' 		=> '<i class="fad fa-info-circle"></i> <span class="sr-only">info</span>',
-														'data-bayar' 	=> esc($pesanan->pembayaran),
 														'data-invoice' 	=> $pesanan->id_invoice,
 														'data-juragan' 	=> $juragan->id,
 														'data-target' 	=> '#modalBayar',
@@ -376,7 +375,6 @@ $session = \Config\Services::session();
 							echo form_button([
 								'class' 		=> 'btn btn-warning ml-1 pesanBayar',
 								'content' 		=> '<i class="fad fa-wallet"></i> Cek Pembayaran',
-								'data-bayar' 	=> esc($pesanan->pembayaran),
 								'data-invoice' 	=> $pesanan->id_invoice,
 								'data-juragan' 	=> $juragan->id,
 								'data-target' 	=> '#modalBayar',
@@ -508,6 +506,7 @@ $session = \Config\Services::session();
 
 $current_user_id = $session->get('id');
 $link_api_get_bank = site_url("api/juragan/all/");
+$link_api_get_pembayaran = site_url("user/invoices/info_pembayaran");
 $link_api_juragan = site_url("api/juragan/by_user/");
 $link_get_status_invoice = site_url('admin/invoices/detail_status/');
 $link_hapus_orderan = site_url('user/invoices/hapus_orderan/');
@@ -593,20 +592,16 @@ $(function() {
 	$('.pesanBayar').on('click',function(){
 		let juragan = $(this).data('juragan'),
 			id = $(this).data('invoice'),
-			bayar = $(this).data('bayar'),
 			dv_list =$("<div/>").addClass('list-group list-group-flushs').attr('id', 'list_pembayaran');
 
-		// buka tab cek secara default
-		// load data pembayaran jika tersedia
-		// kalau tidak ada data, tampilkan pesan kosong		
-		if (bayar !== '') {
-			for(var i in bayar) {
-				// console.log(bayar[i].id);
+			$.getJSON('$link_api_get_pembayaran', {id:id}, function(bayar){
+			for (let i = 0; i < bayar.length; i++) {
 				var label = $('<div/>').addClass('list-group-item list-group-action');
 
 				var info = '';
 				var ico = '';
 				var btn = '';
+				
 				switch (bayar[i].status) {
 					case 2:
 						btn = ``;
@@ -642,9 +637,8 @@ $(function() {
 				<div class="d-flex justify-content-between">
 					<div class="d-flex justify-content-start align-items-center">
 						<i class="fad fa-`+ ico +` fa-2x mr-3"></i>
-						<div>`+
-						
-							bank.toUpperCase() +`&nbsp;-&nbsp;`+ new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR',maximumSignificantDigits: 2 }).format(bayar[i].nominal) +`&nbsp;(`+ tanggal(bayar[i].tanggal_bayar) +`)
+						<div>
+							<span class="mr-1">`+ bank.toUpperCase() +`</span> <span class="mr-1">`+ bayar[i].nominal +`</span> <span>(`+ tanggal(bayar[i].tanggal_bayar) +`)</span>
 							<div class="text-muted small">`+ info +`</div>
 						</div>
 					</div>
@@ -657,11 +651,7 @@ $(function() {
 
 				$('#modalBayar #cek').empty().append(dv_list);
 			}
-		}
-		else {
-			// console.log('data bayar kosong');
-			$('#modalBayar #cek').empty().append('<div class="text-center my-5"><i class="fad fa-wallet fa-4x"></i><br/>data kosong</div>');
-		}
+		});
 	});
 
 	// tambah pembayaran
