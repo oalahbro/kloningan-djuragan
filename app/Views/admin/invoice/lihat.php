@@ -23,6 +23,15 @@ $session = \Config\Services::session();
 		</ol>
 	</nav>
 
+	<div class="wrap-btn-filter mb-3">
+		<?= anchor('admin/invoices/lihat/' . $juragan . '/semua', 'Semua Orderan', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'semua'? 'primary':'outline-secondary')]); ?>
+		<?= anchor('admin/invoices/lihat/' . $juragan . '/cek-bayar', 'Cek Pembayaran', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'cek-bayar'? 'primary':'outline-secondary')]); ?>
+		<?= anchor('admin/invoices/lihat/' . $juragan . '/belum-proses', 'Belum Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'belum-proses'? 'primary':'outline-secondary')]); ?>
+		<?= anchor('admin/invoices/lihat/' . $juragan . '/dalam-proses', 'Dalam Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'dalam-proses'? 'primary':'outline-secondary')]); ?>
+		<?= anchor('admin/invoices/lihat/' . $juragan . '/selesai', 'Orderan Selesai', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'selesai'? 'primary':'outline-secondary')]); ?>
+		<a class="mb-2 btn btn-warning rounded-pill mr-1" href="#!"><i class="fad fa-search"></i></a>
+	</div>
+
 	<?php
 	if (count($pesanans) > 0) {
 		foreach ($pesanans as $pesanan) { ?>

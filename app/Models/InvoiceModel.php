@@ -27,7 +27,7 @@ class InvoiceModel extends Model
 
 	// ------------------------------------------------------------------------
 	// ambil data
-	public function ambil_data($seri = NULL, $juragan_id = NULL, $limit = NULL, $offset = NULL)
+	public function ambil_data($seri = NULL, $juragan_id = NULL, $hal = 'semua', $limit = NULL, $offset = NULL)
 	{
 		$inv = $this->db->table($this->table . ' i');
 		$inv->select('i.*,l.label as label_asal, l.source_id');
@@ -67,6 +67,29 @@ class InvoiceModel extends Model
 		} else {
 			if ($juragan_id !== NULL) {
 				$inv->having('i.juragan_id', $juragan_id);
+			}
+
+			switch ($hal) {
+				case 'selesai':
+					$inv->where('i.status_pengiriman', '3');
+					break;
+
+				case 'belum-proses':
+					$inv->where('i.status_pesanan', '1');
+					break;
+
+				case 'cek-bayar':
+					$inv->whereIn('i.status_pembayaran', ['2', '3']);
+					break;
+				
+				case 'dalam-proses':
+					$inv->where('i.status_pesanan', '2');
+					$inv->whereNotIn('i.status_pengiriman', ['3']);
+					break;
+
+				default:
+					# code...
+					break;
 			}
 
 			$inv->where('i.deleted_at', NULL);

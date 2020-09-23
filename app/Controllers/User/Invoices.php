@@ -120,7 +120,7 @@ class Invoices extends BaseController
 
 	// ------------------------------------------------------------------------
 	// menampilkan semua invoice
-	public function lihat($juragan = '')
+	public function lihat($juragan = '', $hal = 'dalam-proses')
 	{
 		if (!$this->isLogged()) {
 			return redirect()->to('/auth');
@@ -128,6 +128,10 @@ class Invoices extends BaseController
 			if ($this->isAdmin()) {
 				return redirect()->to('/auth');
 			}
+		}
+
+		if (!in_array($hal, ['semua', 'cek-bayar', 'dalam-proses', 'belum-proses', 'selesai'])) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
 
 		$user_id = $this->session->get('id');
@@ -157,8 +161,10 @@ class Invoices extends BaseController
 
 			$data = [
 				'title'     => 'Invoice ' . $title,
-				'pesanans' 	=> $this->invoice->ambil_data(NULL, $id_juragan, $limit, $offset)->get()->getResult(),
-				'totalPage' => $this->invoice->ambil_data(NULL, $id_juragan, NULL, NULL)->countAllResults(),
+				'pesanans' 	=> $this->invoice->ambil_data(NULL, $id_juragan, $hal, $limit, $offset)->get()->getResult(),
+				'totalPage' => $this->invoice->ambil_data(NULL, $id_juragan, $hal, NULL, NULL)->countAllResults(),
+				'juragan' 	=> $juragan,
+				'hal' 		=> $hal,
 				'limit' 	=> $limit,
 				'page' 		=> $page
 			];
