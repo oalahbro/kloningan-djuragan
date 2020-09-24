@@ -18,9 +18,10 @@ class NotifikasiModel extends Model
 	public function ambil($user_id)
 	{
 		$builder = $this->db->table($this->table . ' n');
-		$builder->select('i.seri, n.*, p.name');
+		$builder->select('i.seri, n.*, p.name, j.juragan');
 		$builder->join('invoice i', 'n.invoice_id = i.id_invoice', 'LEFT');
 		$builder->join('user p', 'n.from = p.id', 'LEFT');
+		$builder->join('juragan j', 'j.id_juragan = n.juragan_id', 'LEFT');
 		$builder->where('n.for', $user_id);
 
 		$builder->orderBy('n.created_at', 'DESC');

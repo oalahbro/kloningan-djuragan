@@ -422,9 +422,8 @@ $(function() {
 			a.push('');
 			
 			$.each(b,function(c,b){
-				a.push('<a href="$link_invoice?q=seri:'+b.invoice+'" class="list-group-item list-group-item-action"><small class="text-muted">'+b.created_at +'</small><br/>' + b.notif+'</a>');
+				a.push('<a href="$link_invoice/'+b.juragan+'/semua?cari[kolom]=faktur&cari[q]='+b.invoice+'" class="list-group-item list-group-item-action"><small class="text-muted">'+b.created_at +'</small><br/>' + b.notif+'</a>');
 			}),
-
 			$(a.join('')).appendTo('#notifDisini');
 		});
 
