@@ -157,7 +157,7 @@ class InvoiceModel extends Model
 
 		$inv->where('i.deleted_at', NULL);
 
-		$inv->orderBy("CASE 
+		/*$inv->orderBy("CASE 
 			WHEN i.status_pembayaran = '2' THEN 0 #perlu dicek (belum ada pembayaran sebelumnya)
 			WHEN i.status_pembayaran = '3' THEN 1 #perlu dicek 2 (sudah ada pembayaran sebelumnya)
 			WHEN i.status_pembayaran = '4' THEN 2 #pembayaran kredit
@@ -167,6 +167,8 @@ class InvoiceModel extends Model
 			WHEN i.status_pembayaran = '5' THEN 6 #pembayaran ada kelebihan
 			WHEN i.status_pesanan = '3' THEN 7 #pesanan dibatalkan
 			END");
+			*/
+		$inv->orderBy('i.status_pesanan ASC, i.tanggal_pesan DESC, i.update_at DESC');
 
 		if ($limit !== NULL && $offset !== NULL) {
 			$inv->limit($limit, $offset);
