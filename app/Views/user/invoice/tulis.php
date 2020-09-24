@@ -488,7 +488,7 @@ $(function() {
 				}
 				hp += ph[i];
 			}
-			return '<div class="text-wrap"><h6 class="mb-0">' +suggestion.value + '</h6>' + hp + '<br/>' + suggestion.data.full + '</div>;
+			return '<div class="text-wrap"><h6 class="mb-0">' +suggestion.value + '</h6>' + hp + '<br/>' + suggestion.data.full + '</div>';
 		},
 		onSelect: function (suggestion) {
 			var c='';
