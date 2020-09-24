@@ -113,9 +113,10 @@ class Invoices extends BaseController
 					simpan_notif(1, $juragan_id, $invoice_id);
 				}
 
+				$juragan = $this->juragan->byInvoiceId($invoice_id)->getResult()[0]->juragan;
 				$ret = [
 					'status' => 'data tersimpan',
-					'url' => site_url('user/invoices/lihat?q=seri:' . $seri)
+					'url' => site_url('user/invoices/lihat/' . $juragan . '/semua?cari[kolom]=faktur&cari[q]=' . $seri)
 				];
 				return $this->response->setJSON($ret);
 			}
@@ -222,7 +223,10 @@ class Invoices extends BaseController
 				$this->_update_status_pembayaran($invoice_id);
 
 				//
-				return $this->response->setJSON(['url' => site_url('admin/invoices/lihat/?q=id:' . $invoice_id)]);
+				$juragan = $this->juragan->byInvoiceId($invoice_id)->getResult()[0]->juragan;
+				return $this->response->setJSON([
+					'url' => site_url('user/invoices/lihat/' . $juragan . '/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
+				]);
 			}
 		}
 	}
@@ -300,7 +304,10 @@ class Invoices extends BaseController
 			$invoice_id = $this->request->getPost('invoice_id');
 			$this->invoice->delete($invoice_id);
 
-			return $this->response->setJSON(['status' => 'Orderan dihapus', 'url' => site_url('user/invoices')]);
+			return $this->response->setJSON([
+				'status' => 'Orderan dihapus',
+				'url' => site_url('user/invoices')
+			]);
 		} else {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}

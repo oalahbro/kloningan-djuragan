@@ -227,7 +227,7 @@ class Invoices extends BaseController
 
 				$ret = [
 					'status' => 'data tersimpan',
-					'url' => site_url('admin/invoices/lihat?q=seri:' . $seri)
+					'url' => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=faktur&cari[q]=' . $seri)
 				];
 				return $this->response->setJSON($ret);
 			}
@@ -336,7 +336,7 @@ class Invoices extends BaseController
 
 				$ret = [
 					'status' => 'data tersimpan',
-					'url' => site_url('admin/invoices/lihat?q=id:' . $invoice_id)
+					'url' => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
 				];
 				return $this->response->setJSON($ret);
 			}
@@ -406,7 +406,7 @@ class Invoices extends BaseController
 
 				$response = [
 					'status' => 200,
-					'url' => site_url('admin/invoices/lihat?q=id:' . $invoice_id)
+					'url' => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
 				];
 
 				return $this->response->setJSON($response);
@@ -546,7 +546,9 @@ class Invoices extends BaseController
 				$this->_update_status_pembayaran($invoice_id);
 
 				//
-				return $this->response->setJSON(['url' => site_url('admin/invoices/lihat/?q=id:' . $invoice_id)]);
+				return $this->response->setJSON([
+					'url' => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
+				]);
 			}
 		}
 	}
@@ -595,7 +597,7 @@ class Invoices extends BaseController
 
 				$res = [
 					'status' => 'data tersimpan',
-					'url' 	=> site_url('admin/invoices/lihat?q=id:' . $invoice_id)
+					'url' 	=> site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
 				];
 
 				return $this->response->setJSON($res);
@@ -748,7 +750,7 @@ class Invoices extends BaseController
 
 			$res = [
 				'status' 	=> 'OK',
-				'url' 		=> site_url('admin/invoices/lihat/?q=id:' . $invoice_id)
+				'url' 		=> site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
 			];
 
 			return $this->response->setJSON($res);
@@ -786,7 +788,6 @@ class Invoices extends BaseController
 					'tanggal_cek' => ($bayar->tanggal_cek !== NULL ? (int) $bayar->tanggal_cek : NULL)
 				];
 			}
-
 
 			return $this->response->setJSON($res);
 		}

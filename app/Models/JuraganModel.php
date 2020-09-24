@@ -45,6 +45,18 @@ class JuraganModel extends Model
 
 	// ------------------------------------------------------------------------
 
+	public function byInvoiceId($invoice_id)
+	{
+		$builder = $this->db->table($this->table . ' j');
+		$builder->select('j.*,i.id_invoice');
+
+		$builder->join('invoice i', 'i.juragan_id = j.id_juragan');
+		$builder->where('i.id_invoice', $invoice_id);
+		return $builder->get();
+	}
+
+	// ------------------------------------------------------------------------
+
 	public function getUsers($ids_juragan)
 	{
 		if (is_array($ids_juragan)) {
