@@ -53,6 +53,10 @@ class Invoices extends BaseController
 			$id_juragan = $juragans[0]->id_juragan;
 		}
 
+		// pencarian
+		$cari = $this->request->getGet('cari');
+
+		// halaman
 		$limit = config('Pager')->perPage;
 		$page = (int) $this->request->getGet('page');
 
@@ -66,9 +70,9 @@ class Invoices extends BaseController
 
 		$data = [
 			'title' 	=> 'Invoice ' . $title,
-			'pesanans' 	=> $this->invoice->ambil_data(NULL, $id_juragan, $hal, $limit, $offset)->get()->getResult(),
-			'totalPage' => $this->invoice->ambil_data(NULL, $id_juragan, $hal, NULL, NULL)->countAllResults(),
-			'juragan' 	=> $juragan,
+			'pesanans' 	=> $this->invoice->ambil_data($id_juragan, $hal, $limit, $offset, $cari)->get()->getResult(),
+			'totalPage' => $this->invoice->ambil_data($id_juragan, $hal, NULL, NULL, $cari)->countAllResults(),
+			'jrgn' 		=> $juragan,
 			'hal' 		=> $hal,
 			'limit' 	=> $limit,
 			'page' 		=> $page

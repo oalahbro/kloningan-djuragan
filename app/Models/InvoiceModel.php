@@ -27,7 +27,7 @@ class InvoiceModel extends Model
 
 	// ------------------------------------------------------------------------
 	// ambil data
-	public function ambil_data($seri = NULL, $juragan_id = NULL, $hal = 'semua', $limit = NULL, $offset = NULL)
+	public function ambil_data($juragan_id = NULL, $hal = 'semua', $limit = NULL, $offset = NULL, $cari = NULL)
 	{
 		$inv = $this->db->table($this->table . ' i');
 		$inv->select('i.*,l.label as label_asal, l.source_id');
@@ -62,39 +62,102 @@ class InvoiceModel extends Model
 		$inv->join('bank bn', 'bn.id_bank = x.sumber_dana', 'left outer');
 		$inv->join('biaya c', 'c.invoice_id = i.id_invoice', 'left');
 
-		if ($seri !== NULL) {
-			$inv->where('i.seri', $seri);
-		} else {
-			if ($juragan_id !== NULL) {
-				$inv->having('i.juragan_id', $juragan_id);
+		if ($cari !== NULL) {
+
+			if (!empty($cari['pembayaran'])) {
+				$status_pembayaran = "i.status_pembayaran='" . $cari['pembayaran'] . "'";
+				if ($cari['pembayaran'] === '2A') {
+					$status_pembayaran = "(i.status_pembayaran='2' OR i.status_pembayaran='3')";
+				}
+				$inv->where($status_pembayaran);
 			}
 
-			switch ($hal) {
-				case 'selesai':
-					$inv->where('i.status_pengiriman', '3');
-					break;
-
-				case 'belum-proses':
-					$inv->where('i.status_pesanan', '1');
-					break;
-
-				case 'cek-bayar':
-					$inv->whereIn('i.status_pembayaran', ['2', '3']);
-					break;
-				
-				case 'dalam-proses':
-					$inv->where('i.status_pesanan', '2');
-					$inv->whereNotIn('i.status_pengiriman', ['3']);
-					break;
-
-				default:
-					# code...
-					break;
+			if (!empty($cari['pengiriman'])) {
+				$status_pengiriman = "i.status_pengiriman='" . $cari['pengiriman'] . "'";
+				if ($cari['pengiriman'] === '2A') {
+					$status_pengiriman = "(i.status_pengiriman='2' OR i.status_pengiriman='3')";
+				}
+				$inv->where($status_pengiriman);
 			}
 
-			$inv->where('i.deleted_at', NULL);
+			if (!empty($cari['orderan'])) {
+				$inv->where('i.status_pesanan', $cari['orderan']);
+			}
 
-			$inv->orderBy("CASE 
+			if (!empty($cari['kolom'])) {
+				switch ($cari['kolom']) {
+					case 'id':
+						$inv->where('i.id_invoice', $cari['q']);
+						break;
+					case 'faktur':
+						$inv->where('i.seri', $cari['q']);
+						break;
+					case 'nama':
+						$inv->where("(p.nama_pelanggan LIKE '%" . $cari['q'] . "%' OR k.nama_pelanggan LIKE '%" . $cari['q'] . "%')");
+						break;
+					case 'hp':
+						$inv->where("(p.hp LIKE '%" . $cari['q'] . "%' OR k.hp LIKE '%" . $cari['q'] . "%')");
+						break;
+					case 'kode':
+						$inv->where("(b.kode LIKE '%" . $cari['q'] . "%')");
+						break;
+					case 'tanggal_pesan':
+						// DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_dibuat, '%Y-%m-%d %H:%i:%s'), '+00:00', '+00:00'))='".$cari['tanggal']."'
+						$inv->where('i.tanggal_pesan', $cari['q']);
+						break;
+				}
+			} else {
+				$query = "(";
+				$query .= "b.kode LIKE '%" . $cari['q'] . "%' ";
+				preg_match_all('/%22(?:\\\\.|(?!%22).)*%22|\S+/', $cari['q'], $matches);
+				foreach ($matches[0] as $term) {
+					$term = trim($term);
+					if (!empty($term)) {
+						$term = str_replace('"', "", $term);
+						$query .= "OR i.id_invoice LIKE '%" . $term . "%' ";
+						$query .= "OR i.seri LIKE '%" . $term . "%' ";
+						$query .= "OR p.nama_pelanggan LIKE '%" . $term . "%' ";
+						$query .= "OR k.nama_pelanggan LIKE '%" . $term . "%' ";
+						$query .= "OR p.hp LIKE '%" . $term . "%' ";
+						$query .= "OR k.hp LIKE '%" . $term . "%' ";
+						$query .= "OR p.alamat LIKE '%" . $term . "%' ";
+						$query .= "OR k.alamat LIKE '%" . $term . "%' ";
+						$query .= "OR i.keterangan LIKE '%" . $term . "%' ";
+						$query .= "OR sx.resi LIKE '%" . $term . "%' ";
+					}
+				}
+
+				$query .= ")";
+				$inv->where($query);
+			}
+		}
+
+		if ($juragan_id !== NULL) {
+			$inv->having('i.juragan_id', $juragan_id);
+		}
+
+		switch ($hal) {
+			case 'selesai':
+				$inv->where('i.status_pengiriman', '3');
+				break;
+
+			case 'belum-proses':
+				$inv->where('i.status_pesanan', '1');
+				break;
+
+			case 'cek-bayar':
+				$inv->whereIn('i.status_pembayaran', ['2', '3']);
+				break;
+
+			case 'dalam-proses':
+				$inv->where('i.status_pesanan', '2');
+				$inv->whereNotIn('i.status_pengiriman', ['3']);
+				break;
+		}
+
+		$inv->where('i.deleted_at', NULL);
+
+		$inv->orderBy("CASE 
 			WHEN i.status_pembayaran = '2' THEN 0 #perlu dicek (belum ada pembayaran sebelumnya)
 			WHEN i.status_pembayaran = '3' THEN 1 #perlu dicek 2 (sudah ada pembayaran sebelumnya)
 			WHEN i.status_pembayaran = '4' THEN 2 #pembayaran kredit
@@ -104,12 +167,12 @@ class InvoiceModel extends Model
 			WHEN i.status_pembayaran = '5' THEN 6 #pembayaran ada kelebihan
 			WHEN i.status_pesanan = '3' THEN 7 #pesanan dibatalkan
 			END");
-			$inv->groupBy("i.id_invoice");
 
-			if ($limit !== NULL && $offset !== NULL) {
-				$inv->limit($limit, $offset);
-			}
+		if ($limit !== NULL && $offset !== NULL) {
+			$inv->limit($limit, $offset);
 		}
+
+		$inv->groupBy("i.id_invoice");
 
 		return $inv;
 	}

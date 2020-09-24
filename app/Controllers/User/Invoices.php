@@ -138,6 +138,9 @@ class Invoices extends BaseController
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
 
+		// pencarian
+		$cari = $this->request->getGet('cari');
+
 		$user_id = $this->session->get('id');
 
 		if ($juragan === '') {
@@ -165,9 +168,9 @@ class Invoices extends BaseController
 
 			$data = [
 				'title'     => 'Invoice ' . $title,
-				'pesanans' 	=> $this->invoice->ambil_data(NULL, $id_juragan, $hal, $limit, $offset)->get()->getResult(),
-				'totalPage' => $this->invoice->ambil_data(NULL, $id_juragan, $hal, NULL, NULL)->countAllResults(),
-				'juragan' 	=> $juragan,
+				'pesanans' 	=> $this->invoice->ambil_data($id_juragan, $hal, $limit, $offset, $cari)->get()->getResult(),
+				'totalPage' => $this->invoice->ambil_data($id_juragan, $hal, NULL, NULL, $cari)->countAllResults(),
+				'jrgn' 		=> $juragan,
 				'hal' 		=> $hal,
 				'limit' 	=> $limit,
 				'page' 		=> $page

@@ -24,12 +24,12 @@ $session = \Config\Services::session();
 	</nav>
 
 	<div class="wrap-btn-filter mb-3">
-		<?= anchor('user/invoices/lihat/' . $juragan . '/semua', 'Semua Orderan', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'semua'? 'primary':'outline-secondary')]); ?>
-		<?= anchor('user/invoices/lihat/' . $juragan . '/cek-bayar', 'Cek Pembayaran', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'cek-bayar'? 'primary':'outline-secondary')]); ?>
-		<?= anchor('user/invoices/lihat/' . $juragan . '/belum-proses', 'Belum Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'belum-proses'? 'primary':'outline-secondary')]); ?>
-		<?= anchor('user/invoices/lihat/' . $juragan . '/dalam-proses', 'Dalam Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'dalam-proses'? 'primary':'outline-secondary')]); ?>
-		<?= anchor('user/invoices/lihat/' . $juragan . '/selesai', 'Orderan Selesai', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'selesai'? 'primary':'outline-secondary')]); ?>
-		<a class="mb-2 btn btn-warning rounded-pill mr-1" href="#!"><i class="fad fa-search"></i></a>
+		<?= anchor('user/invoices/lihat/' . $jrgn . '/semua', 'Semua Orderan', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'semua' ? 'primary' : 'outline-secondary')]); ?>
+		<?= anchor('user/invoices/lihat/' . $jrgn . '/cek-bayar', 'Cek Pembayaran', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'cek-bayar' ? 'primary' : 'outline-secondary')]); ?>
+		<?= anchor('user/invoices/lihat/' . $jrgn . '/belum-proses', 'Belum Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'belum-proses' ? 'primary' : 'outline-secondary')]); ?>
+		<?= anchor('user/invoices/lihat/' . $jrgn . '/dalam-proses', 'Dalam Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'dalam-proses' ? 'primary' : 'outline-secondary')]); ?>
+		<?= anchor('user/invoices/lihat/' . $jrgn . '/selesai', 'Orderan Selesai', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'selesai' ? 'primary' : 'outline-secondary')]); ?>
+		<a class="mb-2 btn btn-warning rounded-pill mr-1" data-target="#modalCari" data-toggle="modal" href="#!"><i class="fad fa-search"></i></a>
 	</div>
 
 	<?php
@@ -503,6 +503,82 @@ $session = \Config\Services::session();
 					<button class="btn btn-primary" type="submit">Simpan</button>
 					<?= form_close(); ?>
 				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal pencarian invoice -->
+<div class="modal fade" id="modalCari" tabindex="-1" aria-labelledby="modalCariLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body">
+				<?= form_open('user/invoices/lihat/' . $jrgn . '/semua', ['method' => 'get']) ?>
+				<div class="row g-2 align-items-center">
+					<div class="col-4">
+						<?= form_label('Status Pembayaran', 'status_pembayaran', ['class' => 'form-label sr-only']); ?>
+						<?php
+						$opsi_pembayaran = [
+							'' => 'Opsi Pembayaran',
+							'1' => 'Belum bayar',
+							'2A' => 'Tunggu Konfirmasi Pembayaran',
+							'4' => 'Cicilan / Kredit',
+							'5' => 'Ada kelebihan',
+							'6' => 'Sudah lunas'
+						];
+						echo form_dropdown('cari[pembayaran]', $opsi_pembayaran, '', ['class' => 'form-select mb-2 mr-sm-2']);
+						?>
+					</div>
+
+					<div class="col-4">
+						<div class="col-12">
+							<?= form_label('Status Orderan', 'status_orderan', ['class' => 'form-label sr-only']); ?>
+							<?php
+							$opsi_orderan = [
+								'' => 'Opsi Orderan',
+								'1' => 'Belum diproses',
+								'2' => 'Sedang/sudah diproses',
+								'3' => 'Dibatalkan'
+							];
+							echo form_dropdown('cari[orderan]', $opsi_orderan, '', ['class' => 'form-select mb-2 mr-sm-2']);
+							?>
+						</div>
+					</div>
+
+					<div class="col-4">
+						<?= form_label('Status Pengiriman', 'status_pengiriman', ['class' => 'form-label sr-only']); ?>
+						<?php
+						$opsi_pengiriman = [
+							'' => 'Opsi pengiriman',
+							'1' => 'Belum dikirim',
+							'2A' => 'Dikirim'
+						];
+						echo form_dropdown('cari[pengiriman]', $opsi_pengiriman, '', ['class' => 'form-select mb-2 mr-sm-2']);
+						?>
+					</div>
+				</div>
+
+				<div class="input-group mb-2">
+					<?php
+					$opsi_kolom = [
+						'' => 'Opsi Pencarian',
+						'nama' => 'Nama Pelanggan',
+						'hp' => 'HP Pelanggan',
+						'faktur' => 'Kode Invoice',
+						'tanggal_pesan' => 'Tanggal Pesan',
+						'kode' => 'Kode Produk'
+					];
+					echo form_dropdown('cari[kolom]', $opsi_kolom, '', ['class' => 'form-select']);
+					echo form_input(['name' => 'cari[q]', 'class' => 'form-control', 'style' => 'flex:2', 'placeholder' => 'cari .....']);
+					?>
+					<div class="text-muted">untuk pencarian berdasarkan tanggal, gunakan format seperti: <code>2020-09-20</code></div>
+				</div>
+
+				<div class="col-12">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+				<?= form_close(); ?>
+
 			</div>
 		</div>
 	</div>
