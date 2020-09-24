@@ -582,7 +582,7 @@ $(function() {
 				}
 				hp += ph[i];
 			}
-			return '<h6 class="mb-0">' +suggestion.value + '</h6>' + hp + '<br/>' + suggestion.data.full;
+			return '<div class="text-wrap"><h6 class="mb-0">' +suggestion.value + '</h6>' + hp + '<br/>' + suggestion.data.full + '</div>';
 		},
 		onSelect: function (suggestion) {
 			var c='';
@@ -682,8 +682,6 @@ $(function() {
 	// set selected sumber orderan
 	$('select[name="asal_orderan"]').val('$orderan->source_id');
 	$('input[name="label"]').val('$orderan->label_asal');
-	
-
 
 	// modal tambah pelanggan
 	// ------------------------------------------------------------------------
