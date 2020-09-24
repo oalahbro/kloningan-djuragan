@@ -25,7 +25,7 @@ class AddBeli extends \CodeIgniter\Database\Migration {
 			],
 			'kode' => [
 				'type'           => 'VARCHAR',
-				'constraint' 	 => 8,
+				'constraint' 	 => 20,
 			],
 			'ukuran' => [
 				'type' 			 => 'VARCHAR',
