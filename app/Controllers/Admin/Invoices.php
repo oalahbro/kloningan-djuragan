@@ -116,7 +116,11 @@ class Invoices extends BaseController
 
 		if ($this->request->isAJAX()) {
 			$invoice_id = $this->request->getPost('invoice_id');
+			$juragan_id = $this->invoice->find($invoice_id)->juragan_id;
 			$this->invoice->delete($invoice_id);
+
+			// simpan notif
+			simpan_notif(3, $juragan_id, $invoice_id);
 
 			return $this->response->setJSON(['status' => 'Orderan dihapus', 'url' => site_url('admin/invoices')]);
 		} else {
@@ -150,16 +154,17 @@ class Invoices extends BaseController
 			} else {
 				$db = \Config\Database::connect();
 
-				$user_id = $this->request->getPost('pengguna');
-				$t = $this->user->find($user_id);
-				$seri = strtoupper(first_letter($t->name) . time());
+				$user_id 	= $this->request->getPost('pengguna');
+				$t 			= $this->user->find($user_id);
+				$seri 		= strtoupper(first_letter($t->name) . time());
+				$juragan_id = $this->request->getPost('juragan');
 
 				$data_invoice = [
 					'tanggal_pesan' => $this->request->getPost('tanggal_order'),
 					'seri'			=> $seri,
 					'pemesan_id' 	=> $this->request->getPost('id_pemesan'),
 					'kirimKepada_id' => $this->request->getPost('id_kirimKe'),
-					'juragan_id' 	=> $this->request->getPost('juragan'),
+					'juragan_id' 	=> $juragan_id,
 					'user_id' 		=> $user_id,
 					// 'status_pesanan'=> '',
 					// 'status_pembayaran'=> '',
@@ -194,6 +199,10 @@ class Invoices extends BaseController
 						}
 					}
 					$db->table('dibeli')->insertBatch($produk);
+
+					// simpan notif
+					// $juragan_id = $this->invoice->find($invoice_id)->juragan_id;
+					simpan_notif(1, $juragan_id, $invoice_id);
 
 					// simpan biaya
 					if ($this->request->getVar('biaya') !== NULL) {
@@ -299,6 +308,10 @@ class Invoices extends BaseController
 
 					// hapus biaya 
 					$db->table('biaya')->delete(['invoice_id' => $invoice_id]);
+
+					// simpan notif
+					$juragan_id = $this->invoice->find($invoice_id)->juragan_id;
+					simpan_notif(2, $juragan_id, $invoice_id);
 
 					// simpan biaya
 					if ($this->request->getVar('biaya') !== NULL) {
@@ -423,6 +436,58 @@ class Invoices extends BaseController
 			$builder->set('keterangan_masuk', $data['keterangan']);
 		}
 
+		$pro = (int) $data['status'];
+		$stt = (int) $data['stat'];
+
+		switch ($pro) {
+			case 1:
+				$status = 7;
+				if ($stt === 1) {
+					$status = 8;
+				}
+				break;
+			case 2:
+				$status = 9;
+				if ($stt === 1) {
+					$status = 10;
+				}
+				break;
+			case 3:
+				$status = 11;
+				if ($stt === 1) {
+					$status = 12;
+				}
+				break;
+			case 4:
+				$status = 13;
+				if ($stt === 1) {
+					$status = 14;
+				}
+				break;
+			case 5:
+				$status = 15;
+				if ($stt === 1) {
+					$status = 16;
+				}
+				break;
+			case 6:
+				$status = 17;
+				if ($stt === 1) {
+					$status = 18;
+				}
+				break;
+			case 7:
+				$status = 19;
+				if ($stt === 1) {
+					$status = 20;
+				}
+				break;
+		}
+
+		// simpan notif
+		$juragan_id = $this->invoice->find($data['invoice_id'])->juragan_id;
+		simpan_notif($status, $juragan_id, $data['invoice_id']);
+
 		// 
 		if ($id_status === FALSE) {
 			$builder->insert();
@@ -469,6 +534,10 @@ class Invoices extends BaseController
 
 				$this->pembayaran->save($data);
 
+				// simpan notif
+				$juragan_id = $this->invoice->find($invoice_id)->juragan_id;
+				simpan_notif(4, $juragan_id, $invoice_id);
+
 				// update status pembayaran (invoice)
 				$this->_update_status_pembayaran($invoice_id);
 
@@ -513,8 +582,11 @@ class Invoices extends BaseController
 				// 
 				$invoice_id = $this->request->getPost('invoice_id');
 
+				// simpan notif
+				$juragan_id = $this->invoice->find($invoice_id)->juragan_id;
+				simpan_notif(($status === "3" ? 5 : 6), $juragan_id, $invoice_id);
+
 				// update status pembayaran (invoice)
-				// 
 				$this->_update_status_pembayaran($invoice_id);
 
 				$res = [
@@ -662,8 +734,11 @@ class Invoices extends BaseController
 					$this->invoice->save([
 						'id_invoice' => $invoice_id,
 						'status_pengiriman' => $status
-
 					]);
+
+					// simpan notif
+					$juragan_id = $this->invoice->find($invoice_id)->juragan_id;
+					simpan_notif(($status === '2' ? 21 : 22), $juragan_id, $invoice_id);
 				}
 			}
 

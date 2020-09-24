@@ -53,13 +53,14 @@ class Invoices extends BaseController
 				$user_id = $this->request->getPost('pengguna');
 				$t = $this->user->find($user_id);
 				$seri = strtoupper(first_letter($t->name) . time());
+				$juragan_id = $this->request->getPost('juragan');
 
 				$data_invoice = [
 					'tanggal_pesan' => $this->request->getPost('tanggal_order'),
 					'seri'			=> $seri,
 					'pemesan_id' 	=> $this->request->getPost('id_pemesan'),
 					'kirimKepada_id' => $this->request->getPost('id_kirimKe'),
-					'juragan_id' 	=> $this->request->getPost('juragan'),
+					'juragan_id' 	=> $juragan_id,
 					'user_id' 		=> $user_id,
 					'keterangan' 	=> ($this->request->getPost('keterangan') !== "" ? $this->request->getPost('keterangan') : NULL)
 				];
@@ -107,6 +108,9 @@ class Invoices extends BaseController
 						}
 						$db->table('biaya')->insertBatch($biaya);
 					}
+
+					// simpan notifikasi, kirim kesemua user
+					simpan_notif(1, $juragan_id, $invoice_id);
 				}
 
 				$ret = [
@@ -261,6 +265,10 @@ class Invoices extends BaseController
 				}
 			}
 		}
+
+		// simpan notif
+		$juragan_id = $this->invoice->find($invoice_id)->juragan_id;
+		simpan_notif(4, $juragan_id, $invoice_id);
 
 		// update status_pembayaran
 		// jadikan status

@@ -131,20 +131,16 @@ $JSmin = new Minify\JS();
 		color: white !important;
 	}
 
-	.sidebarcollapse {
+	.sidebarcollapse, .notifCollapse {
 		top: 0;
 		height: 100vh;
-		left: -250px;
-		width: 250px;
 		transition: all 0.4s ease;
 		display: block;
 		z-index: 10000;
 	}
 
-	.sidebarcollapse.collapsing {
+	.sidebarcollapse.collapsing, .notifCollapse.collapsing {
 		height: auto !important;
-		margin-right: 50%;
-		left: -250px;
 		transition: all 0.2s ease;
 	}
 
@@ -152,27 +148,29 @@ $JSmin = new Minify\JS();
 		left: 0;
 	}
 
-	.amplop::before,
-	.amplop::after {
-		content: "";
-		height: 10px;
-		display: block;
-		margin-top: -4px;
-		margin-left: -4px;
-		margin-right: -4px;
-		margin-bottom: 5px;
-		border-top-left-radius: 0.25rem;
-		border-top-right-radius: 0.25rem;
-		background-image: repeating-linear-gradient(135deg, #F29B91 0px, #F09290 15px, transparent 15px, transparent 25px, #83B3DB 25px, #84ADCB 40px, transparent 40px, transparent 50px);
+	.sidebarcollapse {
+		left: -250px;
+		width: 250px;
 	}
 
-	.amplop::after {
-		margin-top: 5px;
-		margin-bottom: -4px;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-		border-bottom-left-radius: 0.25rem;
-		border-bottom-right-radius: 0.25rem;
+	.sidebarcollapse.collapsing{
+		margin-right: 50%;
+		left: -250px;
+	}
+
+	.notifCollapse {
+		right: -300px;
+		width: 300px;
+		overflow: auto;
+	}
+
+	.notifCollapse.collapsing {
+		margin-left: 50%;
+		right: -300px;
+	}
+
+	.notifCollapse.show {
+		right: 0;
 	}
 
 	@media (max-width: 767.98px) {
@@ -239,6 +237,9 @@ $JSmin = new Minify\JS();
 			<div id="topmenu" class="ml-sm-auto">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item dropdown">
+						<a href="#!" class="nav-link" id="notif" data-toggle="collapse" data-target="#notif-pane"><span class="d-none d-md-inline-block">Notifikasi</span> <span class="badge rounded-pill bg-danger counter"></span></a>
+					</li>
+					<li class="nav-item dropdown">
 						<a class="nav-link" href="#" id="dropUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fad fa-user d-block d-md-none"></i> <span class="d-none d-md-inline-block">
 								<?= $_SESSION['name']; ?></span>
@@ -264,6 +265,9 @@ $JSmin = new Minify\JS();
 	<div aria-live="polite" aria-atomic="true">
 		<div id="lTo" style="position: fixed; top: 65px; right: 10px;">
 		</div>
+	</div>
+	<div class="position-fixed bg-light notifCollapse collapse" id="notif-pane">
+		<div class="list-group list-group-flush" id="notifDisini"></div>
 	</div>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

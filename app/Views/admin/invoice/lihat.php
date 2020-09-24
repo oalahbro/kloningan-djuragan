@@ -24,11 +24,11 @@ $session = \Config\Services::session();
 	</nav>
 
 	<div class="wrap-btn-filter mb-3">
-		<?= anchor('admin/invoices/lihat/' . $juragan . '/semua', 'Semua Orderan', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'semua'? 'primary':'outline-secondary')]); ?>
-		<?= anchor('admin/invoices/lihat/' . $juragan . '/cek-bayar', 'Cek Pembayaran', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'cek-bayar'? 'primary':'outline-secondary')]); ?>
-		<?= anchor('admin/invoices/lihat/' . $juragan . '/belum-proses', 'Belum Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'belum-proses'? 'primary':'outline-secondary')]); ?>
-		<?= anchor('admin/invoices/lihat/' . $juragan . '/dalam-proses', 'Dalam Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'dalam-proses'? 'primary':'outline-secondary')]); ?>
-		<?= anchor('admin/invoices/lihat/' . $juragan . '/selesai', 'Orderan Selesai', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'selesai'? 'primary':'outline-secondary')]); ?>
+		<?= anchor('admin/invoices/lihat/' . $juragan . '/semua', 'Semua Orderan', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'semua' ? 'primary' : 'outline-secondary')]); ?>
+		<?= anchor('admin/invoices/lihat/' . $juragan . '/cek-bayar', 'Cek Pembayaran', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'cek-bayar' ? 'primary' : 'outline-secondary')]); ?>
+		<?= anchor('admin/invoices/lihat/' . $juragan . '/belum-proses', 'Belum Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'belum-proses' ? 'primary' : 'outline-secondary')]); ?>
+		<?= anchor('admin/invoices/lihat/' . $juragan . '/dalam-proses', 'Dalam Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'dalam-proses' ? 'primary' : 'outline-secondary')]); ?>
+		<?= anchor('admin/invoices/lihat/' . $juragan . '/selesai', 'Orderan Selesai', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'selesai' ? 'primary' : 'outline-secondary')]); ?>
 		<a class="mb-2 btn btn-warning rounded-pill mr-1" href="#!"><i class="fad fa-search"></i></a>
 	</div>
 
@@ -665,6 +665,7 @@ $link_save_progress = site_url('admin/invoices/save_progress');
 $link_save_resi = site_url('admin/invoices/submit_resi');
 $link_tambah_pembayaran = site_url('admin/invoices/simpan_pembayaran');
 $link_update_pembayaran = site_url('admin/invoices/update_bayar');
+$link_api_notif = site_url('api/notifikasi/');
 
 $codvalue = 'COD' . $sekarang->toLocalizedString('dmmyyyy');
 
@@ -715,7 +716,49 @@ $(function() {
 		});
 	});
 
+	// notifikasi
+	// ------------------------------------------------------------------------
+	$('#notif-pane').on('show.bs.collapse',function(){
+		var id = $current_user_id;
+		$('#notifDisini').html(''),
+		$.getJSON('$link_api_notif' + 'get', { id: id }, function(b){
+			var a=[];
+			a.push('');
+			
+			$.each(b,function(c,b){
+				a.push('<a href="$link_invoice?q=seri:'+b.invoice+'" class="list-group-item list-group-item-action"><small class="text-muted">'+b.created_at +'</small><br/>' + b.notif+'</a>');
+			}),
+
+			$(a.join('')).appendTo('#notifDisini');
+		});
+
+		var a=$('<div>',{'class':'modal-backdrop fade show'});
+		$('body').toggleClass('modal-open').append(a),
+		a.click(function(){
+			$('#notif-pane').collapse('hide'),
+			a.remove(),
+			$('body').toggleClass('modal-open');
+		});
+	});
+
+	counter_notif();
+
+	setInterval(function(){ 
+		counter_notif();
+	}, 10000);
+
+	function counter_notif() {
+		var id = $current_user_id;
+		$.getJSON('$link_api_notif' + 'count', { id: id }, function(b){
+			if(b.belum_baca > 0)
+			{
+				$('.counter').text(b.belum_baca);
+			}
+		});
+	}
+
 	//
+	// ------------------------------------------------------------------------
 	$('.pesanStatus').on('click',function(){
 		let id = $(this).data('invoice');
 

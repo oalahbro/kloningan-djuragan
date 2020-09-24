@@ -52,6 +52,11 @@ $routes->group('api', function($routes)
         $routes->add('(:segment)', 'Api\Pengguna::$1');
     });
 
+    $routes->group('notifikasi', function($routes)
+    {
+        $routes->add('(:segment)', 'Api\Notifikasi::$1');
+    });
+
 });
 
 /**

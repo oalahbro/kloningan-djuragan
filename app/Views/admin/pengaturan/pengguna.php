@@ -219,6 +219,7 @@ $link_api_juragan_all = site_url("api/juragan/all/");
 $link_api_pengguna_all = site_url("api/pengguna/all/");
 $link_api_relasi = site_url('api/juragan/by_user');
 $link_invoice = site_url('admin/invoices/lihat/');
+$link_api_notif = site_url('api/notifikasi/');
 
 $js = <<< JS
 $(function() { 
@@ -248,6 +249,47 @@ $(function() {
 			$(a.join('')).appendTo('#listLi');
 		});
 	});
+
+	// notifikasi
+	// ------------------------------------------------------------------------
+	$('#notif-pane').on('show.bs.collapse',function(){
+		var id = $current_user_id;
+		$('#notifDisini').html(''),
+		$.getJSON('$link_api_notif' + 'get', { id: id }, function(b){
+			var a=[];
+			a.push('');
+			
+			$.each(b,function(c,b){
+				a.push('<a href="$link_invoice?q=seri:'+b.invoice+'" class="list-group-item list-group-item-action"><small class="text-muted">'+b.created_at +'</small><br/>' + b.notif+'</a>');
+			}),
+
+			$(a.join('')).appendTo('#notifDisini');
+		});
+
+		var a=$('<div>',{'class':'modal-backdrop fade show'});
+		$('body').toggleClass('modal-open').append(a),
+		a.click(function(){
+			$('#notif-pane').collapse('hide'),
+			a.remove(),
+			$('body').toggleClass('modal-open');
+		});
+	});
+
+	counter_notif();
+
+	setInterval(function(){ 
+		counter_notif();
+	}, 10000);
+
+	function counter_notif() {
+		var id = $current_user_id;
+		$.getJSON('$link_api_notif' + 'count', { id: id }, function(b){
+			if(b.belum_baca > 0)
+			{
+				$('.counter').text(b.belum_baca);
+			}
+		});
+	}
 
 	$.getJSON('$link_api_juragan_all', function(b){
 		var apnd = '';

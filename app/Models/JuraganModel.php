@@ -66,6 +66,23 @@ class JuraganModel extends Model
 
 	// ------------------------------------------------------------------------
 
+	public function getUsersByJuragan($id)
+	{
+		$builder = $this->db->table($this->table . ' j');
+		$builder->select('j.*, u.*, r.table');
+
+		$builder->join('relasi r', 'r.juragan_id = j.id_juragan', 'left');
+
+		$builder->join('user u', 'u.id = r.val_id', 'both');
+		$builder->where('j.id_juragan', $id);
+		$builder->where('r.table', 1); // juragan-user
+		$builder->groupBy("u.id");
+
+		return $builder->get();
+	}
+
+	// ------------------------------------------------------------------------
+
 	public function ambil_bank($juragan_id)
 	{
 		$bank = $this->db->table($this->table . ' j');

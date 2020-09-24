@@ -332,3 +332,46 @@ if (!function_exists('status_pengiriman')) {
 }
 
 // ------------------------------------------------------------------------
+
+if (!function_exists('replacer')) {
+	// source : https://stackoverflow.com/a/48981341/2094645
+	function replacer($template, $data)
+	{
+		if (preg_match_all("/{(.*?)}/", $template, $m)) {
+			foreach ($m[1] as $i => $varname) {
+				$template = str_replace($m[0][$i], sprintf('%s', $data[$varname]), $template);
+			}
+		}
+
+		return $template;
+	}
+}
+
+// ------------------------------------------------------------------------
+
+if (!function_exists('simpan_notif')) {
+	function simpan_notif($type, $juragan_id, $invoice_id)
+	{
+		$juragan = new \App\Models\JuraganModel();
+		$notifikasi = new \App\Models\NotifikasiModel();
+		$session = \Config\Services::session();
+
+		$user_id = $session->get('id');
+
+		$r_users = $juragan->getUsersByJuragan($juragan_id)->getResult();
+		foreach ($r_users as $v) {
+			# code...
+			if ($v->id !== $user_id) {
+				// $users[] = $v->id;
+				$notifikasi->save([
+					'juragan_id' => $juragan_id,
+					'from' => $user_id,
+					'for' => $v->id,
+					'invoice_id' => $invoice_id,
+					'type' => $type,
+					'created_at' => time()
+				]);
+			}
+		}
+	}
+}
