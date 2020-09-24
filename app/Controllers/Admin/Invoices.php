@@ -97,7 +97,13 @@ class Invoices extends BaseController
 		if ($seri === '' or empty($seri) or $x === NULL) {
 			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		} else {
-			$pesanan = $this->invoice->ambil_data($seri, NULL, NULL, NULL)->get()->getResult();
+			$cari = [
+				'kolom' => 'faktur',
+				'q' => $seri
+			];
+
+			// 
+			$pesanan = $this->invoice->ambil_data(NULL, 'semua', NULL, NULL, $cari)->get()->getResult();
 			$data = [
 				'title' 	=> 'Sunting Orderan #' . $seri,
 				'pesanan' 	=> $pesanan

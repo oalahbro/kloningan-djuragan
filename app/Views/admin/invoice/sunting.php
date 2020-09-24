@@ -204,7 +204,7 @@ $biaya 		= json_decode($orderan->biaya);
 					</div>
 					<div class="mb-3">
 						<?= form_label('Note / Keterangan', 'keterangan', ['class' => 'form-label']); ?>
-						<?= form_textarea(['name' => 'keterangan', 'value' => set_value('keterangan', $orderan->keterangan), 'id' => 'keterangan', 'class' => 'form-control', 'rows' => '3', 'placeholder' => 'opsional']); ?>
+						<?= form_textarea(['name' => 'keterangan', 'value' => set_value('keterangan', ($orderan->keterangan !== null? $orderan->keterangan:'')), 'id' => 'keterangan', 'class' => 'form-control', 'rows' => '3', 'placeholder' => 'opsional']); ?>
 					</div>
 				</div>
 			</div>
