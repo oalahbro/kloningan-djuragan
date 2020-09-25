@@ -15,17 +15,43 @@ class Notifikasi extends \CodeIgniter\Controller
         helper('fungsi');
 
         $user_id = $this->request->getGet('id');
-        $x = $notifikasi->ambil($user_id)->get()->getResult();
+        $page = $this->request->getGet('page');
+        $baca = $this->request->getGet('dibaca');
 
-        $res = [];
+        $limit = config('Pager')->perPage;
+        $page = (int) $this->request->getGet('page');
+
+        if (!isset($page) || $page === 0 || $page === 1) {
+            $page = 1;
+            $offset = 0;
+        } else {
+            $offset = ($page - 1) * $limit;
+            $page = $page;
+        }
+
+        $dibaca = FALSE;
+        if (isset($baca) && $baca === '1') {
+            $dibaca = TRUE;
+        }
+
+        $counter = $notifikasi->ambil($user_id, $dibaca)->countAllResults();
+
+        $res = [
+            'page' => (int) $page,
+            'next' => (ceil($counter / $limit) > $page ? TRUE : FALSE),
+            'count' => $counter
+        ];
+
+        $x = $notifikasi->ambil($user_id, $dibaca, $limit, $offset)->get()->getResult();
+
         foreach ($x as $notif) {
             $notifikasi = replacer(config('JuraganConfig')->notifikasi[$notif->type], ['invoice' => $notif->seri, 'nama' => $notif->name]);
             $tanggal = Time::createFromTimestamp($notif->created_at);
 
-            $res[] = [
+            $res['results'][] = [
                 'id' => (int) $notif->id_notifikasi,
                 'notif' => $notifikasi,
-                'created_at' => $tanggal->toLocalizedString('EEEE, d MMMM yyyy (HH:mm:ss)'),
+                'created_at' => $tanggal->toLocalizedString('EEE, d MMM yyyy (HH:mm:ss)'),
                 'invoice' => $notif->seri,
                 'juragan' => $notif->juragan
             ];
@@ -36,18 +62,38 @@ class Notifikasi extends \CodeIgniter\Controller
 
     // ------------------------------------------------------------------------
 
-    public function count()
+    public function mark_all()
     {
         $notifikasi = new \App\Models\NotifikasiModel();
 
-        $user_id = $this->request->getGet('id');
-        $x = $notifikasi->ambil($user_id)->countAllResults();
+        $user_id = $this->request->getPost('id');
+        $notifikasi->whereIn('for', [$user_id])
+            ->set(['read_at' => time()])
+            ->update();
 
-        $res = [
-            'belum_baca' => $x
-        ];
-
-        return $this->respond($res);
+        return $this->respond(['status' => 'OK', 'message' => 'Semua notifikasi sudah ditandai terbaca']);
     }
 
+    // ------------------------------------------------------------------------
+
+    public function mark()
+    {
+        $notifikasi = new \App\Models\NotifikasiModel();
+
+        $id     = $this->request->getPost('id');
+        $action = $this->request->getPost('action');
+
+        $dibaca = time();
+        if ($action === 'belumBaca') {
+            $dibaca =  NULL;
+        }
+
+        $data = [
+            'id_notifikasi' => $id,
+            'read_at'       => $dibaca
+        ];
+        $notifikasi->save($data);
+
+        return $this->respond($data);
+    }
 }

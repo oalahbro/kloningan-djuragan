@@ -275,7 +275,21 @@ $JSmin = new Minify\JS();
 		</div>
 	</div>
 	<div class="position-fixed bg-light notifCollapse collapse" id="notif-pane">
-		<div class="list-group list-group-flush" id="notifDisini"></div>
+		<div class="d-flex flex-column">
+			<div class="bg-dark shadow-sm sticky-top text-light d-flex align-items-center px-3 py-2">
+				Notifikasi
+				<div class="ml-auto">
+					<button type="button" class="btn btn-light btn-sm btnSettingNotif" data-toggle="dropdown" aria-expanded="false">
+						<span class="fad fa-ellipsis-h-alt"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><button class="dropdown-item tandaiSemuaTerbaca" type="button">Tandai semua sudah dibaca</button></li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="list-group list-group-flush" id="notifDisini"></div>
+		</div>
 	</div>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
