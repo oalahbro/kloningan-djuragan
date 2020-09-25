@@ -6,7 +6,7 @@ $CSSmin = new Minify\CSS();
 $JSmin = new Minify\JS();
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="id">
 
 <head>
 	<!-- Required meta tags -->
