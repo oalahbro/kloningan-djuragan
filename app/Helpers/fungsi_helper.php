@@ -318,7 +318,7 @@ if (!function_exists('status_pengiriman')) {
 			}
 		}
 
-		$html = '<li class="list-inline-item mr-0 position-relative ' . $class . '" data-toggle="tooltip" data-placement="top" title="' . $title . '"><div class="d-flex justify-content-center">';
+		$html = '<li class="list-inline-item mr-0 position-relative ' . $class . ' end" data-toggle="tooltip" data-placement="top" title="' . $title . '"><div class="d-flex justify-content-center">';
 		$html .= '<div class="text-center"><i class="fad fa-truck icon d-block"></i>';
 		if ($tanggal_kirim !== '') {
 			$html .= '<span><abbr title="' . $tanggal_kirim->humanize() . '">' . $tanggal_kirim->day . '/' . $tanggal_kirim->month . '</abbr></span></div></div>';
