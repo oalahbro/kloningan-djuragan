@@ -542,10 +542,10 @@ $(function() {
 
 			done(result);
 		},
-		formatResult: function (suggestion, currentValue) {
-			let hp = '';
-			let ph = suggestion.data.hp
-			for (let i = 0; i < ph.length; i++) {
+		formatResult: function (suggestion) {
+			var hp = '';
+			var ph = suggestion.data.hp;
+			for (var i = 0; i < ph.length; i++) {
 				if (i > 0) {
 					hp+= ' / ';
 				}
@@ -1084,7 +1084,6 @@ $(function() {
 		}
 	});
 
-	//
 	function uniqId() {
 		return Math.round(new Date().getTime() + (Math.random() * 100));
 	}
@@ -1095,6 +1094,6 @@ JS;
 
 $packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();
-echo '<script>' . $js . '</script>';
+echo '<script>' . $packed_js . '</script>';
 ?>
 <?= $this->endSection() ?>
