@@ -356,7 +356,7 @@ $session = \Config\Services::session();
 								</button>
 								<ul class="dropdown-menu">
 									<li><a class="dropdown-item" href="#">Print Label</a></li>
-									<li><a class="dropdown-item" href="#">Unduh Invoice (PDF)</a></li>
+									<li><a class="dropdown-item" target="_blank" href="<?= site_url('download/invoice/' . $pesanan->seri); ?>">Unduh Invoice (PDF)</a></li>
 									<li>
 										<hr class="dropdown-divider" />
 									</li>
