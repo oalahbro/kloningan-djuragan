@@ -209,8 +209,8 @@ $session = \Config\Services::session();
 		<?= form_open('', ['id' => 'tambahPelanggan', 'class' => 'modal-content']); ?>
 		<div class="modal-header">
 			<h5 class="modal-title" id="modalTambahPelangganLabel"></h5>
-			<button type="button" data-reset="false" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
+			<button type="button" data-reset="false" class="btn-close" data-dismiss="modal"aria-label="Close">
+				
 			</button>
 		</div>
 		<div class="modal-body">
@@ -287,8 +287,8 @@ $session = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="biayaOrderLabel">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
+					
 				</button>
 			</div>
 			<?= form_open('', ['id' => 'tambahBiaya'], ['biayaId' => '']); ?>
@@ -319,8 +319,8 @@ $session = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="tambahProdukLabel">Tambah Orderan</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
+					
 				</button>
 			</div>
 			<?= form_open('', ['id' => 'nambahProduk']); ?>
@@ -1068,7 +1068,7 @@ $(function() {
 			<div class="toast-header">
 				<strong class="mr-auto">`+status+`</strong>
 				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
+				
 				</button>
 			</div>
 			<div class="toast-body">`+text+`</div>

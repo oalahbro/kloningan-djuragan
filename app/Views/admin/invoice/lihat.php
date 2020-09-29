@@ -445,9 +445,7 @@ $session = \Config\Services::session();
 		<?= form_open('', ['class' => 'modal-content', 'id' => 'newStatus'], ['id_invoice' => '']); ?>
 		<div class="modal-header">
 			<h5 class="modal-title" id="modalProgressLabel">Status Proses Orderan</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
+			<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
 			<div class="mb-3">
@@ -493,9 +491,7 @@ $session = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalBayarLabel">Info Pembayaran</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<div class="bg-warning p-2 rounded mb-2">
@@ -514,9 +510,7 @@ $session = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalTambahBayarLabel">Tambah Pembayaran</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<div class="bg-warning p-2 rounded mt-2">
@@ -554,9 +548,7 @@ $session = \Config\Services::session();
 		<?= form_open('', ['id' => 'submitResi', 'class' => 'modal-content'], ['invoice_id' => '1']); ?>
 		<div class="modal-header">
 			<h5 class="modal-title" id="modalKirimLabel">Modal title</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
+			<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
 			<div class="row gx-2 mb-3">

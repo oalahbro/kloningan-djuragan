@@ -409,8 +409,8 @@ $session = \Config\Services::session();
 		<?= form_open('', ['class' => 'modal-content', 'id' => 'newStatus'], ['id_invoice' => '']); ?>
 		<div class="modal-header">
 			<h5 class="modal-title" id="modalProgressLabel">Status Proses Orderan</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
+			<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
+				
 			</button>
 		</div>
 		<div class="modal-body">
@@ -457,8 +457,8 @@ $session = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalBayarLabel">Info Pembayaran</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
+					
 				</button>
 			</div>
 			<div class="modal-body">
@@ -474,8 +474,8 @@ $session = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalTambahBayarLabel">Tambah Pembayaran</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
+					
 				</button>
 			</div>
 			<div class="modal-body">

@@ -83,8 +83,8 @@ $session = \Config\Services::session();
 			<?= form_open('admin/settings/update_juragan', ['id' => 'mf'], ['id' => '']); ?>
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalSuntingJuraganLabel">Update Juragan</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
+					
 				</button>
 			</div>
 			<div class="modal-body">
