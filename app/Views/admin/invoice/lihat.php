@@ -1290,20 +1290,22 @@ $(function() {
 
 	});
 
-	// 
-	var maxLength = 200;
+	//
+	var maxLength = 7;
 	$(".keterangan").each(function(){
-		var myStr = $(this).html();
+		var myStr = $(this).html(),
+			lines = myStr.replace(/^\s+|\s+$|\s+(?=\s)/g, "").split("<br>"); // https://stackoverflow.com/a/18066013/2094645
+		
+		if (lines.length > maxLength) {
+			var newStr = lines.slice(0, maxLength),
+				hideStr = lines.slice(maxLength, lines.length);
 
-		if($.trim(myStr).length > maxLength){
-			var newStr = myStr.substring(0, maxLength);
-			var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
-			$(this).empty().html(newStr);
+			$(this).empty().html(newStr.join('<br/>'));
 			$(this).append('<a href="javascript:void(0);" class="read-more ml-1">lanjut ...</a>');
-			$(this).append('<span class="more-text">' + removedStr + '</span>');
+			$(this).append('<span class="more-text"><br/>' + hideStr.join('<br/>') + '</span>');
 		}
 	});
-	$(".read-more").click(function(){
+	$(".read-more").on('click', function(){
 		$(this).siblings(".more-text").contents().unwrap();
 		$(this).remove();
 	});
