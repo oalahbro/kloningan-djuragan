@@ -251,11 +251,10 @@ $biaya 		= json_decode($orderan->biaya);
 									$produk_total = $produk->harga * $produk->qty;
 									$subtotal +=  $produk_total;
 								?>
-
 									<tr>
 										<td>
 											<div>
-												<button class="close hapus_row orderan mr-1">
+												<button class="bg-transparent border-0 hapus_row orderan mr-1">
 													<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>
 												</button>
 												<?= $produk->kode; ?> ( <?= strtoupper($produk->ukuran); ?> )
@@ -1010,7 +1009,7 @@ $(function() {
 			ip = $('<input/>',{'type':'hidden','name': 'produk['+j+'][harga]', 'value': a}),
 			iz = $('<input/>',{'type':'hidden','name': 'produk['+j+'][ukuran]', 'value': e}),
 			iq = $('<input/>',{'type':'hidden','name': 'produk['+j+'][qty]', 'value': b}),
-			bt = $('<button />', {'class' : 'close hapus_row orderan mr-1', html:'<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>'}),
+			bt = $('<button />', {'class' : 'bg-transparent border-0 hapus_row orderan mr-1', html:'<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>'}),
 			t = $('<div/>').append(bt).append(d+' ( '+e+' )'),
 			tb = $('.list-orderan'),
 			p = $('<div/>', {'class' : 'text-right', 'data-uang1': a*b}).append(g).append(ik).append(ip).append(iz).append(iq);

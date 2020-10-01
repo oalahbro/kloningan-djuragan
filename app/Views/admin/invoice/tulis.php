@@ -872,7 +872,7 @@ $(function() {
 			ip = $('<input/>',{'type':'hidden','name': 'produk['+j+'][harga]', 'value': a}),
 			iz = $('<input/>',{'type':'hidden','name': 'produk['+j+'][ukuran]', 'value': e}),
 			iq = $('<input/>',{'type':'hidden','name': 'produk['+j+'][qty]', 'value': b}),
-			bt = $('<button />', {'class' : 'close hapus_row orderan mr-1', html:'<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>'}),
+			bt = $('<button />', {'class' : 'bg-transparent border-0 hapus_row orderan mr-1', html:'<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>'}),
 			t = $('<div/>').append(bt).append(d+' ( '+e+' )'),
 			tb = $('.list-orderan'),
 			p = $('<div/>', {'class' : 'text-right', 'data-uang1': a*b}).append(g).append(ik).append(ip).append(iz).append(iq);
@@ -986,7 +986,7 @@ $(function() {
 				no = $('<input/>',{'type':'hidden','name': 'biaya['+j+'][nominal]', 'value': u}),
 				la = $('<input/>',{'type':'hidden','name': 'biaya['+j+'][label]', 'value': c}),
 				r=$('<tr/>'),
-				c1=$('<td/>', {'colspan': '3', 'class': 'text-right'}).append('<button type="button" class="close hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>'+b+d),
+				c1=$('<td/>', {'colspan': '3', 'class': 'text-right'}).append('<button type="button" class="bg-transparent border-0 hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>'+b+d),
 				c2=$('<td/>').append('<div data-biaya="'+u+'" class="text-right '+e+'">'+h+'</div>').append(id).append(no).append(la),
 				q = r.append(c1).append(c2);
 			$(q).appendTo('.listBiaya');
