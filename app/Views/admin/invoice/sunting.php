@@ -294,7 +294,7 @@ $biaya 		= json_decode($orderan->biaya);
 									foreach ($biaya as $o) { ?>
 										<tr>
 											<td colspan="3" class="text-right">
-												<button type="button" class="close hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>
+												<button type="button" class="bg-transparent border-0 hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>
 												<?= ($o->biaya_id === 1 ? 'Ongkir' : 'Lain-lain') ?>
 												<?= empty($o->label) || $o->label === 'null' ? '' : '<span class="text-muted ml-1">' . $o->label . '</span>'; ?></td>
 											<td>
@@ -1123,7 +1123,7 @@ $(function() {
 				no = $('<input/>',{'type':'hidden','name': 'biaya['+j+'][nominal]', 'value': u}),
 				la = $('<input/>',{'type':'hidden','name': 'biaya['+j+'][label]', 'value': c}),
 				r=$('<tr/>'),
-				c1=$('<td/>', {'colspan': '3', 'class': 'text-right'}).append('<button type="button" class="close hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>'+b+d),
+				c1=$('<td/>', {'colspan': '3', 'class': 'text-right'}).append('<button type="button" class="bg-transparent border-0 hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>'+b+d),
 				c2=$('<td/>').append('<div data-biaya="'+u+'" class="text-right '+e+'">'+h+'</div>').append(id).append(no).append(la),
 				q = r.append(c1).append(c2);
 			$(q).appendTo('.listBiaya');
