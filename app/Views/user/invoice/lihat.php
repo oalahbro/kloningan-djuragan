@@ -927,11 +927,10 @@ $(function() {
 	var maxLength = 300;
 	$(".keterangan").each(function(){
 		var myStr = $(this).html();
-		const splits = myStr.replace(/[\r\n]+/gm, "<br/>");
 
-		if($.trim(splits).length > maxLength){
-			var newStr = splits.substring(0, maxLength);
-			var removedStr = splits.substring(maxLength, $.trim(splits).length);
+		if($.trim(myStr).length > maxLength){
+			var newStr = myStr.substring(0, maxLength);
+			var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
 			$(this).empty().html(newStr);
 			$(this).append('<a href="javascript:void(0);" class="read-more ml-1">lanjut ...</a>');
 			$(this).append('<span class="more-text">' + removedStr + '</span>');
