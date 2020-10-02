@@ -210,7 +210,7 @@ if (!function_exists('status_orderan')) {
 		}
 
 		$html = '<li class="list-inline-item mr-0 position-relative ' . $class . '" data-toggle="tooltip" data-placement="top" title="' . $title . '"><div class="d-flex justify-content-center">';
-		$html .= '<div class="text-center"><i class="fad fa-' . $ico . ' icon d-block"></i>';
+		$html .= '<div class="text-center"><i class="fal fa-' . $ico . ' icon d-block"></i>';
 		$html .= '<span><abbr title="' . $time->humanize() . '">' . $time->day . '/' . $time->month . '</abbr></span></div></div>';
 		$html .= '</li>';
 
@@ -270,7 +270,7 @@ if (!function_exists('status_pembayaran')) {
 		}
 
 		$html = '<li class="list-inline-item mr-0 position-relative ' . $class . '" data-toggle="tooltip" data-placement="top" title="' . $title . '"><div class="d-flex justify-content-center">';
-		$html .= '<div class="text-center"><i class="fad fa-wallet icon d-block"></i>';
+		$html .= '<div class="text-center"><i class="fal fa-wallet icon d-block"></i>';
 		if ($tanggal_bayar !== '') {
 			$html .= '<span><abbr title="' . $tanggal_bayar->humanize() . '">' . $tanggal_bayar->day . '/' . $tanggal_bayar->month . '</abbr></span></div></div>';
 		} else {
@@ -319,7 +319,7 @@ if (!function_exists('status_pengiriman')) {
 		}
 
 		$html = '<li class="list-inline-item mr-0 position-relative ' . $class . ' end" data-toggle="tooltip" data-placement="top" title="' . $title . '"><div class="d-flex justify-content-center">';
-		$html .= '<div class="text-center"><i class="fad fa-truck icon d-block"></i>';
+		$html .= '<div class="text-center"><i class="fal fa-truck icon d-block"></i>';
 		if ($tanggal_kirim !== '') {
 			$html .= '<span><abbr title="' . $tanggal_kirim->humanize() . '">' . $tanggal_kirim->day . '/' . $tanggal_kirim->month . '</abbr></span></div></div>';
 		} else {

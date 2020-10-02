@@ -41,7 +41,7 @@ $session = \Config\Services::session();
                                     <td>
                                         <?php if ($bank->id_bank > 2) { // COD not editable
                                         ?>
-                                            <button class="btn btn-outline-secondary"><i class="fad fa-pencil"></i></button>
+                                            <button class="btn btn-outline-secondary"><i class="fal fa-pencil"></i></button>
                                         <?php } ?>
                                     </td>
                                 </tr>
@@ -84,7 +84,7 @@ $session = \Config\Services::session();
                         <?= form_input('atas_nama', '', ['class' => 'form-control', 'id' => 'atas_nama', 'required' => '']); ?>
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-block btn-primary" type="submit"><i class="fad fa-save"></i> Tambahkan</button>
+                        <button class="btn btn-block btn-primary" type="submit"><i class="fal fa-save"></i> Tambahkan</button>
                     </div>
                     <?= form_close(); ?>
                 </div>
@@ -121,10 +121,10 @@ $(function() {
 		var id = $current_user_id;
 		$('#listLi').html(''),
 		$.getJSON('$link_api_juragan', { id: id }, function(b){
-			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+'semua'+'"><i class="fad fa-user-circle"></i> Semua Juragan</li></li>');
+			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+'semua'+'"><i class="fal fa-user-circle"></i> Semua Juragan</li></li>');
 			
 			$.each(b[id].juragan,function(c,b){
-				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fad fa-user-circle"></i> '+b.nama+'</li>');
+				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
 			}),
 
 			$(a.join('')).appendTo('#listLi');
@@ -151,7 +151,7 @@ $(function() {
 								<a class="d-block text-decoration-none" href="$link_invoice/semua/semua?cari[kolom]=faktur&cari[q]=`+b.invoice+`">`+ b.notif+`</a>
 							</div>
 							<div class="d-flex justify-content-right flex-column actionNotif">
-								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fad fa-circle"></i></button>
+								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fal fa-circle"></i></button>
 							</div>
 						</div>
 					</div>`);
@@ -166,7 +166,7 @@ $(function() {
 			else {
 				$('.btnSettingNotif').hide();
 
-				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fad fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
+				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fal fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
 			}
 		});
 	}

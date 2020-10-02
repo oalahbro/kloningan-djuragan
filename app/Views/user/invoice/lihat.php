@@ -29,7 +29,7 @@ $session = \Config\Services::session();
 		<?= anchor('user/invoices/lihat/' . $jrgn . '/belum-proses', 'Belum Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'belum-proses' ? 'primary' : 'outline-secondary')]); ?>
 		<?= anchor('user/invoices/lihat/' . $jrgn . '/dalam-proses', 'Dalam Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'dalam-proses' ? 'primary' : 'outline-secondary')]); ?>
 		<?= anchor('user/invoices/lihat/' . $jrgn . '/selesai', 'Orderan Selesai', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'selesai' ? 'primary' : 'outline-secondary')]); ?>
-		<a class="mb-2 btn btn-warning rounded-pill mr-1" data-target="#modalCari" data-toggle="modal" href="#!"><i class="fad fa-search"></i></a>
+		<a class="mb-2 btn btn-warning rounded-pill mr-1" data-target="#modalCari" data-toggle="modal" href="#!"><i class="fal fa-search"></i></a>
 	</div>
 
 	<?php
@@ -68,7 +68,7 @@ $session = \Config\Services::session();
 								<li class="list-inline-item mr-0 position-relative start full" data-toggle="tooltip" data-placement="top" title="Pesanan Ditambahkan">
 									<div class="d-flex justify-content-center">
 										<div class="text-center">
-											<i class="fad fa-plus-circle icon d-block"></i>
+											<i class="fal fa-plus-circle icon d-block"></i>
 											<?= '<span><abbr title="' . $time->humanize() . '">' . $time->day . '/' . $time->month . '</abbr></span>'; ?>
 										</div>
 									</div>
@@ -215,7 +215,7 @@ $session = \Config\Services::session();
 											[
 												'data-toggle' => 'popHarga',
 												'data-content' => $content,
-												'content' => '<i class="fad fa-info-circle"></i> <span class="sr-only">info</span>',
+												'content' => '<i class="fal fa-info-circle"></i> <span class="sr-only">info</span>',
 												'class' => 'btn btn-link btn-sm text-secondary'
 											]
 										);
@@ -277,7 +277,7 @@ $session = \Config\Services::session();
 														Sudah</span>&nbsp;Bayar
 													<?= form_button([
 														'class' 		=> 'text-dark ml-1 pesanBayar',
-														'content' 		=> '<i class="fad fa-info-circle"></i> <span class="sr-only">info</span>',
+														'content' 		=> '<i class="fal fa-info-circle"></i> <span class="sr-only">info</span>',
 														'data-invoice' 	=> $pesanan->id_invoice,
 														'data-juragan' 	=> $juragan->id,
 														'data-target' 	=> '#modalBayar',
@@ -383,7 +383,7 @@ $session = \Config\Services::session();
 							// hanya tampil jika ada pembayaran yang perlu dicek
 							echo form_button([
 								'class' 		=> 'btn btn-warning ml-1 pesanBayar',
-								'content' 		=> '<i class="fad fa-wallet"></i> Cek Pembayaran',
+								'content' 		=> '<i class="fal fa-wallet"></i> Cek Pembayaran',
 								'data-invoice' 	=> $pesanan->id_invoice,
 								'data-juragan' 	=> $juragan->id,
 								'data-target' 	=> '#modalBayar',
@@ -397,7 +397,7 @@ $session = \Config\Services::session();
 		}
 		echo $pager->makeLinks($page, $limit, $totalPage, 'front_full');
 	} else {
-		echo '<div class="text-center my-5"><i class="fad fa-5x fa-box-open text-primary"></i><br/>orderan masih kosong</div>';
+		echo '<div class="text-center my-5"><i class="fal fa-5x fa-box-open text-primary"></i><br/>orderan masih kosong</div>';
 	}
 	?>
 
@@ -638,7 +638,7 @@ $(function() {
 		$.getJSON('$link_api_juragan', { id: id }, function(b){
 			var a=[];			
 			$.each(b[id].juragan,function(c,b){
-				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fad fa-user-circle"></i> '+b.nama+'</li>');
+				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
 			}),
 
 			$(a.join('')).appendTo('#listLi');
@@ -665,7 +665,7 @@ $(function() {
 								<a class="d-block text-decoration-none" href="$link_invoice`+b.juragan+`/semua?cari[kolom]=faktur&cari[q]=`+b.invoice+`">`+ b.notif+`</a>
 							</div>
 							<div class="d-flex justify-content-right flex-column actionNotif">
-								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fad fa-circle"></i></button>
+								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fal fa-circle"></i></button>
 							</div>
 						</div>
 					</div>`);
@@ -680,7 +680,7 @@ $(function() {
 			else {
 				$('.btnSettingNotif').hide();
 
-				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fad fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
+				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fal fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
 			}
 		});
 	}
@@ -822,7 +822,7 @@ $(function() {
 				var dv = $(`
 				<div class="d-flex justify-content-between">
 					<div class="d-flex justify-content-start align-items-center">
-						<i class="fad fa-`+ ico +` fa-2x mr-3"></i>
+						<i class="fal fa-`+ ico +` fa-2x mr-3"></i>
 						<div>
 							<span class="mr-1">`+ bank.toUpperCase() +`</span> <span class="mr-1">`+ bayar[i].nominal +`</span> <span>(`+ tanggal(bayar[i].tanggal_bayar) +`)</span>
 							<div class="text-muted small">`+ info +`</div>

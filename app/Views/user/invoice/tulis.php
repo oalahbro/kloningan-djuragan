@@ -81,7 +81,7 @@ $session = \Config\Services::session();
 							]); ?>
 							<?= form_button([
 								'class' 	=> 'btn btn-dark',
-								'content' 	=> '<i class="fad fa-plus"></i> Tambah',
+								'content' 	=> '<i class="fal fa-plus"></i> Tambah',
 								'data-target' => '#modalTambahPelanggan',
 								'data-toggle' => 'modal',
 								'id' 		=> 'tambah_pemesan_kirimKe',
@@ -92,7 +92,7 @@ $session = \Config\Services::session();
 						<div class="mb-3 info-data-pemesan" style="display: none;">
 							<?= form_button([
 								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
-								'content' 	=> '<i class="fad fa-trash"></i> <span class="sr-only">Hapus</span>',
+								'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
 								'title' 	=> 'Hapus Pemesan'
 							]); ?>
 							<span id="alamat_pemesan" class="border rounded p-2 d-block"></span>
@@ -107,7 +107,7 @@ $session = \Config\Services::session();
 							]); ?>
 							<?= form_button([
 								'class' 	=> 'btn btn-dark',
-								'content' 	=> '<i class="fad fa-plus"></i> Tambah',
+								'content' 	=> '<i class="fal fa-plus"></i> Tambah',
 								'data-target' => '#modalTambahPelanggan',
 								'data-toggle' => 'modal',
 								'id' 		=> 'tambah_kirimKe',
@@ -118,7 +118,7 @@ $session = \Config\Services::session();
 						<div class="mb-3 info-data-kirimKe" style="display: none;">
 							<?= form_button([
 								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
-								'content' 	=> '<i class="fad fa-trash"></i> <span class="sr-only">Hapus</span>',
+								'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
 								'title' 	=> 'Hapus Kirim'
 							]); ?>
 							<span id="alamat_kirimKe" class="border rounded p-2 d-block"></span>
@@ -142,7 +142,7 @@ $session = \Config\Services::session();
 						</li>
 						<li class="nav-item">
 							<a href="#!" class="nav-link" data-toggle="modal" data-target="#tambahProduk">
-								<i class="fad fa-plus"></i>
+								<i class="fal fa-plus"></i>
 							</a>
 						</li>
 					</ul>
@@ -177,8 +177,8 @@ $session = \Config\Services::session();
 					</div>
 
 					<div class="border-bottom pb-3 customBiaya d-none">
-						<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder" data-biayaID="1" data-judul="Ongkir" data-operasi="1"><i class="fad fa-plus"></i> Ongkir</button>
-						<button type="button" class="btn btn-sm btn-outline-primary" data-target="#biayaOrder" data-toggle="modal" data-biayaID="2" data-judul="Lain-lain" data-operasi="1"><i class="fad fa-plus"></i> Biaya Lain</button>
+						<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#biayaOrder" data-biayaID="1" data-judul="Ongkir" data-operasi="1"><i class="fal fa-plus"></i> Ongkir</button>
+						<button type="button" class="btn btn-sm btn-outline-primary" data-target="#biayaOrder" data-toggle="modal" data-biayaID="2" data-judul="Lain-lain" data-operasi="1"><i class="fal fa-plus"></i> Biaya Lain</button>
 					</div>
 					<div class="customBiaya d-none">
 						<div class="d-flex justify-content-between align-items-center">
@@ -191,7 +191,7 @@ $session = \Config\Services::session();
 
 			<hr />
 			<button type="submit" class="btn btn-primary btn-block text-uppercase">
-				<i class="fad fa-save"></i> Simpan
+				<i class="fal fa-save"></i> Simpan
 			</button>
 		</div>
 	</div>
@@ -270,7 +270,7 @@ $session = \Config\Services::session();
 				<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Simpan
 			</button>
 			<button type="submit" class="btn submit btn-primary">
-				<i class="fad fa-save"></i> Simpan
+				<i class="fal fa-save"></i> Simpan
 			</button>
 		</div>
 		<?= form_close(); ?>
@@ -402,10 +402,10 @@ $(function() {
 		var id = $current_user_id;
 		$('#listLi').html(''),
 		$.getJSON('$link_api_juragan', { id: id }, function(b){
-			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+'semua'+'"><i class="fad fa-user-circle"></i> Semua Juragan</li></li>');
+			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+'semua'+'"><i class="fal fa-user-circle"></i> Semua Juragan</li></li>');
 			
 			$.each(b[id].juragan,function(c,b){
-				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fad fa-user-circle"></i> '+b.nama+'</li>');
+				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
 			}),
 
 			$(a.join('')).appendTo('#listLi');
@@ -432,7 +432,7 @@ $(function() {
 								<a class="d-block text-decoration-none" href="$link_invoice`+b.juragan+`/semua?cari[kolom]=faktur&cari[q]=`+b.invoice+`">`+ b.notif+`</a>
 							</div>
 							<div class="d-flex justify-content-right flex-column actionNotif">
-								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fad fa-circle"></i></button>
+								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fal fa-circle"></i></button>
 							</div>
 						</div>
 					</div>`);
@@ -447,7 +447,7 @@ $(function() {
 			else {
 				$('.btnSettingNotif').hide();
 
-				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fad fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
+				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fal fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
 			}
 		});
 	}
@@ -868,7 +868,7 @@ $(function() {
 			ip = $('<input/>',{'type':'hidden','name': 'produk['+j+'][harga]', 'value': a}),
 			iz = $('<input/>',{'type':'hidden','name': 'produk['+j+'][ukuran]', 'value': e}),
 			iq = $('<input/>',{'type':'hidden','name': 'produk['+j+'][qty]', 'value': b}),
-			bt = $('<button />', {'class' : 'bg-transparent border-0 hapus_row orderan mr-1', html:'<span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span>'}),
+			bt = $('<button />', {'class' : 'bg-transparent border-0 hapus_row orderan mr-1', html:'<span aria-hidden="true"><i class="fal fa-trash-alt h6"></i></span>'}),
 			t = $('<div/>').append(bt).append(d+' ( '+e+' )'),
 			tb = $('.list-orderan'),
 			p = $('<div/>', {'class' : 'text-right', 'data-uang1': a*b}).append(g).append(ik).append(ip).append(iz).append(iq);
@@ -982,7 +982,7 @@ $(function() {
 				no = $('<input/>',{'type':'hidden','name': 'biaya['+j+'][nominal]', 'value': u}),
 				la = $('<input/>',{'type':'hidden','name': 'biaya['+j+'][label]', 'value': c}),
 				r=$('<tr/>'),
-				c1=$('<td/>', {'colspan': '3', 'class': 'text-right'}).append('<button type="button" class="bg-transparent border-0 hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fad fa-trash-alt h6"></i></span></button>'+b+d),
+				c1=$('<td/>', {'colspan': '3', 'class': 'text-right'}).append('<button type="button" class="bg-transparent border-0 hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fal fa-trash-alt h6"></i></span></button>'+b+d),
 				c2=$('<td/>').append('<div data-biaya="'+u+'" class="text-right '+e+'">'+h+'</div>').append(id).append(no).append(la),
 				q = r.append(c1).append(c2);
 			$(q).appendTo('.listBiaya');
