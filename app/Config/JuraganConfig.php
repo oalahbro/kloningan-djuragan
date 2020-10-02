@@ -78,7 +78,7 @@ class JuraganConfig extends BaseConfig
 		'18' => '<i class="fal fa-tasks text-success"></i> Orderan pada invoice {invoice} selesai proses QC (Quality Control)',
 		'19' => '<i class="fal fa-box-alt text-warning"></i> Orderan pada invoice {invoice} mulai dipacking',
 		'20' => '<i class="fal fa-box-alt text-success"></i> Orderan pada invoice {invoice} selesai packing',
-		'21' => '<i class="fal fa-truck text-warning"></i> Orderan pada invoice {invoice} dikirim beberapa dulu',
-		'22' => '<i class="fal fa-truck text-success"></i> Orderan pada invoice {invoice} telah dikirimkan'
+		'21' => '<i class="fal fa-shipping-fast text-warning"></i> Orderan pada invoice {invoice} dikirim beberapa dulu',
+		'22' => '<i class="fal fa-shipping-fast text-success"></i> Orderan pada invoice {invoice} telah dikirimkan'
 	];
 }
