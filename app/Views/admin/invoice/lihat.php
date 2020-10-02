@@ -702,7 +702,7 @@ $session = \Config\Services::session();
 						'kode' => 'Kode Produk'
 					];
 					echo form_dropdown('cari[kolom]', $opsi_kolom, '', ['class' => 'form-select']);
-					echo form_input(['name' => 'cari[q]', 'class' => 'form-control', 'style' => 'flex:2', 'placeholder' => 'cari .....']);
+					echo form_input(['name' => 'cari[q]', 'class' => 'form-control allow-enter', 'style' => 'flex:2', 'placeholder' => 'cari .....']);
 					?>
 					<div class="text-muted">untuk pencarian berdasarkan tanggal, gunakan format seperti: <code>2020-09-20</code></div>
 				</div>
@@ -1312,7 +1312,7 @@ $(function() {
 
 	// disable hit enter
 	// https://stackoverflow.com/a/895231/2094645
-	$(document).on("keydown", ":input:not(textarea)", function(event) {
+	$(document).on("keydown", ":input:not(textarea):not(.allow-enter)", function(event) {
 		if(event.keyCode == 13) {
 			event.preventDefault();
 			return false;
