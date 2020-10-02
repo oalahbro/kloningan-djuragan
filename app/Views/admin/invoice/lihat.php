@@ -735,7 +735,7 @@ $link_tambah_pembayaran = site_url('admin/invoices/simpan_pembayaran');
 $link_update_pembayaran = site_url('admin/invoices/update_bayar');
 $link_api_notif = site_url('api/notifikasi/');
 
-$codvalue = 'COD' . $sekarang->toLocalizedString('dmmyyyy');
+$codvalue = 'COD' . $sekarang->toLocalizedString('ddMMyyyy');
 
 $js = <<< JS
 $(function() { 
