@@ -7,12 +7,12 @@ if (count($pager->links()) > 1) {
 			<?php if ($pager->hasPrevious()) : ?>
 				<li class="page-item">
 					<a class="page-link" href="<?= $pager->getFirst() ?>" aria-label="First">
-						<i class="fad fa-arrow-alt-to-left"></i>
+						<i class="fal fa-arrow-alt-to-left"></i>
 					</a>
 				</li>
 				<li class="page-item">
 					<a class="page-link" href="<?= $pager->getPrevious() ?>" aria-label="Previous">
-						<i class="fad fa-arrow-alt-left"></i>
+						<i class="fal fa-arrow-alt-left"></i>
 					</a>
 				</li>
 			<?php endif ?>
@@ -37,12 +37,12 @@ if (count($pager->links()) > 1) {
 			<?php if ($pager->hasNext()) : ?>
 				<li class="page-item">
 					<a class="page-link" href="<?= $pager->getNext() ?>" aria-label="Next">
-						<i class="fad fa-arrow-alt-right"></i>
+						<i class="fal fa-arrow-alt-right"></i>
 					</a>
 				</li>
 				<li class="page-item">
 					<a class="page-link" href="<?= $pager->getLast() ?>" aria-label="Last">
-						<i class="fad fa-arrow-alt-to-right"></i>
+						<i class="fal fa-arrow-alt-to-right"></i>
 					</a>
 				</li>
 			<?php endif ?>

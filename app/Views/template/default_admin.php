@@ -215,7 +215,7 @@ $JSmin = new Minify\JS();
 	<nav class="sticky-top mainnav navbar navbar-expand navbar-dark bg-dark bg-gradient">
 		<div class="container-xxl d-flex flex-wrap flex-md-nowrap align-items-center justify-content-between">
 			<div class="d-flex align-items-center mr-3" id="logo">
-				<?php echo form_button(array('class' => 'btn-juragan btn btn-outline-light', 'data-toggle' => "collapse", 'data-target' => "#sidebar", 'id' => 'sidebarCollapse', 'content' => '<i class="fad fa-align-left fa-flip-vertical"></i>')); ?>
+				<?php echo form_button(array('class' => 'btn-juragan btn btn-outline-light', 'data-toggle' => "collapse", 'data-target' => "#sidebar", 'id' => 'sidebarCollapse', 'content' => '<i class="fal fa-align-left fa-flip-vertical"></i>')); ?>
 				<?php echo anchor('', 'Pesanan Juragan', ['class' => 'navbar-brand ml-3']); ?>
 			</div>
 			<div id="menu" class="order-3 order-md-0 navbar-nav-scroll d-flex justify-content-center">
@@ -239,17 +239,17 @@ $JSmin = new Minify\JS();
 						<a href="#!" class="nav-link" id="notif" data-toggle="collapse" data-target="#notif-pane"><span class="d-none d-md-inline-block">Notifikasi</span> <span class="badge rounded-pill bg-danger counter"></span></a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link" id="dropSetting" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fad fa-cogs d-block d-md-none"></i> <span class="d-none d-md-inline-block">Pengaturan</span></a>
+						<a class="nav-link" id="dropSetting" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fal fa-cogs d-block d-md-none"></i> <span class="d-none d-md-inline-block">Pengaturan</span></a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-							<?= anchor('admin/settings', '<i class="fad fa-globe"></i> Situs', array('class' => 'dropdown-item')); ?>
+							<?= anchor('admin/settings', '<i class="fal fa-globe"></i> Situs', array('class' => 'dropdown-item')); ?>
 							<hr class="dropdown-divider" />
-							<?= anchor('admin/settings/juragan', '<i class="fad fa-user-circle"></i> Juragan', array('class' => 'dropdown-item')); ?>
-							<?= anchor('admin/settings/pengguna', '<i class="fad fa-users"></i> Pengguna', array('class' => 'dropdown-item')); ?>
+							<?= anchor('admin/settings/juragan', '<i class="fal fa-user-circle"></i> Juragan', array('class' => 'dropdown-item')); ?>
+							<?= anchor('admin/settings/pengguna', '<i class="fal fa-users"></i> Pengguna', array('class' => 'dropdown-item')); ?>
 						</div>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link" href="#" id="dropUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fad fa-user d-block d-md-none"></i> <span class="d-none d-md-inline-block">
+							<i class="fal fa-user d-block d-md-none"></i> <span class="d-none d-md-inline-block">
 								<?= $_SESSION['name']; ?></span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
@@ -280,7 +280,7 @@ $JSmin = new Minify\JS();
 				Notifikasi
 				<div class="ml-auto">
 					<button type="button" class="btn btn-light btn-sm btnSettingNotif" data-toggle="dropdown" aria-expanded="false">
-						<span class="fad fa-ellipsis-h-alt"></span>
+						<span class="fal fa-ellipsis-h-alt"></span>
 					</button>
 					<ul class="dropdown-menu">
 						<li><button class="dropdown-item tandaiSemuaTerbaca" type="button">Tandai semua sudah dibaca</button></li>
