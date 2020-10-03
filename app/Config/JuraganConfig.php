@@ -79,6 +79,7 @@ class JuraganConfig extends BaseConfig
 		'19' => '<i class="fal fa-box-alt text-warning"></i> Orderan pada invoice {invoice} mulai dipacking',
 		'20' => '<i class="fal fa-box-alt text-success"></i> Orderan pada invoice {invoice} selesai packing',
 		'21' => '<i class="fal fa-shipping-fast text-warning"></i> Orderan pada invoice {invoice} dikirim beberapa dulu',
-		'22' => '<i class="fal fa-shipping-fast text-success"></i> Orderan pada invoice {invoice} telah dikirimkan'
+		'22' => '<i class="fal fa-shipping-fast text-success"></i> Orderan pada invoice {invoice} telah dikirimkan',
+		'23' => '<i class="fal fa-money-check-edit fa-flip-horizontal"></i> Resi Orderan pada invoice {invoice} telah diubah'
 	];
 }
