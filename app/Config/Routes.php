@@ -46,15 +46,21 @@ $routes->group('api', function($routes)
     {
         $routes->add('(:segment)', 'Api\Juragan::$1');
     });
-    
+
+    $routes->group('notifikasi', function($routes)
+    {
+        $routes->add('(:segment)', 'Api\Notifikasi::$1');
+    });
+
     $routes->group('pengguna', function($routes)
     {
         $routes->add('(:segment)', 'Api\Pengguna::$1');
     });
 
-    $routes->group('notifikasi', function($routes)
+    $routes->group('pengiriman', function($routes)
     {
-        $routes->add('(:segment)', 'Api\Notifikasi::$1');
+        $routes->add('(:segment)', 'Api\Pengiriman::$1');
+        $routes->post('photos', 'Api\Pengiriman::create');
     });
 
 });

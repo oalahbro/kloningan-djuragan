@@ -328,19 +328,30 @@ $session = \Config\Services::session();
 									<div class="card-subtitle text-muted text-uppercase small">Resi</div>
 
 									<?php
-									foreach ($pengiriman as $key => $kirim) { ?>
-										<div class="border-bottom mb-2 pb-2">
-											<?php $tanggal_kirim = Time::createFromTimestamp($kirim->tanggal_kirim); ?>
-											<h6 class="mb-0"><?= $kirim->kurir; ?></h6>
-											<div class="lead"><?= $kirim->resi; ?></div>
-											<p class="mb-0 text-muted">
-												<?= $tanggal_kirim->toLocalizedString('EEEE, d MMMM yyyy'); ?>
-												<?php if ($kirim->ongkir > 0) { ?>
-													<br />ongkir fix (<?= $kirim->qty . 'pcs'; ?>): <u><?= number_to_currency($kirim->ongkir, 'IDR'); ?></u>
-												<?php } ?>
-											</p>
-										</div>
-									<?php } ?>
+									if ($pengiriman !== NULL) {
+										foreach ($pengiriman as $key => $kirim) { ?>
+											<div class="border-bottom mb-2 pb-2">
+												<?php $tanggal_kirim = Time::createFromTimestamp($kirim->tanggal_kirim); ?>
+												<h6 class="mb-0">
+													<?= $kirim->kurir; ?>
+													<?= form_button([
+														'class' 	=> 'bg-transparent border-0 text-primary ml-1 suntingResi',
+														'content' 	=> '<i class="fal fa-money-check-edit fa-flip-horizontal"></i>',
+														'data-id' 	=> $kirim->id,
+														'data-invoice' 	=> $pesanan->id_invoice
+													]); ?>
+												</h6>
+												<div class="lead"><?= $kirim->resi; ?></div>
+												<p class="mb-0 text-muted">
+													<?= $tanggal_kirim->toLocalizedString('EEEE, d MMMM yyyy'); ?>
+													<?php if ($kirim->ongkir > 0) { ?>
+														<br />ongkir fix (<?= $kirim->qty . 'pcs'; ?>): <u><?= number_to_currency($kirim->ongkir, 'IDR'); ?></u>
+													<?php } ?>
+												</p>
+											</div>
+									<?php }
+									}
+									?>
 								<?php } ?>
 							</div>
 						</div>
@@ -725,12 +736,12 @@ $session = \Config\Services::session();
 $current_user_id = $session->get('id');
 $link_api_get_bank = site_url("api/juragan/all/");
 $link_api_get_pembayaran = site_url("admin/invoices/info_pembayaran");
+$link_api_pengiriman = site_url("api/pengiriman");
 $link_api_juragan = site_url("api/juragan/by_user/");
 $link_get_status_invoice = site_url('admin/invoices/detail_status/');
 $link_hapus_orderan = site_url('admin/invoices/hapus_orderan');
 $link_invoice = site_url('admin/invoices/lihat/');
 $link_save_progress = site_url('admin/invoices/save_progress');
-$link_save_resi = site_url('admin/invoices/submit_resi');
 $link_tambah_pembayaran = site_url('admin/invoices/simpan_pembayaran');
 $link_update_pembayaran = site_url('admin/invoices/update_bayar');
 $link_api_notif = site_url('api/notifikasi/');
@@ -1196,11 +1207,10 @@ $(function() {
 
 	// submit resi
 	$('.kirimResi').on('click',function(){
-		var modalKirim = new bootstrap.Modal(document.getElementById('modalKirim'));
-		var invoice = $(this).data('invoice');
-		var count = $(this).data('count');
-
-		var qty = $('#submitResi [name="qty"]');
+		var modal = new bootstrap.Modal(document.getElementById('modalKirim')),
+			invoice = $(this).data('invoice'),
+			count = $(this).data('count'),
+			qty = $('#submitResi [name="qty"]');
 
 		$('#submitResi [name="invoice_id"]').val(invoice);
 		qty.val(count).attr('readonly', true);
@@ -1210,7 +1220,64 @@ $(function() {
 			qty.attr('readonly', false);			
 		}
 
-		modalKirim.show();
+		modal.show();
+	});
+
+	// source: https://stackoverflow.com/a/27521981/2094645
+	function dropdownToArray(target) {
+        var targets = $(target + " option");
+        var results = [];
+        targets.each(function () {
+            var val = $(this).val();
+            if (val !== '') results.push(val);
+        });
+        return results;
+	}
+
+	// sunting resi
+	$('.suntingResi').on('click', function() {
+		var id = $(this).data('id'), // id pengiriman
+			modal = new bootstrap.Modal(document.getElementById('modalKirim')),
+			invoice = $(this).data('invoice');
+
+		$('#modalKirim .modal-title').text('Sunting Resi');
+
+		$('#submitResi').attr('id', 'suntingResi');
+
+		$('#suntingResi [name="invoice_id"]').val(invoice);
+		
+		// get data
+		// source: https://stackoverflow.com/a/18867652/2094645
+		$.getJSON('$link_api_pengiriman/get', { id: id }, function(data) {
+			// set array
+			var arr = dropdownToArray('#suntingResi #kurir');
+			if(jQuery.inArray(data.kurir, arr) != -1) {
+				$('#suntingResi #kurir').val(data.kurir);
+				$('#suntingResi #lainnya').attr('disabled', true);
+			} else {
+				$('#suntingResi #kurir').val('lainnya');
+				$('#suntingResi #lainnya').attr('disabled', false).val(data.kurir);
+			} 
+
+			$('#suntingResi #resi').val(data.resi);
+			var date = new Date(data.tanggal_kirim * 1000),
+				tggl = date.getFullYear() +'-'+("0" + date.getMonth()).slice(-2) + '-'+ ("0" + date.getDate()).slice(-2);
+
+			console.log(tggl);
+			$('#suntingResi #tanggal_kirim').val(tggl);
+			$('#suntingResi #isi_paket').val(data.qty_kirim).attr('readonly', true);
+			$('#suntingResi #ongkir').val(data.ongkir);
+
+			$('#suntingResi [name="invoice_id"]').after($('<input>').attr({
+				type: 'hidden',
+				name: 'id_pengiriman'
+			}));
+
+			$('#suntingResi [name="id_pengiriman"]').val(id);
+
+		});
+
+		modal.show();
 	});
 
 	// kurir
@@ -1237,7 +1304,7 @@ $(function() {
 	var request_resi;
 
 	// Bind to the submit event of our form
-	$("#submitResi").submit(function(event){
+	$(document).on('submit', "#submitResi", function(event){
 
 		// Prevent default posting of form - put here to work in case of errors
 		event.preventDefault();
@@ -1262,7 +1329,7 @@ $(function() {
 
 		// Fire off the request to /form.php
 		request_resi = $.ajax({
-			url: "$link_save_resi",
+			url: "$link_api_pengiriman/save",
 			type: "post",
 			data: serializedData
 		});
@@ -1284,6 +1351,60 @@ $(function() {
 		// Callback handler that will be called regardless
 		// if the request failed or succeeded
 		request_resi.always(function () {
+			// Reenable the inputs
+			inputs.prop("disabled", false);
+		});
+
+	});
+
+	var request_suntingResi;
+	$(document).on('submit', "#suntingResi", function(event){
+
+		// Prevent default posting of form - put here to work in case of errors
+		event.preventDefault();
+
+		// Abort any pending request
+		if (request_suntingResi) {
+			request_suntingResi.abort();
+		}
+		// setup some local variables
+		var form = $(this);
+
+		// Let's select and cache all the fields
+		var inputs = form.find("input, select, button, textarea");
+
+		// Serialize the data in the form
+		var serializedData = form.serialize();
+
+		// Let's disable the inputs for the duration of the Ajax request.
+		// Note: we disable elements AFTER the form data has been serialized.
+		// Disabled form elements will not be serialized.
+		inputs.prop("disabled", true);
+
+		// Fire off the request to /form.php
+		request_suntingResi = $.ajax({
+			url: "$link_api_pengiriman/save",
+			type: "post",
+			data: serializedData
+		});
+
+		// Callback handler that will be called on success
+		request_suntingResi.done(function (response, textStatus, jqXHR){
+			document.location.href = response.url;
+		});
+
+		// Callback handler that will be called on failure
+		request_suntingResi.fail(function (jqXHR, textStatus, errorThrown){
+			// Log the error to the console
+			console.error(
+				"The following error occurred: "+
+				textStatus, errorThrown
+			);
+		});
+
+		// Callback handler that will be called regardless
+		// if the request failed or succeeded
+		request_suntingResi.always(function () {
 			// Reenable the inputs
 			inputs.prop("disabled", false);
 		});
