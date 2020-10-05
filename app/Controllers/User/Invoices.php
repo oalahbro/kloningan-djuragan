@@ -335,7 +335,7 @@ class Invoices extends BaseController
 				$res[] = [
 					'id'		=> (int) $bayar->id,
 					'nama' 		=> $bayar->nama,
-					'atas_nama' => $bayar->atas_nama,
+					'atas_nama'	=> $bayar->atas_nama,
 					'sumber' 	=> (int) $bayar->sumber,
 					'nominal' 	=> number_to_currency($bayar->nominal, 'IDR'), //(int) $bayar->nominal,
 					'status' 	=> (int) $bayar->status,
@@ -343,7 +343,6 @@ class Invoices extends BaseController
 					'tanggal_cek' => ($bayar->tanggal_cek !== NULL ? (int) $bayar->tanggal_cek : NULL)
 				];
 			}
-
 
 			return $this->response->setJSON($res);
 		}
