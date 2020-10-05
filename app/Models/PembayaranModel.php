@@ -12,6 +12,7 @@ class PembayaranModel extends Model
     protected $returnType = 'object';
 
     protected $allowedFields = ['invoice_id', 'sumber_dana', 'total_pembayaran', 'status', 'tanggal_pembayaran', 'tanggal_cek'];
+    
     // ambil data pembayaran
     public function ambil($invoice_id)
     {
