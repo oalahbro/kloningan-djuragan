@@ -333,11 +333,12 @@ class Invoices extends BaseController
 
 			foreach ($x as $bayar) {
 				$res[] = [
-					'id' => (int) $bayar->id,
-					'nama' => $bayar->nama,
+					'id'		=> (int) $bayar->id,
+					'nama' 		=> $bayar->nama,
 					'atas_nama' => $bayar->atas_nama,
-					'nominal' => number_to_currency($bayar->nominal, 'IDR'), //(int) $bayar->nominal,
-					'status' => (int) $bayar->status,
+					'sumber' 	=> (int) $bayar->sumber,
+					'nominal' 	=> number_to_currency($bayar->nominal, 'IDR'), //(int) $bayar->nominal,
+					'status' 	=> (int) $bayar->status,
 					'tanggal_bayar' => (int) $bayar->tanggal_pembayaran,
 					'tanggal_cek' => ($bayar->tanggal_cek !== NULL ? (int) $bayar->tanggal_cek : NULL)
 				];
