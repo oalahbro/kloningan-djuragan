@@ -224,10 +224,10 @@ $JSmin = new Minify\JS();
 					<li class="nav-item">
 						<?= anchor('user/invoices/tulis', 'Tulis Orderan', ['class' => 'nav-link']) ?>
 					</li>
-					<?php /*
 					<li class="nav-item">
-						<?= anchor('pelanggan', 'Customer', ['class' => 'nav-link']) ?>
+						<?= anchor('user/chart', 'Chart', ['class' => 'nav-link']) ?>
 					</li>
+					<?php /*
 					<li class="nav-item">
 						<?= anchor('produk', 'Produk', ['class' => 'nav-link']) ?>
 					</li>
