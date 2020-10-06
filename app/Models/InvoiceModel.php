@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\I18n\Time;
 
 class InvoiceModel extends Model
 {
@@ -221,6 +222,37 @@ class InvoiceModel extends Model
 		$builder->select('(SELECT SUM(d.qty) FROM ' . $db->prefixTable('dibeli') . ' d WHERE d.invoice_id=' . $invoice_id . ') AS wajib_kirim', FALSE);
 
 		return $builder->get();
+	}
+
+	// ------------------------------------------------------------------------
+
+	public function counter_terkirim()
+	{
+		$awalBulanIni 	= date('Y-m-', strtotime(date('Y-m') . " -1 month")) . '26';
+		$akhirBulanIni 	= date('Y-m-', strtotime(date('Y-m'))) . '25';
+
+		$awalBulanLalu 	= date('Y-m-', strtotime(date('Y-m') . " -2 month")) . '26';
+		$akhirBulanLalu	= date('Y-m-', strtotime(date('Y-m') . " -1 month")) . '25';
+
+		$counter = $this->db->table('juragan j');
+		$counter->select('j.*');
+
+		$counter->select('COUNT(DISTINCT(CASE WHEN i.deleted_at IS NULL AND i.tanggal_pesan between "' . $awalBulanIni . '" AND "' . $akhirBulanIni . '" THEN i.id_invoice END)) as jumlahOrderBulanIni');
+
+		$counter->select('COUNT(DISTINCT(CASE WHEN i.deleted_at IS NULL AND i.tanggal_pesan between "' . $awalBulanLalu . '" AND "' . $akhirBulanLalu . '" THEN i.id_invoice END)) as jumlahOrderBulanLalu');
+
+		$counter->select('SUM(CASE WHEN i.deleted_at IS NULL AND i.status_pengiriman = "3" AND DATE_FORMAT(FROM_UNIXTIME(s.tanggal_kirim), "%Y-%m-%d") between "' . $awalBulanIni . '" AND "' . $akhirBulanIni . '" THEN s.qty_kirim ELSE 0 END) as terkirimBulanIni');
+
+		$counter->select('SUM(CASE WHEN i.deleted_at IS NULL AND i.status_pengiriman = "3" AND DATE_FORMAT(FROM_UNIXTIME(s.tanggal_kirim), "%Y-%m-%d") between "' . $awalBulanLalu . '" AND "' . $akhirBulanLalu . '" THEN s.qty_kirim ELSE 0 END) as terkirimBulanLalu');
+
+		$counter->join('invoice i', 'j.id_juragan = i.juragan_id', 'left outer');
+		$counter->join('dibeli b', 'b.invoice_id = i.id_invoice', 'left outer');
+		$counter->join('pengiriman s', 's.invoice_id = i.id_invoice', 'left outer');
+
+		$counter->groupBy('j.id_juragan');
+		$query = $counter->get();
+
+		return $query;
 	}
 
 	// ------------------------------------------------------------------------

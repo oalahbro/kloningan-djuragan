@@ -18,7 +18,8 @@ class Chart extends BaseController
         }
 
         $data = [
-            'title' => 'Chart'
+            'title'     => 'Chart',
+            'counter'   => $this->invoice->counter_terkirim()->getResult()
         ];
         return view('user/chart', $data);
     }
