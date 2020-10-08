@@ -1,0 +1,10 @@
+{
+    "name": "djuragan",
+    "scripts": {
+        "css-compile": "node-sass --output-style compressed --no-source-map --precision 6 public/assets/scss/style.scss public/assets/css/style.css"
+    },
+    "dependencies": {
+        "bootstrap": "^5.0.0-alpha2",
+        "node-sass": "^4.14.1"
+    }
+}
