@@ -324,7 +324,7 @@ $session = \Config\Services::session();
 									</p>
 								<?php } ?>
 
-								<?php if ($pesanan->status_pengiriman !== '1') { ?>
+								<?php if ($pesanan->status_pengiriman !== '1' && $pengiriman !== NULL) { ?>
 									<div class="card-subtitle text-muted text-uppercase small">Resi</div>
 
 									<?php
@@ -340,7 +340,9 @@ $session = \Config\Services::session();
 												<?php } ?>
 											</p>
 										</div>
-									<?php } ?>
+									<?php
+									}
+									?>
 								<?php } ?>
 							</div>
 						</div>
@@ -409,8 +411,8 @@ $session = \Config\Services::session();
 		<?= form_open('', ['class' => 'modal-content', 'id' => 'newStatus'], ['id_invoice' => '']); ?>
 		<div class="modal-header">
 			<h5 class="modal-title" id="modalProgressLabel">Status Proses Orderan</h5>
-			<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-				
+			<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 			</button>
 		</div>
 		<div class="modal-body">
@@ -457,8 +459,8 @@ $session = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalBayarLabel">Info Pembayaran</h5>
-				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-					
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 				</button>
 			</div>
 			<div class="modal-body">
@@ -474,8 +476,8 @@ $session = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalTambahBayarLabel">Tambah Pembayaran</h5>
-				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-					
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 				</button>
 			</div>
 			<div class="modal-body">
