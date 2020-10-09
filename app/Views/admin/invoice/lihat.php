@@ -324,34 +324,32 @@ $session = \Config\Services::session();
 									</p>
 								<?php } ?>
 
-								<?php if ($pesanan->status_pengiriman !== '1') { ?>
+								<?php if ($pesanan->status_pengiriman !== '1' && $pengiriman !== NULL) { ?>
 									<div class="card-subtitle text-muted text-uppercase small">Resi</div>
 
 									<?php
-									if ($pengiriman !== NULL) {
-										foreach ($pengiriman as $key => $kirim) { ?>
-											<div class="border-bottom mb-2 pb-2">
-												<?php $tanggal_kirim = Time::createFromTimestamp($kirim->tanggal_kirim); ?>
-												<h6 class="mb-0">
-													<?= $kirim->kurir; ?>
-													<?= form_button([
-														'class' 	=> 'bg-transparent border-0 text-primary ml-1 suntingResi',
-														'content' 	=> '<i class="fal fa-money-check-edit fa-flip-horizontal"></i>',
-														'data-id' 	=> $kirim->id,
-														'data-invoice' 	=> $pesanan->id_invoice
-													]); ?>
-												</h6>
-												<div class="lead"><?= $kirim->resi; ?></div>
-												<p class="mb-0 text-muted">
-													<?= $tanggal_kirim->toLocalizedString('EEEE, d MMMM yyyy'); ?>
-													<?php if ($kirim->ongkir > 0) { ?>
-														<br />ongkir fix (<?= $kirim->qty . 'pcs'; ?>): <u><?= number_to_currency($kirim->ongkir, 'IDR'); ?></u>
-													<?php } ?>
-												</p>
-											</div>
-									<?php }
-									}
-									?>
+									foreach ($pengiriman as $key => $kirim) { ?>
+										<div class="border-bottom mb-2 pb-2">
+											<?php $tanggal_kirim = Time::createFromTimestamp($kirim->tanggal_kirim); ?>
+											<h6 class="mb-0">
+												<?= $kirim->kurir; ?>
+												<?= form_button([
+													'class' 	=> 'bg-transparent border-0 text-primary ml-1 suntingResi',
+													'content' 	=> '<i class="fal fa-money-check-edit fa-flip-horizontal"></i>',
+													'data-id' 	=> $kirim->id,
+													'data-invoice' 	=> $pesanan->id_invoice
+												]); ?>
+											</h6>
+											<div class="lead"><?= $kirim->resi; ?></div>
+											<p class="mb-0 text-muted">
+												<?= $tanggal_kirim->toLocalizedString('EEEE, d MMMM yyyy'); ?>
+												<?php if ($kirim->ongkir > 0) { ?>
+													<br />ongkir fix (<?= $kirim->qty . 'pcs'; ?>): <u><?= number_to_currency($kirim->ongkir, 'IDR'); ?></u>
+												<?php } ?>
+											</p>
+										</div>
+									<?php
+									} ?>
 								<?php } ?>
 							</div>
 						</div>
