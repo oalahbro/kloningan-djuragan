@@ -18,4 +18,6 @@ class Notifikasi extends Controller
 
         return $this->response->setJSON(['status' => 200, 'message' => $counting . ' notifikasi sudah dihapus']);
     }
+    
+    // --
 }
