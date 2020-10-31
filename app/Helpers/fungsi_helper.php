@@ -375,3 +375,69 @@ if (!function_exists('simpan_notif')) {
 		}
 	}
 }
+
+// ------------------------------------------------------------------------
+
+if (!function_exists('tanggalDefault')) {
+	function tanggalDefault($akhir_mulai)
+	{
+		$time = new Time('now');
+
+		$default_tanggal_mulai = 26;
+		$default_tanggal_akhir = 25;
+		$setting = '1';
+
+		$hari_ini   = $time->toLocalizedString('yyyy-MM-dd');
+		$bulan_ini  = $time->toLocalizedString('yyyy-MM');
+		$datestring = $hari_ini . ' first day of last month';
+		$dt = date_create($datestring);
+		$datestring2 = $hari_ini . ' first day of next month';
+		$dt2 = date_create($datestring2);
+		$bulan_kemarin  = $dt->format('Y-m');
+		$bulan_besok    = $dt2->format('Y-m');
+
+		$sekarang   = strtotime($hari_ini);
+		$mulai_bulan_ini = strtotime($bulan_ini . '-' . $default_tanggal_mulai);
+		// $mulai_bulan_kemarin = strtotime($bulan_kemarin . '-' . $default_tanggal_mulai);
+
+		$akhir_bulan_ini = strtotime($bulan_ini . '-' . $default_tanggal_akhir);
+		// $akhir_bulan_besok = strtotime($bulan_besok . '-' . $default_tanggal_akhir);
+		if ($setting === '1') {
+			if ($sekarang >= $mulai_bulan_ini) {
+				$tanggal_mulai = $bulan_ini . '-' . $default_tanggal_mulai;
+			} elseif ($sekarang <= $mulai_bulan_ini) {
+				$tanggal_mulai = $bulan_kemarin . '-' . $default_tanggal_mulai;
+			}
+
+			if ($sekarang <= $akhir_bulan_ini) {
+				$tanggal_akhir = $bulan_ini . '-' . $default_tanggal_akhir;
+			} elseif ($sekarang >= $akhir_bulan_ini) {
+				$tanggal_akhir = $bulan_besok . '-' . $default_tanggal_akhir;
+			}
+		} else {
+			$tanggal_mulai = $time->toLocalizedString('yyyy-MM-01');
+			$tanggal_akhir = date("Y-m-t", now());
+		}
+		if ($akhir_mulai === 'mulai') {
+			return $tanggal_mulai;
+		} elseif ($akhir_mulai === 'akhir') {
+			return $tanggal_akhir;
+		}
+	}
+}
+
+if (!function_exists('satuBulanSebelumnya')) {
+	function satuBulanSebelumnya($tanggal)
+	{
+		$bulan_kemarin = date('Y-m-d', strtotime('-1 month', strtotime($tanggal)));
+		return $bulan_kemarin;
+	}
+}
+
+if (!function_exists('satuBulanSelanjutnya')) {
+	function satuBulanSelanjutnya($tanggal)
+	{
+		$bulan_depan = date('Y-m-d', strtotime('+1 month', strtotime($tanggal)));
+		return $bulan_depan;
+	}
+}
