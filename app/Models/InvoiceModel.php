@@ -227,11 +227,11 @@ class InvoiceModel extends Model
 
 	public function counter_terkirim()
 	{
-		$awalBulanIni 	= date('Y-m-', strtotime(date('Y-m') . " -1 month")) . '26';
-		$akhirBulanIni 	= date('Y-m-', strtotime(date('Y-m'))) . '25';
+		$awalBulanIni 	= tanggalDefault('mulai');
+		$akhirBulanIni 	= tanggalDefault('akhir');
 
-		$awalBulanLalu 	= date('Y-m-', strtotime(date('Y-m') . " -2 month")) . '26';
-		$akhirBulanLalu	= date('Y-m-', strtotime(date('Y-m') . " -1 month")) . '25';
+		$awalBulanLalu 	= satuBulanSebelumnya($awalBulanIni);
+		$akhirBulanLalu	= satuBulanSebelumnya($akhirBulanIni);
 
 		$counter = $this->db->table('juragan j');
 		$counter->select('j.*');
