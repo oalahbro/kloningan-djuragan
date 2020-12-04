@@ -15,28 +15,28 @@ class Pelanggan extends BaseController
 
         if ($this->request->isAJAX()) {
 
-            $ongkir = new Ongkir();
-            $pelanggan     = new PelangganModel();
+            $ongkir    = new Ongkir();
+            $pelanggan = new PelangganModel();
 
             $d['nama_pelanggan'] = strtoupper($this->request->getPost('nama_pelanggan'));
-            $d['hp']            = json_encode(array_filter($this->request->getPost('hp')));
+            $d['hp']             = json_encode(array_filter($this->request->getPost('hp')));
 
             $cod = $this->request->getVar('cod');
             $cod = ($cod === NULL ? '0' : '1');
 
             $d['cod']           = $cod;
             if ($cod === '1') {
-                $d['kecamatan']     = NULL;
-                $d['kabupaten']     = NULL;
-                $d['provinsi']      = NULL;
-                $d['alamat']        = NULL;
-                $d['kodepos']       = NULL;
+                $d['kecamatan'] = NULL;
+                $d['kabupaten'] = NULL;
+                $d['provinsi']  = NULL;
+                $d['alamat']    = NULL;
+                $d['kodepos']   = NULL;
             } else {
-                $d['kecamatan']     = $this->request->getPost('kecamatan');
-                $d['kabupaten']     = $this->request->getPost('kabupaten');
-                $d['provinsi']      = $this->request->getPost('provinsi');
-                $d['alamat']        = strtoupper(trim(preg_replace('/\s+/', ' ', $this->request->getPost('alamat'))));
-                $d['kodepos']       = $this->request->getPost('kodepos');
+                $d['kecamatan'] = $this->request->getPost('kecamatan');
+                $d['kabupaten'] = $this->request->getPost('kabupaten');
+                $d['provinsi']  = $this->request->getPost('provinsi');
+                $d['alamat']    = htmlentities(strtoupper(trim(preg_replace('/\s+/', ' ', $this->request->getPost('alamat')))), ENT_QUOTES);
+                $d['kodepos']   = $this->request->getPost('kodepos');
             }
 
             if ($this->request->getVar('id_pelanggan')) {
@@ -97,13 +97,12 @@ class Pelanggan extends BaseController
 
         if ($this->request->getVar('juragan_id') && $juragan_id !== null) {
             $juragan_id = $juragan_id;
-        }
-        else {
+        } else {
             $juragan_id = '0';
         }
 
         $builder = $pelanggan->cari($juragan_id, $cari);
-       
+
         $s = [];
         $i = 0;
         foreach ($builder->getResult() as $u) {
