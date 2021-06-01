@@ -6,7 +6,13 @@
 	"license": "MIT",
 	"require": {
 		"php": "^7.3||^8.0",
-		"codeigniter4/framework": "^4"
+		"codeigniter4/framework": "^4",
+		"codeigniter4/translations": "dev-develop",
+		"dompdf/dompdf": "^0.8.6",
+		"matthiasmullie/minify": "^1.3",
+		"phpmailer/phpmailer": "^6.1",
+		"steevenz/rajaongkir": "^2.2",
+		"tholu/php-packer": "^0.2.0"
 	},
 	"require-dev": {
 		"fakerphp/faker": "^1.9",
