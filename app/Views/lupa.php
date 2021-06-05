@@ -21,14 +21,15 @@
 					<?= form_open(); ?>
 					<div class="form-group mb-2">
 						<?php
-						$class_username = 'form-control';
-						if ($validation->hasError('username')) {
-							$class_username .= ' is-invalid';
-						}
+                        $class_username = 'form-control';
 
-						echo form_label('Email atau Nama pengguna', 'username');
-						echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'email / username', 'required' => '', 'tabindex' => '1']);
-						?>
+                        if ($validation->hasError('username')) {
+                            $class_username .= ' is-invalid';
+                        }
+
+                        echo form_label('Email atau Nama pengguna', 'username');
+                        echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'email / username', 'required' => '', 'tabindex' => '1']);
+                        ?>
 						<?php if ($validation->hasError('username')) { ?>
 							<div class="invalid-feedback">
 								<?php echo $validation->getError('username'); ?>
@@ -36,8 +37,8 @@
 						<?php } ?>
 					</div>
 					<?php
-					echo form_button(['content' => 'Atur ulang', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '2']);
-					?>
+                    echo form_button(['content' => 'Atur ulang', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '2']);
+                    ?>
 					<?= form_close(); ?>
 				</div>
 			</div>

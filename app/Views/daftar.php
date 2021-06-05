@@ -21,15 +21,16 @@
 					<?= form_open(); ?>
 					<div class="form-group mb-2">
 						<?php
-						$class_username = 'form-control';
-						if ($validation->hasError('username')) {
-							$class_username .= ' is-invalid';
-						}
+                        $class_username = 'form-control';
 
-						echo form_label('Pengguna', 'username');
-						echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'username', 'required' => '', 'tabindex' => '1']);
+                        if ($validation->hasError('username')) {
+                            $class_username .= ' is-invalid';
+                        }
 
-						if ($validation->hasError('username')) { ?>
+                        echo form_label('Pengguna', 'username');
+                        echo form_input('username', set_value('username'), ['class' => $class_username, 'id' => 'username', 'placeholder' => 'username', 'required' => '', 'tabindex' => '1']);
+
+                        if ($validation->hasError('username')) { ?>
 							<div class="invalid-feedback">
 								<?php echo $validation->getError('username'); ?>
 							</div>
@@ -37,15 +38,16 @@
 					</div>
 					<div class="form-group mb-2">
 						<?php
-						$class_password = 'form-control';
-						if ($validation->hasError('password')) {
-							$class_password .= ' is-invalid';
-						}
+                        $class_password = 'form-control';
 
-						echo form_label('Kata sandi', 'password');
-						echo form_input('password', '', ['class' => $class_password, 'id' => 'password', 'placeholder' => 'kata sandi', 'required' => '', 'tabindex' => '2'], 'password');
+                        if ($validation->hasError('password')) {
+                            $class_password .= ' is-invalid';
+                        }
 
-						if ($validation->hasError('password')) { ?>
+                        echo form_label('Kata sandi', 'password');
+                        echo form_input('password', '', ['class' => $class_password, 'id' => 'password', 'placeholder' => 'kata sandi', 'required' => '', 'tabindex' => '2'], 'password');
+
+                        if ($validation->hasError('password')) { ?>
 							<div class="invalid-feedback">
 								<?php echo $validation->getError('password'); ?>
 							</div>
@@ -53,15 +55,16 @@
 					</div>
 					<div class="form-group mb-2">
 						<?php
-						$class_nama = 'form-control';
-						if ($validation->hasError('nama')) {
-							$class_nama .= ' is-invalid';
-						}
+                        $class_nama = 'form-control';
 
-						echo form_label('Nama', 'nama');
-						echo form_input('nama', set_value('nama'), ['class' => $class_nama, 'id' => 'nama', 'placeholder' => 'nama pengguna', 'required' => '', 'tabindex' => '3']);
+                        if ($validation->hasError('nama')) {
+                            $class_nama .= ' is-invalid';
+                        }
 
-						if ($validation->hasError('nama')) { ?>
+                        echo form_label('Nama', 'nama');
+                        echo form_input('nama', set_value('nama'), ['class' => $class_nama, 'id' => 'nama', 'placeholder' => 'nama pengguna', 'required' => '', 'tabindex' => '3']);
+
+                        if ($validation->hasError('nama')) { ?>
 							<div class="invalid-feedback">
 								<?php echo $validation->getError('nama'); ?>
 							</div>
@@ -69,23 +72,24 @@
 					</div>
 					<div class="form-group mb-2">
 						<?php
-						$class_email = 'form-control';
-						if ($validation->hasError('email')) {
-							$class_email .= ' is-invalid';
-						}
+                        $class_email = 'form-control';
 
-						echo form_label('Email', 'email');
-						echo form_input('email', set_value('email'), ['class' => $class_email, 'id' => 'email', 'placeholder' => 'email', 'required' => '', 'tabindex' => '4'], 'email');
+                        if ($validation->hasError('email')) {
+                            $class_email .= ' is-invalid';
+                        }
 
-						if ($validation->hasError('email')) { ?>
+                        echo form_label('Email', 'email');
+                        echo form_input('email', set_value('email'), ['class' => $class_email, 'id' => 'email', 'placeholder' => 'email', 'required' => '', 'tabindex' => '4'], 'email');
+
+                        if ($validation->hasError('email')) { ?>
 							<div class="invalid-feedback">
 								<?php echo $validation->getError('email'); ?>
 							</div>
 						<?php } ?>
 					</div>
 					<?php
-					echo form_button(['content' => 'Daftar', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '5']);
-					?>
+                    echo form_button(['content' => 'Daftar', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '5']);
+                    ?>
 					<?= form_close(); ?>
 				</div>
 			</div>

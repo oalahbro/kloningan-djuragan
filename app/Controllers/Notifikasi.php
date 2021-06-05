@@ -11,13 +11,13 @@ class Notifikasi extends Controller
         $notifikasi = new \App\Models\NotifikasiModel();
 
         $builder = $notifikasi->builder();
-        $builder->where('read_at !=', NULL);
+        $builder->where('read_at !=', null);
         $counting = $builder->countAllResults();
 
-        $notifikasi->where('read_at !=', NULL)->delete();
+        $notifikasi->where('read_at !=', null)->delete();
 
         return $this->response->setJSON(['status' => 200, 'message' => $counting . ' notifikasi sudah dihapus']);
     }
-    
+
     // --
 }

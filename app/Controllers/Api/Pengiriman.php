@@ -15,6 +15,7 @@ class Pengiriman extends \CodeIgniter\Controller
         // helper('fungsi');
 
         $id = $this->request->getGet('id');
+
         if (!isset($id) or empty($id) or (int) $id === 0) {
             $res = [];
         } else {
@@ -29,13 +30,14 @@ class Pengiriman extends \CodeIgniter\Controller
     public function save()
     {
         $pengiriman = new \App\Models\PengirimanModel();
-        $invoice = new \App\Models\InvoiceModel();
+        $invoice    = new \App\Models\InvoiceModel();
         helper('fungsi');
 
-        $time = Time::parse($this->request->getPost('tanggal_kirim'))->getTimestamp();
+        $time       = Time::parse($this->request->getPost('tanggal_kirim'))->getTimestamp();
         $invoice_id = $this->request->getPost('invoice_id');
-        $qty = $this->request->getPost('qty');
-        $kurir = $this->request->getPost('kurir');
+        $qty        = $this->request->getPost('qty');
+        $kurir      = $this->request->getPost('kurir');
+
         if ($kurir === 'lainnya') {
             $kurir = $this->request->getPost('lainnya');
         }
@@ -43,6 +45,7 @@ class Pengiriman extends \CodeIgniter\Controller
         $id_pengiriman = $this->request->getPost('id_pengiriman');
 
         $kirim_id = [];
+
         if ((int) $id_pengiriman > 0) {
             $kirim_id = [
                 'id_pengiriman' => $id_pengiriman
@@ -60,7 +63,7 @@ class Pengiriman extends \CodeIgniter\Controller
 
         $data = array_merge($data, $kirim_id);
 
-        
+
         $pengiriman->save($data);
 
         $db = \Config\Database::connect();
@@ -70,6 +73,7 @@ class Pengiriman extends \CodeIgniter\Controller
             $hasil = $invoice->jumlah_produk($invoice_id)->getResult()[0];
 
             $status = '2';
+
             if ($hasil->wajib_kirim === $hasil->sudah_kirim) {
                 $status = '3';
             } elseif ((int) $hasil->wajib_kirim < (int) $hasil->sudah_kirim) {
@@ -78,12 +82,13 @@ class Pengiriman extends \CodeIgniter\Controller
 
             // save db invoice
             $invoice->save([
-                'id_invoice' => $invoice_id,
+                'id_invoice'        => $invoice_id,
                 'status_pengiriman' => $status
             ]);
 
             // simpan notif
             $juragan_id = $invoice->find($invoice_id)->juragan_id;
+
             if ((int) $id_pengiriman > 0) {
                 simpan_notif(23, $juragan_id, $invoice_id);
             } else {
@@ -93,7 +98,7 @@ class Pengiriman extends \CodeIgniter\Controller
 
 
         $res = [
-            'status'     => 'OK',
+            'status'      => 'OK',
             'url'         => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
         ];
 
@@ -101,5 +106,4 @@ class Pengiriman extends \CodeIgniter\Controller
     }
 
     // ------------------------------------------------------------------------
-
 }

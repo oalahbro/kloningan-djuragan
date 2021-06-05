@@ -6,10 +6,10 @@ use CodeIgniter\Model;
 
 class BankModel extends Model
 {
-    protected $table = 'bank';
+    protected $table      = 'bank';
     protected $primaryKey = 'id_bank';
 
-    protected $returnType = 'object';
+    protected $returnType     = 'object';
     protected $useSoftDeletes = true;
 
     protected $allowedFields = ['nama_bank', 'tipe_bank', 'rekening', 'atas_nama'];

@@ -7,347 +7,347 @@ use CodeIgniter\I18n\Time;
 
 class Invoices extends BaseController
 {
-	//
-	public function tulis()
-	{
-		if (!$this->isLogged()) {
-			return redirect()->to('/auth');
-		} else {
-			if ($this->isAdmin()) {
-				return redirect()->to('/auth');
-			}
-		}
+    //
+    public function tulis()
+    {
+        if (!$this->isLogged()) {
+            return redirect()->to('/auth');
+        } else {
+            if ($this->isAdmin()) {
+                return redirect()->to('/auth');
+            }
+        }
 
-		$data = [
-			'title' => 'Tulis Orderan Baru'
-		];
-		return view('user/invoice/tulis', $data);
-	}
+        $data = [
+            'title' => 'Tulis Orderan Baru'
+        ];
 
-	// ------------------------------------------------------------------------
+        return view('user/invoice/tulis', $data);
+    }
 
-	public function save()
-	{
-		if (!$this->isLogged()) {
-			return redirect()->to('/auth');
-		} else {
-			if ($this->isAdmin()) {
-				return redirect()->to('/auth');
-			}
-		}
+    // ------------------------------------------------------------------------
 
-		if ($this->request->getPost()) {
-			$this->validation->setRuleGroup('addInvoice');
-		}
+    public function save()
+    {
+        if (!$this->isLogged()) {
+            return redirect()->to('/auth');
+        } else {
+            if ($this->isAdmin()) {
+                return redirect()->to('/auth');
+            }
+        }
 
-		if ($this->request->isAJAX()) {
-			if (!$this->validation->withRequest($this->request)->run()) {
+        if ($this->request->getPost()) {
+            $this->validation->setRuleGroup('addInvoice');
+        }
 
-				$this->response->setStatusCode(406);
-				$errors = $this->validation->getErrors();
+        if ($this->request->isAJAX()) {
+            if (!$this->validation->withRequest($this->request)->run()) {
+                $this->response->setStatusCode(406);
+                $errors = $this->validation->getErrors();
 
-				return $this->response->setJSON($errors);
-			} else {
-				$db = \Config\Database::connect();
+                return $this->response->setJSON($errors);
+            } else {
+                $db = \Config\Database::connect();
 
-				$user_id = $this->request->getPost('pengguna');
-				$t = $this->user->find($user_id);
-				$seri = strtoupper(first_letter($t->name) . time());
-				$juragan_id = $this->request->getPost('juragan');
+                $user_id    = $this->request->getPost('pengguna');
+                $t          = $this->user->find($user_id);
+                $seri       = strtoupper(first_letter($t->name) . time());
+                $juragan_id = $this->request->getPost('juragan');
 
-				$data_invoice = [
-					'tanggal_pesan' => $this->request->getPost('tanggal_order'),
-					'seri'			=> $seri,
-					'pemesan_id' 	=> $this->request->getPost('id_pemesan'),
-					'kirimKepada_id' => $this->request->getPost('id_kirimKe'),
-					'juragan_id' 	=> $juragan_id,
-					'user_id' 		=> $user_id,
-					'keterangan' 	=> ($this->request->getPost('keterangan') !== "" ? $this->request->getPost('keterangan') : NULL)
-				];
+                $data_invoice = [
+                    'tanggal_pesan'  => $this->request->getPost('tanggal_order'),
+                    'seri'			        => $seri,
+                    'pemesan_id' 	   => $this->request->getPost('id_pemesan'),
+                    'kirimKepada_id' => $this->request->getPost('id_kirimKe'),
+                    'juragan_id' 	   => $juragan_id,
+                    'user_id' 		     => $user_id,
+                    'keterangan' 	   => ($this->request->getPost('keterangan') !== '' ? $this->request->getPost('keterangan') : null)
+                ];
 
-				// simpan ke database
-				$this->invoice->insert($data_invoice);
+                // simpan ke database
+                $this->invoice->insert($data_invoice);
 
-				// 
-				if ($db->affectedRows() > 0) {
-					$invoice_id = $db->insertID();
+                //
+                if ($db->affectedRows() > 0) {
+                    $invoice_id = $db->insertID();
 
-					// simpan asal orderan
-					$data_asal = [
-						'invoice_id' => $invoice_id,
-						'source_id' => $this->request->getPost('asal_orderan'),
-						'label' 	=> ($this->request->getPost('label') !== "" ? $this->request->getPost('label') : NULL)
-					];
-					$db->table('label_invoice')->insert($data_asal);
+                    // simpan asal orderan
+                    $data_asal = [
+                        'invoice_id' => $invoice_id,
+                        'source_id'  => $this->request->getPost('asal_orderan'),
+                        'label' 	    => ($this->request->getPost('label') !== '' ? $this->request->getPost('label') : null)
+                    ];
+                    $db->table('label_invoice')->insert($data_asal);
 
-					// simpan produk
-					$produks =  $this->request->getPost('produk');
+                    // simpan produk
+                    $produks =  $this->request->getPost('produk');
 
-					// tambahkan `invoice_id` untuk tiap pesanan
-					$produk = [];
-					foreach ($produks as $k => $v) {
-						foreach ($v as $p => $d) {
-							$produk[$k]['invoice_id'] = $invoice_id;
-							$produk[$k][$p] = $d;
-						}
-					}
-					$db->table('dibeli')->insertBatch($produk);
+                    // tambahkan `invoice_id` untuk tiap pesanan
+                    $produk = [];
+                    foreach ($produks as $k => $v) {
+                        foreach ($v as $p => $d) {
+                            $produk[$k]['invoice_id'] = $invoice_id;
+                            $produk[$k][$p]           = $d;
+                        }
+                    }
+                    $db->table('dibeli')->insertBatch($produk);
 
-					// simpan biaya
-					if ($this->request->getVar('biaya') !== NULL) {
-						//
-						$biayas =  $this->request->getPost('biaya');
+                    // simpan biaya
+                    if ($this->request->getVar('biaya') !== null) {
+                        //
+                        $biayas =  $this->request->getPost('biaya');
 
-						// tambahkan `invoice_id` untuk tiap biaya
-						$biaya = [];
-						foreach ($biayas as $k => $v) {
-							foreach ($v as $p => $d) {
-								$biaya[$k]['invoice_id'] = $invoice_id;
-								$biaya[$k][$p] = ($d !== "" ? $d : NULL);
-							}
-						}
-						$db->table('biaya')->insertBatch($biaya);
-					}
+                        // tambahkan `invoice_id` untuk tiap biaya
+                        $biaya = [];
+                        foreach ($biayas as $k => $v) {
+                            foreach ($v as $p => $d) {
+                                $biaya[$k]['invoice_id'] = $invoice_id;
+                                $biaya[$k][$p]           = ($d !== '' ? $d : null);
+                            }
+                        }
+                        $db->table('biaya')->insertBatch($biaya);
+                    }
 
-					// simpan notifikasi, kirim kesemua user
-					simpan_notif(1, $juragan_id, $invoice_id);
-				}
+                    // simpan notifikasi, kirim kesemua user
+                    simpan_notif(1, $juragan_id, $invoice_id);
+                }
 
-				$juragan = $this->juragan->byInvoiceId($invoice_id)->getResult()[0]->juragan;
-				$ret = [
-					'status' => 'data tersimpan',
-					'url' => site_url('user/invoices/lihat/' . $juragan . '/semua?cari[kolom]=faktur&cari[q]=' . $seri)
-				];
-				return $this->response->setJSON($ret);
-			}
-		}
-	}
+                $juragan = $this->juragan->byInvoiceId($invoice_id)->getResult()[0]->juragan;
+                $ret     = [
+                    'status' => 'data tersimpan',
+                    'url'    => site_url('user/invoices/lihat/' . $juragan . '/semua?cari[kolom]=faktur&cari[q]=' . $seri)
+                ];
 
-	// ------------------------------------------------------------------------
-	// menampilkan semua invoice
-	public function lihat($juragan = '', $hal = 'dalam-proses')
-	{
-		if (!$this->isLogged()) {
-			return redirect()->to('/auth');
-		} else {
-			if ($this->isAdmin()) {
-				return redirect()->to('/auth');
-			}
-		}
+                return $this->response->setJSON($ret);
+            }
+        }
+    }
 
-		if (!in_array($hal, ['semua', 'cek-bayar', 'dalam-proses', 'belum-proses', 'selesai'])) {
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
+    // ------------------------------------------------------------------------
+    // menampilkan semua invoice
+    public function lihat($juragan = '', $hal = 'dalam-proses')
+    {
+        if (!$this->isLogged()) {
+            return redirect()->to('/auth');
+        } else {
+            if ($this->isAdmin()) {
+                return redirect()->to('/auth');
+            }
+        }
 
-		// pencarian
-		$cari = $this->request->getGet('cari');
+        if (!in_array($hal, ['semua', 'cek-bayar', 'dalam-proses', 'belum-proses', 'selesai'])) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
 
-		$user_id = $this->session->get('id');
+        // pencarian
+        $cari = $this->request->getGet('cari');
 
-		if ($juragan === '') {
-			$juragan = $this->juraganBy($user_id);
-			return redirect()->to('/user/invoices/lihat/' . $juragan->juragan);
-		}
+        $user_id = $this->session->get('id');
 
-		// diijinkan atau tidak
-		if ($this->allowedJuragan($user_id, $juragan)) {
-			// 
-			$juragans = $this->juragan->where('juragan', $juragan)->findAll();
-			$title = $juragans[0]->nama_juragan;
-			$id_juragan = $juragans[0]->id_juragan;
+        if ($juragan === '') {
+            $juragan = $this->juraganBy($user_id);
 
-			$limit = config('Pager')->perPage;
-			$page = (int) $this->request->getGet('page');
+            return redirect()->to('/user/invoices/lihat/' . $juragan->juragan);
+        }
 
-			if (!isset($page) || $page === 0 || $page === 1) {
-				$page = 1;
-				$offset = 0;
-			} else {
-				$offset = ($page - 1) * $limit;
-				$page = $page;
-			}
+        // diijinkan atau tidak
+        if ($this->allowedJuragan($user_id, $juragan)) {
+            //
+            $juragans   = $this->juragan->where('juragan', $juragan)->findAll();
+            $title      = $juragans[0]->nama_juragan;
+            $id_juragan = $juragans[0]->id_juragan;
 
-			$data = [
-				'title'     => 'Invoice ' . $title,
-				'pesanans' 	=> $this->invoice->ambil_data($id_juragan, $hal, $limit, $offset, $cari)->get()->getResult(),
-				'totalPage' => $this->invoice->ambil_data($id_juragan, $hal, NULL, NULL, $cari)->countAllResults(),
-				'jrgn' 		=> $juragan,
-				'hal' 		=> $hal,
-				'limit' 	=> $limit,
-				'page' 		=> $page
-			];
-			echo view('user/invoice/lihat', $data);
-		} else {
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
-	}
+            $limit = config('Pager')->perPage;
+            $page  = (int) $this->request->getGet('page');
 
-	// ------------------------------------------------------------------------
-	// tambah pembayaran
-	public function simpan_pembayaran()
-	{
-		if (!$this->isLogged()) {
-			return redirect()->to('/auth');
-		} else {
-			if ($this->isAdmin()) {
-				return redirect()->to('/auth');
-			}
-		}
+            if (!isset($page) || $page === 0 || $page === 1) {
+                $page   = 1;
+                $offset = 0;
+            } else {
+                $offset = ($page - 1) * $limit;
+                $page   = $page;
+            }
 
-		if ($this->request->getPost()) {
-			$this->validation->setRuleGroup('tambahPembayaran');
-		}
+            $data = [
+                'title'     => 'Invoice ' . $title,
+                'pesanans' 	=> $this->invoice->ambil_data($id_juragan, $hal, $limit, $offset, $cari)->get()->getResult(),
+                'totalPage' => $this->invoice->ambil_data($id_juragan, $hal, null, null, $cari)->countAllResults(),
+                'jrgn' 		   => $juragan,
+                'hal' 		    => $hal,
+                'limit' 	   => $limit,
+                'page' 		   => $page
+            ];
+            echo view('user/invoice/lihat', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
 
-		if ($this->request->isAJAX()) {
-			if (!$this->validation->withRequest($this->request)->run()) {
+    // ------------------------------------------------------------------------
+    // tambah pembayaran
+    public function simpan_pembayaran()
+    {
+        if (!$this->isLogged()) {
+            return redirect()->to('/auth');
+        } else {
+            if ($this->isAdmin()) {
+                return redirect()->to('/auth');
+            }
+        }
 
-				$this->response->setStatusCode(406);
-				$errors = $this->validation->getErrors();
+        if ($this->request->getPost()) {
+            $this->validation->setRuleGroup('tambahPembayaran');
+        }
 
-				return $this->response->setJSON($errors);
-			} else {
+        if ($this->request->isAJAX()) {
+            if (!$this->validation->withRequest($this->request)->run()) {
+                $this->response->setStatusCode(406);
+                $errors = $this->validation->getErrors();
 
-				$time = Time::parse($this->request->getPost('tanggal_pembayaran'))->getTimestamp();
-				$invoice_id = $this->request->getPost('invoice_id');
+                return $this->response->setJSON($errors);
+            } else {
+                $time       = Time::parse($this->request->getPost('tanggal_pembayaran'))->getTimestamp();
+                $invoice_id = $this->request->getPost('invoice_id');
 
-				$data = [
-					'invoice_id' => $invoice_id,
-					'sumber_dana' => $this->request->getPost('sumber_dana'),
-					'total_pembayaran' => $this->request->getPost('total_pembayaran'),
-					'tanggal_pembayaran' => $time
-				];
+                $data = [
+                    'invoice_id'         => $invoice_id,
+                    'sumber_dana'        => $this->request->getPost('sumber_dana'),
+                    'total_pembayaran'   => $this->request->getPost('total_pembayaran'),
+                    'tanggal_pembayaran' => $time
+                ];
 
-				$this->pembayaran->save($data);
+                $this->pembayaran->save($data);
 
-				// update status pembayaran (invoice)
-				$this->_update_status_pembayaran($invoice_id);
+                // update status pembayaran (invoice)
+                $this->_update_status_pembayaran($invoice_id);
 
-				//
-				$juragan = $this->juragan->byInvoiceId($invoice_id)->getResult()[0]->juragan;
-				return $this->response->setJSON([
-					'url' => site_url('user/invoices/lihat/' . $juragan . '/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
-				]);
-			}
-		}
-	}
+                //
+                $juragan = $this->juragan->byInvoiceId($invoice_id)->getResult()[0]->juragan;
 
-	// ------------------------------------------------------------------------
+                return $this->response->setJSON([
+                    'url' => site_url('user/invoices/lihat/' . $juragan . '/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
+                ]);
+            }
+        }
+    }
 
-	private function _update_status_pembayaran($invoice_id)
-	{
-		if (!$this->isLogged()) {
-			return redirect()->to('/auth');
-		} else {
-			if ($this->isAdmin()) {
-				return redirect()->to('/auth');
-			}
-		}
+    // ------------------------------------------------------------------------
 
-		$cek = $this->invoice->total_biaya($invoice_id)->getResult()[0];
-		// cek yang terbayar dan belum terbayar
-		$terbayar = (int) $cek->terbayar;
-		$total_bayar = (int) $cek->barang + (int) $cek->lain;
-		$belum_bayar = $total_bayar - $terbayar;
-		$belum_cek = (int) $cek->belumcek;
+    private function _update_status_pembayaran($invoice_id)
+    {
+        if (!$this->isLogged()) {
+            return redirect()->to('/auth');
+        } else {
+            if ($this->isAdmin()) {
+                return redirect()->to('/auth');
+            }
+        }
 
-		if ($belum_cek > 0) {
-			if ($terbayar > 0) { // ada yang belum dicek, tapi sudah ada dana masuk
-				$status_bayar = '3';
-			} else {
-				$status_bayar = '2';
-			}
-		} else { //  tidak ada yang pelu dicek
-			if ($terbayar === 0) {
-				$status_bayar = '1';
-			} else {
-				if ($terbayar === $total_bayar) {
-					// sudah lunas
-					$status_bayar = '6';
-				} elseif ($terbayar < $total_bayar) {
-					// masih belum lunas / kredit
-					$status_bayar = '4';
-				} elseif ($terbayar > $total_bayar) {
-					// ada kelebihan
-					$status_bayar = '5';
-				}
-			}
-		}
+        $cek = $this->invoice->total_biaya($invoice_id)->getResult()[0];
+        // cek yang terbayar dan belum terbayar
+        $terbayar    = (int) $cek->terbayar;
+        $total_bayar = (int) $cek->barang + (int) $cek->lain;
+        $belum_bayar = $total_bayar - $terbayar;
+        $belum_cek   = (int) $cek->belumcek;
 
-		// simpan notif
-		$juragan_id = $this->invoice->find($invoice_id)->juragan_id;
-		simpan_notif(4, $juragan_id, $invoice_id);
+        if ($belum_cek > 0) {
+            if ($terbayar > 0) { // ada yang belum dicek, tapi sudah ada dana masuk
+                $status_bayar = '3';
+            } else {
+                $status_bayar = '2';
+            }
+        } else { //  tidak ada yang pelu dicek
+            if ($terbayar === 0) {
+                $status_bayar = '1';
+            } else {
+                if ($terbayar === $total_bayar) {
+                    // sudah lunas
+                    $status_bayar = '6';
+                } elseif ($terbayar < $total_bayar) {
+                    // masih belum lunas / kredit
+                    $status_bayar = '4';
+                } elseif ($terbayar > $total_bayar) {
+                    // ada kelebihan
+                    $status_bayar = '5';
+                }
+            }
+        }
 
-		// update status_pembayaran
-		// jadikan status
-		$update_invoice = [
-			'id_invoice' => $invoice_id,
-			'status_pembayaran' => $status_bayar
-		];
-		$this->invoice->save($update_invoice);
+        // simpan notif
+        $juragan_id = $this->invoice->find($invoice_id)->juragan_id;
+        simpan_notif(4, $juragan_id, $invoice_id);
 
-		return TRUE;
-	}
+        // update status_pembayaran
+        // jadikan status
+        $update_invoice = [
+            'id_invoice'        => $invoice_id,
+            'status_pembayaran' => $status_bayar
+        ];
+        $this->invoice->save($update_invoice);
 
-	// ------------------------------------------------------------------------
-	// hapus invoice
-	public function hapus_orderan()
-	{
-		if (!$this->isLogged()) {
-			return redirect()->to('/auth');
-		} else {
-			if ($this->isAdmin()) {
-				return redirect()->to('/auth');
-			}
-		}
+        return true;
+    }
 
-		if ($this->request->isAJAX()) {
-			$invoice_id = $this->request->getPost('invoice_id');
-			$this->invoice->delete($invoice_id);
+    // ------------------------------------------------------------------------
+    // hapus invoice
+    public function hapus_orderan()
+    {
+        if (!$this->isLogged()) {
+            return redirect()->to('/auth');
+        } else {
+            if ($this->isAdmin()) {
+                return redirect()->to('/auth');
+            }
+        }
 
-			return $this->response->setJSON([
-				'status' => 'Orderan dihapus',
-				'url' => site_url('user/invoices')
-			]);
-		} else {
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
-	}
+        if ($this->request->isAJAX()) {
+            $invoice_id = $this->request->getPost('invoice_id');
+            $this->invoice->delete($invoice_id);
 
-	// ------------------------------------------------------------------------
+            return $this->response->setJSON([
+                'status' => 'Orderan dihapus',
+                'url'    => site_url('user/invoices')
+            ]);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
 
-	public function info_pembayaran()
-	{
-		if (!$this->isLogged()) {
-			return redirect()->to('/auth');
-		} else {
-			if ($this->isAdmin()) {
-				return redirect()->to('/auth');
-			}
-		}
+    // ------------------------------------------------------------------------
 
-		if ($this->request->isAJAX()) {
-			$invoice_id = $this->request->getGet('id');
-			$x = $this->pembayaran->ambil($invoice_id)->get()->getResult();
+    public function info_pembayaran()
+    {
+        if (!$this->isLogged()) {
+            return redirect()->to('/auth');
+        } else {
+            if ($this->isAdmin()) {
+                return redirect()->to('/auth');
+            }
+        }
 
-			$res = [];
+        if ($this->request->isAJAX()) {
+            $invoice_id = $this->request->getGet('id');
+            $x          = $this->pembayaran->ambil($invoice_id)->get()->getResult();
 
-			foreach ($x as $bayar) {
-				$res[] = [
-					'id'		=> (int) $bayar->id,
-					'nama' 		=> $bayar->nama,
-					'atas_nama'	=> $bayar->atas_nama,
-					'sumber' 	=> (int) $bayar->sumber,
-					'nominal' 	=> number_to_currency($bayar->nominal, 'IDR'), //(int) $bayar->nominal,
-					'status' 	=> (int) $bayar->status,
-					'tanggal_bayar' => (int) $bayar->tanggal_pembayaran,
-					'tanggal_cek' => ($bayar->tanggal_cek !== NULL ? (int) $bayar->tanggal_cek : NULL)
-				];
-			}
+            $res = [];
 
-			return $this->response->setJSON($res);
-		}
-	}
+            foreach ($x as $bayar) {
+                $res[] = [
+                    'id'		          => (int) $bayar->id,
+                    'nama' 		       => $bayar->nama,
+                    'atas_nama'	    => $bayar->atas_nama,
+                    'sumber' 	      => (int) $bayar->sumber,
+                    'nominal' 	     => number_to_currency($bayar->nominal, 'IDR'), //(int) $bayar->nominal,
+                    'status' 	      => (int) $bayar->status,
+                    'tanggal_bayar' => (int) $bayar->tanggal_pembayaran,
+                    'tanggal_cek'   => ($bayar->tanggal_cek !== null ? (int) $bayar->tanggal_cek : null)
+                ];
+            }
 
-	// ------------------------------------------------------------------------
+            return $this->response->setJSON($res);
+        }
+    }
 
+    // ------------------------------------------------------------------------
 }

@@ -1,5 +1,5 @@
 <?php
-$pager = \Config\Services::pager();
+$pager   = \Config\Services::pager();
 $session = \Config\Services::session();
 ?>
 <?= $this->extend('template/default_admin') ?>
@@ -56,12 +56,12 @@ $session = \Config\Services::session();
 					<div class="mb-3">
 						<?= form_label('Rekening Bank / EDC', 'bank', ['class' => 'form-label']); ?>
 						<?php
-						foreach ($banks as $bank) {
-							$options[$bank->id_bank] = strtoupper($bank->nama_bank) . ' - ' . $bank->atas_nama;
-						}
+                        foreach ($banks as $bank) {
+                            $options[$bank->id_bank] = strtoupper($bank->nama_bank) . ' - ' . $bank->atas_nama;
+                        }
 
-						echo form_multiselect('bank[]', $options, [], ['class' => 'form-select', 'required' => '']);
-						?>
+                        echo form_multiselect('bank[]', $options, [], ['class' => 'form-select', 'required' => '']);
+                        ?>
 						<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 					</div>
 					<hr />
@@ -97,8 +97,8 @@ $session = \Config\Services::session();
 					<?= form_label('Rekening Bank', 'bank', ['class' => 'form-label']); ?>
 					<?php
 
-					echo form_multiselect('bank[]', $options, [], ['class' => 'form-select mybanks', 'required' => '']);
-					?>
+                    echo form_multiselect('bank[]', $options, [], ['class' => 'form-select mybanks', 'required' => '']);
+                    ?>
 					<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 				</div>
 
@@ -117,11 +117,11 @@ $session = \Config\Services::session();
 <?= $this->section('js') ?>
 <?php
 
-$current_user_id = $session->get('id');
-$link_api_juragan = site_url("api/juragan/by_user/");
-$link_api_juragan_all = site_url("api/juragan/all/");
-$link_invoice = site_url('admin/invoices/lihat/');
-$link_api_notif = site_url('api/notifikasi/');
+$current_user_id      = $session->get('id');
+$link_api_juragan     = site_url('api/juragan/by_user/');
+$link_api_juragan_all = site_url('api/juragan/all/');
+$link_invoice         = site_url('admin/invoices/lihat/');
+$link_api_notif       = site_url('api/notifikasi/');
 
 $js = <<< JS
 $(function() { 
@@ -303,7 +303,7 @@ $(function() {
 });
 JS;
 
-$packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
+$packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();
 echo '<script>' . $packed_js . '</script>';
 ?>

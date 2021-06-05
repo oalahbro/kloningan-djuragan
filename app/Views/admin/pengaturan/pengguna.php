@@ -1,5 +1,5 @@
 <?php
-$pager = \Config\Services::pager();
+$pager   = \Config\Services::pager();
 $session = \Config\Services::session();
 ?>
 <?= $this->extend('template/default_admin') ?>
@@ -73,43 +73,43 @@ $session = \Config\Services::session();
 						<div class="col-6">
 							<?= form_label('Level', 'level', ['class' => 'form-label']); ?>
 							<?php
-							$options_level = array(
-								'superadmin' => 'Superadmin',
-								'admin' => 'Admin',
-								'cs' => 'CS',
-								'viewer' => 'Viewer',
-								'reseller' => 'Reseller'
-							);
+                            $options_level = [
+                                'superadmin' => 'Superadmin',
+                                'admin'      => 'Admin',
+                                'cs'         => 'CS',
+                                'viewer'     => 'Viewer',
+                                'reseller'   => 'Reseller'
+                            ];
 
-							echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level', 'required' => '']);
-							?>
+                            echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level', 'required' => '']);
+                            ?>
 
 						</div>
 						<div class="col-6">
 							<?= form_label('Status', 'status', ['class' => 'form-label']); ?>
 							<?php
-							$options_status = array(
-								'pending' => 'Pending',
-								'inactive' => 'Tidak Aktif',
-								'active' => 'Aktif',
-								'blocked' => 'Blokir'
-							);
+                            $options_status = [
+                                'pending'  => 'Pending',
+                                'inactive' => 'Tidak Aktif',
+                                'active'   => 'Aktif',
+                                'blocked'  => 'Blokir'
+                            ];
 
-							echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status', 'required' => '']);
-							?>
+                            echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status', 'required' => '']);
+                            ?>
 						</div>
 					</div>
 					<div class="mb-3">
 						<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
 						<?php
-						/*
-						foreach ($juragans->getResult() as $juragan) {
-							$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
-						}
-						*/
+                        /*
+                        foreach ($juragans->getResult() as $juragan) {
+                            $options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
+                        }
+                        */
 
-						echo form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan']);
-						?>
+                        echo form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan']);
+                        ?>
 						<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 					</div>
 					<hr />
@@ -159,43 +159,43 @@ $session = \Config\Services::session();
 					<div class="col-6">
 						<?= form_label('Level', 'level_', ['class' => 'form-label']); ?>
 						<?php
-						$options_level = array(
-							'superadmin' => 'Superadmin',
-							'admin' => 'Admin',
-							'cs' => 'CS',
-							'viewer' => 'Viewer',
-							'reseller' => 'Reseller'
-						);
+                        $options_level = [
+                            'superadmin' => 'Superadmin',
+                            'admin'      => 'Admin',
+                            'cs'         => 'CS',
+                            'viewer'     => 'Viewer',
+                            'reseller'   => 'Reseller'
+                        ];
 
-						echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level_', 'required' => '']);
-						?>
+                        echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level_', 'required' => '']);
+                        ?>
 
 					</div>
 					<div class="col-6">
 						<?= form_label('Status', 'status_', ['class' => 'form-label']); ?>
 						<?php
-						$options_status = array(
-							'pending' => 'Pending',
-							'inactive' => 'Tidak Aktif',
-							'active' => 'Aktif',
-							'blocked' => 'Blokir'
-						);
+                        $options_status = [
+                            'pending'  => 'Pending',
+                            'inactive' => 'Tidak Aktif',
+                            'active'   => 'Aktif',
+                            'blocked'  => 'Blokir'
+                        ];
 
-						echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status_', 'required' => '']);
-						?>
+                        echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status_', 'required' => '']);
+                        ?>
 					</div>
 				</div>
 				<div class="mb-3">
 					<?= form_label('Juragan', 'juragan_', ['class' => 'form-label']); ?>
 					<?php
-					/*
-					foreach ($juragans->getResult() as $juragan) {
-						$options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
-					}
-					*/
+                    /*
+                    foreach ($juragans->getResult() as $juragan) {
+                        $options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
+                    }
+                    */
 
-					echo form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan_']);
-					?>
+                    echo form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan_']);
+                    ?>
 					<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 				</div>
 
@@ -213,13 +213,13 @@ $session = \Config\Services::session();
 
 <?= $this->section('js') ?>
 <?php
-$current_user_id = $session->get('id');
-$link_api_juragan = site_url("api/juragan/by_user/");
-$link_api_juragan_all = site_url("api/juragan/all/");
-$link_api_pengguna_all = site_url("api/pengguna/all/");
-$link_api_relasi = site_url('api/juragan/by_user');
-$link_invoice = site_url('admin/invoices/lihat/');
-$link_api_notif = site_url('api/notifikasi/');
+$current_user_id       = $session->get('id');
+$link_api_juragan      = site_url('api/juragan/by_user/');
+$link_api_juragan_all  = site_url('api/juragan/all/');
+$link_api_pengguna_all = site_url('api/pengguna/all/');
+$link_api_relasi       = site_url('api/juragan/by_user');
+$link_invoice          = site_url('admin/invoices/lihat/');
+$link_api_notif        = site_url('api/notifikasi/');
 
 $js = <<< JS
 $(function() { 
@@ -463,7 +463,7 @@ $(function() {
 });
 JS;
 
-$packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
+$packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();
 echo '<script>' . $packed_js . '</script>';
 ?>

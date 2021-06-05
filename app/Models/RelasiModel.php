@@ -6,10 +6,10 @@ use CodeIgniter\Model;
 
 class RelasiModel extends Model
 {
-    protected $table = 'relasi';
+    protected $table      = 'relasi';
     protected $primaryKey = 'id_bank';
 
-    protected $returnType = 'object';
+    protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['table', 'juragan_id', 'val_id'];

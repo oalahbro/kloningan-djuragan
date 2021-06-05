@@ -3,7 +3,7 @@
 use MatthiasMullie\Minify;
 
 $CSSmin = new Minify\CSS();
-$JSmin = new Minify\JS();
+$JSmin  = new Minify\JS();
 ?>
 <!doctype html>
 <html lang="id">
@@ -23,7 +23,7 @@ $JSmin = new Minify\JS();
 	<nav class="sticky-top mainnav navbar navbar-expand navbar-dark bg-dark bg-gradient">
 		<div class="container-xxl d-flex flex-wrap flex-md-nowrap align-items-center justify-content-between">
 			<div class="d-flex align-items-center mr-3" id="logo">
-				<?php echo form_button(array('class' => 'btn-juragan btn btn-outline-light', 'data-toggle' => "collapse", 'data-target' => "#sidebar", 'id' => 'sidebarCollapse', 'content' => '<i class="fal fa-align-left fa-flip-vertical"></i>')); ?>
+				<?php echo form_button(['class' => 'btn-juragan btn btn-outline-light', 'data-toggle' => 'collapse', 'data-target' => '#sidebar', 'id' => 'sidebarCollapse', 'content' => '<i class="fal fa-align-left fa-flip-vertical"></i>']); ?>
 				<?php echo anchor('', 'Pesanan Juragan', ['class' => 'navbar-brand ml-3']); ?>
 			</div>
 			<div id="menu" class="order-3 order-md-0 navbar-nav-scroll d-flex justify-content-center">
@@ -32,13 +32,13 @@ $JSmin = new Minify\JS();
 						<?= anchor('admin/invoices/tulis', 'Tulis Orderan', ['class' => 'nav-link']) ?>
 					</li>
 					<?php /*
-					<li class="nav-item">
-						<?= anchor('pelanggan', 'Customer', ['class' => 'nav-link']) ?>
-					</li>
-					<li class="nav-item">
-						<?= anchor('produk', 'Produk', ['class' => 'nav-link']) ?>
-					</li>
-					*/ ?>
+                    <li class="nav-item">
+                        <?= anchor('pelanggan', 'Customer', ['class' => 'nav-link']) ?>
+                    </li>
+                    <li class="nav-item">
+                        <?= anchor('produk', 'Produk', ['class' => 'nav-link']) ?>
+                    </li>
+                    */ ?>
 				</ul>
 			</div>
 			<div id="topmenu" class="ml-sm-auto">
@@ -49,10 +49,10 @@ $JSmin = new Minify\JS();
 					<li class="nav-item dropdown">
 						<a class="nav-link" id="dropSetting" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fal fa-cogs d-block d-md-none"></i> <span class="d-none d-md-inline-block">Pengaturan</span></a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-							<?= anchor('admin/settings', '<i class="fal fa-globe"></i> Situs', array('class' => 'dropdown-item')); ?>
+							<?= anchor('admin/settings', '<i class="fal fa-globe"></i> Situs', ['class' => 'dropdown-item']); ?>
 							<hr class="dropdown-divider" />
-							<?= anchor('admin/settings/juragan', '<i class="fal fa-user-circle"></i> Juragan', array('class' => 'dropdown-item')); ?>
-							<?= anchor('admin/settings/pengguna', '<i class="fal fa-users"></i> Pengguna', array('class' => 'dropdown-item')); ?>
+							<?= anchor('admin/settings/juragan', '<i class="fal fa-user-circle"></i> Juragan', ['class' => 'dropdown-item']); ?>
+							<?= anchor('admin/settings/pengguna', '<i class="fal fa-users"></i> Pengguna', ['class' => 'dropdown-item']); ?>
 						</div>
 					</li>
 					<li class="nav-item dropdown">
@@ -61,8 +61,8 @@ $JSmin = new Minify\JS();
 								<?= $_SESSION['name']; ?></span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-							<?= anchor('user/sunting', 'Ubah Profil', array('class' => 'dropdown-item')); ?>
-							<?= anchor('auth/keluar', 'Keluar', array('class' => 'dropdown-item')); ?>
+							<?= anchor('user/sunting', 'Ubah Profil', ['class' => 'dropdown-item']); ?>
+							<?= anchor('auth/keluar', 'Keluar', ['class' => 'dropdown-item']); ?>
 						</div>
 					</li>
 				</ul>
@@ -105,10 +105,10 @@ $JSmin = new Minify\JS();
 	<script defer src="<?= base_url('assets/js/bootstrap.bundle.min.js'); ?>"></script>
 	<script defer src="<?= base_url('assets/js/jquery.autocomplete.min.js'); ?>"></script>
 	<?php /*
-	// source fontawesome: https://github.com/carlosproductions/Portfolio-Home-Page2
-	// or can use https://kit.fontawesome.com/22a9d93fa2.js
-	*/
-	?><script defer src="https://kit.fontawesome.com/9bdc906322.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>
+    // source fontawesome: https://github.com/carlosproductions/Portfolio-Home-Page2
+    // or can use https://kit.fontawesome.com/22a9d93fa2.js
+    */
+    ?><script defer src="https://kit.fontawesome.com/9bdc906322.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>
 	<?= $this->renderSection('js'); ?>
 
 	<!--

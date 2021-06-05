@@ -29,151 +29,157 @@ use Psr\Log\LoggerInterface;
  */
 class BaseController extends Controller
 {
-	/**
-	 * Instance of the main Request object.
-	 *
-	 * @var IncomingRequest|CLIRequest
-	 */
-	protected $request;
+    /**
+     * Instance of the main Request object.
+     *
+     * @var IncomingRequest|CLIRequest
+     */
+    protected $request;
 
-	/**
-	 * An array of helpers to be loaded automatically upon
-	 * class instantiation. These helpers will be available
-	 * to all other controllers that extend BaseController.
-	 *
-	 * @var array
-	 */
-	protected $helpers = ['date', 'form', 'fungsi', 'number', 'text', 'url'];
+    /**
+     * An array of helpers to be loaded automatically upon
+     * class instantiation. These helpers will be available
+     * to all other controllers that extend BaseController.
+     *
+     * @var array
+     */
+    protected $helpers = ['date', 'form', 'fungsi', 'number', 'text', 'url'];
 
-	public $cache;
-	public $session;
-	public $validation;
+    public $cache;
+    public $session;
+    public $validation;
 
-	public $bank;
-	public $invoice;
-	public $juragan;
-	public $pembayaran;
-	public $relasi;
-	public $user;
+    public $bank;
+    public $invoice;
+    public $juragan;
+    public $pembayaran;
+    public $relasi;
+    public $user;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param RequestInterface  $request
-	 * @param ResponseInterface $response
-	 * @param LoggerInterface   $logger
-	 */
-	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-	{
-		// Do Not Edit This Line
-		parent::initController($request, $response, $logger);
+    /**
+     * Constructor.
+     *
+     * @param RequestInterface  $request
+     * @param ResponseInterface $response
+     * @param LoggerInterface   $logger
+     */
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+    {
+        // Do Not Edit This Line
+        parent::initController($request, $response, $logger);
 
-		//--------------------------------------------------------------------
-		// Preload any models, libraries, etc, here.
-		//--------------------------------------------------------------------
+        //--------------------------------------------------------------------
+        // Preload any models, libraries, etc, here.
+        //--------------------------------------------------------------------
 
-		$this->cache      = \Config\Services::cache();
-		$this->session    = \Config\Services::session();
-		$this->validation = \Config\Services::validation();
+        $this->cache      = \Config\Services::cache();
+        $this->session    = \Config\Services::session();
+        $this->validation = \Config\Services::validation();
 
-		$this->bank 	  = new BankModel();
-		$this->invoice 	  = new InvoiceModel();
-		$this->juragan 	  = new JuraganModel();
-		$this->pembayaran = new PembayaranModel();
-		$this->pengiriman = new PengirimanModel();
-		$this->relasi 	  = new RelasiModel();
-		$this->user 	  = new UserModel();
+        $this->bank 	     = new BankModel();
+        $this->invoice 	  = new InvoiceModel();
+        $this->juragan 	  = new JuraganModel();
+        $this->pembayaran = new PembayaranModel();
+        $this->pengiriman = new PengirimanModel();
+        $this->relasi 	   = new RelasiModel();
+        $this->user 	     = new UserModel();
 
-		// migration here
-		// $migrate = \Config\Services::migrations();
-		// $migrate->latest();
-	}
+        // migration here
+        // $migrate = \Config\Services::migrations();
+        // $migrate->latest();
+    }
 
-	public function isLogged()
-	{
-		$r = FALSE;
-		if ($this->session->has('logged') && $this->session->get('logged')) {
-			$r = TRUE;
-		}
+    public function isLogged()
+    {
+        $r = false;
 
-		return $r;
-	}
+        if ($this->session->has('logged') && $this->session->get('logged')) {
+            $r = true;
+        }
 
-	public function isAdmin($superadmin = FALSE)
-	{
-		$return = FALSE;
-		if ($this->isLogged()) {
-			if ($superadmin === TRUE) {
-				// jika $superadmin === TRUE, maka yang diambil hanya superadmin
-				if ($this->session->get('level') === 'superadmin') {
-					$return = TRUE;
-				}
-			} else {
-				// levelnya admin dan superadmin
-				if ($this->session->get('level') === 'admin' or $this->session->get('level') === 'superadmin') {
-					$return = TRUE;
-				}
-			}
-		}
+        return $r;
+    }
 
-		return $return;
-	}
+    public function isAdmin($superadmin = false)
+    {
+        $return = false;
 
-	public function juraganBy($user_id)
-	{
-		$juragan = Jrgn::by_user($user_id);
+        if ($this->isLogged()) {
+            if ($superadmin === true) {
+                // jika $superadmin === TRUE, maka yang diambil hanya superadmin
+                if ($this->session->get('level') === 'superadmin') {
+                    $return = true;
+                }
+            } else {
+                // levelnya admin dan superadmin
+                if ($this->session->get('level') === 'admin' or $this->session->get('level') === 'superadmin') {
+                    $return = true;
+                }
+            }
+        }
 
-		$ids = [];
-		foreach ($juragan[$user_id]['juragan'] as $r) {
-			$ids = array_merge($ids, array($r['id']));
-		}
+        return $return;
+    }
 
-		$return = $this->juragan->terakhir_update($ids);
+    public function juraganBy($user_id)
+    {
+        $juragan = Jrgn::by_user($user_id);
 
-		if ($return === NULL) {
-			//  $juragan[$user_id]['juragan'];
-			$arr = [];
-			foreach ($juragan[$user_id]['juragan'] as $r => $v) {
-				$arr['id_juragan'] = $v['id'];
-				$arr['juragan'] = $v['slug'];
-				$arr['nama_juragan'] = $v['nama'];
-				break;
-			}
+        $ids = [];
+        foreach ($juragan[$user_id]['juragan'] as $r) {
+            $ids = array_merge($ids, [$r['id']]);
+        }
 
-			$return = (object) $arr;
-		}
+        $return = $this->juragan->terakhir_update($ids);
 
-		return $return;
-	}
+        if ($return === null) {
+            //  $juragan[$user_id]['juragan'];
+            $arr = [];
+            foreach ($juragan[$user_id]['juragan'] as $r => $v) {
+                $arr['id_juragan']   = $v['id'];
+                $arr['juragan']      = $v['slug'];
+                $arr['nama_juragan'] = $v['nama'];
 
-	public function isJuragan($juragan)
-	{
-		$get = $this->juragan->where('juragan', $juragan)->findAll();
+                break;
+            }
 
-		$return = FALSE;
-		if (count($get) > 0) {
-			$return = TRUE;
-		}
+            $return = (object) $arr;
+        }
 
-		return $return;
-	}
+        return $return;
+    }
 
-	public function allowedJuragan($user_id, $juragan)
-	{
-		$juragans = Jrgn::by_user($user_id);
+    public function isJuragan($juragan)
+    {
+        $get = $this->juragan->where('juragan', $juragan)->findAll();
 
-		$return = FALSE;
-		if ($this->isJuragan($juragan)) {
-			$get = $this->juragan->where('juragan', $juragan)->findAll();
+        $return = false;
 
-			$result = array_search($get[0]->id_juragan, array_column($juragans[$user_id]['juragan'], 'id'));  // false if not found, key off array if exist
+        if (count($get) > 0) {
+            $return = true;
+        }
 
-			$return = FALSE;
-			if ($result !== FALSE) {
-				$return = TRUE;
-			}
-		}
+        return $return;
+    }
 
-		return $return;
-	}
+    public function allowedJuragan($user_id, $juragan)
+    {
+        $juragans = Jrgn::by_user($user_id);
+
+        $return = false;
+
+        if ($this->isJuragan($juragan)) {
+            $get = $this->juragan->where('juragan', $juragan)->findAll();
+
+            $result = array_search($get[0]->id_juragan, array_column($juragans[$user_id]['juragan'], 'id'));  // false if not found, key off array if exist
+
+            $return = false;
+
+            if ($result !== false) {
+                $return = true;
+            }
+        }
+
+        return $return;
+    }
 }

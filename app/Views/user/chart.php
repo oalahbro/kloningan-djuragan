@@ -1,11 +1,11 @@
 <?php
 
-use CodeIgniter\I18n\Time;
 use App\Libraries\Ongkir;
+use CodeIgniter\I18n\Time;
 
 $sekarang = new Time('now');
-$pager = \Config\Services::pager();
-$session = \Config\Services::session();
+$pager    = \Config\Services::pager();
+$session  = \Config\Services::session();
 ?>
 <?= $this->extend('template/default_user') ?>
 
@@ -39,32 +39,32 @@ $session = \Config\Services::session();
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <?php
 
-$current_user_id = $session->get('id');
-$link_api_juragan = site_url("api/juragan/by_user/");
-$link_invoice = site_url('user/invoices/lihat/');
-$link_api_notif = site_url('api/notifikasi/');
+$current_user_id  = $session->get('id');
+$link_api_juragan = site_url('api/juragan/by_user/');
+$link_invoice     = site_url('user/invoices/lihat/');
+$link_api_notif   = site_url('api/notifikasi/');
 
-$juragan = [];
-$orderBulanIni = [];
-$orderBulanLalu = [];
-$terkirimBulanIni = [];
+$juragan           = [];
+$orderBulanIni     = [];
+$orderBulanLalu    = [];
+$terkirimBulanIni  = [];
 $terkirimBulanLalu = [];
 
 foreach ($counter as $count) {
-	$juragan[] = $count->nama_juragan;
-	$orderBulanIni[] = ($count->jumlahOrderBulanIni !== '' ? $count->jumlahOrderBulanIni : 0);
-	$orderBulanLalu[] = ($count->jumlahOrderBulanLalu !== '' ? $count->jumlahOrderBulanLalu : 0);
-	$terkirimBulanIni[] = ($count->terkirimBulanIni !== '' ? $count->terkirimBulanIni : 0);
-	$terkirimBulanLalu[] = ($count->terkirimBulanLalu !== '' ? $count->terkirimBulanLalu : 0);
+    $juragan[]           = $count->nama_juragan;
+    $orderBulanIni[]     = ($count->jumlahOrderBulanIni !== '' ? $count->jumlahOrderBulanIni : 0);
+    $orderBulanLalu[]    = ($count->jumlahOrderBulanLalu !== '' ? $count->jumlahOrderBulanLalu : 0);
+    $terkirimBulanIni[]  = ($count->terkirimBulanIni !== '' ? $count->terkirimBulanIni : 0);
+    $terkirimBulanLalu[] = ($count->terkirimBulanLalu !== '' ? $count->terkirimBulanLalu : 0);
 }
 
-$juragan = json_encode($juragan);
-$orderBulanIni = json_encode($orderBulanIni);
-$orderBulanLalu = json_encode($orderBulanLalu);
-$terkirimBulanIni = json_encode($terkirimBulanIni);
+$juragan           = json_encode($juragan);
+$orderBulanIni     = json_encode($orderBulanIni);
+$orderBulanLalu    = json_encode($orderBulanLalu);
+$terkirimBulanIni  = json_encode($terkirimBulanIni);
 $terkirimBulanLalu = json_encode($terkirimBulanLalu);
 
-$awalBulanIni 	= tanggalDefault('mulai');
+$awalBulanIni 	 = tanggalDefault('mulai');
 $akhirBulanIni 	= tanggalDefault('akhir');
 
 $js = <<< JS
@@ -299,7 +299,7 @@ $(function() {
 });
 JS;
 
-$packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
+$packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();
 echo '<script>' . $packed_js . '</script>';
 ?>

@@ -6,10 +6,10 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    protected $table = 'user';
+    protected $table      = 'user';
     protected $primaryKey = 'id';
 
-    protected $returnType = 'object';
+    protected $returnType     = 'object';
     protected $useSoftDeletes = true;
 
     protected $allowedFields = ['username', 'password', 'name', 'email', 'level', 'status', 'login_terakhir'];
@@ -36,7 +36,8 @@ class UserModel extends Model
         $builder->join('juragan j', 'j.id_juragan = r.juragan_id', 'left');
         $builder->where('r.table', '1');
 
-        $builder->groupBy("u.id");
+        $builder->groupBy('u.id');
+
         return $builder;
     }
 }

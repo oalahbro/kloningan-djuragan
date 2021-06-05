@@ -1,5 +1,5 @@
 <?php
-$pager = \Config\Services::pager();
+$pager   = \Config\Services::pager();
 $session = \Config\Services::session();
 ?>
 <?= $this->extend('template/default_admin') ?>
@@ -97,10 +97,10 @@ $session = \Config\Services::session();
 <?= $this->section('js') ?>
 <?php
 
-$current_user_id = $session->get('id');
-$link_api_juragan = site_url("api/juragan/by_user/");
-$link_invoice = site_url('admin/invoices/lihat/');
-$link_api_notif = site_url('api/notifikasi/');
+$current_user_id  = $session->get('id');
+$link_api_juragan = site_url('api/juragan/by_user/');
+$link_invoice     = site_url('admin/invoices/lihat/');
+$link_api_notif   = site_url('api/notifikasi/');
 
 $js = <<< JS
 $(function() { 
@@ -234,7 +234,7 @@ $(function() {
 });
 JS;
 
-$packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
+$packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();
 echo '<script>' . $packed_js . '</script>';
 ?>

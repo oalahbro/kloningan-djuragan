@@ -132,3 +132,4 @@ nb-configuration.xml
 node_modules/
 
 package-lock.json
+.php-cs-fixer.cache

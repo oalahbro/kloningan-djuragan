@@ -6,10 +6,10 @@ use CodeIgniter\Model;
 
 class PelangganModel extends Model
 {
-    protected $table = 'pelanggan';
+    protected $table      = 'pelanggan';
     protected $primaryKey = 'id_pelanggan';
 
-    protected $returnType = 'object';
+    protected $returnType     = 'object';
     protected $useSoftDeletes = true;
 
     protected $allowedFields = ['nama_pelanggan', 'hp', 'cod', 'kecamatan', 'kabupaten', 'provinsi', 'alamat', 'kodepos'];
@@ -40,7 +40,7 @@ class PelangganModel extends Model
     {
         $builder = $this->db->table($this->table . ' p');
         $builder->select('i.*, p.*');
-        $builder->join('order_invoice i', '(p.id_pelanggan = i.pemesan_id OR i.kirimKepada_id = p.id_pelanggan) AND i.deleted_at IS NULL', '', FALSE);
+        $builder->join('order_invoice i', '(p.id_pelanggan = i.pemesan_id OR i.kirimKepada_id = p.id_pelanggan) AND i.deleted_at IS NULL', '', false);
 
         if ($cari !== null or $cari !== '') {
             $builder->like('p.nama_pelanggan', $cari, 'both');
@@ -55,5 +55,4 @@ class PelangganModel extends Model
     }
 
     // ------------------------------------------------------------------------
-
 }

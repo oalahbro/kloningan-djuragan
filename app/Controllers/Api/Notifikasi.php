@@ -15,30 +15,31 @@ class Notifikasi extends \CodeIgniter\Controller
         helper('fungsi');
 
         $user_id = $this->request->getGet('id');
-        $page = $this->request->getGet('page');
-        $baca = $this->request->getGet('dibaca');
+        $page    = $this->request->getGet('page');
+        $baca    = $this->request->getGet('dibaca');
 
         $limit = config('Pager')->perPage;
-        $page = (int) $this->request->getGet('page');
+        $page  = (int) $this->request->getGet('page');
 
         if (!isset($page) || $page === 0 || $page === 1) {
-            $page = 1;
+            $page   = 1;
             $offset = 0;
         } else {
             $offset = ($page - 1) * $limit;
-            $page = $page;
+            $page   = $page;
         }
 
-        $dibaca = FALSE;
+        $dibaca = false;
+
         if (isset($baca) && $baca === '1') {
-            $dibaca = TRUE;
+            $dibaca = true;
         }
 
         $counter = $notifikasi->ambil($user_id, $dibaca)->countAllResults();
 
         $res = [
-            'page' => (int) $page,
-            'next' => (ceil($counter / $limit) > $page ? TRUE : FALSE),
+            'page'  => (int) $page,
+            'next'  => (ceil($counter / $limit) > $page ? true : false),
             'count' => $counter
         ];
 
@@ -46,14 +47,14 @@ class Notifikasi extends \CodeIgniter\Controller
 
         foreach ($x as $notif) {
             $notifikasi = replacer(config('JuraganConfig')->notifikasi[$notif->type], ['invoice' => $notif->seri, 'nama' => $notif->name]);
-            $tanggal = Time::createFromTimestamp($notif->created_at);
+            $tanggal    = Time::createFromTimestamp($notif->created_at);
 
             $res['results'][] = [
-                'id' => (int) $notif->id_notifikasi,
-                'notif' => $notifikasi,
+                'id'         => (int) $notif->id_notifikasi,
+                'notif'      => $notifikasi,
                 'created_at' => $tanggal->toLocalizedString('EEE, d MMM yyyy (HH:mm:ss)'),
-                'invoice' => $notif->seri,
-                'juragan' => $notif->juragan
+                'invoice'    => $notif->seri,
+                'juragan'    => $notif->juragan
             ];
         }
 
@@ -84,8 +85,9 @@ class Notifikasi extends \CodeIgniter\Controller
         $action = $this->request->getPost('action');
 
         $dibaca = time();
+
         if ($action === 'belumBaca') {
-            $dibaca =  NULL;
+            $dibaca =  null;
         }
 
         $data = [

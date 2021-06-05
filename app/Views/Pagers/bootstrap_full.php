@@ -1,7 +1,8 @@
 <?php
 $pager->setSurroundCount(2);
+
 if (count($pager->links()) > 1) {
-?>
+    ?>
 	<nav class="my-5" aria-label="Page navigation">
 		<ul class="pagination justify-content-center">
 			<?php if ($pager->hasPrevious()) : ?>
@@ -48,4 +49,5 @@ if (count($pager->links()) > 1) {
 			<?php endif ?>
 		</ul>
 	</nav>
-<?php } ?>
+<?php
+} ?>

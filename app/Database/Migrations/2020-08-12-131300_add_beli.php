@@ -1,55 +1,57 @@
-<?php namespace App\Database\Migrations;
+<?php
 
-class AddBeli extends \CodeIgniter\Database\Migration {
+namespace App\Database\Migrations;
 
-	public function up()
-	{
-		$this->forge->addField([
-			'id_beli'  => [
-				'type' 			 => 'INT',
-				'constraint' 	 => 11,
-				'unsigned' 		 => TRUE,
-				'auto_increment' => TRUE
-			],
-			'invoice_id' => [
-				'type' 			 => 'INT',
-				'constraint' 	 => 11,
-				'unsigned' 		 => TRUE,
-			],
-			'stok_id' => [
-				'type' 			 => 'INT',
-				'constraint' 	 => 11,
-				'unsigned' 		 => TRUE,
-				'null'			 => TRUE,
-				'default' 		 => NULL
-			],
-			'kode' => [
-				'type'           => 'VARCHAR',
-				'constraint' 	 => 20,
-			],
-			'ukuran' => [
-				'type' 			 => 'VARCHAR',
-				'constraint' 	 => 6,
-				'null' 			 => true
-			],
-			'qty' => [
-				'type' 			 => 'INT',
-				'constraint' 	 => 3,
-				'unsigned' 		 => TRUE
-			],
-			'harga' => [
-				'type'           => 'INT',
-				'constraint'     => 7,
-				'unsigned' 		 => TRUE
-			]
-		]);
-		
-		$this->forge->addKey('id_beli', TRUE);
-		$this->forge->createTable('dibeli', TRUE);
-	}
+class AddBeli extends \CodeIgniter\Database\Migration
+{
+    public function up()
+    {
+        $this->forge->addField([
+            'id_beli'  => [
+                'type' 			       => 'INT',
+                'constraint' 	   => 11,
+                'unsigned' 		    => true,
+                'auto_increment' => true
+            ],
+            'invoice_id' => [
+                'type' 			     => 'INT',
+                'constraint' 	 => 11,
+                'unsigned' 		  => true,
+            ],
+            'stok_id' => [
+                'type' 			     => 'INT',
+                'constraint' 	 => 11,
+                'unsigned' 		  => true,
+                'null'			      => true,
+                'default' 		   => null
+            ],
+            'kode' => [
+                'type'           => 'VARCHAR',
+                'constraint' 	   => 20,
+            ],
+            'ukuran' => [
+                'type' 			     => 'VARCHAR',
+                'constraint' 	 => 6,
+                'null' 			     => true
+            ],
+            'qty' => [
+                'type' 			     => 'INT',
+                'constraint' 	 => 3,
+                'unsigned' 		  => true
+            ],
+            'harga' => [
+                'type'           => 'INT',
+                'constraint'     => 7,
+                'unsigned' 		    => true
+            ]
+        ]);
 
-	public function down()
-	{
-		$this->forge->dropTable('dibeli');
-	}
+        $this->forge->addKey('id_beli', true);
+        $this->forge->createTable('dibeli', true);
+    }
+
+    public function down()
+    {
+        $this->forge->dropTable('dibeli');
+    }
 }

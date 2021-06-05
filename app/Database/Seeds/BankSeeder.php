@@ -1,4 +1,6 @@
-<?php namespace App\Database\Seeds;
+<?php
+
+namespace App\Database\Seeds;
 
 class BankSeeder extends \CodeIgniter\Database\Seeder
 {
@@ -7,24 +9,24 @@ class BankSeeder extends \CodeIgniter\Database\Seeder
         $time = time();
         $data = [
             [
-                'nama_bank' => 'lainnya',
-                'atas_nama' => 'Lainnya',
-                'rekening' => 'Lainnya',
-                'tipe_bank' => '3',
+                'nama_bank'  => 'lainnya',
+                'atas_nama'  => 'Lainnya',
+                'rekening'   => 'Lainnya',
+                'tipe_bank'  => '3',
                 'created_at' => $time,
                 'updated_at' => $time
-                
+
             ],
             [
-                'nama_bank' => 'cod',
-                'atas_nama' => 'C.O.D',
-                'rekening' => 'C.O.D',
+                'nama_bank'  => 'cod',
+                'atas_nama'  => 'C.O.D',
+                'rekening'   => 'C.O.D',
                 'created_at' => $time,
                 'updated_at' => $time
             ]
         ];
 
-        for ($i=0; $i < count($data) ; $i++) { 
+        for ($i=0; $i < count($data) ; $i++) {
             // Using Query Builder
             $this->db->table('bank')->insert($data[$i]);
         }

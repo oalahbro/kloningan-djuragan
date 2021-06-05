@@ -3,7 +3,7 @@
 use CodeIgniter\I18n\Time;
 
 $sekarang = new Time('now');
-$session = \Config\Services::session();
+$session  = \Config\Services::session();
 ?>
 
 <?= $this->extend('template/default_admin') ?>
@@ -47,11 +47,11 @@ $session = \Config\Services::session();
 							<div class="col-sm-5">
 								<?= form_label('Asal Orderan', 'asal_orderan', ['class' => 'form-label']); ?>
 								<?php
-								$options_label = array('' => 'Pilih asal');
-								foreach (config('JuraganConfig')->label as $key => $label) {
-									$options_label[$key] = $label;
-								}
-								?>
+                                $options_label = ['' => 'Pilih asal'];
+                                foreach (config('JuraganConfig')->label as $key => $label) {
+                                    $options_label[$key] = $label;
+                                }
+                                ?>
 								<?= form_dropdown('asal_orderan', $options_label, '', ['class' => 'form-select', 'id' => 'asal_orderan', 'required' => '']); ?>
 							</div>
 							<div class="col-sm-7">
@@ -78,52 +78,52 @@ $session = \Config\Services::session();
 
 						<div class="input-group mb-3 mycustom form_pemesan">
 							<?= form_input([
-								'class' 	=> 'form-control cari_pelanggan pemesan',
-								'id' 		=> 'cari_pemesan',
-								'placeholder' => 'cari data pelanggan',
-								'type' 		=> 'search'
+							    'class' 	     => 'form-control cari_pelanggan pemesan',
+							    'id' 		       => 'cari_pemesan',
+							    'placeholder' => 'cari data pelanggan',
+							    'type' 		     => 'search'
 							]); ?>
 							<?= form_button([
-								'class' 	=> 'btn btn-dark',
-								'content' 	=> '<i class="fal fa-plus"></i> Tambah',
-								'data-target' => '#modalTambahPelanggan',
-								'data-toggle' => 'modal',
-								'id' 		=> 'tambah_pemesan_kirimKe',
-								'title' 	=> 'Tambah Data Pemesan'
+							    'class' 	     => 'btn btn-dark',
+							    'content' 	   => '<i class="fal fa-plus"></i> Tambah',
+							    'data-target' => '#modalTambahPelanggan',
+							    'data-toggle' => 'modal',
+							    'id' 		       => 'tambah_pemesan_kirimKe',
+							    'title' 	     => 'Tambah Data Pemesan'
 							]); ?>
 						</div>
 
 						<div class="mb-3 info-data-pemesan" style="display: none;">
 							<?= form_button([
-								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
-								'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-								'title' 	=> 'Hapus Pemesan'
+							    'class' 	  => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
+							    'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+							    'title' 	  => 'Hapus Pemesan'
 							]); ?>
 							<span id="alamat_pemesan" class="border rounded p-2 d-block"></span>
 						</div>
 
 						<div class="input-group mb-3 mycustom form_kirimKe" style="display: none">
 							<?= form_input([
-								'class' 	=> 'form-control cari_pelanggan kirimKe',
-								'id' 		=> 'cari_kirimKe',
-								'placeholder' => 'cari data pelanggan',
-								'type' 		=> 'search'
+							    'class' 	     => 'form-control cari_pelanggan kirimKe',
+							    'id' 		       => 'cari_kirimKe',
+							    'placeholder' => 'cari data pelanggan',
+							    'type' 		     => 'search'
 							]); ?>
 							<?= form_button([
-								'class' 	=> 'btn btn-dark',
-								'content' 	=> '<i class="fal fa-plus"></i> Tambah',
-								'data-target' => '#modalTambahPelanggan',
-								'data-toggle' => 'modal',
-								'id' 		=> 'tambah_kirimKe',
-								'title' 	=> 'Tambah Data Kirim Kepada'
+							    'class' 	     => 'btn btn-dark',
+							    'content' 	   => '<i class="fal fa-plus"></i> Tambah',
+							    'data-target' => '#modalTambahPelanggan',
+							    'data-toggle' => 'modal',
+							    'id' 		       => 'tambah_kirimKe',
+							    'title' 	     => 'Tambah Data Kirim Kepada'
 							]); ?>
 						</div>
 
 						<div class="mb-3 info-data-kirimKe" style="display: none;">
 							<?= form_button([
-								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
-								'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-								'title' 	=> 'Hapus Kirim'
+							    'class' 	  => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
+							    'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+							    'title' 	  => 'Hapus Kirim'
 							]); ?>
 							<span id="alamat_kirimKe" class="border rounded p-2 d-block"></span>
 						</div>
@@ -233,7 +233,7 @@ $session = \Config\Services::session();
 			<div class="mb-3">
 				<div class="form-check form-switch">
 					<?= form_label('COD', 'cod', ['class' => 'form-check-label']); ?>
-					<?= form_checkbox('cod', 'ya', TRUE, ['class' => 'form-check-input swictCOD', 'id' => 'cod']); ?>
+					<?= form_checkbox('cod', 'ya', true, ['class' => 'form-check-input swictCOD', 'id' => 'cod']); ?>
 				</div>
 			</div>
 
@@ -255,7 +255,7 @@ $session = \Config\Services::session();
 					<div class="col">
 						<?= form_label('Kecamatan', 'kecamatan', ['class' => 'form-label']); ?>
 						<?= form_dropdown('kecamatan', ['' => 'Pilih Kecamatan'], '', ['class' => 'form-select input', 'id' => 'kecamatan', 'required' => '', 'disabled' => '']);
-						?>
+                        ?>
 					</div>
 				</div>
 
@@ -337,19 +337,18 @@ $session = \Config\Services::session();
 					<div class="col col-sm-6 col-md-3">
 						<?= form_label('Ukuran', 'ukuran', ['class' => 'form-label']); ?>
 						<?php
-						echo '<select name="ukuran" class="form-select" id="ukuran" required="">';
-						echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
-						foreach (config('JuraganConfig')->size as $k => $v) {
-
-							echo '<optgroup label="' . $k . '">';
-							foreach ($v as $k2 => $v2) {
-								echo '<option value="' . $k2 . '">' . $v2 . '</option>';
-							}
-							echo '</optgroup>';
-						}
-						echo '<option value="custom">Custom</option>';
-						echo '</select>';
-						?>
+                        echo '<select name="ukuran" class="form-select" id="ukuran" required="">';
+                        echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
+                        foreach (config('JuraganConfig')->size as $k => $v) {
+                            echo '<optgroup label="' . $k . '">';
+                            foreach ($v as $k2 => $v2) {
+                                echo '<option value="' . $k2 . '">' . $v2 . '</option>';
+                            }
+                            echo '</optgroup>';
+                        }
+                        echo '<option value="custom">Custom</option>';
+                        echo '</select>';
+                        ?>
 					</div>
 					<div class="col col-sm-6 col-md-3">
 						<?= form_label('QTY', 'QTY', ['class' => 'form-label']); ?>
@@ -373,17 +372,17 @@ $session = \Config\Services::session();
 <?= $this->section('js') ?>
 <?php
 
-$current_user_id = $session->get('id');
-$link_api_invoice = site_url('admin/invoices/save');
-$link_api_juragan = site_url("api/juragan/by_user/");
-$link_api_kecamatan = site_url('rajaongkir/kecamatan');
-$link_api_kota = site_url('rajaongkir/kota');
-$link_api_pengguna = site_url('api/juragan/get_users/');
-$link_api_provinsi = site_url('rajaongkir/provinsi');
+$current_user_id     = $session->get('id');
+$link_api_invoice    = site_url('admin/invoices/save');
+$link_api_juragan    = site_url('api/juragan/by_user/');
+$link_api_kecamatan  = site_url('rajaongkir/kecamatan');
+$link_api_kota       = site_url('rajaongkir/kota');
+$link_api_pengguna   = site_url('api/juragan/get_users/');
+$link_api_provinsi   = site_url('rajaongkir/provinsi');
 $link_cari_pelanggan = site_url('pelanggan/cari');
-$link_invoice = site_url('admin/invoices/lihat/');
+$link_invoice        = site_url('admin/invoices/lihat/');
 $link_post_pelanggan = site_url('pelanggan/baru');
-$link_api_notif = site_url('api/notifikasi/');
+$link_api_notif      = site_url('api/notifikasi/');
 
 $js = <<< JS
 $(function() { 
@@ -1092,7 +1091,7 @@ $(function() {
 
 JS;
 
-$packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
+$packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();
 echo '<script>' . $packed_js . '</script>';
 ?>

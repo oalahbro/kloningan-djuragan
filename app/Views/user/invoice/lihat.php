@@ -1,11 +1,11 @@
 <?php
 
-use CodeIgniter\I18n\Time;
 use App\Libraries\Ongkir;
+use CodeIgniter\I18n\Time;
 
 $sekarang = new Time('now');
-$pager = \Config\Services::pager();
-$session = \Config\Services::session();
+$pager    = \Config\Services::pager();
+$session  = \Config\Services::session();
 ?>
 <?= $this->extend('template/default_user') ?>
 
@@ -33,8 +33,8 @@ $session = \Config\Services::session();
 	</div>
 
 	<?php
-	if (count($pesanans) > 0) {
-		foreach ($pesanans as $pesanan) { ?>
+    if (count($pesanans) > 0) {
+        foreach ($pesanans as $pesanan) { ?>
 			<div class="card rounded-lg shadow-sm mb-3">
 				<div class="card-body">
 					<div class="d-flex flex-column flex-sm-row justify-content-between">
@@ -44,20 +44,20 @@ $session = \Config\Services::session();
 								<p class="text-muted small mb-1">
 									(
 									<?php
-									$time = Time::createFromFormat('Y-m-d', $pesanan->tanggal_pesan);
-									echo $time->toLocalizedString('EEEE, d MMMM yyyy');
-									?>
+                                    $time = Time::createFromFormat('Y-m-d', $pesanan->tanggal_pesan);
+                                    echo $time->toLocalizedString('EEEE, d MMMM yyyy');
+                                    ?>
 									)
 								</p>
 							</div>
 
 							<div class="border-left pl-3">
 								<?php
-								$juragan 	= json_decode($pesanan->juragan);
-								$pengguna 	= json_decode($pesanan->pengguna);
-								$pengiriman = json_decode($pesanan->pengiriman);
-								$statuss 	= json_decode($pesanan->status);
-								?>
+                                $juragan 	  = json_decode($pesanan->juragan);
+                                $pengguna 	 = json_decode($pesanan->pengguna);
+                                $pengiriman = json_decode($pesanan->pengiriman);
+                                $statuss 	  = json_decode($pesanan->status);
+                                ?>
 								<span class="text-muted text-lowercase">Juragan:</span> <?= anchor('user/invoices/lihat/' . $juragan->slug, $juragan->nama); ?><br />
 								<span class="text-muted text-lowercase">Admin/CS:</span> <?= $pengguna->nama; ?>
 							</div>
@@ -77,23 +77,24 @@ $session = \Config\Services::session();
 								<?= status_pembayaran($pesanan->pembayaran, $pesanan->status_pembayaran); ?>
 
 								<?php
-								$dipacking = FALSE;
-								if ($statuss !== NULL) {
-									foreach ($statuss as $status) {
-										echo status_orderan($status->status, $status->tanggal_masuk, $status->tanggal_selesai, $status->keterangan_masuk, $status->keterangan_selesai);
+                                $dipacking = false;
 
-										if (isset($status->status) && $status->status == 7) {
-											if ($status->tanggal_selesai !== NULL) {
-												$dipacking = TRUE;
-											}
-										}
-									}
-								}
-								?>
+                                if ($statuss !== null) {
+                                    foreach ($statuss as $status) {
+                                        echo status_orderan($status->status, $status->tanggal_masuk, $status->tanggal_selesai, $status->keterangan_masuk, $status->keterangan_selesai);
+
+                                        if (isset($status->status) && $status->status == 7) {
+                                            if ($status->tanggal_selesai !== null) {
+                                                $dipacking = true;
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
 								<?php if ($dipacking) { ?>
 									<?= status_pengiriman($pesanan->pengiriman, $pesanan->status_pengiriman); ?>
 								<?php }
-								?>
+                                ?>
 							</ul>
 						</div>
 					</div>
@@ -109,34 +110,34 @@ $session = \Config\Services::session();
 									<span class="d-block font-weight-bold"><?= strtoupper($pelanggan->nama); ?></span>
 									<span class="d-block lead">
 										<?php
-										for ($i = 0; $i < count($pelanggan->hp); $i++) {
-											if ($i === 1) {
-												echo '<span class="sr-only">/</span>';
-											}
-											echo '<span class="badge bg-secondary mr-1 font-weight-light">' . $pelanggan->hp[$i] . '</span>';
-										}
-										?>
+                                        for ($i = 0; $i < count($pelanggan->hp); $i++) {
+                                            if ($i === 1) {
+                                                echo '<span class="sr-only">/</span>';
+                                            }
+                                            echo '<span class="badge bg-secondary mr-1 font-weight-light">' . $pelanggan->hp[$i] . '</span>';
+                                        }
+                                        ?>
 									</span>
 									<span class="d-block">
 										<?php
-										if ($pelanggan->cod === 1) {
-											echo 'C.O.D';
-										} else {
-											//
-											$ongkir = new Ongkir();
+                                        if ($pelanggan->cod === 1) {
+                                            echo 'C.O.D';
+                                        } else {
+                                            //
+                                            $ongkir = new Ongkir();
 
-											$PPro = $pelanggan->provinsi;
-											$PKab = $pelanggan->kabupaten;
-											$PKec = $pelanggan->kecamatan;
-											$kota = $ongkir->kota($PPro, $PKab);
+                                            $PPro = $pelanggan->provinsi;
+                                            $PKab = $pelanggan->kabupaten;
+                                            $PKec = $pelanggan->kecamatan;
+                                            $kota = $ongkir->kota($PPro, $PKab);
 
-											$kec = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
-											$kab = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
-											$prov = strtoupper($ongkir->provinsi($PPro)['province']);
+                                            $kec  = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
+                                            $kab  = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
+                                            $prov = strtoupper($ongkir->provinsi($PPro)['province']);
 
-											echo $pelanggan->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $pelanggan->kodepos;
-										}
-										?>
+                                            echo $pelanggan->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $pelanggan->kodepos;
+                                        }
+                                        ?>
 									</span>
 								</div>
 							</div>
@@ -150,34 +151,34 @@ $session = \Config\Services::session();
 										<span class="d-block font-weight-bold"><?= strtoupper($kirimKe->nama); ?></span>
 										<span class="d-block lead">
 											<?php
-											for ($i = 0; $i < count($kirimKe->hp); $i++) {
-												if ($i === 1) {
-													echo '<span class="sr-only">/</span>';
-												}
-												echo '<span class="badge bg-secondary mr-1 font-weight-light">' . $kirimKe->hp[$i] . '</span>';
-											}
-											?>
+                                            for ($i = 0; $i < count($kirimKe->hp); $i++) {
+                                                if ($i === 1) {
+                                                    echo '<span class="sr-only">/</span>';
+                                                }
+                                                echo '<span class="badge bg-secondary mr-1 font-weight-light">' . $kirimKe->hp[$i] . '</span>';
+                                            }
+                                            ?>
 										</span>
 										<span class="d-block">
 											<?php
-											if ($kirimKe->cod === 1) {
-												echo 'C.O.D';
-											} else {
-												//
-												$ongkir = new Ongkir();
+                                            if ($kirimKe->cod === 1) {
+                                                echo 'C.O.D';
+                                            } else {
+                                                //
+                                                $ongkir = new Ongkir();
 
-												$PPro = $kirimKe->provinsi;
-												$PKab = $kirimKe->kabupaten;
-												$PKec = $kirimKe->kecamatan;
-												$kota = $ongkir->kota($PPro, $PKab);
+                                                $PPro = $kirimKe->provinsi;
+                                                $PKab = $kirimKe->kabupaten;
+                                                $PKec = $kirimKe->kecamatan;
+                                                $kota = $ongkir->kota($PPro, $PKab);
 
-												$kec = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
-												$kab = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
-												$prov = strtoupper($ongkir->provinsi($PPro)['province']);
+                                                $kec  = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
+                                                $kab  = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
+                                                $prov = strtoupper($ongkir->provinsi($PPro)['province']);
 
-												echo $kirimKe->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $kirimKe->kodepos;
-											}
-											?>
+                                                echo $kirimKe->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $kirimKe->kodepos;
+                                            }
+                                            ?>
 										</span>
 									</div>
 								</div>
@@ -194,34 +195,35 @@ $session = \Config\Services::session();
 								<div class="card-subtitle text-muted text-uppercase small">Produk</div>
 								<ul class="list-unstyled">
 									<?php
-									$wajib_bayar = 0;
-									$count_barang = 0;
-									$harga_barang = 0;
-									foreach (json_decode($pesanan->barang) as $b) {
-										$count_barang += $b->qty;
-										$wajib_bayar += $b->qty * $b->harga;
-										$harga_barang += $b->qty * $b->harga;
-										echo '<li>';
-										echo strtoupper($b->kode) . ' (' . strtoupper($b->ukuran) . ')= ' . $b->qty . 'pcs';
+                                    $wajib_bayar  = 0;
+                                    $count_barang = 0;
+                                    $harga_barang = 0;
+                                    foreach (json_decode($pesanan->barang) as $b) {
+                                        $count_barang += $b->qty;
+                                        $wajib_bayar += $b->qty * $b->harga;
+                                        $harga_barang += $b->qty * $b->harga;
+                                        echo '<li>';
+                                        echo strtoupper($b->kode) . ' (' . strtoupper($b->ukuran) . ')= ' . $b->qty . 'pcs';
 
-										$content = '<div class=\'text-right\'>';
-										$content .= 'harga @: <strong>' . number_to_currency($b->harga, 'IDR') . '</strong>';
-										if ($b->qty > 1) {
-											$content .= '<br/>harga @ x ' . $b->qty . ': <strong>' . number_to_currency($b->harga * $b->qty, 'IDR') . '</strong>';
-										}
-										$content .= '</div>';
+                                        $content = '<div class=\'text-right\'>';
+                                        $content .= 'harga @: <strong>' . number_to_currency($b->harga, 'IDR') . '</strong>';
 
-										echo form_button(
-											[
-												'data-toggle' => 'popHarga',
-												'data-content' => $content,
-												'content' => '<i class="fal fa-info-circle"></i> <span class="sr-only">info</span>',
-												'class' => 'btn btn-link btn-sm text-secondary'
-											]
-										);
-										echo '</li>';
-									}
-									?>
+                                        if ($b->qty > 1) {
+                                            $content .= '<br/>harga @ x ' . $b->qty . ': <strong>' . number_to_currency($b->harga * $b->qty, 'IDR') . '</strong>';
+                                        }
+                                        $content .= '</div>';
+
+                                        echo form_button(
+                                            [
+                                                'data-toggle'  => 'popHarga',
+                                                'data-content' => $content,
+                                                'content'      => '<i class="fal fa-info-circle"></i> <span class="sr-only">info</span>',
+                                                'class'        => 'btn btn-link btn-sm text-secondary'
+                                            ]
+                                        );
+                                        echo '</li>';
+                                    }
+                                    ?>
 									<li class="border-top pt-2">total: <span class="badge rounded-pill bg-dark"><?= $count_barang; ?></span> pcs</li>
 								</ul>
 							</div>
@@ -238,72 +240,78 @@ $session = \Config\Services::session();
 										</div>
 
 										<?php
-										if ($pesanan->biaya !== NULL) {
-											foreach (json_decode($pesanan->biaya) as $c) {
-												$wajib_bayar += $c->nominal;
-										?>
+                                        if ($pesanan->biaya !== null) {
+                                            foreach (json_decode($pesanan->biaya) as $c) {
+                                                $wajib_bayar += $c->nominal; ?>
 
 												<div class="d-flex justify-content-between align-items-center">
 													<div class="small d-flex text-muted text-uppercase text-truncate">
 														<span class="font-weight-bold">
 															<?php
-															$biaya = 'Lainnya';
-															if ($c->biaya_id === 1) {
-																$biaya = 'Ongkir';
-															}
-															$label = $c->label;
-															if ($c->label !== "null" && $c->biaya_id !== 1) {
-																$biaya = $c->label;
-																$label = '';
-															} elseif ($c->label === 'null') {
-																$label = '';
-															}
-															?>
+                                                            $biaya = 'Lainnya';
+
+                                                if ($c->biaya_id === 1) {
+                                                    $biaya = 'Ongkir';
+                                                }
+                                                $label = $c->label;
+
+                                                if ($c->label !== 'null' && $c->biaya_id !== 1) {
+                                                    $biaya = $c->label;
+                                                    $label = '';
+                                                } elseif ($c->label === 'null') {
+                                                    $label = '';
+                                                } ?>
 															<?= $biaya; ?>
 														</span>&nbsp;
 														<?= $label; ?>
 													</div>
 													<div class="font-weight-bold text-nowrap pl-2 <?= ($c->nominal < 0 ? 'text-danger' : ''); ?>"><?= number_to_currency($c->nominal, 'IDR'); ?></div>
 												</div>
-											<?php }
-										}
-										echo '<hr/>';
-										$sudah_bayar = status_pembayaran($pesanan->pembayaran, $pesanan->status_pembayaran, 'sudah_bayar');
-										if ($sudah_bayar > 0) {
-											?>
+											<?php
+                                            }
+                                        }
+                                        echo '<hr/>';
+                                        $sudah_bayar = status_pembayaran($pesanan->pembayaran, $pesanan->status_pembayaran, 'sudah_bayar');
+
+                                        if ($sudah_bayar > 0) {
+                                            ?>
 
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">
 														Sudah</span>&nbsp;Bayar
 													<?= form_button([
-														'class' 		=> 'text-dark ml-1 pesanBayar',
-														'content' 		=> '<i class="fal fa-info-circle"></i> <span class="sr-only">info</span>',
-														'data-invoice' 	=> $pesanan->id_invoice,
-														'data-juragan' 	=> $juragan->id,
-														'data-target' 	=> '#modalBayar',
-														'data-toggle' 	=> 'modal',
-														'style' 		=> 'border:none; background:transparent'
-													]);
-													?>
+													    'class' 		      => 'text-dark ml-1 pesanBayar',
+													    'content' 		    => '<i class="fal fa-info-circle"></i> <span class="sr-only">info</span>',
+													    'data-invoice' 	=> $pesanan->id_invoice,
+													    'data-juragan' 	=> $juragan->id,
+													    'data-target' 	 => '#modalBayar',
+													    'data-toggle' 	 => 'modal',
+													    'style' 		      => 'border:none; background:transparent'
+													]); ?>
 												</div>
 												<div class="font-weight-bold"><?= number_to_currency($sudah_bayar, 'IDR'); ?></div>
 											</div>
-										<?php }
-										if (($wajib_bayar - $sudah_bayar) > 0) {
-										?>
+										<?php
+                                        }
+
+                                        if (($wajib_bayar - $sudah_bayar) > 0) {
+                                            ?>
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">Kurang</span>&nbsp;Bayar</div>
 												<div class="font-weight-bold text-danger"><?= number_to_currency(- ($wajib_bayar - $sudah_bayar), 'IDR'); ?></div>
 											</div>
-										<?php }
-										if ($sudah_bayar > $wajib_bayar) {
-										?>
+										<?php
+                                        }
+
+                                        if ($sudah_bayar > $wajib_bayar) {
+                                            ?>
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">Lebih</span>&nbsp;Bayar</div>
 												<div class="font-weight-bold"><?= number_to_currency(($sudah_bayar - $wajib_bayar), 'IDR'); ?></div>
 											</div>
-										<?php }
-										?>
+										<?php
+                                        }
+                                        ?>
 									</div>
 									<div class="p-2 list-group-item-<?= status_pembayaran($pesanan->pembayaran, $pesanan->status_pembayaran, 'l_class');; ?> shadow rounded rounded-sm">
 										<div class="d-flex justify-content-between align-items-center">
@@ -317,18 +325,18 @@ $session = \Config\Services::session();
 
 						<div class="col-12 col-sm-4 mb-3">
 							<div class="mb-3">
-								<?php if ($pesanan->keterangan !== NULL) { ?>
+								<?php if ($pesanan->keterangan !== null) { ?>
 									<div class="card-subtitle text-muted text-uppercase small">Keterangan</div>
 									<p class="keterangan mb-3" id="keterangan-<?= $pesanan->id_invoice; ?>">
 										<?= nl2br($pesanan->keterangan); ?>
 									</p>
 								<?php } ?>
 
-								<?php if ($pesanan->status_pengiriman !== '1' && $pengiriman !== NULL) { ?>
+								<?php if ($pesanan->status_pengiriman !== '1' && $pengiriman !== null) { ?>
 									<div class="card-subtitle text-muted text-uppercase small">Resi</div>
 
 									<?php
-									foreach ($pengiriman as $key => $kirim) { ?>
+                                    foreach ($pengiriman as $key => $kirim) { ?>
 										<div class="border-bottom mb-2 pb-2">
 											<?php $tanggal_kirim = Time::createFromTimestamp($kirim->tanggal_kirim); ?>
 											<h6 class="mb-0"><?= $kirim->kurir; ?></h6>
@@ -341,8 +349,8 @@ $session = \Config\Services::session();
 											</p>
 										</div>
 									<?php
-									}
-									?>
+                                    }
+                                    ?>
 								<?php } ?>
 							</div>
 						</div>
@@ -352,14 +360,14 @@ $session = \Config\Services::session();
 					<!-- Example split danger button -->
 					<div class="btn-group">
 						<?= form_button([
-							'class' 		=> 'btn btn-outline-secondary tambahBayar',
-							'content' 		=> 'Tambah Pembayaran',
-							'data-invoice' 	=> $pesanan->id_invoice,
-							'data-juragan' 	=> $juragan->id,
-							'data-kurang' 	=> $wajib_bayar - $sudah_bayar,
-							'data-seri' 	=> $pesanan->seri,
-							'data-target' 	=> '#modalTambahBayar',
-							'data-toggle' 	=> 'modal'
+						    'class' 		      => 'btn btn-outline-secondary tambahBayar',
+						    'content' 		    => 'Tambah Pembayaran',
+						    'data-invoice' 	=> $pesanan->id_invoice,
+						    'data-juragan' 	=> $juragan->id,
+						    'data-kurang' 	 => $wajib_bayar - $sudah_bayar,
+						    'data-seri' 	   => $pesanan->seri,
+						    'data-target' 	 => '#modalTambahBayar',
+						    'data-toggle' 	 => 'modal'
 						]); ?>
 						<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
 							<span class="sr-only">Toggle Dropdown</span>
@@ -371,37 +379,36 @@ $session = \Config\Services::session();
 							</li>
 							<li>
 								<?= form_button([
-									'class' 		=> 'dropdown-item belumFungsi',
-									'content' 		=> 'Sunting'
+								    'class' 		  => 'dropdown-item belumFungsi',
+								    'content' 		=> 'Sunting'
 								]); ?>
 							</li>
 						</ul>
 					</div>
 
 					<?php if ($pesanan->status_pembayaran !== '1') {
-
-						if ($pesanan->status_pembayaran === '2' or $pesanan->status_pembayaran === '3') {
-							// tombol cek pembayaran
-							// hanya tampil jika ada pembayaran yang perlu dicek
-							echo form_button([
-								'class' 		=> 'btn btn-warning ml-1 pesanBayar',
-								'content' 		=> '<i class="fal fa-wallet"></i> Cek Pembayaran',
-								'data-invoice' 	=> $pesanan->id_invoice,
-								'data-juragan' 	=> $juragan->id,
-								'data-target' 	=> '#modalBayar',
-								'data-toggle' 	=> 'modal'
-							]);
-						}
-					} ?>
+                                    if ($pesanan->status_pembayaran === '2' or $pesanan->status_pembayaran === '3') {
+                                        // tombol cek pembayaran
+                                        // hanya tampil jika ada pembayaran yang perlu dicek
+                                        echo form_button([
+                                            'class' 		      => 'btn btn-warning ml-1 pesanBayar',
+                                            'content' 		    => '<i class="fal fa-wallet"></i> Cek Pembayaran',
+                                            'data-invoice' 	=> $pesanan->id_invoice,
+                                            'data-juragan' 	=> $juragan->id,
+                                            'data-target' 	 => '#modalBayar',
+                                            'data-toggle' 	 => 'modal'
+                                        ]);
+                                    }
+                                } ?>
 				</div>
 			</div>
 	<?php
-		}
-		echo $pager->makeLinks($page, $limit, $totalPage, 'front_full');
-	} else {
-		echo '<div class="text-center my-5"><i class="fal fa-5x fa-box-open text-primary"></i><br/>orderan masih kosong</div>';
-	}
-	?>
+        }
+        echo $pager->makeLinks($page, $limit, $totalPage, 'front_full');
+    } else {
+        echo '<div class="text-center my-5"><i class="fal fa-5x fa-box-open text-primary"></i><br/>orderan masih kosong</div>';
+    }
+    ?>
 
 </div>
 
@@ -420,19 +427,19 @@ $session = \Config\Services::session();
 				<?= form_label('Pilih Status', 'status', ['class' => 'form-label']); ?>
 				<div class="input-group mb-3">
 					<?php
-					$list_status = [
-						'' => 'Pilih status',
-						'1' => 'Data Pesanan',
-						'2' => 'Bahan Produk',
-						'3' => 'Sablon',
-						'4' => 'Bordir',
-						'5' => 'Penjahit',
-						'6' => 'QC',
-						'7' => 'Packing'
-					];
-					echo form_dropdown('status', $list_status, '', ['class' => 'form-select', 'id' => 'status', 'required' => '']);
-					echo form_dropdown('stat', ['' => 'Pilih', '1' => 'Ada', '0' => 'Tidak Ada'], '', ['class' => 'form-select', 'id' => 'stat', 'required' => '', 'disabled' => '']);
-					?>
+                    $list_status = [
+                        ''  => 'Pilih status',
+                        '1' => 'Data Pesanan',
+                        '2' => 'Bahan Produk',
+                        '3' => 'Sablon',
+                        '4' => 'Bordir',
+                        '5' => 'Penjahit',
+                        '6' => 'QC',
+                        '7' => 'Packing'
+                    ];
+                    echo form_dropdown('status', $list_status, '', ['class' => 'form-select', 'id' => 'status', 'required' => '']);
+                    echo form_dropdown('stat', ['' => 'Pilih', '1' => 'Ada', '0' => 'Tidak Ada'], '', ['class' => 'form-select', 'id' => 'stat', 'required' => '', 'disabled' => '']);
+                    ?>
 				</div>
 			</div>
 
@@ -520,59 +527,59 @@ $session = \Config\Services::session();
 					<div class="col-4">
 						<?= form_label('Status Pembayaran', 'status_pembayaran', ['class' => 'form-label sr-only']); ?>
 						<?php
-						$opsi_pembayaran = [
-							'' => 'Opsi Pembayaran',
-							'1' => 'Belum bayar',
-							'2A' => 'Tunggu Konfirmasi Pembayaran',
-							'4' => 'Cicilan / Kredit',
-							'5' => 'Ada kelebihan',
-							'6' => 'Sudah lunas'
-						];
-						echo form_dropdown('cari[pembayaran]', $opsi_pembayaran, '', ['class' => 'form-select mb-2 mr-sm-2']);
-						?>
+                        $opsi_pembayaran = [
+                            ''   => 'Opsi Pembayaran',
+                            '1'  => 'Belum bayar',
+                            '2A' => 'Tunggu Konfirmasi Pembayaran',
+                            '4'  => 'Cicilan / Kredit',
+                            '5'  => 'Ada kelebihan',
+                            '6'  => 'Sudah lunas'
+                        ];
+                        echo form_dropdown('cari[pembayaran]', $opsi_pembayaran, '', ['class' => 'form-select mb-2 mr-sm-2']);
+                        ?>
 					</div>
 
 					<div class="col-4">
 						<div class="col-12">
 							<?= form_label('Status Orderan', 'status_orderan', ['class' => 'form-label sr-only']); ?>
 							<?php
-							$opsi_orderan = [
-								'' => 'Opsi Orderan',
-								'1' => 'Belum diproses',
-								'2' => 'Sedang/sudah diproses',
-								'3' => 'Dibatalkan'
-							];
-							echo form_dropdown('cari[orderan]', $opsi_orderan, '', ['class' => 'form-select mb-2 mr-sm-2']);
-							?>
+                            $opsi_orderan = [
+                                ''  => 'Opsi Orderan',
+                                '1' => 'Belum diproses',
+                                '2' => 'Sedang/sudah diproses',
+                                '3' => 'Dibatalkan'
+                            ];
+                            echo form_dropdown('cari[orderan]', $opsi_orderan, '', ['class' => 'form-select mb-2 mr-sm-2']);
+                            ?>
 						</div>
 					</div>
 
 					<div class="col-4">
 						<?= form_label('Status Pengiriman', 'status_pengiriman', ['class' => 'form-label sr-only']); ?>
 						<?php
-						$opsi_pengiriman = [
-							'' => 'Opsi pengiriman',
-							'1' => 'Belum dikirim',
-							'2A' => 'Dikirim'
-						];
-						echo form_dropdown('cari[pengiriman]', $opsi_pengiriman, '', ['class' => 'form-select mb-2 mr-sm-2']);
-						?>
+                        $opsi_pengiriman = [
+                            ''   => 'Opsi pengiriman',
+                            '1'  => 'Belum dikirim',
+                            '2A' => 'Dikirim'
+                        ];
+                        echo form_dropdown('cari[pengiriman]', $opsi_pengiriman, '', ['class' => 'form-select mb-2 mr-sm-2']);
+                        ?>
 					</div>
 				</div>
 
 				<div class="input-group mb-2">
 					<?php
-					$opsi_kolom = [
-						'' => 'Opsi Pencarian',
-						'nama' => 'Nama Pelanggan',
-						'hp' => 'HP Pelanggan',
-						'faktur' => 'Kode Invoice',
-						'tanggal_pesan' => 'Tanggal Pesan',
-						'kode' => 'Kode Produk'
-					];
-					echo form_dropdown('cari[kolom]', $opsi_kolom, '', ['class' => 'form-select']);
-					echo form_input(['name' => 'cari[q]', 'class' => 'form-control allow-enter', 'style' => 'flex:2', 'placeholder' => 'cari .....']);
-					?>
+                    $opsi_kolom = [
+                        ''              => 'Opsi Pencarian',
+                        'nama'          => 'Nama Pelanggan',
+                        'hp'            => 'HP Pelanggan',
+                        'faktur'        => 'Kode Invoice',
+                        'tanggal_pesan' => 'Tanggal Pesan',
+                        'kode'          => 'Kode Produk'
+                    ];
+                    echo form_dropdown('cari[kolom]', $opsi_kolom, '', ['class' => 'form-select']);
+                    echo form_input(['name' => 'cari[q]', 'class' => 'form-control allow-enter', 'style' => 'flex:2', 'placeholder' => 'cari .....']);
+                    ?>
 					<div class="text-muted">untuk pencarian berdasarkan tanggal, gunakan format seperti: <code>2020-09-20</code></div>
 				</div>
 
@@ -591,15 +598,15 @@ $session = \Config\Services::session();
 <?= $this->section('js') ?>
 <?php
 
-$current_user_id = $session->get('id');
-$link_api_get_bank = site_url("api/juragan/all/");
-$link_api_get_pembayaran = site_url("user/invoices/info_pembayaran");
-$link_api_juragan = site_url("api/juragan/by_user/");
+$current_user_id         = $session->get('id');
+$link_api_get_bank       = site_url('api/juragan/all/');
+$link_api_get_pembayaran = site_url('user/invoices/info_pembayaran');
+$link_api_juragan        = site_url('api/juragan/by_user/');
 $link_get_status_invoice = site_url('admin/invoices/detail_status/');
-$link_hapus_orderan = site_url('user/invoices/hapus_orderan/');
-$link_invoice = site_url('user/invoices/lihat/');
-$link_tambah_pembayaran = site_url('user/invoices/simpan_pembayaran');
-$link_api_notif = site_url('api/notifikasi/');
+$link_hapus_orderan      = site_url('user/invoices/hapus_orderan/');
+$link_invoice            = site_url('user/invoices/lihat/');
+$link_tambah_pembayaran  = site_url('user/invoices/simpan_pembayaran');
+$link_api_notif          = site_url('api/notifikasi/');
 
 $js = <<< JS
 $(function() { 
@@ -963,7 +970,7 @@ $(function() {
 });
 JS;
 
-$packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
+$packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();
 echo '<script>' . $packed_js . '</script>';
 ?>

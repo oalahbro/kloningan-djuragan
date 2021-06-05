@@ -9,15 +9,15 @@ class Download extends BaseController
     public function invoice($invoice)
     {
         if (!$this->isLogged()) {
-			return redirect()->to('/auth');
-		}
+            return redirect()->to('/auth');
+        }
 
         $cari = [
             'kolom' => 'faktur',
-            'q' => $invoice
+            'q'     => $invoice
         ];
 
-        $get_invoice = $this->invoice->ambil_data(NULL, 'semua', NULL, NULL, $cari)->get()->getResult();
+        $get_invoice = $this->invoice->ambil_data(null, 'semua', null, null, $cari)->get()->getResult();
 
         $filename = time();
 
@@ -37,7 +37,7 @@ class Download extends BaseController
         // $dompdf->stream();
 
         // Output the generated PDF to Browser
-        $dompdf->stream($filename, array("Attachment" => false));
+        $dompdf->stream($filename, ['Attachment' => false]);
         exit(0);
     }
 }

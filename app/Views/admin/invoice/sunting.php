@@ -4,15 +4,15 @@ use App\Libraries\Ongkir;
 use CodeIgniter\I18n\Time;
 
 $sekarang = new Time('now');
-$session = \Config\Services::session();
+$session  = \Config\Services::session();
 
-$orderan 	= $pesanan[0];
-$juragan 	= json_decode($orderan->juragan);
+$orderan 	 = $pesanan[0];
+$juragan 	 = json_decode($orderan->juragan);
 $pengguna 	= json_decode($orderan->pengguna);
-$pemesan 	= json_decode($orderan->pelanggan);
-$kirimKe 	= json_decode($orderan->kirimKe);
-$dibeli 	= json_decode($orderan->barang);
-$biaya 		= json_decode($orderan->biaya);
+$pemesan 	 = json_decode($orderan->pelanggan);
+$kirimKe 	 = json_decode($orderan->kirimKe);
+$dibeli 	  = json_decode($orderan->barang);
+$biaya 		  = json_decode($orderan->biaya);
 ?>
 
 <?= $this->extend('template/default_admin') ?>
@@ -57,11 +57,11 @@ $biaya 		= json_decode($orderan->biaya);
 							<div class="col-sm-5">
 								<?= form_label('Asal Orderan', 'asal_orderan', ['class' => 'form-label']); ?>
 								<?php
-								$options_label = array('' => 'Pilih asal');
-								foreach (config('JuraganConfig')->label as $key => $label) {
-									$options_label[$key] = $label;
-								}
-								?>
+                                $options_label = ['' => 'Pilih asal'];
+                                foreach (config('JuraganConfig')->label as $key => $label) {
+                                    $options_label[$key] = $label;
+                                }
+                                ?>
 								<?= form_dropdown('asal_orderan', $options_label, '', ['class' => 'form-select', 'id' => 'asal_orderan', 'required' => '']); ?>
 							</div>
 							<div class="col-sm-7">
@@ -88,57 +88,58 @@ $biaya 		= json_decode($orderan->biaya);
 
 						<div class="input-group mb-3 mycustom form_pemesan" style="display: none;">
 							<?= form_input([
-								'class' 	=> 'form-control cari_pelanggan pemesan',
-								'id' 		=> 'cari_pemesan',
-								'placeholder' => 'cari data pelanggan',
-								'type' 		=> 'search'
+							    'class' 	     => 'form-control cari_pelanggan pemesan',
+							    'id' 		       => 'cari_pemesan',
+							    'placeholder' => 'cari data pelanggan',
+							    'type' 		     => 'search'
 							]); ?>
 							<?= form_button([
-								'class' 	=> 'btn btn-dark',
-								'content' 	=> '<i class="fal fa-plus"></i> Tambah',
-								'data-target' => '#modalTambahPelanggan',
-								'data-toggle' => 'modal',
-								'id' 		=> 'tambah_pemesan_kirimKe',
-								'title' 	=> 'Tambah Data Pemesan'
+							    'class' 	     => 'btn btn-dark',
+							    'content' 	   => '<i class="fal fa-plus"></i> Tambah',
+							    'data-target' => '#modalTambahPelanggan',
+							    'data-toggle' => 'modal',
+							    'id' 		       => 'tambah_pemesan_kirimKe',
+							    'title' 	     => 'Tambah Data Pemesan'
 							]); ?>
 						</div>
 
 						<?php
-						$alamat_pemesan_full = 'C.O.D';
-						if ($pemesan->cod === 0) {
-							$ongkir = new Ongkir();
+                        $alamat_pemesan_full = 'C.O.D';
 
-							$PPro = $pemesan->provinsi;
-							$PKab = $pemesan->kabupaten;
-							$PKec = $pemesan->kecamatan;
-							$kota = $ongkir->kota($PPro, $PKab);
+                        if ($pemesan->cod === 0) {
+                            $ongkir = new Ongkir();
 
-							$kec = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
-							$kab = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
-							$prov = strtoupper($ongkir->provinsi($PPro)['province']);
+                            $PPro = $pemesan->provinsi;
+                            $PKab = $pemesan->kabupaten;
+                            $PKec = $pemesan->kecamatan;
+                            $kota = $ongkir->kota($PPro, $PKab);
 
-							$alamat_pemesan_full = $pemesan->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $pemesan->kodepos;
-						}
-						?>
+                            $kec  = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
+                            $kab  = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
+                            $prov = strtoupper($ongkir->provinsi($PPro)['province']);
+
+                            $alamat_pemesan_full = $pemesan->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $pemesan->kodepos;
+                        }
+                        ?>
 
 						<div class="mb-3 info-data-pemesan">
 							<?= form_button([
-								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
-								'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-								'title' 	=> 'Hapus Pemesan'
+							    'class' 	  => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
+							    'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+							    'title' 	  => 'Hapus Pemesan'
 							]); ?>
 							<span id="alamat_pemesan" class="border rounded p-2 d-block">
 								<h6 class="text-muted font-weight-normal">Pemesan</h6>
 								<span class="d-block font-weight-bold"><?= $pemesan->nama; ?></span>
 								<span class="d-block">
 									<?php
-									for ($i = 0; $i < count($pemesan->hp); $i++) {
-										if ($i === 1) {
-											echo '<span> / </span>';
-										}
-										echo $pemesan->hp[$i];
-									}
-									?>
+                                    for ($i = 0; $i < count($pemesan->hp); $i++) {
+                                        if ($i === 1) {
+                                            echo '<span> / </span>';
+                                        }
+                                        echo $pemesan->hp[$i];
+                                    }
+                                    ?>
 								</span>
 								<span class="d-block"><?= $alamat_pemesan_full; ?></span>
 							</span>
@@ -146,57 +147,58 @@ $biaya 		= json_decode($orderan->biaya);
 
 						<div class="input-group mb-3 mycustom form_kirimKe" style="display: none">
 							<?= form_input([
-								'class' 	=> 'form-control cari_pelanggan kirimKe',
-								'id' 		=> 'cari_kirimKe',
-								'placeholder' => 'cari data pelanggan',
-								'type' 		=> 'search'
+							    'class' 	     => 'form-control cari_pelanggan kirimKe',
+							    'id' 		       => 'cari_kirimKe',
+							    'placeholder' => 'cari data pelanggan',
+							    'type' 		     => 'search'
 							]); ?>
 							<?= form_button([
-								'class' 	=> 'btn btn-dark',
-								'content' 	=> '<i class="fal fa-plus"></i> Tambah',
-								'data-target' => '#modalTambahPelanggan',
-								'data-toggle' => 'modal',
-								'id' 		=> 'tambah_kirimKe',
-								'title' 	=> 'Tambah Data Kirim Kepada'
+							    'class' 	     => 'btn btn-dark',
+							    'content' 	   => '<i class="fal fa-plus"></i> Tambah',
+							    'data-target' => '#modalTambahPelanggan',
+							    'data-toggle' => 'modal',
+							    'id' 		       => 'tambah_kirimKe',
+							    'title' 	     => 'Tambah Data Kirim Kepada'
 							]); ?>
 						</div>
 
 						<?php
-						$alamat_kirim_full = 'C.O.D';
-						if ($kirimKe->cod === 0) {
-							$ongkir = new Ongkir();
+                        $alamat_kirim_full = 'C.O.D';
 
-							$KKPro = $kirimKe->provinsi;
-							$KKKab = $kirimKe->kabupaten;
-							$KKKec = $kirimKe->kecamatan;
-							$Kkota = $ongkir->kota($KKPro, $KKKab);
+                        if ($kirimKe->cod === 0) {
+                            $ongkir = new Ongkir();
 
-							$Kkec = strtoupper($ongkir->kecamatan($KKKab, $KKKec)['subdistrict_name']);
-							$Kkab = strtoupper(($Kkota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $Kkota['city_name']);
-							$Kprov = strtoupper($ongkir->provinsi($KKPro)['province']);
+                            $KKPro = $kirimKe->provinsi;
+                            $KKKab = $kirimKe->kabupaten;
+                            $KKKec = $kirimKe->kecamatan;
+                            $Kkota = $ongkir->kota($KKPro, $KKKab);
 
-							$alamat_kirim_full = $kirimKe->alamat . '<br/>' . $Kkec . ', ' . $Kkab  . '<br/>' . $Kprov . ' - ' . $kirimKe->kodepos;
-						}
-						?>
+                            $Kkec  = strtoupper($ongkir->kecamatan($KKKab, $KKKec)['subdistrict_name']);
+                            $Kkab  = strtoupper(($Kkota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $Kkota['city_name']);
+                            $Kprov = strtoupper($ongkir->provinsi($KKPro)['province']);
+
+                            $alamat_kirim_full = $kirimKe->alamat . '<br/>' . $Kkec . ', ' . $Kkab  . '<br/>' . $Kprov . ' - ' . $kirimKe->kodepos;
+                        }
+                        ?>
 
 						<div class="mb-3 info-data-kirimKe">
 							<?= form_button([
-								'class' 	=> 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
-								'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-								'title' 	=> 'Hapus Kirim'
+							    'class' 	  => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
+							    'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+							    'title' 	  => 'Hapus Kirim'
 							]); ?>
 							<span id="alamat_kirimKe" class="border rounded p-2 d-block">
 								<h6 class="text-muted font-weight-normal">Kirim Kepada</h6>
 								<span class="d-block font-weight-bold"><?= $kirimKe->nama; ?></span>
 								<span class="d-block">
 									<?php
-									for ($i = 0; $i < count($kirimKe->hp); $i++) {
-										if ($i === 1) {
-											echo '<span> / </span>';
-										}
-										echo $kirimKe->hp[$i];
-									}
-									?>
+                                    for ($i = 0; $i < count($kirimKe->hp); $i++) {
+                                        if ($i === 1) {
+                                            echo '<span> / </span>';
+                                        }
+                                        echo $kirimKe->hp[$i];
+                                    }
+                                    ?>
 								</span>
 								<span class="d-block"><?= $alamat_kirim_full; ?></span>
 							</span>
@@ -204,7 +206,7 @@ $biaya 		= json_decode($orderan->biaya);
 					</div>
 					<div class="mb-3">
 						<?= form_label('Note / Keterangan', 'keterangan', ['class' => 'form-label']); ?>
-						<?= form_textarea(['name' => 'keterangan', 'value' => set_value('keterangan', ($orderan->keterangan !== null? $orderan->keterangan:'')), 'id' => 'keterangan', 'class' => 'form-control', 'rows' => '3', 'placeholder' => 'opsional']); ?>
+						<?= form_textarea(['name' => 'keterangan', 'value' => set_value('keterangan', ($orderan->keterangan !== null ? $orderan->keterangan : '')), 'id' => 'keterangan', 'class' => 'form-control', 'rows' => '3', 'placeholder' => 'opsional']); ?>
 					</div>
 				</div>
 			</div>
@@ -246,11 +248,10 @@ $biaya 		= json_decode($orderan->biaya);
 								</tr>
 
 								<?php
-								$subtotal = 0;
-								foreach ($dibeli as $produk) {
-									$produk_total = $produk->harga * $produk->qty;
-									$subtotal +=  $produk_total;
-								?>
+                                $subtotal = 0;
+                                foreach ($dibeli as $produk) {
+                                    $produk_total = $produk->harga * $produk->qty;
+                                    $subtotal += $produk_total; ?>
 									<tr>
 										<td>
 											<div>
@@ -272,26 +273,28 @@ $biaya 		= json_decode($orderan->biaya);
 										</td>
 									</tr>
 
-								<?php } ?>
+								<?php
+                                } ?>
 							</tbody>
 							<tfoot class="customBiaya d-none listBiaya">
 								<?php
-								$totalbiaya = 0;
-								if ($biaya !== NULL) {
-									foreach ($biaya as $o) {
-										$totalbiaya += $o->nominal;
-									}
-								}
+                                $totalbiaya = 0;
 
-								?>
+                                if ($biaya !== null) {
+                                    foreach ($biaya as $o) {
+                                        $totalbiaya += $o->nominal;
+                                    }
+                                }
+
+                                ?>
 								<tr>
 									<td colspan="3" class="text-right">Subtotal</td>
 									<td class="text-right" data-totalbiaya="<?= $totalbiaya; ?>" data-subtotal="<?= $subtotal; ?>" id="subTotal"><?= number_to_currency($subtotal, 'IDR'); ?></td>
 								</tr>
 
 								<?php
-								if ($biaya !== NULL) {
-									foreach ($biaya as $o) { ?>
+                                if ($biaya !== null) {
+                                    foreach ($biaya as $o) { ?>
 										<tr>
 											<td colspan="3" class="text-right">
 												<button type="button" class="bg-transparent border-0 hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fal fa-trash-alt h6"></i></span></button>
@@ -305,7 +308,7 @@ $biaya 		= json_decode($orderan->biaya);
 											</td>
 										</tr>
 								<?php }
-								} ?>
+                                } ?>
 							</tfoot>
 						</table>
 					</div>
@@ -363,7 +366,7 @@ $biaya 		= json_decode($orderan->biaya);
 			<div class="mb-3">
 				<div class="form-check form-switch">
 					<?= form_label('COD', 'cod', ['class' => 'form-check-label']); ?>
-					<?= form_checkbox('cod', 'ya', TRUE, ['class' => 'form-check-input swictCOD', 'id' => 'cod']); ?>
+					<?= form_checkbox('cod', 'ya', true, ['class' => 'form-check-input swictCOD', 'id' => 'cod']); ?>
 				</div>
 			</div>
 
@@ -385,7 +388,7 @@ $biaya 		= json_decode($orderan->biaya);
 					<div class="col">
 						<?= form_label('Kecamatan', 'kecamatan', ['class' => 'form-label']); ?>
 						<?= form_dropdown('kecamatan', ['' => 'Pilih Kecamatan'], '', ['class' => 'form-select input', 'id' => 'kecamatan', 'required' => '', 'disabled' => '']);
-						?>
+                        ?>
 					</div>
 				</div>
 
@@ -467,19 +470,18 @@ $biaya 		= json_decode($orderan->biaya);
 					<div class="col col-sm-6 col-md-3">
 						<?= form_label('Ukuran', 'ukuran', ['class' => 'form-label']); ?>
 						<?php
-						echo '<select name="ukuran" class="form-select" id="ukuran" required="">';
-						echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
-						foreach (config('JuraganConfig')->size as $k => $v) {
-
-							echo '<optgroup label="' . $k . '">';
-							foreach ($v as $k2 => $v2) {
-								echo '<option value="' . $k2 . '">' . $v2 . '</option>';
-							}
-							echo '</optgroup>';
-						}
-						echo '<option value="custom">Custom</option>';
-						echo '</select>';
-						?>
+                        echo '<select name="ukuran" class="form-select" id="ukuran" required="">';
+                        echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
+                        foreach (config('JuraganConfig')->size as $k => $v) {
+                            echo '<optgroup label="' . $k . '">';
+                            foreach ($v as $k2 => $v2) {
+                                echo '<option value="' . $k2 . '">' . $v2 . '</option>';
+                            }
+                            echo '</optgroup>';
+                        }
+                        echo '<option value="custom">Custom</option>';
+                        echo '</select>';
+                        ?>
 					</div>
 					<div class="col col-sm-6 col-md-3">
 						<?= form_label('QTY', 'QTY', ['class' => 'form-label']); ?>
@@ -503,18 +505,18 @@ $biaya 		= json_decode($orderan->biaya);
 <?= $this->section('js') ?>
 <?php
 
-$current_user_id = $session->get('id');
-$link_api_invoice = site_url('admin/invoices/save');
+$current_user_id         = $session->get('id');
+$link_api_invoice        = site_url('admin/invoices/save');
 $link_api_invoice_update = site_url('admin/invoices/update');
-$link_api_juragan = site_url("api/juragan/by_user/");
-$link_api_kecamatan = site_url('rajaongkir/kecamatan');
-$link_api_kota = site_url('rajaongkir/kota');
-$link_api_pengguna = site_url('api/juragan/get_users/');
-$link_api_provinsi = site_url('rajaongkir/provinsi');
-$link_cari_pelanggan = site_url('pelanggan/cari');
-$link_invoice = site_url('admin/invoices/lihat/');
-$link_post_pelanggan = site_url('pelanggan/baru');
-$link_api_notif = site_url('api/notifikasi/');
+$link_api_juragan        = site_url('api/juragan/by_user/');
+$link_api_kecamatan      = site_url('rajaongkir/kecamatan');
+$link_api_kota           = site_url('rajaongkir/kota');
+$link_api_pengguna       = site_url('api/juragan/get_users/');
+$link_api_provinsi       = site_url('rajaongkir/provinsi');
+$link_cari_pelanggan     = site_url('pelanggan/cari');
+$link_invoice            = site_url('admin/invoices/lihat/');
+$link_post_pelanggan     = site_url('pelanggan/baru');
+$link_api_notif          = site_url('api/notifikasi/');
 
 $js = <<< JS
 $(function() { 
@@ -1230,7 +1232,7 @@ $(function() {
 
 JS;
 
-$packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
+$packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();
 echo '<script>' . $packed_js . '</script>';
 ?>
