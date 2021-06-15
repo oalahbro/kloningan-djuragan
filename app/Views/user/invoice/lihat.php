@@ -53,10 +53,10 @@ $session  = \Config\Services::session();
 
 							<div class="border-left pl-3">
 								<?php
-                                $juragan 	  = json_decode($pesanan->juragan);
-                                $pengguna 	 = json_decode($pesanan->pengguna);
+                                $juragan    = json_decode($pesanan->juragan);
+                                $pengguna   = json_decode($pesanan->pengguna);
                                 $pengiriman = json_decode($pesanan->pengiriman);
-                                $statuss 	  = json_decode($pesanan->status);
+                                $statuss    = json_decode($pesanan->status);
                                 ?>
 								<span class="text-muted text-lowercase">Juragan:</span> <?= anchor('user/invoices/lihat/' . $juragan->slug, $juragan->nama); ?><br />
 								<span class="text-muted text-lowercase">Admin/CS:</span> <?= $pengguna->nama; ?>
@@ -198,6 +198,7 @@ $session  = \Config\Services::session();
                                     $wajib_bayar  = 0;
                                     $count_barang = 0;
                                     $harga_barang = 0;
+
                                     foreach (json_decode($pesanan->barang) as $b) {
                                         $count_barang += $b->qty;
                                         $wajib_bayar += $b->qty * $b->harga;
@@ -218,7 +219,7 @@ $session  = \Config\Services::session();
                                                 'data-toggle'  => 'popHarga',
                                                 'data-content' => $content,
                                                 'content'      => '<i class="fal fa-info-circle"></i> <span class="sr-only">info</span>',
-                                                'class'        => 'btn btn-link btn-sm text-secondary'
+                                                'class'        => 'btn btn-link btn-sm text-secondary',
                                             ]
                                         );
                                         echo '</li>';
@@ -280,13 +281,13 @@ $session  = \Config\Services::session();
 												<div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">
 														Sudah</span>&nbsp;Bayar
 													<?= form_button([
-													    'class' 		      => 'text-dark ml-1 pesanBayar',
-													    'content' 		    => '<i class="fal fa-info-circle"></i> <span class="sr-only">info</span>',
-													    'data-invoice' 	=> $pesanan->id_invoice,
-													    'data-juragan' 	=> $juragan->id,
-													    'data-target' 	 => '#modalBayar',
-													    'data-toggle' 	 => 'modal',
-													    'style' 		      => 'border:none; background:transparent'
+													    'class'        => 'text-dark ml-1 pesanBayar',
+													    'content'      => '<i class="fal fa-info-circle"></i> <span class="sr-only">info</span>',
+													    'data-invoice' => $pesanan->id_invoice,
+													    'data-juragan' => $juragan->id,
+													    'data-target'  => '#modalBayar',
+													    'data-toggle'  => 'modal',
+													    'style'        => 'border:none; background:transparent',
 													]); ?>
 												</div>
 												<div class="font-weight-bold"><?= number_to_currency($sudah_bayar, 'IDR'); ?></div>
@@ -360,14 +361,14 @@ $session  = \Config\Services::session();
 					<!-- Example split danger button -->
 					<div class="btn-group">
 						<?= form_button([
-						    'class' 		      => 'btn btn-outline-secondary tambahBayar',
-						    'content' 		    => 'Tambah Pembayaran',
-						    'data-invoice' 	=> $pesanan->id_invoice,
-						    'data-juragan' 	=> $juragan->id,
-						    'data-kurang' 	 => $wajib_bayar - $sudah_bayar,
-						    'data-seri' 	   => $pesanan->seri,
-						    'data-target' 	 => '#modalTambahBayar',
-						    'data-toggle' 	 => 'modal'
+						    'class'        => 'btn btn-outline-secondary tambahBayar',
+						    'content'      => 'Tambah Pembayaran',
+						    'data-invoice' => $pesanan->id_invoice,
+						    'data-juragan' => $juragan->id,
+						    'data-kurang'  => $wajib_bayar - $sudah_bayar,
+						    'data-seri'    => $pesanan->seri,
+						    'data-target'  => '#modalTambahBayar',
+						    'data-toggle'  => 'modal',
 						]); ?>
 						<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
 							<span class="sr-only">Toggle Dropdown</span>
@@ -379,8 +380,8 @@ $session  = \Config\Services::session();
 							</li>
 							<li>
 								<?= form_button([
-								    'class' 		  => 'dropdown-item belumFungsi',
-								    'content' 		=> 'Sunting'
+								    'class'   => 'dropdown-item belumFungsi',
+								    'content' => 'Sunting',
 								]); ?>
 							</li>
 						</ul>
@@ -391,12 +392,12 @@ $session  = \Config\Services::session();
                                         // tombol cek pembayaran
                                         // hanya tampil jika ada pembayaran yang perlu dicek
                                         echo form_button([
-                                            'class' 		      => 'btn btn-warning ml-1 pesanBayar',
-                                            'content' 		    => '<i class="fal fa-wallet"></i> Cek Pembayaran',
-                                            'data-invoice' 	=> $pesanan->id_invoice,
-                                            'data-juragan' 	=> $juragan->id,
-                                            'data-target' 	 => '#modalBayar',
-                                            'data-toggle' 	 => 'modal'
+                                            'class'        => 'btn btn-warning ml-1 pesanBayar',
+                                            'content'      => '<i class="fal fa-wallet"></i> Cek Pembayaran',
+                                            'data-invoice' => $pesanan->id_invoice,
+                                            'data-juragan' => $juragan->id,
+                                            'data-target'  => '#modalBayar',
+                                            'data-toggle'  => 'modal',
                                         ]);
                                     }
                                 } ?>
@@ -435,7 +436,7 @@ $session  = \Config\Services::session();
                         '4' => 'Bordir',
                         '5' => 'Penjahit',
                         '6' => 'QC',
-                        '7' => 'Packing'
+                        '7' => 'Packing',
                     ];
                     echo form_dropdown('status', $list_status, '', ['class' => 'form-select', 'id' => 'status', 'required' => '']);
                     echo form_dropdown('stat', ['' => 'Pilih', '1' => 'Ada', '0' => 'Tidak Ada'], '', ['class' => 'form-select', 'id' => 'stat', 'required' => '', 'disabled' => '']);
@@ -533,7 +534,7 @@ $session  = \Config\Services::session();
                             '2A' => 'Tunggu Konfirmasi Pembayaran',
                             '4'  => 'Cicilan / Kredit',
                             '5'  => 'Ada kelebihan',
-                            '6'  => 'Sudah lunas'
+                            '6'  => 'Sudah lunas',
                         ];
                         echo form_dropdown('cari[pembayaran]', $opsi_pembayaran, '', ['class' => 'form-select mb-2 mr-sm-2']);
                         ?>
@@ -547,7 +548,7 @@ $session  = \Config\Services::session();
                                 ''  => 'Opsi Orderan',
                                 '1' => 'Belum diproses',
                                 '2' => 'Sedang/sudah diproses',
-                                '3' => 'Dibatalkan'
+                                '3' => 'Dibatalkan',
                             ];
                             echo form_dropdown('cari[orderan]', $opsi_orderan, '', ['class' => 'form-select mb-2 mr-sm-2']);
                             ?>
@@ -560,7 +561,7 @@ $session  = \Config\Services::session();
                         $opsi_pengiriman = [
                             ''   => 'Opsi pengiriman',
                             '1'  => 'Belum dikirim',
-                            '2A' => 'Dikirim'
+                            '2A' => 'Dikirim',
                         ];
                         echo form_dropdown('cari[pengiriman]', $opsi_pengiriman, '', ['class' => 'form-select mb-2 mr-sm-2']);
                         ?>
@@ -575,7 +576,7 @@ $session  = \Config\Services::session();
                         'hp'            => 'HP Pelanggan',
                         'faktur'        => 'Kode Invoice',
                         'tanggal_pesan' => 'Tanggal Pesan',
-                        'kode'          => 'Kode Produk'
+                        'kode'          => 'Kode Produk',
                     ];
                     echo form_dropdown('cari[kolom]', $opsi_kolom, '', ['class' => 'form-select']);
                     echo form_input(['name' => 'cari[q]', 'class' => 'form-control allow-enter', 'style' => 'flex:2', 'placeholder' => 'cari .....']);

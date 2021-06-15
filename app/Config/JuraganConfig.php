@@ -6,7 +6,7 @@ use CodeIgniter\Config\BaseConfig;
 
 class JuraganConfig extends BaseConfig
 {
-    public $rajaongkir  = '75f538ed88e26297a2fabed240ed8bf0'; // ID rajaongkir
+    public $rajaongkir = '75f538ed88e26297a2fabed240ed8bf0'; // ID rajaongkir
 
     public $label = [
         '1'  => 'Blibli',
@@ -21,7 +21,7 @@ class JuraganConfig extends BaseConfig
         '10' => 'Zalora',
         '13' => 'Meesho',
         '8'  => 'Web/App lain',
-        '6'  => 'Offline Store/COD'
+        '6'  => 'Offline Store/COD',
     ];
 
     public $size = [
@@ -31,7 +31,7 @@ class JuraganConfig extends BaseConfig
             'l'    => 'L',
             'xl'   => 'XL',
             'xxl'  => 'XXL',
-            'xxxl' => 'XXXL'
+            'xxxl' => 'XXXL',
         ],
         'bawahan' => [
             '28' => '28',
@@ -40,8 +40,8 @@ class JuraganConfig extends BaseConfig
             '31' => '31',
             '32' => '32',
             '33' => '33',
-            '34' => '34'
-        ]
+            '34' => '34',
+        ],
         // custom
     ];
 
@@ -54,7 +54,7 @@ class JuraganConfig extends BaseConfig
         'Wahana',
         'J&T',
         'RPX',
-        'lainnya'
+        'lainnya',
     ];
 
     public $notifikasi = [
@@ -80,6 +80,6 @@ class JuraganConfig extends BaseConfig
         '20' => '<i class="fal fa-box-alt text-success"></i> Orderan pada invoice {invoice} selesai packing',
         '21' => '<i class="fal fa-shipping-fast text-warning"></i> Orderan pada invoice {invoice} dikirim beberapa dulu',
         '22' => '<i class="fal fa-shipping-fast text-success"></i> Orderan pada invoice {invoice} telah dikirimkan',
-        '23' => '<i class="fal fa-money-check-edit fa-flip-horizontal"></i> Resi Orderan pada invoice {invoice} telah diubah'
+        '23' => '<i class="fal fa-money-check-edit fa-flip-horizontal"></i> Resi Orderan pada invoice {invoice} telah diubah',
     ];
 }

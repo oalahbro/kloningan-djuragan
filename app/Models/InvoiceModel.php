@@ -91,22 +91,27 @@ class InvoiceModel extends Model
                         $inv->where('i.id_invoice', $cari['q']);
 
                         break;
+
                     case 'faktur':
                         $inv->where('i.seri', $cari['q']);
 
                         break;
+
                     case 'nama':
                         $inv->where("(p.nama_pelanggan LIKE '%" . $cari['q'] . "%' OR k.nama_pelanggan LIKE '%" . $cari['q'] . "%')");
 
                         break;
+
                     case 'hp':
                         $inv->where("(p.hp LIKE '%" . $cari['q'] . "%' OR k.hp LIKE '%" . $cari['q'] . "%')");
 
                         break;
+
                     case 'kode':
                         $inv->where("(b.kode LIKE '%" . $cari['q'] . "%')");
 
                         break;
+
                     case 'tanggal_pesan':
                         // DATE(CONVERT_TZ(FROM_UNIXTIME(tanggal_dibuat, '%Y-%m-%d %H:%i:%s'), '+00:00', '+00:00'))='".$cari['tanggal']."'
                         $inv->where('i.tanggal_pesan', $cari['q']);
@@ -117,6 +122,7 @@ class InvoiceModel extends Model
                 $query = '(';
                 $query .= "b.kode LIKE '%" . $cari['q'] . "%' ";
                 preg_match_all('/%22(?:\\\\.|(?!%22).)*%22|\S+/', $cari['q'], $matches);
+
                 foreach ($matches[0] as $term) {
                     $term = trim($term);
 
@@ -239,11 +245,11 @@ class InvoiceModel extends Model
 
     public function counter_terkirim()
     {
-        $awalBulanIni 	 = tanggalDefault('mulai');
-        $akhirBulanIni 	= tanggalDefault('akhir');
+        $awalBulanIni  = tanggalDefault('mulai');
+        $akhirBulanIni = tanggalDefault('akhir');
 
-        $awalBulanLalu 	= satuBulanSebelumnya($awalBulanIni);
-        $akhirBulanLalu	= satuBulanSebelumnya($akhirBulanIni);
+        $awalBulanLalu  = satuBulanSebelumnya($awalBulanIni);
+        $akhirBulanLalu = satuBulanSebelumnya($akhirBulanIni);
 
         $counter = $this->db->table('juragan j');
         $counter->select('j.*');

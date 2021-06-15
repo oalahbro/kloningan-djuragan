@@ -17,7 +17,7 @@
 		<div class="col-md-4 d-flex justify-content-start align-items-center">
 			<div class="w-100 my-5 my-md-2 px-3">
 				<div>
-					<?= (isset($_SESSION['status']) ? $_SESSION['status'] : ''); ?>
+					<?= ($_SESSION['status'] ?? ''); ?>
 					<?= form_open(); ?>
 					<div class="form-group mb-2">
 						<?php

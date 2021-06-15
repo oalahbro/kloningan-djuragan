@@ -14,6 +14,7 @@ class Invoice extends ResourceController
         $rows = $this->model->ambil_data()->get()->getResult();
 
         $response = [];
+
         foreach ($rows as $pesanan) {
             $juragan  = json_decode($pesanan->juragan);
             $pengguna = json_decode($pesanan->pengguna);
@@ -22,6 +23,7 @@ class Invoice extends ResourceController
             $barang   = json_decode($pesanan->barang);
 
             $dibeli = [];
+
             foreach ($barang as $p) {
                 $dibeli[] = [
                     'id'       => $p->id,
@@ -29,7 +31,7 @@ class Invoice extends ResourceController
                     'code'     => strtoupper($p->kode),
                     'size'     => strtoupper($p->ukuran),
                     'price'    => $p->harga,
-                    'qty'      => $p->qty
+                    'qty'      => $p->qty,
 
                 ];
             }
@@ -41,21 +43,21 @@ class Invoice extends ResourceController
                 'status'        => [
                     'pesanan'    => $pesanan->status_pesanan,
                     'pembayaran' => $pesanan->status_pembayaran,
-                    'pengiriman' => $pesanan->status_pengiriman
+                    'pengiriman' => $pesanan->status_pengiriman,
                 ],
                 'sumber' => [
                     'id'    => (int) $pesanan->source_id,
-                    'label' => $pesanan->label_asal
+                    'label' => $pesanan->label_asal,
                 ],
                 'juragan' => [
                     'id'   => $juragan->id,
                     'nama' => $juragan->nama,
-                    'slug' => $juragan->slug
+                    'slug' => $juragan->slug,
                 ],
                 'pengguna' => [
                     'id'       => $pengguna->id,
                     'nama'     => $pengguna->nama,
-                    'username' => $pengguna->username
+                    'username' => $pengguna->username,
                 ],
                 'pelanggan' => [
                     'pemesan' => [
@@ -66,7 +68,7 @@ class Invoice extends ResourceController
                         'kecamatan' => $pemesan->kecamatan,
                         'kabupaten' => $pemesan->kabupaten,
                         'provinsi'  => $pemesan->provinsi,
-                        'kodepos'   => $pemesan->kodepos
+                        'kodepos'   => $pemesan->kodepos,
 
                     ],
                     'alamat_kirim' => [
@@ -77,11 +79,11 @@ class Invoice extends ResourceController
                         'kecamatan' => $kirim->kecamatan,
                         'kabupaten' => $kirim->kabupaten,
                         'provinsi'  => $kirim->provinsi,
-                        'kodepos'   => $kirim->kodepos
+                        'kodepos'   => $kirim->kodepos,
 
-                    ]
+                    ],
                 ],
-                'barang_dibeli' => $dibeli
+                'barang_dibeli' => $dibeli,
 
                 /*
 
@@ -113,8 +115,6 @@ class Invoice extends ResourceController
     public function tes($id)
     {
         $hasil = $this->model->jumlah_produk($id)->getResult()[0];
-
-
 
         return $this->respond($hasil);
         # code...

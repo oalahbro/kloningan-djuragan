@@ -41,20 +41,20 @@ $routes->addRedirect('admin', 'admin_inv');
 $routes->get('user/invoices', 'User/Invoices::lihat', ['as' => 'user_inv']);
 $routes->addRedirect('user', 'user_inv');
 
-$routes->group('api', function ($routes) {
-    $routes->group('juragan', function ($routes) {
+$routes->group('api', static function ($routes) {
+    $routes->group('juragan', static function ($routes) {
         $routes->add('(:segment)', 'Api\Juragan::$1');
     });
 
-    $routes->group('notifikasi', function ($routes) {
+    $routes->group('notifikasi', static function ($routes) {
         $routes->add('(:segment)', 'Api\Notifikasi::$1');
     });
 
-    $routes->group('pengguna', function ($routes) {
+    $routes->group('pengguna', static function ($routes) {
         $routes->add('(:segment)', 'Api\Pengguna::$1');
     });
 
-    $routes->group('pengiriman', function ($routes) {
+    $routes->group('pengiriman', static function ($routes) {
         $routes->add('(:segment)', 'Api\Pengiriman::$1');
         $routes->post('photos', 'Api\Pengiriman::create');
     });

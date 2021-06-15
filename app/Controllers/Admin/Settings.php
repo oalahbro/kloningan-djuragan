@@ -17,8 +17,8 @@ class Settings extends BaseController
         }
 
         $data = [
-            'title'     => 'Pengaturan Situs',
-            'banks'     => $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll()
+            'title' => 'Pengaturan Situs',
+            'banks' => $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll(),
         ];
 
         echo view('admin/pengaturan/situs', $data);
@@ -48,16 +48,16 @@ class Settings extends BaseController
             $tipe      = $this->request->getPost('nama_bank');
             $tipe_bank = null;
 
-            if (in_array($tipe, ['bca', 'bni', 'mandiri', 'bri'])) {
+            if (\in_array($tipe, ['bca', 'bni', 'mandiri', 'bri'])) {
                 $tipe_bank = '1';
-            } elseif (in_array($tipe, ['edc'])) {
+            } elseif (\in_array($tipe, ['edc'])) {
                 $tipe_bank = '2';
             }
             $this->bank->insert([
                 'nama_bank' => $tipe,
                 'tipe_bank' => $tipe_bank,
                 'rekening'  => $this->request->getPost('nomor_rekening'),
-                'atas_nama' => $this->request->getPost('atas_nama')
+                'atas_nama' => $this->request->getPost('atas_nama'),
             ]);
 
             // return redirect()->to('/settings')->with('notif', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Penambahan </div>');
@@ -79,8 +79,8 @@ class Settings extends BaseController
         }
 
         $data = [
-            'title' 	=> 'Pengaturan Juragan',
-            'banks' 	=> $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll()
+            'title' => 'Pengaturan Juragan',
+            'banks' => $this->bank->orderBy('atas_nama ASC, nama_bank ASC')->findAll(),
         ];
 
         echo view('admin/pengaturan/juragan', $data);
@@ -114,7 +114,7 @@ class Settings extends BaseController
 
             $this->juragan->save([
                 'juragan'      => random_string('sha1', 40), // url_title( $nama_juragan, '-', TRUE ),
-                'nama_juragan' => $nama_juragan
+                'nama_juragan' => $nama_juragan,
             ]);
             $id = $db->insertID();
 
@@ -124,7 +124,7 @@ class Settings extends BaseController
                     $this->relasi->insert([
                         'table'      => 2, // juragan-bank
                         'juragan_id' => $id,
-                        'val_id'     => $bank
+                        'val_id'     => $bank,
                     ]);
                 }
             }
@@ -164,7 +164,7 @@ class Settings extends BaseController
             $this->juragan->save([
                 'id_juragan' => $id_juragan,
                 // 'juragan' => url_title( $nama_juragan, '-', TRUE ),
-                'nama_juragan' => $nama_juragan
+                'nama_juragan' => $nama_juragan,
             ]);
 
             // hapus semua tabel relasi
@@ -176,7 +176,7 @@ class Settings extends BaseController
                     $this->relasi->insert([
                         'table'      => 2, // juragan-bank
                         'juragan_id' => $id_juragan,
-                        'val_id'     => $bank
+                        'val_id'     => $bank,
                     ]);
                 }
             }
@@ -198,7 +198,7 @@ class Settings extends BaseController
         }
 
         $data = [
-            'title' 	=> 'Pengaturan Pengguna'
+            'title' => 'Pengaturan Pengguna',
         ];
 
         echo view('admin/pengaturan/pengguna', $data);
@@ -230,15 +230,14 @@ class Settings extends BaseController
             $level = $this->request->getPost('level');
 
             $this->user->save([
-                'username' 	=> strtolower($this->request->getPost('username')),
-                'password' 	=> password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
-                'name' 		   => $this->request->getPost('nama'),
-                'email' 	   => strtolower($this->request->getPost('email')),
-                'level' 	   => $level,
-                'status' 	  => $this->request->getPost('status')
+                'username' => strtolower($this->request->getPost('username')),
+                'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
+                'name'     => $this->request->getPost('nama'),
+                'email'    => strtolower($this->request->getPost('email')),
+                'level'    => $level,
+                'status'   => $this->request->getPost('status'),
             ]);
             $id = $db->insertID();
-
 
             $juragans = $this->request->getPost('juragan');
 
@@ -247,7 +246,7 @@ class Settings extends BaseController
                     $this->relasi->insert([
                         'table'      => 1, // juragan-user
                         'juragan_id' => $juragan,
-                        'val_id'     => $id
+                        'val_id'     => $id,
                     ]);
                 }
             }
@@ -309,7 +308,7 @@ class Settings extends BaseController
                     $this->relasi->insert([
                         'table'      => 1, // juragan-user
                         'juragan_id' => $juragan,
-                        'val_id'     => $id
+                        'val_id'     => $id,
                     ]);
                 }
             }

@@ -9,7 +9,7 @@ class Rajaongkir extends BaseController
     public function index()
     {
         $data = [
-            'data' => 'not valid'
+            'data' => 'not valid',
         ];
 
         return $this->response->setJSON($data);

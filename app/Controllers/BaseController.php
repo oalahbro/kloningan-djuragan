@@ -76,13 +76,13 @@ class BaseController extends Controller
         $this->session    = \Config\Services::session();
         $this->validation = \Config\Services::validation();
 
-        $this->bank 	     = new BankModel();
-        $this->invoice 	  = new InvoiceModel();
-        $this->juragan 	  = new JuraganModel();
+        $this->bank       = new BankModel();
+        $this->invoice    = new InvoiceModel();
+        $this->juragan    = new JuraganModel();
         $this->pembayaran = new PembayaranModel();
         $this->pengiriman = new PengirimanModel();
-        $this->relasi 	   = new RelasiModel();
-        $this->user 	     = new UserModel();
+        $this->relasi     = new RelasiModel();
+        $this->user       = new UserModel();
 
         // migration here
         // $migrate = \Config\Services::migrations();
@@ -126,6 +126,7 @@ class BaseController extends Controller
         $juragan = Jrgn::by_user($user_id);
 
         $ids = [];
+
         foreach ($juragan[$user_id]['juragan'] as $r) {
             $ids = array_merge($ids, [$r['id']]);
         }
@@ -135,6 +136,7 @@ class BaseController extends Controller
         if ($return === null) {
             //  $juragan[$user_id]['juragan'];
             $arr = [];
+
             foreach ($juragan[$user_id]['juragan'] as $r => $v) {
                 $arr['id_juragan']   = $v['id'];
                 $arr['juragan']      = $v['slug'];
@@ -155,7 +157,7 @@ class BaseController extends Controller
 
         $return = false;
 
-        if (count($get) > 0) {
+        if (\count($get) > 0) {
             $return = true;
         }
 

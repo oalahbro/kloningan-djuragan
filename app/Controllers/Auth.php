@@ -28,7 +28,7 @@ class Auth extends BaseController
         if (!$this->validation->withRequest($this->request)->run()) {
             $data = [
                 'title'      => 'Masuk',
-                'validation' => $this->validation
+                'validation' => $this->validation,
             ];
             echo view('masuk', $data);
         } else {
@@ -37,15 +37,15 @@ class Auth extends BaseController
             if ($get === null or empty($get)) {
                 $arr = [
                     'sesi' => [
-                        'logged' => false
+                        'logged' => false,
                     ],
                     'redirect' => '/auth/index',
-                    'status'   => '<div class="alert alert-danger"><strong class="d-block">Nay!</strong>Kamu siapa? daftar aja dulu.</div>'
+                    'status'   => '<div class="alert alert-danger"><strong class="d-block">Nay!</strong>Kamu siapa? daftar aja dulu.</div>',
                 ];
             } else {
                 $post_pswd = $this->request->getPost('password');
                 // cek length password in db
-                if (strlen($get->password) === 32) {
+                if (\strlen($get->password) === 32) {
                     // jika password gunakan md5()
                     // ini berguna untuk edit password lewat phpmyadmin
 
@@ -60,10 +60,10 @@ class Auth extends BaseController
                     } else {
                         $arr = [
                             'sesi' => [
-                                'logged' => false
+                                'logged' => false,
                             ],
                             'redirect' => '/auth/index',
-                            'status'   => '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Ingat lagi apa kata sandimu, ku tungguin deh.</div>'
+                            'status'   => '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Ingat lagi apa kata sandimu, ku tungguin deh.</div>',
                         ];
                     }
                 }
@@ -83,10 +83,10 @@ class Auth extends BaseController
             case 'pending':
                 $arr = [
                     'sesi' => [
-                        'logged' => false
+                        'logged' => false,
                     ],
                     'redirect' => '/auth/index',
-                    'status'   => '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Kamu sudah terdaftar kok, tapi cek email dulu ya.</div>'
+                    'status'   => '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Kamu sudah terdaftar kok, tapi cek email dulu ya.</div>',
                 ];
 
                 break;
@@ -94,10 +94,10 @@ class Auth extends BaseController
             case 'blocked':
                 $arr = [
                     'sesi' => [
-                        'logged' => false
+                        'logged' => false,
                     ],
                     'redirect' => '/auth/index',
-                    'status'   => '<div class="alert alert-danger"><strong class="d-block">Grrrr!</strong>Kamu dilarang masuk.</div>'
+                    'status'   => '<div class="alert alert-danger"><strong class="d-block">Grrrr!</strong>Kamu dilarang masuk.</div>',
                 ];
 
                 break;
@@ -105,21 +105,22 @@ class Auth extends BaseController
             case 'inactive':
                 $arr = [
                     'sesi' => [
-                        'logged' => false
+                        'logged' => false,
                     ],
                     'redirect' => '/auth/index',
-                    'status'   => '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Tunggu validasi dari admin ya, atau hubungi admin segera.</div>'
+                    'status'   => '<div class="alert alert-warning"><strong class="d-block">Nay!</strong>Tunggu validasi dari admin ya, atau hubungi admin segera.</div>',
                 ];
 
                 break;
+
             default:
                 // save for update `login_terakhir`
-                $data['id'] 			         = $db->id;
+                $data['id']             = $db->id;
                 $data['login_terakhir'] = now();
 
                 // jika password dari md5() perlu diupdate
                 if ($password_to_update !== false) {
-                    $data['password'] 	= password_hash($password_to_update, PASSWORD_BCRYPT);
+                    $data['password'] = password_hash($password_to_update, PASSWORD_BCRYPT);
                 }
 
                 $this->user->save($data);
@@ -132,17 +133,16 @@ class Auth extends BaseController
 
                 $arr = [
                     'sesi' => [
-                        'id'  		    => $db->id,
-                        'username'  => $db->username,
-                        'name'  	   => $db->name,
-                        'email'  	  => $db->email,
-                        'level'  	  => $db->level,
-                        'logged'	   => true
+                        'id'       => $db->id,
+                        'username' => $db->username,
+                        'name'     => $db->name,
+                        'email'    => $db->email,
+                        'level'    => $db->level,
+                        'logged'   => true,
                     ],
 
-
                     'redirect' => $redirect,
-                    'status'   => '<div class="alert alert-sucess"><strong class="d-block">Hay!</strong>Jangan lupa bahagia ya.</div>'
+                    'status'   => '<div class="alert alert-sucess"><strong class="d-block">Hay!</strong>Jangan lupa bahagia ya.</div>',
                 ];
 
                 break;
@@ -175,7 +175,7 @@ class Auth extends BaseController
         if (!$this->validation->withRequest($this->request)->run()) {
             $data = [
                 'title'      => 'Daftar',
-                'validation' => $this->validation
+                'validation' => $this->validation,
             ];
             echo view('daftar', $data);
         } else {
@@ -183,7 +183,7 @@ class Auth extends BaseController
                 'username' => $this->request->getPost('username'),
                 'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
                 'name'     => $this->request->getPost('nama'),
-                'email'    => $this->request->getPost('email')
+                'email'    => $this->request->getPost('email'),
             ]);
 
             return redirect()->to('/auth/daftar')->with('status', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Kamu sudah terdaftar, cek email dulu ya.</div>');
@@ -214,7 +214,7 @@ class Auth extends BaseController
         if (!$this->validation->withRequest($this->request)->run()) {
             $data = [
                 'title'      => 'Lupa Sandi',
-                'validation' => $this->validation
+                'validation' => $this->validation,
             ];
             echo view('lupa', $data);
         } else {
@@ -222,7 +222,7 @@ class Auth extends BaseController
                 'username' => $this->request->getPost('username'),
                 'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
                 'name'     => $this->request->getPost('nama'),
-                'email'    => $this->request->getPost('email')
+                'email'    => $this->request->getPost('email'),
             ]);
 
             return redirect()->to('/auth/daftar')->with('status', '<div class="alert alert-info"><strong class="d-block">Yay!</strong>Kamu sudah terdaftar, cek email dulu ya.</div>');

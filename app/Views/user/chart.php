@@ -64,8 +64,8 @@ $orderBulanLalu    = json_encode($orderBulanLalu);
 $terkirimBulanIni  = json_encode($terkirimBulanIni);
 $terkirimBulanLalu = json_encode($terkirimBulanLalu);
 
-$awalBulanIni 	 = tanggalDefault('mulai');
-$akhirBulanIni 	= tanggalDefault('akhir');
+$awalBulanIni  = tanggalDefault('mulai');
+$akhirBulanIni = tanggalDefault('akhir');
 
 $js = <<< JS
 $(function() { 

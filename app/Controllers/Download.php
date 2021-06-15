@@ -14,7 +14,7 @@ class Download extends BaseController
 
         $cari = [
             'kolom' => 'faktur',
-            'q'     => $invoice
+            'q'     => $invoice,
         ];
 
         $get_invoice = $this->invoice->ambil_data(null, 'semua', null, null, $cari)->get()->getResult();
@@ -24,7 +24,7 @@ class Download extends BaseController
         // instantiate and use the dompdf class
         $dompdf = new Dompdf();
         $dompdf->loadHtml(view('template/invoice', [
-            'invoice' => $get_invoice[0]
+            'invoice' => $get_invoice[0],
         ]));
 
         // (Optional) Setup the paper size and orientation
@@ -38,6 +38,7 @@ class Download extends BaseController
 
         // Output the generated PDF to Browser
         $dompdf->stream($filename, ['Attachment' => false]);
+
         exit(0);
     }
 }

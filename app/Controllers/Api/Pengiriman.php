@@ -48,7 +48,7 @@ class Pengiriman extends \CodeIgniter\Controller
 
         if ((int) $id_pengiriman > 0) {
             $kirim_id = [
-                'id_pengiriman' => $id_pengiriman
+                'id_pengiriman' => $id_pengiriman,
             ];
         }
 
@@ -58,11 +58,10 @@ class Pengiriman extends \CodeIgniter\Controller
             'ongkir'        => $this->request->getPost('ongkir'),
             'resi'          => $this->request->getPost('resi'),
             'qty_kirim'     => $qty,
-            'tanggal_kirim' => $time
+            'tanggal_kirim' => $time,
         ];
 
         $data = array_merge($data, $kirim_id);
-
 
         $pengiriman->save($data);
 
@@ -83,7 +82,7 @@ class Pengiriman extends \CodeIgniter\Controller
             // save db invoice
             $invoice->save([
                 'id_invoice'        => $invoice_id,
-                'status_pengiriman' => $status
+                'status_pengiriman' => $status,
             ]);
 
             // simpan notif
@@ -96,10 +95,9 @@ class Pengiriman extends \CodeIgniter\Controller
             }
         }
 
-
         $res = [
-            'status'      => 'OK',
-            'url'         => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
+            'status' => 'OK',
+            'url'    => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id),
         ];
 
         return $this->respond($res);

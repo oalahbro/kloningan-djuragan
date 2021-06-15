@@ -78,7 +78,7 @@ $session = \Config\Services::session();
                                 'admin'      => 'Admin',
                                 'cs'         => 'CS',
                                 'viewer'     => 'Viewer',
-                                'reseller'   => 'Reseller'
+                                'reseller'   => 'Reseller',
                             ];
 
                             echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level', 'required' => '']);
@@ -92,7 +92,7 @@ $session = \Config\Services::session();
                                 'pending'  => 'Pending',
                                 'inactive' => 'Tidak Aktif',
                                 'active'   => 'Aktif',
-                                'blocked'  => 'Blokir'
+                                'blocked'  => 'Blokir',
                             ];
 
                             echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status', 'required' => '']);
@@ -164,7 +164,7 @@ $session = \Config\Services::session();
                             'admin'      => 'Admin',
                             'cs'         => 'CS',
                             'viewer'     => 'Viewer',
-                            'reseller'   => 'Reseller'
+                            'reseller'   => 'Reseller',
                         ];
 
                         echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level_', 'required' => '']);
@@ -178,7 +178,7 @@ $session = \Config\Services::session();
                             'pending'  => 'Pending',
                             'inactive' => 'Tidak Aktif',
                             'active'   => 'Aktif',
-                            'blocked'  => 'Blokir'
+                            'blocked'  => 'Blokir',
                         ];
 
                         echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status_', 'required' => '']);

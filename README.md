@@ -2,7 +2,7 @@
 
 ## Sekilas Info
 
-Web POS ini dibangun dengan menggunakan framework [Codeigniter](http://codeigniter.com) v4.1.2
+Web POS ini dibangun dengan menggunakan framework [Codeigniter](http://codeigniter.com) v4.1.3
 
 ## Update System
 

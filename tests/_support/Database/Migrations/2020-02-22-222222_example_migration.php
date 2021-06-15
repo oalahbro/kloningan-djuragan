@@ -11,23 +11,23 @@ class ExampleMigration extends Migration
     public function up()
     {
         $fields = [
-            'name'       => [
+            'name' => [
                 'type'       => 'varchar',
                 'constraint' => 31,
             ],
-            'uid'        => [
+            'uid' => [
                 'type'       => 'varchar',
                 'constraint' => 31,
             ],
-            'class'      => [
+            'class' => [
                 'type'       => 'varchar',
                 'constraint' => 63,
             ],
-            'icon'       => [
+            'icon' => [
                 'type'       => 'varchar',
                 'constraint' => 31,
             ],
-            'summary'    => [
+            'summary' => [
                 'type'       => 'varchar',
                 'constraint' => 255,
             ],

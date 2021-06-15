@@ -18,6 +18,7 @@ class Pengguna extends \CodeIgniter\Controller
         $gets = $user->orderBy('status DESC')->findAll();
 
         $json = [];
+
         foreach ($gets as $user) {
             $json[] = [
                 'id'             => (int) $user->id,
@@ -26,7 +27,7 @@ class Pengguna extends \CodeIgniter\Controller
                 'email'          => $user->email,
                 'level'          => $user->level,
                 'status'         => $user->status,
-                'login_terakhir' => $user->login_terakhir
+                'login_terakhir' => $user->login_terakhir,
             ];
         }
 

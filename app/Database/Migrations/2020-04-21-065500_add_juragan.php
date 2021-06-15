@@ -7,37 +7,37 @@ class AddJuragan extends \CodeIgniter\Database\Migration
     public function up()
     {
         $this->forge->addField([
-            'id_juragan'  => [
-                'type' 			       => 'INT',
-                'constraint' 	   => 5,
-                'unsigned' 		    => true,
-                'auto_increment' => true
+            'id_juragan' => [
+                'type'           => 'INT',
+                'constraint'     => 5,
+                'unsigned'       => true,
+                'auto_increment' => true,
             ],
             'juragan' => [
-                'type' 			     => 'VARCHAR',
-                'constraint' 	 => 40,
+                'type'       => 'VARCHAR',
+                'constraint' => 40,
             ],
             'nama_juragan' => [
-                'type' 			     => 'VARCHAR',
-                'constraint' 	 => 60,
+                'type'       => 'VARCHAR',
+                'constraint' => 60,
             ],
             'created_at' => [
-                'type' 			     => 'INT',
-                'constraint' 	 => 10,
-                'unsigned' 		  => true
+                'type'       => 'INT',
+                'constraint' => 10,
+                'unsigned'   => true,
             ],
             'updated_at' => [
-                'type'           => 'INT',
-                'constraint' 	   => 10,
-                'unsigned' 		    => true
+                'type'       => 'INT',
+                'constraint' => 10,
+                'unsigned'   => true,
             ],
             'deleted_at' => [
-                'type'           => 'INT',
-                'constraint' 	   => 10,
-                'unsigned' 		    => true,
-                'null' 			       => true,
-                'default' 		     => null
-            ]
+                'type'       => 'INT',
+                'constraint' => 10,
+                'unsigned'   => true,
+                'null'       => true,
+                'default'    => null,
+            ],
         ]);
         $this->forge->addKey('id_juragan', true);
         $this->forge->createTable('juragan', true);

@@ -19,7 +19,7 @@ class Invoices extends BaseController
         }
 
         $data = [
-            'title' => 'Tulis Orderan Baru'
+            'title' => 'Tulis Orderan Baru',
         ];
 
         return view('admin/invoice/tulis', $data);
@@ -37,7 +37,7 @@ class Invoices extends BaseController
             }
         }
 
-        if (!in_array($hal, ['semua', 'cek-bayar', 'dalam-proses', 'belum-proses', 'selesai'])) {
+        if (!\in_array($hal, ['semua', 'cek-bayar', 'dalam-proses', 'belum-proses', 'selesai'])) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
@@ -48,7 +48,7 @@ class Invoices extends BaseController
         if ($juragan !== 'semua') {
             $juragans = $this->juragan->where('juragan', $juragan)->findAll();
 
-            if (count($juragans) < 1) {
+            if (\count($juragans) < 1) {
                 return redirect()->to('/faktur?juragan_notfound=' . $juragan);
             }
             $title = $juragans[0]->nama_juragan;
@@ -72,13 +72,13 @@ class Invoices extends BaseController
         }
 
         $data = [
-            'title' 	   => 'Invoice ' . $title,
-            'pesanans' 	=> $this->invoice->ambil_data($id_juragan, $hal, $limit, $offset, $cari)->get()->getResult(),
+            'title'     => 'Invoice ' . $title,
+            'pesanans'  => $this->invoice->ambil_data($id_juragan, $hal, $limit, $offset, $cari)->get()->getResult(),
             'totalPage' => $this->invoice->ambil_data($id_juragan, $hal, null, null, $cari)->countAllResults(),
-            'jrgn' 		   => $juragan,
-            'hal' 		    => $hal,
-            'limit' 	   => $limit,
-            'page' 		   => $page
+            'jrgn'      => $juragan,
+            'hal'       => $hal,
+            'limit'     => $limit,
+            'page'      => $page,
         ];
         echo view('admin/invoice/lihat', $data);
     }
@@ -102,14 +102,14 @@ class Invoices extends BaseController
         } else {
             $cari = [
                 'kolom' => 'faktur',
-                'q'     => $seri
+                'q'     => $seri,
             ];
 
             //
             $pesanan = $this->invoice->ambil_data(null, 'semua', null, null, $cari)->get()->getResult();
             $data    = [
-                'title' 	  => 'Sunting Orderan #' . $seri,
-                'pesanan' 	=> $pesanan
+                'title'   => 'Sunting Orderan #' . $seri,
+                'pesanan' => $pesanan,
             ];
 
             return view('admin/invoice/sunting', $data);
@@ -167,22 +167,22 @@ class Invoices extends BaseController
             } else {
                 $db = \Config\Database::connect();
 
-                $user_id 	  = $this->request->getPost('pengguna');
-                $t 			      = $this->user->find($user_id);
-                $seri 		    = strtoupper(first_letter($t->name) . time());
+                $user_id    = $this->request->getPost('pengguna');
+                $t          = $this->user->find($user_id);
+                $seri       = strtoupper(first_letter($t->name) . time());
                 $juragan_id = $this->request->getPost('juragan');
 
                 $data_invoice = [
                     'tanggal_pesan'  => $this->request->getPost('tanggal_order'),
-                    'seri'			        => $seri,
-                    'pemesan_id' 	   => $this->request->getPost('id_pemesan'),
+                    'seri'           => $seri,
+                    'pemesan_id'     => $this->request->getPost('id_pemesan'),
                     'kirimKepada_id' => $this->request->getPost('id_kirimKe'),
-                    'juragan_id' 	   => $juragan_id,
-                    'user_id' 		     => $user_id,
+                    'juragan_id'     => $juragan_id,
+                    'user_id'        => $user_id,
                     // 'status_pesanan'=> '',
                     // 'status_pembayaran'=> '',
                     // 'status_pengiriman'=> '',
-                    'keterangan' 	=> ($this->request->getPost('keterangan') !== '' ? $this->request->getPost('keterangan') : null)
+                    'keterangan' => ($this->request->getPost('keterangan') !== '' ? $this->request->getPost('keterangan') : null),
                 ];
 
                 // simpan ke database
@@ -196,15 +196,16 @@ class Invoices extends BaseController
                     $data_asal = [
                         'invoice_id' => $invoice_id,
                         'source_id'  => $this->request->getPost('asal_orderan'),
-                        'label' 	    => ($this->request->getPost('label') !== '' ? $this->request->getPost('label') : null)
+                        'label'      => ($this->request->getPost('label') !== '' ? $this->request->getPost('label') : null),
                     ];
                     $db->table('label_invoice')->insert($data_asal);
 
                     // simpan produk
-                    $produks =  $this->request->getPost('produk');
+                    $produks = $this->request->getPost('produk');
 
                     // tambahkan `invoice_id` untuk tiap pesanan
                     $produk = [];
+
                     foreach ($produks as $k => $v) {
                         foreach ($v as $p => $d) {
                             $produk[$k]['invoice_id'] = $invoice_id;
@@ -220,10 +221,11 @@ class Invoices extends BaseController
                     // simpan biaya
                     if ($this->request->getVar('biaya') !== null) {
                         //
-                        $biayas =  $this->request->getPost('biaya');
+                        $biayas = $this->request->getPost('biaya');
 
                         // tambahkan `invoice_id` untuk tiap biaya
                         $biaya = [];
+
                         foreach ($biayas as $k => $v) {
                             foreach ($v as $p => $d) {
                                 $biaya[$k]['invoice_id'] = $invoice_id;
@@ -236,7 +238,7 @@ class Invoices extends BaseController
 
                 $ret = [
                     'status' => 'data tersimpan',
-                    'url'    => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=faktur&cari[q]=' . $seri)
+                    'url'    => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=faktur&cari[q]=' . $seri),
                 ];
 
                 return $this->response->setJSON($ret);
@@ -275,14 +277,14 @@ class Invoices extends BaseController
                 // $seri = strtoupper(first_letter($t->name) . time());
 
                 $data_invoice = [
-                    'id_invoice' 	  => $invoice_id,
+                    'id_invoice'    => $invoice_id,
                     'tanggal_pesan' => $this->request->getPost('tanggal_order'),
                     // 'seri'			=> $seri,
-                    'pemesan_id' 	   => $this->request->getPost('id_pemesan'),
+                    'pemesan_id'     => $this->request->getPost('id_pemesan'),
                     'kirimKepada_id' => $this->request->getPost('id_kirimKe'),
-                    'juragan_id' 	   => $this->request->getPost('juragan'),
-                    'user_id' 		     => $user_id,
-                    'keterangan' 	   => ($this->request->getPost('keterangan') !== '' ? $this->request->getPost('keterangan') : null)
+                    'juragan_id'     => $this->request->getPost('juragan'),
+                    'user_id'        => $user_id,
+                    'keterangan'     => ($this->request->getPost('keterangan') !== '' ? $this->request->getPost('keterangan') : null),
                 ];
 
                 // simpan ke database
@@ -299,7 +301,7 @@ class Invoices extends BaseController
                     $data_asal = [
                         'invoice_id' => $invoice_id,
                         'source_id'  => $this->request->getPost('asal_orderan'),
-                        'label' 	    => ($this->request->getPost('label') !== '' ? $this->request->getPost('label') : null)
+                        'label'      => ($this->request->getPost('label') !== '' ? $this->request->getPost('label') : null),
                     ];
                     $db->table('label_invoice')->insert($data_asal);
 
@@ -307,10 +309,11 @@ class Invoices extends BaseController
                     $db->table('dibeli')->delete(['invoice_id' => $invoice_id]);
 
                     // simpan produk
-                    $produks =  $this->request->getPost('produk');
+                    $produks = $this->request->getPost('produk');
 
                     // tambahkan `invoice_id` untuk tiap pesanan
                     $produk = [];
+
                     foreach ($produks as $k => $v) {
                         foreach ($v as $p => $d) {
                             $produk[$k]['invoice_id'] = $invoice_id;
@@ -329,10 +332,11 @@ class Invoices extends BaseController
                     // simpan biaya
                     if ($this->request->getVar('biaya') !== null) {
                         //
-                        $biayas =  $this->request->getPost('biaya');
+                        $biayas = $this->request->getPost('biaya');
 
                         // tambahkan `invoice_id` untuk tiap biaya
                         $biaya = [];
+
                         foreach ($biayas as $k => $v) {
                             foreach ($v as $p => $d) {
                                 $biaya[$k]['invoice_id'] = $invoice_id;
@@ -345,7 +349,7 @@ class Invoices extends BaseController
 
                 $ret = [
                     'status' => 'data tersimpan',
-                    'url'    => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
+                    'url'    => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id),
                 ];
 
                 return $this->response->setJSON($ret);
@@ -383,13 +387,13 @@ class Invoices extends BaseController
 
                 $data = [
                     'invoice_id' => $invoice_id,
-                    'status' 	   => $status,
-                    'stat' 		    => $stat,
-                    'keterangan' => ($keterangan !== '' ? $keterangan : null)
+                    'status'     => $status,
+                    'stat'       => $stat,
+                    'keterangan' => ($keterangan !== '' ? $keterangan : null),
                 ];
 
                 // ambil yang terakhir
-                $arr = array_slice($this->invoice->status($invoice_id)->getResult(), -1);
+                $arr = \array_slice($this->invoice->status($invoice_id)->getResult(), -1);
 
                 if (empty($arr)) {
                     // jika kosong, bikin baru
@@ -398,7 +402,7 @@ class Invoices extends BaseController
                     // update orderan menjadi `diproses` (2)
                     $update_invoice = [
                         'id_invoice'     => $invoice_id,
-                        'status_pesanan' => '2'
+                        'status_pesanan' => '2',
                     ];
                     $this->invoice->save($update_invoice);
                 } else {
@@ -415,7 +419,7 @@ class Invoices extends BaseController
 
                 $response = [
                     'status' => 200,
-                    'url'    => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
+                    'url'    => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id),
                 ];
 
                 return $this->response->setJSON($response);
@@ -461,6 +465,7 @@ class Invoices extends BaseController
                 }
 
                 break;
+
             case 2:
                 $status = 9;
 
@@ -469,6 +474,7 @@ class Invoices extends BaseController
                 }
 
                 break;
+
             case 3:
                 $status = 11;
 
@@ -477,6 +483,7 @@ class Invoices extends BaseController
                 }
 
                 break;
+
             case 4:
                 $status = 13;
 
@@ -485,6 +492,7 @@ class Invoices extends BaseController
                 }
 
                 break;
+
             case 5:
                 $status = 15;
 
@@ -493,6 +501,7 @@ class Invoices extends BaseController
                 }
 
                 break;
+
             case 6:
                 $status = 17;
 
@@ -501,6 +510,7 @@ class Invoices extends BaseController
                 }
 
                 break;
+
             case 7:
                 $status = 19;
 
@@ -554,7 +564,7 @@ class Invoices extends BaseController
                     'invoice_id'         => $invoice_id,
                     'sumber_dana'        => $this->request->getPost('sumber_dana'),
                     'total_pembayaran'   => $this->request->getPost('total_pembayaran'),
-                    'tanggal_pembayaran' => $time
+                    'tanggal_pembayaran' => $time,
                 ];
 
                 $this->pembayaran->save($data);
@@ -568,7 +578,7 @@ class Invoices extends BaseController
 
                 //
                 return $this->response->setJSON([
-                    'url' => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
+                    'url' => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id),
                 ]);
             }
         }
@@ -600,8 +610,8 @@ class Invoices extends BaseController
                 $status = $this->request->getPost('status');
                 $data   = [
                     'id_pembayaran' => $this->request->getPost('id_pembayaran'),
-                    'status' 		     => $status,
-                    'tanggal_cek' 	 => time()
+                    'status'        => $status,
+                    'tanggal_cek'   => time(),
                 ];
                 $this->pembayaran->save($data);
 
@@ -617,7 +627,7 @@ class Invoices extends BaseController
 
                 $res = [
                     'status' => 'data tersimpan',
-                    'url' 	  => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id)
+                    'url'    => site_url('admin/invoices/lihat/semua/semua?cari[kolom]=id&cari[q]=' . $invoice_id),
                 ];
 
                 return $this->response->setJSON($res);
@@ -671,7 +681,7 @@ class Invoices extends BaseController
         // jadikan status
         $update_invoice = [
             'id_invoice'        => $invoice_id,
-            'status_pembayaran' => $status_bayar
+            'status_pembayaran' => $status_bayar,
         ];
         $this->invoice->save($update_invoice);
 
@@ -691,7 +701,7 @@ class Invoices extends BaseController
         }
 
         if ($this->request->isAJAX()) {
-            $arr = array_slice($this->invoice->status($invoice_id)->getResult(), -1);
+            $arr = \array_slice($this->invoice->status($invoice_id)->getResult(), -1);
 
             return $this->response->setJSON($arr);
         } else {
@@ -719,14 +729,14 @@ class Invoices extends BaseController
 
             foreach ($x as $bayar) {
                 $res[] = [
-                    'id'		          => (int) $bayar->id,
-                    'nama' 		       => $bayar->nama,
-                    'atas_nama'	    => $bayar->atas_nama,
-                    'sumber' 	      => (int) $bayar->sumber,
-                    'nominal' 	     => number_to_currency($bayar->nominal, 'IDR'), //(int) $bayar->nominal,
-                    'status' 	      => (int) $bayar->status,
+                    'id'            => (int) $bayar->id,
+                    'nama'          => $bayar->nama,
+                    'atas_nama'     => $bayar->atas_nama,
+                    'sumber'        => (int) $bayar->sumber,
+                    'nominal'       => number_to_currency($bayar->nominal, 'IDR'), //(int) $bayar->nominal,
+                    'status'        => (int) $bayar->status,
                     'tanggal_bayar' => (int) $bayar->tanggal_pembayaran,
-                    'tanggal_cek'   => ($bayar->tanggal_cek !== null ? (int) $bayar->tanggal_cek : null)
+                    'tanggal_cek'   => ($bayar->tanggal_cek !== null ? (int) $bayar->tanggal_cek : null),
                 ];
             }
 

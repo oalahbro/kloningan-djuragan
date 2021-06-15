@@ -23,7 +23,7 @@ class Pelanggan extends BaseController
             $cod = $this->request->getVar('cod');
             $cod = ($cod === null ? '0' : '1');
 
-            $d['cod']           = $cod;
+            $d['cod'] = $cod;
 
             if ($cod === '1') {
                 $d['kecamatan'] = null;
@@ -90,10 +90,10 @@ class Pelanggan extends BaseController
         //     throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         // }
 
-        $cari          = $this->request->getGet('q');
-        $juragan_id    = $this->request->getGet('juragan_id');
-        $pelanggan     = new PelangganModel();
-        $ongkir        = new Ongkir();
+        $cari       = $this->request->getGet('q');
+        $juragan_id = $this->request->getGet('juragan_id');
+        $pelanggan  = new PelangganModel();
+        $ongkir     = new Ongkir();
 
         if ($this->request->getVar('juragan_id') && $juragan_id !== null) {
             $juragan_id = $juragan_id;
@@ -105,13 +105,14 @@ class Pelanggan extends BaseController
 
         $s = [];
         $i = 0;
+
         foreach ($builder->getResult() as $u) {
             $s[$i] = [
-                'id'    => (int) $u->id_pelanggan,
-                'nama'  => $u->nama_pelanggan,
-                'hp'    => json_decode($u->hp),
-                'cod'   => (int) $u->cod,
-                'full'  => 'C.O.D'
+                'id'   => (int) $u->id_pelanggan,
+                'nama' => $u->nama_pelanggan,
+                'hp'   => json_decode($u->hp),
+                'cod'  => (int) $u->cod,
+                'full' => 'C.O.D',
             ];
 
             if ($u->cod === '0') {
@@ -140,8 +141,8 @@ class Pelanggan extends BaseController
         }
 
         $return = [
-            'query'     => $cari,
-            'results'   => $s
+            'query'   => $cari,
+            'results' => $s,
         ];
 
         return $this->response->setJSON($return);

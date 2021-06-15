@@ -33,7 +33,8 @@ if (!function_exists('random_element')) {
      * Random Element - Takes an array as input and returns a random element
      *
      * @param	array
-     * @return	mixed	depends on what the array contains
+     *
+     * @return mixed depends on what the array contains
      */
     function random_element($array)
     {
@@ -93,7 +94,8 @@ if (!function_exists('first_letter')) {
      * First Letter - Get the first letter of string
      *
      * @param	string
-     * @return	string
+     *
+     * @return string
      */
     function first_letter($words, $length = 2)
     {
@@ -101,6 +103,7 @@ if (!function_exists('first_letter')) {
 
         if (count($r) > 1) {
             $c = '';
+
             foreach ($r as $f) {
                 $c .= mb_substr($f, 0, 1);
             }
@@ -118,6 +121,7 @@ if (!function_exists('status_orderan')) {
     function status_orderan($status, $mulai, $selesai, $keterangan_mulai, $keterangan_selesai)
     {
         $class = '';
+
         switch ($status) {
             case 1:
                 $ico = 'file-alt';
@@ -255,30 +259,35 @@ if (!function_exists('status_pembayaran')) {
                 $title   = 'Belum ada pembayaran (cek)';
 
                 break;
+
             case 3: // tunggu konfirmasi (kredit)
                 $class   = 'half';
                 $l_class = 'warning';
                 $title   = 'Sebagian sudah dibayar (cek)';
 
                 break;
+
             case 4: // kredit
                 $class   = 'half';
                 $l_class = 'warning';
                 $title   = 'Sebagian sudah dibayar';
 
                 break;
+
             case 5: // kelebihan
                 $class   = 'full';
                 $l_class = 'primary';
                 $title   = 'Pembayaran lunas, ada kelebihan';
 
                 break;
+
             case 6: // lunas
                 $class   = 'full';
                 $l_class = 'success';
                 $title   = 'Pembayaran sudah Lunas';
 
                 break;
+
             default: // belum bayar
                 $class   = '';
                 $l_class = 'danger';
@@ -332,11 +341,13 @@ if (!function_exists('status_pengiriman')) {
                 $title = 'Sebagian sudah dikirim';
 
                 break;
+
             case 3: // dikirim semua
                 $class = 'full';
                 $title = 'Semua pesanan sudah dikirim';
 
                 break;
+
             default: // belum kirim
                 $class = '';
                 $title = 'Masih menunggu';
@@ -394,6 +405,7 @@ if (!function_exists('simpan_notif')) {
         $user_id = $session->get('id');
 
         $r_users = $juragan->getUsersByJuragan($juragan_id)->getResult();
+
         foreach ($r_users as $v) {
             # code...
             if ($v->id !== $user_id) {
@@ -404,7 +416,7 @@ if (!function_exists('simpan_notif')) {
                     'for'        => $v->id,
                     'invoice_id' => $invoice_id,
                     'type'       => $type,
-                    'created_at' => time()
+                    'created_at' => time(),
                 ]);
             }
         }
@@ -422,14 +434,14 @@ if (!function_exists('tanggalDefault')) {
         $default_tanggal_akhir = 25;
         $setting               = '1';
 
-        $hari_ini       = $time->toLocalizedString('yyyy-MM-dd');
-        $bulan_ini      = $time->toLocalizedString('yyyy-MM');
-        $datestring     = $hari_ini . ' first day of last month';
-        $dt             = date_create($datestring);
-        $datestring2    = $hari_ini . ' first day of next month';
-        $dt2            = date_create($datestring2);
-        $bulan_kemarin  = $dt->format('Y-m');
-        $bulan_besok    = $dt2->format('Y-m');
+        $hari_ini      = $time->toLocalizedString('yyyy-MM-dd');
+        $bulan_ini     = $time->toLocalizedString('yyyy-MM');
+        $datestring    = $hari_ini . ' first day of last month';
+        $dt            = date_create($datestring);
+        $datestring2   = $hari_ini . ' first day of next month';
+        $dt2           = date_create($datestring2);
+        $bulan_kemarin = $dt->format('Y-m');
+        $bulan_besok   = $dt2->format('Y-m');
 
         $sekarang        = strtotime($hari_ini);
         $mulai_bulan_ini = strtotime($bulan_ini . '-' . $default_tanggal_mulai);

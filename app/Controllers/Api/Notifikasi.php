@@ -40,7 +40,7 @@ class Notifikasi extends \CodeIgniter\Controller
         $res = [
             'page'  => (int) $page,
             'next'  => (ceil($counter / $limit) > $page ? true : false),
-            'count' => $counter
+            'count' => $counter,
         ];
 
         $x = $notifikasi->ambil($user_id, $dibaca, $limit, $offset)->get()->getResult();
@@ -54,7 +54,7 @@ class Notifikasi extends \CodeIgniter\Controller
                 'notif'      => $notifikasi,
                 'created_at' => $tanggal->toLocalizedString('EEE, d MMM yyyy (HH:mm:ss)'),
                 'invoice'    => $notif->seri,
-                'juragan'    => $notif->juragan
+                'juragan'    => $notif->juragan,
             ];
         }
 
@@ -87,12 +87,12 @@ class Notifikasi extends \CodeIgniter\Controller
         $dibaca = time();
 
         if ($action === 'belumBaca') {
-            $dibaca =  null;
+            $dibaca = null;
         }
 
         $data = [
             'id_notifikasi' => $id,
-            'read_at'       => $dibaca
+            'read_at'       => $dibaca,
         ];
         $notifikasi->save($data);
 

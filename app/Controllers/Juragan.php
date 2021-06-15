@@ -16,18 +16,20 @@ class Juragan extends BaseController
 
             $json     = [];
             $juragans = [];
+
             foreach ($x as $a) {
                 $list_bank = [];
 
                 if ($bank === 'yes') {
                     $banks = $juragan->ambil_bank($a->id_juragan)->getResult();
+
                     foreach ($banks as $b) {
                         $list_bank[$b->id_bank] = [
                             'id'        => (int) $b->id_bank,
                             'nama'      => $b->nama_bank,
                             'tipe'      => $b->tipe_bank,
                             'rekening'  => $b->rekening,
-                            'atas_nama' => $b->atas_nama
+                            'atas_nama' => $b->atas_nama,
                         ];
                     }
                 }
@@ -35,7 +37,7 @@ class Juragan extends BaseController
                 $juragans[$a->id_juragan] = [
                     'id'   => (int) $a->id_juragan,
                     'nama' => $a->nama_juragan,
-                    'slug' => $a->juragan
+                    'slug' => $a->juragan,
                 ];
 
                 if ($bank === 'yes') {
@@ -47,7 +49,7 @@ class Juragan extends BaseController
                     'nama'     => $a->nama_user,
                     'username' => $a->username,
                     'email'    => $a->email,
-                    'juragan'  => $juragans
+                    'juragan'  => $juragans,
 
                 ];
             }
@@ -67,6 +69,7 @@ class Juragan extends BaseController
 
         $user        = $juragan->byUserId($current_user_id)->getResult();
         $ids_juragan = [];
+
         foreach ($user as $u) {
             $ids_juragan[] = $u->id_juragan;
         }
@@ -74,11 +77,12 @@ class Juragan extends BaseController
         $r_users = $juragan->getUsers($ids_juragan)->getResult();
 
         $users = [];
+
         foreach ($r_users as $jrgn) {
             $users[] = [
                 'id'       => (int) $jrgn->id,
                 'nama'     => $jrgn->name,
-                'username' => $jrgn->username
+                'username' => $jrgn->username,
             ];
         }
 

@@ -29,7 +29,7 @@ class PelangganModel extends Model
     {
         $builder = $this->db->table('pelanggan');
         $builder->where('id_pelanggan', $id_pelanggan);
-        $query   = $builder->get();
+        $query = $builder->get();
 
         return $query;
     }

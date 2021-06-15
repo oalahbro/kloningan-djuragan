@@ -44,6 +44,7 @@ $session  = \Config\Services::session();
 								<?= form_label('Asal Orderan', 'asal_orderan', ['class' => 'form-label']); ?>
 								<?php
                                 $options_label = ['' => 'Pilih asal'];
+
                                 foreach (config('JuraganConfig')->label as $key => $label) {
                                     $options_label[$key] = $label;
                                 }
@@ -74,52 +75,52 @@ $session  = \Config\Services::session();
 
 						<div class="input-group mb-3 mycustom form_pemesan">
 							<?= form_input([
-							    'class' 	     => 'form-control cari_pelanggan pemesan',
-							    'id' 		       => 'cari_pemesan',
+							    'class'       => 'form-control cari_pelanggan pemesan',
+							    'id'          => 'cari_pemesan',
 							    'placeholder' => 'cari data pelanggan',
-							    'type' 		     => 'search'
+							    'type'        => 'search',
 							]); ?>
 							<?= form_button([
-							    'class' 	     => 'btn btn-dark',
-							    'content' 	   => '<i class="fal fa-plus"></i> Tambah',
+							    'class'       => 'btn btn-dark',
+							    'content'     => '<i class="fal fa-plus"></i> Tambah',
 							    'data-target' => '#modalTambahPelanggan',
 							    'data-toggle' => 'modal',
-							    'id' 		       => 'tambah_pemesan_kirimKe',
-							    'title' 	     => 'Tambah Data Pemesan'
+							    'id'          => 'tambah_pemesan_kirimKe',
+							    'title'       => 'Tambah Data Pemesan',
 							]); ?>
 						</div>
 
 						<div class="mb-3 info-data-pemesan" style="display: none;">
 							<?= form_button([
-							    'class' 	  => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
-							    'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-							    'title' 	  => 'Hapus Pemesan'
+							    'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
+							    'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+							    'title'   => 'Hapus Pemesan',
 							]); ?>
 							<span id="alamat_pemesan" class="border rounded p-2 d-block"></span>
 						</div>
 
 						<div class="input-group mb-3 mycustom form_kirimKe" style="display: none">
 							<?= form_input([
-							    'class' 	     => 'form-control cari_pelanggan kirimKe',
-							    'id' 		       => 'cari_kirimKe',
+							    'class'       => 'form-control cari_pelanggan kirimKe',
+							    'id'          => 'cari_kirimKe',
 							    'placeholder' => 'cari data pelanggan',
-							    'type' 		     => 'search'
+							    'type'        => 'search',
 							]); ?>
 							<?= form_button([
-							    'class' 	     => 'btn btn-dark',
-							    'content' 	   => '<i class="fal fa-plus"></i> Tambah',
+							    'class'       => 'btn btn-dark',
+							    'content'     => '<i class="fal fa-plus"></i> Tambah',
 							    'data-target' => '#modalTambahPelanggan',
 							    'data-toggle' => 'modal',
-							    'id' 		       => 'tambah_kirimKe',
-							    'title' 	     => 'Tambah Data Kirim Kepada'
+							    'id'          => 'tambah_kirimKe',
+							    'title'       => 'Tambah Data Kirim Kepada',
 							]); ?>
 						</div>
 
 						<div class="mb-3 info-data-kirimKe" style="display: none;">
 							<?= form_button([
-							    'class' 	  => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
-							    'content' 	=> '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-							    'title' 	  => 'Hapus Kirim'
+							    'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
+							    'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+							    'title'   => 'Hapus Kirim',
 							]); ?>
 							<span id="alamat_kirimKe" class="border rounded p-2 d-block"></span>
 						</div>
@@ -335,8 +336,10 @@ $session  = \Config\Services::session();
 						<?php
                         echo '<select name="ukuran" class="form-select" id="ukuran" required="">';
                         echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
+
                         foreach (config('JuraganConfig')->size as $k => $v) {
                             echo '<optgroup label="' . $k . '">';
+
                             foreach ($v as $k2 => $v2) {
                                 echo '<option value="' . $k2 . '">' . $v2 . '</option>';
                             }

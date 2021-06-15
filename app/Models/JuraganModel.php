@@ -61,7 +61,7 @@ class JuraganModel extends Model
 
     public function getUsers($ids_juragan)
     {
-        if (is_array($ids_juragan)) {
+        if (\is_array($ids_juragan)) {
             $builder = $this->db->table($this->table . ' j');
             $builder->select('j.*, u.*, r.table');
 
@@ -118,7 +118,7 @@ class JuraganModel extends Model
 
     public function terakhir_update($ids_juragan)
     {
-        if (is_array($ids_juragan)) {
+        if (\is_array($ids_juragan)) {
             $juragan = $this->db->table($this->table . ' j');
             $juragan->select('i.juragan_id as id_juragan, j.*');
             $juragan->join('relasi r', 'r.juragan_id = j.id_juragan', 'left');

@@ -103,9 +103,9 @@ $html_logo = '<img src="data:image/svg+xml;base64,' . base64_encode($logo) . '" 
 
     <table width="100%">
         <?php
-        $ongkir     = new Ongkir();
-        $pemesan    = json_decode($invoice->pelanggan);
-        $kirimKe    = json_decode($invoice->kirimKe);
+        $ongkir  = new Ongkir();
+        $pemesan = json_decode($invoice->pelanggan);
+        $kirimKe = json_decode($invoice->kirimKe);
         ?>
         <tr>
             <td>
@@ -187,6 +187,7 @@ $html_logo = '<img src="data:image/svg+xml;base64,' . base64_encode($logo) . '" 
             $wajib_bayar = 0;
             // $count_barang = 0;
             $harga_barang = 0;
+
             foreach (json_decode($invoice->barang) as $b) {
                 // $count_barang += $b->qty;
                 $wajib_bayar += $b->qty * $b->harga;

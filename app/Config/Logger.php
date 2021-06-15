@@ -35,7 +35,7 @@ class Logger extends BaseConfig
      * For a live site you'll usually enable Critical or higher (3) to be logged otherwise
      * your log files will fill up very fast.
      *
-     * @var integer|array
+     * @var int|array
      */
     public $threshold = 4;
 
@@ -88,7 +88,7 @@ class Logger extends BaseConfig
             /*
              * The log levels that this handler will handle.
              */
-            'handles'         => [
+            'handles' => [
                 'critical',
                 'alert',
                 'emergency',
@@ -106,7 +106,7 @@ class Logger extends BaseConfig
              *
              * Note: Leaving it blank will default to 'log'.
              */
-            'fileExtension'   => '',
+            'fileExtension' => '',
 
             /*
              * The file system permissions to be applied on newly created log files.
@@ -122,7 +122,7 @@ class Logger extends BaseConfig
              * By default, logs are written to WRITEPATH . 'logs/'
              * Specify a different destination here, if desired.
              */
-            'path'            => '',
+            'path' => '',
         ],
 
         /**

@@ -66,7 +66,7 @@ class Cache extends BaseConfig
      *    array('q') = Enabled, but only take into account the specified list
      *                 of query parameters.
      *
-     * @var boolean|string[]
+     * @var bool|string[]
      */
     public $cacheQueryString = false;
 
@@ -81,6 +81,21 @@ class Cache extends BaseConfig
      * @var string
      */
     public $prefix = '';
+
+    /**
+     * --------------------------------------------------------------------------
+     * Default TTL
+     * --------------------------------------------------------------------------
+     *
+     * The default number of seconds to save items when none is specified.
+     *
+     * WARNING: This is not used by framework handlers where 60 seconds is
+     * hard-coded, but may be useful to projects and modules. This will replace
+     * the hard-coded value in a future release.
+     *
+     * @var int
+     */
+    public $ttl = 60;
 
     /**
      * --------------------------------------------------------------------------

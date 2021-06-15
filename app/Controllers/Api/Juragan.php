@@ -22,16 +22,18 @@ class Juragan extends \CodeIgniter\Controller
             $x = $juragan->findAll();
 
             $json = [];
+
             foreach ($x as $a) {
                 $list_bank = [];
                 $banks     = $juragan->ambil_bank($a->id_juragan)->getResult();
+
                 foreach ($banks as $b) {
                     $list_bank[$b->id_bank] = [
                         'id'        => (int) $b->id_bank,
                         'nama'      => $b->nama_bank,
                         'tipe'      => $b->tipe_bank,
                         'rekening'  => $b->rekening,
-                        'atas_nama' => $b->atas_nama
+                        'atas_nama' => $b->atas_nama,
                     ];
                 }
 
@@ -39,7 +41,7 @@ class Juragan extends \CodeIgniter\Controller
                     'id'   => (int) $a->id_juragan,
                     'nama' => $a->nama_juragan,
                     'slug' => $a->juragan,
-                    'bank' => $list_bank
+                    'bank' => $list_bank,
                 ];
             }
 

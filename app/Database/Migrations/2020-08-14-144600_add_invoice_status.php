@@ -7,16 +7,16 @@ class AddInvoiceStatus extends \CodeIgniter\Database\Migration
     public function up()
     {
         $this->forge->addField([
-            'id_status'  => [
-                'type' 			      => 'INT',
-                'constraint' 	  => 11,
-                'unsigned' 		   => true,
-                'auto_increment'=> true
+            'id_status' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
+                'auto_increment' => true,
             ],
-            'invoice_id'  => [
-                'type' 			    => 'INT',
-                'constraint' 	=> 11,
-                'unsigned' 		 => true
+            'invoice_id' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'unsigned'   => true,
             ],
             /*
              * 1: data pesanan lengkap atau tidak
@@ -29,37 +29,37 @@ class AddInvoiceStatus extends \CodeIgniter\Database\Migration
              *
              */
             'status' => [
-                'type'          => 'ENUM',
-                'constraint'    => ['1', '2', '3', '4', '5', '6', '7'],
-                'null' 			      => true,
-                'default' 		    => null
+                'type'       => 'ENUM',
+                'constraint' => ['1', '2', '3', '4', '5', '6', '7'],
+                'null'       => true,
+                'default'    => null,
             ],
             'tanggal_masuk' => [
-                'type'           => 'INT',
-                'constraint' 	   => 10,
-                'unsigned' 		    => true,
-                'null' 			       => true,
-                'default' 		     => null
+                'type'       => 'INT',
+                'constraint' => 10,
+                'unsigned'   => true,
+                'null'       => true,
+                'default'    => null,
             ],
             'tanggal_selesai' => [
-                'type'           => 'INT',
-                'constraint' 	   => 10,
-                'unsigned' 		    => true,
-                'null' 			       => true,
-                'default' 		     => null
+                'type'       => 'INT',
+                'constraint' => 10,
+                'unsigned'   => true,
+                'null'       => true,
+                'default'    => null,
             ],
             'keterangan_masuk' => [
-                'type' 			     => 'VARCHAR',
-                'constraint' 	 => 100,
-                'null' 			     => true,
-                'default' 		   => null
+                'type'       => 'VARCHAR',
+                'constraint' => 100,
+                'null'       => true,
+                'default'    => null,
             ],
             'keterangan_selesai' => [
-                'type' 			     => 'VARCHAR',
-                'constraint' 	 => 100,
-                'null' 			     => true,
-                'default' 		   => null
-            ]
+                'type'       => 'VARCHAR',
+                'constraint' => 100,
+                'null'       => true,
+                'default'    => null,
+            ],
         ]);
 
         $this->forge->addKey('id_status', true);

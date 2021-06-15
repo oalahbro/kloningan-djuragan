@@ -14,7 +14,6 @@ class NotifikasiModel extends Model
 
     protected $allowedFields = ['juragan_id', 'from', 'for', 'invoice_id', 'type', 'read_at', 'created_at'];
 
-
     public function ambil($user_id, $dibaca = false, $limit = null, $offset = null)
     {
         $notif = $this->db->table($this->table . ' n');

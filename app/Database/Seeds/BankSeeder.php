@@ -14,7 +14,7 @@ class BankSeeder extends \CodeIgniter\Database\Seeder
                 'rekening'   => 'Lainnya',
                 'tipe_bank'  => '3',
                 'created_at' => $time,
-                'updated_at' => $time
+                'updated_at' => $time,
 
             ],
             [
@@ -22,11 +22,11 @@ class BankSeeder extends \CodeIgniter\Database\Seeder
                 'atas_nama'  => 'C.O.D',
                 'rekening'   => 'C.O.D',
                 'created_at' => $time,
-                'updated_at' => $time
-            ]
+                'updated_at' => $time,
+            ],
         ];
 
-        for ($i=0; $i < count($data) ; $i++) {
+        for ($i = 0; $i < \count($data) ; $i++) {
             // Using Query Builder
             $this->db->table('bank')->insert($data[$i]);
         }
