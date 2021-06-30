@@ -135,7 +135,7 @@ $session  = \Config\Services::session();
                                             $kab  = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
                                             $prov = strtoupper($ongkir->provinsi($PPro)['province']);
 
-                                            echo $pelanggan->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $pelanggan->kodepos;
+                                            echo $pelanggan->alamat . '<br/>' . $kec . ', ' . $kab . '<br/>' . $prov . ' - ' . $pelanggan->kodepos;
                                         }
                                         ?>
 									</span>
@@ -176,7 +176,7 @@ $session  = \Config\Services::session();
                                                 $kab  = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
                                                 $prov = strtoupper($ongkir->provinsi($PPro)['province']);
 
-                                                echo $kirimKe->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $kirimKe->kodepos;
+                                                echo $kirimKe->alamat . '<br/>' . $kec . ', ' . $kab . '<br/>' . $prov . ' - ' . $kirimKe->kodepos;
                                             }
                                             ?>
 										</span>
@@ -299,7 +299,7 @@ $session  = \Config\Services::session();
                                             ?>
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="small d-flex text-muted text-uppercase"><span class="font-weight-bold">Kurang</span>&nbsp;Bayar</div>
-												<div class="font-weight-bold text-danger"><?= number_to_currency(- ($wajib_bayar - $sudah_bayar), 'IDR'); ?></div>
+												<div class="font-weight-bold text-danger"><?= number_to_currency(-($wajib_bayar - $sudah_bayar), 'IDR'); ?></div>
 											</div>
 										<?php
                                         }
@@ -388,7 +388,7 @@ $session  = \Config\Services::session();
 					</div>
 
 					<?php if ($pesanan->status_pembayaran !== '1') {
-                                    if ($pesanan->status_pembayaran === '2' or $pesanan->status_pembayaran === '3') {
+                                    if ($pesanan->status_pembayaran === '2' || $pesanan->status_pembayaran === '3') {
                                         // tombol cek pembayaran
                                         // hanya tampil jika ada pembayaran yang perlu dicek
                                         echo form_button([
@@ -610,366 +610,366 @@ $link_tambah_pembayaran  = site_url('user/invoices/simpan_pembayaran');
 $link_api_notif          = site_url('api/notifikasi/');
 
 $js = <<< JS
-$(function() { 
-	'use strict';
-	// popover 
-	// ------------------------------------------------------------------------
-	var po = {};
-		po.trigger = 'focus';
-		po.placement = 'right';
-		po.container = 'body';
-		po.html = true;
-		po.selector = '[data-toggle="popHarga"]';
-		po.template = '<div class="popover shadow" role="tooltip"><div class="popover-arrow"></div><div class="popover-body"></div></div>';
-	$('body').popover(po);
+    $(function() { 
+    	'use strict';
+    	// popover 
+    	// ------------------------------------------------------------------------
+    	var po = {};
+    		po.trigger = 'focus';
+    		po.placement = 'right';
+    		po.container = 'body';
+    		po.html = true;
+    		po.selector = '[data-toggle="popHarga"]';
+    		po.template = '<div class="popover shadow" role="tooltip"><div class="popover-arrow"></div><div class="popover-body"></div></div>';
+    	$('body').popover(po);
 
-	// tooltips
-	// ------------------------------------------------------------------------
-	var tt = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
-	var ttl = tt.map(function(e) {
-		return new bootstrap.Tooltip(e);
-	});
+    	// tooltips
+    	// ------------------------------------------------------------------------
+    	var tt = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
+    	var ttl = tt.map(function(e) {
+    		return new bootstrap.Tooltip(e);
+    	});
 
-	// sidebar
-	// ------------------------------------------------------------------------
-	$('#sidebar').on('show.bs.collapse',function(){
-		var a=$('<div>',{'class':'modal-backdrop fade show'});
-		$('body').toggleClass('modal-open').append(a),
-		a.click(function(){
-			$('#sidebar').collapse('hide'),
-			a.remove(),
-			$('body').toggleClass('modal-open');
-		});
-	});
+    	// sidebar
+    	// ------------------------------------------------------------------------
+    	$('#sidebar').on('show.bs.collapse',function(){
+    		var a=$('<div>',{'class':'modal-backdrop fade show'});
+    		$('body').toggleClass('modal-open').append(a),
+    		a.click(function(){
+    			$('#sidebar').collapse('hide'),
+    			a.remove(),
+    			$('body').toggleClass('modal-open');
+    		});
+    	});
 
-	$('#sidebarCollapse').on('click',function(){
-		var id = $current_user_id;
-		$('#listLi').html(''),
-		$.getJSON('$link_api_juragan', { id: id }, function(b){
-			var a=[];			
-			$.each(b[id].juragan,function(c,b){
-				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
-			}),
+    	$('#sidebarCollapse').on('click',function(){
+    		var id = {$current_user_id};
+    		$('#listLi').html(''),
+    		$.getJSON('{$link_api_juragan}', { id: id }, function(b){
+    			var a=[];			
+    			$.each(b[id].juragan,function(c,b){
+    				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="{$link_invoice}'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
+    			}),
 
-			$(a.join('')).appendTo('#listLi');
-		});
-	});
+    			$(a.join('')).appendTo('#listLi');
+    		});
+    	});
 
-	// notifikasi
-	// ------------------------------------------------------------------------
-	function getNotif(page = 1, dibaca = 0){
-		var id = $current_user_id;
-		$.getJSON('$link_api_notif' + 'get', { id: id, page: page, dibaca: dibaca }, function(b){
-			var a=[],
-				data = b.results;
+    	// notifikasi
+    	// ------------------------------------------------------------------------
+    	function getNotif(page = 1, dibaca = 0){
+    		var id = {$current_user_id};
+    		$.getJSON('{$link_api_notif}' + 'get', { id: id, page: page, dibaca: dibaca }, function(b){
+    			var a=[],
+    				data = b.results;
 
-			if (b.count > 0) {
-				$('.btnSettingNotif').show();
-				a.push('');
+    			if (b.count > 0) {
+    				$('.btnSettingNotif').show();
+    				a.push('');
 
-				$.each(data,function(c,b){
-					a.push(`<div class="list-group-item list-group-item-action">
-						<div class="d-flex">
-							<div class="mr-auto">
-								<div class="text-muted small">`+b.created_at +`</div>
-								<a class="d-block text-decoration-none" href="$link_invoice`+b.juragan+`/semua?cari[kolom]=faktur&cari[q]=`+b.invoice+`">`+ b.notif+`</a>
-							</div>
-							<div class="d-flex justify-content-right flex-column actionNotif">
-								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fal fa-circle"></i></button>
-							</div>
-						</div>
-					</div>`);
-				}),
-				$(a.join('')).appendTo('#notifDisini');
-				var next = '';
+    				$.each(data,function(c,b){
+    					a.push(`<div class="list-group-item list-group-item-action">
+    						<div class="d-flex">
+    							<div class="mr-auto">
+    								<div class="text-muted small">`+b.created_at +`</div>
+    								<a class="d-block text-decoration-none" href="{$link_invoice}`+b.juragan+`/semua?cari[kolom]=faktur&cari[q]=`+b.invoice+`">`+ b.notif+`</a>
+    							</div>
+    							<div class="d-flex justify-content-right flex-column actionNotif">
+    								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fal fa-circle"></i></button>
+    							</div>
+    						</div>
+    					</div>`);
+    				}),
+    				$(a.join('')).appendTo('#notifDisini');
+    				var next = '';
 
-				if (b.next) {
-					$('<button type="button" class="list-group-item list-group-item-action text-center lanjutNotif" data-page="'+ (b.page+1) +'">lanjut ...</button>').appendTo('#notifDisini');
-				}
-			}
-			else {
-				$('.btnSettingNotif').hide();
+    				if (b.next) {
+    					$('<button type="button" class="list-group-item list-group-item-action text-center lanjutNotif" data-page="'+ (b.page+1) +'">lanjut ...</button>').appendTo('#notifDisini');
+    				}
+    			}
+    			else {
+    				$('.btnSettingNotif').hide();
 
-				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fal fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
-			}
-		});
-	}
+    				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fal fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
+    			}
+    		});
+    	}
 
-	$(document).on('click', '.lanjutNotif',function(){
-		getNotif($(this).data('page'));
-		$(this).attr('disabled', true).html(`<div class="text-center">
-			<div class="spinner-border" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
-		</div>`).remove();
-	});
+    	$(document).on('click', '.lanjutNotif',function(){
+    		getNotif($(this).data('page'));
+    		$(this).attr('disabled', true).html(`<div class="text-center">
+    			<div class="spinner-border" role="status">
+    				<span class="sr-only">Loading...</span>
+    			</div>
+    		</div>`).remove();
+    	});
 
-	$('#notif-pane').on('show.bs.collapse',function(){
-		var id = $current_user_id;
-		$('#notifDisini').empty(),
-		getNotif();
+    	$('#notif-pane').on('show.bs.collapse',function(){
+    		var id = {$current_user_id};
+    		$('#notifDisini').empty(),
+    		getNotif();
 
-		var a=$('<div>',{'class':'modal-backdrop fade show'});
-		$('body').toggleClass('modal-open').append(a),
-		a.click(function(){
-			$('#notif-pane').collapse('hide'),
-			a.remove(),
-			$('body').toggleClass('modal-open');
-		});
-	});
+    		var a=$('<div>',{'class':'modal-backdrop fade show'});
+    		$('body').toggleClass('modal-open').append(a),
+    		a.click(function(){
+    			$('#notif-pane').collapse('hide'),
+    			a.remove(),
+    			$('body').toggleClass('modal-open');
+    		});
+    	});
 
-	counter_notif();
+    	counter_notif();
 
-	setInterval(function(){ 
-		counter_notif();
-	}, 10000);
+    	setInterval(function(){ 
+    		counter_notif();
+    	}, 10000);
 
-	function counter_notif() {
-		var id = $current_user_id;
-		$.getJSON('$link_api_notif' + 'get', { id: id }, function(b){
-			$('.counter').text(b.count);
-		});
-	}
+    	function counter_notif() {
+    		var id = {$current_user_id};
+    		$.getJSON('{$link_api_notif}' + 'get', { id: id }, function(b){
+    			$('.counter').text(b.count);
+    		});
+    	}
 
-	$(document).on('click', '.actionNotif .markAs', function() { // markAs
-		var action = '';
+    	$(document).on('click', '.actionNotif .markAs', function() { // markAs
+    		var action = '';
 
-		if ($(this).hasClass( "text-primary" )) {
-			$(this).removeClass('text-primary').addClass('text-muted');	
-			action = 'sudahBaca';
-		}
-		else {
-			$(this).removeClass('text-muted').addClass('text-primary');
-			action = 'belumBaca';
-		}
+    		if ($(this).hasClass( "text-primary" )) {
+    			$(this).removeClass('text-primary').addClass('text-muted');	
+    			action = 'sudahBaca';
+    		}
+    		else {
+    			$(this).removeClass('text-muted').addClass('text-primary');
+    			action = 'belumBaca';
+    		}
 
-		$.post( '$link_api_notif' + 'mark', { action: action, id: $(this).data('id') });
-	});
+    		$.post( '{$link_api_notif}' + 'mark', { action: action, id: $(this).data('id') });
+    	});
 
-	$('.tandaiSemuaTerbaca').on('click',function(){ 
-		var id = $current_user_id;
+    	$('.tandaiSemuaTerbaca').on('click',function(){ 
+    		var id = {$current_user_id};
 
-		$.post( '$link_api_notif' + 'mark_all', { id: id }, function() {
-			// 
-			$('.actionNotif .markAs').removeClass('text-primary').addClass('text-muted');
-		});
-	});
+    		$.post( '{$link_api_notif}' + 'mark_all', { id: id }, function() {
+    			// 
+    			$('.actionNotif .markAs').removeClass('text-primary').addClass('text-muted');
+    		});
+    	});
 
-	//
-	$("#status").change(function() {
-		let val = this.value;
-		// alert("Selected value is : " + val);
-		let stat = $('#stat');
-		let v1 = $('#stat option[value=1]');
-		let v0 = $('#stat option[value=0]');
+    	//
+    	$("#status").change(function() {
+    		let val = this.value;
+    		// alert("Selected value is : " + val);
+    		let stat = $('#stat');
+    		let v1 = $('#stat option[value=1]');
+    		let v0 = $('#stat option[value=0]');
 
-		stat.val('');
+    		stat.val('');
 
-		if (val !== '') {
-			stat.prop('disabled', false);
-		}
-		else {
-			stat.prop('disabled', true);
-		}
+    		if (val !== '') {
+    			stat.prop('disabled', false);
+    		}
+    		else {
+    			stat.prop('disabled', true);
+    		}
 
-		if (val == 1) {
-			v1.text('Lengkap');
-			v0.text('Tidak Lengkap');
-		} else if (val == 2) {
-			v1.text('Ada');
-			v0.text('Belum Ada');
-		} else {
-			v1.text('Selesai');
-			v0.text('Masuk');
-		}
-	});
+    		if (val == 1) {
+    			v1.text('Lengkap');
+    			v0.text('Tidak Lengkap');
+    		} else if (val == 2) {
+    			v1.text('Ada');
+    			v0.text('Belum Ada');
+    		} else {
+    			v1.text('Selesai');
+    			v0.text('Masuk');
+    		}
+    	});
 
-	// cek pembayaran
-	$('.pesanBayar').on('click',function(){
-		let juragan = $(this).data('juragan'),
-			id = $(this).data('invoice'),
-			dv_list =$("<div/>").addClass('list-group list-group-flushs').attr('id', 'list_pembayaran');
+    	// cek pembayaran
+    	$('.pesanBayar').on('click',function(){
+    		let juragan = $(this).data('juragan'),
+    			id = $(this).data('invoice'),
+    			dv_list =$("<div/>").addClass('list-group list-group-flushs').attr('id', 'list_pembayaran');
 
-			$.getJSON('$link_api_get_pembayaran', {id:id}, function(bayar){
-			for (let i = 0; i < bayar.length; i++) {
-				var label = $('<div/>').addClass('list-group-item list-group-action');
+    			$.getJSON('{$link_api_get_pembayaran}', {id:id}, function(bayar){
+    			for (let i = 0; i < bayar.length; i++) {
+    				var label = $('<div/>').addClass('list-group-item list-group-action');
 
-				var info = '';
-				var ico = '';
-				var btn = '';
-				
-				switch (bayar[i].status) {
-					case 2:
-						btn = ``;
-						ico = 'times-circle text-danger';
-						info = 'dana tidak ada, sudah cek pada: '+ tanggal(bayar[i].tanggal_cek);
-						break;
+    				var info = '';
+    				var ico = '';
+    				var btn = '';
+    				
+    				switch (bayar[i].status) {
+    					case 2:
+    						btn = ``;
+    						ico = 'times-circle text-danger';
+    						info = 'dana tidak ada, sudah cek pada: '+ tanggal(bayar[i].tanggal_cek);
+    						break;
 
-					case 3:
-						btn = ``;
-						ico = 'check-circle text-success';
-						info = 'dana ada, sudah cek pada: '+ tanggal(bayar[i].tanggal_cek);
-						break;
+    					case 3:
+    						btn = ``;
+    						ico = 'check-circle text-success';
+    						info = 'dana ada, sudah cek pada: '+ tanggal(bayar[i].tanggal_cek);
+    						break;
 
-					default:
-						btn = ``;
-						ico = 'minus-circle text-info';
-						info = 'dana belum dicek';
-						break;
-				}
+    					default:
+    						btn = ``;
+    						ico = 'minus-circle text-info';
+    						info = 'dana belum dicek';
+    						break;
+    				}
 
-				var bta = ``;
+    				var bta = ``;
 
-				if (bayar[i].status !== 1) {
-					bta = '';
-				}
+    				if (bayar[i].status !== 1) {
+    					bta = '';
+    				}
 
-				var bank = bayar[i].atas_nama;
-				if (bayar[i].sumber > 2) {
-					bank = bayar[i].nama + ' (' + bayar[i].atas_nama + ')';
-				}
+    				var bank = bayar[i].atas_nama;
+    				if (bayar[i].sumber > 2) {
+    					bank = bayar[i].nama + ' (' + bayar[i].atas_nama + ')';
+    				}
 
-				var dv = $(`
-				<div class="d-flex justify-content-between">
-					<div class="d-flex justify-content-start align-items-center">
-						<i class="fal fa-`+ ico +` fa-2x mr-3"></i>
-						<div>
-							<span class="mr-1">`+ bank.toUpperCase() +`</span> <span class="mr-1">`+ bayar[i].nominal +`</span> <span>(`+ tanggal(bayar[i].tanggal_bayar) +`)</span>
-							<div class="text-muted small">`+ info +`</div>
-						</div>
-					</div>
-					`+ bta +`
-				</div>
-				`);
-				
-				label.append(dv);
-				dv_list.append(label);
+    				var dv = $(`
+    				<div class="d-flex justify-content-between">
+    					<div class="d-flex justify-content-start align-items-center">
+    						<i class="fal fa-`+ ico +` fa-2x mr-3"></i>
+    						<div>
+    							<span class="mr-1">`+ bank.toUpperCase() +`</span> <span class="mr-1">`+ bayar[i].nominal +`</span> <span>(`+ tanggal(bayar[i].tanggal_bayar) +`)</span>
+    							<div class="text-muted small">`+ info +`</div>
+    						</div>
+    					</div>
+    					`+ bta +`
+    				</div>
+    				`);
+    				
+    				label.append(dv);
+    				dv_list.append(label);
 
-				$('#modalBayar #cek').empty().append(dv_list);
-			}
-		});
-	});
+    				$('#modalBayar #cek').empty().append(dv_list);
+    			}
+    		});
+    	});
 
-	// tambah pembayaran
-	$('.tambahBayar').on('click',function(){
-		let juragan = $(this).data('juragan'),
-			id = $(this).data('invoice'),
-			kekurangan = $(this).data('kurang'),
-			ttl = $('#myTabContent [name="total_pembayaran"]');
+    	// tambah pembayaran
+    	$('.tambahBayar').on('click',function(){
+    		let juragan = $(this).data('juragan'),
+    			id = $(this).data('invoice'),
+    			kekurangan = $(this).data('kurang'),
+    			ttl = $('#myTabContent [name="total_pembayaran"]');
 
-		// invoice_id
-		$('#myTabContent [name="invoice_id"]').val(id);
-		ttl.val('');
-		if (parseInt(kekurangan)>0) {
-			ttl.val(kekurangan);	
-		}
-		
-		// set dropdown sumber_dana
-		$.getJSON('$link_api_get_bank', function(data){
-			var banks = data[juragan].bank;
-			var apnd = '<option value="">Pilih Tujuan</option>';
-			for (var i in banks) {
-				apnd += "<option value = '" + banks[i].id + " '>" + banks[i].nama.toUpperCase() + ' (' + banks[i].atas_nama + ')' + " </option>";
-			}
-			$("#modalTambahBayar #tujuan").empty().append(apnd);
-		});
-	});
+    		// invoice_id
+    		$('#myTabContent [name="invoice_id"]').val(id);
+    		ttl.val('');
+    		if (parseInt(kekurangan)>0) {
+    			ttl.val(kekurangan);	
+    		}
+    		
+    		// set dropdown sumber_dana
+    		$.getJSON('{$link_api_get_bank}', function(data){
+    			var banks = data[juragan].bank;
+    			var apnd = '<option value="">Pilih Tujuan</option>';
+    			for (var i in banks) {
+    				apnd += "<option value = '" + banks[i].id + " '>" + banks[i].nama.toUpperCase() + ' (' + banks[i].atas_nama + ')' + " </option>";
+    			}
+    			$("#modalTambahBayar #tujuan").empty().append(apnd);
+    		});
+    	});
 
-	var req_pay,
-		tambah_pay=$('#tambahPembayaran');
-	tambah_pay.on('submit',function(f){
-		f.preventDefault(),
-		f.stopPropagation();
-		
-		// Abort any pending request
-		if (req_pay) {
-			req_pay.abort();
-		}
-		// setup some local variables
-		var f = $(this);
+    	var req_pay,
+    		tambah_pay=$('#tambahPembayaran');
+    	tambah_pay.on('submit',function(f){
+    		f.preventDefault(),
+    		f.stopPropagation();
+    		
+    		// Abort any pending request
+    		if (req_pay) {
+    			req_pay.abort();
+    		}
+    		// setup some local variables
+    		var f = $(this);
 
-		// Let's select and cache all the fields
-		var inputs = f.find("input, select, button, textarea");
+    		// Let's select and cache all the fields
+    		var inputs = f.find("input, select, button, textarea");
 
-		// Serialize the data in the form
-		var serializedData = f.serialize();
+    		// Serialize the data in the form
+    		var serializedData = f.serialize();
 
-		// Let's disable the inputs for the duration of the Ajax request.
-		// Note: we disable elements AFTER the form data has been serialized.
-		// Disabled form elements will not be serialized.
-		inputs.prop("disabled", true);
+    		// Let's disable the inputs for the duration of the Ajax request.
+    		// Note: we disable elements AFTER the form data has been serialized.
+    		// Disabled form elements will not be serialized.
+    		inputs.prop("disabled", true);
 
-		// Fire off the request to /form.php
-		req_pay = $.ajax({
-			url: "$link_tambah_pembayaran",
-			type: "post",
-			data: serializedData
-		});
+    		// Fire off the request to /form.php
+    		req_pay = $.ajax({
+    			url: "{$link_tambah_pembayaran}",
+    			type: "post",
+    			data: serializedData
+    		});
 
-		// Callback handler that will be called on success
-		req_pay.done(function (response, textStatus, jqXHR){
-			// Log a message to the console
-			// console.log(response);
-			// redirect
-			document.location.href = response.url;
-		});
+    		// Callback handler that will be called on success
+    		req_pay.done(function (response, textStatus, jqXHR){
+    			// Log a message to the console
+    			// console.log(response);
+    			// redirect
+    			document.location.href = response.url;
+    		});
 
-		// Callback handler that will be called on failure
-		req_pay.fail(function (jqXHR, textStatus, errorThrown){
-			// 
-			// console.log( Object.keys(jqXHR['responseJSON']).length);
-		});
+    		// Callback handler that will be called on failure
+    		req_pay.fail(function (jqXHR, textStatus, errorThrown){
+    			// 
+    			// console.log( Object.keys(jqXHR['responseJSON']).length);
+    		});
 
-		// Callback handler that will be called regardless
-		// if the request failed or succeeded
-		req_pay.always(function () {
-			// Reenable the inputs
-			inputs.prop("disabled", false);
-			
-		});		
-	});
+    		// Callback handler that will be called regardless
+    		// if the request failed or succeeded
+    		req_pay.always(function () {
+    			// Reenable the inputs
+    			inputs.prop("disabled", false);
+    			
+    		});		
+    	});
 
-	$('.belumFungsi').on('click',function(){
-		alert('Fungsi ini belum tersedia');
-	});
+    	$('.belumFungsi').on('click',function(){
+    		alert('Fungsi ini belum tersedia');
+    	});
 
-	// 
-	var maxLength = 7;
-	$(".keterangan").each(function(){
-		var myStr = $(this).html(),
-			lines = myStr.replace(/^\s+|\s+$|\s+(?=\s)/g, "").split("<br>"); // https://stackoverflow.com/a/18066013/2094645
-		
-		if (lines.length > maxLength) {
-			var newStr = lines.slice(0, maxLength),
-				hideStr = lines.slice(maxLength, lines.length);
+    	// 
+    	var maxLength = 7;
+    	$(".keterangan").each(function(){
+    		var myStr = $(this).html(),
+    			lines = myStr.replace(/^\s+|\s+$|\s+(?=\s)/g, "").split("<br>"); // https://stackoverflow.com/a/18066013/2094645
+    		
+    		if (lines.length > maxLength) {
+    			var newStr = lines.slice(0, maxLength),
+    				hideStr = lines.slice(maxLength, lines.length);
 
-			$(this).empty().html(newStr.join('<br/>'));
-			$(this).append('<a href="javascript:void(0);" class="read-more ml-1">lanjut ...</a>');
-			$(this).append('<span class="more-text"><br/>' + hideStr.join('<br/>') + '</span>');
-		}
-	});
-	$(".read-more").on('click', function(){
-		$(this).siblings(".more-text").contents().unwrap();
-		$(this).remove();
-	});
+    			$(this).empty().html(newStr.join('<br/>'));
+    			$(this).append('<a href="javascript:void(0);" class="read-more ml-1">lanjut ...</a>');
+    			$(this).append('<span class="more-text"><br/>' + hideStr.join('<br/>') + '</span>');
+    		}
+    	});
+    	$(".read-more").on('click', function(){
+    		$(this).siblings(".more-text").contents().unwrap();
+    		$(this).remove();
+    	});
 
-	// disable hit enter
-	// https://stackoverflow.com/a/895231/2094645
-	$(document).on("keydown", ":input:not(textarea):not(.allow-enter)", function(event) {
-		if(event.keyCode == 13) {
-			event.preventDefault();
-			return false;
-		}
-	});
+    	// disable hit enter
+    	// https://stackoverflow.com/a/895231/2094645
+    	$(document).on("keydown", ":input:not(textarea):not(.allow-enter)", function(event) {
+    		if(event.keyCode == 13) {
+    			event.preventDefault();
+    			return false;
+    		}
+    	});
 
-	// create date from unix
-	function tanggal(unixtime) {
-		var u = new Date(unixtime*1000);
+    	// create date from unix
+    	function tanggal(unixtime) {
+    		var u = new Date(unixtime*1000);
 
-		return ('0' + u.getDate()).slice(-2) + '/' + ('0' + u.getMonth()).slice(-2) + '/' + u.getFullYear();
-	};
-});
-JS;
+    		return ('0' + u.getDate()).slice(-2) + '/' + ('0' + u.getMonth()).slice(-2) + '/' + u.getFullYear();
+    	};
+    });
+    JS;
 
 $packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();

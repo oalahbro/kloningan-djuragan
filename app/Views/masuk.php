@@ -32,7 +32,7 @@
                         ?>
 						<?php if ($validation->hasError('username')) { ?>
 							<div class="invalid-feedback">
-								<?php echo $validation->getError('username'); ?>
+								<?= $validation->getError('username'); ?>
 							</div>
 						<?php } ?>
 					</div>
@@ -49,12 +49,11 @@
 
                         if ($validation->hasError('password')) { ?>
 							<div class="invalid-feedback">
-								<?php echo $validation->getError('password'); ?>
+								<?= $validation->getError('password'); ?>
 							</div>
 						<?php } ?>
 					</div>
-					<?php
-                    echo form_button(['content' => 'Masuk', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '3']);
+					<?= form_button(['content' => 'Masuk', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '3']);
                     echo anchor('auth/lupa', 'Lupa sandi?', ['title' => 'Reset kata sandi', 'class' => 'ml-2 text-muted']);
                     ?>
 					<?= form_close(); ?>

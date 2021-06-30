@@ -23,8 +23,8 @@ $JSmin  = new Minify\JS();
 	<nav class="sticky-top mainnav navbar navbar-expand navbar-dark bg-dark bg-gradient">
 		<div class="container-xxl d-flex flex-wrap flex-md-nowrap align-items-center justify-content-between">
 			<div class="d-flex align-items-center mr-3" id="logo">
-				<?php echo form_button(['class' => 'btn-juragan btn btn-outline-light', 'data-toggle' => 'collapse', 'data-target' => '#sidebar', 'id' => 'sidebarCollapse', 'content' => '<i class="fal fa-align-left fa-flip-vertical"></i>']); ?>
-				<?php echo anchor('', 'Pesanan Juragan', ['class' => 'navbar-brand ml-3']); ?>
+				<?= form_button(['class' => 'btn-juragan btn btn-outline-light', 'data-toggle' => 'collapse', 'data-target' => '#sidebar', 'id' => 'sidebarCollapse', 'content' => '<i class="fal fa-align-left fa-flip-vertical"></i>']); ?>
+				<?= anchor('', 'Pesanan Juragan', ['class' => 'navbar-brand ml-3']); ?>
 			</div>
 			<div id="menu" class="order-3 order-md-0 navbar-nav-scroll d-flex justify-content-center">
 				<ul class="navbar-nav bd-navbar-nav flex-row py-2 py-md-0">

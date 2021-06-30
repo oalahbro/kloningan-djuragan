@@ -28,13 +28,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package    CodeIgniter
- *
  * @author     CodeIgniter Dev Team
  * @copyright  2019-2021 CodeIgniter Foundation
  * @license    https://opensource.org/licenses/MIT	MIT License
  *
- * @link       https://codeigniter.com
+ * @see       https://codeigniter.com
  * @since      Version 4.0.0
  * @filesource
  */

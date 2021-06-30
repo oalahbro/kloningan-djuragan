@@ -21,7 +21,7 @@ class Notifikasi extends \CodeIgniter\Controller
         $limit = config('Pager')->perPage;
         $page  = (int) $this->request->getGet('page');
 
-        if (!isset($page) || $page === 0 || $page === 1) {
+        if (! isset($page) || $page === 0 || $page === 1) {
             $page   = 1;
             $offset = 0;
         } else {

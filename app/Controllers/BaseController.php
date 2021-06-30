@@ -32,7 +32,7 @@ class BaseController extends Controller
     /**
      * Instance of the main Request object.
      *
-     * @var IncomingRequest|CLIRequest
+     * @var CLIRequest|IncomingRequest
      */
     protected $request;
 
@@ -112,7 +112,7 @@ class BaseController extends Controller
                 }
             } else {
                 // levelnya admin dan superadmin
-                if ($this->session->get('level') === 'admin' or $this->session->get('level') === 'superadmin') {
+                if ($this->session->get('level') === 'admin' || $this->session->get('level') === 'superadmin') {
                     $return = true;
                 }
             }

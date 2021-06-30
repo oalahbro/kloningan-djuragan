@@ -4,7 +4,7 @@ use CodeIgniter\I18n\Time;
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('base_user')) {
+if (! function_exists('base_user')) {
     function base_user()
     {
         $session = \Config\Services::session();
@@ -28,7 +28,7 @@ if (!function_exists('base_user')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('random_element')) {
+if (! function_exists('random_element')) {
     /**
      * Random Element - Takes an array as input and returns a random element
      *
@@ -44,7 +44,7 @@ if (!function_exists('random_element')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('label_asal')) {
+if (! function_exists('label_asal')) {
     function label_asal($id, $label)
     {
         $arr = config('JuraganConfig')->label;
@@ -55,7 +55,7 @@ if (!function_exists('label_asal')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('logo_bank')) {
+if (! function_exists('logo_bank')) {
     function logo_bank($nama_bank)
     {
         switch ($nama_bank) {
@@ -89,7 +89,7 @@ if (!function_exists('logo_bank')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('first_letter')) {
+if (! function_exists('first_letter')) {
     /**
      * First Letter - Get the first letter of string
      *
@@ -117,7 +117,7 @@ if (!function_exists('first_letter')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('status_orderan')) {
+if (! function_exists('status_orderan')) {
     function status_orderan($status, $mulai, $selesai, $keterangan_mulai, $keterangan_selesai)
     {
         $class = '';
@@ -247,7 +247,7 @@ if (!function_exists('status_orderan')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('status_pembayaran')) {
+if (! function_exists('status_pembayaran')) {
     function status_pembayaran($pembayaran, $status, $return = 'html')
     {
 
@@ -330,7 +330,7 @@ if (!function_exists('status_pembayaran')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('status_pengiriman')) {
+if (! function_exists('status_pengiriman')) {
     function status_pengiriman($pengiriman, $status)
     {
 
@@ -379,7 +379,7 @@ if (!function_exists('status_pengiriman')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('replacer')) {
+if (! function_exists('replacer')) {
     // source : https://stackoverflow.com/a/48981341/2094645
     function replacer($template, $data)
     {
@@ -395,7 +395,7 @@ if (!function_exists('replacer')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('simpan_notif')) {
+if (! function_exists('simpan_notif')) {
     function simpan_notif($type, $juragan_id, $invoice_id)
     {
         $juragan    = new \App\Models\JuraganModel();
@@ -425,7 +425,7 @@ if (!function_exists('simpan_notif')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('tanggalDefault')) {
+if (! function_exists('tanggalDefault')) {
     function tanggalDefault($akhir_mulai)
     {
         $time = new Time('now');
@@ -474,7 +474,7 @@ if (!function_exists('tanggalDefault')) {
     }
 }
 
-if (!function_exists('satuBulanSebelumnya')) {
+if (! function_exists('satuBulanSebelumnya')) {
     function satuBulanSebelumnya($tanggal)
     {
         $bulan_kemarin = date('Y-m-d', strtotime('-1 month', strtotime($tanggal)));
@@ -483,7 +483,7 @@ if (!function_exists('satuBulanSebelumnya')) {
     }
 }
 
-if (!function_exists('satuBulanSelanjutnya')) {
+if (! function_exists('satuBulanSelanjutnya')) {
     function satuBulanSelanjutnya($tanggal)
     {
         $bulan_depan = date('Y-m-d', strtotime('+1 month', strtotime($tanggal)));

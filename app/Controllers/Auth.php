@@ -25,7 +25,7 @@ class Auth extends BaseController
             $this->validation->setRuleGroup('signin');
         }
 
-        if (!$this->validation->withRequest($this->request)->run()) {
+        if (! $this->validation->withRequest($this->request)->run()) {
             $data = [
                 'title'      => 'Masuk',
                 'validation' => $this->validation,
@@ -34,7 +34,7 @@ class Auth extends BaseController
         } else {
             $get = $this->user->where('username', $this->request->getPost('username'))->first();
 
-            if ($get === null or empty($get)) {
+            if ($get === null || empty($get)) {
                 $arr = [
                     'sesi' => [
                         'logged' => false,
@@ -127,7 +127,7 @@ class Auth extends BaseController
 
                 $redirect = '/user';
 
-                if ($db->level === 'admin' or $db->level === 'superadmin') {
+                if ($db->level === 'admin' || $db->level === 'superadmin') {
                     $redirect = '/admin';
                 }
 
@@ -172,7 +172,7 @@ class Auth extends BaseController
             $this->validation->setRuleGroup('signup');
         }
 
-        if (!$this->validation->withRequest($this->request)->run()) {
+        if (! $this->validation->withRequest($this->request)->run()) {
             $data = [
                 'title'      => 'Daftar',
                 'validation' => $this->validation,
@@ -211,7 +211,7 @@ class Auth extends BaseController
             $this->validation->setRuleGroup('forgot');
         }
 
-        if (!$this->validation->withRequest($this->request)->run()) {
+        if (! $this->validation->withRequest($this->request)->run()) {
             $data = [
                 'title'      => 'Lupa Sandi',
                 'validation' => $this->validation,

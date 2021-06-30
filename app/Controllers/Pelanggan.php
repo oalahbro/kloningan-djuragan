@@ -9,7 +9,7 @@ class Pelanggan extends BaseController
 {
     public function baru()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
@@ -81,7 +81,7 @@ class Pelanggan extends BaseController
 
     public function cari()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 

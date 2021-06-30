@@ -101,14 +101,11 @@ $session = \Config\Services::session();
 					</div>
 					<div class="mb-3">
 						<?= form_label('Juragan', 'juragan', ['class' => 'form-label']); ?>
-						<?php
-                        /*
+						<?=/*
                         foreach ($juragans->getResult() as $juragan) {
                             $options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
                         }
-                        */
-
-                        echo form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan']);
+                        */ form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan']);
                         ?>
 						<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 					</div>
@@ -187,14 +184,11 @@ $session = \Config\Services::session();
 				</div>
 				<div class="mb-3">
 					<?= form_label('Juragan', 'juragan_', ['class' => 'form-label']); ?>
-					<?php
-                    /*
+					<?=/*
                     foreach ($juragans->getResult() as $juragan) {
                         $options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
                     }
-                    */
-
-                    echo form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan_']);
+                    */ form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan_']);
                     ?>
 					<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 				</div>
@@ -222,246 +216,246 @@ $link_invoice          = site_url('admin/invoices/lihat/');
 $link_api_notif        = site_url('api/notifikasi/');
 
 $js = <<< JS
-$(function() { 
-	'use strict';
-	// sidebar
-    // ------------------------------------------------------------------------
-	$('#sidebar').on('show.bs.collapse',function(){
-		var a=$('<div>',{'class':'modal-backdrop fade show'});
-		$('body').toggleClass('modal-open').append(a),
-		a.click(function(){
-			$('#sidebar').collapse('hide'),
-			a.remove(),
-			$('body').toggleClass('modal-open');
-		});
-	});
+    $(function() { 
+    	'use strict';
+    	// sidebar
+        // ------------------------------------------------------------------------
+    	$('#sidebar').on('show.bs.collapse',function(){
+    		var a=$('<div>',{'class':'modal-backdrop fade show'});
+    		$('body').toggleClass('modal-open').append(a),
+    		a.click(function(){
+    			$('#sidebar').collapse('hide'),
+    			a.remove(),
+    			$('body').toggleClass('modal-open');
+    		});
+    	});
 
-	$('#sidebarCollapse').on('click',function(){
-		var id = $current_user_id;
-		$('#listLi').html(''),
-		$.getJSON('$link_api_juragan', { id: id }, function(b){
-			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+'semua'+'"><i class="fal fa-user-circle"></i> Semua Juragan</li></li>');
-			
-			$.each(b[id].juragan,function(c,b){
-				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
-			}),
+    	$('#sidebarCollapse').on('click',function(){
+    		var id = {$current_user_id};
+    		$('#listLi').html(''),
+    		$.getJSON('{$link_api_juragan}', { id: id }, function(b){
+    			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="{$link_invoice}'+'semua'+'"><i class="fal fa-user-circle"></i> Semua Juragan</li></li>');
+    			
+    			$.each(b[id].juragan,function(c,b){
+    				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="{$link_invoice}'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
+    			}),
 
-			$(a.join('')).appendTo('#listLi');
-		});
-	});
+    			$(a.join('')).appendTo('#listLi');
+    		});
+    	});
 
-	// notifikasi
-	// ------------------------------------------------------------------------
-	function getNotif(page = 1, dibaca = 0){
-		var id = $current_user_id;
-		$.getJSON('$link_api_notif' + 'get', { id: id, page: page, dibaca: dibaca }, function(b){
-			var a=[],
-				data = b.results;
+    	// notifikasi
+    	// ------------------------------------------------------------------------
+    	function getNotif(page = 1, dibaca = 0){
+    		var id = {$current_user_id};
+    		$.getJSON('{$link_api_notif}' + 'get', { id: id, page: page, dibaca: dibaca }, function(b){
+    			var a=[],
+    				data = b.results;
 
-			if (b.count > 0) {
-				$('.btnSettingNotif').show();
-				a.push('');
+    			if (b.count > 0) {
+    				$('.btnSettingNotif').show();
+    				a.push('');
 
-				$.each(data,function(c,b){
-					a.push(`<div class="list-group-item list-group-item-action">
-						<div class="d-flex">
-							<div class="mr-auto">
-								<div class="text-muted small">`+b.created_at +`</div>
-								<a class="d-block text-decoration-none" href="$link_invoice/semua/semua?cari[kolom]=faktur&cari[q]=`+b.invoice+`">`+ b.notif+`</a>
-							</div>
-							<div class="d-flex justify-content-right flex-column actionNotif">
-								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fal fa-circle"></i></button>
-							</div>
-						</div>
-					</div>`);
-				}),
-				$(a.join('')).appendTo('#notifDisini');
-				var next = '';
+    				$.each(data,function(c,b){
+    					a.push(`<div class="list-group-item list-group-item-action">
+    						<div class="d-flex">
+    							<div class="mr-auto">
+    								<div class="text-muted small">`+b.created_at +`</div>
+    								<a class="d-block text-decoration-none" href="{$link_invoice}/semua/semua?cari[kolom]=faktur&cari[q]=`+b.invoice+`">`+ b.notif+`</a>
+    							</div>
+    							<div class="d-flex justify-content-right flex-column actionNotif">
+    								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fal fa-circle"></i></button>
+    							</div>
+    						</div>
+    					</div>`);
+    				}),
+    				$(a.join('')).appendTo('#notifDisini');
+    				var next = '';
 
-				if (b.next) {
-					$('<button type="button" class="list-group-item list-group-item-action text-center lanjutNotif" data-page="'+ (b.page+1) +'">lanjut ...</button>').appendTo('#notifDisini');
-				}
-			}
-			else {
-				$('.btnSettingNotif').hide();
+    				if (b.next) {
+    					$('<button type="button" class="list-group-item list-group-item-action text-center lanjutNotif" data-page="'+ (b.page+1) +'">lanjut ...</button>').appendTo('#notifDisini');
+    				}
+    			}
+    			else {
+    				$('.btnSettingNotif').hide();
 
-				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fal fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
-			}
-		});
-	}
+    				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fal fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
+    			}
+    		});
+    	}
 
-	$(document).on('click', '.lanjutNotif',function(){
-		getNotif($(this).data('page'));
-		$(this).attr('disabled', true).html(`<div class="text-center">
-			<div class="spinner-border" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
-		</div>`).remove();
-	});
+    	$(document).on('click', '.lanjutNotif',function(){
+    		getNotif($(this).data('page'));
+    		$(this).attr('disabled', true).html(`<div class="text-center">
+    			<div class="spinner-border" role="status">
+    				<span class="sr-only">Loading...</span>
+    			</div>
+    		</div>`).remove();
+    	});
 
-	$('#notif-pane').on('show.bs.collapse',function(){
-		var id = $current_user_id;
-		$('#notifDisini').empty(),
-		getNotif();
+    	$('#notif-pane').on('show.bs.collapse',function(){
+    		var id = {$current_user_id};
+    		$('#notifDisini').empty(),
+    		getNotif();
 
-		var a=$('<div>',{'class':'modal-backdrop fade show'});
-		$('body').toggleClass('modal-open').append(a),
-		a.click(function(){
-			$('#notif-pane').collapse('hide'),
-			a.remove(),
-			$('body').toggleClass('modal-open');
-		});
-	});
+    		var a=$('<div>',{'class':'modal-backdrop fade show'});
+    		$('body').toggleClass('modal-open').append(a),
+    		a.click(function(){
+    			$('#notif-pane').collapse('hide'),
+    			a.remove(),
+    			$('body').toggleClass('modal-open');
+    		});
+    	});
 
-	counter_notif();
+    	counter_notif();
 
-	setInterval(function(){ 
-		counter_notif();
-	}, 10000);
+    	setInterval(function(){ 
+    		counter_notif();
+    	}, 10000);
 
-	function counter_notif() {
-		var id = $current_user_id;
-		$.getJSON('$link_api_notif' + 'get', { id: id }, function(b){
-			$('.counter').text(b.count);
-		});
-	}
+    	function counter_notif() {
+    		var id = {$current_user_id};
+    		$.getJSON('{$link_api_notif}' + 'get', { id: id }, function(b){
+    			$('.counter').text(b.count);
+    		});
+    	}
 
-	$(document).on('click', '.actionNotif .markAs', function() { // markAs
-		var action = '';
+    	$(document).on('click', '.actionNotif .markAs', function() { // markAs
+    		var action = '';
 
-		if ($(this).hasClass( "text-primary" )) {
-			$(this).removeClass('text-primary').addClass('text-muted');	
-			action = 'sudahBaca';
-		}
-		else {
-			$(this).removeClass('text-muted').addClass('text-primary');
-			action = 'belumBaca';
-		}
+    		if ($(this).hasClass( "text-primary" )) {
+    			$(this).removeClass('text-primary').addClass('text-muted');	
+    			action = 'sudahBaca';
+    		}
+    		else {
+    			$(this).removeClass('text-muted').addClass('text-primary');
+    			action = 'belumBaca';
+    		}
 
-		$.post( '$link_api_notif' + 'mark', { action: action, id: $(this).data('id') });
-	});
+    		$.post( '{$link_api_notif}' + 'mark', { action: action, id: $(this).data('id') });
+    	});
 
-	$('.tandaiSemuaTerbaca').on('click',function(){ 
-		var id = $current_user_id;
+    	$('.tandaiSemuaTerbaca').on('click',function(){ 
+    		var id = {$current_user_id};
 
-		$.post( '$link_api_notif' + 'mark_all', { id: id }, function() {
-			// 
-			$('.actionNotif .markAs').removeClass('text-primary').addClass('text-muted');
-		});
-	});
+    		$.post( '{$link_api_notif}' + 'mark_all', { id: id }, function() {
+    			// 
+    			$('.actionNotif .markAs').removeClass('text-primary').addClass('text-muted');
+    		});
+    	});
 
-	$.getJSON('$link_api_juragan_all', function(b){
-		var apnd = '';
-		for (var i in b) {
-			apnd += "<option value = '" + b[i].id + " '>" + b[i].nama + " </option>";
-		}
-		$('[name="juragan[]"]').empty().append(apnd);
-	});
+    	$.getJSON('{$link_api_juragan_all}', function(b){
+    		var apnd = '';
+    		for (var i in b) {
+    			apnd += "<option value = '" + b[i].id + " '>" + b[i].nama + " </option>";
+    		}
+    		$('[name="juragan[]"]').empty().append(apnd);
+    	});
 
-	$.getJSON('$link_api_pengguna_all', function(b){
-		var apnd = '';
+    	$.getJSON('{$link_api_pengguna_all}', function(b){
+    		var apnd = '';
 
-		for (let i = 0; i < b.length; i++) {
-			apnd += `<tr>
-				<td>
-					<div>
-						<div class="lead">`+b[i].nama+`<span class="ml-2 badge rounded-pill bg-secondary font-weight-normal">`+b[i].username+`</span></div>
-						<div>`+b[i].email+`</div>
-					</div>
-				</td>
-				<td>`+b[i].level+`</td>
-				<td>`+b[i].status+`</td>
-				<td class="text-right">
-					<!-- Example split danger button -->
-					<div class="btn-group">
-						<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modalSuntingPengguna" data-id="`+b[i].id+`" data-nama="`+b[i].nama+`" data-email="`+b[i].email+`" data-username="`+b[i].username+`" data-level="`+b[i].level+`" data-status="`+b[i].status+`">Sunting</button>
-						<button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu">
-							<li><button class="dropdown-item" href="#">Hapus</button></li>
-						</ul>
-					</div>
-				</td>
-			</tr>`;
-		}
-		$('#listUsers').empty().append(apnd);
-	});
+    		for (let i = 0; i < b.length; i++) {
+    			apnd += `<tr>
+    				<td>
+    					<div>
+    						<div class="lead">`+b[i].nama+`<span class="ml-2 badge rounded-pill bg-secondary font-weight-normal">`+b[i].username+`</span></div>
+    						<div>`+b[i].email+`</div>
+    					</div>
+    				</td>
+    				<td>`+b[i].level+`</td>
+    				<td>`+b[i].status+`</td>
+    				<td class="text-right">
+    					<!-- Example split danger button -->
+    					<div class="btn-group">
+    						<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modalSuntingPengguna" data-id="`+b[i].id+`" data-nama="`+b[i].nama+`" data-email="`+b[i].email+`" data-username="`+b[i].username+`" data-level="`+b[i].level+`" data-status="`+b[i].status+`">Sunting</button>
+    						<button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
+    							<span class="sr-only">Toggle Dropdown</span>
+    						</button>
+    						<ul class="dropdown-menu">
+    							<li><button class="dropdown-item" href="#">Hapus</button></li>
+    						</ul>
+    					</div>
+    				</td>
+    			</tr>`;
+    		}
+    		$('#listUsers').empty().append(apnd);
+    	});
 
-	var mP=document.getElementById('modalSuntingPengguna');
-	mP.addEventListener('show.bs.modal',function(o){
-		var a=o.relatedTarget;
-		var b=a.getAttribute('data-id');
-		var c=a.getAttribute('data-nama');
-		var d=a.getAttribute('data-username');
-		var e=a.getAttribute('data-email');
-		var f=a.getAttribute('data-level');
-		var g=a.getAttribute('data-status');
-		var h=mP.querySelector('.modal-title');
-		var i=mP.querySelector('#modalSuntingPengguna input[name="id"]');
-		var j=mP.querySelector('#modalSuntingPengguna input[name="nama"]');
-		var k=mP.querySelector('#modalSuntingPengguna input[name="username"]');
-		var l=mP.querySelector('#modalSuntingPengguna input[name="email"]');
-		var m=mP.querySelector('#modalSuntingPengguna select[name="level"]');
-		var n=mP.querySelector('#modalSuntingPengguna select[name="status"]');
-		h.textContent='Perbarui '+c,
-		i.value=b,
-		j.value=c,
-		k.value=d,
-		l.value=e,
-		m.value=f,
-		n.value=g,
-		
-		$.ajax({
-			method:'GET',
-			url:'$link_api_relasi',
-			data:{id:b}
-		}).done(function(a){
-			var juragans = a[b].juragan;
-			var arr_lama = [];
-			var opt = [];
+    	var mP=document.getElementById('modalSuntingPengguna');
+    	mP.addEventListener('show.bs.modal',function(o){
+    		var a=o.relatedTarget;
+    		var b=a.getAttribute('data-id');
+    		var c=a.getAttribute('data-nama');
+    		var d=a.getAttribute('data-username');
+    		var e=a.getAttribute('data-email');
+    		var f=a.getAttribute('data-level');
+    		var g=a.getAttribute('data-status');
+    		var h=mP.querySelector('.modal-title');
+    		var i=mP.querySelector('#modalSuntingPengguna input[name="id"]');
+    		var j=mP.querySelector('#modalSuntingPengguna input[name="nama"]');
+    		var k=mP.querySelector('#modalSuntingPengguna input[name="username"]');
+    		var l=mP.querySelector('#modalSuntingPengguna input[name="email"]');
+    		var m=mP.querySelector('#modalSuntingPengguna select[name="level"]');
+    		var n=mP.querySelector('#modalSuntingPengguna select[name="status"]');
+    		h.textContent='Perbarui '+c,
+    		i.value=b,
+    		j.value=c,
+    		k.value=d,
+    		l.value=e,
+    		m.value=f,
+    		n.value=g,
+    		
+    		$.ajax({
+    			method:'GET',
+    			url:'{$link_api_relasi}',
+    			data:{id:b}
+    		}).done(function(a){
+    			var juragans = a[b].juragan;
+    			var arr_lama = [];
+    			var opt = [];
 
-			// $(document).find('option[value='+juragans[x].id+']');
-			var olds = $('select#juragan_ option');
-			// console.log(olds);
+    			// $(document).find('option[value='+juragans[x].id+']');
+    			var olds = $('select#juragan_ option');
+    			// console.log(olds);
 
-			for (const x in olds) {
-				if (olds[x].value) arr_lama.push({
-					id: parseInt(olds[x].value), 
-					nama: olds[x].text
-				});
-			}
-			
-			var arr_baru = [];
-			for (const x in juragans) {
-				arr_baru.push({
-					id: juragans[x].id,
-					nama: juragans[x].nama,
-					selected: true
-				});
-			}
-			// console.log(selected);
-			let new_juragans = Object.assign(arr_lama,arr_baru);
-			// console.log(new_juragans);
-			// $('select#juragan_ option').val(selected);
+    			for (const x in olds) {
+    				if (olds[x].value) arr_lama.push({
+    					id: parseInt(olds[x].value), 
+    					nama: olds[x].text
+    				});
+    			}
+    			
+    			var arr_baru = [];
+    			for (const x in juragans) {
+    				arr_baru.push({
+    					id: juragans[x].id,
+    					nama: juragans[x].nama,
+    					selected: true
+    				});
+    			}
+    			// console.log(selected);
+    			let new_juragans = Object.assign(arr_lama,arr_baru);
+    			// console.log(new_juragans);
+    			// $('select#juragan_ option').val(selected);
 
-			for (let i = 0; i < new_juragans.length; i++) {
-				let _option = new_juragans[i];
-				let selected = '';
-				if (_option.selected) {
-					selected = 'selected="selected"';
-				}
-				opt.push(`
-				<option value="`+_option.id+`" `+selected+`>`+_option.nama+`</option>
-				`);
-			}
+    			for (let i = 0; i < new_juragans.length; i++) {
+    				let _option = new_juragans[i];
+    				let selected = '';
+    				if (_option.selected) {
+    					selected = 'selected="selected"';
+    				}
+    				opt.push(`
+    				<option value="`+_option.id+`" `+selected+`>`+_option.nama+`</option>
+    				`);
+    			}
 
-			$('select#juragan_').empty();
-			$(opt.join('')).appendTo('select#juragan_');
-		});
-	});
-});
-JS;
+    			$('select#juragan_').empty();
+    			$(opt.join('')).appendTo('select#juragan_');
+    		});
+    	});
+    });
+    JS;
 
 $packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();

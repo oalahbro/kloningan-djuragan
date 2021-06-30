@@ -42,7 +42,7 @@ class PelangganModel extends Model
         $builder->select('i.*, p.*');
         $builder->join('order_invoice i', '(p.id_pelanggan = i.pemesan_id OR i.kirimKepada_id = p.id_pelanggan) AND i.deleted_at IS NULL', '', false);
 
-        if ($cari !== null or $cari !== '') {
+        if ($cari !== null || $cari !== '') {
             $builder->like('p.nama_pelanggan', $cari, 'both');
             $builder->orLike('p.hp', $cari, 'both');
         }

@@ -9,7 +9,7 @@ class Chart extends BaseController
     //
     public function index()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return redirect()->to('/auth');
         } else {
             if ($this->isAdmin()) {

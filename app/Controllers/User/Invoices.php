@@ -10,7 +10,7 @@ class Invoices extends BaseController
     //
     public function tulis()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return redirect()->to('/auth');
         } else {
             if ($this->isAdmin()) {
@@ -29,7 +29,7 @@ class Invoices extends BaseController
 
     public function save()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return redirect()->to('/auth');
         } else {
             if ($this->isAdmin()) {
@@ -42,7 +42,7 @@ class Invoices extends BaseController
         }
 
         if ($this->request->isAJAX()) {
-            if (!$this->validation->withRequest($this->request)->run()) {
+            if (! $this->validation->withRequest($this->request)->run()) {
                 $this->response->setStatusCode(406);
                 $errors = $this->validation->getErrors();
 
@@ -130,7 +130,7 @@ class Invoices extends BaseController
     // menampilkan semua invoice
     public function lihat($juragan = '', $hal = 'dalam-proses')
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return redirect()->to('/auth');
         } else {
             if ($this->isAdmin()) {
@@ -138,7 +138,7 @@ class Invoices extends BaseController
             }
         }
 
-        if (!\in_array($hal, ['semua', 'cek-bayar', 'dalam-proses', 'belum-proses', 'selesai'])) {
+        if (! \in_array($hal, ['semua', 'cek-bayar', 'dalam-proses', 'belum-proses', 'selesai'])) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
@@ -163,7 +163,7 @@ class Invoices extends BaseController
             $limit = config('Pager')->perPage;
             $page  = (int) $this->request->getGet('page');
 
-            if (!isset($page) || $page === 0 || $page === 1) {
+            if (! isset($page) || $page === 0 || $page === 1) {
                 $page   = 1;
                 $offset = 0;
             } else {
@@ -190,7 +190,7 @@ class Invoices extends BaseController
     // tambah pembayaran
     public function simpan_pembayaran()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return redirect()->to('/auth');
         } else {
             if ($this->isAdmin()) {
@@ -203,7 +203,7 @@ class Invoices extends BaseController
         }
 
         if ($this->request->isAJAX()) {
-            if (!$this->validation->withRequest($this->request)->run()) {
+            if (! $this->validation->withRequest($this->request)->run()) {
                 $this->response->setStatusCode(406);
                 $errors = $this->validation->getErrors();
 
@@ -238,7 +238,7 @@ class Invoices extends BaseController
 
     private function _update_status_pembayaran($invoice_id)
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return redirect()->to('/auth');
         } else {
             if ($this->isAdmin()) {
@@ -295,7 +295,7 @@ class Invoices extends BaseController
     // hapus invoice
     public function hapus_orderan()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return redirect()->to('/auth');
         } else {
             if ($this->isAdmin()) {
@@ -320,7 +320,7 @@ class Invoices extends BaseController
 
     public function info_pembayaran()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return redirect()->to('/auth');
         } else {
             if ($this->isAdmin()) {

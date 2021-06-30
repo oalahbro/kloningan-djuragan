@@ -95,9 +95,7 @@ $session = \Config\Services::session();
 				</div>
 				<div class="mb-3">
 					<?= form_label('Rekening Bank', 'bank', ['class' => 'form-label']); ?>
-					<?php
-
-                    echo form_multiselect('bank[]', $options, [], ['class' => 'form-select mybanks', 'required' => '']);
+					<?= form_multiselect('bank[]', $options, [], ['class' => 'form-select mybanks', 'required' => '']);
                     ?>
 					<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 				</div>
@@ -124,184 +122,184 @@ $link_invoice         = site_url('admin/invoices/lihat/');
 $link_api_notif       = site_url('api/notifikasi/');
 
 $js = <<< JS
-$(function() { 
-	'use strict';
-	// sidebar
-    // ------------------------------------------------------------------------
-	$('#sidebar').on('show.bs.collapse',function(){
-		var a=$('<div>',{'class':'modal-backdrop fade show'});
-		$('body').toggleClass('modal-open').append(a),
-		a.click(function(){
-			$('#sidebar').collapse('hide'),
-			a.remove(),
-			$('body').toggleClass('modal-open');
-		});
-	});
+    $(function() { 
+    	'use strict';
+    	// sidebar
+        // ------------------------------------------------------------------------
+    	$('#sidebar').on('show.bs.collapse',function(){
+    		var a=$('<div>',{'class':'modal-backdrop fade show'});
+    		$('body').toggleClass('modal-open').append(a),
+    		a.click(function(){
+    			$('#sidebar').collapse('hide'),
+    			a.remove(),
+    			$('body').toggleClass('modal-open');
+    		});
+    	});
 
-	$('#sidebarCollapse').on('click',function(){
-		var id = $current_user_id;
-		$('#listLi').html(''),
-		$.getJSON('$link_api_juragan', { id: id }, function(b){
-			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+'semua'+'"><i class="fal fa-user-circle"></i> Semua Juragan</li></li>');
-			
-			$.each(b[id].juragan,function(c,b){
-				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="$link_invoice'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
-			}),
+    	$('#sidebarCollapse').on('click',function(){
+    		var id = {$current_user_id};
+    		$('#listLi').html(''),
+    		$.getJSON('{$link_api_juragan}', { id: id }, function(b){
+    			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="{$link_invoice}'+'semua'+'"><i class="fal fa-user-circle"></i> Semua Juragan</li></li>');
+    			
+    			$.each(b[id].juragan,function(c,b){
+    				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="{$link_invoice}'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
+    			}),
 
-			$(a.join('')).appendTo('#listLi');
-		});
-	});
+    			$(a.join('')).appendTo('#listLi');
+    		});
+    	});
 
-	// notifikasi
-	// ------------------------------------------------------------------------
-	function getNotif(page = 1, dibaca = 0){
-		var id = $current_user_id;
-		$.getJSON('$link_api_notif' + 'get', { id: id, page: page, dibaca: dibaca }, function(b){
-			var a=[],
-				data = b.results;
+    	// notifikasi
+    	// ------------------------------------------------------------------------
+    	function getNotif(page = 1, dibaca = 0){
+    		var id = {$current_user_id};
+    		$.getJSON('{$link_api_notif}' + 'get', { id: id, page: page, dibaca: dibaca }, function(b){
+    			var a=[],
+    				data = b.results;
 
-			if (b.count > 0) {
-				$('.btnSettingNotif').show();
-				a.push('');
+    			if (b.count > 0) {
+    				$('.btnSettingNotif').show();
+    				a.push('');
 
-				$.each(data,function(c,b){
-					a.push(`<div class="list-group-item list-group-item-action">
-						<div class="d-flex">
-							<div class="mr-auto">
-								<div class="text-muted small">`+b.created_at +`</div>
-								<a class="d-block text-decoration-none" href="$link_invoice/semua/semua?cari[kolom]=faktur&cari[q]=`+b.invoice+`">`+ b.notif+`</a>
-							</div>
-							<div class="d-flex justify-content-right flex-column actionNotif">
-								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fal fa-circle"></i></button>
-							</div>
-						</div>
-					</div>`);
-				}),
-				$(a.join('')).appendTo('#notifDisini');
-				var next = '';
+    				$.each(data,function(c,b){
+    					a.push(`<div class="list-group-item list-group-item-action">
+    						<div class="d-flex">
+    							<div class="mr-auto">
+    								<div class="text-muted small">`+b.created_at +`</div>
+    								<a class="d-block text-decoration-none" href="{$link_invoice}/semua/semua?cari[kolom]=faktur&cari[q]=`+b.invoice+`">`+ b.notif+`</a>
+    							</div>
+    							<div class="d-flex justify-content-right flex-column actionNotif">
+    								<button data-id="`+b.id+`" class="markAs border-0 bg-transparent text-primary small" type="button"><i class="fal fa-circle"></i></button>
+    							</div>
+    						</div>
+    					</div>`);
+    				}),
+    				$(a.join('')).appendTo('#notifDisini');
+    				var next = '';
 
-				if (b.next) {
-					$('<button type="button" class="list-group-item list-group-item-action text-center lanjutNotif" data-page="'+ (b.page+1) +'">lanjut ...</button>').appendTo('#notifDisini');
-				}
-			}
-			else {
-				$('.btnSettingNotif').hide();
+    				if (b.next) {
+    					$('<button type="button" class="list-group-item list-group-item-action text-center lanjutNotif" data-page="'+ (b.page+1) +'">lanjut ...</button>').appendTo('#notifDisini');
+    				}
+    			}
+    			else {
+    				$('.btnSettingNotif').hide();
 
-				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fal fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
-			}
-		});
-	}
+    				$('<div class="d-flex justify-content-center align-items-center" style="height: 90vh"><i class="fal fa-bell-slash fa-5x"></i></div>').appendTo('#notifDisini');
+    			}
+    		});
+    	}
 
-	$(document).on('click', '.lanjutNotif',function(){
-		getNotif($(this).data('page'));
-		$(this).attr('disabled', true).html(`<div class="text-center">
-			<div class="spinner-border" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
-		</div>`).remove();
-	});
+    	$(document).on('click', '.lanjutNotif',function(){
+    		getNotif($(this).data('page'));
+    		$(this).attr('disabled', true).html(`<div class="text-center">
+    			<div class="spinner-border" role="status">
+    				<span class="sr-only">Loading...</span>
+    			</div>
+    		</div>`).remove();
+    	});
 
-	$('#notif-pane').on('show.bs.collapse',function(){
-		var id = $current_user_id;
-		$('#notifDisini').empty(),
-		getNotif();
+    	$('#notif-pane').on('show.bs.collapse',function(){
+    		var id = {$current_user_id};
+    		$('#notifDisini').empty(),
+    		getNotif();
 
-		var a=$('<div>',{'class':'modal-backdrop fade show'});
-		$('body').toggleClass('modal-open').append(a),
-		a.click(function(){
-			$('#notif-pane').collapse('hide'),
-			a.remove(),
-			$('body').toggleClass('modal-open');
-		});
-	});
+    		var a=$('<div>',{'class':'modal-backdrop fade show'});
+    		$('body').toggleClass('modal-open').append(a),
+    		a.click(function(){
+    			$('#notif-pane').collapse('hide'),
+    			a.remove(),
+    			$('body').toggleClass('modal-open');
+    		});
+    	});
 
-	counter_notif();
+    	counter_notif();
 
-	setInterval(function(){ 
-		counter_notif();
-	}, 10000);
+    	setInterval(function(){ 
+    		counter_notif();
+    	}, 10000);
 
-	function counter_notif() {
-		var id = $current_user_id;
-		$.getJSON('$link_api_notif' + 'get', { id: id }, function(b){
-			$('.counter').text(b.count);
-		});
-	}
+    	function counter_notif() {
+    		var id = {$current_user_id};
+    		$.getJSON('{$link_api_notif}' + 'get', { id: id }, function(b){
+    			$('.counter').text(b.count);
+    		});
+    	}
 
-	$(document).on('click', '.actionNotif .markAs', function() { // markAs
-		var action = '';
+    	$(document).on('click', '.actionNotif .markAs', function() { // markAs
+    		var action = '';
 
-		if ($(this).hasClass( "text-primary" )) {
-			$(this).removeClass('text-primary').addClass('text-muted');	
-			action = 'sudahBaca';
-		}
-		else {
-			$(this).removeClass('text-muted').addClass('text-primary');
-			action = 'belumBaca';
-		}
+    		if ($(this).hasClass( "text-primary" )) {
+    			$(this).removeClass('text-primary').addClass('text-muted');	
+    			action = 'sudahBaca';
+    		}
+    		else {
+    			$(this).removeClass('text-muted').addClass('text-primary');
+    			action = 'belumBaca';
+    		}
 
-		$.post( '$link_api_notif' + 'mark', { action: action, id: $(this).data('id') });
-	});
+    		$.post( '{$link_api_notif}' + 'mark', { action: action, id: $(this).data('id') });
+    	});
 
-	$('.tandaiSemuaTerbaca').on('click',function(){ 
-		var id = $current_user_id;
+    	$('.tandaiSemuaTerbaca').on('click',function(){ 
+    		var id = {$current_user_id};
 
-		$.post( '$link_api_notif' + 'mark_all', { id: id }, function() {
-			// 
-			$('.actionNotif .markAs').removeClass('text-primary').addClass('text-muted');
-		});
-	});
+    		$.post( '{$link_api_notif}' + 'mark_all', { id: id }, function() {
+    			// 
+    			$('.actionNotif .markAs').removeClass('text-primary').addClass('text-muted');
+    		});
+    	});
 
-	$.getJSON('$link_api_juragan_all', function(b){
-		var a=[];		
-		$.each(b,function(c,b){
-			var selected = '';
+    	$.getJSON('{$link_api_juragan_all}', function(b){
+    		var a=[];		
+    		$.each(b,function(c,b){
+    			var selected = '';
 
-			var banks = b.bank;
-			for(var i in banks){
-				// console.log(i); //  key
-				// console.log(banks[i]); // key's value
+    			var banks = b.bank;
+    			for(var i in banks){
+    				// console.log(i); //  key
+    				// console.log(banks[i]); // key's value
 
-				selected += i + ',';
-			}
+    				selected += i + ',';
+    			}
 
-			a.push(`<tr><td>
-				<div class="d-flex justify-content-between">
-					<div class="lead">`+b.nama+`</div>
-					<div>
-						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSuntingJuragan" data-selected="`+selected.replace(/,\s*$/, "")+`" data-id="`+b.id+`" data-nama="`+b.nama+`"><i class="fal fa-pencil"></i> sunting</button>
+    			a.push(`<tr><td>
+    				<div class="d-flex justify-content-between">
+    					<div class="lead">`+b.nama+`</div>
+    					<div>
+    						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSuntingJuragan" data-selected="`+selected.replace(/,\s*$/, "")+`" data-id="`+b.id+`" data-nama="`+b.nama+`"><i class="fal fa-pencil"></i> sunting</button>
 
-						<a href="" class="text-decoration-none"><i class="fal fa-trash"></i> hapus</a>
-					</div>
-				</div>
-			</td></tr>`);
-		}),
+    						<a href="" class="text-decoration-none"><i class="fal fa-trash"></i> hapus</a>
+    					</div>
+    				</div>
+    			</td></tr>`);
+    		}),
 
-		$(a.join('')).appendTo('#juragans');
-	});
+    		$(a.join('')).appendTo('#juragans');
+    	});
 
-	var mj=document.getElementById('modalSuntingJuragan');
-	mj.addEventListener('show.bs.modal',function(h){
-		var a=h.relatedTarget;
-		var c=a.getAttribute('data-selected');
-		var d=a.getAttribute('data-id');
-		var b=a.getAttribute('data-nama');
-		var e=mj.querySelector('.modal-title');
-		var f=mj.querySelector('#modalSuntingJuragan input#nama_juragan');
-		var g=mj.querySelector('#modalSuntingJuragan input[name="id"]');
+    	var mj=document.getElementById('modalSuntingJuragan');
+    	mj.addEventListener('show.bs.modal',function(h){
+    		var a=h.relatedTarget;
+    		var c=a.getAttribute('data-selected');
+    		var d=a.getAttribute('data-id');
+    		var b=a.getAttribute('data-nama');
+    		var e=mj.querySelector('.modal-title');
+    		var f=mj.querySelector('#modalSuntingJuragan input#nama_juragan');
+    		var g=mj.querySelector('#modalSuntingJuragan input[name="id"]');
 
-		e.textContent='Perbarui '+b,
-		f.value=b,
-		g.value=d,
-		$.each(c.split(','),function(b,a){
-			$("select.mybanks option[value='"+a+"']").prop('selected',!0);
-		});
-	}),
-	mj.addEventListener('hide.bs.modal',function(a){
-		document.getElementById('mf').reset();
-	});
-});
-JS;
+    		e.textContent='Perbarui '+b,
+    		f.value=b,
+    		g.value=d,
+    		$.each(c.split(','),function(b,a){
+    			$("select.mybanks option[value='"+a+"']").prop('selected',!0);
+    		});
+    	}),
+    	mj.addEventListener('hide.bs.modal',function(a){
+    		document.getElementById('mf').reset();
+    	});
+    });
+    JS;
 
 $packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();

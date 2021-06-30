@@ -8,7 +8,7 @@ class Download extends BaseController
 {
     public function invoice($invoice)
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return redirect()->to('/auth');
         }
 

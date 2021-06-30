@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Invoices extends BaseController
+class Products extends BaseController
 {
     public function index()
     {

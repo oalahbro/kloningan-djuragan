@@ -11,7 +11,7 @@ class Juragan extends BaseController
 
         $nama_cache = 'juragan_by_user_' . $user_id . ($bank === 'yes' ? '_bank' : '');
 
-        if (!$json = $cache->get($nama_cache)) {
+        if (! $json = $cache->get($nama_cache)) {
             $x = $juragan->byUserId($user_id)->getResult();
 
             $json     = [];

@@ -32,12 +32,11 @@
                         ?>
 						<?php if ($validation->hasError('username')) { ?>
 							<div class="invalid-feedback">
-								<?php echo $validation->getError('username'); ?>
+								<?= $validation->getError('username'); ?>
 							</div>
 						<?php } ?>
 					</div>
-					<?php
-                    echo form_button(['content' => 'Atur ulang', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '2']);
+					<?= form_button(['content' => 'Atur ulang', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '2']);
                     ?>
 					<?= form_close(); ?>
 				</div>

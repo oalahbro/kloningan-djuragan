@@ -16,7 +16,7 @@ class Pengiriman extends \CodeIgniter\Controller
 
         $id = $this->request->getGet('id');
 
-        if (!isset($id) or empty($id) or (int) $id === 0) {
+        if (! isset($id) || empty($id) || (int) $id === 0) {
             $res = [];
         } else {
             $res = $pengiriman->where(['id_pengiriman' => $id])->findAll()[0];

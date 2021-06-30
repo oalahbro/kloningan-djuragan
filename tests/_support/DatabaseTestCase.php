@@ -5,7 +5,10 @@ namespace Tests\Support;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 
-class DatabaseTestCase extends CIUnitTestCase
+/**
+ * @internal
+ */
+final class DatabaseTestCase extends CIUnitTestCase
 {
     use DatabaseTestTrait;
 
@@ -20,7 +23,7 @@ class DatabaseTestCase extends CIUnitTestCase
      * The seed file(s) used for all tests within this test case.
      * Should be fully-namespaced or relative to $basePath
      *
-     * @var string|array
+     * @var array|string
      */
     protected $seed = 'Tests\Support\Database\Seeds\ExampleSeeder';
 
@@ -38,18 +41,18 @@ class DatabaseTestCase extends CIUnitTestCase
      * Note that running "all" runs migrations in date order,
      * but specifying namespaces runs them in namespace order (then date)
      *
-     * @var string|array|null
+     * @var array|string|null
      */
     protected $namespace = 'Tests\Support';
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         // Extra code to run before each test
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         parent::tearDown();
 

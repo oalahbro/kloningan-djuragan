@@ -133,7 +133,7 @@ $html_logo = '<img src="data:image/svg+xml;base64,' . base64_encode($logo) . '" 
                     $kab  = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
                     $prov = strtoupper($ongkir->provinsi($PPro)['province']);
 
-                    echo $pemesan->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $pemesan->kodepos;
+                    echo $pemesan->alamat . '<br/>' . $kec . ', ' . $kab . '<br/>' . $prov . ' - ' . $pemesan->kodepos;
                 }
                 ?>
             </td>
@@ -163,7 +163,7 @@ $html_logo = '<img src="data:image/svg+xml;base64,' . base64_encode($logo) . '" 
                         $kab  = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
                         $prov = strtoupper($ongkir->provinsi($PPro)['province']);
 
-                        echo $kirimKe->alamat . '<br/>' . $kec . ', ' . $kab  . '<br/>' . $prov . ' - ' . $kirimKe->kodepos;
+                        echo $kirimKe->alamat . '<br/>' . $kec . ', ' . $kab . '<br/>' . $prov . ' - ' . $kirimKe->kodepos;
                     }
                     ?>
                 <?php } ?>

@@ -32,7 +32,7 @@
 
                         if ($validation->hasError('username')) { ?>
 							<div class="invalid-feedback">
-								<?php echo $validation->getError('username'); ?>
+								<?= $validation->getError('username'); ?>
 							</div>
 						<?php } ?>
 					</div>
@@ -49,7 +49,7 @@
 
                         if ($validation->hasError('password')) { ?>
 							<div class="invalid-feedback">
-								<?php echo $validation->getError('password'); ?>
+								<?= $validation->getError('password'); ?>
 							</div>
 						<?php } ?>
 					</div>
@@ -66,7 +66,7 @@
 
                         if ($validation->hasError('nama')) { ?>
 							<div class="invalid-feedback">
-								<?php echo $validation->getError('nama'); ?>
+								<?= $validation->getError('nama'); ?>
 							</div>
 						<?php } ?>
 					</div>
@@ -83,12 +83,11 @@
 
                         if ($validation->hasError('email')) { ?>
 							<div class="invalid-feedback">
-								<?php echo $validation->getError('email'); ?>
+								<?= $validation->getError('email'); ?>
 							</div>
 						<?php } ?>
 					</div>
-					<?php
-                    echo form_button(['content' => 'Daftar', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '5']);
+					<?= form_button(['content' => 'Daftar', 'class' => 'btn btn-primary', 'type' => 'submit', 'tabindex' => '5']);
                     ?>
 					<?= form_close(); ?>
 				</div>

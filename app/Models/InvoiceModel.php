@@ -63,7 +63,7 @@ class InvoiceModel extends Model
         $inv->join('biaya c', 'c.invoice_id = i.id_invoice', 'left');
 
         if ($cari !== null) {
-            if (!empty($cari['pembayaran'])) {
+            if (! empty($cari['pembayaran'])) {
                 $status_pembayaran = "i.status_pembayaran='" . $cari['pembayaran'] . "'";
 
                 if ($cari['pembayaran'] === '2A') {
@@ -72,7 +72,7 @@ class InvoiceModel extends Model
                 $inv->where($status_pembayaran);
             }
 
-            if (!empty($cari['pengiriman'])) {
+            if (! empty($cari['pengiriman'])) {
                 $status_pengiriman = "i.status_pengiriman='" . $cari['pengiriman'] . "'";
 
                 if ($cari['pengiriman'] === '2A') {
@@ -81,11 +81,11 @@ class InvoiceModel extends Model
                 $inv->where($status_pengiriman);
             }
 
-            if (!empty($cari['orderan'])) {
+            if (! empty($cari['orderan'])) {
                 $inv->where('i.status_pesanan', $cari['orderan']);
             }
 
-            if (!empty($cari['kolom'])) {
+            if (! empty($cari['kolom'])) {
                 switch ($cari['kolom']) {
                     case 'id':
                         $inv->where('i.id_invoice', $cari['q']);
@@ -126,7 +126,7 @@ class InvoiceModel extends Model
                 foreach ($matches[0] as $term) {
                     $term = trim($term);
 
-                    if (!empty($term)) {
+                    if (! empty($term)) {
                         $term = str_replace('"', '', $term);
                         $query .= "OR i.id_invoice LIKE '%" . $term . "%' ";
                         $query .= "OR i.seri LIKE '%" . $term . "%' ";

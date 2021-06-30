@@ -1,0 +1,18 @@
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+    
+name: Main
+jobs:
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: PHP-CS-Fixer
+      uses: docker://oskarstark/php-cs-fixer-ga
+      with:
+        args: --config=.php-cs-fixer.dist.php --diff --dry-run --allow-risky=yes

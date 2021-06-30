@@ -18,7 +18,7 @@ class Juragan extends \CodeIgniter\Controller
 
         $nama_cache = 'all_juragan';
 
-        if (!$json = $cache->get($nama_cache)) {
+        if (! $json = $cache->get($nama_cache)) {
             $x = $juragan->findAll();
 
             $json = [];
