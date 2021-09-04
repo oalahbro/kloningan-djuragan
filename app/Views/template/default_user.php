@@ -17,20 +17,6 @@ $JSmin  = new Minify\JS();
 		<?= $title; ?>
 	</title>
 </head>
-<style>
-	/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-</style>
 
 <body>
 	<nav class="sticky-top mainnav navbar navbar-expand navbar-dark bg-dark bg-gradient">

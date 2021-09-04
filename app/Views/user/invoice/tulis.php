@@ -43,12 +43,12 @@ $session  = \Config\Services::session();
 							<div class="col-sm-5">
 								<?= form_label('Asal Orderan', 'asal_orderan', ['class' => 'form-label']); ?>
 								<?php
-                                $options_label = ['' => 'Pilih asal'];
+								$options_label = ['' => 'Pilih asal'];
 
-                                foreach (config('JuraganConfig')->label as $key => $label) {
-                                    $options_label[$key] = $label;
-                                }
-                                ?>
+								foreach (config('JuraganConfig')->label as $key => $label) {
+									$options_label[$key] = $label;
+								}
+								?>
 								<?= form_dropdown('asal_orderan', $options_label, '', ['class' => 'form-select', 'id' => 'asal_orderan', 'required' => '']); ?>
 							</div>
 							<div class="col-sm-7">
@@ -75,52 +75,52 @@ $session  = \Config\Services::session();
 
 						<div class="input-group mb-3 mycustom form_pemesan">
 							<?= form_input([
-							    'class'       => 'form-control cari_pelanggan pemesan',
-							    'id'          => 'cari_pemesan',
-							    'placeholder' => 'cari data pelanggan',
-							    'type'        => 'search',
+								'class'       => 'form-control cari_pelanggan pemesan',
+								'id'          => 'cari_pemesan',
+								'placeholder' => 'cari data pelanggan',
+								'type'        => 'search',
 							]); ?>
 							<?= form_button([
-							    'class'       => 'btn btn-dark',
-							    'content'     => '<i class="fal fa-plus"></i> Tambah',
-							    'data-target' => '#modalTambahPelanggan',
-							    'data-toggle' => 'modal',
-							    'id'          => 'tambah_pemesan_kirimKe',
-							    'title'       => 'Tambah Data Pemesan',
+								'class'       => 'btn btn-dark',
+								'content'     => '<i class="fal fa-plus"></i> Tambah',
+								'data-target' => '#modalTambahPelanggan',
+								'data-toggle' => 'modal',
+								'id'          => 'tambah_pemesan_kirimKe',
+								'title'       => 'Tambah Data Pemesan',
 							]); ?>
 						</div>
 
 						<div class="mb-3 info-data-pemesan" style="display: none;">
 							<?= form_button([
-							    'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
-							    'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-							    'title'   => 'Hapus Pemesan',
+								'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
+								'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+								'title'   => 'Hapus Pemesan',
 							]); ?>
 							<span id="alamat_pemesan" class="border rounded p-2 d-block"></span>
 						</div>
 
 						<div class="input-group mb-3 mycustom form_kirimKe" style="display: none">
 							<?= form_input([
-							    'class'       => 'form-control cari_pelanggan kirimKe',
-							    'id'          => 'cari_kirimKe',
-							    'placeholder' => 'cari data pelanggan',
-							    'type'        => 'search',
+								'class'       => 'form-control cari_pelanggan kirimKe',
+								'id'          => 'cari_kirimKe',
+								'placeholder' => 'cari data pelanggan',
+								'type'        => 'search',
 							]); ?>
 							<?= form_button([
-							    'class'       => 'btn btn-dark',
-							    'content'     => '<i class="fal fa-plus"></i> Tambah',
-							    'data-target' => '#modalTambahPelanggan',
-							    'data-toggle' => 'modal',
-							    'id'          => 'tambah_kirimKe',
-							    'title'       => 'Tambah Data Kirim Kepada',
+								'class'       => 'btn btn-dark',
+								'content'     => '<i class="fal fa-plus"></i> Tambah',
+								'data-target' => '#modalTambahPelanggan',
+								'data-toggle' => 'modal',
+								'id'          => 'tambah_kirimKe',
+								'title'       => 'Tambah Data Kirim Kepada',
 							]); ?>
 						</div>
 
 						<div class="mb-3 info-data-kirimKe" style="display: none;">
 							<?= form_button([
-							    'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
-							    'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-							    'title'   => 'Hapus Kirim',
+								'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
+								'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+								'title'   => 'Hapus Kirim',
 							]); ?>
 							<span id="alamat_kirimKe" class="border rounded p-2 d-block"></span>
 						</div>
@@ -206,8 +206,8 @@ $session  = \Config\Services::session();
 		<?= form_open('', ['id' => 'tambahPelanggan', 'class' => 'modal-content']); ?>
 		<div class="modal-header">
 			<h5 class="modal-title" id="modalTambahPelangganLabel"></h5>
-			<button type="button" data-reset="false" class="btn-close" data-dismiss="modal"aria-label="Close">
-				
+			<button type="button" data-reset="false" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 			</button>
 		</div>
 		<div class="modal-body">
@@ -220,39 +220,30 @@ $session  = \Config\Services::session();
 			<div class="row gx-2 mb-3">
 				<div class="col-6">
 					<?= form_label('HP 1', 'hp1', ['class' => 'form-label']); ?>
-					<?= form_input('hp[0]', '', ['class' => 'form-control input', 'id' => 'hp1', 'required' => '', 'placeholder' => 'HP', 'autocomplete' => 'off']); ?>
 					<?php
-                    $datainput1 = [
-                        'type'        => 'number',
-                        'name'        => 'hp[0]',
-                        'id'          => 'hp1',
-                        "pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
-                        'class'       => 'form-control input',
-                        'placeholder' => 'HP',
-                    ];
-
-                    echo form_input($datainput1);
-
-                    ?>
-				
+					$datainput1 = [
+						'name'        => 'hp[0]',
+						'id'          => 'hp1',
+						"pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
+						'class'       => 'form-control input',
+						'placeholder' => 'HP',
+					];
+					echo form_input($datainput1);
+					?>
 				</div>
 				<div class="col-6">
 					<?= form_label('HP 2', 'hp2', ['class' => 'form-label']); ?>
-					<?= form_input('hp[1]', '', ['class' => 'form-control input', 'id' => 'hp2', 'placeholder' => 'HP 2 - opsional', 'autocomplete' => 'off']); ?>
 					<?php
-                    $datainput2 = [
-                        'type'        => 'number',
-                        'name'        => 'hp[1]',
-                        'id'          => 'hp2',
-                        'class'       => 'form-control input',
-                        "pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
-                        'placeholder' => 'HP 2 - opsional',
-                    ];
+					$datainput2 = [
+						'name'        => 'hp[1]',
+						'id'          => 'hp2',
+						'class'       => 'form-control input',
+						"pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
+						'placeholder' => 'HP 2 - opsional',
+					];
 
-                    echo form_input($datainput2);
-
-                    ?>
-				
+					echo form_input($datainput2);
+					?>
 				</div>
 			</div>
 			<div class="mb-3">
@@ -280,7 +271,7 @@ $session  = \Config\Services::session();
 					<div class="col">
 						<?= form_label('Kecamatan', 'kecamatan', ['class' => 'form-label']); ?>
 						<?= form_dropdown('kecamatan', ['' => 'Pilih Kecamatan'], '', ['class' => 'form-select input', 'id' => 'kecamatan', 'required' => '', 'disabled' => '']);
-                        ?>
+						?>
 					</div>
 				</div>
 
@@ -312,8 +303,8 @@ $session  = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="biayaOrderLabel">Modal title</h5>
-				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-					
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 				</button>
 			</div>
 			<?= form_open('', ['id' => 'tambahBiaya'], ['biayaId' => '']); ?>
@@ -344,8 +335,8 @@ $session  = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="tambahProdukLabel">Tambah Orderan</h5>
-				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-					
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 				</button>
 			</div>
 			<?= form_open('', ['id' => 'nambahProduk']); ?>
@@ -362,19 +353,19 @@ $session  = \Config\Services::session();
 					<div class="col col-sm-6 col-md-3">
 						<?= form_label('Ukuran', 'ukuran', ['class' => 'form-label']); ?>
 						<?= '<select name="ukuran" class="form-select" id="ukuran" required="">';
-                        echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
+						echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
 
-                        foreach (config('JuraganConfig')->size as $k => $v) {
-                            echo '<optgroup label="' . $k . '">';
+						foreach (config('JuraganConfig')->size as $k => $v) {
+							echo '<optgroup label="' . $k . '">';
 
-                            foreach ($v as $k2 => $v2) {
-                                echo '<option value="' . $k2 . '">' . $v2 . '</option>';
-                            }
-                            echo '</optgroup>';
-                        }
-                        echo '<option value="custom">Custom</option>';
-                        echo '</select>';
-                        ?>
+							foreach ($v as $k2 => $v2) {
+								echo '<option value="' . $k2 . '">' . $v2 . '</option>';
+							}
+							echo '</optgroup>';
+						}
+						echo '<option value="custom">Custom</option>';
+						echo '</select>';
+						?>
 					</div>
 					<div class="col col-sm-6 col-md-3">
 						<?= form_label('QTY', 'QTY', ['class' => 'form-label']); ?>

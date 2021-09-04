@@ -226,7 +226,6 @@ $session  = \Config\Services::session();
 					<?= form_label('HP 1', 'hp1', ['class' => 'form-label']); ?>
 					<?php
                     $datainput1 = [
-                        'type'        => 'number',
                         'name'        => 'hp[0]',
                         'id'          => 'hp1',
                         "pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
@@ -242,7 +241,6 @@ $session  = \Config\Services::session();
 					<?= form_label('HP 2', 'hp2', ['class' => 'form-label']); ?>
 					<?php
                     $datainput2 = [
-                        'type'        => 'number',
                         'name'        => 'hp[1]',
                         'id'          => 'hp2',
                         'class'       => 'form-control input',
