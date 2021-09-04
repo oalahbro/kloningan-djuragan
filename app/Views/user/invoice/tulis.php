@@ -221,10 +221,38 @@ $session  = \Config\Services::session();
 				<div class="col-6">
 					<?= form_label('HP 1', 'hp1', ['class' => 'form-label']); ?>
 					<?= form_input('hp[0]', '', ['class' => 'form-control input', 'id' => 'hp1', 'required' => '', 'placeholder' => 'HP', 'autocomplete' => 'off']); ?>
+					<?php
+                    $datainput1 = [
+                        'type'        => 'number',
+                        'name'        => 'hp[0]',
+                        'id'          => 'hp1',
+                        "pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
+                        'class'       => 'form-control input',
+                        'placeholder' => 'HP',
+                    ];
+
+                    echo form_input($datainput1);
+
+                    ?>
+				
 				</div>
 				<div class="col-6">
 					<?= form_label('HP 2', 'hp2', ['class' => 'form-label']); ?>
 					<?= form_input('hp[1]', '', ['class' => 'form-control input', 'id' => 'hp2', 'placeholder' => 'HP 2 - opsional', 'autocomplete' => 'off']); ?>
+					<?php
+                    $datainput2 = [
+                        'type'        => 'number',
+                        'name'        => 'hp[1]',
+                        'id'          => 'hp2',
+                        'class'       => 'form-control input',
+                        "pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
+                        'placeholder' => 'HP 2 - opsional',
+                    ];
+
+                    echo form_input($datainput2);
+
+                    ?>
+				
 				</div>
 			</div>
 			<div class="mb-3">
