@@ -40,4 +40,26 @@ class UserModel extends Model
 
         return $builder;
     }
+    public function ambilSemua(?int $id = null)
+    {
+        $users  = $this->ambil($id)->get()->getResultObject();
+        $return = [];
+
+        foreach ($users as $user) {
+            $juragan = json_decode(html_entity_decode($user->juragan, ENT_QUOTES, 'UTF-8'), true);
+
+            $return[] = [
+                'id'             => (int) $user->id,
+                'username'       => $user->username,
+                'nama'           => $user->name,
+                'email'          => $user->email,
+                'level'          => $user->level,
+                'status'         => $user->status,
+                'login_terakhir' => $user->login_terakhir,
+                'juragan'        => $juragan,
+            ];
+        }
+
+        return $return;
+    }
 }

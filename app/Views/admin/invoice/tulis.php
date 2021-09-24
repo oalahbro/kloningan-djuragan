@@ -47,12 +47,12 @@ $session  = \Config\Services::session();
 							<div class="col-sm-5">
 								<?= form_label('Asal Orderan', 'asal_orderan', ['class' => 'form-label']); ?>
 								<?php
-                                $options_label = ['' => 'Pilih asal'];
+								$options_label = ['' => 'Pilih asal'];
 
-                                foreach (config('JuraganConfig')->label as $key => $label) {
-                                    $options_label[$key] = $label;
-                                }
-                                ?>
+								foreach (config('JuraganConfig')->label as $key => $label) {
+									$options_label[$key] = $label;
+								}
+								?>
 								<?= form_dropdown('asal_orderan', $options_label, '', ['class' => 'form-select', 'id' => 'asal_orderan', 'required' => '']); ?>
 							</div>
 							<div class="col-sm-7">
@@ -79,52 +79,52 @@ $session  = \Config\Services::session();
 
 						<div class="input-group mb-3 mycustom form_pemesan">
 							<?= form_input([
-							    'class'       => 'form-control cari_pelanggan pemesan',
-							    'id'          => 'cari_pemesan',
-							    'placeholder' => 'cari data pelanggan',
-							    'type'        => 'search',
+								'class'       => 'form-control cari_pelanggan pemesan',
+								'id'          => 'cari_pemesan',
+								'placeholder' => 'cari data pelanggan',
+								'type'        => 'search',
 							]); ?>
 							<?= form_button([
-							    'class'       => 'btn btn-dark',
-							    'content'     => '<i class="fal fa-plus"></i> Tambah',
-							    'data-target' => '#modalTambahPelanggan',
-							    'data-toggle' => 'modal',
-							    'id'          => 'tambah_pemesan_kirimKe',
-							    'title'       => 'Tambah Data Pemesan',
+								'class'       => 'btn btn-dark',
+								'content'     => '<i class="fal fa-plus"></i> Tambah',
+								'data-target' => '#modalTambahPelanggan',
+								'data-toggle' => 'modal',
+								'id'          => 'tambah_pemesan_kirimKe',
+								'title'       => 'Tambah Data Pemesan',
 							]); ?>
 						</div>
 
 						<div class="mb-3 info-data-pemesan" style="display: none;">
 							<?= form_button([
-							    'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
-							    'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-							    'title'   => 'Hapus Pemesan',
+								'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
+								'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+								'title'   => 'Hapus Pemesan',
 							]); ?>
 							<span id="alamat_pemesan" class="border rounded p-2 d-block"></span>
 						</div>
 
 						<div class="input-group mb-3 mycustom form_kirimKe" style="display: none">
 							<?= form_input([
-							    'class'       => 'form-control cari_pelanggan kirimKe',
-							    'id'          => 'cari_kirimKe',
-							    'placeholder' => 'cari data pelanggan',
-							    'type'        => 'search',
+								'class'       => 'form-control cari_pelanggan kirimKe',
+								'id'          => 'cari_kirimKe',
+								'placeholder' => 'cari data pelanggan',
+								'type'        => 'search',
 							]); ?>
 							<?= form_button([
-							    'class'       => 'btn btn-dark',
-							    'content'     => '<i class="fal fa-plus"></i> Tambah',
-							    'data-target' => '#modalTambahPelanggan',
-							    'data-toggle' => 'modal',
-							    'id'          => 'tambah_kirimKe',
-							    'title'       => 'Tambah Data Kirim Kepada',
+								'class'       => 'btn btn-dark',
+								'content'     => '<i class="fal fa-plus"></i> Tambah',
+								'data-target' => '#modalTambahPelanggan',
+								'data-toggle' => 'modal',
+								'id'          => 'tambah_kirimKe',
+								'title'       => 'Tambah Data Kirim Kepada',
 							]); ?>
 						</div>
 
 						<div class="mb-3 info-data-kirimKe" style="display: none;">
 							<?= form_button([
-							    'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
-							    'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-							    'title'   => 'Hapus Kirim',
+								'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
+								'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+								'title'   => 'Hapus Kirim',
 							]); ?>
 							<span id="alamat_kirimKe" class="border rounded p-2 d-block"></span>
 						</div>
@@ -160,12 +160,13 @@ $session  = \Config\Services::session();
 									<th scope="col">Produk</th>
 									<th scope="col">Harga</th>
 									<th scope="col">QTY</th>
+									<th scope="col">Gambar</th>
 									<th scope="col" class="text-right">Subtotal</th>
 								</tr>
 							</thead>
 							<tbody class="list-orderan" data-length="1">
 								<tr class="orderan-kosong">
-									<td class="text-center" colspan="4">
+									<td class="text-center" colspan="5">
 										<div class="py-5"><i class="fad text-warning fa-<?= random_element(['shopping-cart', 'shopping-bag', 'shopping-basket', 'bags-shopping', 'dolly-flatbed-empty', 'dolly-empty']) ?> fa-4x"></i>
 											<p class="mb-0"><?= random_element(['orderan kosong?', 'isi dulu orderannya ya?', 'jangan lupa isi orderannya ya?']) ?></p>
 										</div>
@@ -174,7 +175,7 @@ $session  = \Config\Services::session();
 							</tbody>
 							<tfoot class="customBiaya d-none listBiaya">
 								<tr>
-									<td colspan="3" class="text-right">Subtotal</td>
+									<td colspan="4" class="text-right">Subtotal</td>
 									<td class="text-right" data-totalbiaya="0" data-subtotal="0" id="subTotal"></td>
 								</tr>
 							</tfoot>
@@ -210,8 +211,8 @@ $session  = \Config\Services::session();
 		<?= form_open('', ['id' => 'tambahPelanggan', 'class' => 'modal-content']); ?>
 		<div class="modal-header">
 			<h5 class="modal-title" id="modalTambahPelangganLabel"></h5>
-			<button type="button" data-reset="false" class="btn-close" data-dismiss="modal"aria-label="Close">
-				
+			<button type="button" data-reset="false" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 			</button>
 		</div>
 		<div class="modal-body">
@@ -225,32 +226,32 @@ $session  = \Config\Services::session();
 				<div class="col-6">
 					<?= form_label('HP 1', 'hp1', ['class' => 'form-label']); ?>
 					<?php
-                    $datainput1 = [
-                        'name'        => 'hp[0]',
-                        'id'          => 'hp1',
-                        "pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
-                        'class'       => 'form-control input',
-                        'placeholder' => 'HP',
-                    ];
+					$datainput1 = [
+						'name'        => 'hp[0]',
+						'id'          => 'hp1',
+						"pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
+						'class'       => 'form-control input',
+						'placeholder' => 'HP',
+					];
 
-                    echo form_input($datainput1);
+					echo form_input($datainput1);
 
-                    ?>
+					?>
 				</div>
 				<div class="col-6">
 					<?= form_label('HP 2', 'hp2', ['class' => 'form-label']); ?>
 					<?php
-                    $datainput2 = [
-                        'name'        => 'hp[1]',
-                        'id'          => 'hp2',
-                        'class'       => 'form-control input',
-                        "pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
-                        'placeholder' => 'HP 2 - opsional',
-                    ];
+					$datainput2 = [
+						'name'        => 'hp[1]',
+						'id'          => 'hp2',
+						'class'       => 'form-control input',
+						"pattern"     => '/^0(([0-79]{1}[0-9]{1,2}(-|)[0-9]{3,4}(-|)[0-9]{4})|((8){1}[0-9]{2}(-|)[0-9]{2,4}(-|)[0-9]{4}))/',
+						'placeholder' => 'HP 2 - opsional',
+					];
 
-                    echo form_input($datainput2);
+					echo form_input($datainput2);
 
-                    ?>
+					?>
 
 				</div>
 			</div>
@@ -279,7 +280,7 @@ $session  = \Config\Services::session();
 					<div class="col">
 						<?= form_label('Kecamatan', 'kecamatan', ['class' => 'form-label']); ?>
 						<?= form_dropdown('kecamatan', ['' => 'Pilih Kecamatan'], '', ['class' => 'form-select input', 'id' => 'kecamatan', 'required' => '', 'disabled' => '']);
-                        ?>
+						?>
 					</div>
 				</div>
 
@@ -311,8 +312,8 @@ $session  = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="biayaOrderLabel">Modal title</h5>
-				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-					
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 				</button>
 			</div>
 			<?= form_open('', ['id' => 'tambahBiaya'], ['biayaId' => '']); ?>
@@ -343,73 +344,78 @@ $session  = \Config\Services::session();
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="tambahProdukLabel">Tambah Orderan</h5>
-				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-					
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 				</button>
 			</div>
 			<?= form_open('', ['id' => 'nambahProduk']); ?>
 			<div class="modal-body">
 				<div class="row gx-2">
-					<div class="col col-sm-6 col-md-3">
+					<div class="col col-sm-2">
 						<?= form_label('Kode Produk', 'kode_produk', ['class' => 'form-label']); ?>
 						<?= form_input(['name' => 'kode_produk', 'id' => 'kode_produk', 'class' => 'form-control', 'required' => '', 'placeholder' => 'cth: ' . random_element(['SK-45', 'BK-01', 'Z-01'])]); ?>
 					</div>
-					<div class="col col-sm-6 col-md-3">
+					<div class="col col-sm-2">
 						<?= form_label('Harga Satuan', 'harga_satuan', ['class' => 'form-label']); ?>
 						<?= form_input(['name' => 'harga_satuan', 'min' => '0', 'id' => 'harga_satuan', 'class' => 'form-control', 'required' => '', 'placeholder' => 'cth: ' . random_element(['225000', '280000', '295000', '320000']), 'type' => 'number']); ?>
 					</div>
-					<div class="col col-sm-6 col-md-3">
+					<div class="col col-sm-3">
 						<?= form_label('Ukuran', 'ukuran', ['class' => 'form-label']); ?>
 						<?= '<select name="ukuran" class="form-select" id="ukuran" required="">';
-                        echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
+						echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
 
-                        foreach (config('JuraganConfig')->size as $k => $v) {
-                            echo '<optgroup label="' . $k . '">';
+						foreach (config('JuraganConfig')->size as $k => $v) {
+							echo '<optgroup label="' . $k . '">';
 
-                            foreach ($v as $k2 => $v2) {
-                                echo '<option value="' . $k2 . '">' . $v2 . '</option>';
-                            }
-                            echo '</optgroup>';
-                        }
-                        echo '<option value="custom">Custom</option>';
-                        echo '</select>';
-                        ?>
+							foreach ($v as $k2 => $v2) {
+								echo '<option value="' . $k2 . '">' . $v2 . '</option>';
+							}
+							echo '</optgroup>';
+						}
+						echo '<option value="custom">Custom</option>';
+						echo '</select>';
+						?>
 					</div>
-					<div class="col col-sm-6 col-md-3">
+					<div class="col col-sm-2">
 						<?= form_label('QTY', 'QTY', ['class' => 'form-label']); ?>
 						<?= form_input(['name' => 'QTY', 'id' => 'QTY', 'class' => 'form-control', 'required' => '', 'placeholder' => 'cth: ' . rand(1, 20), 'type' => 'number', 'min' => '1']); ?>
 					</div>
+					<div class="col col-sm-3">
+						<?= form_label('gambar', 'gambar', ['class' => 'form-label']); ?>
+						<?= form_input(['name' => 'gambar', 'id' => 'gambar', 'class' => 'form-control', 'required' => '', 'placeholder' => 'Upload Gambar Format JPG', 'type' => 'file', 'min' => '1', 'accept' => 'image/*']); ?>
+
+						<br>
+					</div>
 				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link text-decoration-none" data-dismiss="modal">Batal</button>
+					<button type="submit" class="btn btn-primary addBiaya">Tambahkan</button>
+				</div>
+				<?= form_close(); ?>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-link text-decoration-none" data-dismiss="modal">Batal</button>
-				<button type="submit" class="btn btn-primary addBiaya">Tambahkan</button>
-			</div>
-			<?= form_close(); ?>
 		</div>
 	</div>
-</div>
 
 
 
-<?= $this->endSection() ?>
+	<?= $this->endSection() ?>
 
-<?= $this->section('js') ?>
-<?php
+	<?= $this->section('js') ?>
+	<?php
 
-$current_user_id     = $session->get('id');
-$link_api_invoice    = site_url('admin/invoices/save');
-$link_api_juragan    = site_url('api/juragan/by_user/');
-$link_api_kecamatan  = site_url('rajaongkir/kecamatan');
-$link_api_kota       = site_url('rajaongkir/kota');
-$link_api_pengguna   = site_url('api/juragan/get_users/');
-$link_api_provinsi   = site_url('rajaongkir/provinsi');
-$link_cari_pelanggan = site_url('pelanggan/cari');
-$link_invoice        = site_url('admin/invoices/lihat/');
-$link_post_pelanggan = site_url('pelanggan/baru');
-$link_api_notif      = site_url('api/notifikasi/');
+	$current_user_id     = $session->get('id');
+	$link_api_invoice    = site_url('admin/invoices/save');
+	$link_api_juragan    = site_url('api/juragan/by_user/');
+	$link_api_kecamatan  = site_url('rajaongkir/kecamatan');
+	$link_api_kota       = site_url('rajaongkir/kota');
+	$link_api_pengguna   = site_url('api/juragan/get_users/');
+	$link_api_provinsi   = site_url('rajaongkir/provinsi');
+	$link_cari_pelanggan = site_url('pelanggan/cari');
+	$link_invoice        = site_url('admin/invoices/lihat/');
+	$link_post_pelanggan = site_url('pelanggan/baru');
+	$link_api_notif      = site_url('api/notifikasi/');
 
-$js = <<< JS
+	$js = <<< JS
     $(function() { 
     	'use strict';
     	// collapse sidebar
@@ -880,7 +886,6 @@ $js = <<< JS
 
     	var pl='';
     	listOrder();
-    	
     	var fpro=$('#nambahProduk');
     	fpro.on('submit',function(c){
     		c.preventDefault(),
@@ -889,9 +894,11 @@ $js = <<< JS
     			a=fpro.find('[name="harga_satuan"]').val(),
     			e=fpro.find('[name="ukuran"]').val(),
     			b=fpro.find('[name="QTY"]').val(),
+    			y=fpro.find('[name="gambar"]').val(),
     			f=price(a),
     			g=price(a*b),
     			j = uniqId(),
+    			iy = $('<input/>',{'type':'hidden','name': 'produk['+j+'][qty]', 'value': b}),
     			ik = $('<input/>',{'type':'hidden','name': 'produk['+j+'][kode]', 'value': d}),
     			ip = $('<input/>',{'type':'hidden','name': 'produk['+j+'][harga]', 'value': a}),
     			iz = $('<input/>',{'type':'hidden','name': 'produk['+j+'][ukuran]', 'value': e}),
@@ -900,10 +907,10 @@ $js = <<< JS
     			t = $('<div/>').append(bt).append(d+' ( '+e+' )'),
     			tb = $('.list-orderan'),
     			p = $('<div/>', {'class' : 'text-right', 'data-uang1': a*b}).append(g).append(ik).append(ip).append(iz).append(iq);
-    	
     		newRow(tb,[t,f,b,p]);
     		subtotal();
 
+    		alert(ik);
     		pl=$('.list-orderan').data('length'),
     		$('.list-orderan').data('length',pl+1),
     		listOrder(),
@@ -1116,8 +1123,8 @@ $js = <<< JS
 
     JS;
 
-$packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
-$packed_js = $packer->pack();
-echo '<script>' . $packed_js . '</script>';
-?>
-<?= $this->endSection() ?>
+	$packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
+	$packed_js = $packer->pack();
+	echo '<script>' . $packed_js . '</script>';
+	?>
+	<?= $this->endSection() ?>

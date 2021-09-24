@@ -73,30 +73,30 @@ $session = \Config\Services::session();
 						<div class="col-6">
 							<?= form_label('Level', 'level', ['class' => 'form-label']); ?>
 							<?php
-                            $options_level = [
-                                'superadmin' => 'Superadmin',
-                                'admin'      => 'Admin',
-                                'cs'         => 'CS',
-                                'viewer'     => 'Viewer',
-                                'reseller'   => 'Reseller',
-                            ];
+							$options_level = [
+								'superadmin' => 'Superadmin',
+								'admin'      => 'Admin',
+								'cs'         => 'CS',
+								'viewer'     => 'Viewer',
+								'reseller'   => 'Reseller',
+							];
 
-                            echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level', 'required' => '']);
-                            ?>
+							echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level', 'required' => '']);
+							?>
 
 						</div>
 						<div class="col-6">
 							<?= form_label('Status', 'status', ['class' => 'form-label']); ?>
 							<?php
-                            $options_status = [
-                                'pending'  => 'Pending',
-                                'inactive' => 'Tidak Aktif',
-                                'active'   => 'Aktif',
-                                'blocked'  => 'Blokir',
-                            ];
+							$options_status = [
+								'pending'  => 'Pending',
+								'inactive' => 'Tidak Aktif',
+								'active'   => 'Aktif',
+								'blocked'  => 'Blokir',
+							];
 
-                            echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status', 'required' => '']);
-                            ?>
+							echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status', 'required' => '']);
+							?>
 						</div>
 					</div>
 					<div class="mb-3">
@@ -106,7 +106,7 @@ $session = \Config\Services::session();
                             $options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
                         }
                         */ form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan']);
-                        ?>
+						?>
 						<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 					</div>
 					<hr />
@@ -128,8 +128,8 @@ $session = \Config\Services::session();
 			<?= form_open('admin/settings/update_pengguna', '', ['id' => '']); ?>
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalSuntingPenggunaLabel">Update Pengguna</h5>
-				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-					
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 				</button>
 			</div>
 			<div class="modal-body">
@@ -156,30 +156,30 @@ $session = \Config\Services::session();
 					<div class="col-6">
 						<?= form_label('Level', 'level_', ['class' => 'form-label']); ?>
 						<?php
-                        $options_level = [
-                            'superadmin' => 'Superadmin',
-                            'admin'      => 'Admin',
-                            'cs'         => 'CS',
-                            'viewer'     => 'Viewer',
-                            'reseller'   => 'Reseller',
-                        ];
+						$options_level = [
+							'superadmin' => 'Superadmin',
+							'admin'      => 'Admin',
+							'cs'         => 'CS',
+							'viewer'     => 'Viewer',
+							'reseller'   => 'Reseller',
+						];
 
-                        echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level_', 'required' => '']);
-                        ?>
+						echo form_dropdown('level', $options_level, 'cs', ['class' => 'form-select', 'id' => 'level_', 'required' => '']);
+						?>
 
 					</div>
 					<div class="col-6">
 						<?= form_label('Status', 'status_', ['class' => 'form-label']); ?>
 						<?php
-                        $options_status = [
-                            'pending'  => 'Pending',
-                            'inactive' => 'Tidak Aktif',
-                            'active'   => 'Aktif',
-                            'blocked'  => 'Blokir',
-                        ];
+						$options_status = [
+							'pending'  => 'Pending',
+							'inactive' => 'Tidak Aktif',
+							'active'   => 'Aktif',
+							'blocked'  => 'Blokir',
+						];
 
-                        echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status_', 'required' => '']);
-                        ?>
+						echo form_dropdown('status', $options_status, 'active', ['class' => 'form-select', 'id' => 'status_', 'required' => '']);
+						?>
 					</div>
 				</div>
 				<div class="mb-3">
@@ -189,7 +189,7 @@ $session = \Config\Services::session();
                         $options_juragan[$juragan->id_juragan] = $juragan->nama_juragan;
                     }
                     */ form_multiselect('juragan[]', [], [], ['class' => 'form-select', 'id' => 'juragan_']);
-                    ?>
+					?>
 					<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 				</div>
 
@@ -204,7 +204,6 @@ $session = \Config\Services::session();
 </div>
 
 <?= $this->endSection() ?>
-
 <?= $this->section('js') ?>
 <?php
 $current_user_id       = $session->get('id');
@@ -216,7 +215,7 @@ $link_invoice          = site_url('admin/invoices/lihat/');
 $link_api_notif        = site_url('api/notifikasi/');
 
 $js = <<< JS
-    $(function() { 
+    $(function() {
     	'use strict';
     	// sidebar
         // ------------------------------------------------------------------------
@@ -235,7 +234,7 @@ $js = <<< JS
     		$('#listLi').html(''),
     		$.getJSON('{$link_api_juragan}', { id: id }, function(b){
     			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="{$link_invoice}'+'semua'+'"><i class="fal fa-user-circle"></i> Semua Juragan</li></li>');
-    			
+
     			$.each(b[id].juragan,function(c,b){
     				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="{$link_invoice}'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
     			}),
@@ -354,7 +353,6 @@ $js = <<< JS
 
     	$.getJSON('{$link_api_pengguna_all}', function(b){
     		var apnd = '';
-
     		for (let i = 0; i < b.length; i++) {
     			apnd += `<tr>
     				<td>
@@ -373,7 +371,7 @@ $js = <<< JS
     							<span class="sr-only">Toggle Dropdown</span>
     						</button>
     						<ul class="dropdown-menu">
-    							<li><button class="dropdown-item" href="#">Hapus</button></li>
+								<li onclick="return confirm('Yakin akan menghapus data? ')"><button class="dropdown-item" id="myButton" onclick="location.href = '../../../admin/settings/pengguna/delete?id=`+ b[i].id +`';">Hapus</button></li>
     						</ul>
     					</div>
     				</td>
@@ -405,7 +403,7 @@ $js = <<< JS
     		l.value=e,
     		m.value=f,
     		n.value=g,
-    		
+
     		$.ajax({
     			method:'GET',
     			url:'{$link_api_relasi}',
@@ -421,11 +419,11 @@ $js = <<< JS
 
     			for (const x in olds) {
     				if (olds[x].value) arr_lama.push({
-    					id: parseInt(olds[x].value), 
+    					id: parseInt(olds[x].value),
     					nama: olds[x].text
     				});
     			}
-    			
+
     			var arr_baru = [];
     			for (const x in juragans) {
     				arr_baru.push({
@@ -455,7 +453,7 @@ $js = <<< JS
     		});
     	});
     });
-    JS;
+JS;
 
 $packer    = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
 $packed_js = $packer->pack();

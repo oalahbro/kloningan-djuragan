@@ -133,6 +133,34 @@ class JuraganModel extends Model
             return ['error' => '$ids_juragan harus array'];
         }
     }
+    public function ambilSemua()
+    {
+        $juragans = $this->orderBy('nama_juragan', 'asc')->findAll();
+        $return   = [];
 
+        foreach ($juragans as $a) {
+            $list_bank = [];
+            $banks     = $this->ambil_bank($a->id_juragan)->getResult();
+
+            foreach ($banks as $b) {
+                $list_bank[$b->id_bank] = [
+                    'id'        => (int) $b->id_bank,
+                    'nama'      => $b->nama_bank,
+                    'tipe'      => $b->tipe_bank,
+                    'rekening'  => $b->rekening,
+                    'atas_nama' => $b->atas_nama,
+                ];
+            }
+
+            $return[$a->id_juragan] = [
+                'id'   => (int) $a->id_juragan,
+                'nama' => $a->nama_juragan,
+                'slug' => $a->juragan,
+                'bank' => $list_bank,
+            ];
+        }
+
+        return $return;
+    }
     // ------------------------------------------------------------------------
 }

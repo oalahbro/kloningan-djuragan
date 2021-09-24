@@ -40,7 +40,7 @@ $routes->addRedirect('admin', 'admin_inv');
 // user
 $routes->get('user/invoices', 'User/Invoices::lihat', ['as' => 'user_inv']);
 $routes->addRedirect('user', 'user_inv');
-
+$routes->add('admin/settings/pengguna/delete', 'Admin/Settings::delete_pengguna');
 $routes->group('api', static function ($routes) {
     $routes->group('juragan', static function ($routes) {
         $routes->add('(:segment)', 'Api\Juragan::$1');

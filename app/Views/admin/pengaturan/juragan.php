@@ -56,12 +56,12 @@ $session = \Config\Services::session();
 					<div class="mb-3">
 						<?= form_label('Rekening Bank / EDC', 'bank', ['class' => 'form-label']); ?>
 						<?php
-                        foreach ($banks as $bank) {
-                            $options[$bank->id_bank] = strtoupper($bank->nama_bank) . ' - ' . $bank->atas_nama;
-                        }
+						foreach ($banks as $bank) {
+							$options[$bank->id_bank] = strtoupper($bank->nama_bank) . ' - ' . $bank->atas_nama;
+						}
 
-                        echo form_multiselect('bank[]', $options, [], ['class' => 'form-select', 'required' => '']);
-                        ?>
+						echo form_multiselect('bank[]', $options, [], ['class' => 'form-select', 'required' => '']);
+						?>
 						<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 					</div>
 					<hr />
@@ -83,8 +83,8 @@ $session = \Config\Services::session();
 			<?= form_open('admin/settings/update_juragan', ['id' => 'mf'], ['id' => '']); ?>
 			<div class="modal-header">
 				<h5 class="modal-title" id="modalSuntingJuraganLabel">Update Juragan</h5>
-				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-					
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 				</button>
 			</div>
 			<div class="modal-body">
@@ -96,7 +96,7 @@ $session = \Config\Services::session();
 				<div class="mb-3">
 					<?= form_label('Rekening Bank', 'bank', ['class' => 'form-label']); ?>
 					<?= form_multiselect('bank[]', $options, [], ['class' => 'form-select mybanks', 'required' => '']);
-                    ?>
+					?>
 					<div class="form-text">tekan CTRL untuk memilih lebih dari 1</div>
 				</div>
 

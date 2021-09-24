@@ -108,7 +108,7 @@ $JSmin  = new Minify\JS();
     // source fontawesome: https://github.com/carlosproductions/Portfolio-Home-Page2
     // or can use https://kit.fontawesome.com/22a9d93fa2.js
     */
-    ?><script defer src="https://kit.fontawesome.com/9bdc906322.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>
+	?><script defer src="https://kit.fontawesome.com/9bdc906322.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>
 	<?= $this->renderSection('js'); ?>
 
 	<!--

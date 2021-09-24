@@ -57,12 +57,12 @@ $biaya    = json_decode($orderan->biaya);
 							<div class="col-sm-5">
 								<?= form_label('Asal Orderan', 'asal_orderan', ['class' => 'form-label']); ?>
 								<?php
-                                $options_label = ['' => 'Pilih asal'];
+								$options_label = ['' => 'Pilih asal'];
 
-                                foreach (config('JuraganConfig')->label as $key => $label) {
-                                    $options_label[$key] = $label;
-                                }
-                                ?>
+								foreach (config('JuraganConfig')->label as $key => $label) {
+									$options_label[$key] = $label;
+								}
+								?>
 								<?= form_dropdown('asal_orderan', $options_label, '', ['class' => 'form-select', 'id' => 'asal_orderan', 'required' => '']); ?>
 							</div>
 							<div class="col-sm-7">
@@ -89,58 +89,58 @@ $biaya    = json_decode($orderan->biaya);
 
 						<div class="input-group mb-3 mycustom form_pemesan" style="display: none;">
 							<?= form_input([
-							    'class'       => 'form-control cari_pelanggan pemesan',
-							    'id'          => 'cari_pemesan',
-							    'placeholder' => 'cari data pelanggan',
-							    'type'        => 'search',
+								'class'       => 'form-control cari_pelanggan pemesan',
+								'id'          => 'cari_pemesan',
+								'placeholder' => 'cari data pelanggan',
+								'type'        => 'search',
 							]); ?>
 							<?= form_button([
-							    'class'       => 'btn btn-dark',
-							    'content'     => '<i class="fal fa-plus"></i> Tambah',
-							    'data-target' => '#modalTambahPelanggan',
-							    'data-toggle' => 'modal',
-							    'id'          => 'tambah_pemesan_kirimKe',
-							    'title'       => 'Tambah Data Pemesan',
+								'class'       => 'btn btn-dark',
+								'content'     => '<i class="fal fa-plus"></i> Tambah',
+								'data-target' => '#modalTambahPelanggan',
+								'data-toggle' => 'modal',
+								'id'          => 'tambah_pemesan_kirimKe',
+								'title'       => 'Tambah Data Pemesan',
 							]); ?>
 						</div>
 
 						<?php
-                        $alamat_pemesan_full = 'C.O.D';
+						$alamat_pemesan_full = 'C.O.D';
 
-                        if ($pemesan->cod === 0) {
-                            $ongkir = new Ongkir();
+						if ($pemesan->cod === 0) {
+							$ongkir = new Ongkir();
 
-                            $PPro = $pemesan->provinsi;
-                            $PKab = $pemesan->kabupaten;
-                            $PKec = $pemesan->kecamatan;
-                            $kota = $ongkir->kota($PPro, $PKab);
+							$PPro = $pemesan->provinsi;
+							$PKab = $pemesan->kabupaten;
+							$PKec = $pemesan->kecamatan;
+							$kota = $ongkir->kota($PPro, $PKab);
 
-                            $kec  = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
-                            $kab  = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
-                            $prov = strtoupper($ongkir->provinsi($PPro)['province']);
+							$kec  = strtoupper($ongkir->kecamatan($PKab, $PKec)['subdistrict_name']);
+							$kab  = strtoupper(($kota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $kota['city_name']);
+							$prov = strtoupper($ongkir->provinsi($PPro)['province']);
 
-                            $alamat_pemesan_full = $pemesan->alamat . '<br/>' . $kec . ', ' . $kab . '<br/>' . $prov . ' - ' . $pemesan->kodepos;
-                        }
-                        ?>
+							$alamat_pemesan_full = $pemesan->alamat . '<br/>' . $kec . ', ' . $kab . '<br/>' . $prov . ' - ' . $pemesan->kodepos;
+						}
+						?>
 
 						<div class="mb-3 info-data-pemesan">
 							<?= form_button([
-							    'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
-							    'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-							    'title'   => 'Hapus Pemesan',
+								'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat pemesan',
+								'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+								'title'   => 'Hapus Pemesan',
 							]); ?>
 							<span id="alamat_pemesan" class="border rounded p-2 d-block">
 								<h6 class="text-muted font-weight-normal">Pemesan</h6>
 								<span class="d-block font-weight-bold"><?= $pemesan->nama; ?></span>
 								<span class="d-block">
 									<?php
-                                    for ($i = 0; $i < count($pemesan->hp); $i++) {
-                                        if ($i === 1) {
-                                            echo '<span> / </span>';
-                                        }
-                                        echo $pemesan->hp[$i];
-                                    }
-                                    ?>
+									for ($i = 0; $i < count($pemesan->hp); $i++) {
+										if ($i === 1) {
+											echo '<span> / </span>';
+										}
+										echo $pemesan->hp[$i];
+									}
+									?>
 								</span>
 								<span class="d-block"><?= $alamat_pemesan_full; ?></span>
 							</span>
@@ -148,58 +148,58 @@ $biaya    = json_decode($orderan->biaya);
 
 						<div class="input-group mb-3 mycustom form_kirimKe" style="display: none">
 							<?= form_input([
-							    'class'       => 'form-control cari_pelanggan kirimKe',
-							    'id'          => 'cari_kirimKe',
-							    'placeholder' => 'cari data pelanggan',
-							    'type'        => 'search',
+								'class'       => 'form-control cari_pelanggan kirimKe',
+								'id'          => 'cari_kirimKe',
+								'placeholder' => 'cari data pelanggan',
+								'type'        => 'search',
 							]); ?>
 							<?= form_button([
-							    'class'       => 'btn btn-dark',
-							    'content'     => '<i class="fal fa-plus"></i> Tambah',
-							    'data-target' => '#modalTambahPelanggan',
-							    'data-toggle' => 'modal',
-							    'id'          => 'tambah_kirimKe',
-							    'title'       => 'Tambah Data Kirim Kepada',
+								'class'       => 'btn btn-dark',
+								'content'     => '<i class="fal fa-plus"></i> Tambah',
+								'data-target' => '#modalTambahPelanggan',
+								'data-toggle' => 'modal',
+								'id'          => 'tambah_kirimKe',
+								'title'       => 'Tambah Data Kirim Kepada',
 							]); ?>
 						</div>
 
 						<?php
-                        $alamat_kirim_full = 'C.O.D';
+						$alamat_kirim_full = 'C.O.D';
 
-                        if ($kirimKe->cod === 0) {
-                            $ongkir = new Ongkir();
+						if ($kirimKe->cod === 0) {
+							$ongkir = new Ongkir();
 
-                            $KKPro = $kirimKe->provinsi;
-                            $KKKab = $kirimKe->kabupaten;
-                            $KKKec = $kirimKe->kecamatan;
-                            $Kkota = $ongkir->kota($KKPro, $KKKab);
+							$KKPro = $kirimKe->provinsi;
+							$KKKab = $kirimKe->kabupaten;
+							$KKKec = $kirimKe->kecamatan;
+							$Kkota = $ongkir->kota($KKPro, $KKKab);
 
-                            $Kkec  = strtoupper($ongkir->kecamatan($KKKab, $KKKec)['subdistrict_name']);
-                            $Kkab  = strtoupper(($Kkota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $Kkota['city_name']);
-                            $Kprov = strtoupper($ongkir->provinsi($KKPro)['province']);
+							$Kkec  = strtoupper($ongkir->kecamatan($KKKab, $KKKec)['subdistrict_name']);
+							$Kkab  = strtoupper(($Kkota['type'] === 'Kabupaten' ? '' : '(Kota) ') . $Kkota['city_name']);
+							$Kprov = strtoupper($ongkir->provinsi($KKPro)['province']);
 
-                            $alamat_kirim_full = $kirimKe->alamat . '<br/>' . $Kkec . ', ' . $Kkab . '<br/>' . $Kprov . ' - ' . $kirimKe->kodepos;
-                        }
-                        ?>
+							$alamat_kirim_full = $kirimKe->alamat . '<br/>' . $Kkec . ', ' . $Kkab . '<br/>' . $Kprov . ' - ' . $kirimKe->kodepos;
+						}
+						?>
 
 						<div class="mb-3 info-data-kirimKe">
 							<?= form_button([
-							    'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
-							    'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
-							    'title'   => 'Hapus Kirim',
+								'class'   => 'btn btn-link text-danger text-decoration-none btn-sm float-right btn-hapus-alamat kirimKe',
+								'content' => '<i class="fal fa-trash"></i> <span class="sr-only">Hapus</span>',
+								'title'   => 'Hapus Kirim',
 							]); ?>
 							<span id="alamat_kirimKe" class="border rounded p-2 d-block">
 								<h6 class="text-muted font-weight-normal">Kirim Kepada</h6>
 								<span class="d-block font-weight-bold"><?= $kirimKe->nama; ?></span>
 								<span class="d-block">
 									<?php
-                                    for ($i = 0; $i < count($kirimKe->hp); $i++) {
-                                        if ($i === 1) {
-                                            echo '<span> / </span>';
-                                        }
-                                        echo $kirimKe->hp[$i];
-                                    }
-                                    ?>
+									for ($i = 0; $i < count($kirimKe->hp); $i++) {
+										if ($i === 1) {
+											echo '<span> / </span>';
+										}
+										echo $kirimKe->hp[$i];
+									}
+									?>
 								</span>
 								<span class="d-block"><?= $alamat_kirim_full; ?></span>
 							</span>
@@ -249,11 +249,11 @@ $biaya    = json_decode($orderan->biaya);
 								</tr>
 
 								<?php
-                                $subtotal = 0;
+								$subtotal = 0;
 
-                                foreach ($dibeli as $produk) {
-                                    $produk_total = $produk->harga * $produk->qty;
-                                    $subtotal += $produk_total; ?>
+								foreach ($dibeli as $produk) {
+									$produk_total = $produk->harga * $produk->qty;
+									$subtotal += $produk_total; ?>
 									<tr>
 										<td>
 											<div>
@@ -276,32 +276,33 @@ $biaya    = json_decode($orderan->biaya);
 									</tr>
 
 								<?php
-                                } ?>
+								} ?>
 							</tbody>
 							<tfoot class="customBiaya d-none listBiaya">
 								<?php
-                                $totalbiaya = 0;
+								$totalbiaya = 0;
 
-                                if ($biaya !== null) {
-                                    foreach ($biaya as $o) {
-                                        $totalbiaya += $o->nominal;
-                                    }
-                                }
+								if ($biaya !== null) {
+									foreach ($biaya as $o) {
+										$totalbiaya += $o->nominal;
+									}
+								}
 
-                                ?>
+								?>
 								<tr>
 									<td colspan="3" class="text-right">Subtotal</td>
 									<td class="text-right" data-totalbiaya="<?= $totalbiaya; ?>" data-subtotal="<?= $subtotal; ?>" id="subTotal"><?= number_to_currency($subtotal, 'IDR'); ?></td>
 								</tr>
 
 								<?php
-                                if ($biaya !== null) {
-                                    foreach ($biaya as $o) { ?>
+								if ($biaya !== null) {
+									foreach ($biaya as $o) { ?>
 										<tr>
 											<td colspan="3" class="text-right">
 												<button type="button" class="bg-transparent border-0 hapus_row mr-1" aria-label="Close"><span aria-hidden="true"><i class="fal fa-trash-alt h6"></i></span></button>
 												<?= ($o->biaya_id === 1 ? 'Ongkir' : 'Lain-lain') ?>
-												<?= empty($o->label) || $o->label === 'null' ? '' : '<span class="text-muted ml-1">' . $o->label . '</span>'; ?></td>
+												<?= empty($o->label) || $o->label === 'null' ? '' : '<span class="text-muted ml-1">' . $o->label . '</span>'; ?>
+											</td>
 											<td>
 												<div data-biaya="<?= $o->nominal; ?>" class="text-right "><?= number_to_currency($o->nominal, 'IDR'); ?></div>
 												<?= form_hidden('biaya[' . $o->id . '][biaya_id]', $o->biaya_id); ?>
@@ -310,7 +311,7 @@ $biaya    = json_decode($orderan->biaya);
 											</td>
 										</tr>
 								<?php }
-                                } ?>
+								} ?>
 							</tfoot>
 						</table>
 					</div>
@@ -344,8 +345,8 @@ $biaya    = json_decode($orderan->biaya);
 		<?= form_open('', ['id' => 'tambahPelanggan', 'class' => 'modal-content']); ?>
 		<div class="modal-header">
 			<h5 class="modal-title" id="modalTambahPelangganLabel"></h5>
-			<button type="button" data-reset="false" class="btn-close" data-dismiss="modal"aria-label="Close">
-				
+			<button type="button" data-reset="false" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 			</button>
 		</div>
 		<div class="modal-body">
@@ -390,7 +391,7 @@ $biaya    = json_decode($orderan->biaya);
 					<div class="col">
 						<?= form_label('Kecamatan', 'kecamatan', ['class' => 'form-label']); ?>
 						<?= form_dropdown('kecamatan', ['' => 'Pilih Kecamatan'], '', ['class' => 'form-select input', 'id' => 'kecamatan', 'required' => '', 'disabled' => '']);
-                        ?>
+						?>
 					</div>
 				</div>
 
@@ -422,8 +423,8 @@ $biaya    = json_decode($orderan->biaya);
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="biayaOrderLabel">Modal title</h5>
-				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-					
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 				</button>
 			</div>
 			<?= form_open('', ['id' => 'tambahBiaya'], ['biayaId' => '']); ?>
@@ -454,8 +455,8 @@ $biaya    = json_decode($orderan->biaya);
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="tambahProdukLabel">Tambah Orderan</h5>
-				<button type="button" class="btn-close" data-dismiss="modal"aria-label="Close">
-					
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+
 				</button>
 			</div>
 			<?= form_open('', ['id' => 'nambahProduk']); ?>
@@ -472,19 +473,19 @@ $biaya    = json_decode($orderan->biaya);
 					<div class="col col-sm-6 col-md-3">
 						<?= form_label('Ukuran', 'ukuran', ['class' => 'form-label']); ?>
 						<?= '<select name="ukuran" class="form-select" id="ukuran" required="">';
-                        echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
+						echo '<option value="" disabled="" selected="">Pilih ukuran</option>';
 
-                        foreach (config('JuraganConfig')->size as $k => $v) {
-                            echo '<optgroup label="' . $k . '">';
+						foreach (config('JuraganConfig')->size as $k => $v) {
+							echo '<optgroup label="' . $k . '">';
 
-                            foreach ($v as $k2 => $v2) {
-                                echo '<option value="' . $k2 . '">' . $v2 . '</option>';
-                            }
-                            echo '</optgroup>';
-                        }
-                        echo '<option value="custom">Custom</option>';
-                        echo '</select>';
-                        ?>
+							foreach ($v as $k2 => $v2) {
+								echo '<option value="' . $k2 . '">' . $v2 . '</option>';
+							}
+							echo '</optgroup>';
+						}
+						echo '<option value="custom">Custom</option>';
+						echo '</select>';
+						?>
 					</div>
 					<div class="col col-sm-6 col-md-3">
 						<?= form_label('QTY', 'QTY', ['class' => 'form-label']); ?>

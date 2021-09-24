@@ -2,16 +2,18 @@
 
 namespace App\Controllers\Admin;
 
+use App\Models\JuraganModel;
+use App\Models\UserModel;
 use App\Controllers\BaseController;
 
 class Settings extends BaseController
 {
     public function index()
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return redirect()->to('/auth');
         } else {
-            if (! $this->isAdmin()) {
+            if (!$this->isAdmin()) {
                 return redirect()->to('/auth');
             }
         }
@@ -28,10 +30,10 @@ class Settings extends BaseController
 
     public function save_bank()
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return redirect()->to('/auth');
         } else {
-            if (! $this->isAdmin()) {
+            if (!$this->isAdmin()) {
                 return redirect()->to('/auth');
             }
         }
@@ -40,7 +42,7 @@ class Settings extends BaseController
             $this->validation->setRuleGroup('addBank');
         }
 
-        if (! $this->validation->withRequest($this->request)->run()) {
+        if (!$this->validation->withRequest($this->request)->run()) {
             $errors = $this->validation->getErrors();
 
             var_dump($errors);
@@ -70,10 +72,10 @@ class Settings extends BaseController
 
     public function juragan()
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return redirect()->to('/auth');
         } else {
-            if (! $this->isAdmin()) {
+            if (!$this->isAdmin()) {
                 return redirect()->to('/auth');
             }
         }
@@ -90,10 +92,10 @@ class Settings extends BaseController
 
     public function save_juragan() // new insert
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return redirect()->to('/auth');
         } else {
-            if (! $this->isAdmin()) {
+            if (!$this->isAdmin()) {
                 return redirect()->to('/auth');
             }
         }
@@ -102,10 +104,10 @@ class Settings extends BaseController
             $this->validation->setRuleGroup('addJuragan');
         }
 
-        if (! $this->validation->withRequest($this->request)->run()) {
+        if (!$this->validation->withRequest($this->request)->run()) {
             $errors = $this->validation->getErrors();
 
-        // var_dump($errors);
+            // var_dump($errors);
         } else {
             $db = \Config\Database::connect();
 
@@ -138,10 +140,10 @@ class Settings extends BaseController
 
     public function update_juragan() // update if exist
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return redirect()->to('/auth');
         } else {
-            if (! $this->isAdmin()) {
+            if (!$this->isAdmin()) {
                 return redirect()->to('/auth');
             }
         }
@@ -150,7 +152,7 @@ class Settings extends BaseController
             $this->validation->setRuleGroup('editJuragan');
         }
 
-        if (! $this->validation->withRequest($this->request)->run()) {
+        if (!$this->validation->withRequest($this->request)->run()) {
             $errors = $this->validation->getErrors();
 
             var_dump($errors);
@@ -189,16 +191,20 @@ class Settings extends BaseController
 
     public function pengguna()
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return redirect()->to('/auth');
         } else {
-            if (! $this->isAdmin()) {
+            if (!$this->isAdmin()) {
                 return redirect()->to('/auth');
             }
         }
+        $juragan  = new JuraganModel();
+        $pengguna = new UserModel();
 
         $data = [
             'title' => 'Pengaturan Pengguna',
+            'juragans'  => $juragan->ambilSemua(),
+            'penggunas' => $pengguna->ambilSemua(),
         ];
 
         echo view('admin/pengaturan/pengguna', $data);
@@ -208,10 +214,10 @@ class Settings extends BaseController
 
     public function save_pengguna() // new insert
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return redirect()->to('/auth');
         } else {
-            if (! $this->isAdmin()) {
+            if (!$this->isAdmin()) {
                 return redirect()->to('/auth');
             }
         }
@@ -220,7 +226,7 @@ class Settings extends BaseController
             $this->validation->setRuleGroup('addPengguna');
         }
 
-        if (! $this->validation->withRequest($this->request)->run()) {
+        if (!$this->validation->withRequest($this->request)->run()) {
             $errors = $this->validation->getErrors();
 
             var_dump($errors);
@@ -259,10 +265,10 @@ class Settings extends BaseController
 
     public function update_pengguna() // update if exist
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return redirect()->to('/auth');
         } else {
-            if (! $this->isAdmin()) {
+            if (!$this->isAdmin()) {
                 return redirect()->to('/auth');
             }
         }
@@ -271,7 +277,7 @@ class Settings extends BaseController
             $this->validation->setRuleGroup('editPengguna');
         }
 
-        if (! $this->validation->withRequest($this->request)->run()) {
+        if (!$this->validation->withRequest($this->request)->run()) {
             $errors = $this->validation->getErrors();
 
             var_dump($errors);
@@ -284,7 +290,7 @@ class Settings extends BaseController
             $data     = [];
             $password = $this->request->getPost('password');
 
-            if (! empty($password)) {
+            if (!empty($password)) {
                 $data['password'] = password_hash($this->request->getPost('password'), PASSWORD_BCRYPT);
             }
 
@@ -316,6 +322,27 @@ class Settings extends BaseController
 
         return redirect()->to('/admin/settings/pengguna');
     }
+    public function delete_pengguna()
+    {
+        $id = $this->request->getGet('id');
 
+        $pengguna = new UserModel();
+
+        // # Check record
+        if ($pengguna->find($id)) {
+
+            // # Delete record
+            $pengguna->delete($id);
+
+            session()->setFlashdata('message', 'Deleted Successfully!');
+            session()->setFlashdata('alert-class', 'alert-success');
+        } else {
+            session()->setFlashdata('message', 'Record not found!');
+            session()->setFlashdata('alert-class', 'alert-danger');
+        }
+        // dd($pengguna->find($id));
+
+        return redirect()->to('/admin/settings/pengguna');
+    }
     // ------------------------------------------------------------------------
 }
