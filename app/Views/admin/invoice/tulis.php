@@ -906,11 +906,11 @@ $session  = \Config\Services::session();
     			bt = $('<button />', {'class' : 'bg-transparent border-0 hapus_row orderan mr-1', html:'<span aria-hidden="true"><i class="fal fa-trash-alt h6"></i></span>'}),
     			t = $('<div/>').append(bt).append(d+' ( '+e+' )'),
     			tb = $('.list-orderan'),
-    			p = $('<div/>', {'class' : 'text-right', 'data-uang1': a*b}).append(g).append(ik).append(ip).append(iz).append(iq);
+    			p = $('<div/>', {'class' : 'text-right', 'data-uang1': a*b}).append(iy).append(g).append(ik).append(ip).append(iz).append(iq);
     		newRow(tb,[t,f,b,p]);
     		subtotal();
 
-    		alert(ik);
+    		alert(b);
     		pl=$('.list-orderan').data('length'),
     		$('.list-orderan').data('length',pl+1),
     		listOrder(),
