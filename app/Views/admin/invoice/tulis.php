@@ -437,7 +437,7 @@ $session  = \Config\Services::session();
     		$('#listLi').html(''),
     		$.getJSON('{$link_api_juragan}', { id: id }, function(b){
     			var a=[];a.push('<li><li><a class="p-2 d-block text-light text-decoration-none" href="{$link_invoice}'+'semua'+'"><i class="fal fa-user-circle"></i> Semua Juragan</li></li>');
-    			
+
     			$.each(b[id].juragan,function(c,b){
     				a.push('<li><a class="p-2 d-block text-light text-decoration-none" href="{$link_invoice}'+b.slug+'"><i class="fal fa-user-circle"></i> '+b.nama+'</li>');
     			}),
@@ -511,7 +511,7 @@ $session  = \Config\Services::session();
 
     	counter_notif();
 
-    	setInterval(function(){ 
+    	setInterval(function(){
     		counter_notif();
     	}, 10000);
 
@@ -526,7 +526,7 @@ $session  = \Config\Services::session();
     		var action = '';
 
     		if ($(this).hasClass( "text-primary" )) {
-    			$(this).removeClass('text-primary').addClass('text-muted');	
+    			$(this).removeClass('text-primary').addClass('text-muted');
     			action = 'sudahBaca';
     		}
     		else {
@@ -537,11 +537,11 @@ $session  = \Config\Services::session();
     		$.post( '{$link_api_notif}' + 'mark', { action: action, id: $(this).data('id') });
     	});
 
-    	$('.tandaiSemuaTerbaca').on('click',function(){ 
+    	$('.tandaiSemuaTerbaca').on('click',function(){
     		var id = {$current_user_id};
 
     		$.post( '{$link_api_notif}' + 'mark_all', { id: id }, function() {
-    			// 
+    			//
     			$('.actionNotif .markAs').removeClass('text-primary').addClass('text-muted');
     		});
     	});
@@ -591,7 +591,7 @@ $session  = \Config\Services::session();
     				if(i>0) {
     					c+='<span> / </span>'; // pemisah nomor hp
     				}
-    				c+=v;				
+    				c+=v;
     			});
     			c+='</span>';
     			c+='<span class="d-block">'+ suggestion.data.full + '</span>';
@@ -617,7 +617,7 @@ $session  = \Config\Services::session();
 
     				$('.hidden_id [name="id_pemesan"]').val(suggestion.data.id);
     			}
-    			
+
     			$(this).autocomplete('clear').val(''); // hapus cache dan selected
     		}
     	});
@@ -700,7 +700,7 @@ $session  = \Config\Services::session();
     				$('<option />',{value:a.province_id,text:a.province}).appendTo(b);
     			});
     		});
-    	});	
+    	});
 
     	$(document).on("keyup change", '.swictCOD',function(){
             if(this.checked) {
@@ -757,7 +757,7 @@ $session  = \Config\Services::session();
     				if(i==1) {
     					c+='<span> / </span>';
     				}
-    				c+=v;				
+    				c+=v
     			});
     			c+='</span>';
     			c+='<span class="d-block">';
@@ -945,7 +945,7 @@ $session  = \Config\Services::session();
     		});
     		$('#subTotal').attr('data-subtotal', a).empty().html(price(a));
     		$(document).trigger('data-attribute-changed');
-    		
+
     		$('.customBiaya').show();
     		// grandtotal();
     	}
@@ -970,7 +970,7 @@ $session  = \Config\Services::session();
     		$('#subTotal').attr('data-totalbiaya', a);
     		$(document).trigger('data-attribute-changed');
     		// grandtotal();
-    	}	
+    	}
 
     	// modal tambah biaya
     	// ------------------------------------------------------------------------
@@ -988,7 +988,7 @@ $session  = \Config\Services::session();
     		a.removeClass('was-validated')[0].reset(),
     		$('#biayaHelp').removeClass('d-none');
     	});
-    	
+
     	var fBia=$('#tambahBiaya');
     	fBia.on('submit',function(f){
     		f.preventDefault(),
@@ -1006,7 +1006,7 @@ $session  = \Config\Services::session();
 
     			default:b='Lain-lain';
     		}
-    		
+
     		if(parseInt(a)!=0){
     			var e='',
     				u=parseInt(a);
@@ -1032,7 +1032,7 @@ $session  = \Config\Services::session();
     	emef.on('submit',function(f){
     		f.preventDefault(),
     		f.stopPropagation();
-    		
+
     		// Abort any pending request
     		if (request) {
     			request.abort();
@@ -1066,7 +1066,7 @@ $session  = \Config\Services::session();
 
     		// Callback handler that will be called on failure
     		request.fail(function (jqXHR, textStatus, errorThrown){
-    			// 
+    			//
     			// console.log( Object.keys(jqXHR['responseJSON']).length);
     			$( Object.entries(jqXHR['responseJSON']) ).each(function( i,v ) {
     				var Tid = 't-'+uniqId();
@@ -1075,8 +1075,8 @@ $session  = \Config\Services::session();
     				$('#lTo').append(makeToast(Tid, v[1], 'Galat'));
     				$('#'+Tid).toast('show');
     			});
-    			
-    			
+
+
     			var myToastEl = document.getElementsByClassName('toast')[0];
     			myToastEl.addEventListener('hidden.bs.toast', function () {
     				// do something...
@@ -1090,8 +1090,8 @@ $session  = \Config\Services::session();
     		request.always(function () {
     			// Reenable the inputs
     			inputs.prop("disabled", false);
-    			
-    		});		
+
+    		});
     	});
 
     	function makeToast(id,text,status) {
@@ -1099,7 +1099,7 @@ $session  = \Config\Services::session();
     			<div class="toast-header">
     				<strong class="mr-auto">`+status+`</strong>
     				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-    				
+
     				</button>
     			</div>
     			<div class="toast-body">`+text+`</div>

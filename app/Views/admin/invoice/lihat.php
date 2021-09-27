@@ -31,7 +31,9 @@ $session  = \Config\Services::session();
 		<?= anchor('admin/invoices/lihat/' . $jrgn . '/selesai', 'Orderan Selesai', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'selesai' ? 'primary' : 'outline-secondary')]); ?>
 		<a class="mb-2 btn btn-warning rounded-pill mr-1" data-target="#modalCari" data-toggle="modal" href="#!"><i class="fal fa-search"></i></a>
 	</div>
-
+	<!-- START COUNTER jumlah pesanan per tab pil -->
+	<pre><?php echo '<b>Jumlah Orderan : <span class="badge rounded-pill bg-success">' . count($pesanans) . '</span></b>'; ?></pre>
+	<!-- END COUNTER -->
 	<?php
 	if (count($pesanans) > 0) {
 		foreach ($pesanans as $pesanan) { ?>
