@@ -1,4 +1,4 @@
-# Orderan Djuragan
+# KLONINGAN DARI REPO SEVENINC/DJURAGAN.COM
 
 ## Sekilas Info
 
