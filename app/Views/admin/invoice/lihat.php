@@ -22,18 +22,33 @@ $session  = \Config\Services::session();
 			<li class="breadcrumb-item active" aria-current="page">Semua Orderan</li>
 		</ol>
 	</nav>
-
+	<?php $parts = $_SERVER['REQUEST_URI'];
+	//echo $parts; 
+	?>
 	<div class="wrap-btn-filter mb-3">
-		<?= anchor('admin/invoices/lihat/' . $jrgn . '/semua', 'Semua Orderan', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'semua' ? 'primary' : 'outline-secondary')]); ?>
-		<?= anchor('admin/invoices/lihat/' . $jrgn . '/cek-bayar', 'Cek Pembayaran', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'cek-bayar' ? 'primary' : 'outline-secondary')]); ?>
-		<?= anchor('admin/invoices/lihat/' . $jrgn . '/belum-proses', 'Belum Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'belum-proses' ? 'primary' : 'outline-secondary')]); ?>
-		<?= anchor('admin/invoices/lihat/' . $jrgn . '/dalam-proses', 'Dalam Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'dalam-proses' ? 'primary' : 'outline-secondary')]); ?>
-		<?= anchor('admin/invoices/lihat/' . $jrgn . '/selesai', 'Orderan Selesai', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'selesai' ? 'primary' : 'outline-secondary')]); ?>
+		<?php if (preg_match("/" . preg_quote("semua/semua", "/") . "/", $parts)) { ?>
+			<?= anchor('admin/invoices/lihat/' . $jrgn . '/semua', 'Semua Orderan <b><span class="badge rounded-pill bg-white text-primary">' . count($pesanans) . '</span></b>', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'semua' ? 'primary' : 'outline-secondary')]); ?><?php } else { ?>
+			<?= anchor('admin/invoices/lihat/' . $jrgn . '/semua', 'Semua Orderan', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'semua' ? 'primary' : 'outline-secondary')]); ?>
+		<?php } ?>
+		<?php if (preg_match("/" . preg_quote("semua/cek-bayar", "/") . "/", $parts) or $parts == "/admin/invoices") { ?>
+			<?= anchor('admin/invoices/lihat/' . $jrgn . '/cek-bayar', 'Cek Pembayaran <b><span class="badge rounded-pill bg-white text-primary">' . count($pesanans) . '</span></b>', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'cek-bayar' ? 'primary' : 'outline-secondary')]); ?><?php } else { ?>
+			<?= anchor('admin/invoices/lihat/' . $jrgn . '/cek-bayar', 'Cek Pembayaran', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'cek-bayar' ? 'primary' : 'outline-secondary')]); ?>
+		<?php } ?>
+		<?php if (preg_match("/" . preg_quote("semua/belum-proses", "/") . "/", $parts)) { ?>
+			<?= anchor('admin/invoices/lihat/' . $jrgn . '/belum-proses', 'Belum Proses <b><span class="badge rounded-pill bg-white text-primary">' . count($pesanans) . '</span></b>', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'belum-proses' ? 'primary' : 'outline-secondary')]); ?><?php } else { ?>
+			<?= anchor('admin/invoices/lihat/' . $jrgn . '/belum-proses', 'Belum Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'belum-proses' ? 'primary' : 'outline-secondary')]); ?>
+		<?php } ?>
+		<?php if (preg_match("/" . preg_quote("semua/dalam-proses", "/") . "/", $parts)) { ?>
+			<?= anchor('admin/invoices/lihat/' . $jrgn . '/dalam-proses', 'Dalam Proses <b><span class="badge rounded-pill bg-white text-primary">' . count($pesanans) . '</span></b>', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'dalam-proses' ? 'primary' : 'outline-secondary')]); ?><?php } else { ?>
+			<?= anchor('admin/invoices/lihat/' . $jrgn . '/dalam-proses', 'Dalam Proses', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'dalam-proses' ? 'primary' : 'outline-secondary')]); ?>
+		<?php } ?>
+		<?php if (preg_match("/" . preg_quote("semua/selesai", "/") . "/", $parts)) { ?>
+			<?= anchor('admin/invoices/lihat/' . $jrgn . '/selesai', 'Orderan Selesai <b><span class="badge rounded-pill bg-white text-primary">' . count($pesanans) . '</span></b>', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'selesai' ? 'primary' : 'outline-secondary')]); ?><?php } else { ?>
+			<?= anchor('admin/invoices/lihat/' . $jrgn . '/selesai', 'Orderan Selesai', ['class' => 'mb-2 btn rounded-pill mr-1 btn-' . ($hal === 'selesai' ? 'primary' : 'outline-secondary')]); ?>
+		<?php } ?>
 		<a class="mb-2 btn btn-warning rounded-pill mr-1" data-target="#modalCari" data-toggle="modal" href="#!"><i class="fal fa-search"></i></a>
 	</div>
-	<!-- START COUNTER jumlah pesanan per tab pil -->
-	<pre><?php echo '<b>Jumlah Orderan : <span class="badge rounded-pill bg-success">' . count($pesanans) . '</span></b>'; ?></pre>
-	<!-- END COUNTER -->
+
 	<?php
 	if (count($pesanans) > 0) {
 		foreach ($pesanans as $pesanan) { ?>
